@@ -539,6 +539,41 @@
       font-size: 1.05rem;
     }
 
+    .opening-section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 1.8rem;
+      margin-bottom: 0.85rem;
+      color: var(--vt-heading);
+    }
+
+    .opening-section-title:first-of-type {
+      margin-top: 1.5rem;
+    }
+
+    .opening-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .opening-list li {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      color: var(--vt-body);
+      font-weight: 500;
+      line-height: 1.55;
+    }
+
+    .opening-list i {
+      color: var(--vt-primary);
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+
     .opening-tags {
       display: flex;
       flex-wrap: wrap;
@@ -1022,22 +1057,45 @@
       <div class="section-title" data-aos="fade-up">
         <span class="subtitle"><i class="bi bi-kanban"></i> Openings</span>
         <h2>Current opportunities</h2>
-        <p>We’re expanding the core team in Kota and hybrid roles supporting our global platform clients.</p>
+        <p>We’re expanding our on-site engineering team in Kota to support global platform clients.</p>
       </div>
       <div class="row g-4">
         <div class="col-lg-6" data-aos="fade-up">
           <div class="opening-card h-100">
-            <h3 class="card-heading">Django Platform Engineer</h3>
+            <h3 class="card-heading">Django Platform Engineer (0–4 years)</h3>
             <ul class="opening-meta">
-              <li><i class="bi bi-geo-alt"></i>On-site · Kota, Rajasthan</li>
+              <li><i class="bi bi-geo-alt"></i>On-site · Kota, India</li>
               <li><i class="bi bi-clock"></i>Full-time</li>
+              <li><i class="bi bi-building"></i>VipraTech</li>
             </ul>
-            <div class="opening-tags">
-              <span><i class="bi bi-code-slash"></i>Django</span>
-              <span><i class="bi bi-hdd-network"></i>Celery</span>
-              <span><i class="bi bi-speedometer2"></i>Observability</span>
-            </div>
-            <p>You’ll own APIs, background workers, and deployment workflows that power high-trust security and analytics products. Expect deep code reviews, pairing, and exposure to infra decisions.</p>
+            <h4 class="opening-section-title">What you&rsquo;ll do</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-check2-circle"></i><span>Build RESTful APIs and backend services using Python (Django/DRF; FastAPI where needed).</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Design schemas and write efficient queries on PostgreSQL; implement migrations and data integrity.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Implement background processing (Celery/Redis or equivalent), webhooks, and file/stream ingestion.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Add observability (structured logs, metrics, traces) and production runbooks.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Ship secure features: auth/SSO (OIDC/SAML), RBAC, rate limiting, audit logging, and retention controls.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Own CI/CD pipelines (GitHub Actions or similar) and containerized deployments.</span></li>
+            </ul>
+            <h4 class="opening-section-title">Must-have</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-check-circle"></i><span>Strong Python and Django/DRF fundamentals; solid SQL and data modeling.</span></li>
+              <li><i class="bi bi-check-circle"></i><span>API design/testing (pytest or equivalent), environment config, and secrets hygiene.</span></li>
+              <li><i class="bi bi-check-circle"></i><span>Comfort with message/task queues and caching patterns.</span></li>
+              <li><i class="bi bi-check-circle"></i><span>Clear written communication (design notes, PR descriptions, incident write-ups).</span></li>
+            </ul>
+            <h4 class="opening-section-title">Nice to have</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-stars"></i><span>FastAPI, ClickHouse/analytics pipelines, multi-tenant/SaaS patterns.</span></li>
+              <li><i class="bi bi-stars"></i><span>IaC and cloud basics (Terraform, AWS/Azure), feature flags, rate-limiters.</span></li>
+              <li><i class="bi bi-stars"></i><span>OpenTelemetry/Grafana/Prometheus familiarity.</span></li>
+            </ul>
+            <h4 class="opening-section-title">Role expectations</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-bullseye"></i><span>Deliver features in 1–2 week loops with tests and telemetry included.</span></li>
+              <li><i class="bi bi-bullseye"></i><span>Maintain low change-failure rate and reduce MTTR with actionable dashboards.</span></li>
+              <li><i class="bi bi-bullseye"></i><span>Keep docs current: API specs, ADRs, and runbooks tied to each release.</span></li>
+            </ul>
             <div class="opening-cta">
               <a href="#apply">Apply for Django Platform Engineer <i class="bi bi-arrow-right-short"></i></a>
             </div>
@@ -1045,17 +1103,38 @@
         </div>
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="120">
           <div class="opening-card h-100">
-            <h3 class="card-heading">React / Next.js Frontend Engineer</h3>
+            <h3 class="card-heading">React / Next.js Frontend Engineer (0–4 years)</h3>
             <ul class="opening-meta">
-              <li><i class="bi bi-geo-alt"></i>Hybrid · Kota + Remote</li>
+              <li><i class="bi bi-geo-alt"></i>On-site · Kota, India</li>
               <li><i class="bi bi-clock"></i>Full-time</li>
+              <li><i class="bi bi-building"></i>VipraTech</li>
             </ul>
-            <div class="opening-tags">
-              <span><i class="bi bi-braces"></i>TypeScript</span>
-              <span><i class="bi bi-columns-gap"></i>Design systems</span>
-              <span><i class="bi bi-bar-chart"></i>Analytics</span>
-            </div>
-            <p>Help craft accessible, resilient frontends that integrate with the platforms we build. You’ll work closely with backend and AI engineers to design interfaces customers trust.</p>
+            <h4 class="opening-section-title">What you&rsquo;ll do</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-check2-circle"></i><span>Build resilient React/Next.js (TypeScript) apps with clean state management and form workflows.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Implement SSR/ISR, code-splitting, error boundaries, and performance budgets.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Create accessible components (a11y), consistent empty/error/loading states, and audit-friendly UI flows.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Integrate with authenticated APIs (OAuth/OIDC), handle session state, and secure client storage.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Add frontend observability: error tracking, usage analytics, Core Web Vitals.</span></li>
+            </ul>
+            <h4 class="opening-section-title">Must-have</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-check-circle"></i><span>Strong React + TypeScript; routing, forms, testing (RTL/Jest or similar).</span></li>
+              <li><i class="bi bi-check-circle"></i><span>Next.js fundamentals (SSR/ISR) and web security basics (CSP awareness, escaping, headers).</span></li>
+              <li><i class="bi bi-check-circle"></i><span>Ability to translate wireframes/Figma into reusable, documented components (Storybook a plus).</span></li>
+            </ul>
+            <h4 class="opening-section-title">Nice to have</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-stars"></i><span>Data visualization (Recharts/Chart.js), table virtualization, event/analytics schemas.</span></li>
+              <li><i class="bi bi-stars"></i><span>Feature flags/experimentation frameworks; internationalization basics.</span></li>
+              <li><i class="bi bi-stars"></i><span>Understanding of accessibility audits and Lighthouse metrics.</span></li>
+            </ul>
+            <h4 class="opening-section-title">Role expectations</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-bullseye"></i><span>Ship UI slices every 1–2 weeks with measurable UX improvements (latency, error rate, CWV).</span></li>
+              <li><i class="bi bi-bullseye"></i><span>Keep component docs updated; maintain a stable design system and tokens.</span></li>
+              <li><i class="bi bi-bullseye"></i><span>Proactively surface system state and failure modes in the UI (no silent failures).</span></li>
+            </ul>
             <div class="opening-cta">
               <a href="#apply">Apply for Frontend Engineer <i class="bi bi-arrow-right-short"></i></a>
             </div>
@@ -1063,17 +1142,39 @@
         </div>
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
           <div class="opening-card h-100">
-            <h3 class="card-heading">AI Systems Engineer (LangChain &amp; LangGraph)</h3>
+            <h3 class="card-heading">AI Systems Engineer (LangChain / LangGraph) (0–4 years)</h3>
             <ul class="opening-meta">
-              <li><i class="bi bi-geo-alt"></i>Remote-first · India</li>
+              <li><i class="bi bi-geo-alt"></i>On-site · Kota, India</li>
               <li><i class="bi bi-clock"></i>Full-time</li>
+              <li><i class="bi bi-building"></i>VipraTech</li>
             </ul>
-            <div class="opening-tags">
-              <span><i class="bi bi-cpu"></i>LangChain</span>
-              <span><i class="bi bi-diagram-3"></i>LangGraph</span>
-              <span><i class="bi bi-shield-lock"></i>Eval harnesses</span>
-            </div>
-            <p>Design guardrailed agentic workflows that orchestrate scanners, APIs, and human approvals. You’ll own evaluation suites, prompt contracts, and integrations with security and data stacks.</p>
+            <h4 class="opening-section-title">What you&rsquo;ll do</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-check2-circle"></i><span>Design agentic workflows (planner → tools → critic/guardrails) with clear tool schemas and contracts.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Build evaluation harnesses: offline test rigs, determinism checks, and regression suites for prompts/tools.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Implement retries, timeouts, circuit breakers, and observability/tracing for end-to-end runs.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Orchestrate async jobs/queues, vector stores, and external API integrations.</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Produce audit-ready docs: risk assessments, approval flows, and rollout plans with safe fallbacks.</span></li>
+            </ul>
+            <h4 class="opening-section-title">Must-have</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-check-circle"></i><span>Strong Python; hands-on projects with LangChain or LangGraph and function/tool calling.</span></li>
+              <li><i class="bi bi-check-circle"></i><span>Experience modeling workflows as graphs/state machines; unit + integration testing discipline.</span></li>
+              <li><i class="bi bi-check-circle"></i><span>Comfort with queues, embedding/vector stores, and JSON schema contracts.</span></li>
+              <li><i class="bi bi-check-circle"></i><span>Clear writing: design memos, experiment logs, and results summaries.</span></li>
+            </ul>
+            <h4 class="opening-section-title">Nice to have</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-stars"></i><span>Prompt security/red-teaming basics; policy/guardrail systems; Azure/OpenAI ops.</span></li>
+              <li><i class="bi bi-stars"></i><span>OpenTelemetry tracing for LLM apps; dataset curation and eval metrics design.</span></li>
+              <li><i class="bi bi-stars"></i><span>Familiarity with cost/latency optimization techniques.</span></li>
+            </ul>
+            <h4 class="opening-section-title">Role expectations</h4>
+            <ul class="opening-list">
+              <li><i class="bi bi-bullseye"></i><span>Deliver reliable, observable agent runs with lower false-positive/false-negative rates over iterations.</span></li>
+              <li><i class="bi bi-bullseye"></i><span>Ship in 1–2 week increments: new tool integrations, evaluators, and guardrails with benchmarks.</span></li>
+              <li><i class="bi bi-bullseye"></i><span>Maintain traceability: every change tied to tests, metrics, and rollback plans.</span></li>
+            </ul>
             <div class="opening-cta">
               <a href="#apply">Apply for AI Systems Engineer <i class="bi bi-arrow-right-short"></i></a>
             </div>
