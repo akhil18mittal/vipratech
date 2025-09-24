@@ -611,6 +611,13 @@
       color: var(--vt-heading);
     }
 
+    .required-indicator {
+      color: #dc3545;
+      margin-left: 0.25rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
     .form-control,
     .form-select {
       border-radius: 0.85rem;
@@ -914,7 +921,6 @@
           <li class="nav-item"><a class="nav-link" href="#openings">Openings</a></li>
           <li class="nav-item"><a class="nav-link" href="#apply">Apply</a></li>
         </ul>
-        <a class="btn btn-primary ms-lg-4" href="mailto:akhilesh@vipratech.in">Email Careers</a>
       </div>
     </div>
   </nav>
@@ -1105,14 +1111,15 @@
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_template" value="box">
               <input type="hidden" name="_autoresponse" value="Thanks for applying to VipraTech. Our team will review your profile and reply shortly.">
+              <input type="hidden" name="_next" value="">
               <input type="text" name="_honey" class="d-none" tabindex="-1" autocomplete="off">
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label class="form-label" for="applyName">Full name</label>
+                  <label class="form-label required-label" for="applyName">Full name<span class="required-indicator" aria-hidden="true">*</span></label>
                   <input class="form-control" id="applyName" name="name" type="text" required>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label" for="applyEmail">Email</label>
+                  <label class="form-label required-label" for="applyEmail">Email<span class="required-indicator" aria-hidden="true">*</span></label>
                   <input class="form-control" id="applyEmail" name="email" type="email" required>
                 </div>
                 <div class="col-md-6">
@@ -1120,8 +1127,8 @@
                   <input class="form-control" id="applyPhone" name="phone" type="tel">
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label" for="applyRole">Role of interest</label>
-                  <select class="form-select" id="applyRole" name="role">
+                  <label class="form-label required-label" for="applyRole">Role of interest<span class="required-indicator" aria-hidden="true">*</span></label>
+                  <select class="form-select" id="applyRole" name="role" required>
                     <option value="" selected disabled>Select role</option>
                     <option value="Django Platform Engineer">Django Platform Engineer</option>
                     <option value="React / Next.js Frontend Engineer">React / Next.js Frontend Engineer</option>
@@ -1140,8 +1147,16 @@
                   </select>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label" for="applyPortfolio">Portfolio / GitHub</label>
-                  <input class="form-control" id="applyPortfolio" name="portfolio" type="url" placeholder="https://">
+                  <label class="form-label" for="applyCompensation">Expected per month (₹)</label>
+                  <input class="form-control" id="applyCompensation" name="expected_monthly" type="text" placeholder="e.g. 60000">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="applyGithub">GitHub URL</label>
+                  <input class="form-control" id="applyGithub" name="github" type="url" placeholder="https://github.com/username">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="applyLinkedin">LinkedIn URL</label>
+                  <input class="form-control" id="applyLinkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/username">
                 </div>
                 <div class="col-12">
                   <label class="form-label" for="applyMessage">Introduce yourself</label>
@@ -1149,10 +1164,10 @@
                 </div>
                 <div class="col-12">
                   <div class="resume-input">
-                    <input id="applyResume" name="resume" type="file" accept=".pdf,.doc,.docx" required>
+                    <input id="applyResume" name="attachment" type="file" accept=".pdf,.doc,.docx" required>
                     <div class="resume-label">
                       <i class="bi bi-cloud-arrow-up fs-3"></i>
-                      <strong class="resume-filename">Upload resume (PDF, DOC)</strong>
+                      <strong class="resume-filename">Upload resume (PDF, DOC)<span class="required-indicator" aria-hidden="true">*</span></strong>
                       <span>Max 5MB • Include recent projects + responsibilities</span>
                     </div>
                   </div>
@@ -1259,65 +1274,56 @@
     AOS.init({ once: true, duration: 800, offset: 120, easing: 'ease-out-cubic' });
   }
 
+  // Update the visible filename when using native FormSubmit posts
   const resumeInput = document.getElementById('applyResume');
-  const resumeLabel = resumeInput ? resumeInput.nextElementSibling : null;
-  const resumeFilename = resumeLabel ? resumeLabel.querySelector('.resume-filename') : null;
-  if (resumeInput && resumeLabel && resumeFilename) {
-    resumeInput.addEventListener('change', () => {
-      const fileName = resumeInput.files && resumeInput.files[0] ? resumeInput.files[0].name : 'Upload resume (PDF, DOC)';
-      resumeFilename.textContent = fileName;
-    });
+  let resumeFilename = null;
+  if (resumeInput) {
+    const resumeLabel = resumeInput.nextElementSibling;
+    resumeFilename = resumeLabel ? resumeLabel.querySelector('.resume-filename') : null;
+    if (resumeFilename) {
+      resumeInput.addEventListener('change', () => {
+        const fileName = resumeInput.files && resumeInput.files[0] ? resumeInput.files[0].name : 'Upload resume (PDF, DOC)';
+        resumeFilename.textContent = fileName;
+      });
+    }
   }
 
   const applyForm = document.getElementById('applyForm');
   const applyAlert = document.getElementById('applyFormAlert');
   if (applyForm && applyAlert) {
-    const submitButton = applyForm.querySelector('button[type="submit"]');
-    const honeypot = applyForm.querySelector('input[name="_honey"]');
+    const nextInput = applyForm.querySelector('input[name="_next"]');
+    if (nextInput) {
+      const successUrl = `${window.location.origin}${window.location.pathname}?submitted=1#apply`;
+      nextInput.value = successUrl;
+    }
 
-    applyForm.addEventListener('submit', async event => {
-      event.preventDefault();
+    const currentUrl = new URL(window.location.href);
+    const hasSuccess = currentUrl.searchParams.get('submitted');
+    const hasError = currentUrl.searchParams.get('error');
 
-      if (honeypot && honeypot.value) {
-        return;
+    if (hasSuccess && !hasError) {
+      applyAlert.textContent = 'Thanks! Your application is with the team. We will respond shortly.';
+      applyAlert.classList.remove('d-none', 'alert-danger');
+      applyAlert.classList.add('alert-success');
+      applyAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      if (resumeFilename) {
+        resumeFilename.textContent = 'Upload resume (PDF, DOC)';
       }
+    }
 
-      applyAlert.classList.add('d-none');
-      applyAlert.classList.remove('alert-success', 'alert-danger');
-      submitButton.disabled = true;
-      const originalText = submitButton.textContent;
-      submitButton.textContent = 'Submitting…';
+    if (hasError) {
+      applyAlert.textContent = 'We could not send your application just now. Please try again.';
+      applyAlert.classList.remove('d-none', 'alert-success');
+      applyAlert.classList.add('alert-danger');
+      applyAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
-      const formData = new FormData(applyForm);
-
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/akhilesh@vipratech.in', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await response.json();
-        if (data.success === 'true' || data.success === true) {
-          applyAlert.textContent = 'Thanks! Your application is with the team. We will respond shortly.';
-          applyAlert.classList.add('alert-success');
-          applyAlert.classList.remove('d-none');
-          applyForm.reset();
-          submitButton.textContent = originalText;
-          submitButton.disabled = false;
-          if (resumeFilename) {
-            resumeFilename.textContent = 'Upload resume (PDF, DOC)';
-          }
-          return;
-        }
-        throw new Error(data.message || 'We could not send your application just now. Please try again.');
-      } catch (error) {
-        applyAlert.textContent = error.message || 'We could not send your application just now. Please try again.';
-        applyAlert.classList.add('alert-danger');
-        applyAlert.classList.remove('d-none');
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = originalText;
-      }
-    });
+    if (hasSuccess || hasError) {
+      currentUrl.searchParams.delete('submitted');
+      currentUrl.searchParams.delete('error');
+      history.replaceState(null, '', `${currentUrl.pathname}${currentUrl.hash}`);
+    }
   }
 </script>
 
