@@ -1,0 +1,17 @@
+<svg width="180" height="64" viewBox="0 0 180 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cyraOrb" x1="16" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#36C3FF"/>
+      <stop offset="50%" stop-color="#3F7CFF"/>
+      <stop offset="100%" stop-color="#6C3BFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="64" rx="16" fill="#F5F7FB"/>
+  <g transform="translate(20 12)">
+    <circle cx="28" cy="20" r="20" fill="url(#cyraOrb)"/>
+    <path d="M40 20C40 27.732 33.732 34 26 34C18.268 34 12 27.732 12 20C12 12.268 18.268 6 26 6C29.216 6 32.128 7.138 34.39 9" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="34" cy="14" r="4" fill="#FFFFFF"/>
+  </g>
+  <text x="78" y="34" fill="#14294C" font-family="Montserrat, 'Open Sans', Arial, sans-serif" font-weight="700" font-size="20" letter-spacing="0.12em">CYRA</text>
+  <text x="154" y="34" fill="#106EEA" font-family="Montserrat, 'Open Sans', Arial, sans-serif" font-weight="700" font-size="16" letter-spacing="0.18em">AI</text>
+</svg>
