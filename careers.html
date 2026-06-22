@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <title>VipraTech Careers — Build With A Senior Engineering Team</title>
-  <meta name="description" content="Join VipraTech in Kota as a Django developer and work with senior engineers shipping Python platforms, React/Next.js frontends, and agentic AI.">
+  <script>(function(){try{var t=localStorage.getItem('vt-theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+  <title>VipraTech Labs Careers — Build With A Senior Engineering Team</title>
+  <meta name="description" content="Join VipraTech Labs in Kota to ship end-to-end products: Django/FastAPI, Next.js, security, automation, and agentic AI/MCP servers.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://vipratech.in/careers">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="VipraTech Careers — Build With A Senior Engineering Team">
-  <meta property="og:description" content="We are hiring an on-site Django developer in Kota to build resilient platforms alongside senior engineers.">
+  <meta property="og:title" content="VipraTech Labs Careers — Build With A Senior Engineering Team">
+  <meta property="og:description" content="Hiring on-site engineers in Kota to deliver Django/FastAPI, Next.js, security, automation, and agentic AI/MCP servers.">
   <meta property="og:url" content="https://vipratech.in/careers">
-  <meta property="og:image" content="https://vipratech.in/assests/images/vipratech-logo.svg">
-  <meta property="og:image:alt" content="VipraTech logo">
-  <meta property="og:site_name" content="VipraTech">
+  <meta property="og:image" content="https://vipratech.in/assests/images/vipratech-logo-square.jpg">
+  <meta property="og:image:alt" content="VipraTech Labs logo">
+  <meta property="og:site_name" content="VipraTech Labs">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VipraTech Careers — Build With A Senior Engineering Team">
-  <meta name="twitter:description" content="Apply for the Django developer role at VipraTech and ship production-ready software every week.">
-  <meta name="twitter:image" content="https://vipratech.in/assests/images/vipratech-logo.svg">
+  <meta name="twitter:title" content="VipraTech Labs Careers — Build With A Senior Engineering Team">
+  <meta name="twitter:description" content="Apply for on-site roles at VipraTech Labs and ship secure, observable Python platforms and agentic AI every week.">
+  <meta name="twitter:image" content="https://vipratech.in/assests/images/vipratech-logo-square.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +32,9 @@
       "@graph": [
         {
           "@type": "Organization",
-          "name": "VipraTech",
+          "name": "VipraTech Labs",
           "url": "https://vipratech.in/",
-          "logo": "https://vipratech.in/assests/images/vipratech-logo.svg"
+          "logo": "https://vipratech.in/assests/images/vipratech-logo-square.jpg"
         },
         {
           "@type": "JobPosting",
@@ -65,15 +66,15 @@
           ],
           "hiringOrganization": {
             "@type": "Organization",
-            "name": "VipraTech",
+            "name": "VipraTech Labs",
             "sameAs": "https://vipratech.in/",
-            "logo": "https://vipratech.in/assests/images/vipratech-logo.svg"
+            "logo": "https://vipratech.in/assests/images/vipratech-logo-square.jpg"
           },
           "jobLocation": {
             "@type": "Place",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Hotel Namo Palace, Nanta Road, Kunhari",
+              "streetAddress": "Plot No.1, Vikas Nagar, Nanta Road, Kunhari",
               "addressLocality": "Kota",
               "addressRegion": "Rajasthan",
               "postalCode": "324008",
@@ -151,7 +152,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       gap: 0.75rem 1.5rem;
       padding-block: 0.35rem;
     }
@@ -311,6 +312,12 @@
       color: var(--vt-primary);
       font-size: 1.1rem;
       margin-top: 0.1rem;
+    }
+
+    .hero-mission {
+      font-weight: 600;
+      color: #4f6078;
+      max-width: 540px;
     }
 
     .hero-actions {
@@ -926,6 +933,98 @@
         padding: 1.05rem;
       }
     }
+
+    /* ============ Theme toggle button ============ */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { background: rgba(255, 255, 255, 0.28); transform: translateY(-1px); }
+    .theme-toggle .bi-moon-stars-fill { display: none; }
+    .theme-toggle .bi-sun-fill { display: inline-block; }
+    [data-theme="dark"] .theme-toggle .bi-sun-fill { display: none; }
+    [data-theme="dark"] .theme-toggle .bi-moon-stars-fill { display: inline-block; }
+
+    .brand-logo {
+      height: 48px;
+      width: auto;
+    }
+    [data-theme="dark"] .brand-logo { filter: brightness(1.12) saturate(1.05); }
+
+    /* ============ DARK THEME ============ */
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --vt-primary: #4f93ff;
+      --vt-primary-dark: #6aa6ff;
+      --vt-body: #c4cdde;
+      --vt-heading: #f1f4fa;
+      --vt-surface: #11151f;
+      --vt-muted: #97a3ba;
+      --vt-border: rgba(255, 255, 255, 0.09);
+      --vt-bg-soft: #07090f;
+    }
+    [data-theme="dark"] .header { background: rgba(8, 11, 18, 0.92); }
+    [data-theme="dark"] .header .navbar {
+      background: rgba(11, 14, 22, 0.96);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .header .navbar .nav-link { color: #aeb9cf; }
+    [data-theme="dark"] .header .navbar .nav-link.active,
+    [data-theme="dark"] .header .navbar .nav-link:hover { color: var(--vt-primary); }
+    [data-theme="dark"] .hero-section { background: linear-gradient(180deg, #0c1322 0%, #07090f 70%); }
+    [data-theme="dark"] .hero-intro,
+    [data-theme="dark"] .hero-list li { color: #b4c0d6; }
+    [data-theme="dark"] .section-animated.section-alt { background: #0b0e16; }
+    [data-theme="dark"] .section-title p { color: #97a3ba; }
+    [data-theme="dark"] .why-card,
+    [data-theme="dark"] .opening-card,
+    [data-theme="dark"] .apply-card {
+      border-color: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.45);
+    }
+    [data-theme="dark"] .opening-meta li,
+    [data-theme="dark"] .apply-panel p { color: #a4b0c6; }
+    [data-theme="dark"] .apply-panel {
+      background: linear-gradient(145deg, rgba(79, 147, 255, 0.12), rgba(52, 208, 194, 0.1));
+      border-color: rgba(79, 147, 255, 0.2);
+    }
+    [data-theme="dark"] .opening-tags span,
+    [data-theme="dark"] .section-title .subtitle {
+      background: rgba(79, 147, 255, 0.16);
+      color: #8fb8ff;
+    }
+    [data-theme="dark"] .hero-badge { background: rgba(79, 147, 255, 0.18); color: #8fb8ff; }
+    [data-theme="dark"] .form-control,
+    [data-theme="dark"] .resume-input {
+      background-color: #0c1018;
+      border-color: rgba(255, 255, 255, 0.14);
+      color: #e6ebf5;
+    }
+    [data-theme="dark"] .form-control::placeholder { color: #6f7b93; }
+    [data-theme="dark"] .form-control:focus {
+      background-color: #0c1018;
+      border-color: var(--vt-primary);
+      color: #e6ebf5;
+      box-shadow: 0 0 0 0.2rem rgba(79, 147, 255, 0.2);
+    }
+    [data-theme="dark"] .feature-icon {
+      background: linear-gradient(135deg, rgba(79, 147, 255, 0.22), rgba(52, 208, 194, 0.16));
+      color: #7eb0ff;
+    }
+    [data-theme="dark"] .bg-white { background-color: #0b0e16 !important; }
+    [data-theme="dark"] .text-secondary { color: #97a3ba !important; }
+    [data-theme="dark"] .text-muted { color: #828ea6 !important; }
   </style>
 </head>
 <body>
@@ -935,24 +1034,28 @@
     <div class="container topbar-inner">
       <div class="topbar-contact">
         <span><i class="bi bi-envelope"></i><a href="mailto:akhilesh@vipratech.in">akhilesh@vipratech.in</a></span>
-        <span><i class="bi bi-telephone"></i><a href="tel:+917023415753">+91 7023415753</a></span>
+        <span><i class="bi bi-telephone"></i><a href="tel:+917023415753">+91-7023415753</a></span>
         <span><i class="bi bi-geo-alt"></i>Current client base: New Zealand &amp; Australia</span>
         <span><i class="bi bi-globe"></i>Delivering across ME, SEA, EU, US, AUS</span>
       </div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <i class="bi bi-sun-fill" aria-hidden="true"></i>
+        <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
   <nav class="navbar navbar-expand-lg navbar-light py-3">
     <div class="container">
       <a class="navbar-brand" href="index.html#hero">
-        <img src="assests/images/vipratech-logo.svg" alt="VipraTech logo" class="navbar-brand-logo">
-        <span class="visually-hidden">VipraTech</span>
+        <img src="assests/images/vipratech-logo-trans.png" alt="VipraTech Labs logo" class="brand-logo">
+        <span class="visually-hidden">VipraTech Labs</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navmenu">
         <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link" href="#why">Why VipraTech</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why">Why VipraTech Labs</a></li>
           <li class="nav-item"><a class="nav-link" href="#openings">Openings</a></li>
           <li class="nav-item"><a class="nav-link" href="#apply">Apply</a></li>
         </ul>
@@ -966,7 +1069,7 @@
     <div class="container">
       <div class="row align-items-center gy-5">
         <div class="col-lg-7" data-aos="fade-right">
-          <span class="hero-badge"><i class="bi bi-people"></i> Join VipraTech</span>
+          <span class="hero-badge"><i class="bi bi-people"></i> Join VipraTech Labs</span>
           <h1 class="display-5 fw-bold mt-4">Build resilient platforms with a senior engineering crew</h1>
           <p class="hero-intro mb-4">We’re a compact, outcomes-focused team shipping Python platforms, React/Next.js interfaces, and dependable agentic AI. If you love disciplined delivery and crisp documentation, you’ll feel at home here.</p>
           <ul class="hero-points">
@@ -978,6 +1081,7 @@
             <a class="btn-hero-primary" href="#apply">Apply now</a>
             <a class="btn-hero-secondary" href="#openings">View openings</a>
           </div>
+          <p class="hero-mission mt-4">We upskill engineers in core development, AI, and security from our Kota HQ — calm schedules, weekly releases, and real ownership.</p>
         </div>
         <div class="col-lg-5" data-aos="fade-left" data-aos-delay="120">
           <div class="hero-card">
@@ -1066,7 +1170,7 @@
             <ul class="opening-meta">
               <li><i class="bi bi-geo-alt"></i>On-site · Kota, India</li>
               <li><i class="bi bi-clock"></i>Full-time</li>
-              <li><i class="bi bi-building"></i>VipraTech</li>
+              <li><i class="bi bi-building"></i>VipraTech Labs</li>
             </ul>
             <h4 class="opening-section-title">What you&rsquo;ll do</h4>
             <ul class="opening-list">
@@ -1107,7 +1211,7 @@
             <ul class="opening-meta">
               <li><i class="bi bi-geo-alt"></i>On-site · Kota, India</li>
               <li><i class="bi bi-clock"></i>Full-time</li>
-              <li><i class="bi bi-building"></i>VipraTech</li>
+              <li><i class="bi bi-building"></i>VipraTech Labs</li>
             </ul>
             <h4 class="opening-section-title">What you&rsquo;ll do</h4>
             <ul class="opening-list">
@@ -1146,7 +1250,7 @@
             <ul class="opening-meta">
               <li><i class="bi bi-geo-alt"></i>On-site · Kota, India</li>
               <li><i class="bi bi-clock"></i>Full-time</li>
-              <li><i class="bi bi-building"></i>VipraTech</li>
+              <li><i class="bi bi-building"></i>VipraTech Labs</li>
             </ul>
             <h4 class="opening-section-title">What you&rsquo;ll do</h4>
             <ul class="opening-list">
@@ -1211,7 +1315,7 @@
               <input type="hidden" name="_subject" value="New career application via vipratech.in">
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_template" value="box">
-              <input type="hidden" name="_autoresponse" value="Thanks for applying to VipraTech. Our team will review your profile and reply shortly.">
+              <input type="hidden" name="_autoresponse" value="Thanks for applying to VipraTech Labs. Our team will review your profile and reply shortly.">
               <input type="hidden" name="_next" value="">
               <input type="text" name="_honey" class="d-none" tabindex="-1" autocomplete="off">
               <div class="row g-3">
@@ -1288,32 +1392,33 @@
   <div class="footer-inner container">
     <div class="row gy-4 align-items-start">
       <div class="col-lg-5">
-        <span class="footer-highlight"><i class="bi bi-stars"></i>Engineered for reliable platforms</span>
+        <span class="footer-highlight"><i class="bi bi-stars"></i>End-to-end systems. Secure by design. Agentic by default.</span>
         <div class="footer-brand">
-          <h4 class="mb-3">VipraTech</h4>
-          <p>Partner with us to deliver resilient Python platforms and agentic AI systems that your teams can scale with confidence.</p>
+          <h4 class="mb-3">VipraTech Labs</h4>
+          <p>We turn roadmaps into results with Django/FastAPI backends, Next.js frontends, security, automation, and agentic AI/MCP servers owned by one senior team.</p>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
         <h5 class="mb-3">Contact</h5>
         <ul class="footer-contact">
           <li><i class="bi bi-envelope"></i><a href="mailto:akhilesh@vipratech.in">akhilesh@vipratech.in</a></li>
-          <li><i class="bi bi-telephone"></i><a href="tel:+917023415753">+91 7023415753</a></li>
-          <li><i class="bi bi-geo-alt"></i><span>Hotel Namo Palace, Nanta Road, Kunhari, Kota, Rajasthan - 324008</span></li>
+          <li><i class="bi bi-telephone"></i><a href="tel:+917023415753">+91-7023415753</a></li>
+          <li><i class="bi bi-geo-alt"></i><span>Plot No.1, Vikas Nagar, Nanta Road, Kunhari, Kota, Rajasthan - 324008</span></li>
+          <li><i class="bi bi-linkedin"></i><a href="https://www.linkedin.com/company/vipratech-labs" target="_blank" rel="noopener noreferrer">linkedin.com/company/vipratech-labs</a></li>
         </ul>
       </div>
       <div class="col-lg-3 col-md-6">
         <h5 class="mb-3">Navigate</h5>
         <ul class="footer-links">
-          <li><i class="bi bi-chevron-right"></i><a href="index.html#services">Services</a></li>
-          <li><i class="bi bi-chevron-right"></i><a href="index.html#portfolio">Case Studies</a></li>
-          <li><i class="bi bi-chevron-right"></i><a href="index.html#contact">Contact Form</a></li>
+          <li><i class="bi bi-chevron-right"></i><a href="index.html#products">Products</a></li>
+          <li><i class="bi bi-chevron-right"></i><a href="index.html#services">What We Do</a></li>
+          <li><i class="bi bi-chevron-right"></i><a href="index.html#contact">Contact</a></li>
           <li><i class="bi bi-chevron-right"></i><a href="careers.html">Careers</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© <span id="year"></span> VipraTech. Built for reliability &amp; velocity.</div>
+      <div>© <span id="year"></span> VipraTech Labs Pvt. Ltd. · Build fast. De-risk. Ship ROI.</div>
       <div class="footer-bottom-links">
         <a href="mailto:akhilesh@vipratech.in">Email us</a>
         <a href="tel:+917023415753">Call us</a>
@@ -1368,6 +1473,16 @@
   };
 
   initParticles('footer-particles', footerParticlesConfig);
+
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('vt-theme', next); } catch (e) {}
+    });
+  }
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
