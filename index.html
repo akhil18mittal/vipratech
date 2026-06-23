@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-  <link rel="icon" type="image/svg+xml" href="assests/images/vipratech-logo.svg">
+  <link rel="icon" type="image/svg+xml" href="assests/images/favicon.svg">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -418,6 +418,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem 2.25rem;
     }
 
     .client-logo {
@@ -427,9 +429,10 @@
     }
 
     .client-logo img {
-      max-height: 40px;
+      max-height: 44px;
       width: auto;
       display: block;
+      transition: opacity 0.25s ease, filter 0.25s ease;
     }
 
     .clients-note {
@@ -1981,6 +1984,41 @@
 
     [data-theme="dark"] .brand-logo { filter: brightness(1.12) saturate(1.05); }
 
+    .brand-wordmark {
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--vt-heading);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .brand-wordmark .accent {
+      background: linear-gradient(100deg, #106eea 0%, #12b8a8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .brand-wordmark .labs {
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--vt-primary);
+      margin-left: 0.45rem;
+      opacity: 0.8;
+    }
+    [data-theme="dark"] .brand-wordmark { color: #f1f4fa; }
+    [data-theme="dark"] .brand-wordmark .accent {
+      background: linear-gradient(100deg, #8fb8ff 0%, #34d0c2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .company-branding .brand-wordmark { font-size: 1.7rem; }
+
     /* ============ DARK THEME ============ */
     [data-theme="dark"] {
       color-scheme: dark;
@@ -2032,6 +2070,13 @@
     }
     [data-theme="dark"] .clients-label { color: #aeb9cf; }
     [data-theme="dark"] .clients-note { color: #828ea6; }
+    [data-theme="dark"] .client-logo img {
+      filter: brightness(0) invert(1);
+      opacity: 0.62;
+    }
+    [data-theme="dark"] .client-logo img:hover {
+      opacity: 1;
+    }
 
     [data-theme="dark"] .products-section {
       background: linear-gradient(180deg, #0b0e16 0%, #07090f 100%);
@@ -2214,9 +2259,8 @@
   </div>
   <nav class="navbar navbar-expand-lg navbar-light py-3">
     <div class="container">
-      <a class="navbar-brand" href="#hero">
-        <img src="assests/images/vipratech-logo-trans.png" alt="VipraTech Labs logo" class="brand-logo">
-        <span class="visually-hidden">VipraTech Labs</span>
+      <a class="navbar-brand" href="#hero" aria-label="VipraTech Labs home">
+        <span class="brand-wordmark" aria-hidden="true">Vipra<span class="accent">Tech</span><span class="labs">Labs</span></span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -2338,8 +2382,11 @@
           <span class="client-logo" role="listitem">
             <img src="assests/clients/blacklock-logo.png" alt="Blacklock logo" loading="lazy">
           </span>
+          <span class="client-logo" role="listitem">
+            <img src="assests/clients/mom-logo.png" alt="Meal of the Moment logo" loading="lazy">
+          </span>
         </div>
-        <p class="clients-note mb-0">We built and run the AI security agent behind Blacklock's pentesting platform.</p>
+        <p class="clients-note mb-0">We built and run the AI security agent behind Blacklock's pentesting platform, and we build AI for Meal of the Moment.</p>
       </div>
     </div>
   </section>
@@ -2773,8 +2820,7 @@
         <div class="col-lg-6" data-aos="fade-left" data-aos-delay="120">
           <div class="contact-panel h-100">
             <h4 class="mb-3 company-branding">
-              <img src="assests/images/vipratech-logo-trans.png" alt="VipraTech Labs logo" class="brand-logo">
-              <span>VipraTech Labs</span>
+              <span class="brand-wordmark">Vipra<span class="accent">Tech</span><span class="labs">Labs</span></span>
             </h4>
             <p class="mb-2">Plot No.1, Vikas Nagar, Nanta Road, Kunhari, Kota, Rajasthan - 324008, India</p>
             <p class="mb-4">We operate Monday–Friday with flexible timezone overlap, supporting teams in New Zealand, Australia, the Middle East, South East Asia, Europe, and North America.</p>
