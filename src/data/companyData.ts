@@ -1,0 +1,251 @@
+import type { ProductSystem, ServiceOffer } from "../types";
+
+export const COMPANY_INFO = {
+  name: "VipraTech Labs Private Limited",
+  brandName: "VipraTech",
+  tagline: "Evidence-First Applied-AI Engineering",
+  subheading: "We research, prototype, and build production AI systems for workflows where accuracy, evidence, human review, and operational reliability matter.",
+  founder: "Akhilesh Mittal",
+  email: "akhilesh@vipratech.in",
+  phone: "+91 70234 15753",
+  address: "Plot No. 1, Vikas Nagar, Nanta Road, Kunhari, Kota, Rajasthan, India",
+  relationships: ["Blacklock", "Meal of the Moment"],
+};
+
+export const SERVICE_OFFERS: ServiceOffer[] = [
+  {
+    id: "doc-reconciliation",
+    title: "Document Intelligence & Reconciliation",
+    subtitle: "Turning complex document friction into auditable settlement decisions",
+    description: "Build systems that process spreadsheets, PDFs, images, invoices, and claims into reviewable decisions with deterministic matching rules and explicit exception states.",
+    includedFeatures: [
+      "Multi-format document ingestion & parsing",
+      "Line-level data normalization",
+      "Deterministic matching rules + AI interpretation",
+      "Human review exception dashboard",
+      "Audit-friendly traceability and evidence links",
+    ],
+    targetAudience: "Finance, claims, and operations teams handling unaligned cross-system records.",
+    primaryOfferName: "Reconciliation Opportunity Sprint",
+    sprintOutputs: [
+      "Current workflow & source map",
+      "Representative document exception review",
+      "Error & leakage taxonomy",
+      "Target architecture & review model",
+      "Bounded pilot scope & acceptance checks",
+    ],
+    iconName: "FileSpreadsheet",
+    evidenceBadge: "Built/Deployed",
+  },
+  {
+    id: "ai-security",
+    title: "AI Security, Testing & Compliance",
+    subtitle: "Rigorously testing AI agents across conversations, tools, and state",
+    description: "Evaluating how AI agents behave under adversarial conditions, prompt manipulation, and tool permission boundaries before production release.",
+    includedFeatures: [
+      "AI-agent threat modeling & asset boundaries",
+      "Controlled multi-turn adversarial red-teaming",
+      "Prompt-manipulation & state corruption testing",
+      "Tool-use & authorization boundary checks",
+      "Reproducible evidence register & finding review",
+    ],
+    targetAudience: "Engineering & risk teams preparing AI agents for production deployment.",
+    primaryOfferName: "AI Agent Security Assessment",
+    sprintOutputs: [
+      "Agent threat model & attack surface map",
+      "Authorized test plan & prompt samples",
+      "Durable evidence register with reproduction steps",
+      "Prioritized vulnerability finding review",
+      "Remediation & verification roadmap",
+    ],
+    iconName: "ShieldAlert",
+    evidenceBadge: "Built/Deployed",
+  },
+  {
+    id: "voice-ai",
+    title: "Voice AI & Conversational Systems",
+    subtitle: "Regulated, multilingual voice automation linked to workflow state",
+    description: "Designing voice systems that connect conversational AI with telephony, Hindi/Hinglish code-switching, policy guardrails, and seamless human handoff.",
+    includedFeatures: [
+      "Call-flow & exception state logic",
+      "Hindi, Hinglish & code-switching evaluation",
+      "Telephony & speech provider benchmarking",
+      "Interruption, retry & policy guardrails",
+      "Operator handoff & call evidence capture",
+    ],
+    targetAudience: "Collections teams, contact centers, and lenders managing high-volume calls.",
+    primaryOfferName: "Voice AI Feasibility Sprint",
+    sprintOutputs: [
+      "Call-flow & exception matrix",
+      "Language & telephony latency report",
+      "Compliance & operational risk register",
+      "Reference system architecture",
+      "Measured prototype & rollout plan",
+    ],
+    iconName: "Mic",
+    evidenceBadge: "Built/Deployed",
+  },
+  {
+    id: "sales-automation",
+    title: "AI Sales & Marketing Automation",
+    subtitle: "Governed revenue workflows from research to CRM attribution",
+    description: "Connecting buyer research, evidence-backed content drafting, human approval gates, channel campaigns, and multi-tenant attribution.",
+    includedFeatures: [
+      "Buyer & account research automation",
+      "Evidence-backed personalized drafting",
+      "Human approval gate before first dispatch",
+      "Identity suppression & compliance checks",
+      "CRM & pipeline attribution telemetry",
+    ],
+    targetAudience: "Founders, growth leads, CROs, and agencies scaling B2B outbound.",
+    primaryOfferName: "Revenue Automation Diagnostic",
+    sprintOutputs: [
+      "Funnel & revenue workflow audit",
+      "Data, channel & approval gate map",
+      "Governance & reply-handling gap analysis",
+      "Prioritized automation roadmap",
+      "Phased implementation & ROI plan",
+    ],
+    iconName: "TrendingUp",
+    evidenceBadge: "Built/Deployed",
+  },
+  {
+    id: "product-research",
+    title: "AI Product Research & Rapid Prototyping",
+    subtitle: "De-risking critical architecture & model choices before building",
+    description: "Helping product teams resolve consequential AI technology, provider selection, build-vs-buy, and evaluation strategy decisions.",
+    includedFeatures: [
+      "Provider & model capability benchmarking",
+      "Build vs. buy trade-off matrix",
+      "Deterministic vs. LLM boundary mapping",
+      "Risk & failure-mode analysis",
+      "Focused technical or clickable prototypes",
+    ],
+    targetAudience: "Founders, CTOs, and product leaders evaluating complex AI ideas.",
+    primaryOfferName: "AI Product Discovery Sprint",
+    sprintOutputs: [
+      "Problem brief & evidence corpus",
+      "Options & trade-off decision record",
+      "Target reference architecture",
+      "Evaluation strategy & dataset spec",
+      "Prototype & delivery scope",
+    ],
+    iconName: "Cpu",
+    evidenceBadge: "Built/Deployed",
+  },
+];
+
+export const PRODUCTS_SYSTEMS: ProductSystem[] = [
+  {
+    id: "autosentinx",
+    name: "AutoSentinx",
+    evidenceLevel: "Built/Deployed",
+    shortDesc: "AI agent security testing system that executes multi-turn adversarial campaigns and captures auditable evidence.",
+    capabilities: [
+      "Multi-turn conversation campaigns",
+      "Durable evidence register",
+      "Adversarial prompt injection testing",
+      "Tool permission boundary checks",
+      "Remediation tracking & compliance export",
+    ],
+    demonstrates: [
+      "Model-aware red teaming",
+      "Production SaaS software",
+      "Auditable test logs",
+    ],
+  },
+  {
+    id: "marketingengine",
+    name: "MarketingEngine",
+    evidenceLevel: "Built/Deployed",
+    shortDesc: "Multi-tenant revenue workflow engine connecting research, drafting, human approval gates, dispatch, and attribution.",
+    capabilities: [
+      "Multi-tenant SaaS tenant isolation",
+      "Human approval gate workflow",
+      "Evidence-backed outreach drafting",
+      "Multi-channel pipeline telemetry",
+      "Attribution tracking & suppression lists",
+    ],
+    demonstrates: [
+      "Revenue workflow orchestration",
+      "Human-in-the-loop control",
+      "Multi-tenant state handling",
+    ],
+  },
+  {
+    id: "aarav",
+    name: "Aarav Voice System",
+    evidenceLevel: "Built/Deployed",
+    shortDesc: "Regulated voice and conversational architecture for Hindi/Hinglish telephony with guardrails and operator handoff.",
+    capabilities: [
+      "Telephony & speech integration",
+      "Hindi & Hinglish code-switching",
+      "Policy guardrail enforcement",
+      "Interruption & retry recovery",
+      "Live operator handoff & evidence logs",
+    ],
+    demonstrates: [
+      "Multilingual conversational AI",
+      "Low-latency voice orchestration",
+      "Operator control screens",
+    ],
+  },
+  {
+    id: "latticly",
+    name: "Latticly",
+    evidenceLevel: "Researched/Designed",
+    shortDesc: "AI-BDR product architecture and research body exploring governed buyer workflows and automated research synthesis.",
+    capabilities: [
+      "Buyer workflow research",
+      "Technical architecture specs",
+      "Governed outbound messaging concepts",
+      "Trade-off decision matrices",
+    ],
+    demonstrates: [
+      "Applied AI product discovery",
+      "System boundaries & safety design",
+    ],
+  },
+];
+
+export const ENGAGEMENT_STEPS = [
+  {
+    step: "01",
+    title: "Free 30-Min Fit Call",
+    duration: "30 Minutes",
+    cost: "Free",
+    description: "We discuss your workflow, current workarounds, exceptions, and timeline. If VipraTech isn't the right fit, we tell you immediately.",
+  },
+  {
+    step: "02",
+    title: "Diagnostic Sprint",
+    duration: "5–10 Business Days",
+    cost: "Paid (Shared Privately)",
+    description: "De-risk before committing. Produces workflow maps, evidence reviews, risk registers, and bounded pilot scope. 50% fee credited if implementation starts within 30 days.",
+  },
+  {
+    step: "03",
+    title: "Production Implementation",
+    duration: "Custom Timeline",
+    cost: "Milestone-Based",
+    description: "Full-stack development, AI model orchestration, human review gates, operator dashboards, cloud deployment, monitoring, and audit controls.",
+  },
+];
+
+export const EVIDENCE_LEVELS_EXPLANATION = [
+  {
+    level: "Built/Deployed",
+    color: "emerald",
+    desc: "Shipped software running in production with real evidence and user verification.",
+  },
+  {
+    level: "Prototyped",
+    color: "amber",
+    desc: "Functional technical test or clickable prototype verifying core feasibility.",
+  },
+  {
+    level: "Researched/Designed",
+    color: "blue",
+    desc: "Architectural blueprint, trade-off analysis, or detailed research specification.",
+  },
+];
