@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface MatrixTerminalHeadlineProps {
   line1: string;
@@ -12,7 +12,13 @@ interface MatrixTerminalHeadlineProps {
 
 const MATRIX_NUMS = "01234567890123456789";
 
-export const MatrixTerminalHeadline: React.FC<MatrixTerminalHeadlineProps> = ({
+function getDisplayLine(line: string, typedLength: number, scrambleChar: string) {
+  if (typedLength === 0) return "";
+  if (typedLength >= line.length) return line;
+  return line.slice(0, typedLength - 1) + scrambleChar;
+}
+
+export function MatrixTerminalHeadline({
   line1,
   line2,
   line1ClassName = "text-white",
@@ -20,7 +26,7 @@ export const MatrixTerminalHeadline: React.FC<MatrixTerminalHeadlineProps> = ({
   cursorColor = "text-lime-400",
   speed = 30,
   headlineClassName = "text-4xl sm:text-6xl font-black tracking-tight leading-[1.08]",
-}) => {
+}: MatrixTerminalHeadlineProps) {
   const [typedLength1, setTypedLength1] = useState(0);
   const [typedLength2, setTypedLength2] = useState(0);
   const [scrambleChar1, setScrambleChar1] = useState("");
@@ -58,29 +64,13 @@ export const MatrixTerminalHeadline: React.FC<MatrixTerminalHeadlineProps> = ({
     }
   }, [typedLength1, typedLength2, line1, line2, speed]);
 
-  const getDisplayLine1 = () => {
-    if (typedLength1 === 0) return "";
-    if (typedLength1 >= line1.length) return line1;
-    const stable = line1.slice(0, typedLength1 - 1);
-    const active = scrambleChar1 || MATRIX_NUMS[Math.floor(Math.random() * MATRIX_NUMS.length)];
-    return stable + active;
-  };
-
-  const getDisplayLine2 = () => {
-    if (typedLength2 === 0) return "";
-    if (typedLength2 >= line2.length) return line2;
-    const stable = line2.slice(0, typedLength2 - 1);
-    const active = scrambleChar2 || MATRIX_NUMS[Math.floor(Math.random() * MATRIX_NUMS.length)];
-    return stable + active;
-  };
-
   const isLine1Active = typedLength1 < line1.length;
   const isLine2Active = typedLength1 >= line1.length;
 
   return (
     <h1 className={headlineClassName}>
       <span className="relative inline-block">
-        <span className={line1ClassName}>{getDisplayLine1()}</span>
+        <span className={line1ClassName}>{getDisplayLine(line1, typedLength1, scrambleChar1)}</span>
         {isLine1Active && (
           <span className={`inline-block ml-1 font-mono font-bold ${cursorColor}`}>
             {cursorVisible ? "█" : "\u00A0"}
@@ -89,7 +79,7 @@ export const MatrixTerminalHeadline: React.FC<MatrixTerminalHeadlineProps> = ({
       </span>
       <br />
       <span className="relative inline-block">
-        <span className={line2ClassName}>{getDisplayLine2()}</span>
+        <span className={line2ClassName}>{getDisplayLine(line2, typedLength2, scrambleChar2)}</span>
         {isLine2Active && (
           <span className={`inline-block ml-1 font-mono font-bold ${cursorColor}`}>
             {cursorVisible ? "█" : "\u00A0"}
@@ -98,4 +88,4 @@ export const MatrixTerminalHeadline: React.FC<MatrixTerminalHeadlineProps> = ({
       </span>
     </h1>
   );
-};
+}

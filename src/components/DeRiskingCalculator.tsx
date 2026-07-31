@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { Calculator, Sparkles } from "lucide-react";
+import type { DiagnosticTriggerProps } from "../types";
+import { RangeControl } from "./RangeControl";
 
-interface CalculatorProps {
-  onOpenDiagnostic: (serviceTitle?: string) => void;
-}
-
-export const DeRiskingCalculator: React.FC<CalculatorProps> = ({
+export function DeRiskingCalculator({
   onOpenDiagnostic,
-}) => {
+}: DiagnosticTriggerProps) {
   const [monthlyVolume, setMonthlyVolume] = useState(2500); // Documents, Calls, or Leads
   const [reviewTimePerItem, setReviewTimePerItem] = useState(12); // Minutes spent manually
   const [hourlyOperatorCost, setHourlyOperatorCost] = useState(35); // USD or equivalent / hr
@@ -44,71 +42,40 @@ export const DeRiskingCalculator: React.FC<CalculatorProps> = ({
             Operational Volume & Cost Inputs
           </h3>
 
-          {/* Input 1: Monthly Document / Call Volume */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs font-mono">
-              <span className="text-zinc-300">Monthly Volume (Invoices / Calls / Records)</span>
-              <span className="font-bold text-lime-400">{monthlyVolume.toLocaleString()} items/mo</span>
-            </div>
-            <input
-              type="range"
-              min="200"
-              max="25000"
-              step="100"
-              value={monthlyVolume}
-              onChange={(e) => setMonthlyVolume(Number(e.target.value))}
-              className="w-full accent-lime-400 bg-zinc-800 h-2 rounded-lg cursor-pointer"
-            />
-          </div>
-
-          {/* Input 2: Minutes Spent Per Exception Item */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs font-mono">
-              <span className="text-zinc-300">Manual Time Per Exception Item</span>
-              <span className="font-bold text-lime-400">{reviewTimePerItem} minutes</span>
-            </div>
-            <input
-              type="range"
-              min="2"
-              max="45"
-              value={reviewTimePerItem}
-              onChange={(e) => setReviewTimePerItem(Number(e.target.value))}
-              className="w-full accent-lime-400 bg-zinc-800 h-2 rounded-lg cursor-pointer"
-            />
-          </div>
-
-          {/* Input 3: Fully Burdened Hourly Cost */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs font-mono">
-              <span className="text-zinc-300">Blended Operator Hourly Rate</span>
-              <span className="font-bold text-lime-400">${hourlyOperatorCost}/hr</span>
-            </div>
-            <input
-              type="range"
-              min="15"
-              max="150"
-              step="5"
-              value={hourlyOperatorCost}
-              onChange={(e) => setHourlyOperatorCost(Number(e.target.value))}
-              className="w-full accent-lime-400 bg-zinc-800 h-2 rounded-lg cursor-pointer"
-            />
-          </div>
-
-          {/* Input 4: Target Automation Percentage */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs font-mono">
-              <span className="text-zinc-300">Target Straight-Through Automation</span>
-              <span className="font-bold text-lime-400">{targetAutomation}%</span>
-            </div>
-            <input
-              type="range"
-              min="50"
-              max="95"
-              value={targetAutomation}
-              onChange={(e) => setTargetAutomation(Number(e.target.value))}
-              className="w-full accent-lime-400 bg-zinc-800 h-2 rounded-lg cursor-pointer"
-            />
-          </div>
+          <RangeControl
+            label="Monthly Volume (Invoices / Calls / Records)"
+            value={monthlyVolume}
+            displayValue={`${monthlyVolume.toLocaleString()} items/mo`}
+            min={200}
+            max={25000}
+            step={100}
+            onChange={setMonthlyVolume}
+          />
+          <RangeControl
+            label="Manual Time Per Exception Item"
+            value={reviewTimePerItem}
+            displayValue={`${reviewTimePerItem} minutes`}
+            min={2}
+            max={45}
+            onChange={setReviewTimePerItem}
+          />
+          <RangeControl
+            label="Blended Operator Hourly Rate"
+            value={hourlyOperatorCost}
+            displayValue={`$${hourlyOperatorCost}/hr`}
+            min={15}
+            max={150}
+            step={5}
+            onChange={setHourlyOperatorCost}
+          />
+          <RangeControl
+            label="Target Straight-Through Automation"
+            value={targetAutomation}
+            displayValue={`${targetAutomation}%`}
+            min={50}
+            max={95}
+            onChange={setTargetAutomation}
+          />
         </div>
 
         {/* Output Metrics Panel */}
@@ -166,4 +133,4 @@ export const DeRiskingCalculator: React.FC<CalculatorProps> = ({
       </div>
     </section>
   );
-};
+}

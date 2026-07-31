@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { Fragment, useState } from "react";
 import { motion } from "motion/react";
 import {
   Zap,
@@ -10,48 +10,54 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
+import type { DiagnosticTriggerProps } from "../types";
+import { SERVICE_OFFERS } from "../data/companyData";
+import { RangeControl } from "./RangeControl";
 
-interface SimulatorProps {
-  onOpenDiagnostic: (serviceTitle?: string) => void;
-}
+const WORKFLOWS = [
+  {
+    id: "invoices",
+    serviceId: "doc-reconciliation",
+    title: "Distributor Invoices & Receipts",
+    icon: FileSpreadsheet,
+    desc: "Parsing multi-page PDFs, spreadsheets, and line items with strict price/QTY reconciliation.",
+  },
+  {
+    id: "security",
+    serviceId: "ai-security",
+    title: "AI Security Red-Teaming",
+    icon: ShieldAlert,
+    desc: "Simulating prompt injection, state corruption, and multi-turn adversarial agent exploits.",
+  },
+  {
+    id: "voice",
+    serviceId: "voice-ai",
+    title: "Hindi/Hinglish Voice Automation",
+    icon: Mic,
+    desc: "Regulated debt collections & customer calls with real-time speech intent classification.",
+  },
+  {
+    id: "revenue",
+    serviceId: "sales-automation",
+    title: "Sales & CRM Attribution",
+    icon: TrendingUp,
+    desc: "B2B prospect research, personalized outreach drafting, and human approval gates.",
+  },
+];
 
-export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
+export function InteractiveFeasibilitySimulator({
   onOpenDiagnostic,
-}) => {
+}: DiagnosticTriggerProps) {
   const [selectedWorkflow, setSelectedWorkflow] = useState("invoices");
   const [ruleStrictness, setRuleStrictness] = useState(85);
   const [llmThreshold, setLlmThreshold] = useState(90);
   const [humanGateThreshold, setHumanGateThreshold] = useState(75);
   const [isSimulating, setIsSimulating] = useState(false);
 
-  const workflows = [
-    {
-      id: "invoices",
-      title: "Distributor Invoices & Receipts",
-      icon: FileSpreadsheet,
-      desc: "Parsing multi-page PDFs, spreadsheets, and line items with strict price/QTY reconciliation.",
-    },
-    {
-      id: "security",
-      title: "AI Security Red-Teaming",
-      icon: ShieldAlert,
-      desc: "Simulating prompt injection, state corruption, and multi-turn adversarial agent exploits.",
-    },
-    {
-      id: "voice",
-      title: "Hindi/Hinglish Voice Automation",
-      icon: Mic,
-      desc: "Regulated debt collections & customer calls with real-time speech intent classification.",
-    },
-    {
-      id: "revenue",
-      title: "Sales & CRM Attribution",
-      icon: TrendingUp,
-      desc: "B2B prospect research, personalized outreach drafting, and human approval gates.",
-    },
-  ];
-
-  const activeWf = workflows.find((w) => w.id === selectedWorkflow) || workflows[0];
+  const activeWf = WORKFLOWS.find((workflow) => workflow.id === selectedWorkflow) ?? WORKFLOWS[0];
+  const diagnosticWorkflow =
+    SERVICE_OFFERS.find((service) => service.id === activeWf.serviceId)?.title ??
+    SERVICE_OFFERS[0].title;
 
   // Calculated simulation metrics
   const deterministicAutoPass = Math.round((ruleStrictness / 100) * 62);
@@ -64,19 +70,50 @@ export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
     setTimeout(() => setIsSimulating(false), 1200);
   };
 
-  const theme = {
-    badge: "bg-lime-400/10 text-lime-400 border-lime-400/30",
-    button: "bg-lime-400 text-black hover:bg-lime-300 shadow-lime-400/20",
-    text: "text-lime-400",
-    border: "border-lime-500/40",
-  };
+  const pipelineNodes = [
+    {
+      step: "01",
+      title: "Heterogeneous Ingestion",
+      description: "PDFs, CSVS, Speech Streams & DB Records",
+      badgeClass: "bg-zinc-800 text-zinc-300",
+      value: "100% Extracted",
+      valueClass: "text-emerald-400",
+    },
+    {
+      step: "02",
+      title: "Deterministic Rule Engine",
+      description: "Zero Hallucination Math & Schema Checks",
+      badgeClass: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40",
+      value: `${deterministicAutoPass}% Auto-Passed`,
+      valueClass: "text-emerald-400",
+      detail: "0.00ms Latency",
+    },
+    {
+      step: "03",
+      title: "LLM Ambiguity Resolution",
+      description: "Contextual Reasoning with Citations",
+      badgeClass: "bg-indigo-500/20 text-indigo-400 border border-indigo-500/40",
+      value: `${llmProcessed}% Resolved`,
+      valueClass: "text-indigo-400",
+      detail: "Evidence Labeled",
+    },
+    {
+      step: "04",
+      title: "Human Approval Gate",
+      description: "Operator Review for Edge Exceptions",
+      badgeClass: "bg-amber-500/20 text-amber-400 border border-amber-500/40",
+      value: `${humanEscalated}% Escalated`,
+      valueClass: "text-amber-400",
+      detail: "Side-by-side UI",
+    },
+  ];
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-800/80">
       {/* Title Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
-          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold border ${theme.badge} mb-2`}>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold border bg-lime-400/10 text-lime-400 border-lime-400/30 mb-2">
             <Activity className="w-3.5 h-3.5 animate-pulse" />
             <span>INTERACTIVE SIMULATOR</span>
           </div>
@@ -98,23 +135,25 @@ export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
               1. Select Operational Workflow
             </label>
             <div className="grid grid-cols-2 gap-2.5">
-              {workflows.map((wf) => {
+              {WORKFLOWS.map((wf) => {
                 const isSelected = wf.id === selectedWorkflow;
                 const WfIcon = wf.icon;
                 return (
                   <button
                     key={wf.id}
+                    type="button"
+                    aria-pressed={isSelected}
                     onClick={() => {
                       setSelectedWorkflow(wf.id);
                       triggerSimulation();
                     }}
                     className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
                       isSelected
-                        ? `bg-zinc-800 ${theme.border} text-white shadow-md`
+                        ? "bg-zinc-800 border-lime-500/40 text-white shadow-md"
                         : "bg-zinc-950/80 border-zinc-800 text-zinc-400 hover:text-white"
                     }`}
                   >
-                    <WfIcon className={`w-4 h-4 flex-shrink-0 ${isSelected ? theme.text : "text-zinc-500"}`} />
+                    <WfIcon className={`w-4 h-4 flex-shrink-0 ${isSelected ? "text-lime-400" : "text-zinc-500"}`} />
                     <span className="text-xs font-bold leading-tight line-clamp-1">{wf.title}</span>
                   </button>
                 );
@@ -130,71 +169,42 @@ export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
               2. Tune Governance Parameters
             </label>
 
-            {/* Slider 1: Deterministic Match Strictness */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-xs font-mono">
-                <span className="text-zinc-300">Deterministic Rule Strictness</span>
-                <span className={`font-bold ${theme.text}`}>{ruleStrictness}%</span>
-              </div>
-              <input
-                type="range"
-                min="50"
-                max="99"
-                value={ruleStrictness}
-                onChange={(e) => {
-                  setRuleStrictness(Number(e.target.value));
-                  triggerSimulation();
-                }}
-                className="w-full accent-lime-400 bg-zinc-800 h-2 rounded-lg cursor-pointer"
-              />
-              <span className="text-[10px] text-zinc-500 block font-mono">
-                Calculates mathematical line item matches, tax calculations & regex schemas with 0% error.
-              </span>
-            </div>
-
-            {/* Slider 2: LLM Confidence Cutoff */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-xs font-mono">
-                <span className="text-zinc-300">LLM Confidence Cutoff</span>
-                <span className={`font-bold ${theme.text}`}>{llmThreshold}%</span>
-              </div>
-              <input
-                type="range"
-                min="60"
-                max="98"
-                value={llmThreshold}
-                onChange={(e) => {
-                  setLlmThreshold(Number(e.target.value));
-                  triggerSimulation();
-                }}
-                className="w-full accent-lime-400 bg-zinc-800 h-2 rounded-lg cursor-pointer"
-              />
-              <span className="text-[10px] text-zinc-500 block font-mono">
-                Requests explicit model citations & rationale before passing without review.
-              </span>
-            </div>
-
-            {/* Slider 3: Human Review Escalation Trigger */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-xs font-mono">
-                <span className="text-zinc-300">Human Review Escalation Floor</span>
-                <span className={`font-bold ${theme.text}`}>{humanGateThreshold}%</span>
-              </div>
-              <input
-                type="range"
-                min="50"
-                max="95"
-                value={humanGateThreshold}
-                onChange={(e) => {
-                  setHumanGateThreshold(Number(e.target.value));
-                  triggerSimulation();
-                }}
-                className="w-full accent-lime-400 bg-zinc-800 h-2 rounded-lg cursor-pointer"
-              />
-              <span className="text-[10px] text-zinc-500 block font-mono">
-                Escalates ambiguous or high-dollar items directly to human operator approval screens.
-              </span>
-            </div>
+            <RangeControl
+              label="Deterministic Rule Strictness"
+              value={ruleStrictness}
+              displayValue={`${ruleStrictness}%`}
+              min={50}
+              max={99}
+              description="Calculates mathematical line item matches, tax calculations & regex schemas with 0% error."
+              onChange={(value) => {
+                setRuleStrictness(value);
+                triggerSimulation();
+              }}
+            />
+            <RangeControl
+              label="LLM Confidence Cutoff"
+              value={llmThreshold}
+              displayValue={`${llmThreshold}%`}
+              min={60}
+              max={98}
+              description="Requests explicit model citations & rationale before passing without review."
+              onChange={(value) => {
+                setLlmThreshold(value);
+                triggerSimulation();
+              }}
+            />
+            <RangeControl
+              label="Human Review Escalation Floor"
+              value={humanGateThreshold}
+              displayValue={`${humanGateThreshold}%`}
+              min={50}
+              max={95}
+              description="Escalates ambiguous or high-dollar items directly to human operator approval screens."
+              onChange={(value) => {
+                setHumanGateThreshold(value);
+                triggerSimulation();
+              }}
+            />
           </div>
         </div>
 
@@ -212,7 +222,7 @@ export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
 
           <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
             <div className="flex items-center gap-2">
-              <Zap className={`w-4 h-4 ${theme.text} animate-bounce`} />
+              <Zap className="w-4 h-4 text-lime-400 animate-bounce" />
               <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
                 Live Data Pipeline Node Simulation
               </span>
@@ -225,92 +235,39 @@ export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
 
           {/* Node Flow Graphic */}
           <div className="space-y-3 font-mono">
-            {/* Node 1: Ingestion */}
-            <div className="p-3.5 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-300 flex items-center justify-center font-bold text-xs">
-                  01
+            {pipelineNodes.map((node, index) => (
+              <Fragment key={node.step}>
+                {index > 0 && (
+                  <div className="flex justify-center -my-1 text-zinc-600">
+                    <ArrowRight className="w-4 h-4 rotate-90" />
+                  </div>
+                )}
+                <div className="p-3.5 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs ${node.badgeClass}`}>
+                      {node.step}
+                    </div>
+                    <div>
+                      <span className="text-xs text-white font-bold block">{node.title}</span>
+                      <span className="text-[10px] text-zinc-400">{node.description}</span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className={`text-xs font-bold ${node.detail ? "block" : ""} ${node.valueClass}`}>
+                      {node.value}
+                    </span>
+                    {node.detail && <span className="text-[9px] text-zinc-500">{node.detail}</span>}
+                  </div>
                 </div>
-                <div>
-                  <span className="text-xs text-white font-bold block">Heterogeneous Ingestion</span>
-                  <span className="text-[10px] text-zinc-400">PDFs, CSVS, Speech Streams & DB Records</span>
-                </div>
-              </div>
-              <span className="text-xs text-emerald-400 font-bold">100% Extracted</span>
-            </div>
-
-            {/* Connecting Arrow */}
-            <div className="flex justify-center -my-1 text-zinc-600">
-              <ArrowRight className="w-4 h-4 rotate-90" />
-            </div>
-
-            {/* Node 2: Deterministic Rule Match */}
-            <div className="p-3.5 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold text-xs">
-                  02
-                </div>
-                <div>
-                  <span className="text-xs text-white font-bold block">Deterministic Rule Engine</span>
-                  <span className="text-[10px] text-zinc-400">Zero Hallucination Math & Schema Checks</span>
-                </div>
-              </div>
-              <div className="text-right">
-                <span className="text-xs text-emerald-400 font-bold block">{deterministicAutoPass}% Auto-Passed</span>
-                <span className="text-[9px] text-zinc-500">0.00ms Latency</span>
-              </div>
-            </div>
-
-            {/* Connecting Arrow */}
-            <div className="flex justify-center -my-1 text-zinc-600">
-              <ArrowRight className="w-4 h-4 rotate-90" />
-            </div>
-
-            {/* Node 3: LLM Model Judgment */}
-            <div className="p-3.5 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/40 flex items-center justify-center font-bold text-xs">
-                  03
-                </div>
-                <div>
-                  <span className="text-xs text-white font-bold block">LLM Ambiguity Resolution</span>
-                  <span className="text-[10px] text-zinc-400">Contextual Reasoning with Citations</span>
-                </div>
-              </div>
-              <div className="text-right">
-                <span className="text-xs text-indigo-400 font-bold block">{llmProcessed}% Resolved</span>
-                <span className="text-[9px] text-zinc-500">Evidence Labeled</span>
-              </div>
-            </div>
-
-            {/* Connecting Arrow */}
-            <div className="flex justify-center -my-1 text-zinc-600">
-              <ArrowRight className="w-4 h-4 rotate-90" />
-            </div>
-
-            {/* Node 4: Human Review Gate */}
-            <div className="p-3.5 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center font-bold text-xs">
-                  04
-                </div>
-                <div>
-                  <span className="text-xs text-white font-bold block">Human Approval Gate</span>
-                  <span className="text-[10px] text-zinc-400">Operator Review for Edge Exceptions</span>
-                </div>
-              </div>
-              <div className="text-right">
-                <span className="text-xs text-amber-400 font-bold block">{humanEscalated}% Escalated</span>
-                <span className="text-[9px] text-zinc-500">Side-by-side UI</span>
-              </div>
-            </div>
+              </Fragment>
+            ))}
           </div>
 
           {/* Outcome Summary Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-zinc-800 font-mono">
             <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl">
               <span className="text-[10px] text-zinc-400 block uppercase">Hallucination Block</span>
-              <span className={`text-base font-bold ${theme.text}`}>{hallucinationBlockRate}%</span>
+              <span className="text-base font-bold text-lime-400">{hallucinationBlockRate}%</span>
             </div>
             <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl">
               <span className="text-[10px] text-zinc-400 block uppercase">Straight-Through Rate</span>
@@ -325,8 +282,8 @@ export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
           <motion.button
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => onOpenDiagnostic(activeWf.title)}
-            className={`w-full py-3.5 ${theme.button} font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2 cursor-pointer font-mono uppercase tracking-wider`}
+            onClick={() => onOpenDiagnostic(diagnosticWorkflow)}
+            className="w-full py-3.5 bg-lime-400 text-black hover:bg-lime-300 shadow-lime-400/20 font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2 cursor-pointer font-mono uppercase tracking-wider"
           >
             <Sparkles className="w-4 h-4" />
             <span>Validate This Pipeline For {activeWf.title}</span>
@@ -335,4 +292,4 @@ export const InteractiveFeasibilitySimulator: React.FC<SimulatorProps> = ({
       </div>
     </section>
   );
-};
+}

@@ -1,17 +1,18 @@
 type EvidenceLevel = "Built/Deployed" | "Prototyped" | "Researched/Designed";
-type FitStatus = "Strong Fit" | "Moderate Fit" | "Alternative Architecture Recommended";
+
+export interface DiagnosticTriggerProps {
+  onOpenDiagnostic: (workflow?: string) => void;
+}
 
 export interface ServiceOffer {
   id: string;
   title: string;
-  subtitle: string;
+  diagnosticLabel: string;
   description: string;
   includedFeatures: string[];
   targetAudience: string;
   primaryOfferName: string;
   sprintOutputs: string[];
-  iconName: string;
-  evidenceBadge: EvidenceLevel;
 }
 
 export interface ProductSystem {
@@ -20,7 +21,6 @@ export interface ProductSystem {
   evidenceLevel: EvidenceLevel;
   shortDesc: string;
   capabilities: string[];
-  demonstrates: string[];
 }
 
 export interface FitDiagnosticInput {
@@ -33,7 +33,7 @@ export interface FitDiagnosticInput {
 
 export interface DiagnosticAnalysis {
   fitScore: number;
-  fitStatus: FitStatus;
+  fitStatus: "Strong Fit";
   recommendedSprint: string;
   estimatedDurationDays: string;
   keyRisksIdentified: string[];

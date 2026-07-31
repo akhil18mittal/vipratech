@@ -22,11 +22,13 @@ export function SignalGridProducts() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {PRODUCTS_SYSTEMS.map((product) => (
-          <motion.div
+          <motion.button
             key={product.id}
+            type="button"
+            aria-pressed={product.id === activeProduct}
             whileHover={{ y: -6, scale: 1.02 }}
             onClick={() => setActiveProduct(product.id)}
-            className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+            className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between text-left ${
               product.id === activeProduct
                 ? "bg-zinc-900 border-lime-500 shadow-xl shadow-lime-500/10"
                 : "bg-zinc-900/60 border-zinc-800 hover:border-zinc-700"
@@ -51,8 +53,8 @@ export function SignalGridProducts() {
               </p>
 
               <div className="space-y-1.5 pt-2">
-                {product.capabilities.slice(0, 3).map((capability, index) => (
-                  <div key={index} className="text-[11px] text-zinc-300 flex items-center gap-1.5 font-mono">
+                {product.capabilities.map((capability) => (
+                  <div key={capability} className="text-[11px] text-zinc-300 flex items-center gap-1.5 font-mono">
                     <span className="text-lime-400">•</span>
                     <span className="truncate">{capability}</span>
                   </div>
@@ -64,7 +66,7 @@ export function SignalGridProducts() {
               <span>View Details</span>
               <ChevronRight className="w-4 h-4 text-lime-400" />
             </div>
-          </motion.div>
+          </motion.button>
         ))}
       </div>
     </section>

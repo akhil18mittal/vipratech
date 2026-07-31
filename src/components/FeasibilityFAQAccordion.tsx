@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, HelpCircle, Sparkles } from "lucide-react";
+import type { DiagnosticTriggerProps } from "../types";
 
-interface FAQProps {
-  onOpenDiagnostic: (serviceTitle?: string) => void;
-}
-
-export const FeasibilityFAQAccordion: React.FC<FAQProps> = ({ onOpenDiagnostic }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const faqs = [
+const FAQS = [
     {
       q: "What makes VipraTech Labs different from typical AI wrappers?",
       a: "Typical wrappers pass unvalidated prompts straight to APIs and hope for the best. VipraTech builds hybrid systems where deterministic rules run first to guarantee 0% error on known logic, followed by LLM model judgment with explicit citation mapping, and a dedicated side-by-side human approval gate before any settlement or dispatch occurs.",
@@ -30,7 +24,10 @@ export const FeasibilityFAQAccordion: React.FC<FAQProps> = ({ onOpenDiagnostic }
       q: "Can VipraTech integrate with our legacy ERP, CRM, or telephony systems?",
       a: "Yes. Our team has built integrations across heterogeneous REST APIs, PostgreSQL databases, Salesforce/HubSpot CRMs, Twilio/Exotel telephony, custom webhook architectures, and flat file/S3 storage buckets.",
     },
-  ];
+];
+
+export function FeasibilityFAQAccordion({ onOpenDiagnostic }: DiagnosticTriggerProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-zinc-800/80">
@@ -48,11 +45,11 @@ export const FeasibilityFAQAccordion: React.FC<FAQProps> = ({ onOpenDiagnostic }
       </div>
 
       <div className="space-y-4">
-        {faqs.map((faq, index) => {
+        {FAQS.map((faq, index) => {
           const isOpen = openIndex === index;
           return (
             <div
-              key={index}
+              key={faq.q}
               className={`rounded-2xl border transition-all overflow-hidden ${
                 isOpen
                   ? "bg-zinc-900 border-lime-500/60 shadow-xl shadow-lime-500/10"
@@ -61,6 +58,7 @@ export const FeasibilityFAQAccordion: React.FC<FAQProps> = ({ onOpenDiagnostic }
             >
               <button
                 onClick={() => setOpenIndex(isOpen ? null : index)}
+                aria-expanded={isOpen}
                 className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 cursor-pointer"
               >
                 <span className="text-sm sm:text-base font-bold text-white font-mono flex items-center gap-3">
@@ -110,4 +108,4 @@ export const FeasibilityFAQAccordion: React.FC<FAQProps> = ({ onOpenDiagnostic }
       </div>
     </section>
   );
-};
+}

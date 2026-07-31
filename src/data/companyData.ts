@@ -2,21 +2,18 @@ import type { ProductSystem, ServiceOffer } from "../types";
 
 export const COMPANY_INFO = {
   name: "VipraTech Labs Private Limited",
-  brandName: "VipraTech",
-  tagline: "Evidence-First Applied-AI Engineering",
   subheading: "We research, prototype, and build production AI systems for workflows where accuracy, evidence, human review, and operational reliability matter.",
   founder: "Akhilesh Mittal",
   email: "akhilesh@vipratech.in",
   phone: "+91 70234 15753",
   address: "Plot No. 1, Vikas Nagar, Nanta Road, Kunhari, Kota, Rajasthan, India",
-  relationships: ["Blacklock", "Meal of the Moment"],
 };
 
 export const SERVICE_OFFERS: ServiceOffer[] = [
   {
     id: "doc-reconciliation",
     title: "Document Intelligence & Reconciliation",
-    subtitle: "Turning complex document friction into auditable settlement decisions",
+    diagnosticLabel: "Document Intelligence & Reconciliation",
     description: "Build systems that process spreadsheets, PDFs, images, invoices, and claims into reviewable decisions with deterministic matching rules and explicit exception states.",
     includedFeatures: [
       "Multi-format document ingestion & parsing",
@@ -34,13 +31,11 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
       "Target architecture & review model",
       "Bounded pilot scope & acceptance checks",
     ],
-    iconName: "FileSpreadsheet",
-    evidenceBadge: "Built/Deployed",
   },
   {
     id: "ai-security",
     title: "AI Security, Testing & Compliance",
-    subtitle: "Rigorously testing AI agents across conversations, tools, and state",
+    diagnosticLabel: "AI Security & Agent Red-Teaming",
     description: "Evaluating how AI agents behave under adversarial conditions, prompt manipulation, and tool permission boundaries before production release.",
     includedFeatures: [
       "AI-agent threat modeling & asset boundaries",
@@ -58,13 +53,11 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
       "Prioritized vulnerability finding review",
       "Remediation & verification roadmap",
     ],
-    iconName: "ShieldAlert",
-    evidenceBadge: "Built/Deployed",
   },
   {
     id: "voice-ai",
     title: "Voice AI & Conversational Systems",
-    subtitle: "Regulated, multilingual voice automation linked to workflow state",
+    diagnosticLabel: "Multilingual Voice AI & Telephony",
     description: "Designing voice systems that connect conversational AI with telephony, Hindi/Hinglish code-switching, policy guardrails, and seamless human handoff.",
     includedFeatures: [
       "Call-flow & exception state logic",
@@ -82,13 +75,11 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
       "Reference system architecture",
       "Measured prototype & rollout plan",
     ],
-    iconName: "Mic",
-    evidenceBadge: "Built/Deployed",
   },
   {
     id: "sales-automation",
     title: "AI Sales & Marketing Automation",
-    subtitle: "Governed revenue workflows from research to CRM attribution",
+    diagnosticLabel: "Revenue & Outreach Automation",
     description: "Connecting buyer research, evidence-backed content drafting, human approval gates, channel campaigns, and multi-tenant attribution.",
     includedFeatures: [
       "Buyer & account research automation",
@@ -106,13 +97,11 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
       "Prioritized automation roadmap",
       "Phased implementation & ROI plan",
     ],
-    iconName: "TrendingUp",
-    evidenceBadge: "Built/Deployed",
   },
   {
     id: "product-research",
     title: "AI Product Research & Rapid Prototyping",
-    subtitle: "De-risking critical architecture & model choices before building",
+    diagnosticLabel: "AI Product Discovery & Feasibility",
     description: "Helping product teams resolve consequential AI technology, provider selection, build-vs-buy, and evaluation strategy decisions.",
     includedFeatures: [
       "Provider & model capability benchmarking",
@@ -130,8 +119,6 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
       "Evaluation strategy & dataset spec",
       "Prototype & delivery scope",
     ],
-    iconName: "Cpu",
-    evidenceBadge: "Built/Deployed",
   },
 ];
 
@@ -145,13 +132,6 @@ export const PRODUCTS_SYSTEMS: ProductSystem[] = [
       "Multi-turn conversation campaigns",
       "Durable evidence register",
       "Adversarial prompt injection testing",
-      "Tool permission boundary checks",
-      "Remediation tracking & compliance export",
-    ],
-    demonstrates: [
-      "Model-aware red teaming",
-      "Production SaaS software",
-      "Auditable test logs",
     ],
   },
   {
@@ -163,13 +143,6 @@ export const PRODUCTS_SYSTEMS: ProductSystem[] = [
       "Multi-tenant SaaS tenant isolation",
       "Human approval gate workflow",
       "Evidence-backed outreach drafting",
-      "Multi-channel pipeline telemetry",
-      "Attribution tracking & suppression lists",
-    ],
-    demonstrates: [
-      "Revenue workflow orchestration",
-      "Human-in-the-loop control",
-      "Multi-tenant state handling",
     ],
   },
   {
@@ -181,13 +154,6 @@ export const PRODUCTS_SYSTEMS: ProductSystem[] = [
       "Telephony & speech integration",
       "Hindi & Hinglish code-switching",
       "Policy guardrail enforcement",
-      "Interruption & retry recovery",
-      "Live operator handoff & evidence logs",
-    ],
-    demonstrates: [
-      "Multilingual conversational AI",
-      "Low-latency voice orchestration",
-      "Operator control screens",
     ],
   },
   {
@@ -199,11 +165,6 @@ export const PRODUCTS_SYSTEMS: ProductSystem[] = [
       "Buyer workflow research",
       "Technical architecture specs",
       "Governed outbound messaging concepts",
-      "Trade-off decision matrices",
-    ],
-    demonstrates: [
-      "Applied AI product discovery",
-      "System boundaries & safety design",
     ],
   },
 ];
@@ -235,17 +196,14 @@ export const ENGAGEMENT_STEPS = [
 export const EVIDENCE_LEVELS_EXPLANATION = [
   {
     level: "Built/Deployed",
-    color: "emerald",
     desc: "Shipped software running in production with real evidence and user verification.",
   },
   {
     level: "Prototyped",
-    color: "amber",
     desc: "Functional technical test or clickable prototype verifying core feasibility.",
   },
   {
     level: "Researched/Designed",
-    color: "blue",
     desc: "Architectural blueprint, trade-off analysis, or detailed research specification.",
   },
 ];

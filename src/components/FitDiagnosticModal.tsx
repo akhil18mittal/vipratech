@@ -1,42 +1,38 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { X, Sparkles, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, FileCheck } from "lucide-react";
 import type { DiagnosticAnalysis, FitDiagnosticInput } from "../types";
 import confetti from "canvas-confetti";
+import { SERVICE_OFFERS } from "../data/companyData";
 import { analyzeFitDiagnostic, buildFitCallMailto } from "../diagnostic/fitDiagnostic";
 
-const DEFAULT_WORKFLOW = "Document Intelligence & Reconciliation";
+const CHALLENGE_OPTIONS = [
+  "Unstructured PDFs and spreadsheet mismatches",
+  "High manual review overhead & human errors",
+  "AI agent security & compliance uncertainty",
+  "Multilingual / Hindi code-switching complexity",
+  "Lack of audit trail & decision evidence",
+  "Difficulty scaling repeated decisions",
+];
 
 interface FitDiagnosticModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialServiceId?: string;
+  initialWorkflow?: string;
 }
 
-export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
+export function FitDiagnosticModal({
   isOpen,
   onClose,
-  initialServiceId,
-}) => {
-  const [workflowType, setWorkflowType] = useState(
-    initialServiceId || DEFAULT_WORKFLOW
-  );
-  const [challenges, setChallenges] = useState<string[]>([
-    "Unstructured PDFs and spreadsheet mismatches",
-    "High manual review overhead & human errors",
-  ]);
+  initialWorkflow,
+}: FitDiagnosticModalProps) {
+  const [workflowType, setWorkflowType] = useState(initialWorkflow ?? SERVICE_OFFERS[0].title);
+  const [challenges, setChallenges] = useState(CHALLENGE_OPTIONS.slice(0, 2));
   const [currentWorkaround, setCurrentWorkaround] = useState("Manual spreadsheet mapping and team email chains");
   const [timeline, setTimeline] = useState("1-2 Months");
   const [teamSize, setTeamSize] = useState("10-50 People");
 
   const [analysis, setAnalysis] = useState<DiagnosticAnalysis | null>(null);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    setWorkflowType(initialServiceId || DEFAULT_WORKFLOW);
-    setAnalysis(null);
-  }, [initialServiceId, isOpen]);
 
   const diagnosticInput: FitDiagnosticInput = {
     workflowType,
@@ -47,17 +43,15 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
   };
 
   const toggleChallenge = (item: string) => {
-    if (challenges.includes(item)) {
-      setChallenges(challenges.filter((c) => c !== item));
-    } else {
-      setChallenges([...challenges, item]);
-    }
+    setChallenges((current) =>
+      current.includes(item)
+        ? current.filter((challenge) => challenge !== item)
+        : [...current, item],
+    );
   };
 
   const handleRunDiagnostic = () => {
-    setAnalysis(null);
-    const result = analyzeFitDiagnostic(diagnosticInput);
-    setAnalysis(result);
+    setAnalysis(analyzeFitDiagnostic(diagnosticInput));
     confetti({
       particleCount: 50,
       spread: 60,
@@ -70,6 +64,9 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
       <motion.div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="fit-diagnostic-title"
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -90,7 +87,7 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
                   VipraTech Diagnostic
                 </span>
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-white mt-0.5">
+              <h2 id="fit-diagnostic-title" className="text-xl font-bold tracking-tight text-white mt-0.5">
                 Evaluate Workflow Automation Feasibility
               </h2>
             </div>
@@ -111,29 +108,20 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
               {/* Form Left */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
+                  <label htmlFor="workflow-type" className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
                     1. Target Workflow Area
                   </label>
                   <select
+                    id="workflow-type"
                     value={workflowType}
                     onChange={(e) => setWorkflowType(e.target.value)}
                     className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-zinc-200 focus:outline-none focus:border-lime-500 transition-colors"
                   >
-                    <option value="Document Intelligence & Reconciliation">
-                      Document Intelligence & Reconciliation
-                    </option>
-                    <option value="AI Security, Testing & Compliance">
-                      AI Security & Agent Red-Teaming
-                    </option>
-                    <option value="Voice AI & Conversational Systems">
-                      Multilingual Voice AI & Telephony
-                    </option>
-                    <option value="AI Sales & Revenue Automation">
-                      Revenue & Outreach Automation
-                    </option>
-                    <option value="AI Product Research & Prototyping">
-                      AI Product Discovery & Feasibility
-                    </option>
+                    {SERVICE_OFFERS.map((service) => (
+                      <option key={service.id} value={service.title}>
+                        {service.diagnosticLabel}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -142,17 +130,11 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
                     2. Primary Pain Points / Challenges
                   </label>
                   <div className="space-y-2">
-                    {[
-                      "Unstructured PDFs and spreadsheet mismatches",
-                      "High manual review overhead & human errors",
-                      "AI agent security & compliance uncertainty",
-                      "Multilingual / Hindi code-switching complexity",
-                      "Lack of audit trail & decision evidence",
-                      "Difficulty scaling repeated decisions",
-                    ].map((item) => (
+                    {CHALLENGE_OPTIONS.map((item) => (
                       <button
                         key={item}
                         type="button"
+                        aria-pressed={challenges.includes(item)}
                         onClick={() => toggleChallenge(item)}
                         className={`w-full text-left p-2.5 rounded-xl text-xs font-medium border transition-all flex items-center justify-between ${
                           challenges.includes(item)
@@ -173,10 +155,11 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
               {/* Form Right */}
               <div className="space-y-4 flex flex-col justify-between">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
+                  <label htmlFor="current-workaround" className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
                     3. Current Workaround
                   </label>
                   <textarea
+                    id="current-workaround"
                     rows={3}
                     value={currentWorkaround}
                     onChange={(e) => setCurrentWorkaround(e.target.value)}
@@ -187,10 +170,11 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
+                    <label htmlFor="timeline" className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
                       Expected Timeline
                     </label>
                     <select
+                      id="timeline"
                       value={timeline}
                       onChange={(e) => setTimeline(e.target.value)}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-lime-500"
@@ -201,10 +185,11 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
+                    <label htmlFor="team-size" className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
                       Team Size
                     </label>
                     <select
+                      id="team-size"
                       value={teamSize}
                       onChange={(e) => setTeamSize(e.target.value)}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-lime-500"
@@ -344,4 +329,4 @@ export const FitDiagnosticModal: React.FC<FitDiagnosticModalProps> = ({
       </motion.div>
     </div>
   );
-};
+}

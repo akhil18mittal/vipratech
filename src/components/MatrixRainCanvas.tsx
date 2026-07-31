@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface MatrixRainProps {
   color?: string; // Tail stream color, e.g., '#a3e635'
@@ -10,7 +10,7 @@ interface MatrixRainProps {
   opacity?: number; // Canvas overall opacity (default 0.25)
 }
 
-export const MatrixRainCanvas: React.FC<MatrixRainProps> = ({
+export function MatrixRainCanvas({
   color = "#a3e635",
   headColor = "#ffffff",
   charSet,
@@ -18,7 +18,7 @@ export const MatrixRainCanvas: React.FC<MatrixRainProps> = ({
   density = 20,
   fontSize = 13,
   opacity = 0.25,
-}) => {
+}: MatrixRainProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -38,8 +38,8 @@ export const MatrixRainCanvas: React.FC<MatrixRainProps> = ({
     let drops: number[] = [];
 
     const resizeCanvas = () => {
-      const width = Math.max(window.innerWidth || 0, document.documentElement.clientWidth || 0, screen.width || 0);
-      const height = Math.max(window.innerHeight || 0, document.documentElement.clientHeight || 0, screen.height || 0);
+      const width = window.innerWidth || document.documentElement.clientWidth;
+      const height = window.innerHeight || document.documentElement.clientHeight;
       canvas.width = width;
       canvas.height = height;
 
@@ -58,14 +58,6 @@ export const MatrixRainCanvas: React.FC<MatrixRainProps> = ({
     resizeCanvas();
 
     window.addEventListener("resize", resizeCanvas);
-
-    let resizeObserver: ResizeObserver | null = null;
-    if (typeof ResizeObserver !== "undefined") {
-      resizeObserver = new ResizeObserver(() => {
-        resizeCanvas();
-      });
-      resizeObserver.observe(document.body);
-    }
 
     const draw = () => {
       // Semi-transparent fade background to create trail effect
@@ -111,9 +103,6 @@ export const MatrixRainCanvas: React.FC<MatrixRainProps> = ({
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", resizeCanvas);
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
     };
   }, [color, headColor, charSet, speed, density, fontSize]);
 
@@ -124,4 +113,4 @@ export const MatrixRainCanvas: React.FC<MatrixRainProps> = ({
       style={{ opacity }}
     />
   );
-};
+}

@@ -1,14 +1,11 @@
 import { motion } from "motion/react";
 import { Mail, Phone, Sparkles } from "lucide-react";
 import { COMPANY_INFO, ENGAGEMENT_STEPS } from "../../data/companyData";
-
-interface SignalGridEngagementProps {
-  onOpenDiagnostic: (serviceId?: string) => void;
-}
+import type { DiagnosticTriggerProps } from "../../types";
 
 export function SignalGridEngagement({
   onOpenDiagnostic,
-}: SignalGridEngagementProps) {
+}: DiagnosticTriggerProps) {
   return (
     <>
       {/* Engagement Lifecycle */}

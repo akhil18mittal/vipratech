@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ShieldCheck,
   ArrowUpRight,
   Terminal,
-  Activity,
   Sparkles,
   Zap,
   Radio,
   Eye,
+  type LucideIcon,
 } from "lucide-react";
+import type { DiagnosticTriggerProps } from "../types";
 import { InteractiveFeasibilitySimulator } from "./InteractiveFeasibilitySimulator";
 import { DeRiskingCalculator } from "./DeRiskingCalculator";
 import { FeasibilityFAQAccordion } from "./FeasibilityFAQAccordion";
@@ -19,20 +20,30 @@ import { SignalGridEngagement } from "./signal-grid/SignalGridEngagement";
 import { SignalGridProducts } from "./signal-grid/SignalGridProducts";
 import { SignalGridServices } from "./signal-grid/SignalGridServices";
 
-interface SignalGridPageProps {
-  onOpenDiagnostic: (serviceId?: string) => void;
-}
+const LIVE_LOGS = [
+  { id: 1, type: "INGESTION", text: "PDF / Spreadsheet multi-parser", status: "PASSED", confidence: "100%", color: "text-lime-400" },
+  { id: 2, type: "RULE ENGINE", text: "Deterministic math validation", status: "VERIFIED", confidence: "99.8%", color: "text-emerald-400" },
+  { id: 3, type: "AMBIGUITY", text: "LLM Human Approval Gate", status: "PAUSED", confidence: "REQUIRES HUMAN", color: "text-amber-300" },
+  { id: 4, type: "AUDIT LOG", text: "Durable settlement immutable record", status: "SETTLED", confidence: "100%", color: "text-teal-400" },
+];
 
-export const SignalGridPage: React.FC<SignalGridPageProps> = ({ onOpenDiagnostic }) => {
+const TICKER_ITEMS: { text: string; icon: LucideIcon; pulse?: boolean }[] = [
+  { text: "EVIDENCE-FIRST APPLIED AI", icon: Zap },
+  { text: "DETERMINISTIC RULES + LLM JUDGMENT", icon: Radio, pulse: true },
+  { text: "HUMAN REVIEW GATES", icon: Eye },
+  { text: "AUTOSENTINX THREAT DEFENSE", icon: ShieldCheck },
+  { text: "NO MOCK CLAIMS", icon: Zap },
+];
+
+const PROOF_METRICS = [
+  { value: "100%", label: "Evidence Labeled" },
+  { value: "5–10 Day", label: "De-Risk Sprints" },
+  { value: "Human", label: "Approval Gates" },
+];
+
+export function SignalGridPage({ onOpenDiagnostic }: DiagnosticTriggerProps) {
   const [mousePos, setMousePos] = useState({ x: -500, y: -500 });
-
-  // Live real-time terminal timestamp counter
-  const [liveLogs, setLiveLogs] = useState([
-    { id: 1, type: "INGESTION", text: "PDF / Spreadsheet multi-parser", status: "PASSED", confidence: "100%", color: "text-lime-400" },
-    { id: 2, type: "RULE ENGINE", text: "Deterministic math validation", status: "VERIFIED", confidence: "99.8%", color: "text-emerald-400" },
-    { id: 3, type: "AMBIGUITY", text: "LLM Human Approval Gate", status: "PAUSED", confidence: "REQUIRES HUMAN", color: "text-amber-300" },
-    { id: 4, type: "AUDIT LOG", text: "Durable settlement immutable record", status: "SETTLED", confidence: "100%", color: "text-teal-400" },
-  ]);
+  const [liveLogs, setLiveLogs] = useState(LIVE_LOGS);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -117,21 +128,15 @@ export const SignalGridPage: React.FC<SignalGridPageProps> = ({ onOpenDiagnostic
           transition={{ repeat: Infinity, duration: 22, ease: "linear" }}
           className="inline-flex gap-10 items-center"
         >
-          <span className="flex items-center gap-2"><Zap className="w-3.5 h-3.5" /> EVIDENCE-FIRST APPLIED AI</span>
-          <span>•</span>
-          <span className="flex items-center gap-2"><Radio className="w-3.5 h-3.5 animate-pulse" /> DETERMINISTIC RULES + LLM JUDGMENT</span>
-          <span>•</span>
-          <span className="flex items-center gap-2"><Eye className="w-3.5 h-3.5" /> HUMAN REVIEW GATES</span>
-          <span>•</span>
-          <span className="flex items-center gap-2"><ShieldCheck className="w-3.5 h-3.5" /> AUTOSENTINX THREAT DEFENSE</span>
-          <span>•</span>
-          <span className="flex items-center gap-2"><Zap className="w-3.5 h-3.5" /> NO MOCK CLAIMS</span>
-          <span>•</span>
-          <span className="flex items-center gap-2"><Zap className="w-3.5 h-3.5" /> EVIDENCE-FIRST APPLIED AI</span>
-          <span>•</span>
-          <span className="flex items-center gap-2"><Radio className="w-3.5 h-3.5 animate-pulse" /> DETERMINISTIC RULES + LLM JUDGMENT</span>
-          <span>•</span>
-          <span className="flex items-center gap-2"><Eye className="w-3.5 h-3.5" /> HUMAN REVIEW GATES</span>
+          {TICKER_ITEMS.concat(TICKER_ITEMS.slice(0, 3)).map(({ text, icon: Icon, pulse }, index, items) => (
+            <Fragment key={`${text}-${index}`}>
+              <span className="flex items-center gap-2">
+                <Icon className={`w-3.5 h-3.5 ${pulse ? "animate-pulse" : ""}`} />
+                {text}
+              </span>
+              {index < items.length - 1 && <span>•</span>}
+            </Fragment>
+          ))}
         </motion.div>
       </div>
 
@@ -166,18 +171,14 @@ export const SignalGridPage: React.FC<SignalGridPageProps> = ({ onOpenDiagnostic
 
             {/* Quick Proof Metrics Strip */}
             <div className="grid grid-cols-3 gap-3 pt-2 max-w-xl">
-              {[
-                { val: "100%", label: "Evidence Labeled", icon: ShieldCheck },
-                { val: "5–10 Day", label: "De-Risk Sprints", icon: Activity },
-                { val: "Human", label: "Approval Gates", icon: Eye },
-              ].map((m, idx) => (
+              {PROOF_METRICS.map((metric) => (
                 <motion.div
-                  key={idx}
+                  key={metric.label}
                   whileHover={{ y: -3, scale: 1.03 }}
                   className="p-3.5 bg-zinc-900/90 border border-zinc-800 rounded-xl hover:border-lime-500/50 transition-all shadow-md"
                 >
-                  <span className="block text-xl font-black font-mono text-lime-400">{m.val}</span>
-                  <span className="text-[11px] text-zinc-400 uppercase font-mono mt-0.5 block">{m.label}</span>
+                  <span className="block text-xl font-black font-mono text-lime-400">{metric.value}</span>
+                  <span className="text-[11px] text-zinc-400 uppercase font-mono mt-0.5 block">{metric.label}</span>
                 </motion.div>
               ))}
             </div>
@@ -296,4 +297,4 @@ export const SignalGridPage: React.FC<SignalGridPageProps> = ({ onOpenDiagnostic
       <SignalGridEngagement onOpenDiagnostic={onOpenDiagnostic} />
     </div>
   );
-};
+}

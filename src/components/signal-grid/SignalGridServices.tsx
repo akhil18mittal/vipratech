@@ -10,24 +10,21 @@ import {
   TrendingUp,
   Zap,
 } from "lucide-react";
+import type { DiagnosticTriggerProps } from "../../types";
 import {
   EVIDENCE_LEVELS_EXPLANATION,
   SERVICE_OFFERS,
 } from "../../data/companyData";
 
-interface SignalGridServicesProps {
-  onOpenDiagnostic: (serviceId?: string) => void;
-}
-
-function getIcon(name: string) {
-  switch (name) {
-    case "FileSpreadsheet":
+function getIcon(serviceId: string) {
+  switch (serviceId) {
+    case "doc-reconciliation":
       return <FileSpreadsheet className="w-5 h-5" />;
-    case "ShieldAlert":
+    case "ai-security":
       return <ShieldCheck className="w-5 h-5" />;
-    case "Mic":
+    case "voice-ai":
       return <Mic className="w-5 h-5" />;
-    case "TrendingUp":
+    case "sales-automation":
       return <TrendingUp className="w-5 h-5" />;
     default:
       return <Cpu className="w-5 h-5" />;
@@ -36,7 +33,7 @@ function getIcon(name: string) {
 
 export function SignalGridServices({
   onOpenDiagnostic,
-}: SignalGridServicesProps) {
+}: DiagnosticTriggerProps) {
   const [activeTab, setActiveTab] = useState(SERVICE_OFFERS[0].id);
   const selectedService =
     SERVICE_OFFERS.find((service) => service.id === activeTab) ??
@@ -60,9 +57,9 @@ export function SignalGridServices({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {EVIDENCE_LEVELS_EXPLANATION.map((item, i) => (
+            {EVIDENCE_LEVELS_EXPLANATION.map((item) => (
               <motion.div
-                key={i}
+                key={item.level}
                 whileHover={{ y: -3, scale: 1.02 }}
                 className="p-5 bg-zinc-900/90 border border-zinc-800 hover:border-lime-500/40 rounded-xl flex items-start gap-3.5 transition-all shadow-md"
               >
@@ -102,6 +99,8 @@ export function SignalGridServices({
             return (
               <motion.button
                 key={service.id}
+                type="button"
+                aria-pressed={isActive}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveTab(service.id)}
@@ -111,7 +110,7 @@ export function SignalGridServices({
                     : "bg-zinc-900/80 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800"
                 }`}
               >
-                {getIcon(service.iconName)}
+                {getIcon(service.id)}
                 <span>{service.title}</span>
               </motion.button>
             );
@@ -139,7 +138,7 @@ export function SignalGridServices({
                   </h3>
                 </div>
                 <span className="px-3 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-full font-bold">
-                  {selectedService.evidenceBadge}
+                  Built/Deployed
                 </span>
               </div>
 

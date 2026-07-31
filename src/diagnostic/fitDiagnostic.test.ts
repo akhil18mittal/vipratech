@@ -14,8 +14,8 @@ describe.each([
   ["Document Intelligence & Reconciliation", "Reconciliation Opportunity Sprint"],
   ["AI Security, Testing & Compliance", "AI Agent Security Assessment"],
   ["Voice AI & Conversational Systems", "Voice AI Feasibility Sprint"],
-  ["AI Sales & Revenue Automation", "Revenue Automation Diagnostic"],
-  ["AI Product Research & Prototyping", "AI Product Discovery Sprint"],
+  ["AI Sales & Marketing Automation", "Revenue Automation Diagnostic"],
+  ["AI Product Research & Rapid Prototyping", "AI Product Discovery Sprint"],
 ])("fit diagnostic category: %s", (workflowType, recommendedSprint) => {
   it(`recommends ${recommendedSprint}`, () => {
     const analysis = analyzeFitDiagnostic({ ...baseInput, workflowType });
