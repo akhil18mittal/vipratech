@@ -7,4 +7,5 @@ export const USE_CASE_BATCHES: readonly {releasedOn: string; industries: readonl
   {releasedOn: '2026-10-22', industries: ['banking', 'nbfc-lending', 'insurance']},
   {releasedOn: '2026-10-22', industries: ['capital-markets-wealth', 'fintech-payments', 'saas-ai-companies']},
   {releasedOn: '2026-10-22', industries: ['healthcare', 'pharma-life-sciences', 'telecom-contact-centers']},
+  {releasedOn: '2026-10-22', industries: ['logistics-supply-chain', 'manufacturing', 'retail-ecommerce']},
 ];
