@@ -5,4 +5,5 @@
 
 export const USE_CASE_BATCHES: readonly {releasedOn: string; industries: readonly string[]}[] = [
   {releasedOn: '2026-10-22', industries: ['banking', 'nbfc-lending', 'insurance']},
+  {releasedOn: '2026-10-22', industries: ['capital-markets-wealth', 'fintech-payments', 'saas-ai-companies']},
 ];
