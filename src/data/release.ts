@@ -10,4 +10,5 @@ export const USE_CASE_BATCHES: readonly {releasedOn: string; industries: readonl
   {releasedOn: '2026-10-22', industries: ['logistics-supply-chain', 'manufacturing', 'retail-ecommerce']},
   {releasedOn: '2026-10-22', industries: ['legal', 'accounting-audit-consulting', 'real-estate-construction']},
   {releasedOn: '2026-10-22', industries: ['hospitality-travel', 'education', 'automotive-mobility']},
+  {releasedOn: '2026-10-22', industries: ['energy-mining-utilities', 'agriculture']},
 ];
