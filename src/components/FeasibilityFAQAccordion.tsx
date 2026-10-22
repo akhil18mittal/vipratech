@@ -96,14 +96,14 @@ export function FeasibilityFAQAccordion({ onOpenDiagnostic }: DiagnosticTriggerP
       <div className="mt-12 p-6 bg-zinc-900/90 border border-zinc-800 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
         <div>
           <h3 className="text-sm font-bold text-white font-mono">Have a specific custom workflow question?</h3>
-          <p className="text-xs text-zinc-400 mt-1">Schedule a 30-minute free fit call with our founder & engineering leads.</p>
+          <p className="text-xs text-zinc-400 mt-1">Schedule a 20-minute free fit call with our founder & engineering leads.</p>
         </div>
         <button
           onClick={() => onOpenDiagnostic()}
           className="px-6 py-3 bg-lime-400 hover:bg-lime-300 text-black font-bold text-xs rounded-xl transition-all cursor-pointer font-mono flex items-center gap-2 whitespace-nowrap shadow-lg shadow-lime-400/20"
         >
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Schedule 30-Min Fit Call</span>
+          <span>Schedule 20-Min Fit Call</span>
         </button>
       </div>
     </section>

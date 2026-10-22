@@ -319,7 +319,7 @@ export function FitDiagnosticModal({
                   href={buildFitCallMailto(diagnosticInput, analysis)}
                   className="w-full sm:w-auto py-3 px-6 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-lime-500/10 cursor-pointer"
                 >
-                  <span>Request Free 30-Min Fit Call</span>
+                  <span>Request Free 20-Min Fit Call</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>

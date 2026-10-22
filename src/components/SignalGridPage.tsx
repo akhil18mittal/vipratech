@@ -10,7 +10,9 @@ import {
   Eye,
   type LucideIcon,
 } from "lucide-react";
-import type { DiagnosticTriggerProps } from "../types";
+import type { DiagnosticTriggerProps, HomeLinks } from "../types";
+import { HomeIndustries } from "./home/HomeIndustries";
+import { HomeSolutions } from "./home/HomeSolutions";
 import { InteractiveFeasibilitySimulator } from "./InteractiveFeasibilitySimulator";
 import { DeRiskingCalculator } from "./DeRiskingCalculator";
 import { FeasibilityFAQAccordion } from "./FeasibilityFAQAccordion";
@@ -41,7 +43,7 @@ const PROOF_METRICS = [
   { value: "Human", label: "Approval Gates" },
 ];
 
-export function SignalGridPage({ onOpenDiagnostic }: DiagnosticTriggerProps) {
+export function SignalGridPage({ onOpenDiagnostic, solutions, industries }: DiagnosticTriggerProps & HomeLinks) {
   const [mousePos, setMousePos] = useState({ x: -500, y: -500 });
   const [liveLogs, setLiveLogs] = useState(LIVE_LOGS);
 
@@ -294,7 +296,11 @@ export function SignalGridPage({ onOpenDiagnostic }: DiagnosticTriggerProps) {
       {/* Feasibility FAQ Accordion */}
       <FeasibilityFAQAccordion onOpenDiagnostic={onOpenDiagnostic} />
 
-      <SignalGridEngagement onOpenDiagnostic={onOpenDiagnostic} />
+      <HomeSolutions solutions={solutions} />
+
+      <HomeIndustries industries={industries} />
+
+      <SignalGridEngagement onOpenDiagnostic={onOpenDiagnostic} solutions={solutions} />
     </div>
   );
 }

@@ -1,0 +1,31 @@
+---
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+
+const {industries} = await siteContent();
+const description = 'Applied-AI workflows we build for 20 industries, from banking to agriculture.';
+const contact = contactLinks('/industries/', 'Industries');
+const cards = industries.map((industry) => ({title: industry.name, text: industry.hero.headline, href: industry.url}));
+---
+
+<BaseLayout
+  title="Industries"
+  description={description}
+  page={{type: 'industries'}}
+  crumbs={[{name: 'Industries', path: '/industries/'}]}
+>
+  <PageHero title="Industries" subtitle={description} contact={contact} />
+
+  <section class="pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <CardGrid items={cards} />
+  </section>
+
+  <FounderBlock />
+
+  <CtaBlock headline="Discuss your workflow" contact={contact} />
+</BaseLayout>

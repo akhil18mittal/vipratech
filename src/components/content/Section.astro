@@ -1,0 +1,16 @@
+---
+// One page section: the homepage's section spacing and h2 style, at content-page width.
+interface Props {
+  title: string;
+  id?: string;
+}
+
+const {title, id} = Astro.props;
+---
+
+<section id={id} class="py-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-zinc-800">
+  <h2 class="text-3xl font-bold tracking-tight text-white mb-8">{title}</h2>
+  <div class="space-y-6">
+    <slot />
+  </div>
+</section>

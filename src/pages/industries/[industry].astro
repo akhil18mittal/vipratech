@@ -1,0 +1,84 @@
+---
+import Section from '../../components/content/Section.astro';
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {DetailCards} from '../../components/content/DetailCards';
+import {FaqList} from '../../components/content/FaqList';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+import {linkFor} from '../../lib/content';
+
+export async function getStaticPaths() {
+  const {industries} = await siteContent();
+  return industries.map((industry) => ({params: {industry: industry.slug}, props: {slug: industry.slug}}));
+}
+
+const content = await siteContent();
+const industry = content.industry(Astro.props.slug);
+const contact = contactLinks(industry.url, industry.name);
+const capabilityCards = industry.capability_fit.map((fit) => {
+  const capability = content.capability(fit.capability);
+  return {title: capability.name, text: fit.summary, href: capability.url};
+});
+const useCaseCards = industry.use_cases.map(content.useCase).map((useCase) => ({
+  title: useCase.title,
+  text: useCase.summary,
+  href: linkFor(useCase),
+  featured: industry.featured_use_cases.includes(useCase.slug),
+}));
+const relatedCards = industry.related_industries.map(content.industry).map((related) => ({
+  title: related.name,
+  text: related.hero.headline,
+  href: related.url,
+}));
+---
+
+<BaseLayout
+  title={industry.seo.title}
+  description={industry.seo.description}
+  page={{type: 'industry', slug: industry.slug}}
+  crumbs={[
+    {name: 'Industries', path: '/industries/'},
+    {name: industry.name, path: industry.url},
+  ]}
+  faqs={industry.faqs}
+>
+  <PageHero
+    eyebrow={industry.name}
+    title={industry.hero.headline}
+    subtitle={industry.hero.subheadline}
+    intro={industry.intro}
+    contact={contact}
+  />
+
+  <Section title="Challenges we hear">
+    <DetailCards items={industry.challenges} />
+  </Section>
+
+  <Section title="Where AI fits">
+    <CardGrid items={capabilityCards} />
+  </Section>
+
+  <Section title="Use cases">
+    <CardGrid items={useCaseCards} />
+  </Section>
+
+  <Section title="Regulatory context">
+    <DetailCards items={industry.regulatory_context.map((item) => ({title: item.name, detail: item.note}))} />
+  </Section>
+
+  <Section title="FAQs">
+    <FaqList faqs={industry.faqs} />
+  </Section>
+
+  <Section title="Related industries">
+    <CardGrid items={relatedCards} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock headline={industry.cta.headline} text={industry.cta.text} contact={contact} />
+</BaseLayout>

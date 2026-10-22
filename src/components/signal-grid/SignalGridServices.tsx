@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
+  ArrowUpRight,
   CheckCircle2,
   Cpu,
   FileSpreadsheet,
@@ -88,7 +89,7 @@ export function SignalGridServices({
             </h2>
           </div>
           <p className="text-xs text-zinc-400 max-w-md font-mono">
-            Engagements start with a 30-min fit call followed by a focused 5-10 day diagnostic sprint to eliminate risk before build.
+            Engagements start with a 20-min fit call followed by a focused 5-10 day diagnostic sprint to eliminate risk before build.
           </p>
         </div>
 
@@ -145,6 +146,16 @@ export function SignalGridServices({
               <p className="text-sm text-zinc-300 leading-relaxed">
                 {selectedService.description}
               </p>
+
+              {selectedService.solutionSlug && (
+                <a
+                  href={`/solutions/${selectedService.solutionSlug}/`}
+                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-lime-400 hover:text-lime-300 transition-colors"
+                >
+                  <span>Learn more</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              )}
 
               <div>
                 <h4 className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-3 font-bold">

@@ -6,7 +6,7 @@ const position = (order: readonly string[], slug: string) => {
   return index === -1 ? order.length : index;
 };
 
-const inOrder = <T extends {slug: string}>(items: readonly T[], order: readonly string[]) =>
+export const inOrder = <T extends {slug: string}>(items: readonly T[], order: readonly string[]) =>
   [...items].sort((a, b) => position(order, a.slug) - position(order, b.slug));
 
 /** Use cases whose main capability is `capability`, in industry display order and then each industry's own order. */

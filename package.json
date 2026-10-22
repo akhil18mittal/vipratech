@@ -6,9 +6,13 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "bun run validate && astro build",
+    "build": "bun run validate && bun run diagrams && astro build",
+    "check:dist": "bun scripts/check-dist.ts",
+    "check:mobile": "bun scripts/check-mobile.ts",
+    "diagrams": "bun scripts/render-diagrams.ts",
     "knip": "knip",
     "preview": "astro preview",
+    "preview:all": "CONTENT_PREVIEW=all bun run build && astro preview",
     "test": "vitest run",
     "typecheck": "astro check && tsc --noEmit",
     "validate": "bun scripts/validate-content.ts"
@@ -25,12 +29,14 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@mermaid-js/mermaid-cli": "^12.0.0",
     "@tailwindcss/vite": "^4.1.14",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^24",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
     "knip": "^5.64.1",
+    "puppeteer": "^25.16.0",
     "typescript": "~5.8.2",
     "vite": "^8.3.4",
     "vitest": "^4.1.12"

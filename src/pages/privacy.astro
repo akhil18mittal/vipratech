@@ -1,0 +1,94 @@
+---
+import Section from '../components/content/Section.astro';
+import {PageHero} from '../components/content/PageHero';
+import {COMPANY_INFO} from '../data/companyData';
+import {PRIVACY_POLICY_APPROVED_ON} from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// DRAFT for the owner to approve. check:dist fails until PRIVACY_POLICY_APPROVED_ON is set in src/data/site.ts.
+
+const paragraph = 'text-sm text-zinc-300 leading-relaxed max-w-3xl';
+const link = 'text-lime-400 hover:text-lime-300 transition-colors';
+---
+
+<BaseLayout
+  title="Privacy policy | VipraTech"
+  description="How vipratech.in uses analytics and cookies, what it collects, and the choices you have."
+  page={{type: 'privacy'}}
+  crumbs={[{name: 'Privacy policy', path: '/privacy/'}]}
+>
+  <PageHero
+    title="Privacy policy"
+    subtitle={PRIVACY_POLICY_APPROVED_ON ? `Last updated ${PRIVACY_POLICY_APPROVED_ON}` : 'Draft'}
+  />
+
+  <Section title="Who we are">
+    <p class={paragraph}>
+      This website, vipratech.in, is run by {COMPANY_INFO.name}, {COMPANY_INFO.address}. For any privacy question or
+      request, email <a href={`mailto:${COMPANY_INFO.email}`} class={link}>{COMPANY_INFO.email}</a>.
+    </p>
+  </Section>
+
+  <Section title="What this site collects">
+    <p class={paragraph}>
+      <strong class="text-white">Analytics.</strong> We use Google Analytics 4 to count visits and see which pages
+      and buttons people use: pages viewed, clicks on the booking and WhatsApp buttons, use-case pages viewed and the
+      filters used in the use case library. Google Analytics sets cookies and records your approximate location,
+      device and browser. We do not send it your name, email or phone number.
+    </p>
+    <p class={paragraph}>
+      <strong class="text-white">Advertising.</strong> If we run Google Ads, the same Google tag tells us when someone
+      who clicked one of our ads goes on to click "Book a 20-minute call".
+    </p>
+    <p class={paragraph}>
+      <strong class="text-white">Visitors in the EEA, UK and Switzerland.</strong> Analytics and advertising cookies
+      stay off until you accept them in the cookie banner. Until then, Google may receive basic signals without
+      cookies, such as that a page was loaded. A cookie consent service shows the banner and stores your choice in a
+      cookie.
+    </p>
+    <p class={paragraph}>
+      <strong class="text-white">Visitors elsewhere.</strong> Analytics is on by default. You can block cookies in your
+      browser settings or install the
+      <a href="https://tools.google.com/dlpage/gaoptout" class={link} target="_blank" rel="noopener">
+        Google Analytics opt-out add-on</a
+      >.
+    </p>
+    <p class={paragraph}>
+      <strong class="text-white">Fit diagnostic.</strong> The fit diagnostic on the homepage runs in your browser.
+      Your answers are not sent to us unless you choose to send the email it prepares.
+    </p>
+    <p class={paragraph}>
+      <strong class="text-white">When you contact us.</strong> If you email, call or message us, we use what you send
+      only to reply and to discuss working together.
+    </p>
+  </Section>
+
+  <Section title="Other services">
+    <p class={paragraph}>
+      "Book a 20-minute call" opens Calendly and "WhatsApp us" opens WhatsApp. The booking link tells Calendly which
+      page you came from. What you enter there is handled under Calendly's and WhatsApp's own privacy policies. The site
+      is hosted on GitHub Pages, and GitHub may log visitors' IP addresses for security.
+    </p>
+  </Section>
+
+  <Section title="How long we keep data">
+    <p class={paragraph}>
+      Google Analytics data is kept for the retention period set in our Google Analytics account. Emails and messages
+      are kept while we are in touch with you and as long as the law requires afterwards.
+    </p>
+  </Section>
+
+  <Section title="Your rights">
+    <p class={paragraph}>
+      You can ask us to tell you what personal data we hold about you, to correct it or to delete it, and you can
+      withdraw consent at any time. Email <a href={`mailto:${COMPANY_INFO.email}`} class={link}>{COMPANY_INFO.email}</a>
+      and we will reply within 30 days. Depending on where you live, these rights come from India's Digital Personal
+      Data Protection Act 2023, the EU or UK GDPR, or other law, and you can also complain to your data protection
+      authority.
+    </p>
+  </Section>
+
+  <Section title="Changes">
+    <p class={paragraph}>If we change this policy, we will update it on this page with the new date.</p>
+  </Section>
+</BaseLayout>

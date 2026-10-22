@@ -1,0 +1,13 @@
+---
+import {PageHero} from '../components/content/PageHero';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Careers | VipraTech"
+  description="Careers at VipraTech Labs. There are no open positions at the moment."
+  page={{type: 'careers'}}
+  crumbs={[{name: 'Careers', path: '/careers/'}]}
+>
+  <PageHero title="Careers" subtitle="There are no open positions at the moment." />
+</BaseLayout>

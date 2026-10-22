@@ -3,7 +3,7 @@ import {APPROVED_PROOFS} from '../data/proofs';
 import {USE_CASE_BATCHES} from '../data/release';
 
 /** `CONTENT_PREVIEW=all` builds every use case, for local review only. */
-const PREVIEW_ALL = process.env.CONTENT_PREVIEW === 'all';
+export const PREVIEW_ALL = process.env.CONTENT_PREVIEW === 'all';
 
 const releasedIndustries = new Set(USE_CASE_BATCHES.flatMap((batch) => batch.industries));
 

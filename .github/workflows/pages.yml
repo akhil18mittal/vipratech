@@ -15,6 +15,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      # CONTENT_PREVIEW=all builds every use case with noindex, for local review only.
+      - name: Refuse preview builds
+        if: github.ref == 'refs/heads/main'
+        run: |
+          if [ -n "${CONTENT_PREVIEW:-}" ]; then
+            echo "::error::CONTENT_PREVIEW is set; preview builds must not be deployed"
+            exit 1
+          fi
+
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -27,6 +36,9 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+        env:
+          # The diagram renderer drives the runner's preinstalled Chrome, so Puppeteer needn't download its own.
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
 
       - name: Type-check
         run: bun run typecheck
@@ -37,8 +49,30 @@ jobs:
       - name: Test
         run: bun run test
 
+      # Rendered diagrams are reused while their source, the renderer and its config are unchanged (see the manifest
+      # in public/diagrams/); a partial hit still reuses every SVG whose hash matches.
+      - name: Cache rendered diagrams
+        uses: actions/cache@v6
+        with:
+          path: public/diagrams
+          key: diagrams-${{ runner.os }}-${{ hashFiles('src/content/use-cases/**', 'scripts/render-diagrams.ts', 'src/data/release.ts', 'bun.lock') }}
+          restore-keys: |
+            diagrams-${{ runner.os }}-
+
       - name: Build
         run: bun run build
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
+
+      - name: Check the built site
+        run: bun run check:dist
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
+
+      - name: Check the built site at phone width
+        run: bun run check:mobile
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
 
       - name: Configure Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

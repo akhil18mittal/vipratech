@@ -101,7 +101,7 @@ export function buildFitCallMailto(
     `Diagnostic result: ${analysis.fitStatus} (${analysis.fitScore}%)`,
     `Recommended sprint: ${analysis.recommendedSprint}`,
     "",
-    "Please share the next available time for a 30-minute fit call.",
+    "Please share the next available time for a 20-minute fit call.",
   ].join("\n");
 
   return `mailto:akhilesh@vipratech.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

@@ -12,6 +12,7 @@ export const COMPANY_INFO = {
 export const SERVICE_OFFERS: ServiceOffer[] = [
   {
     id: "doc-reconciliation",
+    solutionSlug: "document-intelligence",
     title: "Document Intelligence & Reconciliation",
     diagnosticLabel: "Document Intelligence & Reconciliation",
     description: "Build systems that process spreadsheets, PDFs, images, invoices, and claims into reviewable decisions with deterministic matching rules and explicit exception states.",
@@ -34,6 +35,7 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
   },
   {
     id: "ai-security",
+    solutionSlug: "ai-security",
     title: "AI Security, Testing & Compliance",
     diagnosticLabel: "AI Security & Agent Red-Teaming",
     description: "Evaluating how AI agents behave under adversarial conditions, prompt manipulation, and tool permission boundaries before production release.",
@@ -56,6 +58,7 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
   },
   {
     id: "voice-ai",
+    solutionSlug: "voice-ai",
     title: "Voice AI & Conversational Systems",
     diagnosticLabel: "Multilingual Voice AI & Telephony",
     description: "Designing voice systems that connect conversational AI with telephony, Hindi/Hinglish code-switching, policy guardrails, and seamless human handoff.",
@@ -78,6 +81,7 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
   },
   {
     id: "sales-automation",
+    solutionSlug: "sales-marketing-automation",
     title: "AI Sales & Marketing Automation",
     diagnosticLabel: "Revenue & Outreach Automation",
     description: "Connecting buyer research, evidence-backed content drafting, human approval gates, channel campaigns, and multi-tenant attribution.",
@@ -172,8 +176,8 @@ export const PRODUCTS_SYSTEMS: ProductSystem[] = [
 export const ENGAGEMENT_STEPS = [
   {
     step: "01",
-    title: "Free 30-Min Fit Call",
-    duration: "30 Minutes",
+    title: "Free 20-Min Fit Call",
+    duration: "20 Minutes",
     cost: "Free",
     description: "We discuss your workflow, current workarounds, exceptions, and timeline. If VipraTech isn't the right fit, we tell you immediately.",
   },

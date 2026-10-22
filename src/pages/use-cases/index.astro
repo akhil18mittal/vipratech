@@ -1,0 +1,83 @@
+---
+import {ContentCard} from '../../components/content/ContentCard';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+import {linkFor} from '../../lib/content';
+
+// Every published use case as static cards. src/scripts/library-filter.ts shows the filters and keeps their state in
+// the URL (?industry=…&capability=…&q=…); without JavaScript the filters stay hidden and every card shows.
+
+const content = await siteContent();
+const description =
+  'Browse applied-AI use cases by industry and capability, each with workflow, architecture and pilot plan.';
+const contact = contactLinks('/use-cases/', 'Use case library');
+const entries = content.industries.flatMap((industry) =>
+  industry.use_cases.map(content.useCase).flatMap((useCase) => {
+    const href = linkFor(useCase);
+    if (!href) return [];
+    const capabilities = [useCase.capability, ...useCase.secondary_capabilities].map(content.capability);
+    return [
+      {
+        industry,
+        capabilities,
+        text: [useCase.title, useCase.summary, industry.name, ...capabilities.map((item) => item.name)].join(' ').toLowerCase(),
+        card: {label: industry.name, title: useCase.title, text: useCase.summary, href},
+      },
+    ];
+  }),
+);
+const industries = content.industries.filter((industry) => entries.some((entry) => entry.industry === industry));
+const fieldClass =
+  'w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 font-mono placeholder:text-zinc-500 focus:outline-none focus:border-lime-500/60';
+---
+
+<BaseLayout
+  title="Use case library"
+  description={description}
+  page={{type: 'library'}}
+  crumbs={[{name: 'Use case library', path: '/use-cases/'}]}
+>
+  <PageHero title="Use case library" subtitle={description} contact={contact} />
+
+  <section class="pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
+    <form id="library-filter" role="search" class="grid grid-cols-1 sm:grid-cols-3 gap-4" hidden>
+      <input type="search" name="q" aria-label="Search use cases" placeholder="Search use cases" class={fieldClass} />
+      <select name="industry" aria-label="All industries" class={fieldClass}>
+        <option value="">All industries</option>
+        {industries.map((industry) => <option value={industry.slug}>{industry.name}</option>)}
+      </select>
+      <select name="capability" aria-label="All capabilities" class={fieldClass}>
+        <option value="">All capabilities</option>
+        {content.capabilities.map((capability) => <option value={capability.slug}>{capability.name}</option>)}
+      </select>
+    </form>
+
+    <p id="library-empty" class="text-sm text-zinc-400 font-mono" hidden>No use cases match these filters</p>
+
+    <ul id="library-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        entries.map((entry) => (
+          <li
+            data-industry={entry.industry.slug}
+            data-capabilities={entry.capabilities.map((item) => item.slug).join(' ')}
+            data-text={entry.text}
+          >
+            <ContentCard item={entry.card} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <FounderBlock />
+
+  <CtaBlock headline="Discuss your workflow" contact={contact} />
+</BaseLayout>
+
+<script>
+  import '../../scripts/library-filter';
+</script>

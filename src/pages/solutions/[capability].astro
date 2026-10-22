@@ -1,0 +1,92 @@
+---
+import Section from '../../components/content/Section.astro';
+import {BulletList} from '../../components/content/BulletList';
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {FaqList} from '../../components/content/FaqList';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {ProofBox} from '../../components/content/ProofBox';
+import {WorkflowSteps} from '../../components/content/WorkflowSteps';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+import {isProofApproved, linkFor} from '../../lib/content';
+import {capabilityIndustries, capabilityUseCases} from '../../lib/derive';
+
+export async function getStaticPaths() {
+  const {capabilities} = await siteContent();
+  return capabilities.map((capability) => ({params: {capability: capability.slug}, props: {slug: capability.slug}}));
+}
+
+const {capability: lookupCapability, industries, useCases, proofProject} = await siteContent();
+const capability = lookupCapability(Astro.props.slug);
+const contact = contactLinks(capability.url, capability.name);
+const proofs = capability.proof_refs.filter(isProofApproved).map(proofProject);
+const ownUseCases = capabilityUseCases(capability.slug, industries, useCases);
+const byIndustry = capabilityIndustries(capability.slug, industries, useCases).map((industry) => ({
+  industry,
+  cards: ownUseCases
+    .filter((useCase) => useCase.industry === industry.slug)
+    .map((useCase) => ({title: useCase.title, text: useCase.summary, href: linkFor(useCase)})),
+}));
+---
+
+<BaseLayout
+  title={capability.seo.title}
+  description={capability.seo.description}
+  page={{type: 'solution', slug: capability.slug}}
+  crumbs={[{name: capability.name, path: capability.url}]}
+  faqs={capability.faqs}
+>
+  <PageHero
+    eyebrow={capability.name}
+    title={capability.hero.headline}
+    subtitle={capability.hero.subheadline}
+    intro={capability.intro}
+    contact={contact}
+  />
+
+  <Section title="What we build">
+    <BulletList items={capability.what_we_build} />
+  </Section>
+
+  <Section title="How we work">
+    <WorkflowSteps steps={capability.how_we_work.map((detail) => ({detail}))} />
+  </Section>
+
+  {
+    proofs.length > 0 && (
+      <Section title="Related work">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {proofs.map((proof) => (
+            <ProofBox proof={proof} />
+          ))}
+        </div>
+      </Section>
+    )
+  }
+
+  <Section title={`Use cases by industry (${ownUseCases.length})`}>
+    {
+      byIndustry.map(({industry, cards}) => (
+        <div class="space-y-4 pt-2">
+          <h3 class="text-lg font-bold text-white">
+            <a href={industry.url} class="hover:text-lime-400 transition-colors">
+              {industry.name}
+            </a>
+          </h3>
+          <CardGrid items={cards} />
+        </div>
+      ))
+    }
+  </Section>
+
+  <Section title="FAQs">
+    <FaqList faqs={capability.faqs} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock headline="Discuss your workflow" contact={contact} />
+</BaseLayout>

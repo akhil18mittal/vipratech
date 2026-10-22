@@ -1,6 +1,7 @@
 import {fileURLToPath} from 'node:url';
 import {describe, expect, it} from 'vitest';
 import {type Content, diagramErrors, findContentErrors, loadContent} from '../scripts/content-checks';
+import {USE_CASE_BATCHES} from '../src/data/release';
 import {isProofApproved, linkFor} from '../src/lib/content';
 
 const {content, errors} = loadContent(fileURLToPath(new URL('../src/content/', import.meta.url)));
@@ -54,10 +55,10 @@ describe('linkFor', () => {
   });
 
   it('links use cases only in released industries', () => {
-    const banking = content.useCases.find((useCase) => useCase.industry === 'banking')!;
-    const legal = content.useCases.find((useCase) => useCase.industry === 'legal')!;
-    expect(linkFor(banking)).toBe(banking.url);
-    expect(linkFor(legal)).toBeUndefined();
+    const released = new Set(USE_CASE_BATCHES.flatMap((batch) => batch.industries));
+    for (const useCase of content.useCases) {
+      expect(linkFor(useCase)).toBe(released.has(useCase.industry) ? useCase.url : undefined);
+    }
   });
 });
 

@@ -1,0 +1,54 @@
+---
+import {CONSENT_SCRIPT_SRC, GA4_ID} from '../../data/site';
+
+// Google Consent Mode v2, GA4 and the consent banner, in the order Google requires: consent defaults, then gtag.js,
+// then the banner. Visitors in the EEA, UK and Switzerland (by Google's IP lookup) start with everything denied until
+// they accept; everyone else starts granted and sees no banner. The banner script loads only for European time zones,
+// so it isn't shown or counted for visitors elsewhere; an EEA visitor outside those time zones simply stays denied.
+// Nothing here renders until GA4_ID is set.
+
+const CONSENT_REGIONS = [
+  ...['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU'],
+  ...['MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH'],
+];
+const EUROPEAN_TIME_ZONES = [
+  'Atlantic/Azores',
+  'Atlantic/Canary',
+  'Atlantic/Madeira',
+  'Atlantic/Reykjavik',
+  'Asia/Famagusta',
+  'Asia/Nicosia',
+];
+---
+
+{
+  GA4_ID && (
+    <>
+      <script is:inline define:vars={{regions: CONSENT_REGIONS}}>
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+        const denied = {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied'};
+        const granted = {ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted'};
+        window.gtag('consent', 'default', {...denied, region: regions, wait_for_update: 500});
+        window.gtag('consent', 'default', granted);
+      </script>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
+      <script is:inline define:vars={{id: GA4_ID}}>
+        window.gtag('js', new Date());
+        window.gtag('config', id);
+      </script>
+      {CONSENT_SCRIPT_SRC && (
+        <script is:inline define:vars={{src: CONSENT_SCRIPT_SRC, zones: EUROPEAN_TIME_ZONES}}>
+          const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+          if (zone.startsWith('Europe/') || zones.includes(zone)) {
+            const banner = document.createElement('script');
+            banner.src = src;
+            document.head.appendChild(banner);
+          }
+        </script>
+      )}
+    </>
+  )
+}

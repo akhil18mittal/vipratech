@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="120" viewBox="0 0 460 120" role="img" aria-labelledby="title desc">
+  <title id="title">VipraTech Logo</title>
+  <desc id="desc">Modern geometric emblem forming the letter V with technology inspired accents next to the text VipraTech.</desc>
+  <defs>
+    <linearGradient id="vipraTechGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d5dd6"/>
+      <stop offset="100%" stop-color="#44b4ff"/>
+    </linearGradient>
+    <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7bd4ff"/>
+      <stop offset="100%" stop-color="#106eea"/>
+    </linearGradient>
+    <filter id="softShadow" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#0a1d3f" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <g transform="translate(30 12)">
+    <g filter="url(#softShadow)">
+      <path d="M68 0 L118 30 L118 78 L68 108 L18 78 L18 30 Z" fill="url(#vipraTechGradient)"/>
+      <path d="M68 17 L102.5 37 L102.5 71 L68 91 L33.5 71 L33.5 37 Z" fill="#0b1f4f"/>
+      <path d="M68 28 L91 42 L76.5 73.5 L68 78 L59.5 73.5 L45 42 Z" fill="url(#vipraTechGradient)" opacity="0.9"/>
+      <path d="M68 28 L48.5 39 L60.5 71 L68 74.5 L75.5 71 L87.5 39 Z" fill="#0e3a8c"/>
+      <path d="M52 36 L68 28 L84 36 L75.5 56.5 L68 60.5 L60.5 56.5 Z" fill="url(#sparkGradient)"/>
+      <circle cx="68" cy="26" r="4" fill="#7bd4ff"/>
+      <circle cx="53" cy="58" r="3" fill="#44b4ff"/>
+      <circle cx="83" cy="58" r="3" fill="#44b4ff"/>
+    </g>
+  </g>
+  <g transform="translate(190 66)">
+    <text x="0" y="0" font-family="'Poppins', 'Montserrat', 'Segoe UI', sans-serif" font-size="42" font-weight="600" fill="#14294c" letter-spacing="0.8">Vipra<tspan fill="#106eea">Tech</tspan></text>
+    <rect x="4" y="14" width="178" height="4" rx="2" fill="#0d5dd6" opacity="0.18"/>
+    <rect x="4" y="14" width="96" height="4" rx="2" fill="url(#sparkGradient)"/>
+    <text x="6" y="36" font-family="'Poppins', 'Montserrat', 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#3a4f7d" letter-spacing="2.4">INNOVATE | BUILD | SCALE</text>
+  </g>
+</svg>
