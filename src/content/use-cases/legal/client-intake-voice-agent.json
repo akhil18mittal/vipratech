@@ -1,0 +1,215 @@
+{
+  "slug": "client-intake-voice-agent",
+  "industry": "legal",
+  "title": "Client Intake Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Answer inbound enquiries in Hindi and English, record facts and parties for a conflict check, spot urgent matters for an on-call advocate and book consultations, without giving legal advice.",
+  "seo": {
+    "title": "Client Intake Voice Agent for Law Firms | VipraTech",
+    "description": "A voice agent for law firms that takes enquiries in Hindi and English, captures facts for conflict checks, escalates urgent matters and books consults.",
+    "keywords": [
+      "law firm intake voice agent",
+      "legal client intake automation",
+      "conflict check intake",
+      "Hindi legal helpline AI",
+      "after-hours law firm calls"
+    ]
+  },
+  "designed_for": [
+    "Managing Partner",
+    "Practice Head",
+    "Office Manager (Law Firm)",
+    "Legal Aid Programme Coordinator"
+  ],
+  "problem": {
+    "intro": "Firms handling property, family, consumer, employment and cheque dishonour matters get calls all day and after hours from people who are anxious and unsure what they need. Partners are in court, juniors answer between tasks, and important details such as opposing parties or an upcoming date go unrecorded, so conflict checks and urgent matters are delayed.",
+    "pain_points": [
+      {
+        "title": "Missed and unstructured calls",
+        "detail": "Calls during court hours go unanswered, and notes from answered calls lack the facts needed to assess the matter."
+      },
+      {
+        "title": "Conflict checks happen too late",
+        "detail": "Opposing party names are not collected up front, so a conflict is discovered only after a consultation has been booked or held."
+      },
+      {
+        "title": "Urgency not recognised",
+        "detail": "A caller with a hearing tomorrow, a limitation date approaching or fear of arrest needs a lawyer now, not a call-back next week."
+      },
+      {
+        "title": "Callers ask for advice",
+        "detail": "Staff and tools are pushed to say whether the caller has a case, which only a lawyer should answer."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound intake agent that answers the firm's enquiry line, says it is an AI assistant that cannot give legal advice, and asks for consent to record. In Hindi, English or a mix, it collects the caller's details, the type of matter, a short account of what happened, the names of other parties and any upcoming dates or deadlines. Urgent situations are transferred to the on-call advocate. Other enquiries go through a conflict check against your client and party records, and possible conflicts go to a partner before anything is booked. Cleared enquiries are booked for consultation, with a document checklist sent on WhatsApp.",
+    "capabilities": [
+      "Hindi, English and Hinglish intake with clear AI and no-advice disclosure",
+      "Structured capture of matter type, facts, other parties and key dates",
+      "Urgency detection for hearings, limitation dates and personal safety, with live transfer",
+      "Conflict check against client and party records before booking",
+      "Consultation booking and a WhatsApp document checklist for the matter type",
+      "Intake memo written to the practice management system"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer and disclose",
+      "detail": "The agent answers, explains that it is an AI assistant that cannot give legal advice and asks for consent to record."
+    },
+    {
+      "step": 2,
+      "title": "Capture the enquiry",
+      "detail": "It records the caller's details, matter type, a short account of the facts, other parties and any upcoming dates."
+    },
+    {
+      "step": 3,
+      "title": "Check urgency",
+      "detail": "Imminent hearings, approaching deadlines or safety concerns trigger a live transfer to the on-call advocate."
+    },
+    {
+      "step": 4,
+      "title": "Run the conflict check",
+      "detail": "Names of the caller and other parties are checked against your client and matter records."
+    },
+    {
+      "step": 5,
+      "title": "Partner review if needed",
+      "detail": "Possible conflicts go to a partner, who decides whether the firm can act."
+    },
+    {
+      "step": 6,
+      "title": "Book and send a checklist",
+      "detail": "Cleared enquiries are booked for consultation, and the caller receives a document checklist."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound enquiry call\"] --> B[\"Disclose AI and no legal advice\"]\n  B --> C[\"Capture facts, parties and dates\"]\n  C --> D{\"Urgent matter?\"}\n  D -->|\"yes\"| E(\"Transfer to on-call advocate\")\n  D -->|\"no\"| F[\"Conflict check on party names\"]\n  F --> G{\"Possible conflict?\"}\n  G -->|\"yes\"| H(\"Partner decides\")\n  G -->|\"no\"| I[\"Book consultation, send checklist\"]\n  H -->|\"cleared\"| I\n  I --> J[\"Intake memo to practice system\"]\n  E --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Firm enquiry number on cloud telephony",
+          "Recording with consent prompt",
+          "Live transfer to the on-call advocate"
+        ]
+      },
+      {
+        "name": "Speech and dialogue",
+        "components": [
+          "Speech-to-text for Hindi, English and legal vocabulary",
+          "Dialogue manager with intake scripts by matter type",
+          "No-advice and safety rules"
+        ]
+      },
+      {
+        "name": "Conflict and scheduling",
+        "components": [
+          "Conflict check against the client and party database",
+          "Partner review queue",
+          "Consultation calendar"
+        ]
+      },
+      {
+        "name": "Records and follow-up",
+        "components": [
+          "Intake memo in the practice management system",
+          "WhatsApp document checklist",
+          "Transcript store with restricted access"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Enquiry number\"]\n    T2(\"On-call advocate transfer\")\n  end\n  subgraph S2[\"Speech and dialogue\"]\n    P1[\"Hindi and English speech layer\"]\n    P2[\"Intake dialogue manager\"]\n    P3[\"No-advice and urgency rules\"]\n  end\n  subgraph S3[\"Conflict and scheduling\"]\n    C1[\"Conflict check database\"]\n    C2(\"Partner review queue\")\n    C3[\"Consultation calendar\"]\n  end\n  subgraph S4[\"Records and follow-up\"]\n    R1[\"Practice system intake memo\"]\n    R2[\"WhatsApp checklist\"]\n  end\n  T1 --> P1\n  P1 --> P2\n  P2 --> P3\n  P3 --> T2\n  P2 --> C1\n  C1 --> C2\n  C1 --> C3\n  C2 --> C3\n  C3 --> R1\n  C3 --> R2\n  T2 --> R1"
+  },
+  "inputs": [
+    "Firm enquiry phone line",
+    "Intake scripts and questions for each matter type",
+    "Client, matter and party records for conflict checks",
+    "On-call advocate roster and consultation calendar",
+    "Document checklists for each matter type"
+  ],
+  "outputs": [
+    "Structured intake memo for each enquiry",
+    "Conflict check results and partner decisions",
+    "Urgent transfers with a call summary",
+    "Booked consultations with reminders",
+    "WhatsApp document checklists sent"
+  ],
+  "human_in_the_loop": "Advocates handle every urgent matter live and give all advice in consultation. Partners decide on possible conflicts before the firm agrees to meet a prospective client.",
+  "integrations": [
+    "Cloud telephony or existing office lines",
+    "Practice or matter management system",
+    "Conflict check database",
+    "Calendar for consultations",
+    "WhatsApp Business API"
+  ],
+  "guardrails": [
+    "States at the start that it is an AI assistant and cannot give legal advice",
+    "Never assesses merits, predicts outcomes or quotes fees beyond the published consultation charge",
+    "Callers in danger are transferred to a person and given emergency numbers per firm policy",
+    "Inbound only, with no outbound promotional calls",
+    "Recordings and transcripts restricted to the intake team and retained per firm policy"
+  ],
+  "compliance_notes": [
+    "Bar Council of India rules restrict advocates from soliciting work or advertising, so the agent answers inbound enquiries only.",
+    "What prospective clients share is confidential and personal data under the DPDP Act 2023; access is restricted and retention limited."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "After-hours and overflow calls on the firm's enquiry line for one or two practice areas, with intake memos reviewed by an associate.",
+    "deliverables": [
+      "Intake scripts and urgency rules agreed with partners",
+      "Working voice agent on the enquiry line",
+      "Conflict check integration",
+      "Weekly call review",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Intake completeness",
+        "how": "Intake memos containing every required field, checked by an associate."
+      },
+      {
+        "metric": "Urgent call handling",
+        "how": "Urgent calls correctly identified and transferred, from call review."
+      },
+      {
+        "metric": "Conflict checks before booking",
+        "how": "Bookings made only after a completed conflict check."
+      },
+      {
+        "metric": "Caller experience",
+        "how": "Short post-call feedback and abandoned call counts."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will callers think they are getting legal advice?",
+      "a": "The agent says clearly at the start, and whenever asked, that it is an AI assistant and cannot give legal advice. It collects information and books time with a lawyer."
+    },
+    {
+      "q": "Is this consistent with Bar Council rules?",
+      "a": "The agent only answers inbound calls to your own number and does not solicit work or advertise. We recommend your partners review the scripts against the rules your firm follows."
+    },
+    {
+      "q": "How does the conflict check work?",
+      "a": "The agent collects the caller's name and the names of other parties and checks them against your client and party database. Possible matches go to a partner before any consultation is booked."
+    },
+    {
+      "q": "What happens in an emergency?",
+      "a": "Callers who mention an imminent hearing, arrest or danger are transferred to a person at once, and given emergency numbers if they are in danger, following your firm's policy."
+    }
+  ],
+  "related": [
+    "hearing-transcription-and-minutes",
+    "case-file-summarisation-and-chronology",
+    "legal-ai-confidentiality-testing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/legal/client-intake-voice-agent/"
+}

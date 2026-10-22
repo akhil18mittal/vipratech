@@ -1,3 +1,8 @@
+---
+import App from '../App';
+import '../index.css';
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,7 +19,6 @@
     <title>VipraTech Labs | Evidence-First Applied-AI Engineering</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <App client:only="react" />
   </body>
 </html>

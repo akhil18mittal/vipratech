@@ -1,0 +1,224 @@
+{
+  "slug": "due-diligence-data-room-review",
+  "industry": "legal",
+  "title": "Due Diligence Data Room Review",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Index a virtual data room against your request list, extract issues from contracts, corporate records and licences, and draft report tables and query lists for lawyers to confirm.",
+  "seo": {
+    "title": "Due Diligence Data Room Review with AI | VipraTech",
+    "description": "AI that maps data room documents to your DD checklist, flags change of control, consents and gaps, and drafts DD report tables for lawyer review.",
+    "keywords": [
+      "due diligence AI",
+      "data room review automation",
+      "legal due diligence India",
+      "change of control clause review",
+      "M&A document review AI"
+    ]
+  },
+  "designed_for": [
+    "Corporate and M&A Partner",
+    "Transaction Associate",
+    "General Counsel (Acquirer)",
+    "Private Equity Legal Head"
+  ],
+  "problem": {
+    "intro": "In an acquisition, investment or financing, the target uploads hundreds or thousands of documents to a virtual data room, often late and in no particular order. The legal team has to map them to the request list, find missing items, review material contracts and corporate records, and produce a report before signing, usually with a large junior team working long hours.",
+    "pain_points": [
+      {
+        "title": "Mapping documents to the checklist",
+        "detail": "Folder names rarely match the request list, so associates spend the first days working out what has actually been provided."
+      },
+      {
+        "title": "Consents and change of control",
+        "detail": "Clauses that need counterparty consent, or allow termination on a change in shareholding, are scattered across many contracts."
+      },
+      {
+        "title": "Gaps found late",
+        "detail": "Missing board resolutions, filings, licences or IP assignments are discovered close to signing."
+      },
+      {
+        "title": "Inconsistent extraction",
+        "detail": "Different reviewers capture different fields in the DD tracker, which makes the report hard to compile."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a diligence assistant that connects to the data room export, classifies every document and maps it to your request list, so the team sees on day one what is present, partial or missing. For each category it extracts agreed fields: for contracts, term, termination, change of control, exclusivity, assignment and liability; for corporate records, board and shareholder approvals and filings; for licences, issuing authority, validity and conditions; for litigation, forum, stage and amounts. Possible red flags are queued for associates with citations. Confirmed findings populate DD report tables, and gaps become a follow-up query list for the target.",
+    "capabilities": [
+      "Maps data room documents to your request list and shows present, partial and missing items",
+      "Category-specific extraction for contracts, corporate records, licences, employment, IP, property and litigation",
+      "Flags change of control, consent, exclusivity and termination triggers across contracts",
+      "Checks corporate approvals and statutory filings against what the transaction needs",
+      "Drafts DD report tables and a query list from confirmed findings",
+      "Matter-isolated questions over the data room, answered with document and page citations"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Connect the data room",
+      "detail": "Documents are loaded from the VDR export or API into a matter-isolated workspace."
+    },
+    {
+      "step": 2,
+      "title": "Map to the request list",
+      "detail": "Each document is classified and matched to items on the diligence request list."
+    },
+    {
+      "step": 3,
+      "title": "Extract by category",
+      "detail": "Agreed fields are extracted for contracts, corporate records, licences, litigation and other categories."
+    },
+    {
+      "step": 4,
+      "title": "Flag issues and gaps",
+      "detail": "Red flags and missing items are queued with citations."
+    },
+    {
+      "step": 5,
+      "title": "Associate and partner review",
+      "detail": "Associates confirm or dismiss each flag, and partners review material issues."
+    },
+    {
+      "step": 6,
+      "title": "Draft outputs",
+      "detail": "Confirmed findings fill DD report tables, and gaps become a query list for the target."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Data room export or API\"] --> B[\"Classify and map to request list\"]\n  B --> C[\"Extract fields by category\"]\n  C --> D{\"Red flag, gap or low confidence?\"}\n  D -->|\"yes\"| E(\"Associate reviews with citation\")\n  D -->|\"no\"| F[\"Add to DD tracker\"]\n  E --> G{\"Material issue?\"}\n  G -->|\"yes\"| H(\"Partner review\")\n  G -->|\"no\"| F\n  H --> F\n  F --> I[\"DD report tables and query list\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "VDR export or API connector",
+          "Matter-isolated document store",
+          "Request list import"
+        ]
+      },
+      {
+        "name": "Classification and mapping",
+        "components": [
+          "Document classifier by DD category",
+          "Request list matcher",
+          "Duplicate and version detection"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Category schemas for contracts, corporate records, licences and litigation",
+          "Clause-level red-flag detection",
+          "Citation linking to page"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Associate review queue",
+          "Partner escalation view",
+          "DD tracker"
+        ]
+      },
+      {
+        "name": "Outputs",
+        "components": [
+          "Report table generator",
+          "Query list for the target",
+          "Audit trail of findings"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"VDR export or API\"]\n    I2[\"Request list import\"]\n  end\n  subgraph S2[\"Classification and mapping\"]\n    M1[\"DD category classifier\"]\n    M2[\"Request list matcher\"]\n  end\n  subgraph S3[\"Extraction\"]\n    X1[\"Category schemas\"]\n    X2[\"Red-flag detection\"]\n    X3[\"Citation linking\"]\n  end\n  subgraph S4[\"Review and outputs\"]\n    R1(\"Associate review queue\")\n    R2(\"Partner escalation\")\n    R3[\"DD tracker and report tables\"]\n    R4[\"Query list\"]\n  end\n  I1 --> M1\n  I2 --> M2\n  M1 --> M2\n  M2 --> X1\n  X1 --> X2\n  X1 --> X3\n  X2 --> R1\n  X3 --> R1\n  R1 --> R2\n  R1 --> R3\n  R2 --> R3\n  M2 --> R4"
+  },
+  "inputs": [
+    "Data room documents and index",
+    "Diligence request list",
+    "Transaction structure and scope notes",
+    "Fields and red-flag criteria for each category",
+    "Materiality guidance agreed with the deal team"
+  ],
+  "outputs": [
+    "Request list status: present, partial or missing",
+    "DD tracker with extracted fields and citations",
+    "Red-flag list with associate and partner decisions",
+    "Draft DD report tables",
+    "Follow-up query list for the target"
+  ],
+  "human_in_the_loop": "Associates confirm every flag and every extracted field that goes into the report, and partners decide which issues are material and how the transaction documents should deal with them. The report is written and signed off by the lawyers.",
+  "integrations": [
+    "Virtual data room platforms (export or API)",
+    "Document management system",
+    "Microsoft Word and Excel for report tables",
+    "Matter management system",
+    "Secure collaboration workspace"
+  ],
+  "guardrails": [
+    "Workspace isolated per matter, with access limited to the deal team",
+    "Every finding cites a document and page",
+    "No finding enters the report without associate confirmation",
+    "Data deleted or returned at matter close, as agreed",
+    "Models do not retain or train on data room content"
+  ],
+  "compliance_notes": [
+    "Data rooms often include employee and customer personal data; designed to support DPDP Act 2023 obligations and, for cross-border deals, GDPR.",
+    "Confidentiality undertakings given to the target apply to the AI workspace as much as to the lawyers."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One completed or ongoing transaction, or one data room category such as material contracts, reviewed in parallel with your team.",
+    "deliverables": [
+      "Request list mapping and category schemas",
+      "Indexed and extracted data room for the pilot scope",
+      "Review queues and DD tracker",
+      "Comparison against your team's findings",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Mapping accuracy",
+        "how": "Documents correctly matched to request list items, checked by associates."
+      },
+      {
+        "metric": "Red-flag recall",
+        "how": "Issues in your final DD report that the system also flagged."
+      },
+      {
+        "metric": "Dismissed flags",
+        "how": "Flags dismissed by associates as not relevant."
+      },
+      {
+        "metric": "Time to first status report",
+        "how": "Time from data room access to a request list status the team can send."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is the data room content secure?",
+      "a": "It is processed in an isolated workspace per matter, in your cloud or chosen region, with access limited to the deal team. Models do not retain or train on the content, and data is deleted at matter close."
+    },
+    {
+      "q": "Does it write the DD report?",
+      "a": "It drafts tables from findings that associates have confirmed. Lawyers write the analysis, decide materiality and sign off the report."
+    },
+    {
+      "q": "Can it handle Indian corporate records?",
+      "a": "Yes. Board and shareholder resolutions, statutory registers and filings, and licences issued by Indian authorities are part of the category schemas, which we refine with your team."
+    },
+    {
+      "q": "What about documents uploaded late?",
+      "a": "New uploads are classified and mapped as they arrive, and the request list status and tracker update with a log of what changed."
+    }
+  ],
+  "related": [
+    "contract-clause-extraction-and-risk-flags",
+    "legal-ai-confidentiality-testing",
+    "case-file-summarisation-and-chronology",
+    "private-markets-fund-document-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/legal/due-diligence-data-room-review/"
+}

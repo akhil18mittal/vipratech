@@ -1,0 +1,215 @@
+{
+  "slug": "warehouse-safety-monitoring",
+  "industry": "logistics-supply-chain",
+  "title": "Warehouse Safety Monitoring",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Use existing or added CCTV to spot forklift and pedestrian near-misses, missing PPE, blocked fire exits and people in restricted zones, with alerts to supervisors and evidence for safety reviews.",
+  "seo": {
+    "title": "AI Warehouse Safety Monitoring with CCTV | VipraTech",
+    "description": "Computer vision on warehouse CCTV that flags forklift near-misses, missing PPE, blocked exits and restricted-zone entry, with supervisor alerts.",
+    "keywords": [
+      "warehouse safety monitoring",
+      "forklift pedestrian detection",
+      "PPE detection CCTV",
+      "dock safety AI",
+      "warehouse near-miss detection"
+    ]
+  },
+  "designed_for": [
+    "Warehouse Manager",
+    "EHS Manager",
+    "Head of Warehousing",
+    "Site Safety Officer"
+  ],
+  "problem": {
+    "intro": "Warehouses mix forklifts, reach trucks, pallet jacks and people in tight aisles and busy docks, often with contract labour across shifts. Safety teams rely on walk-rounds and reported incidents, so near-misses that nobody reports stay invisible until someone is hurt.",
+    "pain_points": [
+      {
+        "title": "Near-misses go unreported",
+        "detail": "Forklift and pedestrian close calls are rarely reported, so the same dangerous spots stay unaddressed."
+      },
+      {
+        "title": "PPE use varies by shift",
+        "detail": "Safety shoes, high-visibility vests and helmets are worn during audits and dropped on night shifts and during peak loading."
+      },
+      {
+        "title": "Blocked exits and aisles",
+        "detail": "Pallets left in fire exits, marked walkways or in front of fire equipment are found only during periodic inspections."
+      },
+      {
+        "title": "Dock and vehicle risks",
+        "detail": "People standing behind reversing trucks or near open dock edges are a known risk that supervisors cannot watch continuously."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build safety analytics on your CCTV, adding cameras only where coverage is missing. Models run on an edge server at the site and detect forklifts, people and PPE, with zones drawn for walkways, docks, racking aisles and fire exits. The system raises alerts for near-misses between vehicles and pedestrians, missing PPE in mandatory zones, entry into restricted areas and obstructed exits. Alerts reach supervisors on a dashboard or WhatsApp with a short clip. A weekly report shows hotspots by zone and shift, so the EHS team can fix layouts and training rather than chase individuals.",
+    "capabilities": [
+      "Detects forklift and pedestrian proximity and near-miss events in aisles and docks",
+      "Checks for safety shoes, high-visibility vests and helmets in mandatory zones",
+      "Flags blocked fire exits, walkways and fire equipment",
+      "Detects entry into restricted zones such as racking under maintenance or dock edges",
+      "Sends alerts with short clips to supervisors on a dashboard or WhatsApp",
+      "Produces hotspot reports by zone, shift and event type"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map zones and rules",
+      "detail": "With the EHS team we draw zones on each camera view and agree the rules and alert recipients for each."
+    },
+    {
+      "step": 2,
+      "title": "Process video on site",
+      "detail": "Camera streams are processed on a site server, so video does not need to leave the premises."
+    },
+    {
+      "step": 3,
+      "title": "Detect events",
+      "detail": "Models detect near-misses, PPE gaps, restricted-zone entry and obstructions."
+    },
+    {
+      "step": 4,
+      "title": "Filter and alert",
+      "detail": "Events above the confidence threshold go to the supervisor with a clip; the rest are logged for weekly review."
+    },
+    {
+      "step": 5,
+      "title": "Supervisor action",
+      "detail": "The supervisor confirms or dismisses the alert and records the action taken."
+    },
+    {
+      "step": 6,
+      "title": "Review hotspots",
+      "detail": "Weekly reports show patterns by zone and shift for the EHS team and site leadership."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"CCTV streams to site edge server\"] --> B[\"Detect people, forklifts and PPE\"]\n  B --> C[\"Apply zone rules\"]\n  C --> D{\"Event above confidence?\"}\n  D -->|\"yes\"| E[\"Alert supervisor with clip\"]\n  D -->|\"no\"| F[\"Log for weekly review\"]\n  E --> G(\"Supervisor confirms and acts\")\n  G --> H[\"Hotspot report by zone and shift\"]\n  F --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Cameras",
+        "components": [
+          "Existing CCTV via RTSP or ONVIF",
+          "Additional cameras for docks and blind spots",
+          "Network video recorder"
+        ]
+      },
+      {
+        "name": "Edge processing",
+        "components": [
+          "On-site GPU server",
+          "Person, vehicle and PPE detection models",
+          "Zone and proximity rules"
+        ]
+      },
+      {
+        "name": "Alerting",
+        "components": [
+          "Supervisor dashboard",
+          "WhatsApp or SMS alerts with clips"
+        ]
+      },
+      {
+        "name": "Reporting and governance",
+        "components": [
+          "Event store with clip retention policy",
+          "Hotspot and trend reports",
+          "Access control and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Cameras\"]\n    C1[\"Existing CCTV\"]\n    C2[\"Added dock cameras\"]\n  end\n  subgraph S2[\"Edge processing\"]\n    E1[\"Site GPU server\"]\n    E2[\"Detection models\"]\n    E3[\"Zone and proximity rules\"]\n  end\n  subgraph S3[\"Alerting\"]\n    A1[\"WhatsApp alerts\"]\n    A2(\"Supervisor dashboard\")\n  end\n  subgraph S4[\"Reporting and governance\"]\n    R1[\"Event store\"]\n    R2[\"Hotspot reports\"]\n    R3[\"Access audit log\"]\n  end\n  C1 --> E1\n  C2 --> E1\n  E1 --> E2 --> E3\n  E3 --> A1\n  E3 --> A2\n  A2 --> R1\n  E3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "CCTV streams from aisles, docks and exits",
+    "Site layout with zones and PPE rules",
+    "Shift schedules",
+    "Alert recipient list by zone",
+    "Incident and near-miss register"
+  ],
+  "outputs": [
+    "Real-time alerts with short clips",
+    "Log of confirmed and dismissed events",
+    "Hotspot reports by zone, shift and event type",
+    "Evidence for safety reviews and toolbox talks",
+    "Camera coverage gap list"
+  ],
+  "human_in_the_loop": "Supervisors confirm or dismiss every alert and record the action taken. The EHS team decides corrective actions from the hotspot reports, and the system is not used for automated disciplinary action.",
+  "integrations": [
+    "Existing CCTV and NVR (RTSP or ONVIF)",
+    "WhatsApp Business API or SMS gateway",
+    "EHS or incident management software",
+    "WMS for shift and zone context",
+    "Access control system for restricted areas"
+  ],
+  "guardrails": [
+    "Video processed on site, with only short clips of confirmed events stored",
+    "Face blurring in reports where identification is not needed",
+    "Clear signage and worker notice about camera analytics",
+    "Alert thresholds tuned with supervisors to avoid alert fatigue",
+    "Clip access restricted by role and logged"
+  ],
+  "compliance_notes": [
+    "Supports employer safety duties under India's Occupational Safety, Health and Working Conditions Code 2020 and your site safety management system.",
+    "Workers are data principals under the DPDP Act 2023, so purpose, notice, retention and access are defined before go-live."
+  ],
+  "pilot": {
+    "duration": "5 weeks",
+    "scope": "One warehouse, focused on a few high-risk areas such as the inbound dock and a busy forklift aisle, using existing cameras where possible.",
+    "deliverables": [
+      "Camera coverage assessment",
+      "Zone and rule configuration for the pilot areas",
+      "Edge deployment with supervisor alerts",
+      "Pilot report on alert quality and hotspots",
+      "Site-wide roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Alert precision",
+        "how": "Alerts that supervisors confirm as genuine events, out of all alerts raised."
+      },
+      {
+        "metric": "Missed events",
+        "how": "Events found in sampled footage reviews compared with alerts raised."
+      },
+      {
+        "metric": "Supervisor response time",
+        "how": "Time from alert to confirmation and action in the event log."
+      },
+      {
+        "metric": "Hotspot actions taken",
+        "how": "Corrective actions recorded by EHS against reported hotspots."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can we use our existing CCTV cameras?",
+      "a": "Usually for aisles and exits, if resolution and angle are adequate. Docks and blind spots sometimes need extra cameras, which the coverage assessment identifies."
+    },
+    {
+      "q": "Will workers be identified and penalised?",
+      "a": "The system is designed to find unsafe conditions and patterns, not to discipline individuals. Faces can be blurred in reports, and how alerts are used is your policy decision, which we recommend sharing with workers."
+    },
+    {
+      "q": "Does video leave our site?",
+      "a": "No. Processing runs on an edge server at the site. Only short clips of confirmed events and summary reports are stored, with retention you define."
+    },
+    {
+      "q": "How do you avoid too many false alerts?",
+      "a": "Zones and thresholds are tuned with supervisors during the pilot, and low-confidence detections go to a weekly review log instead of real-time alerts. Alert precision is measured and reported."
+    }
+  ],
+  "related": [
+    "parcel-damage-and-dimension-detection",
+    "ppe-and-safety-zone-compliance",
+    "construction-site-safety-compliance",
+    "mine-safety-monitoring"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/warehouse-safety-monitoring/"
+}

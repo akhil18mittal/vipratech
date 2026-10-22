@@ -1,0 +1,221 @@
+{
+  "slug": "llm-application-penetration-test",
+  "industry": "saas-ai-companies",
+  "title": "LLM Application Penetration Test (OWASP LLM Top 10)",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "A scoped pentest of your LLM feature and the app around it: prompt injection, data disclosure, output handling, excessive agency and system-prompt leakage, with reproducible evidence.",
+  "seo": {
+    "title": "LLM Penetration Testing, OWASP LLM Top 10 | VipraTech",
+    "description": "Manual and automated pentest of LLM features against the OWASP Top 10 for LLM Applications, with reproducible transcripts, severity ratings and a retest.",
+    "keywords": [
+      "LLM penetration testing",
+      "OWASP Top 10 for LLM Applications",
+      "prompt injection testing",
+      "AI application security assessment",
+      "chatbot security audit"
+    ]
+  },
+  "designed_for": [
+    "CTO or VP Engineering",
+    "Head of Security or CISO",
+    "AI Product Lead",
+    "Application Security Engineer"
+  ],
+  "problem": {
+    "intro": "Your product now has a chat assistant, a copilot or an AI search box, built on a hosted model with a system prompt, retrieval and perhaps a few tools. Your annual pentest covered the web app, but nobody has checked whether the model can be made to reveal its instructions, read another customer's data or pass unsafe output to the rest of your stack.",
+    "pain_points": [
+      {
+        "title": "Prompt injection, direct and indirect",
+        "detail": "Users can type instructions that override the system prompt, and documents, web pages or emails the model reads can carry instructions of their own."
+      },
+      {
+        "title": "Sensitive data in the wrong answer",
+        "detail": "Retrieval, conversation history and tool results can expose another user's or tenant's data when access checks sit in the wrong layer."
+      },
+      {
+        "title": "Model output trusted downstream",
+        "detail": "Output rendered as HTML or Markdown, passed to a database or another API, or used to trigger actions recreates classic injection risks in a new form."
+      },
+      {
+        "title": "System prompts treated as secrets",
+        "detail": "System prompts often hold business rules, internal URLs or keys, and anything in a prompt should be assumed recoverable."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a scoped penetration test of your LLM feature and the application around it. Testing combines manual work by an experienced tester with automated probe sets run against your endpoint, so coverage is broad and the important findings are verified by hand. We test each OWASP Top 10 for LLM Applications category that applies, from prompt injection and sensitive information disclosure to improper output handling, excessive agency, system prompt leakage, vector and embedding weaknesses and unbounded consumption. We also test the surrounding authentication, authorisation and API layer. Every finding includes a reproducible transcript or request, a severity rating, a MITRE ATLAS mapping where relevant and a specific fix. A retest confirms remediation.",
+    "capabilities": [
+      "Threat model of the LLM feature: data flows, trust boundaries, tools and retrieval sources",
+      "Direct and indirect prompt injection testing, including content placed in retrieved documents",
+      "Data disclosure tests across users, roles and tenants",
+      "Output handling tests where model output reaches browsers, databases or other services",
+      "System prompt leakage and secrets exposure checks",
+      "Findings mapped to OWASP LLM Top 10 and MITRE ATLAS, with a retest"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and rules",
+      "detail": "We agree the feature, environments, test accounts, rate limits and stop conditions in writing."
+    },
+    {
+      "step": 2,
+      "title": "Threat model",
+      "detail": "We map data flows, trust boundaries, retrieval sources, tools and every place model output goes."
+    },
+    {
+      "step": 3,
+      "title": "Automated probing",
+      "detail": "Probe sets for each relevant OWASP LLM category run against your endpoint, and every exchange is logged."
+    },
+    {
+      "step": 4,
+      "title": "Manual testing",
+      "detail": "A tester works through the feature by hand, chaining weaknesses and testing business context that automation misses."
+    },
+    {
+      "step": 5,
+      "title": "Verify and rate",
+      "detail": "Each candidate issue is reproduced, false positives are removed, and severity is agreed against real impact."
+    },
+    {
+      "step": 6,
+      "title": "Report and retest",
+      "detail": "You receive findings with evidence and fixes, and we retest after remediation."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agree scope and rules of engagement\"] --> B[\"Threat model data flows and tools\"]\n  B --> C[\"Run automated probe sets\"]\n  C --> D[\"Manual testing and chaining\"]\n  D --> E{\"Issue reproducible?\"}\n  E -->|\"no\"| F[\"Discard as false positive\"]\n  E -->|\"yes\"| G(\"Tester rates severity and impact\")\n  G --> H[\"Report with evidence and fixes\"]\n  H --> I[\"Retest after remediation\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scope and threat model",
+        "components": [
+          "Rules of engagement and test accounts",
+          "Data flow and trust boundary map"
+        ]
+      },
+      {
+        "name": "Test execution",
+        "components": [
+          "Endpoint connector for chat API or UI",
+          "OWASP LLM probe library",
+          "Manual tester workspace"
+        ]
+      },
+      {
+        "name": "Observation",
+        "components": [
+          "Full request and response logging",
+          "Token and cost tracking for consumption tests"
+        ]
+      },
+      {
+        "name": "Analysis",
+        "components": [
+          "Reproduction and false-positive check",
+          "Severity rating with impact notes",
+          "OWASP LLM and MITRE ATLAS mapping"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Findings report with transcripts",
+          "Retest record"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scope and threat model\"]\n    P1[\"Rules of engagement\"]\n    P2[\"Data flow map\"]\n  end\n  subgraph S2[\"Test execution\"]\n    T1[\"Endpoint connector\"]\n    T2[\"OWASP LLM probe library\"]\n    T3(\"Manual tester\")\n  end\n  subgraph S3[\"Observation and analysis\"]\n    O1[\"Request and response log\"]\n    O2[\"Reproduction check\"]\n    O3[\"Severity and mapping\"]\n  end\n  subgraph S4[\"Reporting\"]\n    R1[\"Findings report\"]\n    R2[\"Retest record\"]\n  end\n  P1 --> T1\n  P2 --> T2\n  T2 --> T1\n  T3 --> T1\n  T1 --> O1 --> O2 --> O3\n  O3 --> R1 --> R2"
+  },
+  "inputs": [
+    "Access to the LLM feature in staging, with test accounts per role and tenant",
+    "Architecture notes: model provider, system prompt, retrieval sources and tools",
+    "API documentation or OpenAPI spec",
+    "Business rules the assistant must follow",
+    "Previous pentest reports, if any"
+  ],
+  "outputs": [
+    "Threat model of the LLM feature",
+    "Findings with reproducible transcripts or requests",
+    "Severity ratings with OWASP LLM and MITRE ATLAS mapping",
+    "Specific remediation guidance",
+    "Retest results"
+  ],
+  "human_in_the_loop": "An experienced tester verifies every finding by hand before it reaches the report and agrees severity with your team. Automated probes widen coverage but never decide severity on their own.",
+  "integrations": [
+    "Your LLM gateway or chat API, on OpenAI, Azure OpenAI, Anthropic, Bedrock or self-hosted models",
+    "Staging environment with test tenants",
+    "Issue tracker such as Jira or Linear",
+    "Observability tools such as Langfuse or LangSmith, read-only",
+    "Secrets manager for test credentials"
+  ],
+  "guardrails": [
+    "Written rules of engagement with stop conditions",
+    "Test accounts and test tenants only, with no access to real customer data",
+    "Rate limits agreed to protect cost and availability",
+    "Evidence stored encrypted and deleted after an agreed period",
+    "No destructive actions without explicit approval"
+  ],
+  "compliance_notes": [
+    "Findings are mapped to the OWASP Top 10 for LLM Applications and MITRE ATLAS, which many enterprise buyers ask for.",
+    "Test records can feed risk management evidence under NIST AI RMF and ISO/IEC 42001."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One LLM feature, such as an in-app assistant with retrieval, plus its supporting API, tested in staging.",
+    "deliverables": [
+      "Rules of engagement and threat model",
+      "Findings report with evidence",
+      "Executive summary for leadership and customers",
+      "Remediation guidance",
+      "Retest after fixes"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Coverage of applicable OWASP LLM categories",
+        "how": "Categories tested against those in scope, recorded in the report."
+      },
+      {
+        "metric": "Verified findings by severity",
+        "how": "Count of reproduced findings at each severity after false positives are removed."
+      },
+      {
+        "metric": "Time to remediate",
+        "how": "Days between report and passing retest, per finding."
+      },
+      {
+        "metric": "Retest outcome",
+        "how": "Share of findings confirmed fixed at retest."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you test the model provider itself?",
+      "a": "No. We test your application: how you use the model, your prompts, retrieval, tools and output handling. Provider-side behaviour is noted where it affects you, but the scope is your product."
+    },
+    {
+      "q": "Is automated scanning enough?",
+      "a": "Automated probes are good for breadth and regression, but the most serious LLM findings usually come from chaining small weaknesses in your specific business context. That needs a human tester."
+    },
+    {
+      "q": "Can findings be shared with our customers?",
+      "a": "Yes. We provide a full technical report for your team and a shorter summary you can share with customers under NDA."
+    },
+    {
+      "q": "How long does it take?",
+      "a": "A typical single-feature test takes two to three weeks including reporting. Larger scopes with agents, many tools or several tenants take longer, and we agree that before starting."
+    }
+  ],
+  "related": [
+    "ai-agent-red-teaming",
+    "rag-data-leakage-and-access-control-testing",
+    "continuous-ai-security-regression-in-ci",
+    "llm-app-pre-launch-security-assessment"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/llm-application-penetration-test/"
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "merchant-onboarding-kyc-verification",
+  "industry": "fintech-payments",
+  "title": "Merchant Onboarding KYC Verification",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read merchant KYC packs, cross-check PAN, GSTIN, bank proof and the merchant's website, and give risk analysts a ready-to-decide file with every check explained.",
+  "seo": {
+    "title": "Merchant Onboarding KYC Verification with AI | VipraTech",
+    "description": "AI that reads merchant KYC documents, cross-checks PAN, GSTIN and bank details, reviews the website and prepares a decision file for risk analysts.",
+    "keywords": [
+      "merchant onboarding KYC",
+      "payment aggregator merchant due diligence",
+      "merchant KYC automation",
+      "GST certificate extraction",
+      "merchant website review AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Merchant Risk",
+    "Merchant Onboarding Operations Manager",
+    "Compliance Officer",
+    "Chief Risk Officer"
+  ],
+  "problem": {
+    "intro": "A payment aggregator onboarding a small merchant collects a PAN card, GST registration certificate, cancelled cheque or bank statement, address proof and, for companies and partnerships, incorporation documents and signatory details, plus the website or app the merchant will sell through. Analysts open each file, re-type names and numbers, and check that the legal name, GSTIN, bank account holder and website all describe the same business.",
+    "pain_points": [
+      {
+        "title": "Name and entity mismatches",
+        "detail": "The trade name on the GST certificate, the legal name on the PAN and the account holder on the cheque differ in small ways that analysts must resolve by hand."
+      },
+      {
+        "title": "Website and business-model checks",
+        "detail": "Confirming that a merchant's site shows a real catalogue, terms, refund policy and contact details, and nothing on your prohibited list, is slow and inconsistent between analysts."
+      },
+      {
+        "title": "Back-and-forth with sales",
+        "detail": "Missing pages and unreadable uploads are discovered days later, and the merchant is chased repeatedly through the sales team."
+      },
+      {
+        "title": "Thin audit trail",
+        "detail": "When an auditor or partner bank asks why a merchant was approved, the reasoning sits in emails and analyst notes rather than a structured record."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a KYC review assistant that sits between your onboarding form and your risk analysts. It classifies each uploaded document, extracts the fields that matter and checks them against each other and against the verification sources you already use, such as GSTIN lookups and penny-drop bank account validation. A website review agent visits the merchant's URL and records what it finds: product categories, pricing, terms, refund and grievance policies, contact details and possible prohibited-category signals, with dated screenshots. The analyst receives one file with every check marked pass, fail or needs review. Missing or unreadable documents trigger a specific request back to the merchant.",
+    "capabilities": [
+      "Classifies PAN, GST certificate, cancelled cheque, bank statement, partnership deed, incorporation certificate and address proof",
+      "Extracts legal and trade name, PAN, GSTIN, account number and IFSC, registered address and signatory details",
+      "Matches names and addresses across documents and explains each mismatch in plain words",
+      "Reviews the merchant website or app listing for catalogue, terms, refund and grievance policies and prohibited-category signals",
+      "Compares extracted data with GSTIN lookup and bank account validation responses from your existing providers",
+      "Drafts a specific missing-document request instead of a generic rejection"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect the onboarding pack",
+      "detail": "Documents and the merchant URL arrive from your onboarding form, CRM or partner portal and are grouped by application ID."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document is identified and its fields extracted, with a confidence score and page reference for every value."
+    },
+    {
+      "step": 3,
+      "title": "Cross-check the entity",
+      "detail": "Names, PAN, GSTIN, bank details and addresses are compared across documents and with the verification API responses you already receive."
+    },
+    {
+      "step": 4,
+      "title": "Review the website",
+      "detail": "An agent browses the merchant site read-only, captures screenshots and records catalogue, policy and risk-category observations."
+    },
+    {
+      "step": 5,
+      "title": "Route by outcome",
+      "detail": "Clean files go to a fast-track queue; mismatches, gaps and risk signals go to detailed review, and missing documents trigger a request."
+    },
+    {
+      "step": 6,
+      "title": "Analyst decides",
+      "detail": "The risk analyst approves, rejects or asks for more, and the decision is written back to your merchant system with its evidence."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Merchant pack and URL received\"] --> B[\"Classify and extract KYC fields\"]\n  B --> C[\"Cross-check PAN, GSTIN and bank\"]\n  C --> D[\"Website and catalogue review\"]\n  D --> E{\"All checks passed?\"}\n  E -->|\"yes\"| F(\"Fast-track analyst sign-off\")\n  E -->|\"no\"| G{\"Documents missing?\"}\n  G -->|\"yes\"| H[\"Send specific document request\"]\n  G -->|\"no\"| I(\"Detailed risk analyst review\")\n  H --> A\n  F --> J[\"Decision and evidence saved\"]\n  I --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Onboarding form and partner portal connector",
+          "CRM webhook",
+          "Application-level document grouping"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with layout detection",
+          "Document classifier",
+          "LLM extractor with KYC field schemas"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "Cross-document entity matcher",
+          "Adapters for your GSTIN and bank account validation providers",
+          "Read-only website review agent with screenshots"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Analyst console with pass, fail and review markers",
+          "Missing-document request templates"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "Merchant management system API",
+          "Audit log of checks, edits and decisions"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Onboarding form and portal\"]\n    I2[\"CRM webhook\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and layout\"]\n    U2[\"Document classifier\"]\n    U3[\"LLM KYC field extractor\"]\n  end\n  subgraph S3[\"Verification\"]\n    V1[\"Cross-document entity matcher\"]\n    V2[\"GSTIN and bank validation adapters\"]\n    V3[\"Website review agent\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Risk analyst console\")\n    R2[\"Merchant system API\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2 --> U3\n  U3 --> V1\n  V1 --> V2\n  I1 --> V3\n  V2 --> R1\n  V3 --> R1\n  R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "PAN of the entity and its signatories",
+    "GST registration certificate",
+    "Cancelled cheque or recent bank statement",
+    "Incorporation certificate, partnership deed or shop establishment licence",
+    "Address proof and signatory ID, with masked Aadhaar where used",
+    "Merchant website or app store URL"
+  ],
+  "outputs": [
+    "Structured merchant profile with extracted fields",
+    "Check-by-check result: pass, fail or needs review",
+    "Website review notes with dated screenshots",
+    "Specific missing-document requests",
+    "Decision record with evidence links for audit"
+  ],
+  "human_in_the_loop": "Every merchant approval, rejection and risk categorisation is made by a risk analyst. The assistant prepares and explains the checks; it never activates a merchant or sets a risk category by itself.",
+  "integrations": [
+    "Merchant onboarding or merchant management system (API)",
+    "Salesforce, Zoho or LeadSquared CRM",
+    "Your existing GSTIN, PAN and bank account validation API providers",
+    "Document storage such as S3 or a DMS",
+    "Case management or ticketing tool for analyst queues"
+  ],
+  "guardrails": [
+    "Masked Aadhaar only; full Aadhaar numbers are never stored, per UIDAI rules",
+    "Only verification sources you are licensed to use, called through your existing providers",
+    "Website agent is read-only and records the date and URL of every screenshot",
+    "Field-level confidence thresholds agreed with your risk team",
+    "Regular sampling of fast-tracked files by a senior analyst"
+  ],
+  "compliance_notes": [
+    "Designed to support the merchant due diligence and record-keeping expected of payment aggregators under RBI directions.",
+    "Personal data of proprietors and signatories handled with purpose limitation and minimisation, in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One merchant segment, such as small online sellers onboarded through self-serve, using past applications whose outcomes are already known.",
+    "deliverables": [
+      "KYC field schema and check list agreed with your risk team",
+      "Working extraction and cross-check pipeline on de-identified past applications",
+      "Website review agent configured for your prohibited-category list",
+      "Analyst console prototype",
+      "Accuracy report and production plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Compared with analyst-entered values for the same applications."
+      },
+      {
+        "metric": "Agreement with past findings",
+        "how": "How often the system's flags match the issues analysts actually raised on those files."
+      },
+      {
+        "metric": "Analyst review time per file",
+        "how": "Timed on a sample of applications with and without the prepared file."
+      },
+      {
+        "metric": "Missing-document detection",
+        "how": "Incomplete packs the system identified, checked against the document chases that actually happened."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does this replace our verification API vendors?",
+      "a": "No. It reads the documents and combines results from the GSTIN, PAN and bank validation vendors you already use. Face match and document tamper checks can be added as a separate step if you need them."
+    },
+    {
+      "q": "How does the website review handle sites that block bots or are still being built?",
+      "a": "The agent records what it could and could not load and marks the check for analyst review. It never tries to bypass logins, captchas or other access controls."
+    },
+    {
+      "q": "Can it read regional-language documents such as shop establishment licences?",
+      "a": "Yes, for printed text in common Indian languages, with low-confidence fields sent to an analyst. The pilot reports accuracy per document type so you can see where it is weaker."
+    },
+    {
+      "q": "Where does merchant data go?",
+      "a": "It stays in your cloud account or an India region. We can use model endpoints that do not retain or train on your data, and personal details are masked in logs."
+    }
+  ],
+  "related": [
+    "selfie-id-face-match-and-tamper-checks",
+    "merchant-activation-and-upsell-automation",
+    "account-opening-document-verification",
+    "tampered-document-detection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/merchant-onboarding-kyc-verification/"
+}

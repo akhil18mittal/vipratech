@@ -1,0 +1,217 @@
+{
+  "slug": "conveyor-and-equipment-anomaly-detection",
+  "industry": "energy-mining-utilities",
+  "title": "Conveyor and Equipment Anomaly Detection from Video",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Video and thermal analytics on conveyor transfer points and idler runs that flag belt drift, spillage, chute blockage and hot idlers for maintenance teams to review.",
+  "seo": {
+    "title": "Conveyor Anomaly Detection from Video | VipraTech",
+    "description": "AI that watches conveyor transfer points and idlers on video and thermal cameras, flags belt drift, spillage and hot spots, and drafts work orders.",
+    "keywords": [
+      "conveyor belt monitoring AI",
+      "belt misalignment detection",
+      "coal handling plant video analytics",
+      "idler hot spot thermal camera",
+      "conveyor spillage detection"
+    ]
+  },
+  "designed_for": [
+    "Head of Coal or Material Handling Plant",
+    "Mechanical Maintenance Manager",
+    "Reliability Engineer",
+    "Plant Head"
+  ],
+  "problem": {
+    "intro": "Long belt conveyors move coal, ore and overburden through crushers, transfer chutes and stockyards, and most faults show visible signs before they become breakdowns. A belt tracking off-centre, spillage building under a chute or an idler running hot is easy to see on camera but hard to catch on a walk-down done once a shift.",
+    "pain_points": [
+      {
+        "title": "Faults found after the belt is damaged",
+        "detail": "Edge wear, rips and carry-back often come to light only when a belt sway switch trips or a section needs replacement."
+      },
+      {
+        "title": "Galleries too long to patrol often",
+        "detail": "Walk-downs cover long galleries and transfer towers, so a developing problem can go unseen between rounds."
+      },
+      {
+        "title": "Spillage adds clean-up and fire risk",
+        "detail": "Coal and ore spillage at transfer points means clean-up hours and, for coal, a fire hazard around hot idlers."
+      },
+      {
+        "title": "Trips without context",
+        "detail": "Interlock and switch trips show that something happened, not what the belt looked like in the minutes before."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a monitoring system for the conveyor sections that matter most: head and tail pulleys, loading points, transfer chutes and idler runs. Fixed cameras, and thermal cameras where heat matters, feed an edge server that learns each view's normal state. Models track the belt edge against its baseline, measure spillage build-up, spot material backing up at chutes and pick out oversized objects on the belt. Thermal frames show idlers and pulleys running hotter than their neighbours. Events are tied to the conveyor's running state, read from the plant historian, and a maintenance engineer reviews each clip before a work order is drafted in your CMMS.",
+    "capabilities": [
+      "Belt edge tracking against a per-view baseline, with drift trends by conveyor",
+      "Spillage and pile build-up detection at transfer points and under return idlers",
+      "Chute blockage and overloading cues at loading points",
+      "Detection of oversized lumps, wood and other foreign objects on the belt surface",
+      "Thermal hot-spot detection on idlers and pulleys compared with adjacent rollers",
+      "Event clips linked to equipment tags, running state and draft work orders"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Choose views and set baselines",
+      "detail": "We select camera positions with your maintenance team and record a normal-running baseline for each view."
+    },
+    {
+      "step": 2,
+      "title": "Read running state",
+      "detail": "The system reads conveyor running and load status from the historian in read-only mode, so idle belts do not raise alerts."
+    },
+    {
+      "step": 3,
+      "title": "Detect anomalies",
+      "detail": "Models check each view for drift, spillage, blockage, foreign objects and thermal hot spots."
+    },
+    {
+      "step": 4,
+      "title": "Score severity",
+      "detail": "Events are scored by severity and persistence; low scores are kept as trend data only."
+    },
+    {
+      "step": 5,
+      "title": "Engineer reviews",
+      "detail": "The shift maintenance engineer views the clip and decides whether action is needed now or at the next planned shutdown."
+    },
+    {
+      "step": 6,
+      "title": "Create the work order",
+      "detail": "Confirmed issues become draft notifications or work orders in the CMMS against the right equipment tag."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Video and thermal camera feeds\"] --> B[\"Read running state from historian\"]\n  B --> C[\"Detect drift, spillage and hot spots\"]\n  C --> D{\"Above severity threshold?\"}\n  D -->|\"no\"| E[\"Store as trend data\"]\n  D -->|\"yes\"| F(\"Maintenance engineer reviews clip\")\n  F --> G{\"Action needed now?\"}\n  G -->|\"yes\"| H[\"Draft work order in CMMS\"]\n  G -->|\"no\"| I[\"Add to planned shutdown list\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Sensing",
+        "components": [
+          "Fixed cameras at transfer points and loading chutes",
+          "Thermal cameras on selected idler runs",
+          "Edge server in the MCC room or control building"
+        ]
+      },
+      {
+        "name": "Plant context",
+        "components": [
+          "Read-only historian connector",
+          "Conveyor running and load tags",
+          "Equipment tag mapping from the CMMS"
+        ]
+      },
+      {
+        "name": "Analytics",
+        "components": [
+          "Belt edge tracking model",
+          "Spillage and blockage detector",
+          "Thermal hot-spot analyser",
+          "Severity and persistence scoring"
+        ]
+      },
+      {
+        "name": "Maintenance workflow",
+        "components": [
+          "Engineer review console",
+          "CMMS notification and work order draft",
+          "Trend dashboards by conveyor"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Sensing\"]\n    N1[\"Transfer point cameras\"]\n    N2[\"Thermal cameras on idlers\"]\n    N3[\"Edge server\"]\n  end\n  subgraph S2[\"Plant context\"]\n    P1[\"Read-only historian connector\"]\n    P2[\"Equipment tag mapping\"]\n  end\n  subgraph S3[\"Analytics\"]\n    A1[\"Belt edge tracking\"]\n    A2[\"Spillage and blockage detector\"]\n    A3[\"Thermal hot-spot analyser\"]\n    A4[\"Severity scoring\"]\n  end\n  subgraph S4[\"Maintenance workflow\"]\n    W1(\"Engineer review console\")\n    W2[\"CMMS work order draft\"]\n  end\n  N1 --> N3\n  N2 --> N3\n  N3 --> A1\n  N3 --> A2\n  N3 --> A3\n  P1 --> A4\n  A1 --> A4\n  A2 --> A4\n  A3 --> A4\n  A4 --> W1\n  P2 --> W2\n  W1 --> W2"
+  },
+  "inputs": [
+    "Video from conveyor transfer points, loading chutes and galleries",
+    "Thermal images from selected idler runs and pulleys",
+    "Running and load status tags from the plant historian",
+    "Conveyor line list and equipment tags from the CMMS",
+    "Past breakdown and belt replacement records"
+  ],
+  "outputs": [
+    "Anomaly events with clip, equipment tag and severity",
+    "Shift list of open events ranked by severity",
+    "Draft CMMS notifications or work orders",
+    "Belt drift and spillage trends per transfer point",
+    "Hot idler list for the next planned shutdown"
+  ],
+  "human_in_the_loop": "A maintenance engineer or CHP shift in-charge confirms every event before a work order is raised. The system never stops a conveyor; trips remain with pull-cord switches, belt sway switches and existing interlocks.",
+  "integrations": [
+    "Video management system or NVR",
+    "Plant historian such as AVEVA PI or equivalent, read-only",
+    "SAP PM, IBM Maximo or another CMMS",
+    "Control room dashboards",
+    "Email, Microsoft Teams or WhatsApp alerts to the maintenance team"
+  ],
+  "guardrails": [
+    "Read-only connection to plant data; no commands to PLC, DCS or drives",
+    "Does not replace pull-cord, belt sway or zero-speed switches, or metal detectors",
+    "Baselines re-recorded after belt changes or camera moves",
+    "Lens obstruction and dust build-up reported as camera faults",
+    "Engineer approval before any work order is created"
+  ],
+  "compliance_notes": [
+    "Plant data access follows zone and conduit boundaries of the kind IEC 62443 describes, agreed with your OT security team.",
+    "Supports, and does not replace, the statutory inspection and maintenance records kept for conveyors in mines and plants."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One critical conveyor line with two or three transfer points and one thermal camera on its most troublesome idler run, alongside normal patrols.",
+    "deliverables": [
+      "Camera and thermal placement plan",
+      "Edge deployment with per-view baselines",
+      "Engineer review console linked to equipment tags",
+      "Event log compared with patrol and breakdown records",
+      "Scale-up plan for further conveyors"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Event precision",
+        "how": "Share of raised events that engineers confirm as real issues."
+      },
+      {
+        "metric": "Early warning",
+        "how": "Time between the first system flag and the issue being found on patrol or by a switch trip, where both occur."
+      },
+      {
+        "metric": "Nuisance alerts from conditions",
+        "how": "Count of events dismissed as caused by dust, lighting or lens problems."
+      },
+      {
+        "metric": "Review effort",
+        "how": "Engineer time spent per shift reviewing events."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need new cameras?",
+      "a": "Often some. Existing CCTV can cover spillage and blockage at transfer points, but belt tracking needs a stable view of the belt edge and hot-spot detection needs thermal cameras. We propose placements after a site walk and a look at your current footage."
+    },
+    {
+      "q": "How do you handle coal dust and poor lighting?",
+      "a": "Views are chosen and enclosures specified with dust in mind, and models are tuned on footage from your galleries. The system detects dirty or blocked lenses and raises them as camera faults rather than missing problems silently."
+    },
+    {
+      "q": "Will this connect to our DCS or PLCs?",
+      "a": "Only through a read-only route such as the plant historian, agreed with your OT security team. The system reads running and load status for context and never writes back."
+    },
+    {
+      "q": "How is this different from vibration monitoring?",
+      "a": "It complements it. Vibration and temperature sensors are good at bearing and gearbox faults, while video sees belt tracking, spillage, blockages and objects on the belt. Many plants use both, and our events can sit beside condition monitoring data in the same dashboards."
+    }
+  ],
+  "related": [
+    "mine-safety-monitoring",
+    "inspection-and-maintenance-report-extraction",
+    "field-technician-voice-reporting",
+    "visual-quality-inspection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/conveyor-and-equipment-anomaly-detection/"
+}

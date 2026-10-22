@@ -1,0 +1,215 @@
+{
+  "slug": "after-hours-reservation-voice-agent",
+  "industry": "hospitality-travel",
+  "title": "After-Hours Reservation Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Answer reservation calls at night and during the front desk rush in Hindi and English, check availability, send payment links and route in-house guest issues to the duty manager.",
+  "seo": {
+    "title": "After-Hours Hotel Reservation Voice Agent | VipraTech",
+    "description": "AI voice agent that answers hotel calls after hours, checks availability and rates, takes bookings with payment links and escalates urgent calls.",
+    "keywords": [
+      "hotel reservation voice agent",
+      "AI receptionist for hotels",
+      "after-hours hotel call answering",
+      "Hindi voice bot for hotels",
+      "missed calls hotel bookings"
+    ]
+  },
+  "designed_for": [
+    "General Manager",
+    "Front Office Manager",
+    "Night Duty Manager",
+    "Reservations Manager"
+  ],
+  "problem": {
+    "intro": "Many independent hotels run the night shift with one person doing the night audit, handling late arrivals and answering the phone. Calls about tomorrow's availability, early check-in or directions ring out or get rushed answers, and travellers who cannot get through book somewhere else.",
+    "pain_points": [
+      {
+        "title": "Missed calls at night and at peak hours",
+        "detail": "Late-night and early-morning calls, and calls during the evening check-in rush, go unanswered or get a hurried reply."
+      },
+      {
+        "title": "Repetitive questions crowd out real work",
+        "detail": "Check-in time, parking, distance from the railway station, pet policy and breakfast timing take the night auditor away from arrivals and the audit."
+      },
+      {
+        "title": "Bookings taken without payment",
+        "detail": "Night bookings promised over the phone without an advance turn into no-shows that block rooms."
+      },
+      {
+        "title": "Urgent calls mixed with routine ones",
+        "detail": "An in-house guest reporting a problem and a caller asking about rates reach the same busy line."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that answers your reservation line after hours, or whenever the front desk does not pick up within a set number of rings. It speaks Hindi, English or Hinglish, answers questions from your hotel's approved information, checks live availability and rates, and takes a reservation by collecting name, dates, guests and room type. It sends a payment link by SMS or WhatsApp for the advance and confirms the booking once paid. Existing guests can modify or cancel within your policy after verification. Calls from in-house guests, emergencies and anything outside its scope are transferred to the duty manager's phone at once.",
+    "capabilities": [
+      "Answers overflow and after-hours calls on your existing hotel number",
+      "Natural conversation in Hindi, English and Hinglish",
+      "Live availability and rate lookup with reservation capture",
+      "Payment link by SMS or WhatsApp, with no card details taken over the phone",
+      "Booking changes and cancellations within policy after caller verification",
+      "Immediate transfer of in-house guest issues and emergencies to the duty manager"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer the call",
+      "detail": "Calls ring at the front desk first; unanswered or after-hours calls are picked up by the agent, which identifies itself as the hotel's AI assistant."
+    },
+    {
+      "step": 2,
+      "title": "Understand the request",
+      "detail": "The agent works out whether the caller wants a new booking, a change, information or help during a stay."
+    },
+    {
+      "step": 3,
+      "title": "Escalate urgent calls",
+      "detail": "In-house guests, emergencies and complaints are transferred straight to the duty manager."
+    },
+    {
+      "step": 4,
+      "title": "Check and quote",
+      "detail": "For new bookings it checks availability and rates in the PMS and explains inclusions and policies."
+    },
+    {
+      "step": 5,
+      "title": "Collect the advance",
+      "detail": "It sends a payment link by SMS or WhatsApp and holds the room for a set time."
+    },
+    {
+      "step": 6,
+      "title": "Confirm and log",
+      "detail": "On payment the booking is created in the PMS, and every call gets a summary for the morning shift."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Call to hotel number\"] --> B{\"Front desk answers?\"}\n  B -->|\"yes\"| Z(\"Front desk handles call\")\n  B -->|\"no\"| C[\"AI agent answers\"]\n  C --> D{\"In-house guest or emergency?\"}\n  D -->|\"yes\"| E(\"Transfer to duty manager\")\n  D -->|\"no\"| F[\"Check availability and quote\"]\n  F --> G[\"Send payment link and hold room\"]\n  G --> H[\"Confirm booking in PMS\"]\n  H --> I[\"Call summary for morning shift\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Call forwarding on no-answer or schedule",
+          "SIP or cloud telephony",
+          "Live transfer to the duty manager"
+        ]
+      },
+      {
+        "name": "Speech and conversation",
+        "components": [
+          "Speech recognition tuned for Hindi and English",
+          "LLM dialogue manager with intent routing",
+          "Natural text-to-speech voice"
+        ]
+      },
+      {
+        "name": "Hotel systems",
+        "components": [
+          "PMS availability and booking API",
+          "Payment link service",
+          "SMS and WhatsApp notifications"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "Call recordings and summaries",
+          "Morning shift report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n  T1[\"Call forwarding rules\"]\n  T2[\"Cloud telephony\"]\n  T3(\"Duty manager phone\")\n  end\n  subgraph S2[\"Speech and conversation\"]\n  V1[\"Speech recognition\"]\n  V2[\"LLM dialogue manager\"]\n  V3[\"Text to speech\"]\n  end\n  subgraph S3[\"Hotel systems\"]\n  H1[\"PMS availability and booking\"]\n  H2[\"Payment link service\"]\n  end\n  subgraph S4[\"Records\"]\n  R1[\"Call summaries\"]\n  R2[\"Morning shift report\"]\n  end\n  T1 --> T2\n  T2 --> V1\n  V1 --> V2\n  V2 --> V3\n  V3 --> T2\n  V2 --> T3\n  V2 --> H1\n  V2 --> H2\n  H2 --> H1\n  V2 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Inbound calls on the hotel reservation number",
+    "Live availability, rates and policies from the PMS",
+    "Approved hotel information: location, facilities, timings",
+    "Duty manager roster and phone numbers",
+    "Payment gateway status callbacks"
+  ],
+  "outputs": [
+    "Reservations created in the PMS after payment",
+    "Payment links sent and their status",
+    "Transfers to the duty manager with the reason",
+    "Call recordings, transcripts and summaries",
+    "Morning report of calls, bookings and promised callbacks"
+  ],
+  "human_in_the_loop": "The duty manager takes every in-house guest call, emergency and complaint immediately. The morning shift reviews the call report and handles callbacks the agent has promised, such as group enquiries or special requests.",
+  "integrations": [
+    "Hotel PMS such as eZee, Hotelogix, IDS or Opera",
+    "Cloud telephony such as Exotel, Knowlarity or Twilio",
+    "Payment gateway with UPI payment links",
+    "WhatsApp Business API and an SMS gateway",
+    "Duty manager mobile phones for transfers"
+  ],
+  "guardrails": [
+    "Identifies itself as an AI assistant at the start of every call",
+    "Never takes card numbers or UPI PINs over the phone",
+    "Verifies booking reference and phone number before any change or cancellation",
+    "Transfers immediately on emergency keywords or when the caller asks for a person",
+    "Quotes only rates and policies returned by the PMS or approved by management"
+  ],
+  "compliance_notes": [
+    "Call recordings and guest details are personal data under the DPDP Act 2023; callers are told calls are recorded, and recordings follow a set retention period.",
+    "Payments are taken through links on a regulated payment gateway, which keeps card and UPI credentials out of the call."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Overflow and night calls on one property's reservation number, with every call reviewed daily by the front office manager.",
+    "deliverables": [
+      "Call flows and hotel information base",
+      "Voice agent connected to telephony, PMS and payment links",
+      "Transfer rules for the duty manager",
+      "Daily call review report",
+      "Production plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Calls answered after hours",
+        "how": "Calls answered versus calls received in the pilot window, compared with missed-call logs from before the pilot."
+      },
+      {
+        "metric": "Bookings from agent calls",
+        "how": "Paid reservations created from agent-handled calls."
+      },
+      {
+        "metric": "Correct escalation",
+        "how": "Front office review of transferred and non-transferred calls for the right decision."
+      },
+      {
+        "metric": "Caller experience",
+        "how": "Short post-call SMS rating and review of a sample of recordings."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need to change our phone number?",
+      "a": "No. Your existing number forwards to the agent when the front desk does not answer, or during the hours you choose. Calls can still be transferred back to staff."
+    },
+    {
+      "q": "What happens in an emergency?",
+      "a": "Emergency words and any call from an in-house guest trigger an immediate transfer to the duty manager's phone, with a fallback number if the first does not answer. The agent does not try to resolve emergencies itself."
+    },
+    {
+      "q": "Can it handle regional accents?",
+      "a": "It is tested on recordings with the accents and code-mixing typical of your callers. When it does not understand after a retry, it offers a callback or a transfer rather than guessing."
+    },
+    {
+      "q": "Is it affordable for a small hotel?",
+      "a": "Pricing is a one-time setup plus a usage-based running cost that depends on call minutes. The pilot measures your actual minutes and bookings, so you can judge the cost against the business it brings."
+    }
+  ],
+  "related": [
+    "hotel-whatsapp-booking-assistant",
+    "wedding-and-banquet-enquiry-qualification",
+    "review-response-and-reputation-automation",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/after-hours-reservation-voice-agent/"
+}

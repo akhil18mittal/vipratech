@@ -1,0 +1,225 @@
+{
+  "slug": "merchant-activation-and-upsell-automation",
+  "industry": "fintech-payments",
+  "title": "Merchant Activation and Upsell Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Spot merchants stuck between approval and first live transaction, send help specific to their blocker over WhatsApp and email, and time upsell prompts to real usage signals.",
+  "seo": {
+    "title": "Merchant Activation and Upsell Automation | VipraTech",
+    "description": "Detect stalled merchant integrations from API and onboarding signals, send blocker-specific help and brief account managers on activation and upsell.",
+    "keywords": [
+      "merchant activation automation",
+      "payment gateway merchant onboarding drop-off",
+      "merchant upsell automation",
+      "WhatsApp merchant engagement",
+      "fintech growth automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Merchant Growth",
+    "Activation and Onboarding Success Manager",
+    "Key Account Manager Lead",
+    "Growth Marketing Manager"
+  ],
+  "problem": {
+    "intro": "Signing a merchant is not the same as processing their payments. Many stall between KYC approval and the first live transaction: API keys never used, a plugin half-installed, webhooks failing in sandbox. Later, active merchants who would benefit from payment links, QR, subscriptions or faster settlement never hear about them at the right moment.",
+    "pain_points": [
+      {
+        "title": "Silent drop-off after approval",
+        "detail": "Account managers cannot watch every new merchant's integration progress, so stalled accounts go unnoticed for weeks."
+      },
+      {
+        "title": "Generic nudges",
+        "detail": "Blanket reminders to complete integration ignore the actual blocker, such as a webhook signature error or a pending KYC document."
+      },
+      {
+        "title": "Upsell at the wrong moment",
+        "detail": "Offers go out by calendar rather than when behaviour shows a need, such as rising international card declines or manual payout volumes."
+      },
+      {
+        "title": "Messaging compliance",
+        "detail": "WhatsApp opt-ins, DLT-registered SMS templates and DPDP consent must hold across every automated message."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an activation and upsell engine that reads merchant lifecycle signals from your onboarding system, dashboard analytics, API logs and transaction data. It places each merchant at a stage, such as KYC pending, keys generated, sandbox errors or live with no volume, and identifies the most likely blocker. An LLM drafts a message for that blocker from your approved content library: the right plugin guide, the specific webhook error explained, or a link to book integration help. Messages go out over WhatsApp, email or SMS within opt-in and template rules, and high-value merchants go to an account manager with a briefing instead. Upsell prompts follow behaviour, not a calendar.",
+    "capabilities": [
+      "Lifecycle staging from onboarding, dashboard, API log and transaction signals",
+      "Blocker detection for KYC gaps, sandbox errors, plugin issues and zero-volume live accounts",
+      "Message drafting from an approved content library in English, Hindi and Hinglish",
+      "WhatsApp, email and SMS delivery within opt-in, DND and template rules",
+      "Account manager briefings for high-value or stuck merchants, pushed to your CRM",
+      "Behaviour-based prompts for payment links, QR, subscriptions, payouts or faster settlement"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect lifecycle signals",
+      "detail": "Onboarding status, dashboard logins, API calls, error logs and transaction volumes are pulled daily for each merchant."
+    },
+    {
+      "step": 2,
+      "title": "Stage and diagnose",
+      "detail": "Each merchant is given a lifecycle stage and a likely blocker or opportunity."
+    },
+    {
+      "step": 3,
+      "title": "Choose the route",
+      "detail": "Rules decide between an automated message and an account manager task, based on merchant value, consent and past responses."
+    },
+    {
+      "step": 4,
+      "title": "Draft from approved content",
+      "detail": "The LLM writes a specific message using only approved snippets, links and offers."
+    },
+    {
+      "step": 5,
+      "title": "Send or brief",
+      "detail": "Messages go out within consent and template rules, or the account manager receives a briefing in the CRM."
+    },
+    {
+      "step": 6,
+      "title": "Track and tune",
+      "detail": "Replies, integration progress and first transactions are tracked, and stage rules are tuned with your growth team."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Onboarding, API log, txn signals\"] --> B[\"Assign stage and likely blocker\"]\n  B --> C{\"High-value or complex?\"}\n  C -->|\"yes\"| D(\"Account manager briefing in CRM\")\n  C -->|\"no\"| E{\"Consent and template valid?\"}\n  E -->|\"yes\"| F[\"Draft message from approved content\"]\n  E -->|\"no\"| G[\"Hold and log reason\"]\n  F --> H[\"Send via WhatsApp, email or SMS\"]\n  D --> I[\"Track activation and replies\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Signals",
+        "components": [
+          "Onboarding system events",
+          "Dashboard product analytics",
+          "API gateway and webhook error logs",
+          "Transaction volume by merchant"
+        ]
+      },
+      {
+        "name": "Decisioning",
+        "components": [
+          "Lifecycle stage rules",
+          "Blocker and opportunity classifier",
+          "Channel, consent and frequency rules"
+        ]
+      },
+      {
+        "name": "Content",
+        "components": [
+          "Approved content library",
+          "LLM message drafter with brand and policy checks"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "WhatsApp Business API",
+          "Email and DLT-registered SMS gateways",
+          "CRM task creation"
+        ]
+      },
+      {
+        "name": "Measurement",
+        "components": [
+          "Activation and reply tracking",
+          "Experiment log for test and control groups"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Signals\"]\n    G1[\"Onboarding events\"]\n    G2[\"API and webhook logs\"]\n    G3[\"Transaction volumes\"]\n  end\n  subgraph S2[\"Decisioning\"]\n    K1[\"Lifecycle stage rules\"]\n    K2[\"Blocker classifier\"]\n    K3[\"Consent and channel rules\"]\n  end\n  subgraph S3[\"Content and delivery\"]\n    C1[\"Approved content library\"]\n    C2[\"LLM message drafter\"]\n    C3[\"WhatsApp, email, SMS\"]\n    C4(\"Account manager in CRM\")\n  end\n  subgraph S4[\"Measurement\"]\n    M1[\"Activation tracking\"]\n  end\n  G1 --> K1\n  G2 --> K1\n  G3 --> K1\n  K1 --> K2 --> K3\n  K3 --> C2\n  C1 --> C2\n  C2 --> C3\n  K3 --> C4\n  C3 --> M1\n  C4 --> M1"
+  },
+  "inputs": [
+    "Onboarding and KYC status per merchant",
+    "Dashboard login and feature usage events",
+    "API key, sandbox and webhook error logs",
+    "Transaction volume, refund and decline trends",
+    "Consent, opt-in and DND records",
+    "Approved message templates and offers"
+  ],
+  "outputs": [
+    "Lifecycle stage and likely blocker per merchant",
+    "Personalised WhatsApp, email or SMS messages",
+    "Account manager briefings and CRM tasks",
+    "Upsell prompts tied to behaviour",
+    "Activation and response reports"
+  ],
+  "human_in_the_loop": "Your growth team approves the content library, offers and stage rules, and account managers personally handle every high-value merchant. Any credit offer from a lending partner is sent only with content approved by that partner and your compliance team.",
+  "integrations": [
+    "Merchant onboarding and dashboard database",
+    "Product analytics such as Mixpanel, CleverTap or Amplitude",
+    "API gateway logs",
+    "WhatsApp Business API, email and DLT-registered SMS providers",
+    "Salesforce, HubSpot, Zoho or LeadSquared CRM"
+  ],
+  "guardrails": [
+    "Messages built only from approved snippets, links and offers, with no invented pricing or features",
+    "Consent, opt-out and DND checked before every send",
+    "Frequency caps per merchant across all channels",
+    "Credit offers held until compliance-approved content and lender disclosure are in place",
+    "Opt-out requests honoured across every channel straight away"
+  ],
+  "compliance_notes": [
+    "SMS and voice outreach follow TRAI commercial communication rules, including DLT-registered headers and templates.",
+    "Merchant contact data processed for a stated purpose with opt-out, in line with the DPDP Act 2023.",
+    "Lending-partner offers carry disclosures consistent with RBI's digital lending guidelines and stay under compliance control."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Merchants approved in the last quarter who have not gone live, split into a test group that receives automated help and a control group handled as today.",
+    "deliverables": [
+      "Lifecycle stage and blocker rules",
+      "Approved content library for pilot messages",
+      "Automated WhatsApp and email flows",
+      "Account manager briefing integration with the CRM",
+      "Pilot report comparing test and control groups"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Activation in test versus control",
+        "how": "First live transaction within the pilot window, compared between the two groups."
+      },
+      {
+        "metric": "Blocker diagnosis accuracy",
+        "how": "Account manager review of whether the stated blocker matched reality for a sample of merchants."
+      },
+      {
+        "metric": "Replies and opt-outs",
+        "how": "Responses and opt-outs per channel and message type."
+      },
+      {
+        "metric": "Account manager effort",
+        "how": "Time spent per stalled merchant with and without briefings, from CRM activity logs."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will this spam our merchants?",
+      "a": "Frequency caps, consent checks and opt-outs apply across all channels, and messages are triggered by a specific blocker or behaviour rather than a calendar. Your team sets the limits."
+    },
+    {
+      "q": "Can it explain integration errors to developers?",
+      "a": "Yes. It reads sandbox and webhook error patterns, such as signature mismatches or wrong callback URLs, and sends the developer the relevant guide section. It has no access to the merchant's own code or servers."
+    },
+    {
+      "q": "Which languages does it use?",
+      "a": "English, Hindi and Hinglish by default, with other Indian languages added for merchant segments that need them. Every message comes from your approved library."
+    },
+    {
+      "q": "Does it work with our CRM?",
+      "a": "We integrate with Salesforce, HubSpot, Zoho, LeadSquared or a custom CRM through APIs, creating tasks and briefings where account managers already work."
+    }
+  ],
+  "related": [
+    "merchant-onboarding-kyc-verification",
+    "payment-support-voice-agent",
+    "dormant-account-reactivation",
+    "retail-banking-cross-sell-outreach"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/merchant-activation-and-upsell-automation/"
+}

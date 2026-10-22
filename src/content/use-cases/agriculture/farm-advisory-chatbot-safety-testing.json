@@ -1,0 +1,222 @@
+{
+  "slug": "farm-advisory-chatbot-safety-testing",
+  "industry": "agriculture",
+  "title": "Safety Testing for Farm Advisory Chatbots",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test farm advisory chatbots and voice bots in Hindi and regional languages for harmful or wrong advice: invented doses, unregistered products, overconfident diagnoses, scheme errors and data leaks.",
+  "seo": {
+    "title": "Safety Testing for Farm Advisory Chatbots | VipraTech",
+    "description": "Adversarial and accuracy testing of agri advisory chatbots in Hindi and regional languages, with agronomist-confirmed findings and fixes before launch.",
+    "keywords": [
+      "agri chatbot safety testing",
+      "farm advisory AI evaluation",
+      "LLM red teaming agriculture",
+      "Hindi chatbot testing",
+      "AI crop advice safety"
+    ]
+  },
+  "designed_for": [
+    "CTO, Agritech Company",
+    "Head of Agronomy",
+    "Product Manager, Farmer Advisory Bot",
+    "Programme Lead, Digital Agriculture Initiative"
+  ],
+  "problem": {
+    "intro": "Agritech companies and public programmes are putting LLM chatbots and voice bots in front of farmers to answer crop questions. A fluent but wrong answer about a pesticide, a dose or a disease can damage a crop and endanger health, and farmers are likely to trust an answer that sounds confident in their own language.",
+    "pain_points": [
+      {
+        "title": "Invented or off-label doses",
+        "detail": "LLMs can produce a plausible dose or tank mix that no label supports, or suggest a product not registered for that crop."
+      },
+      {
+        "title": "Overconfident diagnosis",
+        "detail": "Bots may name a disease from a vague description or a poor photo instead of asking questions or referring to an agronomist."
+      },
+      {
+        "title": "Answers that change by language",
+        "detail": "A bot that behaves carefully in English may give different, less careful answers in Hindi, Marathi or Telugu."
+      },
+      {
+        "title": "Manipulation and misinformation",
+        "detail": "Users can push a bot off its rules, and wrong answers on subsidies, schemes or loan terms damage trust in the programme."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build and run a safety test programme for your farm advisory bot before launch and after every major change. With your agronomists, we define safe behaviour: which topics must be referred, which products and doses are allowed, and how uncertainty should be expressed. We then create multi-turn test conversations in English, Hindi and your regional languages, covering pesticide and dose questions, look-alike symptoms, out-of-season and out-of-region crops, scheme and loan queries, attempts to make the bot ignore its rules, and requests for other farmers' data. Answers are scored automatically against the rules, then agronomists review every risky or failed case. You receive PASS, RISK and FAIL findings with transcripts and specific fixes.",
+    "capabilities": [
+      "Safety policy written with your agronomists: referral topics, allowed products and dose rules",
+      "Multi-turn test conversations in English, Hindi and regional languages",
+      "Checks for invented doses, unregistered products and unsafe mixing advice",
+      "Diagnosis behaviour tests with vague descriptions and poor-quality photos",
+      "Rule-bypass, misinformation and data-leakage test sets",
+      "PASS, RISK and FAIL findings with transcripts, root causes and fixes"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree the safety policy",
+      "detail": "We work with your agronomists to define referral topics, allowed products, dose rules and how uncertainty must be stated."
+    },
+    {
+      "step": 2,
+      "title": "Build the test sets",
+      "detail": "We create multi-turn conversations and photo cases across crops, regions, languages and risk categories."
+    },
+    {
+      "step": 3,
+      "title": "Run the tests",
+      "detail": "Test conversations run against your bot through its API, a WhatsApp test number or a voice test line."
+    },
+    {
+      "step": 4,
+      "title": "Score automatically",
+      "detail": "Rule checks and an evaluator model score each answer and mark anything risky or failed."
+    },
+    {
+      "step": 5,
+      "title": "Agronomist review",
+      "detail": "Agronomists review every RISK and FAIL case and confirm the finding and its severity."
+    },
+    {
+      "step": 6,
+      "title": "Report and retest",
+      "detail": "You receive findings with fixes, and we rerun the suite after your changes to confirm they hold."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agree safety policy with agronomists\"] --> B[\"Build multilingual test sets\"]\n  B --> C[\"Run tests against the bot\"]\n  C --> D[\"Score answers with rules and evaluator\"]\n  D --> E{\"Risk or fail found?\"}\n  E -->|\"yes\"| F(\"Agronomist confirms finding\")\n  E -->|\"no\"| G[\"Record pass with transcript\"]\n  F --> H[\"Report fixes and retest\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Policy and test design",
+        "components": [
+          "Safety policy and referral rules",
+          "Approved product and dose list",
+          "Multilingual test case library"
+        ]
+      },
+      {
+        "name": "Test execution",
+        "components": [
+          "API, WhatsApp and voice test runners",
+          "Multi-turn conversation driver",
+          "Photo test cases"
+        ]
+      },
+      {
+        "name": "Scoring",
+        "components": [
+          "Rule-based dose and product checks",
+          "Evaluator model with agronomist-calibrated rubric",
+          "Cross-language consistency comparison"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Agronomist review screen for risky and failed cases",
+          "Severity assignment"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Findings report with transcripts",
+          "Regression suite for retests"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Policy and test design\"]\n    P1[\"Safety policy and dose rules\"]\n    P2[\"Multilingual test library\"]\n  end\n  subgraph S2[\"Test execution\"]\n    T1[\"Conversation driver\"]\n    T2[\"API, WhatsApp and voice runners\"]\n  end\n  subgraph S3[\"Scoring and review\"]\n    C1[\"Dose and product rule checks\"]\n    C2[\"Evaluator model\"]\n    C3(\"Agronomist review\")\n  end\n  subgraph S4[\"Reporting\"]\n    R1[\"Findings with transcripts\"]\n    R2[\"Regression suite\"]\n  end\n  P1 --> C1\n  P2 --> T1 --> T2\n  T2 --> C1\n  T2 --> C2\n  C1 --> C3\n  C2 --> C3\n  C3 --> R1\n  R1 --> R2\n  R2 --> T1"
+  },
+  "inputs": [
+    "Access to the bot in a test environment via API, WhatsApp or voice",
+    "System prompt, knowledge base and approved advisory content",
+    "Approved product and dose list from your agronomists",
+    "Target crops, regions and languages",
+    "De-identified past user conversations, where available"
+  ],
+  "outputs": [
+    "Safety policy agreed with agronomists",
+    "Findings graded PASS, RISK or FAIL with transcripts",
+    "Root causes and recommended fixes",
+    "Cross-language consistency report",
+    "Reusable regression suite for future releases"
+  ],
+  "human_in_the_loop": "Agronomists confirm every RISK and FAIL finding and set its severity, because only they can judge whether a crop answer is unsafe. Your product team decides which fixes to make and when to release.",
+  "integrations": [
+    "Your chatbot API or LLM gateway",
+    "WhatsApp Business API test number",
+    "Voice bot test line",
+    "Issue tracker such as Jira or Linear",
+    "CI pipeline for regression runs"
+  ],
+  "guardrails": [
+    "Testing only in a test environment or on test numbers, never with real farmers",
+    "No real farmer data in test prompts",
+    "Findings shared only with named contacts",
+    "Severity confirmed by agronomists, not by the evaluator model alone",
+    "Regression suite versioned with each bot release"
+  ],
+  "compliance_notes": [
+    "Test categories map to OWASP Top 10 for LLM Applications risks such as prompt injection, sensitive information disclosure and misinformation.",
+    "Findings help show that pesticide guidance stays within uses registered under the Insecticides Act 1968, as defined by your agronomists."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One bot, two languages and a focused set of crops, covering dose, diagnosis, scheme and rule-bypass categories.",
+    "deliverables": [
+      "Safety policy agreed with your agronomists",
+      "Multilingual test suite",
+      "Findings report with transcripts and fixes",
+      "Retest after fixes",
+      "Regression suite handed over for CI"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Findings by category and severity",
+        "how": "Count of PASS, RISK and FAIL results per risk category, confirmed by agronomists."
+      },
+      {
+        "metric": "Unsafe dose or product answers",
+        "how": "Answers stating a dose or product outside the approved list, found by rule checks and confirmed in review."
+      },
+      {
+        "metric": "Cross-language consistency",
+        "how": "Differences in safety behaviour between English and regional-language versions of the same test."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Share of findings that pass on retest after your changes."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you test in regional languages or only English?",
+      "a": "Both. We run the same safety cases in English, Hindi and your regional languages, because bots often behave differently across languages. Native speakers check the test wording."
+    },
+    {
+      "q": "Who decides whether an answer is unsafe?",
+      "a": "Your agronomists, supported by our rule checks and evaluator model. We prepare the cases and evidence; they confirm each finding and its severity."
+    },
+    {
+      "q": "Can you test a voice bot as well as a chatbot?",
+      "a": "Yes. We run spoken test calls against voice bots, including noisy audio and mixed-language speech, and score the transcripts the same way."
+    },
+    {
+      "q": "Will testing affect our live users?",
+      "a": "No. Tests run against a test environment or dedicated test numbers, with no real farmer data in the prompts."
+    }
+  ],
+  "related": [
+    "crop-disease-detection-from-photos",
+    "farmer-advisory-voice-helpline",
+    "healthcare-chatbot-safety-testing",
+    "voice-agent-jailbreak-testing"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/farm-advisory-chatbot-safety-testing/"
+}

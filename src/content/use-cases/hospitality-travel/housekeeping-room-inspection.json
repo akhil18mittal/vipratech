@@ -1,0 +1,214 @@
+{
+  "slug": "housekeeping-room-inspection",
+  "industry": "hospitality-travel",
+  "title": "Housekeeping Room Inspection from Photos",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Check each cleaned room from attendant photos against your room standard: bed, bathroom, amenities, minibar and visible damage, with supervisors confirming before the room is released.",
+  "seo": {
+    "title": "Housekeeping Room Inspection from Photos | VipraTech",
+    "description": "Computer vision that checks housekeeping photos against room standards for bed, bathroom, amenities and damage, so supervisors focus where it matters.",
+    "keywords": [
+      "housekeeping room inspection AI",
+      "hotel room cleanliness check",
+      "housekeeping photo audit",
+      "room ready inspection for hotels",
+      "hotel quality audit computer vision"
+    ]
+  },
+  "designed_for": [
+    "Executive Housekeeper",
+    "Housekeeping Supervisor",
+    "Rooms Division Manager",
+    "Quality Manager for hotel groups"
+  ],
+  "problem": {
+    "intro": "Every departure room should be inspected before it is released for sale, but on a day with many check-outs and early arrivals, supervisors cannot walk every room. A missing towel, a used glass, hair in the shower or a stain on the linen then reaches a guest, and often a review.",
+    "pain_points": [
+      {
+        "title": "Too many rooms to inspect",
+        "detail": "Supervisors cover several floors and prioritise early arrivals, so many rooms are released on the attendant's word."
+      },
+      {
+        "title": "Standards that vary by attendant",
+        "detail": "New and temporary staff set amenities and fold towels differently from the standard, especially in peak season."
+      },
+      {
+        "title": "Damage found by the next guest",
+        "detail": "Broken fittings, stained carpets or missing items are discovered after check-in rather than reported to maintenance."
+      },
+      {
+        "title": "No record of what was checked",
+        "detail": "When a guest complains, there is no evidence of the room's condition at release."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a room inspection flow in a phone app that housekeeping already carries. After cleaning, the attendant takes photos from a short set of fixed angles for the room type: bed, bathroom, vanity, amenities tray, minibar and floor. Vision models check each photo against your standard, for example bed made with the correct linen and cushions, towels and amenities present and placed, no visible stains or litter, minibar stocked and nothing left behind. Rooms that pass with high confidence get a light supervisor check; failures and uncertain photos go to the supervisor with the exact issue marked. Damage creates a maintenance ticket, and the PMS room status changes only after supervisor sign-off.",
+    "capabilities": [
+      "Guided photo capture per room type with fixed angles",
+      "Checks for bed making, towels, amenities placement and minibar stock",
+      "Detection of visible stains, litter, used items and items left behind",
+      "Damage spotting for fittings, furniture and soft furnishings, with maintenance tickets",
+      "Supervisor queue prioritised by failures, uncertainty and arrival times",
+      "Room condition record at release for complaint handling and coaching"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture after cleaning",
+      "detail": "The attendant photographs the room from the fixed angles defined for that room type."
+    },
+    {
+      "step": 2,
+      "title": "Check against the standard",
+      "detail": "Vision models compare each photo with the room standard and score each item."
+    },
+    {
+      "step": 3,
+      "title": "Decide the route",
+      "detail": "Passing rooms go to a light check, and failed or uncertain items go to the supervisor with the issue marked."
+    },
+    {
+      "step": 4,
+      "title": "Supervisor inspection",
+      "detail": "The supervisor confirms or corrects the result, physically for flagged rooms, and the attendant fixes any issues."
+    },
+    {
+      "step": 5,
+      "title": "Release and log",
+      "detail": "After sign-off the PMS room status updates to inspected, and photos are stored with the room record."
+    },
+    {
+      "step": 6,
+      "title": "Report and coach",
+      "detail": "Weekly reports show recurring misses by item and floor for training."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Attendant photographs cleaned room\"] --> B[\"Check items against room standard\"]\n  B --> C{\"All items pass with confidence?\"}\n  C -->|\"yes\"| D(\"Light supervisor check\")\n  C -->|\"no\"| E(\"Supervisor inspects flagged items\")\n  E --> F[\"Attendant fixes and recaptures\"]\n  F --> B\n  D --> G[\"PMS status set to inspected\"]\n  B --> H[\"Maintenance ticket for damage\"]\n  G --> I[\"Weekly coaching report\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Housekeeping mobile app with angle guides",
+          "Room type standards and reference photos"
+        ]
+      },
+      {
+        "name": "Vision checks",
+        "components": [
+          "Item presence and placement models",
+          "Stain, litter and damage detection",
+          "Image quality checks"
+        ]
+      },
+      {
+        "name": "Workflow",
+        "components": [
+          "Supervisor priority queue",
+          "Maintenance ticket creation",
+          "PMS room status update after sign-off"
+        ]
+      },
+      {
+        "name": "Records and reporting",
+        "components": [
+          "Room condition photo archive",
+          "Weekly item and floor reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n  P1[\"Housekeeping mobile app\"]\n  P2[\"Room standards by type\"]\n  end\n  subgraph S2[\"Vision checks\"]\n  V1[\"Item and placement models\"]\n  V2[\"Stain and damage detection\"]\n  V3[\"Image quality check\"]\n  end\n  subgraph S3[\"Workflow\"]\n  W1(\"Supervisor queue\")\n  W2[\"Maintenance tickets\"]\n  W3[\"PMS status update\"]\n  end\n  subgraph S4[\"Records and reporting\"]\n  R1[\"Room condition archive\"]\n  R2[\"Weekly reports\"]\n  end\n  P1 --> V3\n  V3 --> V1\n  P2 --> V1\n  V3 --> V2\n  V1 --> W1\n  V2 --> W1\n  V2 --> W2\n  W1 --> W3\n  W3 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Photos from fixed angles after cleaning",
+    "Room standards and reference photos per room type",
+    "Room status and arrivals list from the PMS",
+    "Amenity and minibar checklists",
+    "Maintenance categories"
+  ],
+  "outputs": [
+    "Item-by-item result per room with photo evidence",
+    "Supervisor queue of flagged rooms",
+    "Maintenance tickets for damage",
+    "PMS room status updates after sign-off",
+    "Weekly misses by item, floor and shift"
+  ],
+  "human_in_the_loop": "Supervisors sign off every room before it is released and physically inspect all flagged rooms. Results are used for coaching, and any disciplinary step stays with the executive housekeeper and HR.",
+  "integrations": [
+    "Hotel PMS for room status and arrivals",
+    "Maintenance or work order system",
+    "Housekeeping apps or WhatsApp for task alerts",
+    "Cloud storage for room photos",
+    "Quality audit dashboards for hotel groups"
+  ],
+  "guardrails": [
+    "Photos taken only in vacant rooms after check-out, never with guests or their belongings in frame",
+    "Room status changes only after supervisor sign-off",
+    "Confidence shown for each item, and uncertain items never auto-pass",
+    "Results not used for automatic penalties",
+    "Reference standards updated whenever room design or amenities change"
+  ],
+  "compliance_notes": [
+    "Photo capture is limited to vacant rooms so guest privacy is not affected.",
+    "Staff are told how photos and results are used, in line with DPDP Act 2023 notice and purpose principles."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Departure rooms of one or two room types on selected floors of one property, with supervisors inspecting every room as usual so results can be compared.",
+    "deliverables": [
+      "Room standards and capture angles for the pilot room types",
+      "Models tuned on your rooms and amenities",
+      "Supervisor queue and PMS status flow",
+      "Pilot comparison with supervisor inspections",
+      "Roll-out plan and estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Item-level agreement with supervisors",
+        "how": "Model results compared with the supervisor's physical inspection of the same rooms."
+      },
+      {
+        "metric": "Missed issues",
+        "how": "Issues found by supervisors or guests in rooms the model passed."
+      },
+      {
+        "metric": "Supervisor time per room",
+        "how": "Inspection time for passed and flagged rooms, compared with inspections before the pilot."
+      },
+      {
+        "metric": "Recurring misses",
+        "how": "Count of repeat issues by item and floor across the pilot weeks."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will this replace supervisors?",
+      "a": "No. It helps supervisors focus on the rooms and items that need attention and gives them evidence. Every room is still signed off by a supervisor."
+    },
+    {
+      "q": "Do attendants need new devices?",
+      "a": "Usually not. The app runs on the phones or shared devices housekeeping already uses, and capture takes a short sequence of photos per room."
+    },
+    {
+      "q": "Can it spot hair or small stains?",
+      "a": "Larger stains, litter, missing items and misplaced amenities are detected more reliably than single hairs. Small-detail checks such as hair in the shower stay on the supervisor's checklist for flagged and sampled rooms."
+    },
+    {
+      "q": "What about stayover rooms?",
+      "a": "We recommend starting with departure rooms. Stayover rooms contain guests' belongings, so photo capture there needs a separate policy and is usually limited or excluded."
+    }
+  ],
+  "related": [
+    "kitchen-hygiene-monitoring",
+    "review-response-and-reputation-automation",
+    "guest-id-and-check-in-document-capture",
+    "visual-quality-inspection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/housekeeping-room-inspection/"
+}

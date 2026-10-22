@@ -1,0 +1,223 @@
+{
+  "slug": "policy-wording-comparison-assistant",
+  "industry": "insurance",
+  "title": "Policy Wording Comparison Assistant",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Align two or more policy wordings clause by clause, highlight what was added, removed, narrowed or broadened, and answer questions with citations to the exact clause.",
+  "seo": {
+    "title": "Policy Wording Comparison with AI | VipraTech",
+    "description": "AI that compares insurance policy wordings clause by clause, flags material changes in cover, exclusions and limits, and cites the source clause.",
+    "keywords": [
+      "policy wording comparison",
+      "insurance wording AI",
+      "policy document comparison tool",
+      "exclusions and sub-limits comparison",
+      "broker policy comparison"
+    ]
+  },
+  "designed_for": [
+    "Product Manager, Health or Commercial Lines",
+    "Broker Placement Lead",
+    "Underwriter",
+    "Legal and Compliance Counsel"
+  ],
+  "problem": {
+    "intro": "Policy wordings change at every renewal, product refile and negotiation with a corporate client's broker. A narrowed definition, a new sub-limit or a moved exclusion can hide inside a document that looks almost identical to last year's, and finding it means slow, careful reading line by line.",
+    "pain_points": [
+      {
+        "title": "Renumbered clauses defeat redlines",
+        "detail": "Word-processor comparisons break when sections are reordered or renumbered, producing pages of noise and hiding the real changes."
+      },
+      {
+        "title": "Meaning changes, not just words",
+        "detail": "Replacing 'any' with 'the' or adding one qualifying phrase to a definition can change cover materially without looking like a big edit."
+      },
+      {
+        "title": "Comparisons across insurers are inconsistent",
+        "detail": "Brokers building group health or property comparisons extract room-rent limits, co-pays, deductibles and exclusions by hand, and each insurer's format differs."
+      },
+      {
+        "title": "Customer summaries drift from the wording",
+        "detail": "Brochures and customer information sheets can fall out of step with the filed wording after several revisions."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a comparison assistant that reads policy wordings, endorsements and customer-facing summaries and breaks each into clauses with their numbering and headings. It aligns equivalent clauses across documents even when they are reordered or renamed, then classifies each difference as added, removed, narrowed, broadened or editorial. A parameter table pulls the items your team cares about, such as waiting periods, sub-limits, co-pay, deductibles and territorial limits, into one view with clause citations. Users can ask questions across the documents and get answers that quote the clause or say it was not found. It is a drafting and review aid, not a coverage opinion.",
+    "capabilities": [
+      "Segments wordings, endorsements and schedules into clauses, keeping numbering and headings",
+      "Aligns equivalent clauses across versions and insurers, even when reordered or renamed",
+      "Classifies each difference as added, removed, narrowed, broadened or editorial",
+      "Builds a parameter table for limits, waiting periods, co-pays, deductibles and exclusions, with citations",
+      "Checks customer information sheets and brochures against the wording for inconsistencies",
+      "Answers questions across the document set, quoting the clause or stating that it was not found"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the document set",
+      "detail": "Users upload the wordings, endorsements and summaries to compare, tagged by version and source."
+    },
+    {
+      "step": 2,
+      "title": "Segment into clauses",
+      "detail": "Each document is split into clauses with numbering, headings and cross-references preserved."
+    },
+    {
+      "step": 3,
+      "title": "Align equivalent clauses",
+      "detail": "Clauses are matched across documents, and low-confidence alignments are flagged for a reviewer."
+    },
+    {
+      "step": 4,
+      "title": "Classify differences",
+      "detail": "Each aligned pair is labelled by type of change, with the changed text highlighted."
+    },
+    {
+      "step": 5,
+      "title": "Build the comparison table",
+      "detail": "Agreed parameters are extracted into a table, with each cell citing its clause."
+    },
+    {
+      "step": 6,
+      "title": "Review and export",
+      "detail": "A product, legal or placement reviewer confirms material differences and exports the redline and table."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Upload wordings and summaries\"] --> B[\"Segment into clauses\"]\n  B --> C[\"Align equivalent clauses\"]\n  C --> D{\"Alignment confident?\"}\n  D -->|\"no\"| E(\"Reviewer confirms clause match\")\n  D -->|\"yes\"| F[\"Classify each difference\"]\n  E --> F\n  F --> G[\"Parameter table with citations\"]\n  G --> H(\"Reviewer signs off material changes\")\n  H --> I[\"Export redline and comparison\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Document intake",
+        "components": [
+          "Upload and version tagging",
+          "PDF and Word parsers",
+          "OCR for scanned wordings"
+        ]
+      },
+      {
+        "name": "Clause modelling",
+        "components": [
+          "Clause segmenter with numbering detection",
+          "Definition and cross-reference resolver"
+        ]
+      },
+      {
+        "name": "Comparison",
+        "components": [
+          "Clause alignment using headings and semantic similarity",
+          "Difference classifier",
+          "Parameter extractor"
+        ]
+      },
+      {
+        "name": "Review and Q&A",
+        "components": [
+          "Side-by-side redline viewer",
+          "Material change sign-off",
+          "Question answering with clause citations"
+        ]
+      },
+      {
+        "name": "Output and audit",
+        "components": [
+          "Excel and Word export",
+          "Version and review history"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Document intake\"]\n    A1[\"Upload and version tags\"]\n    A2[\"PDF, Word and OCR parsing\"]\n  end\n  subgraph S2[\"Clause modelling\"]\n    B1[\"Clause segmenter\"]\n    B2[\"Definition resolver\"]\n  end\n  subgraph S3[\"Comparison\"]\n    C1[\"Clause alignment\"]\n    C2[\"Difference classifier\"]\n    C3[\"Parameter extractor\"]\n  end\n  subgraph S4[\"Review and output\"]\n    D1(\"Redline viewer and sign-off\")\n    D2[\"Cited question answering\"]\n    D3[\"Export and review history\"]\n  end\n  A1 --> A2\n  A2 --> B1\n  B1 --> B2\n  B2 --> C1\n  C1 --> C2\n  C1 --> C3\n  C2 --> D1\n  C3 --> D1\n  B2 --> D2\n  D1 --> D3"
+  },
+  "inputs": [
+    "Policy wordings, current and proposed or expiring",
+    "Endorsements and clause libraries",
+    "Customer information sheet, prospectus or brochure",
+    "Schedule of benefits or policy schedule",
+    "Broker manuscript wording or client requirement list",
+    "Competitor wordings from public sources"
+  ],
+  "outputs": [
+    "Clause-aligned redline view",
+    "Difference register with change type and citations",
+    "Parameter comparison table in Excel or PDF",
+    "Consistency flags between customer summaries and the wording",
+    "Cited answers to reviewer questions"
+  ],
+  "human_in_the_loop": "Product, legal or placement staff review every difference marked as material before it is used in a filing, a client comparison or a negotiation. The assistant never states whether a specific loss or claim is covered.",
+  "integrations": [
+    "Document management system or SharePoint",
+    "Product filing workspace",
+    "Broker placement platform",
+    "Microsoft Word and Excel export",
+    "CRM for client comparison records"
+  ],
+  "guardrails": [
+    "Answers only from the uploaded documents, with clause citations",
+    "States 'not found' instead of filling gaps from general knowledge",
+    "Material-change labels confirmed by a person before export",
+    "Exact document versions recorded for every comparison",
+    "No coverage opinions or claim decisions"
+  ],
+  "compliance_notes": [
+    "Helps product and compliance teams check that customer information sheets and brochures match the wording, in line with IRDAI's emphasis on clear and consistent disclosure to policyholders.",
+    "Outputs are review aids for qualified staff, not legal advice."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One product family, such as retail health indemnity, comparing the current wording with its previous version, its customer information sheet and two public competitor wordings.",
+    "deliverables": [
+      "Parameter list agreed with product and legal teams",
+      "Working comparison assistant on the pilot document set",
+      "Redline and parameter table outputs",
+      "Accuracy report on alignment and difference classification",
+      "Roll-out plan for other product lines or broker use"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Clause alignment accuracy",
+        "how": "Reviewer checks of matched clause pairs across the pilot documents."
+      },
+      {
+        "metric": "Material differences missed and over-flagged",
+        "how": "Tool output compared with a reviewer's independent comparison of one document pair."
+      },
+      {
+        "metric": "Citation correctness",
+        "how": "Share of table cells and answers whose cited clause actually supports the value."
+      },
+      {
+        "metric": "Reviewer time per comparison",
+        "how": "Timed for the pilot comparison against the team's usual manual method."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it compare scanned or older wordings?",
+      "a": "Yes. Scanned wordings go through OCR first, and the clause segmenter handles older numbering styles. Pages with poor scan quality are flagged so a reviewer can check the text."
+    },
+    {
+      "q": "Can it tell us whether a claim would be covered?",
+      "a": "No. It shows what the wordings say and where they differ, with citations. Coverage decisions belong to your claims and legal teams."
+    },
+    {
+      "q": "Does it work for group health and commercial wordings as well as retail products?",
+      "a": "Yes. The parameter list is configurable, so a broker comparing group health terms and an underwriter reviewing a property endorsement can each use their own set of fields."
+    },
+    {
+      "q": "Is our unpublished product wording safe?",
+      "a": "Documents stay in your environment or a dedicated cloud tenancy, access is role-based, and model endpoints are configured not to retain or train on your content."
+    }
+  ],
+  "related": [
+    "commercial-underwriting-submission-intake",
+    "insurance-bot-mis-selling-and-disclosure-testing",
+    "contract-clause-extraction-and-risk-flags",
+    "nda-review-and-redlines"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/policy-wording-comparison-assistant/"
+}

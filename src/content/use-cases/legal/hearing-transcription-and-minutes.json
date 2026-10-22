@@ -1,0 +1,225 @@
+{
+  "slug": "hearing-transcription-and-minutes",
+  "industry": "legal",
+  "title": "Hearing and Meeting Transcription with Minutes",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Transcribe arbitral hearings, depositions and client meetings where recording is permitted, label speakers, handle Hindi-English speech and legal terms, and draft minutes for review.",
+  "seo": {
+    "title": "Hearing and Meeting Transcription with Minutes | VipraTech",
+    "description": "AI transcription for arbitral hearings and legal meetings with speaker labels, legal vocabulary, Hindi-English support and draft minutes for review.",
+    "keywords": [
+      "arbitration hearing transcription",
+      "legal transcription India",
+      "AI meeting minutes for lawyers",
+      "Hindi English transcription",
+      "deposition transcript AI"
+    ]
+  },
+  "designed_for": [
+    "Arbitration Counsel",
+    "Tribunal Secretary",
+    "Litigation Partner",
+    "Company Secretary (In-House Legal)"
+  ],
+  "problem": {
+    "intro": "Ad hoc arbitrations in India often run without a professional stenographer, and lawyers and tribunal secretaries reconstruct proceedings from handwritten notes. Client conferences, witness preparation sessions and internal case meetings produce decisions and action items that live only in someone's notebook.",
+    "pain_points": [
+      {
+        "title": "No reliable record",
+        "detail": "Without a transcript, disputes about what a witness said or what the tribunal directed are hard to settle."
+      },
+      {
+        "title": "Generic transcription fails",
+        "detail": "Case names, statutory references, Latin terms and Hindi-English switching produce garbled output from consumer tools."
+      },
+      {
+        "title": "Speakers not identified",
+        "detail": "A transcript that does not say who spoke, whether counsel, witness or arbitrator, is of limited use."
+      },
+      {
+        "title": "Minutes take hours",
+        "detail": "Turning a long hearing or meeting into minutes, procedural notes and action items takes associate time after a full day."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a transcription and minutes pipeline for proceedings where recording is permitted: arbitral hearings, depositions, virtual hearings with the tribunal's approval, and client or internal meetings with participants' consent. Audio from the hearing room or a video-conference platform is split by speaker and mapped to named participants, then transcribed with a glossary built from the matter, including party names, case citations and statutes, across Hindi, English and mixed speech. Low-confidence segments are marked for a transcript reviewer who checks them against the audio. From the reviewed transcript the system drafts minutes, a summary of directions and action items, which counsel or the tribunal secretary approve before circulation.",
+    "capabilities": [
+      "Speaker separation mapped to named counsel, witnesses and arbitrators",
+      "Matter-specific glossary for parties, citations, statutes and technical terms",
+      "Hindi, English and code-switched transcription with time stamps",
+      "Low-confidence segments marked for review against the audio",
+      "Draft minutes, directions summary and action items from the reviewed transcript",
+      "Errata workflow for parties to propose corrections"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Confirm permission and capture",
+      "detail": "Recording proceeds only with the tribunal's or participants' permission, from room microphones or the video-conference platform."
+    },
+    {
+      "step": 2,
+      "title": "Separate and label speakers",
+      "detail": "Speech is split by speaker and mapped to the names on the appearance list."
+    },
+    {
+      "step": 3,
+      "title": "Transcribe with the glossary",
+      "detail": "Audio is transcribed using the matter glossary, with time stamps and a confidence score for each segment."
+    },
+    {
+      "step": 4,
+      "title": "Review uncertain segments",
+      "detail": "A transcript reviewer corrects marked segments against the audio."
+    },
+    {
+      "step": 5,
+      "title": "Draft minutes",
+      "detail": "Minutes, directions and action items are drafted from the reviewed transcript."
+    },
+    {
+      "step": 6,
+      "title": "Approve and circulate",
+      "detail": "Counsel or the tribunal secretary approve the documents, and parties can submit errata."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Recording with permission\"] --> B[\"Separate and label speakers\"]\n  B --> C[\"Transcribe with matter glossary\"]\n  C --> D{\"Low-confidence segments?\"}\n  D -->|\"yes\"| E(\"Reviewer checks against audio\")\n  D -->|\"no\"| F[\"Draft minutes and action items\"]\n  E --> F\n  F --> G(\"Counsel or tribunal secretary approves\")\n  G --> H[\"Circulate transcript and minutes\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Hearing room microphone kit",
+          "Video-conference recording import",
+          "Permission and consent record"
+        ]
+      },
+      {
+        "name": "Speech processing",
+        "components": [
+          "Speaker separation and labelling",
+          "Speech-to-text for Hindi, English and mixed speech",
+          "Matter glossary and custom vocabulary"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Transcript editor synced to audio",
+          "Confidence highlighting",
+          "Errata tracking"
+        ]
+      },
+      {
+        "name": "Drafting",
+        "components": [
+          "Minutes and directions drafter",
+          "Action item extractor"
+        ]
+      },
+      {
+        "name": "Storage and access",
+        "components": [
+          "Matter-restricted storage",
+          "Version history",
+          "Retention as agreed for the proceeding"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Room microphones\"]\n    C2[\"Video-conference import\"]\n  end\n  subgraph S2[\"Speech processing\"]\n    P1[\"Speaker separation\"]\n    P2[\"Hindi and English transcription\"]\n    P3[\"Matter glossary\"]\n  end\n  subgraph S3[\"Review and drafting\"]\n    R1(\"Transcript editor with audio\")\n    R2[\"Minutes and action drafter\"]\n    R3(\"Approver sign-off\")\n  end\n  subgraph S4[\"Storage\"]\n    T1[\"Matter-restricted storage\"]\n    T2[\"Version and errata history\"]\n  end\n  C1 --> P1\n  C2 --> P1\n  P1 --> P2\n  P3 --> P2\n  P2 --> R1\n  R1 --> R2\n  R2 --> R3\n  R3 --> T1\n  R1 --> T2"
+  },
+  "inputs": [
+    "Audio or video of the hearing or meeting",
+    "Appearance list and participant names",
+    "Matter glossary: parties, citations, statutes and technical terms",
+    "Agenda or procedural order, if any",
+    "Recording permission or consent record"
+  ],
+  "outputs": [
+    "Time-stamped transcript with speaker labels",
+    "List of corrected segments and errata",
+    "Draft minutes and directions summary",
+    "Action items with owners and dates",
+    "Approved, versioned records in matter storage"
+  ],
+  "human_in_the_loop": "A transcript reviewer checks every low-confidence segment against the audio, and counsel or the tribunal secretary approve the minutes before circulation. Parties can propose errata, which the approver decides.",
+  "integrations": [
+    "Zoom, Microsoft Teams or Google Meet recordings",
+    "Document management system",
+    "Matter management system",
+    "Microsoft Word for transcripts and minutes",
+    "Secure file sharing with parties"
+  ],
+  "guardrails": [
+    "No recording without tribunal or participant permission, and no recording of court proceedings",
+    "Uncertain words marked, never silently filled in",
+    "Minutes drafted only from the reviewed transcript",
+    "Recordings and transcripts restricted to the matter team and kept for the agreed period",
+    "Audio and transcripts not used to train models"
+  ],
+  "compliance_notes": [
+    "Courts in India generally restrict recording of proceedings without permission; this service is designed for arbitral hearings, depositions and meetings where recording is agreed.",
+    "Recordings contain participants' personal data; consent and retention are handled in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Two or three recorded arbitral sessions or internal meetings, with transcripts reviewed against the audio by your team.",
+    "deliverables": [
+      "Matter glossary and speaker set-up",
+      "Reviewed transcripts for the pilot sessions",
+      "Draft minutes and action items",
+      "Accuracy report by speaker and language",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Word error rate",
+        "how": "Reviewed transcript compared with the raw output, by language and speaker."
+      },
+      {
+        "metric": "Speaker attribution accuracy",
+        "how": "Segments assigned to the correct speaker, from reviewer corrections."
+      },
+      {
+        "metric": "Reviewer time per hour of audio",
+        "how": "Time the reviewer spends correcting each recorded hour."
+      },
+      {
+        "metric": "Edits to draft minutes",
+        "how": "Extent of the changes the approver made to the draft minutes."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can you transcribe court hearings?",
+      "a": "We do not record court proceedings, which courts generally restrict without permission. The service is for arbitral hearings, depositions, virtual hearings where the tribunal permits recording, and meetings where participants agree."
+    },
+    {
+      "q": "How accurate is it with Hindi and legal terms?",
+      "a": "Accuracy improves with a matter glossary and good audio. Every low-confidence segment is marked for review, and the pilot reports error rates by language and speaker."
+    },
+    {
+      "q": "Who owns the transcript?",
+      "a": "The client or tribunal, as agreed for the proceeding. We keep it in matter-restricted storage and delete it at the end of the agreed period."
+    },
+    {
+      "q": "Can the minutes include the tribunal's directions?",
+      "a": "Yes. The drafter pulls directions and deadlines from the reviewed transcript into a summary, which counsel or the tribunal secretary approve."
+    }
+  ],
+  "related": [
+    "case-file-summarisation-and-chronology",
+    "client-intake-voice-agent",
+    "court-order-and-cause-list-tracking",
+    "meeting-minutes-drafting"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/legal/hearing-transcription-and-minutes/"
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "hospital-insurance-claim-file-preparation",
+  "industry": "healthcare",
+  "title": "Insurance Pre-Auth and Claim File Preparation for Hospitals",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Assemble cashless pre-auth, enhancement and final claim files for TPAs, insurers and government schemes, and check each against the payer's checklist before submission.",
+  "seo": {
+    "title": "Hospital Pre-Auth and Claim File Preparation | VipraTech",
+    "description": "AI for hospital insurance desks: pre-fill cashless pre-auth forms, check payer document checklists, flag non-payable items and draft TPA query replies.",
+    "keywords": [
+      "hospital TPA pre-authorisation",
+      "cashless claim file preparation",
+      "hospital insurance desk automation",
+      "TPA query reply drafting",
+      "PM-JAY claim documentation"
+    ]
+  },
+  "designed_for": [
+    "Head of TPA and Insurance Desk",
+    "Revenue Cycle Manager",
+    "Chief Financial Officer",
+    "Medical Superintendent"
+  ],
+  "problem": {
+    "intro": "A hospital insurance desk handles cashless requests for many insurers, TPAs and government schemes, each with its own forms, portals and document checklists. A pre-auth needs the request form, doctor's notes, investigation reports, a cost estimate and policy and ID documents; the final claim adds the bill breakup, discharge summary, pharmacy bills and implant invoices. One missing report or a mismatch between estimate and notes brings a query, and the patient waits at discharge.",
+    "pain_points": [
+      {
+        "title": "Payer-specific checklists",
+        "detail": "Each TPA, insurer and scheme asks for slightly different documents and formats, and desk staff keep the differences in their heads."
+      },
+      {
+        "title": "Queries and deficiency letters",
+        "detail": "Missing investigation reports, unsigned notes or unclear line items trigger queries that delay approval and discharge."
+      },
+      {
+        "title": "Mismatches across documents",
+        "detail": "The diagnosis on the pre-auth, the procedure in the OT notes and the package on the final bill do not always line up."
+      },
+      {
+        "title": "Deductions found too late",
+        "detail": "Non-payable items, room-category issues and missing implant documentation surface only at settlement."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a claim file assistant for the hospital insurance desk. When a cashless request starts, it gathers the patient's policy or e-card, ID, doctor's notes, investigations and estimate from the HIS, fills the payer's pre-auth form fields and checks the file against that payer's checklist. For enhancements and final claims, it compares the bill breakup with the discharge summary, OT notes and approved amount, highlights likely non-payable items and missing documents, and drafts replies to TPA queries using the relevant pages of the record. Desk staff review and submit through the payer portal, or through NHCX where the hospital is onboarded. Every file keeps a log of what was sent and when.",
+    "capabilities": [
+      "Payer-specific document checklists for insurers, TPAs, PM-JAY, CGHS, ECHS and state schemes, maintained by your desk",
+      "Pre-fills pre-auth and enhancement form fields from HIS data and clinical notes",
+      "Cross-checks diagnosis, procedure, package and dates across notes, estimate and final bill",
+      "Highlights likely non-payable items and room-category issues before submission",
+      "Drafts replies to TPA queries with the relevant pages of the patient record attached",
+      "Tracks each file's submission, query and approval history"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Open the case",
+      "detail": "When a cashless admission is registered, the assistant opens a case and pulls policy, ID and clinical documents from the HIS."
+    },
+    {
+      "step": 2,
+      "title": "Prepare the pre-auth",
+      "detail": "Form fields are pre-filled and the file is checked against the payer checklist, with gaps listed for the desk."
+    },
+    {
+      "step": 3,
+      "title": "Desk review and submission",
+      "detail": "Desk staff close the gaps, review the file and submit it through the payer portal or NHCX."
+    },
+    {
+      "step": 4,
+      "title": "Queries and enhancements",
+      "detail": "Payer queries are read, the right documents found and a reply drafted; enhancements are prepared when the treating team revises the plan."
+    },
+    {
+      "step": 5,
+      "title": "Prepare the final claim",
+      "detail": "At discharge, the bill breakup is checked against the discharge summary, OT notes and approvals, and missing documents are flagged."
+    },
+    {
+      "step": 6,
+      "title": "Submit and track",
+      "detail": "The final file is submitted after desk review and its status is tracked through to settlement."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Cashless admission registered\"] --> B[\"Pull policy, ID, notes, estimate\"]\n  B --> C[\"Pre-fill payer form and checklist\"]\n  C --> D{\"Checklist complete and consistent?\"}\n  D -->|\"no\"| E(\"Desk staff fill gaps\")\n  E --> C\n  D -->|\"yes\"| F(\"Desk reviews and submits pre-auth\")\n  F --> G[\"Draft query replies and enhancements\"]\n  G --> H[\"Check final bill against records\"]\n  H --> I(\"Desk submits final claim\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data sources",
+        "components": [
+          "HIS patient, billing and clinical modules",
+          "Scanned policy cards and ID with masked Aadhaar",
+          "Payer query emails and portal downloads"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR and document classifier",
+          "LLM extractor for clinical and billing fields"
+        ]
+      },
+      {
+        "name": "Payer rules",
+        "components": [
+          "Checklist library per insurer, TPA and scheme",
+          "Cross-document consistency checks",
+          "Non-payable item and room-category rules"
+        ]
+      },
+      {
+        "name": "Desk workspace",
+        "components": [
+          "Case dashboard with gaps and deadlines",
+          "Query reply drafter",
+          "Submission tracker"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "Payer portal upload packs and NHCX connector where available",
+          "Audit log of every submission"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data sources\"]\n    D1[\"HIS clinical and billing\"]\n    D2[\"Policy cards and ID scans\"]\n    D3[\"Payer query emails\"]\n  end\n  subgraph S2[\"Understanding\"]\n    U1[\"OCR and classifier\"]\n    U2[\"LLM field extractor\"]\n  end\n  subgraph S3[\"Payer rules\"]\n    P1[\"Checklist per payer\"]\n    P2[\"Cross-document consistency\"]\n    P3[\"Non-payable item rules\"]\n  end\n  subgraph S4[\"Desk workspace\"]\n    W1(\"Insurance desk dashboard\")\n    W2[\"Query reply drafter\"]\n    W3[\"Submission tracker\"]\n  end\n  D1 --> U2\n  D2 --> U1\n  D3 --> U1\n  U1 --> U2\n  U2 --> P1\n  U2 --> P2\n  U2 --> P3\n  P1 --> W1\n  P2 --> W1\n  P3 --> W1\n  W1 --> W2\n  W1 --> W3"
+  },
+  "inputs": [
+    "Policy or e-card, patient ID with masked Aadhaar, and scheme card",
+    "Doctor's admission notes and treatment plan",
+    "Investigation and imaging reports",
+    "Cost estimate and package details",
+    "Final bill, itemised breakup, pharmacy and implant invoices",
+    "Discharge summary and OT notes"
+  ],
+  "outputs": [
+    "Pre-filled pre-auth and enhancement forms",
+    "Payer checklist status with missing items",
+    "Consistency and non-payable item flags",
+    "Draft query replies with supporting documents attached",
+    "Submission and settlement tracking log"
+  ],
+  "human_in_the_loop": "Insurance desk staff review and submit every file, and treating doctors confirm any clinical statement in a query reply. The assistant never submits to a payer or changes clinical content on its own.",
+  "integrations": [
+    "Hospital information system (billing, clinical and pharmacy modules)",
+    "Insurer and TPA portals",
+    "National Health Claims Exchange (NHCX) where the hospital is onboarded",
+    "PM-JAY and state scheme portals, through desk-uploaded packs",
+    "Email inbox used by the insurance desk"
+  ],
+  "guardrails": [
+    "No claim, query reply or enhancement submitted without desk review",
+    "Clinical statements drafted only from signed notes and confirmed by the doctor before sending",
+    "Masked Aadhaar only; full numbers never stored, per UIDAI rules",
+    "Payer checklists versioned so every change is traceable",
+    "Access limited to insurance desk roles, with full audit logging"
+  ],
+  "compliance_notes": [
+    "Helps hospitals meet payer documentation requirements and IRDAI's expectations on faster cashless processing; claim decisions remain with insurers and TPAs.",
+    "Patient health data processed only for claim purposes, in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Cashless files for two or three high-volume TPAs or insurers in one department, prepared in parallel with the current desk process.",
+    "deliverables": [
+      "Checklists and form mappings for the pilot payers",
+      "Working assistant connected to HIS exports",
+      "Insurance desk dashboard",
+      "Comparison report against recent files and their query history",
+      "Roll-out plan for remaining payers and schemes"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Gaps caught before submission",
+        "how": "Checklist gaps found by the assistant compared with the queries payers later raised."
+      },
+      {
+        "metric": "Query rate",
+        "how": "Queries received on pilot files compared with recent files for the same payers."
+      },
+      {
+        "metric": "Desk preparation time",
+        "how": "Time from admission to pre-auth submission, and from discharge order to final claim submission."
+      },
+      {
+        "metric": "Flag usefulness",
+        "how": "Desk feedback on whether each consistency and non-payable flag was valid."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it work with government schemes like PM-JAY?",
+      "a": "Yes, as checklists and package mappings. Scheme portals have their own rules on access, so the assistant prepares and checks the documents and the desk uploads them through the official portal."
+    },
+    {
+      "q": "Will it decide what we bill?",
+      "a": "No. Billing stays with your billing team and claim decisions with insurers and TPAs. The assistant flags items that commonly attract deductions so your team can review them before submission."
+    },
+    {
+      "q": "Can it reply to TPA queries automatically?",
+      "a": "It drafts replies and attaches the relevant documents. Desk staff, and the treating doctor where clinical content is involved, review and send them."
+    },
+    {
+      "q": "How do you keep payer checklists current?",
+      "a": "Your desk team owns the checklist library through a simple admin screen. Changes are versioned, and each file shows which checklist version it was checked against."
+    }
+  ],
+  "related": [
+    "discharge-summary-and-record-structuring",
+    "lab-report-digitisation",
+    "tpa-pre-authorisation-triage",
+    "health-claim-document-extraction"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/hospital-insurance-claim-file-preparation/"
+}

@@ -1,0 +1,215 @@
+{
+  "slug": "delivery-status-voice-and-whatsapp-agent",
+  "industry": "logistics-supply-chain",
+  "title": "Delivery Status Agent (Voice + WhatsApp)",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Answer where-is-my-shipment calls and WhatsApp messages from consignees and shippers, arrange reschedules and NDR reattempts within your rules, and hand complaints and disputes to your team.",
+  "seo": {
+    "title": "Delivery Status Voice and WhatsApp Agent | VipraTech",
+    "description": "Voice and WhatsApp agent that answers shipment status queries, arranges reschedules and NDR reattempts within rules, and escalates exceptions to staff.",
+    "keywords": [
+      "where is my shipment bot",
+      "delivery status WhatsApp bot",
+      "shipment tracking voice agent",
+      "NDR reattempt automation",
+      "logistics customer support AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Experience",
+    "Contact Centre Manager",
+    "Last-Mile Operations Head",
+    "Key Account Manager"
+  ],
+  "problem": {
+    "intro": "Status questions make up a large share of inbound calls and messages for carriers and 3PLs: where is my shipment, why was delivery not attempted, can it come tomorrow, can I add a landmark. Most answers already sit in the tracking system, but customers call because tracking pages are vague and the right person is hard to reach.",
+    "pain_points": [
+      {
+        "title": "Repetitive status calls",
+        "detail": "Agents spend much of the day reading tracking events back to customers who could not interpret them."
+      },
+      {
+        "title": "Failed deliveries and NDRs",
+        "detail": "Non-delivery reports for customer unavailable or address issues need quick contact with the consignee, or the shipment heads back to origin."
+      },
+      {
+        "title": "Peak-season spikes",
+        "detail": "Festival sales and month-end volumes overwhelm contact centres, and wait times rise just when customers are most anxious."
+      },
+      {
+        "title": "B2B customers want specifics",
+        "detail": "Shippers and key accounts ask about consignment-level ETAs, POD copies and delays across many shipments at once."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an agent that answers status queries on voice and WhatsApp in Hindi, English and regional languages. It verifies the caller with the tracking number plus registered phone or an OTP, reads the latest events from your tracking system and explains them in plain words with the expected delivery window. Within rules you set, it reschedules deliveries, records address landmarks, arranges reattempts after an NDR and sends POD copies to verified shippers. Delays beyond threshold, damage complaints, COD disputes and anything outside policy go to a human agent with the conversation summary. Outbound NDR calls and messages can be triggered from your NDR feed.",
+    "capabilities": [
+      "Answers status queries on inbound voice and WhatsApp after verifying the caller",
+      "Explains tracking events and expected delivery windows in plain language",
+      "Reschedules deliveries and records address landmarks within configured rules",
+      "Runs outbound NDR calls and messages to arrange reattempts",
+      "Shares POD copies and consignment lists with verified B2B shippers",
+      "Escalates delays, damage, COD disputes and complaints to agents with a summary"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Customer reaches out",
+      "detail": "A consignee or shipper calls or messages on WhatsApp, or receives an outbound NDR call."
+    },
+    {
+      "step": 2,
+      "title": "Verify identity",
+      "detail": "The agent asks for the tracking number and verifies it against the registered phone or an OTP."
+    },
+    {
+      "step": 3,
+      "title": "Fetch and explain status",
+      "detail": "Latest tracking events and ETA are fetched and explained in the customer's language."
+    },
+    {
+      "step": 4,
+      "title": "Offer allowed actions",
+      "detail": "Where rules allow, the agent reschedules, records landmarks or arranges a reattempt."
+    },
+    {
+      "step": 5,
+      "title": "Escalate exceptions",
+      "detail": "Complaints, disputes and out-of-policy requests go to a human agent with the summary."
+    },
+    {
+      "step": 6,
+      "title": "Update and confirm",
+      "detail": "Actions are written back to the TMS, and a WhatsApp confirmation is sent."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Call or WhatsApp from customer\"] --> B[\"Verify tracking number and phone\"]\n  B --> C[\"Fetch status and ETA\"]\n  C --> D[\"Explain status in chosen language\"]\n  D --> E{\"Request within rules?\"}\n  E -->|\"yes\"| F[\"Reschedule or reattempt in TMS\"]\n  E -->|\"no\"| G(\"Human agent with summary\")\n  F --> H[\"Send WhatsApp confirmation\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channels",
+        "components": [
+          "Inbound voice numbers in place of the old IVR",
+          "WhatsApp Business API",
+          "Outbound dialler for NDR calls"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Speech-to-text and text-to-speech in Indian languages",
+          "Dialogue manager with verification step",
+          "Policy rules for reschedules and landmarks"
+        ]
+      },
+      {
+        "name": "Logistics data",
+        "components": [
+          "Tracking and TMS API",
+          "NDR feed",
+          "POD repository"
+        ]
+      },
+      {
+        "name": "Escalation and audit",
+        "components": [
+          "Agent desktop with conversation summary",
+          "Conversation logs and QA sampling"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Channels\"]\n    C1[\"Voice numbers\"]\n    C2[\"WhatsApp Business API\"]\n    C3[\"Outbound NDR dialler\"]\n  end\n  subgraph S2[\"Conversation\"]\n    V1[\"Speech and language\"]\n    V2[\"Dialogue and verification\"]\n    V3[\"Policy rules\"]\n  end\n  subgraph S3[\"Logistics data\"]\n    L1[\"Tracking and TMS API\"]\n    L2[\"NDR feed\"]\n    L3[\"POD repository\"]\n  end\n  subgraph S4[\"Escalation and audit\"]\n    E1(\"Agent desktop\")\n    E2[\"Conversation logs\"]\n  end\n  L2 --> C3\n  C1 --> V1\n  C3 --> V1\n  C2 --> V2\n  V1 --> V2\n  V2 --> L1\n  V2 --> V3\n  V3 --> L1\n  V2 --> L3\n  V2 --> E1\n  V2 --> E2"
+  },
+  "inputs": [
+    "Tracking events and ETAs from the TMS",
+    "NDR reasons and reattempt slots",
+    "Consignee and shipper contact details",
+    "Reschedule, landmark and reattempt policies",
+    "PODs for B2B shippers"
+  ],
+  "outputs": [
+    "Resolved status conversations with summaries",
+    "Reschedules and reattempts written back to the TMS",
+    "Address landmarks and delivery instructions for riders",
+    "Escalations to agents with full context",
+    "Reports on query reasons, languages and escalation causes"
+  ],
+  "human_in_the_loop": "Human agents handle every complaint, damage or COD dispute and out-of-policy request, with the conversation summary in front of them. Operations teams set and change the rules for what the agent may do.",
+  "integrations": [
+    "TMS and tracking platform",
+    "WhatsApp Business API provider",
+    "Cloud telephony and contact-centre platform",
+    "CRM or ticketing system",
+    "Client order systems or marketplace APIs for B2C shipments"
+  ],
+  "guardrails": [
+    "Shipment details shared only after tracking number and phone or OTP verification",
+    "Address changes limited to landmarks or what your policy allows",
+    "No promises of compensation or refunds by the agent",
+    "Human handover available on request at any point",
+    "Outbound calls within permitted hours, with opt-outs honoured"
+  ],
+  "compliance_notes": [
+    "Outbound calls and WhatsApp messages follow TRAI commercial communication rules and WhatsApp Business policies for service messages.",
+    "Consignee personal data is processed in line with the DPDP Act 2023, with masking in logs."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Inbound status queries and outbound NDR contact for one region or one key client, in Hindi and English plus one regional language.",
+    "deliverables": [
+      "Voice and WhatsApp flows for status, reschedule and NDR",
+      "TMS integration for reads and permitted writes",
+      "Agent handover with summaries",
+      "Pilot report on resolution and escalation",
+      "Scale-up plan for peak season"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Resolution without handover",
+        "how": "In-scope conversations closed by the agent, verified through sampled reviews."
+      },
+      {
+        "metric": "NDR reattempt outcomes",
+        "how": "NDR shipments contacted by the agent that were delivered on reattempt."
+      },
+      {
+        "metric": "Answer accuracy",
+        "how": "Sampled conversations checked against the tracking record at the time of the call."
+      },
+      {
+        "metric": "Customer effort",
+        "how": "Conversation length and repeat contacts for the same shipment."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it handle peak-season volumes?",
+      "a": "Voice and WhatsApp capacity scales with concurrent sessions rather than headcount. We load-test the agent and your TMS API before peak to confirm lookups keep up."
+    },
+    {
+      "q": "How do you stop it sharing someone else's shipment details?",
+      "a": "Details are shared only after the tracking number is verified against the registered phone or an OTP. B2B shippers are verified against their account before POD copies or consignment lists are shared."
+    },
+    {
+      "q": "Can it make outbound calls for failed deliveries?",
+      "a": "Yes. NDR events trigger calls or WhatsApp messages to the consignee, who can pick a reattempt slot or add landmarks. Results go back to the hub before the next delivery run."
+    },
+    {
+      "q": "What if the tracking data is wrong?",
+      "a": "The agent can only be as good as the tracking data. It explains what the system shows, and when events look stale or contradictory, it escalates to a person instead of guessing."
+    }
+  ],
+  "related": [
+    "rider-and-driver-support-voice-agent",
+    "proof-of-delivery-verification",
+    "logistics-ai-agent-security-testing",
+    "order-status-and-returns-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/delivery-status-voice-and-whatsapp-agent/"
+}

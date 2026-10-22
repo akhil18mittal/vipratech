@@ -1,0 +1,226 @@
+{
+  "slug": "admission-document-verification",
+  "industry": "education",
+  "title": "Admission Document Verification",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check mark sheets, transfer and migration certificates, category certificates and ID proofs against your eligibility rules, and send applicants a precise deficiency list instead of a vague rejection.",
+  "seo": {
+    "title": "Admission Document Verification with AI | VipraTech",
+    "description": "AI that reads mark sheets, TCs, category and domicile certificates, checks names, dates and eligibility, and routes doubtful files to admissions staff.",
+    "keywords": [
+      "admission document verification",
+      "mark sheet verification AI",
+      "university admission automation",
+      "category certificate validity check",
+      "DigiLocker admission documents"
+    ]
+  },
+  "designed_for": [
+    "Registrar",
+    "Head of Admissions Office",
+    "Director of Admissions",
+    "School Principal"
+  ],
+  "problem": {
+    "intro": "Admission files arrive in a rush: Class 10 and 12 mark sheets from different boards, entrance scorecards, transfer and migration certificates, category, income and domicile certificates, disability certificates and ID proofs. Staff check each one by eye against eligibility rules that change by programme and quota, often during counselling rounds with fixed reporting deadlines.",
+    "pain_points": [
+      {
+        "title": "Every board's mark sheet looks different",
+        "detail": "CBSE, CISCE and each state board use different layouts, grading systems and subject codes, so working out the right aggregate takes time."
+      },
+      {
+        "title": "Validity rules are easy to miss",
+        "detail": "Category, income and non-creamy-layer certificates are often valid only for a particular period or financial year, and expired documents slip through."
+      },
+      {
+        "title": "Name and date mismatches",
+        "detail": "Spelling differences, initials and date-of-birth discrepancies across documents need judgement, not automatic rejection."
+      },
+      {
+        "title": "Vague deficiency notices",
+        "detail": "Applicants get a generic documents-incomplete message, call the office repeatedly and risk missing the reporting window."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a verification pipeline behind your admission portal. It classifies each uploaded document, extracts the fields that matter, such as board, roll number, subject-wise marks, result status, certificate type, issuing authority and validity, and cross-checks them against each other and against the programme's eligibility rules. Documents pulled from DigiLocker are marked as issuer-sourced. Signs of editing, such as altered figures or mismatched fonts, are flagged for scrutiny. Admissions staff see one checklist per applicant with every field linked to its source page, and the applicant receives a specific list of what is missing or needs correcting.",
+    "capabilities": [
+      "Classifies mark sheets, scorecards, TCs and migration, category, income, domicile and disability certificates",
+      "Extracts subject-wise marks and computes aggregates using each board's grading rules",
+      "Checks certificate validity dates and issuing authority against programme and quota rules",
+      "Matches names, parents' names and dates of birth across documents, tolerating spelling variants",
+      "Flags signs of editing, such as inconsistent fonts or altered figures, for manual scrutiny",
+      "Generates a precise deficiency list for the applicant in English or Hindi"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Applicant uploads",
+      "detail": "Documents come through the admission portal or DigiLocker and are grouped under the application number."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document is identified and its key fields extracted with confidence scores and source-page links."
+    },
+    {
+      "step": 3,
+      "title": "Cross-check",
+      "detail": "Names, dates, marks and certificate validity are compared across documents and against the eligibility rules for the chosen programme and quota."
+    },
+    {
+      "step": 4,
+      "title": "Route exceptions",
+      "detail": "Low-confidence fields, rule failures and possible tampering go to an admissions officer."
+    },
+    {
+      "step": 5,
+      "title": "Officer decides",
+      "detail": "The officer verifies against the original, records a decision and adds any comment for the applicant."
+    },
+    {
+      "step": 6,
+      "title": "Notify and update",
+      "detail": "The applicant gets a status update with a specific deficiency list, and the student information system is updated."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Uploads via portal or DigiLocker\"] --> B[\"Classify documents\"]\n  B --> C[\"Extract marks, dates, certificates\"]\n  C --> D[\"Check consistency and eligibility\"]\n  D --> E{\"All checks clear and confident?\"}\n  E -->|\"yes\"| F[\"Clean file for batch sign-off\"]\n  E -->|\"no\"| G(\"Admissions officer reviews\")\n  G --> H[\"Send specific deficiency list\"]\n  F --> I[\"Update student information system\"]\n  G --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Admission portal upload connector",
+          "DigiLocker document pull with applicant consent",
+          "Application-level document grouping"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with layout detection",
+          "Document classifier",
+          "Board-specific mark sheet parsers",
+          "LLM extractor for certificates"
+        ]
+      },
+      {
+        "name": "Rules and checks",
+        "components": [
+          "Eligibility and quota rule engine",
+          "Certificate validity checks",
+          "Cross-document name and date matching",
+          "Tamper indicators"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Applicant checklist screen with source links",
+          "Officer decision log"
+        ]
+      },
+      {
+        "name": "Communication and integration",
+        "components": [
+          "Deficiency notice generator",
+          "Student information system adapter",
+          "Email, SMS and WhatsApp notifications"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Admission portal uploads\"]\n    I2[\"DigiLocker pull\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and classifier\"]\n    U2[\"Mark sheet parsers\"]\n    U3[\"Certificate extractor\"]\n  end\n  subgraph S3[\"Rules and checks\"]\n    K1[\"Eligibility rule engine\"]\n    K2[\"Validity and name matching\"]\n    K3[\"Tamper indicators\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Officer checklist screen\")\n    R2[\"Deficiency notices\"]\n    R3[\"Student information system\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2\n  U1 --> U3\n  U2 --> K1\n  U3 --> K2\n  U1 --> K3\n  K1 --> R1\n  K2 --> R1\n  K3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Class 10 and 12 mark sheets and passing certificates",
+    "Entrance exam scorecards or rank letters",
+    "Transfer, migration and character certificates",
+    "Category, income, domicile and disability certificates",
+    "ID proof with masked Aadhaar",
+    "Programme eligibility and quota rules"
+  ],
+  "outputs": [
+    "Applicant checklist with every field linked to its source",
+    "Computed aggregates and eligibility result for officer confirmation",
+    "Flags for expired certificates, mismatches and possible tampering",
+    "Applicant-specific deficiency notices",
+    "Status updates in the student information system"
+  ],
+  "human_in_the_loop": "Admissions officers decide every exception and sign off clean files in batches. The system never rejects an applicant; it tells staff what to look at and tells applicants exactly what to fix.",
+  "integrations": [
+    "Admission portal or application form system",
+    "DigiLocker, where your institution is registered as a requester",
+    "Student information system or ERP",
+    "Email, SMS and WhatsApp Business API",
+    "Document management or cloud storage"
+  ],
+  "guardrails": [
+    "No automatic rejection; every failure becomes an officer task",
+    "Aadhaar handled per UIDAI rules and stored only in masked form",
+    "Category and disability documents visible only to authorised staff",
+    "Every extracted value linked to its source page",
+    "Eligibility rules versioned so any decision can be explained later"
+  ],
+  "compliance_notes": [
+    "School and many undergraduate applicants are minors; designed to support DPDP Act 2023 requirements on parental consent, purpose limitation and retention.",
+    "Category, income and disability documents are sensitive; access controls and view logs help evidence that only authorised staff saw them."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One programme in one admission round, with files verified by the system and by your staff in parallel.",
+    "deliverables": [
+      "Document types and eligibility rules configured for the pilot programme",
+      "Verification pipeline running on real, consented applications",
+      "Officer checklist screen and deficiency notice templates",
+      "Accuracy and exception report",
+      "Roll-out plan for the next admission cycle"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Compared with values verified by admissions staff on the same files."
+      },
+      {
+        "metric": "Exceptions confirmed as genuine",
+        "how": "Officer outcome on each flag: genuine issue, false alarm or needs more information."
+      },
+      {
+        "metric": "Officer time per file",
+        "how": "Timed on sample files with and without the checklist screen."
+      },
+      {
+        "metric": "Repeat applicant queries",
+        "how": "Calls and emails about document status before and during the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read mark sheets from every board?",
+      "a": "We start with the boards that make up most of your applicants and add parsers for others. Unusual layouts are still handled by the general model, with lower-confidence fields sent to an officer."
+    },
+    {
+      "q": "Does it detect fake certificates?",
+      "a": "It flags signs of editing and inconsistencies, and documents pulled from DigiLocker can be treated as issuer-sourced. It cannot prove a paper certificate is genuine, so your verification process with the issuing authority still applies."
+    },
+    {
+      "q": "How is applicant data protected?",
+      "a": "Data stays in your cloud account or an India region, Aadhaar is masked, sensitive certificates have restricted access and every view is logged. Retention follows your admission policy."
+    },
+    {
+      "q": "Can the rules change between rounds?",
+      "a": "Yes. Eligibility and quota rules are configuration, versioned by round, so the admissions team can update them without code changes and earlier decisions remain explainable."
+    }
+  ],
+  "related": [
+    "admission-enquiry-voice-agent",
+    "counselling-funnel-lead-nurture",
+    "fee-reminder-voice-and-whatsapp-agent",
+    "account-opening-document-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/admission-document-verification/"
+}

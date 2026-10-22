@@ -1,0 +1,125 @@
+{
+  "slug": "manufacturing",
+  "name": "Manufacturing",
+  "seo": {
+    "title": "AI for Manufacturing: Quality, Safety & Dealers | VipraTech",
+    "description": "Applied AI for manufacturers: visual inspection, PPE monitoring, three-way matching, drawing extraction and dealer voice agents, built around your plant.",
+    "keywords": [
+      "AI for manufacturing",
+      "visual quality inspection AI",
+      "PPE compliance monitoring",
+      "three-way matching automation",
+      "engineering drawing extraction",
+      "dealer order voice agent",
+      "manufacturing AI India"
+    ]
+  },
+  "hero": {
+    "headline": "AI that inspects parts, matches invoices and takes dealer orders, built around your plant",
+    "subheadline": "We build computer vision, document and voice systems that work with your line cameras, SAP or Tally and dealer network. Every system keeps a person in charge of the decisions that matter."
+  },
+  "intro": "Manufacturing has some of the clearest uses for applied AI, because so much of the work is physical and repetitive: parts passing a camera, people moving through a press shop, invoices matched against POs and GRNs, dealers ordering the same SKUs every week. Vision models can flag defects and PPE lapses that a tired eye misses, and language models can read drawings, mill test certificates and maintenance logs that nobody has time to search. AI does not replace PLC logic, safety interlocks, CMM measurement or a quality engineer's sign-off. It works best as a second pair of eyes and a fast clerk that flags, sorts and drafts while your people decide. Lighting, camera placement and clean master data matter as much as the model.",
+  "challenges": [
+    {
+      "title": "Inspection that depends on tired eyes",
+      "detail": "End-of-line visual checks vary by inspector and shift, and escapes surface at the customer's incoming inspection as line rejections and 8D requests."
+    },
+    {
+      "title": "Paperwork between stores, purchase and accounts",
+      "detail": "Supplier invoices, GRNs, debit notes and material certificates are matched by hand in SAP or Tally, so payment holds, GST mismatches and traceability gaps build up."
+    },
+    {
+      "title": "Knowledge locked in logbooks and senior technicians",
+      "detail": "Breakdown history sits in handwritten registers and free-text work orders, and OEM manuals sit in cupboards, so the same faults are diagnosed from scratch."
+    },
+    {
+      "title": "Dealer and service demand that arrives by phone",
+      "detail": "Dealers order through calls and WhatsApp messages to sales officers, and consumer-durable service calls peak with the season, so orders and tickets are re-keyed with errors."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "computer-vision",
+      "summary": "Defect detection at inspection stations and PPE and zone monitoring on existing CCTV, running on edge hardware inside the plant so images stay on site."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Reading supplier invoices, GRNs, mill test certificates, engineering drawings and maintenance logs, and checking them against SAP, Tally or your spec library."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Order-taking calls with dealers and service booking for consumer durables in Hindi, English and regional languages, writing directly to your ERP or service CRM."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Reorder suggestions and lead qualification for dealer and distributor networks over WhatsApp, driven by billing history rather than broadcast lists."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Security testing of plant and enterprise copilots that touch SAP, CMMS, drawings and costings, before they reach engineers and the shop floor."
+    }
+  ],
+  "featured_use_cases": [
+    "visual-quality-inspection",
+    "po-invoice-three-way-matching",
+    "dealer-order-taking-voice-agent"
+  ],
+  "use_cases": [
+    "visual-quality-inspection",
+    "ppe-and-safety-zone-compliance",
+    "po-invoice-three-way-matching",
+    "engineering-drawing-and-spec-extraction",
+    "maintenance-log-and-sop-assistant",
+    "supplier-quality-certificate-verification",
+    "dealer-order-taking-voice-agent",
+    "consumer-durables-service-booking-voice-agent",
+    "dealer-reorder-automation",
+    "plant-copilot-security-review"
+  ],
+  "regulatory_context": [
+    {
+      "name": "Factories Act 1948 and OSH Code 2020 (India)",
+      "note": "Place duties on employers for safe workplaces, protective equipment and control of hazardous areas; the Occupational Safety, Health and Working Conditions Code consolidates the Factories Act and related laws. AI monitoring supports the safety officer and does not discharge these duties."
+    },
+    {
+      "name": "GST and e-invoicing (India)",
+      "note": "Input tax credit depends on supplier invoices appearing in GSTR-2B and, where e-invoicing applies, carrying a valid IRN. Matching tools help the tax team spot gaps early; ITC decisions stay with them."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "CCTV footage of workers and call recordings of dealers and consumers are personal data. Notice, purpose limitation, security safeguards and retention limits apply."
+    },
+    {
+      "name": "ISO 9001 and IATF 16949",
+      "note": "Quality management standards that expect controlled documents, inspection records and traceability. AI inspection and certificate checks can produce records for these systems; certification and its controls remain your responsibility."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Do we need new cameras or a new ERP?",
+      "a": "Usually not. PPE monitoring runs on your existing CCTV streams, and document systems read what SAP, Tally or your MES already export. Line inspection often needs a dedicated camera and lighting at the station, which we specify during the pilot."
+    },
+    {
+      "q": "Can it run inside the plant without reliable internet?",
+      "a": "Yes. Vision models run on an industrial PC or edge GPU at the line, and only summaries leave the site if you allow it. Document and voice systems can run in your cloud tenancy or an India region of a major cloud provider."
+    },
+    {
+      "q": "Will it work for shop-floor staff and dealers who prefer Hindi or regional languages?",
+      "a": "Yes. Voice agents and the maintenance assistant handle Hindi, Hinglish and common regional languages, including local SKU names and machine nicknames. We test with real recordings from your plant or dealer network during the pilot."
+    },
+    {
+      "q": "How do pilots usually run?",
+      "a": "A pilot covers one station, one document type or one dealer region for three to six weeks, alongside your current process. You get a measured report on accuracy and effort, and a costed plan for roll-out."
+    }
+  ],
+  "related_industries": [
+    "automotive-mobility",
+    "logistics-supply-chain",
+    "energy-mining-utilities"
+  ],
+  "cta": {
+    "headline": "Start with one line, one document or one region",
+    "text": "Book a discovery call and we will pick a narrow pilot with your quality, finance or sales team, run it alongside your current process and report what we measured."
+  },
+  "url": "/industries/manufacturing/"
+}

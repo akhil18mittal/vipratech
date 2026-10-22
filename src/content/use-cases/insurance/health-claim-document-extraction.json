@@ -1,0 +1,224 @@
+{
+  "slug": "health-claim-document-extraction",
+  "industry": "insurance",
+  "title": "Health Claim Document Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Turn hospital bills, discharge summaries and investigation reports into structured, checked claim data, with uncertain fields routed to an assessor instead of guessed.",
+  "seo": {
+    "title": "Health Claim Document Extraction with AI | VipraTech",
+    "description": "AI that reads hospital bills, discharge summaries and reports, extracts claim fields, runs policy checks and flags exceptions for assessors.",
+    "keywords": [
+      "health claim document extraction",
+      "AI claims processing insurance",
+      "discharge summary extraction",
+      "TPA claims automation",
+      "hospital bill OCR"
+    ]
+  },
+  "designed_for": [
+    "Head of Claims",
+    "TPA Operations Manager",
+    "Claims Assessor Team Lead",
+    "Chief Operating Officer"
+  ],
+  "problem": {
+    "intro": "A single cashless or reimbursement claim can arrive as dozens of pages: scanned bills, pharmacy receipts, discharge summaries, lab reports and ID proofs, often photographed on a phone. Assessors re-type the same fields into the claims system before they can start the real work of adjudication.",
+    "pain_points": [
+      {
+        "title": "Manual data entry before any decision",
+        "detail": "Assessors spend their first pass keying patient, hospital, diagnosis, dates and line-item amounts instead of judging the claim."
+      },
+      {
+        "title": "Inconsistent document quality",
+        "detail": "Skewed scans, handwritten notes and mixed languages make template-based OCR break on every new hospital format."
+      },
+      {
+        "title": "Missed mismatches",
+        "detail": "Dates of admission, room category or billed procedures that contradict the discharge summary are easy to miss under volume."
+      },
+      {
+        "title": "Turnaround pressure",
+        "detail": "Regulatory and customer expectations on claim turnaround leave little time for document chasing and rework."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a claim document pipeline that accepts the whole claim file, splits it into individual documents, classifies each one and extracts the fields your adjudication process needs. A large language model reads the documents in context, so a field that appears differently on two hospitals' bills is still captured. Every extracted value carries a confidence score and a link back to the page it came from. Low-confidence fields and rule failures go to an assessor queue, and clean claims move straight to the claims system with an audit trail.",
+    "capabilities": [
+      "Splits and classifies mixed claim files: bills, discharge summaries, lab reports, prescriptions, KYC",
+      "Extracts header fields and bill line items, including handwritten and phone-photographed pages",
+      "Cross-checks dates, room category, diagnosis and procedures across documents",
+      "Applies configurable policy rules such as sub-limits, room-rent caps and waiting periods",
+      "Flags possible duplicates against previously submitted claims",
+      "Shows every value with its source page so assessors can verify in one click"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the claim file",
+      "detail": "Documents arrive from the hospital portal, email or a TPA upload, and are grouped by claim number."
+    },
+    {
+      "step": 2,
+      "title": "Split and classify",
+      "detail": "Each page is assigned to a document type so the right extraction schema is applied."
+    },
+    {
+      "step": 3,
+      "title": "Extract fields",
+      "detail": "OCR plus an LLM extract structured fields and bill line items, each with a confidence score and page reference."
+    },
+    {
+      "step": 4,
+      "title": "Check confidence",
+      "detail": "Fields below the agreed threshold are sent to an assessor for confirmation instead of being guessed."
+    },
+    {
+      "step": 5,
+      "title": "Run policy and consistency checks",
+      "detail": "Rules compare documents with each other and with the policy schedule, and flag duplicates."
+    },
+    {
+      "step": 6,
+      "title": "Hand over to the claims system",
+      "detail": "Structured data, flags and the evidence trail are pushed to the core claims system for adjudication."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Claim file from portal or email\"] --> B[\"Split and classify documents\"]\n  B --> C[\"Extract fields with OCR and LLM\"]\n  C --> D{\"All fields above confidence?\"}\n  D -->|\"yes\"| E[\"Policy, consistency and duplicate checks\"]\n  D -->|\"no\"| F(\"Assessor confirms flagged fields\")\n  F --> E\n  E --> G{\"Any rule failures?\"}\n  G -->|\"yes\"| H(\"Exception queue for assessor\")\n  G -->|\"no\"| I[\"Push structured claim to claims system\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Email and portal connectors",
+          "SFTP or API intake from TPA systems",
+          "Claim-level document grouping"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with layout detection",
+          "Document classifier",
+          "LLM field and line-item extractor with JSON schemas"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Confidence scoring",
+          "Policy rule engine",
+          "Cross-document consistency checks",
+          "Duplicate detection"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Assessor review screen with source-page highlights",
+          "Exception queue"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "Claims system API adapter",
+          "Audit log of every extracted value and reviewer change"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Portal and email connectors\"]\n    I2[\"TPA API or SFTP intake\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and layout\"]\n    U2[\"Document classifier\"]\n    U3[\"LLM extractor with schemas\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"Confidence scoring\"]\n    V2[\"Policy rule engine\"]\n    V3[\"Duplicate detection\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Assessor review screen\")\n    R2[\"Claims system adapter\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2 --> U3\n  U3 --> V1 --> V2 --> V3\n  V1 --> R1\n  V3 --> R1\n  R1 --> R2\n  V3 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Hospital final bill and itemised bill",
+    "Discharge summary",
+    "Investigation and lab reports",
+    "Pharmacy bills and prescriptions",
+    "Policy schedule and member details",
+    "ID and KYC documents (masked Aadhaar)"
+  ],
+  "outputs": [
+    "Structured claim record with header fields and line items",
+    "Field-level confidence scores with source-page links",
+    "List of policy and consistency flags",
+    "Duplicate-claim alerts",
+    "Audit trail of extraction and reviewer edits"
+  ],
+  "human_in_the_loop": "Assessors confirm any field below the confidence threshold and decide every flagged exception. The system never approves or rejects a claim; it prepares the file so the assessor starts with clean, verifiable data.",
+  "integrations": [
+    "Core claims or TPA platform (via API or SFTP)",
+    "Hospital and provider portals",
+    "Email inboxes used for claim intake",
+    "Document management system",
+    "Data warehouse for MIS reporting"
+  ],
+  "guardrails": [
+    "Confidence thresholds per field, agreed with the claims team",
+    "No auto-decision on claims; humans adjudicate",
+    "Personal and health data masked in logs and kept in your cloud region",
+    "Every value traceable to a source page",
+    "Regular sampling of auto-cleared claims for quality review"
+  ],
+  "compliance_notes": [
+    "Designed to support data minimisation and purpose limitation under India's DPDP Act 2023.",
+    "Keeps the audit trail insurers need to evidence how each claim was assessed under IRDAI expectations."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One claim type (for example cashless hospitalisation) from two or three high-volume hospitals, run in parallel with your current process.",
+    "deliverables": [
+      "Extraction schema agreed with your claims team",
+      "Working pipeline on a sample of real, de-identified claims",
+      "Assessor review screen",
+      "Field-level accuracy report against assessor-entered data",
+      "Production roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field-level extraction accuracy",
+        "how": "Compared with the values assessors entered for the same claims."
+      },
+      {
+        "metric": "Share of fields sent for review",
+        "how": "Count of fields below the confidence threshold per claim."
+      },
+      {
+        "metric": "Assessor handling time per claim",
+        "how": "Timed on a sample of claims with and without the pipeline."
+      },
+      {
+        "metric": "Flags confirmed as genuine issues",
+        "how": "Assessor feedback on each policy or consistency flag."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does this work on handwritten and phone-photographed documents?",
+      "a": "Yes, within limits. The pipeline handles skewed photos and common handwriting on bills and prescriptions, and any field it is unsure about is sent for human confirmation rather than guessed. The pilot report shows accuracy separately for printed and handwritten fields."
+    },
+    {
+      "q": "Will the AI approve or reject claims?",
+      "a": "No. It prepares structured, checked data and flags issues. Adjudication stays with your assessors and medical team."
+    },
+    {
+      "q": "Where is the data processed?",
+      "a": "In your cloud account or an India region of a major cloud provider, depending on your policy. Health and personal data is masked in logs, and we can use models that do not retain or train on your data."
+    },
+    {
+      "q": "How does it connect to our claims system?",
+      "a": "Through your system's API, an SFTP drop or a database staging table. We agree the format with your IT team during the pilot."
+    }
+  ],
+  "related": [
+    "tpa-pre-authorisation-triage",
+    "tampered-document-detection",
+    "claim-status-voice-helpline",
+    "hospital-insurance-claim-file-preparation"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/health-claim-document-extraction/"
+}

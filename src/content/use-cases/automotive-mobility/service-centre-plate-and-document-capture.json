@@ -1,0 +1,217 @@
+{
+  "slug": "service-centre-plate-and-document-capture",
+  "industry": "automotive-mobility",
+  "title": "Number Plate and Document Capture at Service Centres",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Read number plates at the workshop gate, pull up the appointment and history from the DMS, and capture walk-around, dashboard and document photos into a pre-filled job card.",
+  "seo": {
+    "title": "Number Plate and Document Capture for Workshops | VipraTech",
+    "description": "ANPR and photo capture at service reception: read plates, match DMS appointments, record walk-around damage, odometer and fuel, and pre-fill job cards.",
+    "keywords": [
+      "ANPR for service centres",
+      "number plate recognition India",
+      "service reception digitisation",
+      "job card automation",
+      "vehicle walk-around inspection app"
+    ]
+  },
+  "designed_for": [
+    "Workshop or Service Manager",
+    "Service Advisor",
+    "Dealer Principal",
+    "OEM After-Sales Network Head"
+  ],
+  "problem": {
+    "intro": "Most dealer workshops see a rush at the reception bay in the morning, when service advisors type registration numbers, look up appointments, note odometer and fuel and walk around each car with a paper checklist. Errors and shortcuts at this step follow the vehicle through the whole visit.",
+    "pain_points": [
+      {
+        "title": "Typing errors at reception",
+        "detail": "A mistyped registration number pulls the wrong history or creates a duplicate vehicle record in the DMS."
+      },
+      {
+        "title": "Morning queues",
+        "detail": "Customers wait while advisors key in details that could have been read from the car itself."
+      },
+      {
+        "title": "Pre-existing damage disputes",
+        "detail": "Without dated photos, a scratch noticed at delivery becomes an argument about whether the workshop caused it."
+      },
+      {
+        "title": "No reliable turnaround data",
+        "detail": "Gate-in and gate-out times are entered by hand, so workshop turnaround and bay utilisation reports cannot be trusted."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reception capture system for the workshop. An ANPR camera at the gate reads the number plate, including high-security registration plates and BH-series plates, and looks up the vehicle and any appointment in the DMS. At the reception bay, a tablet app guides the advisor through walk-around photos, a dashboard photo from which odometer, fuel level and warning lamps are read, and photos of the RC, insurance and PUC where needed. Damage marks and readings pre-fill the job card for the advisor to confirm. The customer receives the photos on WhatsApp, and a gate-out read closes the visit timestamp.",
+    "capabilities": [
+      "Reads Indian number plates, including high-security registration, BH-series and two-wheeler plates",
+      "Matches plates to appointments and vehicle history in the DMS",
+      "Reads odometer, fuel level indicator and warning lamps from a dashboard photo",
+      "Guided walk-around photos with damage marks stored on the job card",
+      "Captures RC, insurance and PUC images into the vehicle file",
+      "Gate-in and gate-out timestamps for turnaround and bay utilisation reports"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Read the plate at the gate",
+      "detail": "An ANPR camera reads the plate as the vehicle enters and records the gate-in time."
+    },
+    {
+      "step": 2,
+      "title": "Match in the DMS",
+      "detail": "The plate is matched to the vehicle record and today's appointment; unmatched or uncertain reads go to the advisor."
+    },
+    {
+      "step": 3,
+      "title": "Walk-around and dashboard capture",
+      "detail": "The advisor follows the tablet guide for walk-around, dashboard and document photos."
+    },
+    {
+      "step": 4,
+      "title": "Confirm the job card",
+      "detail": "Odometer, fuel, warning lamps, damage marks and customer concerns pre-fill the job card, and the advisor confirms each field."
+    },
+    {
+      "step": 5,
+      "title": "Share with the customer",
+      "detail": "The customer receives the walk-around photos and job card summary on WhatsApp."
+    },
+    {
+      "step": 6,
+      "title": "Close at gate-out",
+      "detail": "A second plate read at exit closes the visit and feeds turnaround reports."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Vehicle arrives at service gate\"] --> B[\"Read number plate\"]\n  B --> C{\"Plate matched in DMS?\"}\n  C -->|\"no\"| D(\"Service advisor confirms or creates\")\n  C -->|\"yes\"| E[\"Pull appointment and history\"]\n  D --> E\n  E --> F[\"Walk-around and dashboard photos\"]\n  F --> G(\"Advisor confirms pre-filled job card\")\n  G --> H[\"Photos sent to customer on WhatsApp\"]\n  H --> I[\"Gate-out read closes visit\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Edge capture",
+        "components": [
+          "ANPR camera at the gate",
+          "Reception tablet app",
+          "Edge box for plate reading"
+        ]
+      },
+      {
+        "name": "Vision",
+        "components": [
+          "Plate detector and reader",
+          "Dashboard cluster reader",
+          "Walk-around damage marker"
+        ]
+      },
+      {
+        "name": "Workshop systems",
+        "components": [
+          "DMS vehicle and appointment API",
+          "Advisor job card review",
+          "Document store"
+        ]
+      },
+      {
+        "name": "Customer and reporting",
+        "components": [
+          "WhatsApp notifications",
+          "Turnaround and bay utilisation dashboards",
+          "Photo archive with retention rules"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Edge capture\"]\n    G1[\"Gate ANPR camera\"]\n    G2[\"Reception tablet app\"]\n  end\n  subgraph S2[\"Vision\"]\n    V1[\"Plate reader\"]\n    V2[\"Dashboard cluster reader\"]\n    V3[\"Damage marker\"]\n  end\n  subgraph S3[\"Workshop systems\"]\n    W1[\"DMS appointment lookup\"]\n    W2(\"Advisor job card review\")\n    W3[\"Document store\"]\n  end\n  subgraph S4[\"Customer and reporting\"]\n    K1[\"WhatsApp notifications\"]\n    K2[\"Turnaround dashboard\"]\n  end\n  G1 --> V1\n  G2 --> V2\n  G2 --> V3\n  V1 --> W1\n  W1 --> W2\n  V2 --> W2\n  V3 --> W2\n  G2 --> W3\n  W2 --> K1\n  V1 --> K2"
+  },
+  "inputs": [
+    "Gate camera stream",
+    "Reception tablet photos of exterior, dashboard and documents",
+    "DMS vehicle master and appointment list",
+    "Customer concerns captured by the advisor",
+    "RC, insurance and PUC images where required"
+  ],
+  "outputs": [
+    "Plate reads with gate-in and gate-out times",
+    "Pre-filled job cards",
+    "Dated walk-around photo record per visit",
+    "Turnaround and bay utilisation reports",
+    "Customer acknowledgement of reception photos"
+  ],
+  "human_in_the_loop": "The service advisor confirms the vehicle match and every pre-filled job card field before work starts. Damage marks are agreed with the customer at reception, so the photo record reflects both sides' view.",
+  "integrations": [
+    "Dealer management system, OEM-supplied or third-party",
+    "ANPR camera and gate hardware",
+    "WhatsApp Business API",
+    "OEM after-sales reporting portal",
+    "SMS gateway"
+  ],
+  "guardrails": [
+    "Low-confidence plate reads always go to the advisor",
+    "Gate cameras framed on plates, not faces, with footage retained only as your policy sets",
+    "Plate reads used only for the service visit and reporting",
+    "Customers can see every reception photo",
+    "Advisor edits to pre-filled fields are logged"
+  ],
+  "compliance_notes": [
+    "Gate signage and the job card notice explain what is captured and why, in line with notice and purpose limitation under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One workshop's gate and reception bay, covering all service visits during the pilot, with the advisor confirming every read.",
+    "deliverables": [
+      "Camera placement and reception flow design",
+      "ANPR and tablet capture live at the pilot workshop",
+      "DMS lookup and job card pre-fill",
+      "Accuracy and turnaround report",
+      "Plan for other workshops in the group"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Plate read accuracy",
+        "how": "Reads compared with advisor-confirmed registration numbers, split by day, night and plate type."
+      },
+      {
+        "metric": "Reception time per vehicle",
+        "how": "Time from gate-in to job card creation, before and during the pilot."
+      },
+      {
+        "metric": "Walk-around completeness",
+        "how": "Share of visits with the full set of reception photos."
+      },
+      {
+        "metric": "Damage disputes",
+        "how": "Count of delivery-time damage disputes logged during the pilot period."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What about dirty, damaged or non-standard plates?",
+      "a": "Reads below the confidence threshold go to the advisor for confirmation, and the report shows accuracy by plate condition. Non-standard fonts and decorative plates are common, so we tune on footage from your gate."
+    },
+    {
+      "q": "Can we use our existing CCTV?",
+      "a": "Sometimes. Plate reading needs a camera angled at plate height with suitable shutter speed and lighting, so we check your current cameras and recommend a dedicated ANPR unit where needed."
+    },
+    {
+      "q": "Does it work for two-wheeler workshops?",
+      "a": "Yes. Two-wheeler plates are smaller and mounted at varied heights, so gate design matters more, and we plan camera placement accordingly."
+    },
+    {
+      "q": "Which DMS do you integrate with?",
+      "a": "We work with the DMS your OEM or dealer group uses, through its APIs where available or a staging integration otherwise. The DMS remains the system of record."
+    }
+  ],
+  "related": [
+    "rc-insurance-puc-document-extraction",
+    "used-car-inspection-and-damage-detection",
+    "service-booking-and-reminder-voice-agent",
+    "warranty-claim-document-processing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/service-centre-plate-and-document-capture/"
+}

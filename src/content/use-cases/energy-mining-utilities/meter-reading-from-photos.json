@@ -1,0 +1,216 @@
+{
+  "slug": "meter-reading-from-photos",
+  "industry": "energy-mining-utilities",
+  "title": "Meter Reading from Photos",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Read kWh, kVAh and demand values from meter photos taken by readers or consumers, check them against what was keyed in, and route mismatches to billing staff before bills go out.",
+  "seo": {
+    "title": "AI Meter Reading from Photos for Utilities | VipraTech",
+    "description": "Computer vision that reads electricity, water and gas meter photos, checks readings and serial numbers, and flags mismatches before billing.",
+    "keywords": [
+      "meter reading OCR",
+      "AI meter photo reading",
+      "spot billing photo verification",
+      "DISCOM billing accuracy",
+      "water meter reading AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Revenue and Billing",
+    "Commercial or Billing Manager at a DISCOM",
+    "Meter Reading Agency Supervisor",
+    "Energy Audit and Vigilance Officer"
+  ],
+  "problem": {
+    "intro": "Where smart meters have not yet reached, meter readers visit each premises, key a reading into a spot billing app and take a photo of the display. Billing teams rarely have time to look at those photos, so wrong entries, reused images and provisional readings turn into disputed bills and complaint calls.",
+    "pain_points": [
+      {
+        "title": "Keyed readings that do not match the photo",
+        "detail": "A misread digit or a value from the wrong register produces a bill the consumer disputes and the utility later revises."
+      },
+      {
+        "title": "Unusable and reused photos",
+        "detail": "Blurred, glare-covered or recycled photos mean nobody can check the reading when a complaint arrives."
+      },
+      {
+        "title": "Provisional billing builds disputes",
+        "detail": "Door-locked and meter-not-accessible codes lead to average bills, which pile up into large corrections later."
+      },
+      {
+        "title": "Tamper signs missed",
+        "detail": "Broken seals, burnt terminals and loose connections appear in photos but go unseen in high-volume billing cycles."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a photo verification service that sits between the meter reading app and the billing system. For each photo it locates the meter, reads the display or mechanical register, identifies which register is shown, such as kWh, kVAh or maximum demand, and reads the meter serial number. It checks timestamp and location against the consumer record, detects reused images and compares the reading with what the reader keyed in and with consumption history. Matching readings go to billing; mismatches and unreadable photos go to a supervisor queue. Visible tamper cues are passed to vigilance as leads for inspection, never as findings.",
+    "capabilities": [
+      "Reads seven-segment LCD and LED displays and mechanical drum registers",
+      "Identifies the register shown, such as kWh, kVAh or maximum demand, on meters that cycle displays",
+      "Reads the meter serial number and matches it to the consumer master",
+      "Detects reused or duplicate photos and checks timestamp and geotag",
+      "Compares readings with the reader's entry and the consumer's consumption pattern",
+      "Lists visible tamper cues such as broken seals, damaged glass or burn marks for vigilance follow-up"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Photo arrives from the reading app",
+      "detail": "The reader's app sends the photo, keyed reading, status code, timestamp and GPS location."
+    },
+    {
+      "step": 2,
+      "title": "Check photo quality and authenticity",
+      "detail": "The service checks focus and glare, compares location with the consumer address and tests whether the image has been used before."
+    },
+    {
+      "step": 3,
+      "title": "Read register and serial",
+      "detail": "The display value, register type and serial number are read, each with a confidence score."
+    },
+    {
+      "step": 4,
+      "title": "Compare and decide",
+      "detail": "The reading is compared with the keyed value and consumption history, and matches above threshold are released."
+    },
+    {
+      "step": 5,
+      "title": "Supervisor review",
+      "detail": "Billing supervisors review mismatches, unreadable photos and tamper cues with the image beside the record."
+    },
+    {
+      "step": 6,
+      "title": "Release or revisit",
+      "detail": "Confirmed readings go to billing; the rest go to a revisit list or a vigilance inspection queue."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Meter photo from reading app\"] --> B[\"Quality, geotag and duplicate checks\"]\n  B --> C[\"Read register value and serial\"]\n  C --> D{\"Matches entry and history?\"}\n  D -->|\"yes\"| E[\"Release reading to billing\"]\n  D -->|\"no\"| F(\"Billing supervisor reviews photo\")\n  F --> G{\"Reading confirmed?\"}\n  G -->|\"yes\"| E\n  G -->|\"no\"| H[\"Revisit or vigilance list\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Spot billing app photo upload API",
+          "WhatsApp self-reading channel for consumers"
+        ]
+      },
+      {
+        "name": "Vision",
+        "components": [
+          "Meter localiser",
+          "Register and digit reader",
+          "Serial number reader",
+          "Tamper cue classifier"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Consumer master match",
+          "Consumption history check",
+          "Duplicate image and geotag check"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Supervisor review queue",
+          "Billing system adapter",
+          "Reader quality and revisit reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    K1[\"Reading app upload\"]\n    K2[\"WhatsApp self-reading\"]\n  end\n  subgraph S2[\"Vision\"]\n    V1[\"Meter localiser\"]\n    V2[\"Register and digit reader\"]\n    V3[\"Serial number reader\"]\n    V4[\"Tamper cue classifier\"]\n  end\n  subgraph S3[\"Validation\"]\n    L1[\"Consumer master match\"]\n    L2[\"Consumption history check\"]\n    L3[\"Duplicate and geotag check\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Supervisor review queue\")\n    R2[\"Billing system adapter\"]\n  end\n  K1 --> V1\n  K2 --> V1\n  V1 --> V2\n  V1 --> V3\n  V1 --> V4\n  V3 --> L1\n  V2 --> L2\n  K1 --> L3\n  L1 --> R1\n  L2 --> R1\n  L3 --> R1\n  V4 --> R1\n  L2 --> R2\n  R1 --> R2"
+  },
+  "inputs": [
+    "Meter photos with timestamp and GPS from the reading app",
+    "Reader-entered reading and status code",
+    "Consumer master with meter serial, category and location",
+    "Consumption history for each consumer",
+    "List of meter makes and display types in the field"
+  ],
+  "outputs": [
+    "Machine-read value and register type with confidence",
+    "Mismatch and unreadable-photo flags for billing staff",
+    "Revisit list for meter readers",
+    "Tamper-cue leads for vigilance inspection",
+    "Reader and agency quality reports"
+  ],
+  "human_in_the_loop": "Billing supervisors decide every mismatch before a bill is generated. Tamper cues go to authorised inspection staff as leads; the system never raises an assessment or penalty on its own.",
+  "integrations": [
+    "Spot billing or meter reading mobile app",
+    "Billing or CIS system such as SAP IS-U or an in-house platform",
+    "Consumer master and GIS data",
+    "WhatsApp Business API for consumer self-reading",
+    "Meter data management system where smart meters coexist"
+  ],
+  "guardrails": [
+    "The reader's entry is never overwritten silently; differences always go to review",
+    "Tamper cues are leads for inspection, not evidence",
+    "Confidence thresholds set per meter type and display",
+    "Photos and location data retained only for the period your policy sets",
+    "Agency performance reports reviewed by managers before any action"
+  ],
+  "compliance_notes": [
+    "Consumer names, addresses and location data handled in line with the DPDP Act 2023.",
+    "Supports the accurate metering and billing expected under state supply codes and the Electricity (Rights of Consumers) Rules, 2020."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Photos from one subdivision's billing cycle, processed in parallel with the current process so that no bill depends on the pilot.",
+    "deliverables": [
+      "Reader model tuned on your meter makes",
+      "Validation rules agreed with the billing team",
+      "Supervisor review screen",
+      "Accuracy report against verified readings",
+      "Integration plan for the billing system"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Reading accuracy",
+        "how": "Machine-read values compared with supervisor-verified readings on a sample."
+      },
+      {
+        "metric": "Mismatch confirmation",
+        "how": "Share of flagged mismatches that supervisors confirm as genuine reading errors."
+      },
+      {
+        "metric": "Unreadable photo share",
+        "how": "Photos the model could not read, broken down by reader and meter type."
+      },
+      {
+        "metric": "Billing team effort",
+        "how": "Time spent per flagged case in the review queue."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which meter types can it read?",
+      "a": "Common single-phase and three-phase electronic meters with LCD or LED displays, older electromechanical meters with drum registers, and water and gas meters with dials or counters. During the pilot we tune on the makes and models in your service area."
+    },
+    {
+      "q": "What happens with poor photos?",
+      "a": "Photos that are blurred, covered in glare or show the wrong object are flagged as unreadable instead of guessed. Reports by reader show where photo practice needs attention."
+    },
+    {
+      "q": "Can consumers submit their own readings?",
+      "a": "Yes. A WhatsApp self-reading flow can accept a meter photo, read it and confirm the value back to the consumer, with the same checks before it reaches billing."
+    },
+    {
+      "q": "Do we have to change our reading app?",
+      "a": "Usually not. The service exposes an API your app vendor can call, or it can pick up photos from the storage your app already uses."
+    }
+  ],
+  "related": [
+    "utility-customer-service-voice-agent",
+    "field-technician-voice-reporting",
+    "inspection-and-maintenance-report-extraction",
+    "proof-of-delivery-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/meter-reading-from-photos/"
+}

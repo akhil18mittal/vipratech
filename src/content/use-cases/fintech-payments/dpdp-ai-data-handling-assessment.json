@@ -1,0 +1,216 @@
+{
+  "slug": "dpdp-ai-data-handling-assessment",
+  "industry": "fintech-payments",
+  "title": "DPDP-Aligned AI Data Handling Assessment",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Map where personal data flows through your AI features, prompts, logs, vector stores and vendors, and get a gap register and evidence pack against DPDP Act duties for your DPO.",
+  "seo": {
+    "title": "DPDP-Aligned AI Data Handling Assessment | VipraTech",
+    "description": "Technical assessment of how fintech AI systems handle personal data: data-flow mapping, erasure and retention tests, and a DPDP gap register for your DPO.",
+    "keywords": [
+      "DPDP Act AI assessment",
+      "AI data protection fintech India",
+      "LLM personal data mapping",
+      "DPDP gap analysis",
+      "AI privacy evidence pack"
+    ]
+  },
+  "designed_for": [
+    "Data Protection Officer",
+    "Chief Compliance Officer",
+    "CISO",
+    "Head of Data and AI"
+  ],
+  "problem": {
+    "intro": "AI features copy personal data into places privacy programmes were not built for: prompts sent to model providers, conversation logs, vector stores, evaluation datasets and call transcripts. Under the DPDP Act 2023, a fintech remains responsible as data fiduciary for that data wherever its processors handle it. Most teams cannot yet show where it goes, how long it stays or whether an erasure request reaches it.",
+    "pain_points": [
+      {
+        "title": "Unmapped AI data flows",
+        "detail": "Records of processing cover core systems but not prompt logs, embeddings, provider-side retention or evaluation datasets."
+      },
+      {
+        "title": "Purpose creep",
+        "detail": "Data collected for KYC or support gets reused to tune or evaluate models without checking it against the purpose stated in the notice."
+      },
+      {
+        "title": "Erasure that stops at the database",
+        "detail": "Deleting a customer from core systems leaves copies in vector indexes, caches, transcripts and fine-tuning sets."
+      },
+      {
+        "title": "Unreviewed vendor terms",
+        "detail": "Model provider terms on retention, training use and hosting location are not checked against your obligations or RBI's payment data storage expectations."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We assess your AI features against the data handling duties in the DPDP Act 2023, working alongside your DPO and legal counsel. We trace personal data through each AI system: what is collected, which prompts and tools receive it, where it is logged, embedded, cached or sent to a provider, how long it is kept and who can access it. We test the controls instead of only reading policies: redaction, access controls, retention jobs and whether a seeded erasure request removes data from every AI store. You receive a data-flow map, a gap register mapped to DPDP obligations with owners and priorities, and an evidence pack your compliance team can maintain.",
+    "capabilities": [
+      "Data-flow mapping across prompts, retrieval indexes, logs, transcripts, evaluation sets and model providers",
+      "Notice and consent review: whether AI uses match the purposes customers were told about",
+      "Control testing for redaction, access, retention and deletion, including a seeded erasure request",
+      "Model provider and processor review covering retention, training use and hosting location",
+      "Breach-readiness check on detecting and scoping a leak from an AI system",
+      "Gap register and evidence pack mapped to DPDP obligations for your DPO"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scope AI systems",
+      "detail": "We list AI features, internal copilots and vendor tools that touch personal data, with an owner for each."
+    },
+    {
+      "step": 2,
+      "title": "Trace data flows",
+      "detail": "Through interviews, configuration review and logs, we map personal data from collection to every AI store and processor."
+    },
+    {
+      "step": 3,
+      "title": "Assess against obligations",
+      "detail": "Each flow is checked for notice and consent, purpose, minimisation, security safeguards, retention and data principal rights."
+    },
+    {
+      "step": 4,
+      "title": "Test controls",
+      "detail": "We test redaction, access and retention, and run a seeded erasure request to see which stores it reaches."
+    },
+    {
+      "step": 5,
+      "title": "Record gaps",
+      "detail": "Gaps are logged with a risk rating, an owner and a practical fix, then reviewed with your DPO and counsel."
+    },
+    {
+      "step": 6,
+      "title": "Assemble the evidence pack",
+      "detail": "The data-flow map, test results and decisions are packaged for your DPO to maintain and report from."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"List AI systems with personal data\"] --> B[\"Trace prompts, logs, indexes, vendors\"]\n  B --> C[\"Assess against DPDP obligations\"]\n  C --> D[\"Test redaction, retention, erasure\"]\n  D --> E{\"Control works as documented?\"}\n  E -->|\"no\"| F[\"Gap with owner and fix\"]\n  E -->|\"yes\"| G[\"Evidence recorded\"]\n  F --> H(\"DPO and counsel review\")\n  G --> H\n  H --> I[\"Evidence pack and remediation plan\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Discovery",
+        "components": [
+          "Stakeholder interviews and questionnaires",
+          "Configuration export from AI platforms and cloud",
+          "Vendor contract and terms review"
+        ]
+      },
+      {
+        "name": "Data-flow mapping",
+        "components": [
+          "Personal data inventory per AI system",
+          "Map of stores and processors"
+        ]
+      },
+      {
+        "name": "Control testing",
+        "components": [
+          "PII probes in prompts and logs",
+          "Seeded erasure test across stores",
+          "Access checks on indexes and logs"
+        ]
+      },
+      {
+        "name": "Assessment and evidence",
+        "components": [
+          "DPDP obligation checklist",
+          "Gap register with risk ratings",
+          "Evidence pack and remediation tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Discovery\"]\n    D1[\"Interviews and questionnaires\"]\n    D2[\"AI platform and cloud config\"]\n    D3[\"Vendor terms review\"]\n  end\n  subgraph S2[\"Data flow mapping\"]\n    M1[\"Personal data inventory\"]\n    M2[\"Stores and processors map\"]\n  end\n  subgraph S3[\"Control testing\"]\n    T1[\"PII probes in prompts and logs\"]\n    T2[\"Seeded erasure test\"]\n    T3[\"Index and log access checks\"]\n  end\n  subgraph S4[\"Assessment and evidence\"]\n    A1[\"DPDP obligation checklist\"]\n    A2(\"DPO and counsel review\")\n    A3[\"Gap register and evidence pack\"]\n  end\n  D1 --> M1\n  D2 --> M1\n  D3 --> M2\n  M1 --> M2\n  M2 --> T1\n  M2 --> T2\n  M2 --> T3\n  T1 --> A1\n  T2 --> A1\n  T3 --> A1\n  A1 --> A2 --> A3"
+  },
+  "inputs": [
+    "Inventory of AI features, copilots and vendor AI tools",
+    "Privacy notices and consent records",
+    "Architecture diagrams and cloud configuration",
+    "Model provider and processor contracts",
+    "Retention and deletion policies",
+    "Test environment with representative data stores"
+  ],
+  "outputs": [
+    "Personal data flow map for each AI system",
+    "Gap register against DPDP obligations with owners",
+    "Control test results, including the erasure test",
+    "Prioritised remediation plan",
+    "Evidence pack for DPO and board reporting"
+  ],
+  "human_in_the_loop": "Your DPO and legal counsel interpret the obligations and accept or adjust each gap rating. We provide technical findings and evidence; we do not give legal opinions.",
+  "integrations": [
+    "Cloud platforms such as AWS, Azure and GCP and their logging",
+    "LLM gateways and model provider consoles",
+    "Vector databases such as pgvector, Pinecone or OpenSearch",
+    "Consent management platform",
+    "GRC or privacy management tool for the gap register"
+  ],
+  "guardrails": [
+    "Testing uses synthetic or seeded records, not real customer data",
+    "Read-only configuration access unless a specific test is agreed",
+    "Findings framed as technical evidence, with legal interpretation left to your counsel",
+    "Sensitive findings shared only through an access-controlled channel"
+  ],
+  "compliance_notes": [
+    "Structured around DPDP Act 2023 duties such as notice, consent, purpose limitation, reasonable security safeguards, breach intimation and data principal rights, with the DPDP Rules phasing in detailed requirements.",
+    "This is a technical assessment, not legal advice, and is designed to support your DPO and counsel.",
+    "Can be extended to GDPR for EU customers and to RBI's direction on storage of payment system data."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Two AI systems, such as a customer support assistant and an internal KYC review copilot, assessed end to end with one seeded erasure test each.",
+    "deliverables": [
+      "Data-flow maps for both systems",
+      "Control test results",
+      "Gap register with owners and priorities",
+      "Evidence pack template your team can extend",
+      "Read-out to the DPO and leadership"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Data-flow coverage",
+        "how": "Stores and processors in the map compared with those confirmed in configuration and logs."
+      },
+      {
+        "metric": "Erasure reach",
+        "how": "Which AI stores the seeded erasure request actually cleared."
+      },
+      {
+        "metric": "Gaps by obligation and severity",
+        "how": "Gaps grouped by DPDP obligation and risk rating."
+      },
+      {
+        "metric": "Remediation ownership",
+        "how": "Gaps with an agreed owner and target date at the read-out."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is this a legal compliance audit?",
+      "a": "No. It is a technical assessment that gives your DPO and counsel evidence of how AI systems actually handle personal data. Legal interpretation and sign-off stay with them."
+    },
+    {
+      "q": "Do model providers' no-training settings solve this?",
+      "a": "They help with one part. Prompt and log retention, hosting location, your own vector stores and transcripts, and erasure across all of them still need checking."
+    },
+    {
+      "q": "How do you handle the phased DPDP Rules timelines?",
+      "a": "We map gaps against each obligation and record the dates your counsel has set internally, so the remediation plan follows your compliance calendar rather than a generic one."
+    },
+    {
+      "q": "Can you cover GDPR at the same time?",
+      "a": "Yes, for European customers or operations. Many controls overlap, and we note where GDPR requirements such as lawful bases, transfer rules or data protection impact assessments differ from DPDP."
+    }
+  ],
+  "related": [
+    "llm-app-pre-launch-security-assessment",
+    "ai-agent-permission-and-tool-use-review",
+    "rag-data-leakage-and-access-control-testing",
+    "ai-calling-compliance-evidence"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/dpdp-ai-data-handling-assessment/"
+}

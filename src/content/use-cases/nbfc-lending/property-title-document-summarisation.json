@@ -1,0 +1,223 @@
+{
+  "slug": "property-title-document-summarisation",
+  "industry": "nbfc-lending",
+  "title": "Property and Title Document Summarisation for Home Loans",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read sale deeds, encumbrance certificates, revenue records and approvals for home loans and LAP, build a chain-of-title summary and flag gaps for the advocate and credit team.",
+  "seo": {
+    "title": "Property Title Document Summarisation for Loans | VipraTech",
+    "description": "AI that reads sale deeds, ECs, revenue records and approvals in regional languages, builds chain-of-title summaries and flags gaps for legal review.",
+    "keywords": [
+      "property title document summarisation",
+      "chain of title AI home loan",
+      "encumbrance certificate extraction",
+      "legal scrutiny report assistant",
+      "LAP property document review"
+    ]
+  },
+  "designed_for": [
+    "Head of Legal and Technical Verification",
+    "Empanelled Advocate Coordinator",
+    "Home Loan Credit Manager",
+    "Head of Mortgage Operations"
+  ],
+  "problem": {
+    "intro": "A home loan or loan-against-property file may hold decades of title documents: sale, gift and partition deeds, encumbrance certificates, mutation entries, tax receipts, approved plans and builder documents, often in Marathi, Hindi, Kannada, Tamil or Gujarati. Empanelled advocates prepare the title search and legal scrutiny report, and credit teams then read that report alongside the documents.",
+    "pain_points": [
+      {
+        "title": "Long chains in regional languages",
+        "detail": "Deeds in regional languages and older legal phrasing take time to read, and credit staff may not read the language at all."
+      },
+      {
+        "title": "Breaks in the chain of title",
+        "detail": "A missing link deed, an unregistered transfer or a mismatch in survey number or area can be missed among dozens of pages."
+      },
+      {
+        "title": "Encumbrances and restrictions",
+        "detail": "Existing mortgages, court attachments, tenancies or restrictions on transfer appear in ECs and revenue records in varying formats."
+      },
+      {
+        "title": "Builder project documents",
+        "detail": "For under-construction flats, RERA registration, approvals, allotment letters and tripartite agreements must line up with the unit being financed."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a summarisation assistant for the legal and technical verification desk. It reads every property document in the file, including regional-language deeds and scanned revenue records, and extracts parties, dates, registration details, survey or plot numbers, areas and boundaries. From these it builds a chronological chain-of-title table, highlights breaks, mismatched descriptions and encumbrances, and checks the file against your property checklist for the property type and state. Each item links to the page it came from, with an English working translation beside the original text. The empanelled advocate uses the summary while preparing the legal opinion, and the credit manager uses it to read that opinion against the documents.",
+    "capabilities": [
+      "Reads deeds, ECs, mutation and revenue records, tax receipts and approvals in English, Hindi and regional languages",
+      "Extracts parties, registration numbers, dates, survey or plot numbers, areas and boundaries",
+      "Builds a chronological chain-of-title table with breaks and mismatches highlighted",
+      "Lists encumbrances, attachments and restrictions found in ECs and revenue records",
+      "State and property-type checklists, including RERA and tripartite documents for builder flats",
+      "Original text and an English working translation side by side for every cited passage"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive property documents",
+      "detail": "Scans arrive from the branch, the customer or the builder and are grouped under the loan application."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document is typed and key details are extracted, with regional-language text translated for reference."
+    },
+    {
+      "step": 3,
+      "title": "Build the chain of title",
+      "detail": "Transfers are ordered by date and linked by parties and property description to form the title chain."
+    },
+    {
+      "step": 4,
+      "title": "Check for gaps and encumbrances",
+      "detail": "Rules and the language model flag breaks, mismatches, encumbrances and checklist gaps, each with confidence."
+    },
+    {
+      "step": 5,
+      "title": "Advocate and credit review",
+      "detail": "The empanelled advocate reviews the summary while preparing the legal opinion, and the credit manager reviews open flags."
+    },
+    {
+      "step": 6,
+      "title": "Record in the loan file",
+      "detail": "The summary, flags and resolution notes are stored in the LOS with the legal and technical reports."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Property papers from branch or builder\"] --> B[\"Classify and extract details\"]\n  B --> C[\"Translate regional text for reference\"]\n  C --> D[\"Build chain-of-title table\"]\n  D --> E{\"Breaks, encumbrances or gaps?\"}\n  E -->|\"yes\"| F(\"Empanelled advocate review\")\n  E -->|\"no\"| G(\"Credit manager check\")\n  F --> G\n  G --> H[\"Summary and flags stored in LOS\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Branch and customer upload connectors",
+          "Builder document intake for approved projects",
+          "Loan-level grouping"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR for Indian scripts and stamp paper scans",
+          "Classifier for deeds, ECs and approvals",
+          "LLM extractor and reference translator"
+        ]
+      },
+      {
+        "name": "Title analysis",
+        "components": [
+          "Chain-of-title builder",
+          "Property description matcher for survey numbers, areas and boundaries",
+          "Encumbrance and checklist rules"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Advocate and credit review workspace",
+          "Flag resolution notes"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "LOS document and summary adapter",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Branch and customer uploads\"]\n    I2[\"Builder project documents\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Indian script OCR\"]\n    U2[\"Document classifier\"]\n    U3[\"Extractor and translator\"]\n  end\n  subgraph S3[\"Title analysis\"]\n    T1[\"Chain-of-title builder\"]\n    T2[\"Property description matcher\"]\n    T3[\"Encumbrance and checklist rules\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Advocate and credit review\")\n    R2[\"LOS adapter\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2 --> U3\n  U3 --> T1\n  U3 --> T2\n  T1 --> T3\n  T2 --> T3\n  T3 --> R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "Sale, gift, partition and other title deeds",
+    "Encumbrance certificates",
+    "Mutation entries and revenue records such as 7/12 extracts, khata or patta",
+    "Property tax receipts and society or association NOCs",
+    "Approved building plan and occupancy or completion certificate",
+    "Builder documents: RERA registration, allotment letter, tripartite agreement"
+  ],
+  "outputs": [
+    "Chronological chain-of-title table with source links",
+    "Property description consistency report",
+    "Encumbrance and restriction list",
+    "Checklist status by state and property type",
+    "Review notes and resolution trail"
+  ],
+  "human_in_the_loop": "The empanelled advocate gives the legal opinion, and the credit manager decides whether the property is acceptable security. The assistant summarises and flags; it does not give legal advice or certify title.",
+  "integrations": [
+    "Loan origination system document module",
+    "Empanelled advocate and valuer portal",
+    "Document management system",
+    "Approved-project records held by the lender",
+    "CERSAI registration workflow already used by the lender"
+  ],
+  "guardrails": [
+    "Translations labelled as working references; the original text is authoritative",
+    "Flags cite source pages, with no inferred ownership without a document",
+    "Low-confidence extraction on old or damaged scans marked for manual reading",
+    "Property and personal data kept in the lender's environment",
+    "No legal conclusions in the output, only facts and flags"
+  ],
+  "compliance_notes": [
+    "Supports the lender's property due diligence process; the title opinion remains with qualified advocates as the lender's policy requires.",
+    "Personal data in property documents is handled with purpose limitation and retention controls under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Resale residential properties in one state, using historical files where the legal scrutiny report is available for comparison.",
+    "deliverables": [
+      "State-specific checklist and extraction schema",
+      "Working summarisation assistant on historical files",
+      "Review workspace for advocates and credit managers",
+      "Comparison report against legal scrutiny reports",
+      "Plan for adding states and builder projects"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Extraction accuracy on key details",
+        "how": "Parties, dates, survey numbers and areas compared with advocate-verified values."
+      },
+      {
+        "metric": "Chain-of-title agreement",
+        "how": "Title chains built by the assistant compared with those in legal scrutiny reports."
+      },
+      {
+        "metric": "Issue detection",
+        "how": "Breaks, encumbrances and gaps raised by advocates that the assistant also flagged, and the reverse."
+      },
+      {
+        "metric": "Review time per file",
+        "how": "Time for credit managers to review legal output with and without the summary."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does this replace the advocate's legal opinion?",
+      "a": "No. The legal scrutiny report and title opinion stay with your empanelled advocates. The assistant gives them and your credit team a structured summary and a list of points to check."
+    },
+    {
+      "q": "Which languages can it read?",
+      "a": "Hindi, Marathi, Gujarati, Kannada, Tamil, Telugu, Bengali and other major scripts, with quality depending on scan condition. The pilot reports accuracy by language for the state you choose."
+    },
+    {
+      "q": "Can it handle very old deeds?",
+      "a": "It reads older typed and stamped documents in most cases. Faded or handwritten pages it cannot read with confidence are marked for manual reading rather than guessed."
+    },
+    {
+      "q": "Does it work for flats in builder projects?",
+      "a": "Yes. For approved projects it checks RERA registration, approvals, allotment letters and tripartite agreements against the unit details, and can reuse project-level documents across loans in the same project."
+    }
+  ],
+  "related": [
+    "loan-application-document-extraction",
+    "co-lending-portfolio-file-audit",
+    "sale-agreement-and-title-review",
+    "rera-project-data-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/property-title-document-summarisation/"
+}

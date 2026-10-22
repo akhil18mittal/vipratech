@@ -1,0 +1,216 @@
+{
+  "slug": "mr-call-reporting-by-voice",
+  "industry": "pharma-life-sciences",
+  "title": "Medical Rep Call Reporting by Voice",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Medical representatives speak a short note in Hindi, English or a regional language after each doctor visit, and the agent drafts the call report, sample entries and follow-ups for them to confirm.",
+  "seo": {
+    "title": "Voice Call Reporting for Medical Representatives | VipraTech",
+    "description": "Voice agent that turns MR visit notes spoken in Hindi, English or regional languages into daily call reports, sample entries and follow-up tasks.",
+    "keywords": [
+      "MR call reporting app",
+      "medical representative voice reporting",
+      "pharma SFA voice input",
+      "DCR automation",
+      "field force reporting in Hindi"
+    ]
+  },
+  "designed_for": [
+    "Sales Force Effectiveness Manager",
+    "National Sales Manager",
+    "Area and Regional Business Managers",
+    "Commercial Excellence Head"
+  ],
+  "problem": {
+    "intro": "Medical representatives visit many doctors and chemists a day and must file a daily call report (DCR) for each visit: doctor, products detailed, samples given, feedback and next steps. Most fill it late at night from memory on a phone, so reports are thin, delayed or copied from the day before.",
+    "pain_points": [
+      {
+        "title": "Late and copied reports",
+        "detail": "DCRs entered at the end of the day lose detail, and repeated generic feedback gives brand teams nothing to act on."
+      },
+      {
+        "title": "Sample entries that do not reconcile",
+        "detail": "Samples entered in DCRs often do not match what was issued to the MR, which creates gaps in sample accountability."
+      },
+      {
+        "title": "Typing in English on a small screen",
+        "detail": "Many reps think and speak in Hindi or a regional language, and typing structured English fields on a phone slows them down."
+      },
+      {
+        "title": "Safety information that never reaches PV",
+        "detail": "A doctor may mention a patient's side effect during a visit, and if it is not captured, the pharmacovigilance team never hears about it."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice reporting agent inside your SFA app or on WhatsApp. After a visit, the MR taps once and speaks naturally in Hindi, English, Hinglish or a supported regional language. The agent transcribes the note, identifies the doctor from the day's tour plan, maps products and samples to your product master, and drafts the DCR fields, feedback summary and follow-up tasks. The MR sees the draft and confirms or corrects it in a few taps. If the note mentions a possible side effect or product complaint, the agent flags it and routes it, with the audio, to the pharmacovigilance or complaints team.",
+    "capabilities": [
+      "Captures spoken notes in Hindi, English, Hinglish and supported regional languages, including noisy outdoor audio",
+      "Matches the doctor or chemist against the tour plan and customer master",
+      "Maps brand names and sample packs to your product master",
+      "Drafts DCR fields, feedback summary and follow-up tasks for MR confirmation",
+      "Compares samples reported with samples issued to the MR",
+      "Flags possible side effects or complaints and routes them for PV review"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "MR records a note",
+      "detail": "Right after the visit, the MR records a short voice note in the SFA app or on WhatsApp."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe and understand",
+      "detail": "Speech is transcribed and the agent picks out doctor, products, samples, feedback and next steps."
+    },
+    {
+      "step": 3,
+      "title": "Match to masters",
+      "detail": "Doctor, products and sample packs are matched to the tour plan, customer master and sample issue records."
+    },
+    {
+      "step": 4,
+      "title": "Screen for safety mentions",
+      "detail": "The note is screened for possible adverse events or complaints, which go to PV with the original audio."
+    },
+    {
+      "step": 5,
+      "title": "MR confirms the draft",
+      "detail": "The MR reviews the drafted DCR on screen, corrects anything wrong and submits."
+    },
+    {
+      "step": 6,
+      "title": "Sync to CRM",
+      "detail": "The confirmed report, sample entries and tasks are written to the CRM and become visible to the manager."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"MR records voice note after visit\"] --> B[\"Transcribe and extract details\"]\n  B --> C[\"Match doctor, products and samples\"]\n  C --> D{\"Possible side effect mentioned?\"}\n  D -->|\"yes\"| E(\"PV team reviews flagged note\")\n  D -->|\"no\"| F[\"Draft DCR and follow-ups\"]\n  E --> F\n  F --> G(\"MR confirms or corrects\")\n  G --> H[\"Sync report to CRM\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "SFA app voice button",
+          "WhatsApp Business API",
+          "Offline recording with upload when the network returns"
+        ]
+      },
+      {
+        "name": "Speech and language",
+        "components": [
+          "Speech-to-text tuned for Indian languages and brand names",
+          "LLM extractor for DCR fields",
+          "Safety mention screen"
+        ]
+      },
+      {
+        "name": "Business context",
+        "components": [
+          "Tour plan and customer master",
+          "Product and sample pack master",
+          "Sample issue records"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "MR confirmation screen",
+          "PV review queue with original audio",
+          "CRM or SFA API adapter"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"SFA app voice button\"]\n    C2[\"WhatsApp voice note\"]\n  end\n  subgraph S2[\"Speech and language\"]\n    L1[\"Indian-language speech to text\"]\n    L2[\"DCR field extractor\"]\n    L3[\"Safety mention screen\"]\n  end\n  subgraph S3[\"Business context\"]\n    B1[\"Tour plan and customer master\"]\n    B2[\"Product and sample master\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"MR confirmation screen\")\n    R2(\"PV review queue\")\n    R3[\"CRM adapter\"]\n  end\n  C1 --> L1\n  C2 --> L1\n  L1 --> L2\n  L1 --> L3\n  B1 --> L2\n  B2 --> L2\n  L2 --> R1\n  L3 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "MR voice notes recorded after visits",
+    "Daily tour plan",
+    "Doctor and chemist master with specialty and location",
+    "Product, brand and sample pack master",
+    "Sample issue records per MR"
+  ],
+  "outputs": [
+    "Drafted DCR with doctor, products, samples and feedback",
+    "Follow-up tasks such as revisits and literature requests",
+    "Sample reconciliation exceptions",
+    "Flagged safety or complaint mentions with audio",
+    "Structured doctor feedback for brand teams"
+  ],
+  "human_in_the_loop": "The MR confirms every report before submission, so nothing enters the CRM without their approval. Any flagged side-effect mention is reviewed by the pharmacovigilance team, who decide whether it is a reportable case.",
+  "integrations": [
+    "Pharma CRM or SFA platform such as Veeva CRM, Salesforce or an Indian SFA product",
+    "WhatsApp Business API",
+    "Sample management system",
+    "Pharmacovigilance intake queue",
+    "HR and territory master"
+  ],
+  "guardrails": [
+    "No report submitted without MR confirmation",
+    "Low-confidence doctor and product matches shown as choices, not filled in",
+    "Safety screening errs towards flagging, with PV deciding",
+    "Voice data retained per your policy, with restricted access",
+    "Prompts and models versioned with change logs"
+  ],
+  "compliance_notes": [
+    "Sample entries support the records expected under the Uniform Code for Pharmaceutical Marketing Practices (UCPMP) 2024.",
+    "Doctor personal data and MR voice recordings are processed in line with the DPDP Act 2023, with purpose and retention defined up front."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One division or a few territories, with a group of volunteer MRs using voice reporting alongside the existing app.",
+    "deliverables": [
+      "Voice reporting flow in a test build of your SFA app or on WhatsApp",
+      "Doctor and product matching tuned to your masters",
+      "Safety-mention routing to PV",
+      "Pilot report on accuracy and adoption",
+      "Roll-out plan by division and language"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field accuracy of drafted DCRs",
+        "how": "Drafted fields compared with what the MR finally submits after corrections."
+      },
+      {
+        "metric": "Report timeliness",
+        "how": "Time between visit and submitted DCR, compared with the same MRs' earlier reports."
+      },
+      {
+        "metric": "MR correction effort",
+        "how": "Number of edits per draft before submission."
+      },
+      {
+        "metric": "Safety mentions routed",
+        "how": "Flagged notes reviewed by PV and marked relevant or not relevant."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which languages are supported?",
+      "a": "We start with Hindi, English and Hinglish, and add regional languages such as Marathi, Tamil, Telugu, Bengali or Gujarati based on your territories. The pilot tests accuracy on real field audio for each language included."
+    },
+    {
+      "q": "What about poor network in rural territories?",
+      "a": "Notes can be recorded offline and uploaded when the phone reconnects. The draft is ready for confirmation shortly after upload."
+    },
+    {
+      "q": "Will managers hear the raw recordings?",
+      "a": "That is a policy decision for you. By default managers see the confirmed report, and audio access is limited to roles you define, such as PV for flagged notes."
+    },
+    {
+      "q": "Does it work with our current SFA app?",
+      "a": "Usually, through the app vendor's API or a screen added to your app. If that integration takes longer, WhatsApp is a quick way to start the pilot."
+    }
+  ],
+  "related": [
+    "doctor-engagement-automation",
+    "adverse-event-intake",
+    "stockist-order-taking-voice-agent",
+    "field-technician-voice-reporting"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/mr-call-reporting-by-voice/"
+}

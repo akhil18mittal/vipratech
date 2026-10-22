@@ -1,0 +1,224 @@
+{
+  "slug": "vehicle-asset-inspection-for-auto-loans",
+  "industry": "nbfc-lending",
+  "title": "Vehicle and Asset Inspection from Photos for Auto Loans",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Check vehicle and equipment photos for used-vehicle, tractor and commercial vehicle loans: read chassis, engine and plate numbers, match them to RC and invoice, and flag damage and reuse.",
+  "seo": {
+    "title": "Vehicle Inspection from Photos for Auto Loans | VipraTech",
+    "description": "Computer vision for auto, tractor and CV loans: reads chassis and plate numbers, matches RC and invoice details, flags damage and reused photos for review.",
+    "keywords": [
+      "vehicle inspection AI auto loan",
+      "used car loan photo verification",
+      "chassis number OCR",
+      "tractor loan asset verification",
+      "post-disbursement vehicle verification"
+    ]
+  },
+  "designed_for": [
+    "Head of Vehicle Finance",
+    "Used Vehicle Credit Manager",
+    "Asset Verification Team Lead",
+    "Head of Risk Containment Unit"
+  ],
+  "problem": {
+    "intro": "Vehicle loans depend on the asset being what the file says it is. For used cars, commercial vehicles and tractors, valuers and field staff photograph the vehicle, chassis and engine numbers and odometer, and after disbursement the lender needs proof that a financed vehicle was delivered and registered with its hypothecation. Checking these photos by eye against the RC, invoice and valuation report is slow and easy to game.",
+    "pain_points": [
+      {
+        "title": "Identifier mismatches",
+        "detail": "Chassis, engine and registration numbers in photos may not match the RC, invoice or valuation report, and partial or blurred numbers get accepted by eye."
+      },
+      {
+        "title": "Reused and borrowed photos",
+        "detail": "The same vehicle photos appear across applications, or photos of a different vehicle of the same model are submitted."
+      },
+      {
+        "title": "Condition and odometer gaps",
+        "detail": "Damage, missing parts or odometer readings that contradict the valuation are missed when photos are reviewed quickly."
+      },
+      {
+        "title": "Post-disbursement follow-up",
+        "detail": "Collecting delivery photos and RC copies with hypothecation after disbursement is a long tail that operations chase by hand."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inspection service for vehicle and equipment finance. Field staff or dealers capture a guided set of photos in the lender's app, including front, rear, sides, chassis plate, engine number, odometer and number plate. Models check that each required view is present and usable, read identifiers and odometer values, detect visible damage and missing parts, and search for the same images in past applications. Extracted values are compared with the RC, invoice, insurance and valuation report, and with registration details from an authorised Vahan data provider where the lender uses one. Each case gets a list of matches and mismatches, and credit or operations staff decide what to accept.",
+    "capabilities": [
+      "Guided capture checks that every required view is present, sharp and well lit",
+      "OCR of chassis, engine and registration numbers and odometer readings",
+      "Matching against RC, tax invoice, insurance policy and valuation report",
+      "Visible damage and missing-part detection to support the valuer",
+      "Duplicate and near-duplicate image search across past applications",
+      "Post-disbursement checks for delivery photos and RC hypothecation endorsement"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture photos",
+      "detail": "Field staff, valuers or dealers capture the guided photo set in the app, with time and location recorded."
+    },
+    {
+      "step": 2,
+      "title": "Check capture quality",
+      "detail": "Missing views, blur or glare are flagged at once so the photographer can retake them on the spot."
+    },
+    {
+      "step": 3,
+      "title": "Read and detect",
+      "detail": "Models read identifiers and the odometer, detect damage and missing parts, and search for reused images."
+    },
+    {
+      "step": 4,
+      "title": "Match against documents",
+      "detail": "Values are compared with the RC, invoice, insurance, valuation report and registration data."
+    },
+    {
+      "step": 5,
+      "title": "Credit or operations review",
+      "detail": "Mismatches, damage flags and reuse alerts go to the credit manager or operations reviewer with evidence."
+    },
+    {
+      "step": 6,
+      "title": "Record in the loan file",
+      "detail": "The verified asset record and decisions are written to the LOS or LMS."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Guided photo capture in app\"] --> B{\"All views present and usable?\"}\n  B -->|\"no\"| C[\"Retake prompt to field staff\"]\n  C --> A\n  B -->|\"yes\"| D[\"Read identifiers and odometer\"]\n  D --> E[\"Detect damage and reused images\"]\n  E --> F[\"Match RC, invoice and valuation\"]\n  F --> G(\"Credit or operations review\")\n  G --> H[\"Asset record to LOS or LMS\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Guided capture flow in field or dealer app",
+          "On-device checks for blur and framing"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "View classifier",
+          "Identifier and odometer OCR",
+          "Damage and missing-part detector",
+          "Image reuse search"
+        ]
+      },
+      {
+        "name": "Document matching",
+        "components": [
+          "RC, invoice and insurance extractor",
+          "Registration data lookup through an authorised provider",
+          "Identifier and attribute matcher"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Credit and operations review screen",
+          "Post-disbursement follow-up tracker"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "LOS and LMS adapters",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Guided capture app\"]\n    C2[\"Quality checks\"]\n  end\n  subgraph S2[\"Vision models\"]\n    V1[\"View classifier\"]\n    V2[\"Identifier and odometer OCR\"]\n    V3[\"Damage detector\"]\n    V4[\"Image reuse search\"]\n  end\n  subgraph S3[\"Document matching\"]\n    M1[\"RC and invoice extractor\"]\n    M2[\"Registration data lookup\"]\n    M3[\"Identifier matcher\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Credit and operations review\")\n    R2[\"LOS and LMS adapter\"]\n  end\n  C1 --> C2 --> V1\n  V1 --> V2\n  V1 --> V3\n  V1 --> V4\n  V2 --> M3\n  M1 --> M3\n  M2 --> M3\n  M3 --> R1\n  V3 --> R1\n  V4 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Guided vehicle photo set with time and location",
+    "Registration certificate and tax invoice",
+    "Insurance policy and valuation report",
+    "Registration details from an authorised Vahan data provider, where used",
+    "Delivery photos and RC with hypothecation after disbursement"
+  ],
+  "outputs": [
+    "Extracted chassis, engine, registration and odometer values",
+    "Match and mismatch list against documents",
+    "Damage and missing-part flags with images",
+    "Image reuse alerts",
+    "Verified asset record in the loan file"
+  ],
+  "human_in_the_loop": "Credit managers and operations reviewers decide on every mismatch, damage flag and reuse alert. Valuation stays with your empanelled valuers; damage detection supports their report rather than replacing it.",
+  "integrations": [
+    "Loan origination and loan management systems",
+    "Field, valuer or dealer mobile app",
+    "Authorised vehicle registration data provider",
+    "Valuer and dealer portals",
+    "Document management system"
+  ],
+  "guardrails": [
+    "Identifier matches require exact agreement; partial reads go to review",
+    "No automatic valuation or rejection",
+    "Image reuse checked only within the lender's own application history",
+    "Photos and registration data retained per policy with access controls",
+    "Models re-evaluated when new vehicle types or capture devices are added"
+  ],
+  "compliance_notes": [
+    "Supports asset verification within the lender's credit policy; credit and valuation decisions stay with authorised staff.",
+    "Personal data on RCs and invoices is handled with purpose limitation under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Used car or tractor loans from one region, using historical photo sets with known outcomes, then live capture through the app for new applications.",
+    "deliverables": [
+      "Guided capture flow and quality checks",
+      "Identifier OCR and document matching on historical cases",
+      "Damage and reuse detection results",
+      "Review screen for credit and operations",
+      "Roll-out plan covering post-disbursement checks"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Identifier reading accuracy",
+        "how": "Chassis, engine and plate numbers compared with verified values from RCs."
+      },
+      {
+        "metric": "Mismatch detection",
+        "how": "Known mismatched or fraudulent cases from history flagged by the service."
+      },
+      {
+        "metric": "Retakes at capture",
+        "how": "Photo sets needing retakes, and whether the retake resolved the issue."
+      },
+      {
+        "metric": "Review time per case",
+        "how": "Time for reviewers to clear a case with and without the service."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it value the vehicle?",
+      "a": "No. It reads identifiers, checks documents and highlights visible damage to support your valuer. The valuation and the loan amount remain decisions for your valuer and credit team."
+    },
+    {
+      "q": "Will it work on tractors and commercial vehicles?",
+      "a": "Yes, with capture guides for each asset type, since chassis plate positions and required views differ. The pilot can focus on the asset class that matters most to you."
+    },
+    {
+      "q": "What if the chassis number is rusted or partly hidden?",
+      "a": "The model reports a partial read with low confidence and sends it for review. It never fills in missing characters by guesswork."
+    },
+    {
+      "q": "Can it check vehicle registration data?",
+      "a": "Where you use an authorised provider for Vahan registration data, we compare those details with the RC and photos. We do not access government systems outside such authorised arrangements."
+    }
+  ],
+  "related": [
+    "field-collection-visit-photo-verification",
+    "loan-application-document-extraction",
+    "used-car-inspection-and-damage-detection",
+    "rc-insurance-puc-document-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/vehicle-asset-inspection-for-auto-loans/"
+}

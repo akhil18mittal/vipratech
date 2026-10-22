@@ -1,0 +1,224 @@
+{
+  "slug": "farmer-onboarding-kyc",
+  "industry": "agriculture",
+  "title": "Farmer Onboarding KYC",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "computer-vision"
+  ],
+  "summary": "Onboard farmers and FPO members from phone photos of KYC, bank and land documents, with masked Aadhaar, name matching across scripts, duplicate checks and consent captured in their language.",
+  "seo": {
+    "title": "Farmer Onboarding KYC with AI | VipraTech",
+    "description": "AI farmer onboarding: reads KYC, bank and land documents from field photos, masks Aadhaar, matches names across scripts and flags duplicates for review.",
+    "keywords": [
+      "farmer KYC automation",
+      "FPO member onboarding",
+      "agritech KYC verification",
+      "farmer registration AI",
+      "masked Aadhaar KYC"
+    ]
+  },
+  "designed_for": [
+    "FPO CEO",
+    "Head of Farmer Onboarding, Agritech",
+    "KYC Operations Manager, Agri NBFC",
+    "Field Operations Manager"
+  ],
+  "problem": {
+    "intro": "Field agents onboard farmers at village meetings and collection points, photographing ID cards, bank passbooks and land records on their phones. Back-office teams then fix blurred photos, retype names written in Hindi and English, and chase missing documents, while the farmer waits weeks for membership, input credit or payments.",
+    "pain_points": [
+      {
+        "title": "Poor photos from the field",
+        "detail": "Glare, cropped edges and blurred passbook pages mean documents are often rejected days after the visit."
+      },
+      {
+        "title": "Names in different scripts",
+        "detail": "The same farmer appears in Devanagari on a land record, in English on a bank passbook, and with another spelling on a voter ID."
+      },
+      {
+        "title": "Duplicate registrations",
+        "detail": "Farmers registered by different agents, FPOs or programmes create duplicate records and double benefits or credit."
+      },
+      {
+        "title": "Consent that is hard to evidence",
+        "detail": "Consent forms in English, signed without explanation, do not show the farmer understood how their data will be used."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an onboarding flow for field agent apps and back offices. As the agent photographs each document, the app checks the image is sharp and complete and asks for a retake on the spot. The pipeline classifies documents, extracts fields, masks Aadhaar numbers immediately and keeps only what your process needs. Names are matched across scripts with transliteration-aware comparison, and bank details can be confirmed with a penny-drop check through your payment provider. A duplicate check compares each new farmer with existing records by name, father's name, village, mobile and bank account. Consent is read out in the farmer's language and recorded. Mismatches and possible duplicates go to a KYC reviewer.",
+    "capabilities": [
+      "On-device photo quality checks with retake prompts for field agents",
+      "Document classification and field extraction for ID, bank and land documents",
+      "Aadhaar masking before anything is stored",
+      "Transliteration-aware name matching across Devanagari, regional scripts and English",
+      "Duplicate farmer detection across agents, FPOs and programmes",
+      "Consent notice read out in the farmer's language, with recorded acknowledgement"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture in the field",
+      "detail": "The field agent photographs documents in the app, which checks quality and asks for retakes immediately."
+    },
+    {
+      "step": 2,
+      "title": "Record consent",
+      "detail": "The app plays a consent notice in the farmer's language and records the acknowledgement."
+    },
+    {
+      "step": 3,
+      "title": "Extract and mask",
+      "detail": "Fields are extracted, Aadhaar is masked, and only the data your process needs is kept."
+    },
+    {
+      "step": 4,
+      "title": "Match and de-duplicate",
+      "detail": "Names and details are matched across documents and against existing farmer records."
+    },
+    {
+      "step": 5,
+      "title": "KYC reviewer decision",
+      "detail": "Mismatches, possible duplicates and low-confidence fields go to a reviewer who approves, corrects or requests documents."
+    },
+    {
+      "step": 6,
+      "title": "Activate the farmer",
+      "detail": "Approved farmers are created in your CRM or ERP and notified by SMS or WhatsApp."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agent photographs documents\"] --> B{\"Photo sharp and complete?\"}\n  B -->|\"no\"| A\n  B -->|\"yes\"| C[\"Play and record consent\"]\n  C --> D[\"Extract fields and mask Aadhaar\"]\n  D --> E[\"Match names and check duplicates\"]\n  E --> F{\"Mismatch or possible duplicate?\"}\n  F -->|\"yes\"| G(\"KYC reviewer decides\")\n  F -->|\"no\"| H[\"Create farmer record\"]\n  G --> H\n  H --> I[\"Notify farmer by SMS or WhatsApp\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Field capture",
+        "components": [
+          "Field agent app with photo quality checks",
+          "Offline queue for low connectivity",
+          "Consent audio playback and recording"
+        ]
+      },
+      {
+        "name": "Document processing",
+        "components": [
+          "Document classifier",
+          "OCR for regional scripts",
+          "Field extractor with Aadhaar masking"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "Transliteration-aware name matcher",
+          "Duplicate detection index",
+          "Bank account penny-drop check via payment provider"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "KYC reviewer queue",
+          "Document re-request workflow"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "Farmer CRM or ERP adapter",
+          "Consent and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Field capture\"]\n    F1[\"Agent app with quality check\"]\n    F2[\"Offline sync queue\"]\n    F3[\"Consent recording\"]\n  end\n  subgraph S2[\"Document processing\"]\n    P1[\"Classifier and OCR\"]\n    P2[\"Extractor with Aadhaar masking\"]\n  end\n  subgraph S3[\"Verification\"]\n    V1[\"Name matcher\"]\n    V2[\"Duplicate index\"]\n    V3[\"Bank account check\"]\n  end\n  subgraph S4[\"Review and records\"]\n    R1(\"KYC reviewer queue\")\n    R2[\"Farmer CRM or ERP\"]\n    R3[\"Consent and audit log\"]\n  end\n  F1 --> F2 --> P1\n  F3 --> R3\n  P1 --> P2\n  P2 --> V1\n  P2 --> V2\n  P2 --> V3\n  V1 --> R1\n  V2 --> R1\n  V3 --> R2\n  R1 --> R2"
+  },
+  "inputs": [
+    "Photos of masked Aadhaar, voter ID or PAN",
+    "Bank passbook or cancelled cheque",
+    "Land record or tenancy document",
+    "Farmer photograph",
+    "Recorded consent acknowledgement"
+  ],
+  "outputs": [
+    "Verified farmer profile with masked identifiers",
+    "Name match and duplicate check results",
+    "Bank account verification status",
+    "Reviewer tasks for exceptions",
+    "Consent record and audit trail"
+  ],
+  "human_in_the_loop": "KYC reviewers decide every name mismatch, possible duplicate and low-confidence document. Where onboarding feeds a regulated loan, the lender's KYC team applies its own policy before any account is opened.",
+  "integrations": [
+    "Field agent mobile app",
+    "Farmer CRM or FPO ERP",
+    "Payment provider for bank account verification",
+    "SMS gateway or WhatsApp Business API",
+    "DigiLocker, where your use case permits"
+  ],
+  "guardrails": [
+    "Aadhaar masked before storage and handled per UIDAI rules",
+    "Data minimisation: only the fields your process needs are kept",
+    "Possible duplicates never auto-merged; a reviewer confirms",
+    "Role-based access to farmer documents",
+    "Consent notice versioned and linked to each record"
+  ],
+  "compliance_notes": [
+    "Consent capture and purpose limitation designed in line with the DPDP Act 2023, with notices in the farmer's language.",
+    "For regulated lenders, the flow is designed to feed, not replace, customer due diligence under the RBI KYC Master Direction."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Onboarding for one FPO or one district's field team, with documents captured in the app and reviewed in parallel with the current process.",
+    "deliverables": [
+      "Field capture flow with quality checks",
+      "Extraction and masking pipeline",
+      "Name matching and duplicate checks",
+      "KYC reviewer screen",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "First-time-right capture",
+        "how": "Share of onboarding cases with no document re-requested after the field visit."
+      },
+      {
+        "metric": "Extraction accuracy",
+        "how": "Extracted fields compared with reviewer-confirmed values."
+      },
+      {
+        "metric": "Duplicates detected",
+        "how": "Possible duplicates flagged and confirmed by reviewers."
+      },
+      {
+        "metric": "Time to activation",
+        "how": "Time from field visit to farmer activation, compared with recent cases."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we store Aadhaar numbers?",
+      "a": "No. Aadhaar is masked as soon as it is read, and only the masked form is stored, in line with UIDAI rules. Where your process needs Aadhaar-based verification, it goes through an authorised route."
+    },
+    {
+      "q": "Will it work without network in villages?",
+      "a": "Yes. The app checks photo quality on the phone and queues documents offline, syncing when the agent reaches coverage."
+    },
+    {
+      "q": "How do you match names written in different scripts?",
+      "a": "We transliterate and compare names using rules tuned for Indian names, alongside father's name, village and mobile number. Close matches go to a reviewer rather than being merged automatically."
+    },
+    {
+      "q": "Can farmers give consent if they cannot read?",
+      "a": "Yes. The consent notice is played as audio in their language, and their acknowledgement is recorded with the agent present. The record is linked to the farmer's profile."
+    }
+  ],
+  "related": [
+    "land-record-and-kcc-document-extraction",
+    "agri-input-dealer-order-automation",
+    "merchant-onboarding-kyc-verification",
+    "account-opening-document-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/farmer-onboarding-kyc/"
+}

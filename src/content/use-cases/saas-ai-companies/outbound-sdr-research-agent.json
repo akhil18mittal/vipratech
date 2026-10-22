@@ -1,0 +1,221 @@
+{
+  "slug": "outbound-sdr-research-agent",
+  "industry": "saas-ai-companies",
+  "title": "Outbound SDR Research and Personalisation Agent",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "An agent that researches target accounts from public sources, writes cited account briefs and draft first lines for SDRs, and syncs to your CRM, with a person approving every message.",
+  "seo": {
+    "title": "Outbound SDR Research and Personalisation Agent | VipraTech",
+    "description": "AI agent that researches B2B accounts from public sources, writes cited briefs and draft first lines for SDRs, and syncs to HubSpot or Salesforce.",
+    "keywords": [
+      "SDR research agent",
+      "AI sales personalisation",
+      "account research automation",
+      "B2B outbound AI",
+      "cited sales briefs"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales or Revenue",
+    "SDR Manager",
+    "Founder running founder-led sales",
+    "Revenue Operations Lead"
+  ],
+  "problem": {
+    "intro": "Good outbound starts with research: what the company does, what changed recently, who owns the problem and why now. SDRs spend much of their day on that research, or skip it and send generic messages that buyers ignore. AI writing tools help with wording but often invent facts that damage credibility.",
+    "pain_points": [
+      {
+        "title": "Research takes too long",
+        "detail": "Reading the website, job posts, news and product pages for each account leaves little time for actual outreach."
+      },
+      {
+        "title": "Generic messages",
+        "detail": "Without real context, sequences fall back on templates that sound like everyone else's."
+      },
+      {
+        "title": "Invented facts",
+        "detail": "AI-written lines can mention funding, hires or launches that never happened, which ends the conversation."
+      },
+      {
+        "title": "Research lost after the email",
+        "detail": "Notes stay in an SDR's head or a browser tab, not in the CRM where the account executive needs them."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a research agent that works through your target account list. For each account it reads permitted public sources: company website, product and pricing pages, careers pages, press releases, news and public filings where relevant. It checks fit against your ideal customer profile, identifies likely triggers such as a new product line, hiring for a role your product supports or a market expansion, and suggests relevant personas. It writes a short account brief in which every claim links to its source, and drafts first lines and talking points in your tone. SDRs review, edit and approve before anything is sent. Briefs and sources are saved to the CRM account record.",
+    "capabilities": [
+      "Account research from permitted public sources such as websites, careers pages and news",
+      "Ideal customer profile fit scoring with reasons",
+      "Trigger detection such as relevant hiring, launches or expansion",
+      "Account briefs in which every claim links to a source",
+      "Draft first lines and talking points in your tone, for SDR approval",
+      "CRM sync of briefs, sources and fit scores"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the target list",
+      "detail": "Accounts come from your CRM, a list upload or an enrichment tool you already licence."
+    },
+    {
+      "step": 2,
+      "title": "Research each account",
+      "detail": "The agent reads permitted public sources and records each fact with its source link."
+    },
+    {
+      "step": 3,
+      "title": "Score fit and triggers",
+      "detail": "It scores fit against your ideal customer profile and notes any relevant triggers."
+    },
+    {
+      "step": 4,
+      "title": "Draft the brief and lines",
+      "detail": "It writes a cited account brief and draft first lines for the chosen persona."
+    },
+    {
+      "step": 5,
+      "title": "SDR review",
+      "detail": "The SDR checks facts, edits the message and approves or rejects it."
+    },
+    {
+      "step": 6,
+      "title": "Sync and sequence",
+      "detail": "Approved messages go into your sequencing tool, and the brief is saved to the CRM."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Target accounts from CRM\"] --> B[\"Research public sources\"]\n  B --> C[\"Score ICP fit and triggers\"]\n  C --> D{\"Fit and sources sufficient?\"}\n  D -->|\"no\"| E[\"Park account with reason\"]\n  D -->|\"yes\"| F[\"Draft cited brief and first lines\"]\n  F --> G(\"SDR checks facts and approves\")\n  G --> H[\"Add to sequence and sync CRM\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Account intake",
+        "components": [
+          "CRM account list connector",
+          "ICP definition and exclusion lists"
+        ]
+      },
+      {
+        "name": "Research",
+        "components": [
+          "Web fetcher limited to permitted sources",
+          "Source store with timestamps",
+          "Fact extractor"
+        ]
+      },
+      {
+        "name": "Reasoning and drafting",
+        "components": [
+          "Fit and trigger scorer",
+          "Brief writer with citation enforcement",
+          "Tone and style guide"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "SDR review screen",
+          "Edit capture for tuning"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Sequencing tool integration",
+          "CRM sync of brief and sources"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"CRM account list\"]\n    I2[\"ICP and exclusions\"]\n  end\n  subgraph S2[\"Research\"]\n    W1[\"Permitted web fetcher\"]\n    W2[\"Source store\"]\n    W3[\"Fact extractor\"]\n  end\n  subgraph S3[\"Drafting and review\"]\n    G1[\"Fit and trigger scorer\"]\n    G2[\"Cited brief writer\"]\n    G3(\"SDR review\")\n  end\n  subgraph S4[\"Delivery\"]\n    L1[\"Sequencing tool\"]\n    L2[\"CRM sync\"]\n  end\n  I1 --> W1\n  I2 --> G1\n  W1 --> W2 --> W3\n  W3 --> G1 --> G2 --> G3\n  G3 --> L1\n  G3 --> L2"
+  },
+  "inputs": [
+    "Target account list",
+    "Ideal customer profile and persona definitions",
+    "Product messaging and tone guide",
+    "Suppression and do-not-contact lists",
+    "List of permitted sources"
+  ],
+  "outputs": [
+    "Cited account briefs",
+    "ICP fit scores with reasons",
+    "Draft first lines and talking points",
+    "Parked accounts with reasons",
+    "CRM records updated with briefs and sources"
+  ],
+  "human_in_the_loop": "SDRs check every fact and approve every message before it enters a sequence. The agent never sends email or social messages on its own.",
+  "integrations": [
+    "CRM such as HubSpot or Salesforce",
+    "Sequencing tools such as Outreach, Salesloft, Apollo or Lemlist",
+    "Enrichment providers you already licence",
+    "Slack for review notifications",
+    "Your website and product documentation as messaging sources"
+  ],
+  "guardrails": [
+    "Every claim in a brief must link to a source; unsupported claims are removed",
+    "Only permitted sources fetched, respecting site terms and robots rules",
+    "Suppression and do-not-contact lists checked before drafting",
+    "No sending without SDR approval",
+    "No inferences about protected personal characteristics"
+  ],
+  "compliance_notes": [
+    "Outreach to EU contacts needs a lawful basis and opt-out handling under GDPR and ePrivacy rules; recorded sources support that assessment.",
+    "For Indian contacts, personal data handling follows DPDP Act 2023 principles, and calls or SMS follow TRAI rules."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One segment of a few hundred target accounts, with two or three SDRs reviewing briefs and drafts.",
+    "deliverables": [
+      "ICP and persona configuration",
+      "Research agent producing cited briefs",
+      "SDR review screen",
+      "CRM and sequencing integration",
+      "Pilot report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Fact accuracy",
+        "how": "SDRs mark each brief claim as correct, wrong or unsupported against its source."
+      },
+      {
+        "metric": "Draft acceptance",
+        "how": "Share of drafts approved with no or minor edits."
+      },
+      {
+        "metric": "Research time per account",
+        "how": "SDR time per account with and without the agent, on a sample."
+      },
+      {
+        "metric": "Reply quality",
+        "how": "Replies from agent-assisted sequences compared with existing sequences, reviewed by the SDR manager."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it invent facts about prospects?",
+      "a": "It is built to avoid that. Every claim must link to a source, unsupported claims are removed, and SDRs check facts before approving."
+    },
+    {
+      "q": "Does it scrape LinkedIn?",
+      "a": "No. It uses permitted public sources and data providers you already licence, within their terms."
+    },
+    {
+      "q": "Does it send emails automatically?",
+      "a": "No. It drafts; your SDRs approve and send through your existing sequencing tool."
+    },
+    {
+      "q": "Can it match our tone?",
+      "a": "Yes. We configure it with your tone guide and examples of messages your team likes, and SDR edits help refine the drafts over time."
+    }
+  ],
+  "related": [
+    "security-questionnaire-answering-assistant",
+    "document-extraction-module-for-saas",
+    "retail-banking-cross-sell-outreach",
+    "shipper-lead-qualification-and-quotes"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/outbound-sdr-research-agent/"
+}

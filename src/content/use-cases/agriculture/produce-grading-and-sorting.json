@@ -1,0 +1,222 @@
+{
+  "slug": "produce-grading-and-sorting",
+  "industry": "agriculture",
+  "title": "Produce Grading and Sorting",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Grade fruit, vegetable and grain lots from camera images at collection centres and packhouses, with defect breakdowns and photo evidence that buyers, FPOs and farmers can all check.",
+  "seo": {
+    "title": "AI Produce Grading and Sorting | VipraTech",
+    "description": "Computer vision that grades produce and grain samples by size, colour and defects at FPO collection centres and packhouses, with photo evidence per lot.",
+    "keywords": [
+      "produce grading AI",
+      "fruit and vegetable sorting computer vision",
+      "grain quality analysis from images",
+      "FPO collection centre grading",
+      "packhouse quality inspection"
+    ]
+  },
+  "designed_for": [
+    "Packhouse Operations Manager",
+    "FPO Procurement Head",
+    "Quality Assurance Lead, Agri Sourcing",
+    "Head of Supply, Agri Marketplace"
+  ],
+  "problem": {
+    "intro": "At a collection centre or packhouse, grading decides what the farmer is paid and what the buyer accepts. It is often done by eye on a sample, by a grader who may be tired by the afternoon, and disputes over grade are settled by argument rather than evidence.",
+    "pain_points": [
+      {
+        "title": "Inconsistent manual grading",
+        "detail": "Two graders can place the same lot of tomatoes or pomegranates in different grades, and the same grader drifts over a long shift."
+      },
+      {
+        "title": "Disputes with farmers and buyers",
+        "detail": "When a farmer questions a deduction or a buyer rejects a consignment, there is no record of what the lot actually looked like."
+      },
+      {
+        "title": "Slow sample analysis for grain",
+        "detail": "Counting broken, shrivelled, discoloured and foreign-matter grains in a wheat or chana sample by hand takes time at peak arrivals."
+      },
+      {
+        "title": "Grade specs that vary by buyer",
+        "detail": "Exporters, modern retail and processors each set their own size, colour and defect limits, which graders must remember."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a vision-based grading station for sample trays or conveyor lines. A fixed camera under controlled lighting captures each sample or piece, and models measure size, shape, colour and surface defects such as bruises, cracks, rot and pest damage. For grain, the system counts and classifies kernels on a tray image, including broken, damaged and foreign matter. Grade rules are configured per commodity and buyer specification. Each lot gets a grade, a defect breakdown and stored images, linked to the farmer and weighbridge record. Borderline lots and disputes go to a QC assayer, who views the same images and can override the grade with a reason.",
+    "capabilities": [
+      "Size, shape and colour measurement for fruit and vegetables",
+      "Surface defect detection for bruising, cracks, rot and pest damage",
+      "Kernel-level grain sample analysis for broken, damaged and foreign matter",
+      "Configurable grade rules per commodity and buyer specification",
+      "Lot-level grade record with stored images",
+      "QC override with mandatory reason capture"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture the sample",
+      "detail": "The operator places a sample on the tray or lets produce pass the conveyor camera, and scans the lot or farmer token."
+    },
+    {
+      "step": 2,
+      "title": "Measure and detect defects",
+      "detail": "Models measure each item or kernel and mark visible defects and foreign matter."
+    },
+    {
+      "step": 3,
+      "title": "Apply grade rules",
+      "detail": "Measurements are compared with the commodity and buyer specification to produce a grade and defect breakdown."
+    },
+    {
+      "step": 4,
+      "title": "Check borderline lots",
+      "detail": "Lots near a grade boundary, or with poor image quality, are flagged instead of being auto-graded."
+    },
+    {
+      "step": 5,
+      "title": "QC assayer review",
+      "detail": "The assayer reviews flagged lots and any farmer or buyer dispute using the stored images, and confirms or overrides the grade."
+    },
+    {
+      "step": 6,
+      "title": "Publish the result",
+      "detail": "The grade and images are attached to the lot in the procurement system and shared with the farmer and buyer."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scan lot token and place sample\"] --> B[\"Capture images under fixed light\"]\n  B --> C[\"Measure size, colour and defects\"]\n  C --> D[\"Apply buyer grade rules\"]\n  D --> E{\"Borderline or poor image?\"}\n  E -->|\"no\"| G[\"Attach grade and images to lot\"]\n  E -->|\"yes\"| F(\"QC assayer reviews and decides\")\n  F --> G\n  G --> H[\"Share grade with farmer and buyer\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture station",
+        "components": [
+          "Fixed camera with diffuse lighting enclosure",
+          "Conveyor or tray trigger",
+          "Lot token or QR scanner"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Segmentation per fruit or kernel",
+          "Defect detector",
+          "Colour and size measurement"
+        ]
+      },
+      {
+        "name": "Grading logic",
+        "components": [
+          "Commodity and buyer grade rule engine",
+          "Borderline detection"
+        ]
+      },
+      {
+        "name": "Review and records",
+        "components": [
+          "QC assayer review screen",
+          "Image archive per lot",
+          "Override log with reasons"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "Procurement or FPO ERP adapter",
+          "Weighbridge data link",
+          "Farmer receipt by SMS or WhatsApp"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture station\"]\n    C1[\"Camera and lighting enclosure\"]\n    C2[\"Lot token scanner\"]\n  end\n  subgraph S2[\"Vision and grading\"]\n    V1[\"Segmentation per item or kernel\"]\n    V2[\"Defect detector\"]\n    V3[\"Grade rule engine\"]\n  end\n  subgraph S3[\"Review and records\"]\n    R1(\"QC assayer screen\")\n    R2[\"Image archive per lot\"]\n  end\n  subgraph S4[\"Integration\"]\n    G1[\"Procurement ERP adapter\"]\n    G2[\"Weighbridge link\"]\n    G3[\"Farmer receipt by WhatsApp\"]\n  end\n  C1 --> V1 --> V2 --> V3\n  C2 --> V3\n  V3 --> R1\n  V3 --> R2\n  R1 --> G1\n  V3 --> G1\n  G2 --> G1\n  G1 --> G3"
+  },
+  "inputs": [
+    "Sample tray or conveyor images per lot",
+    "Lot or farmer token and weighbridge record",
+    "Commodity grade specifications from buyers, or AGMARK standards where used",
+    "Reference images of each grade and defect, labelled by your QC team"
+  ],
+  "outputs": [
+    "Grade per lot with defect breakdown",
+    "Stored images linked to each lot",
+    "Borderline and dispute queue for QC",
+    "Grade history by farmer, village and season",
+    "Data export for payment calculation"
+  ],
+  "human_in_the_loop": "QC assayers review every borderline lot and every dispute raised by a farmer or buyer, using the same stored images. Overrides require a reason, which is used to recalibrate grade rules and models.",
+  "integrations": [
+    "Procurement or FPO ERP",
+    "Weighbridge software",
+    "Farmer payment system",
+    "WhatsApp Business API or SMS gateway for farmer receipts",
+    "Buyer portal or dispatch system"
+  ],
+  "guardrails": [
+    "Lighting and camera calibration check at the start of each shift",
+    "Borderline lots never auto-graded",
+    "All grade overrides logged with user and reason",
+    "Periodic blind re-grading of sampled lots by QC staff",
+    "Separate model versions per commodity, released only after QC sign-off"
+  ],
+  "compliance_notes": [
+    "Where produce is graded under AGMARK, grade rules can be configured to the published grade standards, with the authorised grader keeping final responsibility.",
+    "Images and farmer identifiers are stored with access controls and retention periods agreed with you."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One commodity at one collection centre or packhouse line, run in parallel with manual grading on the same lots.",
+    "deliverables": [
+      "Imaging enclosure specification and setup",
+      "Labelled reference set agreed with your QC team",
+      "Working grading station for one commodity",
+      "Comparison report against manual grades",
+      "Plan for further commodities and sites"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with QC grading",
+        "how": "Model grade compared with the QC assayer's grade on the same lots."
+      },
+      {
+        "metric": "Defect detection accuracy",
+        "how": "Defects marked by the model checked against a QC-labelled sample."
+      },
+      {
+        "metric": "Time per lot",
+        "how": "Grading time per lot measured with and without the station during peak arrivals."
+      },
+      {
+        "metric": "Disputes settled with images",
+        "how": "Count of farmer or buyer disputes where stored images were used to settle the grade."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need special hardware?",
+      "a": "A good industrial camera, or a high-end phone camera, in a simple lighting enclosure is usually enough for sample-tray grading. Conveyor lines need a fixed camera and a trigger. We specify the setup for your commodity during the pilot."
+    },
+    {
+      "q": "Can it handle different buyers' grade specs?",
+      "a": "Yes. Grade rules are configured per commodity and buyer, so the same images can be graded against an exporter's spec and a processor's spec. Your QC team approves every rule set."
+    },
+    {
+      "q": "What about internal defects we cannot see?",
+      "a": "Camera-based grading sees surface and shape only. Internal browning, hollow heart or insect damage inside the grain need other methods, and we say so clearly in the scope."
+    },
+    {
+      "q": "Will farmers trust a machine grade?",
+      "a": "Trust usually comes from transparency. Each farmer can be shown the images and defect marks for their lot, and disputes go to a human assayer who can override the grade."
+    }
+  ],
+  "related": [
+    "crop-disease-detection-from-photos",
+    "warehouse-receipt-and-quality-certificate-extraction",
+    "mandi-price-and-procurement-voice-updates",
+    "visual-quality-inspection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/produce-grading-and-sorting/"
+}

@@ -1,0 +1,222 @@
+{
+  "slug": "lab-report-digitisation",
+  "industry": "healthcare",
+  "title": "Lab Report Digitisation and Trend Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Turn external lab reports, PDFs and phone photos into structured results mapped to standard test codes, and show trends over time to the treating doctor with every value linked to its source.",
+  "seo": {
+    "title": "Lab Report Digitisation and Trends with AI | VipraTech",
+    "description": "Digitise lab reports from any lab, map tests to LOINC, normalise units safely and show result trends to doctors, with each value linked to its report.",
+    "keywords": [
+      "lab report digitisation",
+      "lab report OCR",
+      "LOINC mapping",
+      "patient result trends",
+      "external report structuring"
+    ]
+  },
+  "designed_for": [
+    "Head of Clinical Informatics",
+    "OPD Operations Manager",
+    "Consultant physicians in chronic care clinics",
+    "Product Manager, digital health app"
+  ],
+  "problem": {
+    "intro": "Patients with diabetes, kidney disease or thyroid conditions arrive with a folder of reports from different labs, or a phone full of PDFs and photos. The doctor flips through pages to find last year's HbA1c or creatinine, while test names, units and reference ranges differ from lab to lab.",
+    "pain_points": [
+      {
+        "title": "Different names for the same test",
+        "detail": "Glycated haemoglobin, HbA1c and A1c appear on different reports, and each lab lays out its panels differently."
+      },
+      {
+        "title": "Unit and range differences",
+        "detail": "Results arrive in mg/dL, mmol/L or micromol/L with lab-specific reference ranges, which makes side-by-side comparison error-prone."
+      },
+      {
+        "title": "Consultation time spent searching",
+        "detail": "Minutes of a short OPD slot go on locating prior values instead of talking to the patient."
+      },
+      {
+        "title": "Reports outside the HIS",
+        "detail": "External reports are scanned as images, if at all, so they never appear in trend views or registries."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a lab report digitisation service that reads reports from any lab, whether native PDFs, scans or phone photos. It extracts each test name, result, unit, reference range as printed, sample date and lab name, and maps tests to a standard code system such as LOINC so that equivalent tests line up. Units are converted only where the conversion is on a list your laboratory medicine team approves, and the original value is always kept. Results flow into the patient record and a trend view that shows values over time, with each point linked to its source report. Values outside the printed reference range are marked as such; interpretation stays with the doctor.",
+    "capabilities": [
+      "Reads native PDFs, scans and phone photos from any lab, including multi-page panels",
+      "Extracts test name, result, unit, printed reference range, sample date and lab",
+      "Maps tests to a standard code system such as LOINC, with a review queue for unmapped names",
+      "Converts units only from an approved list and always keeps the original value",
+      "Builds trend views for chronic-care markers your clinicians choose, with source links on every point",
+      "Detects duplicate uploads of the same report"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive reports",
+      "detail": "Reports arrive through front-desk scanning, patient upload on WhatsApp or an app, or lab interfaces."
+    },
+    {
+      "step": 2,
+      "title": "Extract results",
+      "detail": "OCR and an LLM extract each test, result, unit, range and date, with a confidence score for each."
+    },
+    {
+      "step": 3,
+      "title": "Map and normalise",
+      "detail": "Tests are mapped to standard codes and units normalised where approved; unmapped or low-confidence items are queued."
+    },
+    {
+      "step": 4,
+      "title": "Review exceptions",
+      "detail": "A trained data reviewer or nurse confirms flagged items against the source image."
+    },
+    {
+      "step": 5,
+      "title": "Update the record",
+      "detail": "Confirmed results are written to the patient record and appear in the trend view."
+    },
+    {
+      "step": 6,
+      "title": "Doctor views trends",
+      "detail": "During the consultation, the doctor sees trends with links to the source reports and interprets them."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Report via scan, WhatsApp or app\"] --> B[\"Extract test, value, unit, range\"]\n  B --> C[\"Map to LOINC and normalise units\"]\n  C --> D{\"Mapped with high confidence?\"}\n  D -->|\"yes\"| F[\"Write results to patient record\"]\n  D -->|\"no\"| E(\"Data reviewer checks source\")\n  E --> F\n  F --> G[\"Trend view with source links\"]\n  G --> H(\"Doctor reviews in consultation\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Front-desk scanner app",
+          "WhatsApp or patient app upload",
+          "Lab interface feed via HL7 or API"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with table detection",
+          "LLM result extractor with schema"
+        ]
+      },
+      {
+        "name": "Normalisation",
+        "components": [
+          "Test name to LOINC mapper",
+          "Approved unit conversion list",
+          "Duplicate report detector"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception review queue with source image",
+          "Patient matching checks on UHID, name and age"
+        ]
+      },
+      {
+        "name": "Clinical view",
+        "components": [
+          "HIS or EMR write-back",
+          "Trend view for doctors",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Scanner and upload apps\"]\n    I2[\"WhatsApp and patient app\"]\n  end\n  subgraph S2[\"Extraction and normalisation\"]\n    J1[\"OCR with table detection\"]\n    J2[\"LLM result extractor\"]\n    J3[\"LOINC mapper\"]\n    J4[\"Approved unit conversion\"]\n  end\n  subgraph S3[\"Review\"]\n    R1(\"Exception review queue\")\n  end\n  subgraph S4[\"Clinical view\"]\n    V1[\"HIS or EMR write-back\"]\n    V2[\"Doctor trend view\"]\n    V3[\"Audit log\"]\n  end\n  I1 --> J1\n  I2 --> J1\n  J1 --> J2 --> J3 --> J4\n  J3 --> R1\n  J4 --> V1\n  R1 --> V1\n  V1 --> V2\n  V1 --> V3"
+  },
+  "inputs": [
+    "External lab reports as PDFs, scans or phone photos",
+    "Lab interface feeds where available",
+    "Patient identifiers from the HIS, such as UHID",
+    "Test name mapping list maintained by the lab or informatics team",
+    "Unit conversion list approved by laboratory medicine"
+  ],
+  "outputs": [
+    "Structured results with test code, value, unit, range and date",
+    "Trend views for chronic-care markers",
+    "Out-of-printed-range markers with source links",
+    "Exception queue for unmapped or uncertain results",
+    "Audit trail of extraction and reviewer changes"
+  ],
+  "human_in_the_loop": "A trained reviewer confirms any uncertain or unmapped result before it enters the record, and the laboratory medicine team approves the unit conversion list. Doctors interpret every result; the system only organises and displays them.",
+  "integrations": [
+    "HIS or EMR (HL7, FHIR or API)",
+    "Laboratory information system for in-house results",
+    "WhatsApp Business API or patient app for uploads",
+    "ABDM-linked health record apps where the patient consents",
+    "Document management system"
+  ],
+  "guardrails": [
+    "Original value and unit always stored alongside any converted value",
+    "Conversions only from the approved list; all others shown as printed",
+    "No interpretive comments, risk scores or diagnoses generated",
+    "Patient matching on UHID with name and age checks to prevent misfiling",
+    "Every trend point links back to its source page"
+  ],
+  "compliance_notes": [
+    "Patient-uploaded reports handled with consent and purpose limitation under the DPDP Act 2023.",
+    "Structured outputs can follow FHIR-based formats used in ABDM where the hospital is integrated."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "External reports for patients of one chronic-care clinic, such as diabetes or nephrology, digitised for a set of common markers.",
+    "deliverables": [
+      "Test mapping and unit conversion lists for the pilot markers",
+      "Extraction pipeline and review queue",
+      "Trend view prototype for doctors",
+      "Accuracy report per test and report format",
+      "Integration plan for HIS write-back"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Value-level accuracy",
+        "how": "Extracted results compared with manually entered values for a sample of reports."
+      },
+      {
+        "metric": "Mapping coverage",
+        "how": "Test names mapped automatically compared with those sent for review."
+      },
+      {
+        "metric": "Patient matching errors",
+        "how": "Reports linked to the wrong patient, found through reviewer checks."
+      },
+      {
+        "metric": "Doctor usefulness",
+        "how": "Structured feedback from pilot doctors on whether the trend view helped them find prior results."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it interpret results or flag diseases?",
+      "a": "No. It shows values, units, the lab's printed reference range and trends. Whether a value matters for the patient is the doctor's call."
+    },
+    {
+      "q": "How do you handle method differences between labs?",
+      "a": "Every result is shown with its lab name and printed range, so the doctor can see the source. Unit conversions are limited to a list approved by your laboratory medicine team."
+    },
+    {
+      "q": "Can patients upload reports themselves?",
+      "a": "Yes, through WhatsApp or your app, with consent captured at upload. Each report is matched to the patient record and checked before it enters the trend view."
+    },
+    {
+      "q": "Which tests does it support?",
+      "a": "Any test printed on a report can be extracted. Trend views start with markers your clinicians choose, such as HbA1c, creatinine, lipid profile and TSH, and expand from there."
+    }
+  ],
+  "related": [
+    "discharge-summary-and-record-structuring",
+    "clinical-documentation-from-dictation",
+    "hospital-insurance-claim-file-preparation",
+    "post-discharge-follow-up-calls"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/lab-report-digitisation/"
+}

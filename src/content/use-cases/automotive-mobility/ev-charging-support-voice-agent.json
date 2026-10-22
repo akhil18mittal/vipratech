@@ -1,0 +1,217 @@
+{
+  "slug": "ev-charging-support-voice-agent",
+  "industry": "automotive-mobility",
+  "title": "EV Charging Support Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A voice agent for EV drivers at a charger: reads live charger status and faults, guides fixes or approved remote actions, raises refunds and escalates safety issues to people.",
+  "seo": {
+    "title": "EV Charging Support Voice Agent | VipraTech",
+    "description": "Voice agent for charge point operators and EV fleets: charger status, guided fixes, approved remote actions, refunds and safety escalation.",
+    "keywords": [
+      "EV charging support voice agent",
+      "charge point operator helpline AI",
+      "OCPP charger support",
+      "EV driver support automation",
+      "charging refund handling"
+    ]
+  },
+  "designed_for": [
+    "Head of Operations at a Charge Point Operator",
+    "Customer Support Manager",
+    "EV Fleet Operations Manager",
+    "OEM EV Customer Experience Lead"
+  ],
+  "problem": {
+    "intro": "EV drivers call for help while standing at a charger, often at night or on a highway, with a session that will not start, a payment that went through without charging or a connector that will not release. Support agents switch between the charge point management system, payment records and the app to work out what happened.",
+    "pain_points": [
+      {
+        "title": "Drivers need help in the moment",
+        "detail": "A driver at a dead charger cannot wait in a queue, and every minute affects the rest of the trip."
+      },
+      {
+        "title": "Too many tools per call",
+        "detail": "Agents look up charger status, session logs, fault codes and payments in separate systems before they can help."
+      },
+      {
+        "title": "Payment-without-charging disputes",
+        "detail": "Deducted payments with failed or short sessions turn into refund requests that need evidence from logs."
+      },
+      {
+        "title": "Safety calls mixed with routine issues",
+        "detail": "Reports of a burning smell, a damaged cable or water near a charger must reach people at once."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent for your support line that identifies the station and connector from the caller's description, the station name or the ID printed on the charger. It reads live status, connector state, recent fault codes and session logs from your charge point management system. It walks the driver through troubleshooting steps written for that charger model and connector type and, where your operations team allows, triggers remote actions such as starting, stopping or resetting a session, each one logged. It checks payment and session records and raises refunds within policy. Any mention of smoke, burning, damaged cables or water sends the call to a person and alerts field operations.",
+    "capabilities": [
+      "Identifies station and connector from station name, charger ID or location",
+      "Reads live charger status, connector state, fault codes and session logs from the CPMS",
+      "Guided troubleshooting by charger model and connector type",
+      "Triggers remote start, stop or reset only from an allow-list your operations team approves",
+      "Checks payment and session records and raises refund requests within policy",
+      "Immediate human escalation for smoke, burning smell, damaged cables or water"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Identify the charger",
+      "detail": "The agent identifies the station and connector, and confirms the vehicle is plugged in where relevant."
+    },
+    {
+      "step": 2,
+      "title": "Screen for safety",
+      "detail": "Any description of smoke, burning, sparks, damaged cables or water sends the call to a person and alerts field operations."
+    },
+    {
+      "step": 3,
+      "title": "Read charger state",
+      "detail": "Live status, faults and the latest session log are read from the CPMS."
+    },
+    {
+      "step": 4,
+      "title": "Guide or act",
+      "detail": "The agent guides the driver through model-specific steps or triggers an approved remote action."
+    },
+    {
+      "step": 5,
+      "title": "Check the outcome",
+      "detail": "If charging still does not start, the call is handed to a support agent with the diagnostics, and a field ticket is raised."
+    },
+    {
+      "step": 6,
+      "title": "Close and refund",
+      "detail": "Outcomes are logged, and refunds for failed sessions are raised within policy limits."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Driver calls support line\"] --> B[\"Identify station and connector\"]\n  B --> C{\"Safety hazard described?\"}\n  C -->|\"yes\"| D(\"Human agent and field team alerted\")\n  C -->|\"no\"| E[\"Read charger status and session log\"]\n  E --> F[\"Guided steps or approved remote action\"]\n  F --> G{\"Charging started or issue resolved?\"}\n  G -->|\"yes\"| H[\"Log outcome and refund if due\"]\n  G -->|\"no\"| I(\"Handover with charger diagnostics\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony and dialogue",
+        "components": [
+          "Support line over SIP or IVR",
+          "Multilingual speech recognition and voices with language detection",
+          "Troubleshooting playbooks and safety escalation rules"
+        ]
+      },
+      {
+        "name": "Charging systems",
+        "components": [
+          "CPMS API for status, faults and sessions",
+          "Remote command gateway with allow-list",
+          "Payment and wallet records"
+        ]
+      },
+      {
+        "name": "Operations",
+        "components": [
+          "Human support desk",
+          "Field service ticketing",
+          "Refund workflow"
+        ]
+      },
+      {
+        "name": "Monitoring",
+        "components": [
+          "Remote command and call logs",
+          "Fault trend dashboards by station"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony and dialogue\"]\n    T1[\"Support line and IVR\"]\n    T2[\"Speech and dialogue engine\"]\n    T3[\"Safety escalation rules\"]\n  end\n  subgraph S2[\"Charging systems\"]\n    C1[\"CPMS status and session API\"]\n    C2[\"Remote command allow-list\"]\n    C3[\"Payment records\"]\n  end\n  subgraph S3[\"Operations\"]\n    P1(\"Human support agent\")\n    P2[\"Field service ticket\"]\n    P3[\"Refund workflow\"]\n  end\n  subgraph S4[\"Monitoring\"]\n    M1[\"Command and call logs\"]\n    M2[\"Fault trend dashboard\"]\n  end\n  T1 --> T2\n  T2 --> T3\n  T3 --> P1\n  T2 --> C1\n  T2 --> C2\n  T2 --> C3\n  C3 --> P3\n  P1 --> P2\n  C2 --> M1\n  C1 --> M2"
+  },
+  "inputs": [
+    "Live calls from drivers",
+    "Charger status, fault codes and session logs from the CPMS",
+    "Troubleshooting guides for each charger model",
+    "Payment and wallet transaction records",
+    "Refund policy and limits",
+    "Station directory with charger IDs and locations"
+  ],
+  "outputs": [
+    "Resolved sessions and logged remote actions",
+    "Refund requests with session evidence",
+    "Field service tickets with diagnostics",
+    "Call summaries",
+    "Fault trends by station and charger model"
+  ],
+  "human_in_the_loop": "Safety reports, repeated faults and refunds above policy limits go to people. Remote actions are limited to an allow-list approved by your operations team, and support leads review command logs.",
+  "integrations": [
+    "Charge point management system using OCPP",
+    "Payment gateway and wallet",
+    "Field service management tool",
+    "Helpdesk such as Freshdesk or Zendesk",
+    "Telephony or cloud contact centre",
+    "WhatsApp Business API"
+  ],
+  "guardrails": [
+    "Remote commands limited to an approved allow-list, with no configuration or firmware changes",
+    "Safety keywords trigger immediate human transfer",
+    "Drivers are never asked to handle damaged equipment",
+    "Session and payment verification before any refund",
+    "Every remote command logged with caller, charger and outcome"
+  ],
+  "compliance_notes": [
+    "Driver phone numbers, vehicle details and charging locations are personal data handled under the DPDP Act 2023.",
+    "Electrical safety and installation compliance of chargers remain the operator's responsibility; the agent supports drivers and logs actions."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One region or highway corridor of your network, covering the most common issue types such as session start failures and payment without charging.",
+    "deliverables": [
+      "Troubleshooting playbooks for the pilot charger models",
+      "Agent connected to CPMS and payments in test",
+      "Approved remote action allow-list",
+      "Live pilot with call and command logs",
+      "Network-wide roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Calls resolved without handover",
+        "how": "Share of pilot calls where charging started or the issue was closed by the agent, checked against session logs."
+      },
+      {
+        "metric": "Time to charging",
+        "how": "Time from call start to a successful session for resolved calls."
+      },
+      {
+        "metric": "Refund accuracy",
+        "how": "Refund decisions reviewed against session and payment evidence."
+      },
+      {
+        "metric": "Safety escalation correctness",
+        "how": "Scripted test calls plus review of live calls mentioning hazards."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can the agent control our chargers?",
+      "a": "Only through the remote actions your operations team puts on the allow-list, such as remote start, stop or reset, and only after confirming the station and connector. Configuration changes and firmware updates are never available to the agent."
+    },
+    {
+      "q": "Which charge point management systems do you support?",
+      "a": "Any CPMS that exposes status, session and command APIs, typically built on OCPP. We confirm the available endpoints with your platform team before the pilot."
+    },
+    {
+      "q": "Can it support drivers round the clock?",
+      "a": "Yes. The agent answers at any hour, and safety calls and complex cases are routed to your on-call staff according to your escalation rota."
+    },
+    {
+      "q": "Which languages does it handle?",
+      "a": "Hindi, English and Hinglish, plus regional languages along your network's routes. Highway corridors often cross language boundaries, so the agent detects language at the start of each call."
+    }
+  ],
+  "related": [
+    "service-booking-and-reminder-voice-agent",
+    "dealer-chatbot-guardrail-testing",
+    "rider-and-driver-support-voice-agent",
+    "utility-customer-service-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/ev-charging-support-voice-agent/"
+}

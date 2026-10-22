@@ -1,0 +1,216 @@
+{
+  "slug": "coa-extraction-and-spec-matching",
+  "industry": "pharma-life-sciences",
+  "title": "Certificate of Analysis Extraction and Spec Matching",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read supplier and in-house certificates of analysis, extract every test result and compare it with your approved specification, so QC sees out-of-limit, missing and mismatched lines at a glance.",
+  "seo": {
+    "title": "COA Extraction and Specification Matching | VipraTech",
+    "description": "AI that extracts results from supplier COAs, matches them to approved specifications and flags out-of-limit, missing and mismatched lines for QC.",
+    "keywords": [
+      "certificate of analysis extraction",
+      "COA verification AI",
+      "raw material release pharma",
+      "specification matching",
+      "supplier COA review"
+    ]
+  },
+  "designed_for": [
+    "Quality Control Manager",
+    "Head of Quality Assurance",
+    "Supplier Quality Manager",
+    "Stores and Warehouse Manager"
+  ],
+  "problem": {
+    "intro": "Every lot of API, excipient and packaging material arrives with a supplier certificate of analysis, each in its own layout. QC compares the COA line by line with the approved specification and vendor approval before sampling and testing, and similar checks repeat for finished-product COAs sent to customers.",
+    "pain_points": [
+      {
+        "title": "Formats vary by supplier",
+        "detail": "Test names, units and limit expressions differ between suppliers, so a COA cannot be checked with a fixed template."
+      },
+      {
+        "title": "Specification drift",
+        "detail": "Suppliers sometimes quote an older pharmacopoeia edition or their own limits, which is easy to miss when the result itself passes."
+      },
+      {
+        "title": "Missing tests",
+        "detail": "A residual solvent, microbial or elemental impurity test that is in your specification but absent from the COA can slip through a quick visual check."
+      },
+      {
+        "title": "Lot and date mismatches",
+        "detail": "Batch numbers and manufacture or retest dates on the COA do not always match the container label, invoice or goods receipt note."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a COA checking pipeline that reads each certificate, whether a digital PDF or a scan, and extracts material, supplier, batch, dates and every test with its result, unit and limit. Test names are mapped to your specification through a maintained synonym list, units are normalised, and each result is compared with your approved limit. The system also checks that every specified test is present, that the cited pharmacopoeia matches your specification, and that batch and dates match the goods receipt. QC sees a pass, flag or missing status for every line, with the source shown beside it.",
+    "capabilities": [
+      "Extracts tests, results, units and limits from digital and scanned COAs in any supplier layout",
+      "Maps supplier test names to your specification through a QC-approved synonym library",
+      "Normalises units and limit expressions such as NMT, NLT and ranges",
+      "Flags out-of-limit results, missing tests and differing pharmacopoeia references",
+      "Matches batch number and dates against the goods receipt note and label",
+      "Keeps a per-supplier history to show results drifting towards limits"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the COA",
+      "detail": "COAs arrive with the consignment, by email or from a supplier portal, and are linked to the goods receipt note."
+    },
+    {
+      "step": 2,
+      "title": "Extract test data",
+      "detail": "OCR and an LLM extract header details and the test table with results, units and limits."
+    },
+    {
+      "step": 3,
+      "title": "Map to specification",
+      "detail": "Each test is mapped to the approved specification for that material and vendor, and units are normalised."
+    },
+    {
+      "step": 4,
+      "title": "Compare and check completeness",
+      "detail": "Results are compared with limits, missing tests are listed, and batch and dates are matched to the goods receipt."
+    },
+    {
+      "step": 5,
+      "title": "QC review",
+      "detail": "Flags, unmapped tests and low-confidence values go to a QC reviewer, who accepts, rejects or raises a query with the supplier."
+    },
+    {
+      "step": 6,
+      "title": "Record the outcome",
+      "detail": "Checked COA data is stored against the lot in LIMS or ERP with the reviewer's decision."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"COA received with consignment\"] --> B[\"Extract tests, results and limits\"]\n  B --> C[\"Map tests to approved spec\"]\n  C --> D[\"Compare results and check completeness\"]\n  D --> E{\"Any flags or unmapped tests?\"}\n  E -->|\"yes\"| F(\"QC reviewer decides\")\n  E -->|\"no\"| G[\"Mark COA check complete\"]\n  F --> H[\"Query supplier if needed\"]\n  F --> G\n  G --> I[\"Store result against lot in LIMS\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Email and supplier portal connectors",
+          "Goods receipt link from ERP",
+          "Scan station at stores"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with table detection",
+          "LLM extractor with COA schema",
+          "Unit and limit normaliser"
+        ]
+      },
+      {
+        "name": "Specification matching",
+        "components": [
+          "Approved specification library by material and vendor",
+          "Test name synonym library",
+          "Comparison and completeness rules"
+        ]
+      },
+      {
+        "name": "Review and records",
+        "components": [
+          "QC review screen with source highlights",
+          "LIMS or ERP adapter",
+          "Supplier trend report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    N1[\"Email and supplier portal\"]\n    N2[\"ERP goods receipt link\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"OCR and table detection\"]\n    E2[\"LLM COA extractor\"]\n    E3[\"Unit normaliser\"]\n  end\n  subgraph S3[\"Specification matching\"]\n    M1[\"Specification library\"]\n    M2[\"Test synonym library\"]\n    M3[\"Comparison rules\"]\n  end\n  subgraph S4[\"Review and records\"]\n    R1(\"QC review screen\")\n    R2[\"LIMS adapter\"]\n    R3[\"Supplier trend report\"]\n  end\n  N1 --> E1\n  E1 --> E2 --> E3\n  E3 --> M3\n  M1 --> M3\n  M2 --> M3\n  N2 --> M3\n  M3 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Supplier COAs for APIs, excipients and packaging materials",
+    "Approved material specifications and approved vendor list",
+    "Goods receipt notes and supplier invoices",
+    "Pharmacopoeia references cited in your specifications",
+    "In-house finished-product COAs before dispatch"
+  ],
+  "outputs": [
+    "Line-by-line comparison with pass, flag or missing status",
+    "List of out-of-limit results and absent tests",
+    "Batch and date mismatch alerts against the goods receipt",
+    "Structured COA data stored against the lot",
+    "Supplier-wise trend of results near limits"
+  ],
+  "human_in_the_loop": "QC reviews every flagged line, unmapped test and low-confidence value, and decides whether to accept the COA, query the supplier or reject the lot. The COA check supports, and does not replace, your sampling and testing programme and the QA release decision.",
+  "integrations": [
+    "LIMS such as LabWare, LabVantage or STARLIMS",
+    "ERP such as SAP for goods receipt and lot status",
+    "Supplier portal or shared mailbox",
+    "Document management system for approved specifications",
+    "QMS for supplier complaints and CAPA"
+  ],
+  "guardrails": [
+    "New test-name synonyms added only after QC approval",
+    "Specifications pulled from the effective version only",
+    "No automatic lot release; status changes stay with QC and QA",
+    "Low-confidence values always shown next to the source image",
+    "Periodic re-check of a sample of cleared COAs by QC"
+  ],
+  "compliance_notes": [
+    "Supports vendor qualification and material control expectations under GMP, including India's revised Schedule M.",
+    "Where COA data feeds GMP decisions, records and audit trails are designed to align with 21 CFR Part 11 and EU GMP Annex 11."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "A group of high-volume raw materials from a few suppliers, using recent COAs already reviewed by QC, followed by a short live run.",
+    "deliverables": [
+      "Synonym and unit library for the pilot materials",
+      "Working COA checking pipeline",
+      "QC review screen",
+      "Accuracy report against QC's own COA reviews",
+      "Plan to extend to the remaining materials"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Extraction accuracy per test line",
+        "how": "Extracted results and limits compared with QC-verified values for the same COAs."
+      },
+      {
+        "metric": "Test mapping accuracy",
+        "how": "Supplier test names checked by QC for correct mapping to the specification."
+      },
+      {
+        "metric": "Flags confirmed by QC",
+        "how": "QC decision recorded against each flag raised."
+      },
+      {
+        "metric": "Review time per COA",
+        "how": "Timed checks on comparable COAs with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does this replace our COA review SOP?",
+      "a": "No. The pipeline does the reading and comparing, and your SOP is updated to describe how QC reviews its output. Lot release decisions stay with QC and QA."
+    },
+    {
+      "q": "What about COAs that are not in English?",
+      "a": "Most supplier COAs are in English or bilingual. Where a supplier issues COAs only in another language, we test extraction on samples during the pilot and report results per supplier."
+    },
+    {
+      "q": "Can it check pharmacopoeia limits directly?",
+      "a": "It checks against your approved specification, which already reflects the monograph you follow. It also flags when a supplier cites a different pharmacopoeia or edition, so QC can decide whether that matters."
+    },
+    {
+      "q": "Will it work for the finished-product COAs we issue?",
+      "a": "Yes. The same comparison can check COAs generated from LIMS before they go to customers or regulators, catching transcription errors and missing tests."
+    }
+  ],
+  "related": [
+    "batch-manufacturing-record-review",
+    "supplier-quality-certificate-verification",
+    "packaging-and-label-inspection",
+    "regulatory-dossier-and-sop-assistant"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/coa-extraction-and-spec-matching/"
+}

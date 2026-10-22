@@ -1,0 +1,125 @@
+{
+  "slug": "fintech-payments",
+  "name": "Fintech & Payments",
+  "seo": {
+    "title": "AI for Fintech & Payments: KYC, Disputes & Recon | VipraTech",
+    "description": "AI for payment aggregators and fintechs: merchant KYC review, chargeback evidence, settlement reconciliation, support voice agents and LLM security.",
+    "keywords": [
+      "AI for payment aggregators",
+      "merchant onboarding KYC automation",
+      "chargeback evidence automation",
+      "settlement reconciliation AI",
+      "LLM security testing fintech",
+      "DPDP AI data assessment",
+      "UPI failed payment voice agent"
+    ]
+  },
+  "hero": {
+    "headline": "Clear merchant KYC, dispute and reconciliation queues with AI your risk team can audit",
+    "subheadline": "We build document, vision, voice and AI security systems for payment aggregators, gateways, B2B payment platforms and fintech apps. Each one shows its evidence and leaves the decision with your risk, finance or compliance team."
+  },
+  "intro": "Payment businesses run on operations queues: merchant onboarding files waiting for KYC review, chargebacks with response deadlines, settlement files that do not tie to escrow credits, and calls about UPI payments that were debited but failed. AI helps most where people currently read documents, compare records or answer the same question many times, and where every output can be checked against a source. It does not replace your fraud models, your risk policy or the person who signs off a high-risk merchant. We build systems that prepare the work, show their evidence and leave decisions with your teams. As fintechs add LLM assistants and agents to their own products, we also test those features before customers and attackers find the gaps.",
+  "challenges": [
+    {
+      "title": "Onboarding speed versus risk appetite",
+      "detail": "Sales wants merchants live quickly, while risk must complete PAN, GST, bank, website and business-model checks properly before activation."
+    },
+    {
+      "title": "Dispute deadlines",
+      "detail": "Card network and UPI dispute windows are short, and the evidence sits across order systems, courier partners, support tickets and the merchant's own records."
+    },
+    {
+      "title": "Settlement breaks",
+      "detail": "Acquirer and partner bank settlement files rarely tie to escrow credits line for line, so unexplained differences build up in suspense."
+    },
+    {
+      "title": "AI features under scrutiny",
+      "detail": "Chatbots and agents that can see transaction data or trigger refunds create new routes for data leakage and misuse, and boards, partner banks and regulators expect them to be tested and governed."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Reads merchant KYC packs, GST invoices, chargeback evidence and settlement files, and checks them against each other with every value linked to its source."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Selfie-to-ID face match, liveness and document tamper checks for digital onboarding, with borderline cases sent to a fraud reviewer."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Hindi, English and Hinglish support agents that read live payment status and explain reversals and refunds, without any access to move money."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Pre-launch testing of LLM features, permission reviews for agents that can move money, and DPDP-aligned assessments of how AI systems handle personal data."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Activation and upsell journeys driven by merchant integration and transaction signals, sent within consent, DLT and WhatsApp template rules."
+    }
+  ],
+  "featured_use_cases": [
+    "merchant-onboarding-kyc-verification",
+    "settlement-reconciliation",
+    "llm-app-pre-launch-security-assessment"
+  ],
+  "use_cases": [
+    "merchant-onboarding-kyc-verification",
+    "chargeback-dispute-evidence-pack",
+    "invoice-and-gst-data-extraction",
+    "settlement-reconciliation",
+    "selfie-id-face-match-and-tamper-checks",
+    "payment-support-voice-agent",
+    "llm-app-pre-launch-security-assessment",
+    "ai-agent-permission-and-tool-use-review",
+    "dpdp-ai-data-handling-assessment",
+    "merchant-activation-and-upsell-automation"
+  ],
+  "regulatory_context": [
+    {
+      "name": "RBI directions for payment aggregators",
+      "note": "RBI's framework for payment aggregators sets expectations on merchant due diligence, escrow account handling and data security. Our onboarding and reconciliation systems keep the records that help you evidence these checks."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Requires a lawful basis such as consent, purpose limitation and reasonable security safeguards for digital personal data, with detailed obligations set out in the DPDP Rules. Our systems minimise, mask and log the personal data they process."
+    },
+    {
+      "name": "RBI FREE-AI framework (2025)",
+      "note": "RBI's Framework for Responsible and Ethical Enablement of AI sets out recommendations on AI governance, testing and accountability for regulated entities. Our security assessments help you evidence these practices."
+    },
+    {
+      "name": "PCI DSS",
+      "note": "Card data environments must meet PCI DSS. We design AI pipelines so they work with masked or tokenised card data and stay out of the card data environment wherever possible."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Will the AI approve merchants or decide disputes?",
+      "a": "No. Our systems prepare files, run checks and draft packs, and they show the evidence behind every flag. Your risk analysts, disputes team and finance controllers make the decisions and their sign-off is recorded."
+    },
+    {
+      "q": "Can you work without seeing full card numbers?",
+      "a": "Yes. We design pipelines around masked or tokenised card data and transaction references such as RRN, ARN and UTR. Full card numbers are not needed for the use cases we build."
+    },
+    {
+      "q": "Where is payment data processed?",
+      "a": "We deploy in your own cloud account or in an India region of a major cloud provider. RBI's direction on storage of payment system data expects payment data to be stored in India, so payment data stays in India, and we can use model endpoints that do not retain or train on your data."
+    },
+    {
+      "q": "How long does a pilot take?",
+      "a": "Most pilots run two to four weeks on one narrow workflow, such as one merchant segment or one dispute reason code, alongside your current process. You get a working system, a measurement report and a costed production plan."
+    }
+  ],
+  "related_industries": [
+    "banking",
+    "nbfc-lending",
+    "retail-ecommerce"
+  ],
+  "cta": {
+    "headline": "Pick one queue and test it on your own data",
+    "text": "Book a discovery call. We will choose one workflow, such as merchant KYC review or dispute evidence, and scope a short pilot that runs alongside your current process."
+  },
+  "url": "/industries/fintech-payments/"
+}

@@ -1,0 +1,113 @@
+{
+  "slug": "voice-ai",
+  "name": "Voice AI",
+  "seo": {
+    "title": "Voice AI Agents in Hindi, English and Regional Languages | VipraTech",
+    "description": "Voice and WhatsApp agents for bookings, reminders, collections and support, built with guardrails, call recording and human handover.",
+    "keywords": [
+      "voice AI agent India",
+      "Hindi voice bot",
+      "AI calling agent",
+      "collections voice agent",
+      "WhatsApp AI agent"
+    ]
+  },
+  "hero": {
+    "headline": "Voice agents that follow your script and know when to hand over",
+    "subheadline": "We build inbound and outbound voice and WhatsApp agents in Hindi, Hinglish, English and regional languages, with consent checks, guardrails and a clean handover to your team."
+  },
+  "intro": "A good voice agent is mostly plumbing and rules: telephony, CRM lookups, consent, calling windows, escalation, and what it must never say. We build those first, then tune the conversation for your callers. Because we also red-team voice agents for a living, every agent we ship is tested against the ways callers try to push it off script.",
+  "what_we_build": [
+    "Inbound support and booking agents",
+    "Outbound reminders, renewals and follow-ups",
+    "Lead qualification and appointment setting",
+    "WhatsApp agents with payment links and catalogues",
+    "Call QA and compliance auditing on recorded calls",
+    "CRM, telephony and ticketing integrations"
+  ],
+  "how_we_work": [
+    "Map the call types and the rules the agent must follow",
+    "Build on your telephony and CRM in a sandbox",
+    "Red-team the agent before it talks to customers",
+    "Launch on a slice of traffic with human handover and call review"
+  ],
+  "proof_refs": [
+    "autosentinx-voice-red-team",
+    "whatsapp-hotel-booking"
+  ],
+  "faqs": [
+    {
+      "q": "Which languages do you support?",
+      "a": "Hindi, Hinglish and English are standard. Other Indian languages depend on the speech models available for your use case; the pilot tests recognition quality on your real callers."
+    },
+    {
+      "q": "How do you stop the agent saying the wrong thing?",
+      "a": "Locked scripts for regulated statements, retrieval from approved content only, refusal rules, and adversarial testing before launch. Calls are recorded and sampled for review."
+    },
+    {
+      "q": "Can it transfer to a human?",
+      "a": "Yes. Handover rules are agreed upfront, for example on complaints, payment disputes or low confidence, and the human agent receives a summary."
+    }
+  ],
+  "url": "/solutions/voice-ai/",
+  "use_cases": [
+    "multilingual-banking-voice-agent",
+    "collections-voice-agent-with-conduct-guardrails",
+    "emi-reminder-voice-and-whatsapp-agent",
+    "policy-renewal-voice-agent",
+    "claim-status-voice-helpline",
+    "trading-support-voice-agent",
+    "payment-support-voice-agent",
+    "appointment-booking-voice-agent",
+    "post-discharge-follow-up-calls",
+    "clinical-documentation-from-dictation",
+    "mr-call-reporting-by-voice",
+    "stockist-order-taking-voice-agent",
+    "rider-and-driver-support-voice-agent",
+    "delivery-status-voice-and-whatsapp-agent",
+    "dealer-order-taking-voice-agent",
+    "consumer-durables-service-booking-voice-agent",
+    "order-status-and-returns-voice-agent",
+    "cod-confirmation-calls",
+    "property-lead-qualification-voice-agent",
+    "site-visit-booking-and-reminders",
+    "after-hours-reservation-voice-agent",
+    "admission-enquiry-voice-agent",
+    "fee-reminder-voice-and-whatsapp-agent",
+    "client-intake-voice-agent",
+    "hearing-transcription-and-minutes",
+    "meeting-minutes-drafting",
+    "multilingual-l1-support-voice-agent",
+    "call-qa-and-compliance-auditing",
+    "real-time-agent-assist",
+    "outbound-sales-voice-agent-with-consent-checks",
+    "utility-customer-service-voice-agent",
+    "field-technician-voice-reporting",
+    "service-booking-and-reminder-voice-agent",
+    "test-drive-lead-qualification-voice-agent",
+    "ev-charging-support-voice-agent",
+    "farmer-advisory-voice-helpline",
+    "mandi-price-and-procurement-voice-updates"
+  ],
+  "industries": [
+    "accounting-audit-consulting",
+    "agriculture",
+    "automotive-mobility",
+    "banking",
+    "capital-markets-wealth",
+    "education",
+    "energy-mining-utilities",
+    "fintech-payments",
+    "healthcare",
+    "hospitality-travel",
+    "insurance",
+    "legal",
+    "logistics-supply-chain",
+    "manufacturing",
+    "nbfc-lending",
+    "pharma-life-sciences",
+    "real-estate-construction",
+    "retail-ecommerce",
+    "telecom-contact-centers"
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "clinical-documentation-from-dictation",
+  "industry": "healthcare",
+  "title": "Clinical Documentation from Doctor Dictation",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Doctors dictate in English or Hinglish after a consultation, round or procedure, and the system drafts a structured note or prescription in your EMR template for the doctor to check and sign.",
+  "seo": {
+    "title": "Clinical Notes from Doctor Dictation with AI | VipraTech",
+    "description": "Dictation-to-note for OPD, ward and OT documentation, tuned for Indian English, Hinglish and drug names, with formulary checks and doctor sign-off.",
+    "keywords": [
+      "clinical documentation from dictation",
+      "medical speech recognition India",
+      "doctor dictation to EMR",
+      "AI medical transcription",
+      "Hinglish medical dictation"
+    ]
+  },
+  "designed_for": [
+    "Chief Medical Officer",
+    "Consultants and surgeons",
+    "Chief Information Officer",
+    "Head of Medical Transcription or MRD"
+  ],
+  "problem": {
+    "intro": "Doctors in busy OPDs and wards either type notes between patients, write them by hand or leave them for later. Medical transcription takes time and still needs correcting. Indian doctors often dictate in English mixed with Hindi, with drug brand names and abbreviations that general speech tools get wrong.",
+    "pain_points": [
+      {
+        "title": "Typing time in short consultations",
+        "detail": "Doctors split attention between the patient and the screen, or write brief notes that miss detail."
+      },
+      {
+        "title": "Vocabulary errors",
+        "detail": "Generic speech tools mangle drug brands, doses, abbreviations and anatomical terms."
+      },
+      {
+        "title": "Unstructured output",
+        "detail": "Free-text dictation does not fill the EMR fields that billing, audits and other teams rely on."
+      },
+      {
+        "title": "Sound-alike drug risk",
+        "detail": "Drug names that sound similar can be transcribed wrongly, which is a patient safety issue if nobody catches it."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a dictation-to-note system for OPD, ward and OT documentation. The doctor dictates on a phone, tablet or desktop microphone, in English or Hinglish, after the consultation or procedure. Speech recognition tuned to your specialties, formulary and common brand names produces a transcript, and an LLM organises it into your EMR template: complaints, history, examination, the doctor's stated assessment, plan and prescription lines. It uses only what the doctor said. Drug names are checked against your formulary, and unrecognised or sound-alike names, missing doses and unusual frequencies are highlighted. The doctor reviews the draft beside the audio, corrects it and signs.",
+    "capabilities": [
+      "Speech recognition tuned for Indian English, Hinglish, drug brands and specialty vocabulary",
+      "Structuring into OPD, ward round, operative note and prescription templates",
+      "Formulary check that highlights unrecognised or sound-alike drug names and missing doses",
+      "Side-by-side review with transcript, audio playback and highlighted uncertain words",
+      "Write-back of signed notes and prescriptions to the EMR",
+      "Per-doctor vocabulary and template preferences"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Dictate",
+      "detail": "The doctor records a dictation on a mobile app or desktop after the consultation, round or procedure, linked to the patient's UHID."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe",
+      "detail": "Specialty-tuned speech recognition converts the audio to text and marks uncertain words."
+    },
+    {
+      "step": 3,
+      "title": "Structure into the template",
+      "detail": "An LLM places the content into the right template sections without adding information."
+    },
+    {
+      "step": 4,
+      "title": "Check drugs and gaps",
+      "detail": "Prescription lines are checked against the formulary, and sound-alike names, missing doses and empty mandatory sections are highlighted."
+    },
+    {
+      "step": 5,
+      "title": "Doctor review and sign",
+      "detail": "The doctor reviews the draft with audio playback, corrects it and signs."
+    },
+    {
+      "step": 6,
+      "title": "Write to the EMR",
+      "detail": "The signed note and prescription are written to the EMR, and the audio is kept or deleted according to policy."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Doctor dictates on app with UHID\"] --> B[\"Specialty-tuned transcription\"]\n  B --> C[\"Structure into EMR template\"]\n  C --> D[\"Formulary and gap checks\"]\n  D --> E{\"Uncertain words or drug flags?\"}\n  E -->|\"yes\"| F[\"Highlight for doctor attention\"]\n  E -->|\"no\"| G(\"Doctor reviews and signs\")\n  F --> G\n  G --> H[\"Signed note and Rx to EMR\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Mobile and desktop dictation app",
+          "Patient context from the EMR by UHID"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Speech recognition with custom vocabulary",
+          "Uncertainty marking"
+        ]
+      },
+      {
+        "name": "Structuring and checks",
+        "components": [
+          "LLM template filler restricted to dictated content",
+          "Formulary and dose checker"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Doctor review screen with synced audio",
+          "E-signature"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "EMR write-back",
+          "Audit log of drafts and edits",
+          "Audio retention controls"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Dictation app\"]\n    C2[\"EMR patient context\"]\n  end\n  subgraph S2[\"Speech\"]\n    P1[\"Custom vocabulary ASR\"]\n    P2[\"Uncertainty marker\"]\n  end\n  subgraph S3[\"Structuring and checks\"]\n    T1[\"LLM template filler\"]\n    T2[\"Formulary and dose checker\"]\n  end\n  subgraph S4[\"Review and EMR\"]\n    R1(\"Doctor review with audio\")\n    R2[\"EMR write-back\"]\n    R3[\"Audit log and audio retention\"]\n  end\n  C1 --> P1 --> P2 --> T1\n  C2 --> T1\n  T1 --> T2 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Doctor dictation audio",
+    "Patient context from the EMR, such as UHID and visit type",
+    "Specialty templates for OPD, ward and operative notes",
+    "Hospital formulary with brand and generic names",
+    "Custom vocabulary lists per department"
+  ],
+  "outputs": [
+    "Structured draft note in the EMR template",
+    "Draft prescription lines with formulary flags",
+    "Highlighted uncertain words with audio links",
+    "Signed note and prescription in the EMR",
+    "Audit trail of draft, edits and signature"
+  ],
+  "human_in_the_loop": "The doctor reviews and signs every note and prescription. The system only structures what the doctor dictated; it does not suggest diagnoses, treatments or doses.",
+  "integrations": [
+    "EMR or HIS (API, HL7 or FHIR)",
+    "Hospital formulary or pharmacy system",
+    "Single sign-on for doctors",
+    "Mobile device management for hospital devices",
+    "Existing transcription workflow where some departments keep it"
+  ],
+  "guardrails": [
+    "No content added beyond the dictation; empty sections stay empty",
+    "Sound-alike and unrecognised drug names always highlighted",
+    "Drafts cannot be printed or shared until signed",
+    "Audio encrypted and kept only as long as policy allows",
+    "Recording of consultations only with the patient's recorded consent"
+  ],
+  "compliance_notes": [
+    "Audio and notes are health data under the DPDP Act 2023; consent, access control and retention follow hospital policy.",
+    "For US deployments, designed to operate under HIPAA safeguards with a business associate agreement.",
+    "The doctor remains the author of the record and responsible for its clinical content."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "OPD notes and prescriptions for a small group of consultants in one or two specialties, run alongside their current documentation.",
+    "deliverables": [
+      "Templates and vocabulary for the pilot specialties",
+      "Dictation app and review screen",
+      "Formulary check configured",
+      "Accuracy and edit report",
+      "EMR integration plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Transcription accuracy",
+        "how": "Word error rate on a reviewed sample, reported separately for drug names and clinical terms."
+      },
+      {
+        "metric": "Doctor edit effort",
+        "how": "Changes made between the draft and the signed note."
+      },
+      {
+        "metric": "Drug flag precision",
+        "how": "Pharmacist or doctor review of whether each formulary flag was justified, and of any drug error that was not flagged."
+      },
+      {
+        "metric": "Documentation time",
+        "how": "Doctor-reported and app-measured time per note compared with their current method."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it understand Hinglish and Indian accents?",
+      "a": "Yes. We tune recognition with your specialties' vocabulary and test it on dictations from your own doctors. The pilot reports accuracy per doctor and per term type."
+    },
+    {
+      "q": "Will it suggest diagnoses or medicines?",
+      "a": "No. It structures what the doctor said. It flags drug names it cannot match to the formulary or that sound like another drug, but it never proposes a drug or dose."
+    },
+    {
+      "q": "Is patient audio sent outside the hospital?",
+      "a": "Processing can run in your cloud account in an India region, or on hospital servers for the speech component. We agree the deployment model with your IT and data protection teams."
+    },
+    {
+      "q": "Can it replace our transcription team?",
+      "a": "Many hospitals keep transcriptionists as reviewers for complex dictations such as operative notes. The pilot shows where doctors can self-review and where a second reviewer still adds value."
+    }
+  ],
+  "related": [
+    "discharge-summary-and-record-structuring",
+    "lab-report-digitisation",
+    "appointment-booking-voice-agent",
+    "mr-call-reporting-by-voice"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/clinical-documentation-from-dictation/"
+}

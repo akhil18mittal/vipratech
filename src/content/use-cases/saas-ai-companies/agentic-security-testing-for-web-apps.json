@@ -1,0 +1,222 @@
+{
+  "slug": "agentic-security-testing-for-web-apps",
+  "industry": "saas-ai-companies",
+  "title": "Agentic Security Testing for Web Apps and APIs",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Supervisor-led AI agents map your web app and APIs, test OWASP Top 10, API and business-logic flaws, confirm each issue live, and hand tester-reviewed findings with evidence to your team.",
+  "seo": {
+    "title": "Agentic Security Testing for Web Apps and APIs | VipraTech",
+    "description": "AI agents that map, test and confirm web app and API vulnerabilities across OWASP Top 10, API risks and business logic, with tester-reviewed findings.",
+    "keywords": [
+      "agentic penetration testing",
+      "AI pentesting for web apps",
+      "API security testing",
+      "business logic testing",
+      "continuous pentesting for SaaS"
+    ]
+  },
+  "designed_for": [
+    "CTO or VP Engineering",
+    "Head of Security",
+    "AppSec Lead",
+    "Penetration Testing Service Provider"
+  ],
+  "problem": {
+    "intro": "SaaS teams ship web and API changes every week, but a full manual pentest happens once or twice a year. Scanners run more often but produce long lists of unverified issues and miss business-logic flaws, such as a user approving their own expense claim or reading another account's invoice by changing an ID.",
+    "pain_points": [
+      {
+        "title": "Pentests that age quickly",
+        "detail": "Last year's report says little about the endpoints and roles added since."
+      },
+      {
+        "title": "Scanner noise",
+        "detail": "Unverified scanner output buries real issues and costs engineers time on false positives."
+      },
+      {
+        "title": "Business logic missed",
+        "detail": "Authorisation and workflow flaws need an understanding of roles and intent that signature-based scanners lack."
+      },
+      {
+        "title": "Weak evidence",
+        "detail": "Findings without a reproducible path are hard for developers to fix and hard for customers to trust."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build and run an agentic testing workflow for your web application and APIs. A supervisor agent plans the engagement and directs specialist agents: one discovers endpoints from crawling, OpenAPI or GraphQL schemas and traffic captures; another maps roles and the attack surface; others test for OWASP Top 10 and OWASP API Security Top 10 risks, such as broken object-level authorisation, and work through business-logic flows. Every candidate issue is confirmed live in a controlled way, so only real issues are reported, with the requests and responses that prove them. A human tester reviews findings, looks for chains across issues and rates severity. Findings can become draft fix pull requests for developer review.",
+    "capabilities": [
+      "Endpoint discovery from crawling, OpenAPI or GraphQL schemas and traffic captures",
+      "Role and permission matrix testing across user types and tenants",
+      "OWASP Top 10 and OWASP API Security Top 10 coverage",
+      "Business-logic testing of workflows such as approvals, refunds and invitations",
+      "Live confirmation of each candidate issue with request and response evidence",
+      "Tester-reviewed findings, with optional draft fix pull requests"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and accounts",
+      "detail": "We agree targets, environments, test accounts per role, rate limits and excluded actions."
+    },
+    {
+      "step": 2,
+      "title": "Discover and map",
+      "detail": "Agents discover endpoints and build a map of roles, objects and workflows."
+    },
+    {
+      "step": 3,
+      "title": "Plan and test",
+      "detail": "The supervisor assigns specialist agents to test each area against OWASP and business-logic cases."
+    },
+    {
+      "step": 4,
+      "title": "Confirm live",
+      "detail": "Each candidate issue is reproduced safely, and unconfirmed issues are dropped."
+    },
+    {
+      "step": 5,
+      "title": "Tester review",
+      "detail": "A human tester reviews confirmed issues, looks for chains and rates severity."
+    },
+    {
+      "step": 6,
+      "title": "Report and fix",
+      "detail": "Findings go to your tracker with evidence, and draft fix pull requests are prepared where useful."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agree scope and test accounts\"] --> B[\"Agents discover endpoints and roles\"]\n  B --> C[\"Supervisor plans test coverage\"]\n  C --> D[\"Specialist agents run tests\"]\n  D --> E{\"Issue confirmed live?\"}\n  E -->|\"no\"| F[\"Drop unconfirmed candidate\"]\n  E -->|\"yes\"| G(\"Tester reviews chain and severity\")\n  G --> H[\"Ticket with evidence\"]\n  H --> I[\"Draft fix pull request\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Discovery",
+        "components": [
+          "Crawler and schema importer",
+          "Traffic capture import",
+          "Role and object map"
+        ]
+      },
+      {
+        "name": "Orchestration",
+        "components": [
+          "Supervisor agent with test plan",
+          "Specialist agents for authentication, access control, injection and logic",
+          "Tool layer for HTTP requests and browser automation"
+        ]
+      },
+      {
+        "name": "Confirmation",
+        "components": [
+          "Live reproduction under a safe-testing policy",
+          "Evidence capture of requests and responses"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Tester console",
+          "Severity and chain analysis"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Issue tracker integration",
+          "Draft fix pull requests",
+          "Retest scheduler"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Discovery\"]\n    D1[\"Crawler and schema import\"]\n    D2[\"Role and object map\"]\n  end\n  subgraph S2[\"Orchestration\"]\n    O1[\"Supervisor agent\"]\n    O2[\"Specialist test agents\"]\n    O3[\"HTTP and browser tools\"]\n  end\n  subgraph S3[\"Confirmation and review\"]\n    V1[\"Live reproduction\"]\n    V2[\"Evidence capture\"]\n    V3(\"Tester review\")\n  end\n  subgraph S4[\"Delivery\"]\n    L1[\"Issue tracker\"]\n    L2[\"Draft fix pull requests\"]\n  end\n  D1 --> D2 --> O1\n  O1 --> O2 --> O3\n  O3 --> V1 --> V2 --> V3\n  V3 --> L1 --> L2"
+  },
+  "inputs": [
+    "Target URLs and API base paths in staging",
+    "OpenAPI or GraphQL schemas, where available",
+    "Test accounts for each role and tenant",
+    "Description of key business workflows",
+    "Exclusions and rate limits"
+  ],
+  "outputs": [
+    "Endpoint and role map",
+    "Confirmed findings with request and response evidence",
+    "Severity ratings and chain analysis",
+    "Tickets in your issue tracker",
+    "Draft fix pull requests for developer review"
+  ],
+  "human_in_the_loop": "A human tester reviews every confirmed finding, looks for chains and sets severity. Developers review and merge any draft fix pull request; nothing changes in your code without their approval.",
+  "integrations": [
+    "Staging environment and test accounts",
+    "OpenAPI or GraphQL schemas",
+    "Issue trackers such as Jira, Linear or GitHub Issues",
+    "Source repository for draft fix pull requests",
+    "CI for scheduled retests"
+  ],
+  "guardrails": [
+    "Agreed scope, exclusions and rate limits enforced by the tool layer",
+    "No destructive actions; state-changing tests only on test accounts",
+    "Every reported issue confirmed live before it is reported",
+    "All agent actions logged for audit",
+    "Stop control available to your team throughout"
+  ],
+  "compliance_notes": [
+    "Testing records support customer due diligence and audits against frameworks such as ISO/IEC 27001 and SOC 2, where regular pentesting is expected.",
+    "Findings map to the OWASP Top 10 and OWASP API Security Top 10."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One web application and its main API in staging, with test accounts for two or three roles.",
+    "deliverables": [
+      "Endpoint and role map",
+      "Confirmed findings with evidence",
+      "Tester-reviewed report",
+      "Draft fix pull requests for selected findings",
+      "Retest results"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Confirmed findings by severity",
+        "how": "Count of confirmed issues after tester review."
+      },
+      {
+        "metric": "Candidates rejected at review",
+        "how": "Candidates the tester rejects as not real, tracked to tune the agents."
+      },
+      {
+        "metric": "Endpoint coverage",
+        "how": "Endpoints discovered and tested against known endpoints from schemas."
+      },
+      {
+        "metric": "Fix turnaround",
+        "how": "Time from ticket to passing retest, including draft pull requests."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is this a replacement for a manual pentest?",
+      "a": "It takes over much of the repetitive work and can run far more often, but a human tester still reviews findings, looks for chains and judges severity. Many teams use it between annual manual tests or as the base of a continuous programme."
+    },
+    {
+      "q": "Is it safe to run against our app?",
+      "a": "Testing runs in staging with test accounts, within agreed rate limits and exclusions. Agents avoid destructive actions, and your team can stop a run at any time."
+    },
+    {
+      "q": "Can it test business logic?",
+      "a": "Yes, within the workflows you describe and the roles we have accounts for. Logic testing works best when your team walks us through how approvals, refunds or sharing should behave."
+    },
+    {
+      "q": "Do you fix the issues?",
+      "a": "We can prepare draft fix pull requests for confirmed findings. Your developers review, test and merge them, and we retest afterwards."
+    }
+  ],
+  "related": [
+    "llm-application-penetration-test",
+    "ai-agent-red-teaming",
+    "continuous-ai-security-regression-in-ci",
+    "llm-app-pre-launch-security-assessment"
+  ],
+  "proof_ref": "cyra-agentic-pentest",
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/agentic-security-testing-for-web-apps/"
+}

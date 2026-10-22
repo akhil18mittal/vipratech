@@ -1,0 +1,225 @@
+{
+  "slug": "property-lead-qualification-voice-agent",
+  "industry": "real-estate-construction",
+  "title": "Property Lead Qualification Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Call every new portal, ad and website enquiry within minutes in Hindi, English or Hinglish, qualify budget, configuration and timeline, and pass warm leads to presales with a summary.",
+  "seo": {
+    "title": "Property Lead Qualification Voice Agent | VipraTech",
+    "description": "AI voice agent that calls new property enquiries in Hindi and English, qualifies budget, configuration and timeline, and books site visits or hands over.",
+    "keywords": [
+      "real estate voice agent",
+      "property lead qualification AI",
+      "Hindi voice bot for real estate",
+      "presales calling automation",
+      "property portal lead follow-up"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales or Presales",
+    "Presales Team Lead",
+    "Digital Marketing Head",
+    "CRM Administrator"
+  ],
+  "problem": {
+    "intro": "A launch campaign can bring hundreds of enquiries a day from property portals, Meta lead forms, Google ads and the project website. Presales teams call them as time allows, many leads are not reached while their interest is fresh, and the first conversation is spent on the same questions each time.",
+    "pain_points": [
+      {
+        "title": "Slow first call",
+        "detail": "Leads that arrive at night, on weekends or during a campaign spike wait hours or days for a call, by which time they have spoken to other projects."
+      },
+      {
+        "title": "Low-intent leads take up presales time",
+        "detail": "Many enquiries turn out to be brokers, wrong numbers, people outside the budget or renters, and each takes a call to discover."
+      },
+      {
+        "title": "Inconsistent answers",
+        "detail": "Different callers quote different starting prices, possession dates and offers, some of which do not match the RERA registration or approved collateral."
+      },
+      {
+        "title": "Thin CRM notes",
+        "detail": "Call outcomes are entered as one word, so the next caller or site sales manager starts from scratch."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that calls each new enquiry soon after it arrives, within the calling windows you set, introduces itself as the developer's AI assistant and holds a natural conversation in Hindi, English or Hinglish. It confirms the project, configuration and budget, whether the buyer plans to live in the home or invest, the timeline, home-loan needs and preferred visit dates. It answers factual questions only from an approved project fact sheet: RERA number, location, configurations, carpet areas, amenities and the declared possession date. Qualified buyers get a site visit booked or a warm transfer to presales, and the CRM receives the transcript, a summary and a score.",
+    "capabilities": [
+      "Outbound calling of new leads from portals, Meta and Google lead forms and the website, within set windows",
+      "Natural conversation in Hindi, English and Hinglish, with regional languages where testing supports them",
+      "Qualification on configuration, budget, purpose, timeline, loan need and location preference",
+      "Answers grounded in an approved project fact sheet, including the RERA registration number",
+      "Site visit booking, or warm transfer to a presales executive during working hours",
+      "CRM update with transcript, structured fields, lead score and next action"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the lead",
+      "detail": "A new enquiry arrives in the CRM from a portal, ad form or website, and duplicate or opted-out numbers are filtered."
+    },
+    {
+      "step": 2,
+      "title": "Place the call",
+      "detail": "The agent calls within the configured window, identifies itself as an AI assistant and confirms the enquiry."
+    },
+    {
+      "step": 3,
+      "title": "Qualify and answer",
+      "detail": "It asks qualification questions and answers factual queries from the approved fact sheet only."
+    },
+    {
+      "step": 4,
+      "title": "Decide the next step",
+      "detail": "Based on fit and intent, it books a site visit, offers a callback or marks the lead as not suitable, with the reason."
+    },
+    {
+      "step": 5,
+      "title": "Hand over warm leads",
+      "detail": "High-intent buyers, price negotiations and complex questions are transferred to presales with a short summary."
+    },
+    {
+      "step": 6,
+      "title": "Update the CRM",
+      "detail": "Transcript, structured answers, score and next action are written to the lead record."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"New lead in CRM\"] --> B{\"Duplicate or opted out?\"}\n  B -->|\"yes\"| C[\"Skip and log\"]\n  B -->|\"no\"| D[\"AI agent calls and qualifies\"]\n  D --> E{\"High intent or complex query?\"}\n  E -->|\"yes\"| F(\"Warm transfer to presales\")\n  E -->|\"no\"| G[\"Book visit or schedule callback\"]\n  F --> H[\"Update CRM with summary\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Lead intake",
+        "components": [
+          "CRM webhook for new leads",
+          "Duplicate, DND and opt-out checks"
+        ]
+      },
+      {
+        "name": "Voice runtime",
+        "components": [
+          "SIP or cloud telephony",
+          "Speech recognition for Hindi and English",
+          "Text-to-speech voices"
+        ]
+      },
+      {
+        "name": "Conversation and knowledge",
+        "components": [
+          "LLM dialogue manager with qualification script",
+          "Approved project fact sheet",
+          "Response guardrails"
+        ]
+      },
+      {
+        "name": "Handover and scheduling",
+        "components": [
+          "Warm transfer to presales",
+          "Site visit calendar"
+        ]
+      },
+      {
+        "name": "CRM and analytics",
+        "components": [
+          "CRM update API",
+          "Call recording and transcript store",
+          "Lead source and outcome reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Lead intake\"]\n  L1[\"CRM new lead webhook\"]\n  L2[\"Duplicate and consent checks\"]\n  end\n  subgraph S2[\"Voice runtime\"]\n  V1[\"Cloud telephony\"]\n  V2[\"Speech recognition\"]\n  V3[\"Text to speech\"]\n  end\n  subgraph S3[\"Conversation and knowledge\"]\n  C1[\"LLM dialogue manager\"]\n  C2[\"Project fact sheet\"]\n  C3[\"Response guardrails\"]\n  end\n  subgraph S4[\"Handover, scheduling and CRM\"]\n  H1(\"Presales executive\")\n  H2[\"Site visit calendar\"]\n  H3[\"CRM update and transcripts\"]\n  end\n  L1 --> L2\n  L2 --> V1\n  V1 --> V2\n  V2 --> C1\n  C2 --> C1\n  C1 --> C3\n  C3 --> V3\n  V3 --> V1\n  C1 --> H1\n  C1 --> H2\n  C1 --> H3"
+  },
+  "inputs": [
+    "New leads from portals, Meta and Google lead forms and the website",
+    "Approved project fact sheet and FAQs",
+    "Qualification criteria and scoring rules",
+    "Presales roster and site visit slots",
+    "DND, opt-out and consent records"
+  ],
+  "outputs": [
+    "Call recording and transcript",
+    "Structured qualification fields in the CRM",
+    "Lead score and next action",
+    "Booked site visits or callbacks",
+    "Daily report by lead source and outcome"
+  ],
+  "human_in_the_loop": "Presales executives take every warm transfer and handle price, discount and negotiation. The sales head approves the fact sheet and script before go-live and again after every price or offer change.",
+  "integrations": [
+    "Real estate CRM such as Salesforce, LeadSquared or Sell.Do",
+    "Cloud telephony such as Exotel, Knowlarity or Twilio",
+    "Property portal and Meta lead form feeds",
+    "WhatsApp Business API for visit confirmations",
+    "Google Calendar or the CRM's scheduling module"
+  ],
+  "guardrails": [
+    "Discloses that it is an AI assistant at the start of every call",
+    "Quotes no final prices, discounts or offers beyond the approved fact sheet",
+    "Makes no claims about appreciation, rental yield or investment returns",
+    "Never states a possession date other than the one declared in the RERA registration",
+    "Respects calling windows, DND preferences and opt-out requests"
+  ],
+  "compliance_notes": [
+    "Outbound calling is configured to respect TRAI commercial communication rules and your customer consent records.",
+    "Call recordings and transcripts are personal data under the DPDP Act 2023 and follow agreed retention periods.",
+    "Statements about the project stay consistent with its RERA registration details."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One project's new leads from one or two sources, called by the agent, alongside a control group handled by presales as usual.",
+    "deliverables": [
+      "Approved call script and project fact sheet",
+      "Working voice agent in Hindi and English connected to your CRM",
+      "Warm transfer and site visit booking flow",
+      "Pilot call review with transcripts",
+      "Production plan and cost-per-call estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to first contact",
+        "how": "Minutes from lead creation to first connected call, agent group versus control group."
+      },
+      {
+        "metric": "Qualification accuracy",
+        "how": "Presales review of a sample of agent-qualified leads against their own follow-up call."
+      },
+      {
+        "metric": "Site visits booked and attended",
+        "how": "Visits booked by the agent and their attendance, tracked in the CRM."
+      },
+      {
+        "metric": "Guardrail breaches",
+        "how": "Transcript review for any off-script price, possession date or returns statement."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will buyers know they are speaking to AI?",
+      "a": "Yes. The agent says so at the start of the call and offers a callback from a person if the buyer prefers. Its voice and pace are tuned to sound natural, but it never pretends to be human."
+    },
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi, English and Hinglish as standard. Marathi, Gujarati, Tamil, Telugu, Kannada and other languages are added where speech models perform well enough in testing, using real recordings from your market before go-live."
+    },
+    {
+      "q": "What if the buyer asks about price or discounts?",
+      "a": "It shares only the approved starting price or price range, and only if the sales head allows it. Discount and negotiation questions are transferred to presales. It never invents offers."
+    },
+    {
+      "q": "How is this priced?",
+      "a": "Typically a one-time build and integration fee plus a running cost per minute or per call that depends on telephony and model usage. The pilot gives you a measured cost per qualified lead before you commit."
+    }
+  ],
+  "related": [
+    "site-visit-booking-and-reminders",
+    "channel-partner-lead-automation",
+    "buyer-nurture-campaigns",
+    "test-drive-lead-qualification-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/property-lead-qualification-voice-agent/"
+}

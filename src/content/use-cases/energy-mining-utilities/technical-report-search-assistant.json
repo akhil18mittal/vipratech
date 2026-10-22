@@ -1,0 +1,217 @@
+{
+  "slug": "technical-report-search-assistant",
+  "industry": "energy-mining-utilities",
+  "title": "Technical Report Search Assistant",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "A search assistant over geological, engineering and incident reports that answers engineers' questions with page-level citations and respects existing document permissions.",
+  "seo": {
+    "title": "Technical Report Search Assistant for Energy | VipraTech",
+    "description": "Ask questions across OEM manuals, RCA reports, HAZOP studies and drilling or geological reports, and get answers with page-level citations.",
+    "keywords": [
+      "technical document search AI",
+      "engineering knowledge assistant",
+      "RAG for oil and gas reports",
+      "mining geological report search",
+      "OEM manual question answering"
+    ]
+  },
+  "designed_for": [
+    "Head of Technical Services",
+    "Reliability Engineer",
+    "Geologist or Reservoir Engineer",
+    "Knowledge Management Lead"
+  ],
+  "problem": {
+    "intro": "Energy and mining companies hold decades of technical knowledge in reports: exploration and geotechnical studies, well completion and daily drilling reports, HAZOP studies, root cause analyses and OEM manuals. Engineers know the answer is somewhere in the archive, but keyword search over scanned PDFs and inconsistent file names rarely finds it.",
+    "pain_points": [
+      {
+        "title": "Archives keyword search cannot reach",
+        "detail": "Scanned reports, drawings with embedded text and inconsistent terminology mean the right document often does not show up in search."
+      },
+      {
+        "title": "Repeat failures",
+        "detail": "A gearbox or pump failure investigated at one site is investigated again elsewhere because the earlier RCA is not found."
+      },
+      {
+        "title": "Knowledge leaves with experienced staff",
+        "detail": "Retiring engineers carry context about why a design or procedure changed, and the reports that record it go unread."
+      },
+      {
+        "title": "Sensitive data needs strict access",
+        "detail": "Exploration results, commercial terms and security-sensitive drawings cannot be opened to everyone just to make them searchable."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a question-answering assistant over your technical archive using retrieval-augmented generation. Documents from file shares, SharePoint and document management systems are OCR-processed, split into passages and tagged with site, asset, document type, revision and date. When an engineer asks a question, the assistant retrieves only passages that user is allowed to see, drafts an answer and cites the exact pages it used. If the archive does not hold enough evidence, it says so and suggests a subject expert instead of filling the gap. Superseded revisions are labelled, and every query and answer is logged for review.",
+    "capabilities": [
+      "Indexes OEM manuals, RCA and incident reports, HAZOP studies, and drilling, well and geotechnical reports",
+      "Answers with page-level citations and the quoted passage beside each claim",
+      "Filters by site, asset, document type, revision and date range",
+      "Applies existing folder and SharePoint permissions at retrieval time",
+      "Says when the documents do not answer the question instead of guessing",
+      "Lists and compares across reports, such as every RCA that mentions a given component"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Connect and index sources",
+      "detail": "We connect file shares and document systems, run OCR on scanned material and tag passages with metadata and permissions."
+    },
+    {
+      "step": 2,
+      "title": "Engineer asks a question",
+      "detail": "Questions are asked in plain English or Hindi through a web app or Microsoft Teams."
+    },
+    {
+      "step": 3,
+      "title": "Retrieve permitted passages",
+      "detail": "Hybrid keyword and semantic search retrieves passages the user may read, and a reranker orders them."
+    },
+    {
+      "step": 4,
+      "title": "Check evidence",
+      "detail": "If the retrieved passages do not support an answer, the assistant says so and points to a subject expert."
+    },
+    {
+      "step": 5,
+      "title": "Answer with citations",
+      "detail": "The assistant drafts a short answer with citations, and the engineer opens the cited pages to verify."
+    },
+    {
+      "step": 6,
+      "title": "Learn from feedback",
+      "detail": "Ratings, corrections and expert reviews build an evaluation set used to tune retrieval."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Reports indexed with metadata\"] --> C[\"Retrieve permitted passages\"]\n  B[\"Engineer asks a question\"] --> C\n  C --> D{\"Enough evidence found?\"}\n  D -->|\"no\"| E(\"Route to subject expert\")\n  D -->|\"yes\"| F[\"Draft answer with citations\"]\n  F --> G(\"Engineer checks cited pages\")\n  G --> H[\"Feedback updates evaluation set\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Sources",
+        "components": [
+          "File shares and SharePoint libraries",
+          "Document management system",
+          "Scanned report archive"
+        ]
+      },
+      {
+        "name": "Indexing",
+        "components": [
+          "OCR and layout parsing",
+          "Passage splitting with site, asset and revision tags",
+          "Keyword and vector indexes"
+        ]
+      },
+      {
+        "name": "Retrieval and answering",
+        "components": [
+          "Permission filter from the identity provider",
+          "Hybrid search and reranker",
+          "LLM answer generator with mandatory citations"
+        ]
+      },
+      {
+        "name": "Interface and governance",
+        "components": [
+          "Web app and Microsoft Teams bot",
+          "Query and answer audit log",
+          "Expert feedback and evaluation set"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Sources\"]\n    Q1[\"SharePoint and file shares\"]\n    Q2[\"Document management system\"]\n    Q3[\"Scanned archive\"]\n  end\n  subgraph S2[\"Indexing\"]\n    N1[\"OCR and layout parsing\"]\n    N2[\"Passage tagging\"]\n    N3[\"Keyword and vector index\"]\n  end\n  subgraph S3[\"Retrieval and answering\"]\n    Y1[\"Permission filter\"]\n    Y2[\"Hybrid search and reranker\"]\n    Y3[\"Answer with citations\"]\n  end\n  subgraph S4[\"Interface and governance\"]\n    Z1(\"Engineer in web app or Teams\")\n    Z2[\"Audit log\"]\n    Z3[\"Evaluation set\"]\n  end\n  Q1 --> N1\n  Q2 --> N1\n  Q3 --> N1\n  N1 --> N2\n  N2 --> N3\n  Z1 --> Y1\n  Y1 --> Y2\n  N3 --> Y2\n  Y2 --> Y3\n  Y3 --> Z1\n  Y3 --> Z2\n  Z2 --> Z3"
+  },
+  "inputs": [
+    "OEM operation and maintenance manuals",
+    "Root cause analysis and incident investigation reports",
+    "HAZOP and risk assessment studies",
+    "Exploration, geotechnical, drilling and well reports",
+    "Design basis documents and engineering standards",
+    "User directory and folder permissions"
+  ],
+  "outputs": [
+    "Answers with page-level citations and quoted passages",
+    "Lists of related documents filtered by site, asset or type",
+    "Not-found responses with suggested subject experts",
+    "Audit log of queries and sources used",
+    "Evaluation reports on answer quality"
+  ],
+  "human_in_the_loop": "Answers are research aids: engineers verify the cited pages before acting, and operating procedures are always read from the controlled document. Subject experts curate the evaluation questions and review answers flagged as wrong.",
+  "integrations": [
+    "SharePoint, OneDrive and network file shares",
+    "Document management systems such as OpenText or Documentum",
+    "Microsoft Teams",
+    "Single sign-on through Microsoft Entra ID or another identity provider",
+    "Engineering drawing management system"
+  ],
+  "guardrails": [
+    "Permission-aware retrieval, so users only see passages from documents they can already open",
+    "Citations are mandatory; answers without supporting passages are withheld",
+    "Superseded revisions are labelled and ranked below current ones",
+    "Hosted in your cloud tenancy or on-premise, with no training on your data",
+    "Every query and answer logged for audit"
+  ],
+  "compliance_notes": [
+    "Personal data in incident reports is handled under the DPDP Act 2023, with names masked in answers where your policy requires.",
+    "Governance practices can be documented against ISO/IEC 42001 if you run an AI management system."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One collection, such as RCA reports and OEM manuals for a single plant or the drilling reports for one field, with a question set written by your engineers.",
+    "deliverables": [
+      "Indexed pilot collection with permissions applied",
+      "Web or Teams assistant for pilot users",
+      "Evaluation question set agreed with subject experts",
+      "Answer quality and citation report",
+      "Scale-up plan covering further collections and hosting"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Answer correctness",
+        "how": "Subject experts grade answers to the agreed question set."
+      },
+      {
+        "metric": "Citation accuracy",
+        "how": "Share of citations that actually support the statements they are attached to."
+      },
+      {
+        "metric": "Not-found correctness",
+        "how": "Whether the assistant correctly declines questions the archive cannot answer."
+      },
+      {
+        "metric": "Time to find",
+        "how": "Engineers time how long finding the same information takes with and without the assistant."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How do you stop it making things up?",
+      "a": "The assistant can only answer from retrieved passages, must cite them, and declines when evidence is thin. We measure citation accuracy on your own question set during the pilot and tune retrieval where it falls short."
+    },
+    {
+      "q": "Our exploration data is confidential. Where does it go?",
+      "a": "It stays in your cloud tenancy or data centre. We can use models hosted in your environment or provider endpoints that do not retain or train on your data, and permissions follow your existing folder access."
+    },
+    {
+      "q": "Can it handle old scanned reports and drawings?",
+      "a": "Scanned reports are OCR-processed before indexing, and text on drawings such as title blocks and notes can be indexed. Very poor scans are listed so you can decide whether to re-scan them."
+    },
+    {
+      "q": "Can it run on-premise?",
+      "a": "Yes. Indexing, retrieval and an open-weight language model can run on your own servers where policy requires it, with some trade-off in answer quality that we measure during the pilot."
+    }
+  ],
+  "related": [
+    "inspection-and-maintenance-report-extraction",
+    "permit-and-compliance-document-tracking",
+    "ot-it-ai-assistant-security-review",
+    "maintenance-log-and-sop-assistant"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/technical-report-search-assistant/"
+}

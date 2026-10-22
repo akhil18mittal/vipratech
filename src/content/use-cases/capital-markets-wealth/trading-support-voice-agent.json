@@ -1,0 +1,217 @@
+{
+  "slug": "trading-support-voice-agent",
+  "industry": "capital-markets-wealth",
+  "title": "Voice Agent for Trading Support and Account Queries",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Inbound voice agent for brokers that verifies clients, answers payout, margin, order-rejection and IPO queries from live data, declines advice and routes order requests to dealers.",
+  "seo": {
+    "title": "Trading Support Voice Agent for Brokers | VipraTech",
+    "description": "Multilingual voice agent for brokers: verified answers on payouts, margins, order rejections and IPO mandates, with advice declined and orders routed.",
+    "keywords": [
+      "broker support voice agent",
+      "trading account query AI",
+      "stock broker customer support automation",
+      "AI voice agent Hindi broking",
+      "order rejection query bot"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Support, Broking",
+    "Contact Centre Manager",
+    "Dealing Desk Head",
+    "Compliance Officer"
+  ],
+  "problem": {
+    "intro": "Broking support lines fill up with the same questions: why was my order rejected, when will my withdrawal arrive, why is there a margin shortfall, did my IPO mandate go through, why is my login locked. Volumes jump on expiry days, after a volatile open and during any platform incident, exactly when clients are least patient.",
+    "pain_points": [
+      {
+        "title": "Answers need live account data",
+        "detail": "Most queries depend on the client's ledger, margin, order log or payout status, which a generic FAQ bot or IVR menu cannot read."
+      },
+      {
+        "title": "Surges overwhelm the floor",
+        "detail": "Expiry days, big market moves and outages bring sudden call spikes that staffing plans cannot match."
+      },
+      {
+        "title": "Advice requests creep in",
+        "detail": "Callers ask whether to buy, sell or hold, and a support channel must never answer as if it were an adviser."
+      },
+      {
+        "title": "Language and timing gaps",
+        "detail": "Clients call in Hindi, Gujarati, Marathi or Tamil, and early-morning or late-evening calls often reach a thin team."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound voice agent connected to your back office, order management and risk systems. It verifies the client with the registered mobile number, client code and a one-time password, then answers account-specific questions from live data: ledger balance and payout status, margin requirements and shortfalls, order rejection reasons from the risk system, IPO application and UPI mandate status, and holdings credit after corporate actions. It can email a contract note or ledger, resend an activation link or raise a ticket. Requests for advice get an approved refusal, order requests go to your recorded dealer line, and complaints reach a person with a summary.",
+    "capabilities": [
+      "Verifies callers with registered mobile, client code and one-time password before sharing account data",
+      "Explains order rejections using the reason codes in your risk and order management logs",
+      "Answers ledger, payout, margin and holdings questions from live back-office data",
+      "Reports IPO application and UPI mandate status and corporate action credits",
+      "Performs simple service actions such as emailing contract notes or raising tickets",
+      "Declines advice requests with an approved script and routes order and complaint calls to people"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer and detect language",
+      "detail": "The agent greets the caller in their preferred language and asks for the client code."
+    },
+    {
+      "step": 2,
+      "title": "Verify the client",
+      "detail": "Registered mobile and a one-time password confirm identity before any account data is shared."
+    },
+    {
+      "step": 3,
+      "title": "Identify the intent",
+      "detail": "The agent classifies the request as service, advice, order or complaint."
+    },
+    {
+      "step": 4,
+      "title": "Route out-of-scope requests",
+      "detail": "Advice requests receive the refusal script; orders go to the dealer line and complaints to a support agent."
+    },
+    {
+      "step": 5,
+      "title": "Answer from live data",
+      "detail": "Service queries are answered from back-office, order and risk data, and simple actions are performed."
+    },
+    {
+      "step": 6,
+      "title": "Log and follow up",
+      "detail": "A ticket with transcript and outcome is logged, and documents are sent by email or SMS where requested."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound call, language detected\"] --> B[\"Verify client with OTP\"]\n  B --> C[\"Identify intent\"]\n  C --> D{\"Advice, order or complaint?\"}\n  D -->|\"yes\"| E(\"Dealer or support agent takes call\")\n  D -->|\"no\"| F[\"Answer from live account data\"]\n  F --> G[\"Service action such as contract note\"]\n  E --> H[\"Ticket logged with transcript\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony and identity",
+        "components": [
+          "Inbound number and IVR integration",
+          "Speech recognition and voices for Indian languages",
+          "Client verification with registered mobile and OTP"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Intent classifier",
+          "Approved answers and refusal scripts",
+          "Dialogue manager with session timeouts"
+        ]
+      },
+      {
+        "name": "Account data and actions",
+        "components": [
+          "Back-office ledger and payout API",
+          "Order management and risk log lookup",
+          "IPO mandate and corporate action status",
+          "Document dispatch and ticketing"
+        ]
+      },
+      {
+        "name": "Hand-off and records",
+        "components": [
+          "Warm transfer to dealer line or support agent",
+          "Recordings, transcripts and analytics"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony and identity\"]\n    T1[\"Inbound line and speech engine\"]\n    T2[\"OTP verification\"]\n  end\n  subgraph S2[\"Conversation\"]\n    C1[\"Intent classifier\"]\n    C2[\"Dialogue manager\"]\n    C3[\"Refusal and approved scripts\"]\n  end\n  subgraph S3[\"Account data and actions\"]\n    A1[\"Ledger and payout API\"]\n    A2[\"Order and risk log lookup\"]\n    A3[\"IPO and corporate action status\"]\n    A4[\"Documents and ticketing\"]\n  end\n  subgraph S4[\"Hand-off and records\"]\n    H1(\"Dealer line or support agent\")\n    H2[\"Recordings and analytics\"]\n  end\n  T1 --> T2\n  T2 --> C1\n  C1 --> C2\n  C2 --> C3\n  C2 --> A1\n  C2 --> A2\n  C2 --> A3\n  C2 --> A4\n  C1 --> H1\n  T1 --> H2"
+  },
+  "inputs": [
+    "Client master and verification details",
+    "Back-office ledger, payout and margin data",
+    "Order management and risk system logs with rejection codes",
+    "IPO application, UPI mandate and corporate action status",
+    "Ticket history",
+    "Approved answers and advice refusal script"
+  ],
+  "outputs": [
+    "Answers to account queries, with call summaries",
+    "Service actions such as emailed contract notes, ledgers and tickets",
+    "Warm transfers to dealers or support agents with context",
+    "Recordings and transcripts",
+    "Intent, surge and incident analytics"
+  ],
+  "human_in_the_loop": "Dealers handle every order request on your recorded lines, and support agents take complaints and anything the agent cannot verify. Supervisors review sampled calls and approve changes to scripts and answers.",
+  "integrations": [
+    "Cloud telephony or IVR platform",
+    "Broking back-office and order management or risk system APIs",
+    "CRM and ticketing",
+    "Email, SMS and WhatsApp gateways",
+    "Status page or incident feed for outage messaging"
+  ],
+  "guardrails": [
+    "Never accepts, modifies or places orders",
+    "No investment advice or tips; advice requests get an approved refusal",
+    "OTP verification before any account data is shared",
+    "Account and bank numbers never read out in full",
+    "Outage mode with a clear status message and priority hand-off"
+  ],
+  "compliance_notes": [
+    "SEBI restricts investment advice to registered advisers, so the agent is limited to factual account service and declines advice requests.",
+    "Order calls are routed to your recorded dealer lines so existing order-recording practices continue to apply, and unresolved complaints flow into your grievance process, including SEBI SCORES where applicable."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Inbound support for payout status and order rejection queries in Hindi and English, with automatic fallback to your agents.",
+    "deliverables": [
+      "Intent list, answers and refusal script approved by compliance",
+      "Working voice agent on a test line with read-only data access",
+      "Hand-off to the dealer line and support queue",
+      "Weekly call review",
+      "Pilot report and production plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Resolution without transfer",
+        "how": "Share of in-scope calls completed by the agent, checked against repeat calls within the pilot."
+      },
+      {
+        "metric": "Answer accuracy",
+        "how": "Supervisor review of sampled calls against back-office records."
+      },
+      {
+        "metric": "Advice and order routing correctness",
+        "how": "Review of every call classified as advice or order to confirm it was handled correctly."
+      },
+      {
+        "metric": "Verification time and drop-off",
+        "how": "Time to verify and share of callers who abandon during verification."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it place or modify trades?",
+      "a": "No. Order requests are routed to your dealer line, where existing recording and confirmation practices apply. The agent only provides account information and service actions."
+    },
+    {
+      "q": "How does it cope with expiry-day spikes?",
+      "a": "Voice agents scale with call volume, so in-scope queries are answered without queueing. During incidents it plays an approved status message and prioritises hand-offs for clients with urgent issues."
+    },
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi and English in a typical first phase, with Gujarati, Marathi, Tamil or others added according to your client base. Each language is tested on your own call samples."
+    },
+    {
+      "q": "Is client data safe?",
+      "a": "The agent shares data only after OTP verification, uses read-only access for queries and redacts personal data from transcripts. Data stays in your chosen cloud region."
+    }
+  ],
+  "related": [
+    "dormant-account-reactivation",
+    "broker-kyc-onboarding-verification",
+    "advisory-chatbot-guardrail-testing",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/trading-support-voice-agent/"
+}

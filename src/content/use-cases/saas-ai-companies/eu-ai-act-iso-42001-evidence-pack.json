@@ -1,0 +1,221 @@
+{
+  "slug": "eu-ai-act-iso-42001-evidence-pack",
+  "industry": "saas-ai-companies",
+  "title": "EU AI Act and ISO/IEC 42001 Evidence Pack",
+  "capability": "ai-security",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Assemble testing records, risk assessments, oversight design and technical documentation for your AI features, mapped to EU AI Act and ISO/IEC 42001 requirements, ready for counsel and auditors.",
+  "seo": {
+    "title": "EU AI Act and ISO/IEC 42001 Evidence Pack | VipraTech",
+    "description": "Testing evidence, risk records and technical documentation for AI features, mapped to EU AI Act, ISO/IEC 42001 and NIST AI RMF for counsel and auditors.",
+    "keywords": [
+      "EU AI Act evidence",
+      "ISO 42001 audit preparation",
+      "AI technical documentation",
+      "AI risk assessment evidence",
+      "NIST AI RMF mapping"
+    ]
+  },
+  "designed_for": [
+    "Head of Compliance or GRC",
+    "CISO",
+    "CTO",
+    "Data Protection Officer"
+  ],
+  "problem": {
+    "intro": "Enterprise customers and auditors are starting to ask SaaS and AI vendors for evidence about their AI systems: what they do, how they were tested, how risks are managed and how people oversee them. The information exists in tickets, notebooks, test logs and engineers' heads, but not in a form counsel or an auditor can review.",
+    "pain_points": [
+      {
+        "title": "Evidence scattered across teams",
+        "detail": "Model choices, evaluations, red-team results and incidents sit in different tools owned by different people."
+      },
+      {
+        "title": "Unclear mapping to requirements",
+        "detail": "Teams are unsure which EU AI Act obligations or ISO/IEC 42001 controls their evidence supports."
+      },
+      {
+        "title": "Testing that was never recorded",
+        "detail": "Security and safety testing happened, but results, versions and fixes were not kept in an auditable form."
+      },
+      {
+        "title": "Customer due diligence pressure",
+        "detail": "Large customers send AI-specific questionnaires and expect consistent, documented answers."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an evidence pack for one or more AI features. We start with an inventory: what each system does, which models and data it uses, who uses it and where it runs. We then gather the technical evidence and, where gaps exist, produce it: architecture and data flow records, evaluation and red-team results, security test reports, logging and monitoring design, human oversight points and an incident process. Each item is mapped to relevant EU AI Act obligations, ISO/IEC 42001 Annex A controls and NIST AI RMF functions in a traceability matrix. Risk classification notes are prepared for your counsel to decide. The pack is designed to be maintained as features change, not rebuilt for each audit.",
+    "capabilities": [
+      "AI system inventory with purpose, models, data, users and deployment",
+      "Technical documentation of architecture, data flows and model choices",
+      "Security and safety testing records with versions and fixes",
+      "Human oversight and logging design records",
+      "Traceability matrix to EU AI Act obligations, ISO/IEC 42001 Annex A controls and NIST AI RMF",
+      "Gap list with owners, and a process to keep the pack current"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Inventory AI systems",
+      "detail": "We list each AI feature with its purpose, users, models, data sources and deployment."
+    },
+    {
+      "step": 2,
+      "title": "Gather existing evidence",
+      "detail": "We collect architecture notes, evaluations, test reports, incidents and policies from your teams."
+    },
+    {
+      "step": 3,
+      "title": "Fill testing gaps",
+      "detail": "Where testing is missing, we run focused security and safety tests and record the results."
+    },
+    {
+      "step": 4,
+      "title": "Map to requirements",
+      "detail": "Evidence is mapped to EU AI Act obligations, ISO/IEC 42001 controls and NIST AI RMF functions."
+    },
+    {
+      "step": 5,
+      "title": "Counsel and GRC review",
+      "detail": "Your counsel reviews the risk classification notes, and your GRC lead approves the pack and gap list."
+    },
+    {
+      "step": 6,
+      "title": "Maintain",
+      "detail": "Owners and triggers are set so the pack is updated when features, models or data change."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inventory AI systems\"] --> B[\"Gather existing evidence\"]\n  B --> C{\"Testing evidence complete?\"}\n  C -->|\"no\"| D[\"Run focused tests and record\"]\n  C -->|\"yes\"| E[\"Map evidence to requirements\"]\n  D --> E\n  E --> F(\"Counsel and GRC lead review\")\n  F --> G[\"Publish pack and gap list\"]\n  G --> H[\"Update on feature or model change\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Inventory",
+        "components": [
+          "AI system register",
+          "Model and data source catalogue"
+        ]
+      },
+      {
+        "name": "Evidence collection",
+        "components": [
+          "Connectors to repositories, issue trackers and test logs",
+          "Interview templates for engineering and product"
+        ]
+      },
+      {
+        "name": "Testing",
+        "components": [
+          "Security and safety test runs",
+          "Evaluation result store with versions"
+        ]
+      },
+      {
+        "name": "Mapping",
+        "components": [
+          "Requirement library for EU AI Act, ISO/IEC 42001 and NIST AI RMF",
+          "Traceability matrix"
+        ]
+      },
+      {
+        "name": "Review and maintenance",
+        "components": [
+          "Counsel and GRC review workflow",
+          "Change triggers and owner assignments"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Inventory and collection\"]\n    I1[\"AI system register\"]\n    I2[\"Evidence connectors\"]\n    I3[\"Team interviews\"]\n  end\n  subgraph S2[\"Testing\"]\n    T1[\"Security and safety tests\"]\n    T2[\"Versioned results store\"]\n  end\n  subgraph S3[\"Mapping\"]\n    M1[\"Requirement library\"]\n    M2[\"Traceability matrix\"]\n  end\n  subgraph S4[\"Review and maintenance\"]\n    R1(\"Counsel and GRC review\")\n    R2[\"Change triggers and owners\"]\n  end\n  I1 --> I2\n  I3 --> M2\n  I2 --> T2\n  T1 --> T2\n  T2 --> M2\n  M1 --> M2\n  M2 --> R1 --> R2\n  R2 --> I1"
+  },
+  "inputs": [
+    "List of AI features and their owners",
+    "Architecture and data flow documents",
+    "Existing evaluation, pentest and red-team reports",
+    "Policies for AI use, data governance and incident response",
+    "Customer and auditor questionnaires already received"
+  ],
+  "outputs": [
+    "AI system inventory",
+    "Technical documentation per AI feature",
+    "Testing records with versions and fixes",
+    "Traceability matrix to EU AI Act, ISO/IEC 42001 and NIST AI RMF",
+    "Gap list with owners and dates"
+  ],
+  "human_in_the_loop": "Your counsel decides risk classification under the EU AI Act, and your GRC lead approves the pack and accepts or assigns each gap. Certification decisions rest with your accredited auditor.",
+  "integrations": [
+    "Code repositories such as GitHub or GitLab",
+    "Issue trackers such as Jira or Linear",
+    "GRC tools such as Vanta or Drata, or a spreadsheet register",
+    "Evaluation and observability tools",
+    "Document storage such as Confluence, Notion or SharePoint"
+  ],
+  "guardrails": [
+    "No compliance or certification claims made in the pack",
+    "Every statement linked to a source document or test record",
+    "Classification notes clearly marked for counsel decision",
+    "Access to the pack limited to named roles",
+    "Version history kept for every update"
+  ],
+  "compliance_notes": [
+    "Designed to support, not replace, legal assessment under the EU AI Act and certification audits against ISO/IEC 42001.",
+    "NIST AI RMF mapping helps US-facing customers compare your evidence with their own risk programmes."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One customer-facing AI feature, from inventory to traceability matrix, including a focused security test where evidence is missing.",
+    "deliverables": [
+      "AI system inventory entry",
+      "Technical documentation for the feature",
+      "Testing records",
+      "Traceability matrix and gap list",
+      "Maintenance runbook"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Requirements with linked evidence",
+        "how": "Share of mapped requirements with at least one linked source document or test record."
+      },
+      {
+        "metric": "Gaps identified and owned",
+        "how": "Count of gaps found and assigned an owner and date."
+      },
+      {
+        "metric": "Questionnaire items supported",
+        "how": "Customer AI questionnaire items that can be answered from the pack."
+      },
+      {
+        "metric": "Effort to update",
+        "how": "Time taken to update the pack after a simulated model change."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will this make us compliant with the EU AI Act?",
+      "a": "No single document does that. The pack organises the technical evidence the Act and your counsel will ask for, and shows where gaps remain. Legal classification and conformity decisions stay with your counsel and, where relevant, notified bodies."
+    },
+    {
+      "q": "Do we need ISO/IEC 42001 certification?",
+      "a": "That is a business decision, often driven by customer demand. The pack is useful either way, because the same evidence answers customer questionnaires and supports an AI management system if you pursue certification."
+    },
+    {
+      "q": "Does this replace our GRC tool?",
+      "a": "No, it feeds it. Evidence and mappings can be exported into Vanta, Drata or your existing register."
+    },
+    {
+      "q": "Is our system high-risk under the EU AI Act?",
+      "a": "That depends on its intended purpose and use, and it is a legal question for your counsel. We prepare clear notes on what the system does and who uses it to inform that decision."
+    }
+  ],
+  "related": [
+    "continuous-ai-security-regression-in-ci",
+    "security-questionnaire-answering-assistant",
+    "llm-application-penetration-test",
+    "ai-model-governance-evidence-pack"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/eu-ai-act-iso-42001-evidence-pack/"
+}

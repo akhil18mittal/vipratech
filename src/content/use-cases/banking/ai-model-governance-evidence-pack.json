@@ -1,0 +1,225 @@
+{
+  "slug": "ai-model-governance-evidence-pack",
+  "industry": "banking",
+  "title": "AI Governance Evidence Pack for Banks",
+  "capability": "ai-security",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Inventory the bank's AI and ML systems and assemble the evidence boards, auditors and supervisors ask for: purpose, data, testing, monitoring, incidents and accountable owners.",
+  "seo": {
+    "title": "AI Governance Evidence Pack for Banks | VipraTech",
+    "description": "Inventory your bank's AI systems and assemble evidence on data, testing, monitoring and ownership, aligned with RBI FREE-AI, ISO/IEC 42001 and NIST AI RMF.",
+    "keywords": [
+      "AI governance for banks",
+      "RBI FREE-AI framework",
+      "AI model inventory bank",
+      "ISO 42001 evidence pack",
+      "AI model risk management"
+    ]
+  },
+  "designed_for": [
+    "Chief Risk Officer",
+    "Chief Compliance Officer",
+    "Head of Model Risk Management",
+    "Head of Internal Audit"
+  ],
+  "problem": {
+    "intro": "Most banks now run AI in more places than anyone has listed: credit scorecards, fraud models, chatbots, document extraction, vendor tools with embedded models and staff use of general-purpose assistants. Boards and auditors increasingly ask a question that is hard to answer: which AI systems do we run, who owns them, how were they tested and how do we know they still behave as intended.",
+    "pain_points": [
+      {
+        "title": "No complete inventory",
+        "detail": "Models built by data science, bought from vendors or embedded in SaaS tools sit in different registers, and some are in none."
+      },
+      {
+        "title": "Evidence scattered across teams",
+        "detail": "Validation reports, data lineage, approval notes and monitoring dashboards live in separate folders and formats."
+      },
+      {
+        "title": "Generative AI outside existing model policy",
+        "detail": "Policies written for scorecards do not say how to test or monitor a chatbot, a retrieval system or a vendor language model."
+      },
+      {
+        "title": "Framework language that is hard to apply",
+        "detail": "Recommendations in RBI's FREE-AI framework, ISO/IEC 42001 and NIST AI RMF must be translated into specific controls and artefacts."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build the evidence pack with your risk, compliance and technology teams. First we discover and inventory AI systems through questionnaires, procurement and architecture records and interviews, and classify each by use, customer impact and risk tier. A document intelligence pipeline reads existing model documentation, validation reports, vendor contracts and policies, and maps what exists to a control set drawn from FREE-AI recommendations, ISO/IEC 42001, NIST AI RMF and your model risk policy. Gaps are listed per system with an owner. Higher-risk generative AI systems receive targeted tests for leakage, bias and unsafe output, and the results join the pack. The output is a register your teams maintain.",
+    "capabilities": [
+      "AI system discovery and inventory across in-house, vendor and embedded models",
+      "Risk tiering by use case, customer impact, autonomy and data sensitivity",
+      "Automated reading of model documents, validation reports and contracts against a control set",
+      "Control mapping to FREE-AI recommendations, ISO/IEC 42001, NIST AI RMF and the bank's own policy",
+      "Targeted testing of higher-risk generative AI systems for leakage, bias and unsafe output",
+      "Gap register with owners, due dates and evidence links, exportable for audit"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree the control set",
+      "detail": "We combine your model risk policy with relevant framework recommendations into one control list approved by risk and compliance."
+    },
+    {
+      "step": 2,
+      "title": "Discover AI systems",
+      "detail": "Questionnaires, procurement and architecture records and interviews identify AI systems and their owners."
+    },
+    {
+      "step": 3,
+      "title": "Collect and read evidence",
+      "detail": "Existing documents are ingested and mapped to controls, each mapping linked to its source passage."
+    },
+    {
+      "step": 4,
+      "title": "Tier and test",
+      "detail": "Systems are risk-tiered, and higher-risk generative AI systems receive targeted tests."
+    },
+    {
+      "step": 5,
+      "title": "Review gaps with owners",
+      "detail": "Model owners and the model risk team confirm mappings and accept or dispute each gap."
+    },
+    {
+      "step": 6,
+      "title": "Publish the pack",
+      "detail": "The register, evidence links and gap plan go to the risk committee and internal audit."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agree control set with risk\"] --> B[\"Discover and inventory AI systems\"]\n  B --> C[\"Ingest and map existing evidence\"]\n  C --> D[\"Risk tier each system\"]\n  D --> E{\"Higher-risk generative AI?\"}\n  E -->|\"yes\"| F[\"Targeted leakage and bias tests\"]\n  E -->|\"no\"| G(\"Owner and model risk review\")\n  F --> G\n  G --> H[\"Register, evidence pack, gap plan\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Discovery",
+        "components": [
+          "Owner questionnaires",
+          "Procurement and architecture record review",
+          "Interview notes capture"
+        ]
+      },
+      {
+        "name": "Evidence processing",
+        "components": [
+          "Document ingestion for model documents, validations and contracts",
+          "Control library combining frameworks and bank policy",
+          "LLM control mapper with passage citations"
+        ]
+      },
+      {
+        "name": "Testing",
+        "components": [
+          "Generative AI leakage and jailbreak tests",
+          "Bias and output consistency tests",
+          "Test evidence store"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Owner and model risk review workspace",
+          "Gap acceptance and remediation tracking"
+        ]
+      },
+      {
+        "name": "Register and reporting",
+        "components": [
+          "AI system register",
+          "Committee-ready evidence pack export"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Discovery\"]\n    D1[\"Owner questionnaires\"]\n    D2[\"Procurement and architecture records\"]\n  end\n  subgraph S2[\"Evidence processing\"]\n    P1[\"Document ingestion\"]\n    P2[\"Control library\"]\n    P3[\"LLM control mapper\"]\n  end\n  subgraph S3[\"Testing\"]\n    T1[\"Leakage and jailbreak tests\"]\n    T2[\"Bias and consistency tests\"]\n  end\n  subgraph S4[\"Review and register\"]\n    R1(\"Owner and model risk review\")\n    R2[\"AI system register\"]\n    R3[\"Evidence pack export\"]\n  end\n  D1 --> R2\n  D2 --> R2\n  D1 --> P1\n  P1 --> P3\n  P2 --> P3\n  P3 --> R1\n  R2 --> T1\n  R2 --> T2\n  T1 --> R1\n  T2 --> R1\n  R1 --> R3"
+  },
+  "inputs": [
+    "Model risk management policy and any existing model inventory",
+    "Model documentation, validation and monitoring reports",
+    "Vendor contracts and AI-related due diligence responses",
+    "Architecture and procurement records",
+    "Access to test environments for higher-risk generative AI systems"
+  ],
+  "outputs": [
+    "AI system register with owners, purpose and risk tier",
+    "Control mapping with links to source evidence",
+    "Gap register with owners and due dates",
+    "Test reports for higher-risk generative AI systems",
+    "Evidence pack for the board risk committee and auditors"
+  ],
+  "human_in_the_loop": "Model owners, the model risk team and compliance confirm every mapping and gap; the pipeline proposes and people decide. The risk committee owns risk acceptance, and the pack states plainly where evidence is missing.",
+  "integrations": [
+    "GRC platform or risk register",
+    "Model registry or MLOps platform",
+    "Document management and policy repositories",
+    "Procurement and vendor management system",
+    "Ticketing tool for remediation tracking"
+  ],
+  "guardrails": [
+    "Every control mapping linked to the exact passage it relies on",
+    "Unsupported mappings recorded as gaps, never inferred",
+    "Confidential documents processed in the bank's environment with role-based access",
+    "Framework references described as alignment, not certification",
+    "Version history for the register and evidence pack"
+  ],
+  "compliance_notes": [
+    "Aligned with themes in RBI's FREE-AI framework (2025), a set of recommendations for responsible AI in financial services, and with ISO/IEC 42001 and NIST AI RMF.",
+    "For EU-facing operations, helps prepare documentation expected under the EU AI Act, which treats credit scoring of individuals as high-risk.",
+    "Does not certify compliance; the bank's own assessment and its auditors decide."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One business area, such as retail lending or digital channels, inventoried end to end, with evidence mapped for its AI systems and one generative AI system tested.",
+    "deliverables": [
+      "Agreed control set",
+      "AI system register for the pilot area",
+      "Control mapping and gap register with evidence links",
+      "Test report for one generative AI system",
+      "Plan and effort estimate for bank-wide roll-out"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Inventory completeness",
+        "how": "AI systems found compared with those in existing registers, confirmed with business owners."
+      },
+      {
+        "metric": "Mapping acceptance",
+        "how": "Control mappings accepted by owners and model risk as proposed, with changes or rejected."
+      },
+      {
+        "metric": "Evidence coverage per system",
+        "how": "Controls with linked evidence compared with controls applicable to each system's risk tier."
+      },
+      {
+        "metric": "Gap closure progress",
+        "how": "Gaps with an owner, due date and status, tracked through the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is FREE-AI mandatory?",
+      "a": "FREE-AI is a framework of recommendations released by RBI in 2025, not a binding regulation in itself. Many banks use it, alongside existing RBI directions on IT governance and outsourcing, to shape their AI policies and evidence."
+    },
+    {
+      "q": "Will this certify us against ISO/IEC 42001?",
+      "a": "No. Certification is carried out by accredited certification bodies. Our work organises evidence and closes gaps, which helps if you choose to pursue certification later."
+    },
+    {
+      "q": "Does it cover vendor AI?",
+      "a": "Yes. Vendor tools with embedded models are inventoried, contracts and due diligence responses are mapped to controls, and gaps such as missing testing rights are listed for procurement to address."
+    },
+    {
+      "q": "How is confidential documentation protected?",
+      "a": "Documents are processed in your environment or a tenancy you control, with role-based access. The language models we use do not retain or train on your data."
+    }
+  ],
+  "related": [
+    "bank-chatbot-and-voice-agent-red-teaming",
+    "regulatory-return-preparation-assistant",
+    "eu-ai-act-iso-42001-evidence-pack",
+    "dpdp-ai-data-handling-assessment"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/ai-model-governance-evidence-pack/"
+}

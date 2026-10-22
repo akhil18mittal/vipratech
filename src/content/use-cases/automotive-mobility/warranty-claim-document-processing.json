@@ -1,0 +1,220 @@
+{
+  "slug": "warranty-claim-document-processing",
+  "industry": "automotive-mobility",
+  "title": "Warranty Claim Document Processing",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "computer-vision"
+  ],
+  "summary": "Pre-check dealer warranty claims before OEM submission: extract job card, VIN, odometer, labour and parts data, test it against policy and flag gaps for the warranty desk.",
+  "seo": {
+    "title": "Warranty Claim Document Processing with AI | VipraTech",
+    "description": "AI that assembles and pre-checks automotive warranty claims: VIN, odometer, labour codes, parts and photos against OEM policy, before submission.",
+    "keywords": [
+      "warranty claim automation automotive",
+      "dealer warranty claim processing",
+      "OEM warranty claim checks",
+      "warranty claim rejection analysis",
+      "job card data extraction"
+    ]
+  },
+  "designed_for": [
+    "Dealer Warranty Manager",
+    "OEM Warranty Operations Head",
+    "After-Sales Quality Engineer",
+    "Dealer Service Manager"
+  ],
+  "problem": {
+    "intro": "Every warranty repair ends in a claim pack: the repair order, technician notes, labour operation codes, causal part, failed-part photos, odometer and VIN photos and often a diagnostic report. OEMs reject or debit claims for missing photos, mismatched VINs, labour beyond standard time or coverage that had already lapsed, and dealers usually find out only after submission.",
+    "pain_points": [
+      {
+        "title": "Avoidable rejections",
+        "detail": "Claims bounce for missing odometer photos, unclear failure descriptions or wrong labour codes that could have been caught at the dealer."
+      },
+      {
+        "title": "Debits after audit",
+        "detail": "Paid claims that are later audited can be debited back when evidence is thin, hitting dealer margins long after the repair."
+      },
+      {
+        "title": "Inconsistent failure narratives",
+        "detail": "Technicians describe the same fault in different words, so complaint, cause and correction rarely line up with the causal part."
+      },
+      {
+        "title": "Patterns hidden in volume",
+        "detail": "On the OEM side, repeat repairs on the same VIN, unusual labour times or duplicate claims are hard to spot one claim at a time."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a warranty claim assistant that pulls the job card and invoice from your DMS along with photos and diagnostic reports. It extracts VIN, odometer, repair dates, labour operation codes, causal and consequential parts and technician notes, and reads the VIN and odometer photos to confirm they match. Rules configured from the OEM warranty manual check coverage period, mileage, part eligibility, campaign applicability and standard labour times. The technician's notes are structured into complaint, cause and correction without adding facts. Gaps and rule failures go to the warranty manager, who approves every pack before it leaves as a portal-ready claim with an evidence index.",
+    "capabilities": [
+      "Extracts VIN, odometer, repair dates, labour operation codes and parts from job cards and invoices",
+      "Reads VIN and odometer photos and checks them against the job card",
+      "Checks coverage period, mileage, part eligibility, campaigns and standard labour times from the OEM manual",
+      "Structures technician notes into complaint, cause and correction, using only what the notes say",
+      "Flags missing photos, duplicate claims and repeat repairs on the same VIN",
+      "Prepares a portal-ready claim pack and tracks OEM responses and rejection codes"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect the claim pack",
+      "detail": "Job card, invoice, failed-part photos, VIN and odometer photos and diagnostic reports are pulled from the DMS and upload folders."
+    },
+    {
+      "step": 2,
+      "title": "Extract and read",
+      "detail": "Fields are extracted from documents, and VIN and odometer values are read from photos."
+    },
+    {
+      "step": 3,
+      "title": "Check policy and consistency",
+      "detail": "Rules test coverage, mileage, part eligibility, campaign status and labour times, and cross-check documents against each other."
+    },
+    {
+      "step": 4,
+      "title": "Warranty manager review",
+      "detail": "Claims with gaps go to the warranty manager to fix, justify or hold, and every pack is approved before submission."
+    },
+    {
+      "step": 5,
+      "title": "Submit to the OEM",
+      "detail": "Approved claims are submitted through the OEM warranty portal, by API where available."
+    },
+    {
+      "step": 6,
+      "title": "Learn from responses",
+      "detail": "Approvals, rejections and debit reasons are tracked and used to tune the pre-checks."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Job card, invoice and photos\"] --> B[\"Extract VIN, odometer, labour, parts\"]\n  B --> C[\"Check warranty policy and labour times\"]\n  C --> D{\"Gaps or rule failures?\"}\n  D -->|\"yes\"| E(\"Warranty manager fixes or justifies\")\n  D -->|\"no\"| F[\"Portal-ready claim pack\"]\n  E --> F\n  F --> G(\"Warranty manager approves pack\")\n  G --> H[\"Submit to OEM warranty portal\"]\n  H --> I[\"Track response and rejection codes\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "DMS job card and invoice export",
+          "Photo and diagnostic report upload",
+          "OEM warranty manual and labour time standards"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR and layout parsing",
+          "VIN and odometer photo readers",
+          "LLM extractor and narrative structurer"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Coverage and mileage rules",
+          "Labour time and campaign checks",
+          "Duplicate and repeat repair detection"
+        ]
+      },
+      {
+        "name": "Review and submission",
+        "components": [
+          "Warranty desk review screen",
+          "Claim pack generator",
+          "OEM portal connector",
+          "Rejection analytics"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"DMS job card export\"]\n    I2[\"Photos and diagnostic reports\"]\n    I3[\"OEM warranty manual rules\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and photo readers\"]\n    U2[\"LLM extractor\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"Coverage and labour checks\"]\n    V2[\"Duplicate and repeat detection\"]\n  end\n  subgraph S4[\"Review and submission\"]\n    R1(\"Warranty manager review\")\n    R2[\"Claim pack generator\"]\n    R3[\"OEM portal connector\"]\n    R4[\"Rejection analytics\"]\n  end\n  I1 --> U2\n  I2 --> U1\n  U1 --> U2\n  U2 --> V1\n  I3 --> V1\n  V1 --> V2\n  V2 --> R1\n  R1 --> R2\n  R2 --> R3\n  R3 --> R4"
+  },
+  "inputs": [
+    "Repair order or job card with technician notes",
+    "Tax invoice for parts and labour",
+    "Failed-part photos and part tags",
+    "VIN and odometer photos",
+    "Diagnostic tool reports with fault codes",
+    "OEM warranty manual, labour time standards and campaign lists"
+  ],
+  "outputs": [
+    "Portal-ready claim pack with evidence index",
+    "Pre-submission flags and reasons",
+    "Structured complaint, cause and correction",
+    "Rejection and debit reason analytics",
+    "Audit trail of checks and edits"
+  ],
+  "human_in_the_loop": "The warranty manager reviews every flagged claim and approves each pack before submission. On the OEM side, warranty analysts make every approval and rejection decision; the system prepares and flags.",
+  "integrations": [
+    "Dealer management system",
+    "OEM warranty portal, by API or controlled browser automation where the OEM permits",
+    "Diagnostic tool report exports",
+    "Parts return and logistics tracking",
+    "BI or reporting tools"
+  ],
+  "guardrails": [
+    "Policy rules taken from the current OEM manual and version-controlled",
+    "Narratives structured only from technician notes, with no facts added",
+    "Photo reuse and tamper checks across claims",
+    "Nothing submitted without warranty manager approval",
+    "Full audit trail for OEM warranty audits"
+  ],
+  "compliance_notes": [
+    "Customer names and contact details on job cards handled under the DPDP Act 2023.",
+    "Keeps the evidence trail dealers need when OEM warranty audits review paid claims."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One dealer group's warranty claims for one brand, including a backtest on recently rejected claims and live pre-checks on new claims.",
+    "deliverables": [
+      "Rule set built from the OEM warranty manual",
+      "Extraction and pre-check pipeline on your claims",
+      "Warranty desk review screen",
+      "Backtest report comparing flags with actual OEM rejection reasons",
+      "Roll-out plan for other brands and branches"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Flag agreement with OEM outcomes",
+        "how": "Backtest of pre-check flags against the rejection and debit reasons the OEM actually gave."
+      },
+      {
+        "metric": "Claim preparation time",
+        "how": "Time per claim at the warranty desk with and without the assistant."
+      },
+      {
+        "metric": "First-time acceptance",
+        "how": "Acceptance of pilot claims at first submission, tracked against the dealer's recent history."
+      },
+      {
+        "metric": "Reviewer edits",
+        "how": "Changes the warranty manager makes to extracted fields and narratives."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it submit claims to our OEM's portal?",
+      "a": "Where the OEM provides an API we use it. Otherwise the assistant prepares a portal-ready pack and, only where the OEM allows it, a controlled browser automation step enters the claim after approval."
+    },
+    {
+      "q": "Can OEMs use this too?",
+      "a": "Yes. On the OEM side, the same extraction and rules support warranty analysts reviewing incoming claims, with extra checks for duplicates, repeat repairs and unusual labour across the dealer network."
+    },
+    {
+      "q": "Does it write the failure description for the technician?",
+      "a": "It structures what the technician wrote into complaint, cause and correction and points out missing elements. It does not invent symptoms, causes or tests that are not in the notes."
+    },
+    {
+      "q": "Our group handles several brands. Is that a problem?",
+      "a": "No. Each brand's warranty manual becomes its own rule set, and the review screen shows which rules applied to each claim."
+    }
+  ],
+  "related": [
+    "service-centre-plate-and-document-capture",
+    "spare-parts-matching-from-photos",
+    "rc-insurance-puc-document-extraction",
+    "distributor-trade-claims-settlement"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/warranty-claim-document-processing/"
+}

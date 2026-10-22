@@ -1,0 +1,222 @@
+{
+  "slug": "dealer-order-taking-voice-agent",
+  "industry": "manufacturing",
+  "title": "Dealer and Distributor Order-Taking Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A voice agent that calls or answers dealers in Hindi and regional languages, takes orders in their own SKU names, checks credit and stock, and books the sales order after readback.",
+  "seo": {
+    "title": "Dealer and Distributor Order Voice Agent | VipraTech",
+    "description": "Voice agent that takes dealer and distributor orders by phone in Hindi and regional languages, checks credit and stock, and books orders in SAP or Tally.",
+    "keywords": [
+      "dealer order taking voice agent",
+      "distributor order booking AI",
+      "Hindi voice bot for dealers",
+      "sales order automation SAP",
+      "voice AI for B2B orders"
+    ]
+  },
+  "designed_for": [
+    "National Sales Head",
+    "Sales Operations Manager",
+    "Area Sales Manager",
+    "Order Desk and Sales Coordination Lead"
+  ],
+  "problem": {
+    "intro": "In building materials, electricals, pipes, paints and similar categories, dealers still order by calling the sales officer or sending a WhatsApp message. A coordinator then re-keys the order into SAP or Tally, often hours later, and credit or stock problems surface only after delivery has been promised.",
+    "pain_points": [
+      {
+        "title": "Orders re-keyed by hand",
+        "detail": "Sales officers and coordinators type orders from calls, voice notes and WhatsApp messages, and wrong SKUs or quantities lead to returns."
+      },
+      {
+        "title": "Local SKU names",
+        "detail": "Dealers say 'four inch, six kg' or 'twenty litre white' rather than the item code, and only experienced staff can map them."
+      },
+      {
+        "title": "Credit and stock checked too late",
+        "detail": "Orders from dealers on credit hold, or for items not in the depot, are discovered after the promise is made."
+      },
+      {
+        "title": "Peaks and after-hours calls",
+        "detail": "Month-end and seasonal peaks overwhelm the order desk, and dealers who call after hours wait until the next day."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that takes dealer orders by phone, on inbound calls or on scheduled outbound calls on each dealer's order day. It speaks Hindi, English and the regional languages your network uses, and understands the names dealers actually use for SKUs, mapped to your item master. During the call it checks the dealer's credit limit and outstanding, depot stock and applicable schemes. It reads the order back, gets confirmation and creates the sales order in SAP or Tally, then sends a WhatsApp summary. Credit holds, special price requests and unclear items go to a coordinator.",
+    "capabilities": [
+      "Inbound order line plus scheduled outbound calls by dealer beat or order day",
+      "Understands Hindi, Hinglish and regional languages, including dealer nicknames for SKUs and pack sizes",
+      "Maps spoken items to item codes using your item master and each dealer's order history",
+      "Checks credit limit, overdue amount, depot stock and scheme eligibility during the call",
+      "Reads back every line and books the sales order only after the dealer confirms",
+      "Sends a WhatsApp order summary and hands over to a coordinator with the transcript when needed"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Call connects",
+      "detail": "A dealer calls the order line or receives a scheduled call; the agent identifies them from the registered number."
+    },
+    {
+      "step": 2,
+      "title": "Capture order lines",
+      "detail": "The dealer speaks the order naturally; the agent maps each item to an item code and asks about anything unclear."
+    },
+    {
+      "step": 3,
+      "title": "Check credit, stock and schemes",
+      "detail": "Credit limit, outstanding, depot stock and active schemes are checked through the ERP."
+    },
+    {
+      "step": 4,
+      "title": "Read back and confirm",
+      "detail": "The agent reads back items, quantities and values and gets explicit confirmation."
+    },
+    {
+      "step": 5,
+      "title": "Book or hand over",
+      "detail": "Clean orders are booked as sales orders; credit holds and special requests go to the coordinator."
+    },
+    {
+      "step": 6,
+      "title": "Confirm on WhatsApp",
+      "detail": "The dealer receives an order summary, and the sales officer sees it in their app or CRM."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Dealer call, inbound or scheduled\"] --> B[\"Identify dealer from number\"]\n  B --> C[\"Capture items in dealer language\"]\n  C --> D[\"Check credit, stock and schemes\"]\n  D --> E{\"Items clear and within credit?\"}\n  E -->|\"yes\"| F[\"Read back and get confirmation\"]\n  E -->|\"no\"| G(\"Sales coordinator takes over\")\n  F --> H[\"Book sales order in ERP\"]\n  G --> H\n  H --> I[\"WhatsApp summary to dealer\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "SIP trunk or cloud telephony number",
+          "Outbound call scheduler by dealer beat"
+        ]
+      },
+      {
+        "name": "Speech and language",
+        "components": [
+          "Speech-to-text tuned for Hindi and regional languages",
+          "LLM dialogue manager with order schema",
+          "Text-to-speech voice"
+        ]
+      },
+      {
+        "name": "Order logic",
+        "components": [
+          "SKU resolver using item master and dealer history",
+          "Credit, stock and scheme lookups",
+          "Order value and exception rules"
+        ]
+      },
+      {
+        "name": "Systems",
+        "components": [
+          "SAP or Tally sales order adapter",
+          "WhatsApp Business API for summaries",
+          "CRM or DMS update"
+        ]
+      },
+      {
+        "name": "Oversight",
+        "components": [
+          "Coordinator handover console",
+          "Call recordings, transcripts and QA sampling"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Order line number\"]\n    T2[\"Outbound scheduler\"]\n  end\n  subgraph S2[\"Speech and language\"]\n    SP1[\"Speech to text\"]\n    SP2[\"LLM dialogue manager\"]\n    SP3[\"Text to speech\"]\n  end\n  subgraph S3[\"Order logic\"]\n    G1[\"SKU resolver\"]\n    G2[\"Credit, stock and scheme checks\"]\n  end\n  subgraph S4[\"Systems\"]\n    Y1[\"SAP or Tally order adapter\"]\n    Y2[\"WhatsApp summary\"]\n  end\n  subgraph S5[\"Oversight\"]\n    H1(\"Coordinator console\")\n    H2[\"Recordings and QA\"]\n  end\n  T1 --> SP1\n  T2 --> SP1\n  SP1 --> SP2 --> SP3\n  SP2 --> G1 --> G2\n  G2 --> Y1 --> Y2\n  G2 --> H1\n  H1 --> Y1\n  SP2 --> H2"
+  },
+  "inputs": [
+    "Dealer master with registered numbers, territory and order days",
+    "Item master with SKU nicknames, pack sizes and price lists",
+    "Credit limits, outstanding and overdue amounts from SAP or Tally",
+    "Depot stock and active scheme circulars",
+    "Past order history per dealer"
+  ],
+  "outputs": [
+    "Sales orders booked in SAP or Tally",
+    "WhatsApp order summary to the dealer",
+    "Coordinator queue for credit holds and unclear items",
+    "Call recordings and transcripts",
+    "Order desk report by region, SKU and handover reason"
+  ],
+  "human_in_the_loop": "Orders over the credit limit, special price requests, new SKUs and any item the agent cannot resolve go to a sales coordinator with the transcript. Credit control decides on holds, and the agent never offers discounts outside approved schemes.",
+  "integrations": [
+    "SAP SD or Tally Prime for orders, credit and stock",
+    "Dealer management system or sales force app",
+    "Cloud telephony or SIP trunk",
+    "WhatsApp Business API",
+    "CRM such as Salesforce or Zoho"
+  ],
+  "guardrails": [
+    "Order created only after explicit readback confirmation",
+    "Prices and schemes taken only from the master, never generated",
+    "Order value limits above which a coordinator confirms",
+    "Call recording disclosure at the start of each call",
+    "Immediate handover when the dealer asks for a person"
+  ],
+  "compliance_notes": [
+    "Dealer proprietors' phone numbers and recordings are personal data under the DPDP Act 2023; notice and retention limits apply.",
+    "Outbound calling follows calling-hour and consent rules aligned with TRAI commercial-communication requirements where they apply."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Dealers of one depot or region, in one or two languages, with the agent taking orders alongside the existing order desk.",
+    "deliverables": [
+      "SKU nickname map built from your item master and order history",
+      "Working agent on inbound and scheduled outbound calls",
+      "Coordinator handover console",
+      "Order accuracy report against invoiced orders",
+      "Roll-out plan for other regions and languages"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Order line accuracy",
+        "how": "Booked lines compared with what the dealer confirmed and what was finally invoiced."
+      },
+      {
+        "metric": "Calls completed without handover",
+        "how": "Share of order calls booked end to end, with handover reasons logged."
+      },
+      {
+        "metric": "SKU resolution rate",
+        "how": "Share of spoken items mapped to the right item code on the first attempt."
+      },
+      {
+        "metric": "Dealer and sales officer feedback",
+        "how": "Short post-call rating from dealers and structured feedback from sales officers in the pilot region."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our dealers use local names for products. How does the agent learn them?",
+      "a": "We build a nickname map from your item master, past orders and a few sessions with sales officers. When a dealer uses a new name, the agent asks a clarifying question, and the coordinator's answer is added to the map after review."
+    },
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi, English and Hinglish as standard, plus regional languages such as Marathi, Gujarati, Tamil, Telugu, Kannada or Bengali depending on your network. We test with real calls from your dealers before go-live."
+    },
+    {
+      "q": "Can it handle credit checks and schemes?",
+      "a": "Yes. It reads credit limit, outstanding and active schemes from your ERP during the call. It tells the dealer when an order needs approval but does not make credit decisions."
+    },
+    {
+      "q": "What does it cost to run?",
+      "a": "Running cost depends on call minutes, languages and integrations. After the pilot we give you a per-call and fixed-cost estimate based on your actual call volumes and lengths."
+    }
+  ],
+  "related": [
+    "dealer-reorder-automation",
+    "consumer-durables-service-booking-voice-agent",
+    "stockist-order-taking-voice-agent",
+    "agri-input-dealer-order-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/dealer-order-taking-voice-agent/"
+}

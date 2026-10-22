@@ -1,0 +1,218 @@
+{
+  "slug": "ticket-and-email-triage",
+  "industry": "telecom-contact-centers",
+  "title": "Ticket and Email Triage",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Classify and route incoming emails, web complaints and tickets by issue, account, urgency and regulatory risk, extract what the resolver needs and draft a first reply for approval.",
+  "seo": {
+    "title": "AI Ticket and Email Triage for Telecom | VipraTech",
+    "description": "AI that classifies emails, web complaints and tickets, reads attachments, flags regulatory escalations, routes to the right queue and drafts replies.",
+    "keywords": [
+      "email ticket triage AI",
+      "complaint classification telecom",
+      "customer email automation",
+      "ticket routing AI",
+      "multilingual complaint handling"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Care Back Office",
+    "Complaints and Appellate Cell Manager",
+    "Enterprise Service Desk Manager",
+    "BPO Email Process Lead"
+  ],
+  "problem": {
+    "intro": "Written complaints arrive by email, web form, app and social media, and as escalations through the nodal officer or appellate channel, in English, Hindi and regional languages, often with bill screenshots or speed-test images attached. First-level agents read each one to decide the category, find the account and route it, and urgent items such as a regulatory escalation, a legal notice or an enterprise link outage wait in the same queue as everything else.",
+    "pain_points": [
+      {
+        "title": "Manual reading and categorisation",
+        "detail": "Agents read every message to pick a category, and miscategorised tickets bounce between teams."
+      },
+      {
+        "title": "Urgency is buried",
+        "detail": "Escalations that mention a regulator, a consumer forum or a legal notice are not visible until someone opens them."
+      },
+      {
+        "title": "Missing details",
+        "detail": "The mobile or account number sits in a screenshot or signature, so agents reply asking for information the customer already sent."
+      },
+      {
+        "title": "Duplicates across channels",
+        "detail": "The same customer writes by email, web form and social media, creating parallel tickets that different agents work on."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a triage service that reads each incoming email, form submission or ticket along with its attachments and prepares it for the resolver. It identifies the language, classifies the issue against your category tree, extracts the mobile or account number, circle, dates, amounts and disputed charges from the text and screenshots, and looks up the customer in the CRM. It assigns priority from your rules, raising anything that mentions a regulator, consumer forum, legal notice or enterprise outage, and links duplicates from the same customer. The ticket lands in the right queue with a summary and a drafted reply in the customer's language, for an agent to approve.",
+    "capabilities": [
+      "Language detection and classification against your category and sub-category tree",
+      "Extraction of mobile number, account ID, circle, dates and disputed amounts from text and attachments",
+      "OCR for bill screenshots, speed-test images and scanned letters",
+      "Priority rules for regulatory escalations, legal notices, repeat complaints and enterprise outages",
+      "Duplicate and thread linking across email, web, app and social channels",
+      "Drafted replies in the customer's language for agent approval"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the message",
+      "detail": "Emails, form submissions, app complaints and social tickets arrive in one intake."
+    },
+    {
+      "step": 2,
+      "title": "Read text and attachments",
+      "detail": "The language is detected and attachments such as screenshots and letters are read with OCR."
+    },
+    {
+      "step": 3,
+      "title": "Classify and extract",
+      "detail": "The issue is classified, key fields are extracted and the customer is found in the CRM."
+    },
+    {
+      "step": 4,
+      "title": "Prioritise and link",
+      "detail": "Priority rules run, regulatory and legal mentions are raised, and duplicates are linked."
+    },
+    {
+      "step": 5,
+      "title": "Confirm uncertain categories",
+      "detail": "Low-confidence classifications go to a triage agent before routing."
+    },
+    {
+      "step": 6,
+      "title": "Route and draft",
+      "detail": "The ticket reaches the right queue with a summary and a drafted reply, which the resolver approves and sends."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Email, web form or ticket arrives\"] --> B[\"Read text and attachments\"]\n  B --> C[\"Classify issue and extract account\"]\n  C --> D[\"Priority rules and duplicate check\"]\n  D --> E{\"Classification confident?\"}\n  E -->|\"yes\"| F[\"Route to queue with summary\"]\n  E -->|\"no\"| G(\"Triage agent confirms category\")\n  G --> F\n  F --> H[\"Draft reply in customer language\"]\n  H --> I(\"Resolver approves and sends\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channels",
+        "components": [
+          "Email intake from Exchange or Gmail",
+          "Web form and app complaint feeds",
+          "Social listening tool feed",
+          "Ticketing system webhooks"
+        ]
+      },
+      {
+        "name": "Understanding",
+        "components": [
+          "Language identification",
+          "OCR for attachments",
+          "Classifier and field extractor"
+        ]
+      },
+      {
+        "name": "Enrichment and rules",
+        "components": [
+          "CRM and billing lookup",
+          "Priority and escalation rules",
+          "Duplicate linker"
+        ]
+      },
+      {
+        "name": "Workflow",
+        "components": [
+          "Triage review screen",
+          "Ticketing system update",
+          "Reply drafter",
+          "Category and escalation analytics"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Channels\"]\n    C1[\"Email and web form intake\"]\n    C2[\"App and social listening feeds\"]\n  end\n  subgraph S2[\"Understanding\"]\n    U1[\"Language identification\"]\n    U2[\"OCR for attachments\"]\n    U3[\"Classifier and field extractor\"]\n  end\n  subgraph S3[\"Enrichment and rules\"]\n    E1[\"CRM and billing lookup\"]\n    E2[\"Priority and escalation rules\"]\n    E3[\"Duplicate linker\"]\n  end\n  subgraph S4[\"Workflow\"]\n    W1(\"Triage review screen\")\n    W2[\"Ticketing system update\"]\n    W3[\"Reply drafter\"]\n  end\n  C1 --> U1\n  C2 --> U1\n  C1 --> U2\n  U1 --> U3\n  U2 --> U3\n  U3 --> E1 --> E2 --> E3\n  U3 --> W1\n  W1 --> W2\n  E3 --> W2\n  W2 --> W3"
+  },
+  "inputs": [
+    "Inbound emails",
+    "Web and app complaint forms",
+    "Tickets from social listening tools",
+    "Attachments such as bills, screenshots and letters",
+    "Category tree and SLA rules",
+    "CRM and billing data"
+  ],
+  "outputs": [
+    "Classified and prioritised tickets",
+    "Extracted account and complaint fields",
+    "Duplicate links across channels",
+    "Draft replies in the customer's language",
+    "Category and escalation reports"
+  ],
+  "human_in_the_loop": "Triage agents confirm low-confidence classifications, and resolvers approve every reply before it reaches the customer. Regulatory and legal escalations always go to the named complaints or legal owner and are never answered automatically.",
+  "integrations": [
+    "Ticketing such as Salesforce Service Cloud, Zendesk, Freshdesk, ServiceNow or an in-house CRM",
+    "Exchange or Gmail mailboxes",
+    "BSS and billing systems",
+    "Social listening tools"
+  ],
+  "guardrails": [
+    "No reply sent without agent approval",
+    "Regulatory, consumer forum and legal mentions always escalated to a named owner",
+    "Personal data masked in logs",
+    "Draft replies limited to approved templates and knowledge",
+    "Confidence thresholds per category, reviewed monthly"
+  ],
+  "compliance_notes": [
+    "Supports the complaint registration and escalation flow operators run under TRAI's complaint redressal regulations; docket handling stays in your ticketing system.",
+    "Customer emails and attachments are personal data under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One inbound mailbox or web complaint queue, evaluated first on historic tickets and then in shadow mode on live traffic.",
+    "deliverables": [
+      "Category tree and priority rules configured",
+      "Triage service integrated with your ticketing system in shadow mode",
+      "Reply drafts for the top categories",
+      "Accuracy report against agents' final categories",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Classification accuracy",
+        "how": "System categories compared with the final category agents assigned."
+      },
+      {
+        "metric": "Routing correctness",
+        "how": "Tickets reassigned after routing, compared with the current process."
+      },
+      {
+        "metric": "Time to first response",
+        "how": "Elapsed time from arrival to first reply, from ticketing data."
+      },
+      {
+        "metric": "Escalation detection",
+        "how": "Regulatory and legal mentions caught on a labelled test set of historic tickets."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it handle Hindi and regional-language emails?",
+      "a": "Yes. It detects the language, classifies the complaint and drafts the reply in the same language, with an English summary for resolvers who need one."
+    },
+    {
+      "q": "Will it reply to customers automatically?",
+      "a": "Not by default. Drafts go to agents for approval. Some acknowledgement messages can be automated later if you choose, but regulatory and legal escalations are always handled by people."
+    },
+    {
+      "q": "Does it work with our ticketing system?",
+      "a": "Yes, through APIs or webhooks for common platforms such as Salesforce Service Cloud, Zendesk, Freshdesk and ServiceNow, or through your in-house CRM's integration layer."
+    },
+    {
+      "q": "Can it read screenshots and scanned letters?",
+      "a": "Yes. Bill screenshots, speed-test images and scanned letters are read with OCR, and extracted values such as amounts or dates are shown with the image region they came from."
+    }
+  ],
+  "related": [
+    "multilingual-l1-support-voice-agent",
+    "real-time-agent-assist",
+    "customer-complaint-triage-and-routing",
+    "churn-risk-outreach-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/ticket-and-email-triage/"
+}

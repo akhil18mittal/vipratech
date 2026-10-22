@@ -1,0 +1,226 @@
+{
+  "slug": "crop-disease-detection-from-photos",
+  "industry": "agriculture",
+  "title": "Crop Disease Detection from Farmer Photos",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Suggest likely diseases, pests and nutrient problems from farmer photos sent on WhatsApp or an app, reply in the farmer's language, and route uncertain or dose questions to an agronomist.",
+  "seo": {
+    "title": "Crop Disease Detection from Farmer Photos | VipraTech",
+    "description": "AI that reads farmer crop photos, suggests likely diseases or pests, replies in Hindi or regional languages and refers dose questions to agronomists.",
+    "keywords": [
+      "crop disease detection app",
+      "plant disease identification AI",
+      "pest detection from photos",
+      "AI for agritech India",
+      "WhatsApp crop advisory"
+    ]
+  },
+  "designed_for": [
+    "Head of Agronomy, Agritech Company",
+    "FPO CEO",
+    "Product Manager, Farmer App",
+    "Extension Manager, Agri-Input Company"
+  ],
+  "problem": {
+    "intro": "Farmers notice a problem when leaves curl, spots spread or plants wilt, and the first thing they do is send a photo to someone they trust. Agronomy teams receive hundreds of these photos a day on WhatsApp, many blurred or showing the wrong part of the plant, and each needs a reply before the problem spreads.",
+    "pain_points": [
+      {
+        "title": "Agronomists buried in photo queues",
+        "detail": "A small agronomy team cannot look at every photo in time during peak kharif and rabi pest windows, so replies arrive days late."
+      },
+      {
+        "title": "Look-alike symptoms",
+        "detail": "Nutrient deficiency, viral infection, herbicide drift and fungal spots can look similar, and a wrong call leads to the wrong spray."
+      },
+      {
+        "title": "Unusable photos",
+        "detail": "Distant, blurred or backlit photos of a whole field cannot be assessed, yet farmers are rarely told which photo is needed instead."
+      },
+      {
+        "title": "Advice the farmer cannot use",
+        "detail": "Replies in English or technical terms, without local product names or timing, are often ignored."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a photo triage service that sits behind your WhatsApp number or farmer app. A vision model first checks whether the photo is usable and asks for a close-up of the affected leaf, stem or fruit if it is not. It then suggests the most likely diseases, pests or deficiencies for that crop and growth stage, with a confidence score and the visual cues it used. Advice is drawn only from content your agronomists approve. Replies go back as text and a voice note in the farmer's language. Low-confidence cases, unfamiliar symptoms and any question about chemical doses go to an agronomist queue with the photos and history attached.",
+    "capabilities": [
+      "Photo quality checks with guided retake prompts for blur, distance and lighting",
+      "Crop and growth-stage aware classification of common diseases, pests and nutrient deficiencies",
+      "Ranked suggestions with confidence scores and highlighted symptom regions",
+      "Advice drawn from agronomist-approved package-of-practices content, never generated doses",
+      "Replies as text and voice notes in Hindi and regional languages",
+      "Agronomist queue with photo history, location and crop calendar context"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Farmer sends photos",
+      "detail": "The farmer shares one or more photos with the crop name on WhatsApp or in the app, and the system asks for the crop if it is missing."
+    },
+    {
+      "step": 2,
+      "title": "Check photo quality",
+      "detail": "The model checks focus, distance and lighting, and asks for a closer or clearer photo of the affected part when needed."
+    },
+    {
+      "step": 3,
+      "title": "Suggest likely causes",
+      "detail": "The vision model ranks likely diseases, pests or deficiencies for that crop and stage, each with a confidence score."
+    },
+    {
+      "step": 4,
+      "title": "Decide the route",
+      "detail": "Confident, common cases get an approved advisory; low-confidence cases and dose questions go to an agronomist."
+    },
+    {
+      "step": 5,
+      "title": "Agronomist review",
+      "detail": "The agronomist confirms or corrects the suggestion and chooses the advisory, including any product and dose from approved content."
+    },
+    {
+      "step": 6,
+      "title": "Reply in the farmer's language",
+      "detail": "The farmer receives the advice as text and a voice note, and every case is logged for follow-up and model improvement."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Farmer sends crop photos\"] --> B{\"Photo usable?\"}\n  B -->|\"no\"| C[\"Ask for clearer close-up\"]\n  C --> A\n  B -->|\"yes\"| D[\"Rank likely diseases and pests\"]\n  D --> E{\"Confident and no dose question?\"}\n  E -->|\"yes\"| F[\"Pick approved advisory\"]\n  E -->|\"no\"| G(\"Agronomist reviews case\")\n  G --> F\n  F --> H[\"Reply as text and voice note\"]\n  H --> I[\"Log case for follow-up\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "WhatsApp Business API webhook",
+          "Farmer app upload SDK",
+          "Image compression and EXIF handling"
+        ]
+      },
+      {
+        "name": "Vision",
+        "components": [
+          "Photo quality classifier",
+          "Crop and growth-stage detector",
+          "Disease, pest and deficiency classifier",
+          "Symptom region highlighting"
+        ]
+      },
+      {
+        "name": "Advisory",
+        "components": [
+          "Agronomist-approved advisory library",
+          "Crop calendar and region rules",
+          "Product and dose lock that blocks unapproved doses"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Agronomist queue with case history",
+          "Correction capture for retraining"
+        ]
+      },
+      {
+        "name": "Delivery and learning",
+        "components": [
+          "Local-language text and voice-note replies",
+          "Case log and outbreak analytics",
+          "Labelled dataset for model updates"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"WhatsApp webhook\"]\n    C2[\"Farmer app upload\"]\n  end\n  subgraph S2[\"Vision\"]\n    V1[\"Photo quality check\"]\n    V2[\"Crop and stage detector\"]\n    V3[\"Disease and pest classifier\"]\n  end\n  subgraph S3[\"Advisory and review\"]\n    A1[\"Approved advisory library\"]\n    A2[\"Product and dose lock\"]\n    A3(\"Agronomist queue\")\n  end\n  subgraph S4[\"Delivery and learning\"]\n    D1[\"Local-language text and voice\"]\n    D2[\"Case log and labelled data\"]\n  end\n  C1 --> V1\n  C2 --> V1\n  V1 --> V2 --> V3\n  V3 --> A1\n  V3 --> A3\n  A3 --> A1\n  A1 --> A2 --> D1\n  D1 --> D2\n  A3 --> D2"
+  },
+  "inputs": [
+    "Farmer photos of leaves, stems, fruit or whole plants",
+    "Crop name, variety and sowing date",
+    "Village or district location",
+    "Agronomist-approved package of practices and advisories",
+    "Historical labelled photos from your agronomy team"
+  ],
+  "outputs": [
+    "Ranked likely causes with confidence scores",
+    "Advisory reply as text and voice note in the farmer's language",
+    "Agronomist review tasks with full case context",
+    "Case log by crop, district and issue for outbreak tracking",
+    "Labelled photos for model improvement"
+  ],
+  "human_in_the_loop": "Agronomists review every low-confidence case, every unfamiliar symptom and every request involving a chemical product or dose. The system never invents a dose; it can only send product guidance an agronomist has approved for that crop and region.",
+  "integrations": [
+    "WhatsApp Business API",
+    "Your farmer app or CRM",
+    "Agronomy helpdesk or ticketing tool",
+    "Weather and crop calendar data feeds",
+    "Cloud image storage in an India region"
+  ],
+  "guardrails": [
+    "Product and dose guidance only from approved content, checked by rules before sending",
+    "Confidence thresholds per crop and issue, agreed with agronomists",
+    "Wording that presents suggestions as likely causes, not certain diagnoses",
+    "Automatic referral when symptoms suggest a fast-spreading or notifiable pest",
+    "Weekly agronomist sampling of auto-answered cases"
+  ],
+  "compliance_notes": [
+    "Product guidance is kept within crop uses registered under India's Insecticides Act 1968, using your agronomists' approved list.",
+    "Farmer phone numbers and locations are handled with consent and purpose limits in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One or two crops, such as cotton and soybean, in a few districts, using your existing WhatsApp photo backlog to build and test before going live with a small farmer group.",
+    "deliverables": [
+      "Labelled evaluation set built with your agronomists",
+      "Working photo triage on WhatsApp or your app",
+      "Agronomist review queue",
+      "Accuracy report by crop and issue against agronomist labels",
+      "Roll-out plan for more crops and languages"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with agronomist labels",
+        "how": "Model suggestions compared with agronomist decisions on the same photos."
+      },
+      {
+        "metric": "Share of cases referred to agronomists",
+        "how": "Count of cases routed for review, split by reason: low confidence, dose question or poor photo."
+      },
+      {
+        "metric": "Reply time to farmers",
+        "how": "Time from photo received to advice sent, compared with the current WhatsApp process."
+      },
+      {
+        "metric": "Retake success",
+        "how": "How often a guided retake prompt produces a usable photo."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which crops and diseases can it recognise?",
+      "a": "We start with the crops and issues that make up most of your photo volume, using your agronomists' labelled photos plus public datasets where relevant. New crops are added in stages, and the system says when a crop or symptom is outside what it knows."
+    },
+    {
+      "q": "Is the AI giving a diagnosis?",
+      "a": "It gives ranked likely causes with a confidence score and the advisory your agronomists approved. Uncertain cases and anything involving chemicals go to an agronomist, who makes the call."
+    },
+    {
+      "q": "What about photos taken in poor light or on basic phones?",
+      "a": "That is the normal case, so the pipeline checks photo quality first and asks for a better shot in simple language when needed. The pilot report shows accuracy separately for good and poor photos."
+    },
+    {
+      "q": "Can farmers get replies in their own language?",
+      "a": "Yes. Replies are sent as text and voice notes in Hindi and the regional languages you choose, with crop and product names reviewed by your team so they match what farmers say locally."
+    }
+  ],
+  "related": [
+    "farmer-advisory-voice-helpline",
+    "farm-advisory-chatbot-safety-testing",
+    "crop-insurance-field-photo-verification",
+    "produce-grading-and-sorting"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/crop-disease-detection-from-photos/"
+}

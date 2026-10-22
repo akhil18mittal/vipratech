@@ -1,0 +1,219 @@
+{
+  "slug": "patient-enquiry-follow-up-automation",
+  "industry": "healthcare",
+  "title": "Patient Enquiry Follow-Up Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Bring patient enquiries from web forms, WhatsApp, ads and missed calls into one queue, reply promptly with approved information, collect reports and route each enquiry to the right counsellor.",
+  "seo": {
+    "title": "Patient Enquiry Follow-Up Automation | VipraTech",
+    "description": "Capture hospital enquiries from web, WhatsApp, ads and calls, reply with approved content, collect reports and route them to the right counsellor.",
+    "keywords": [
+      "patient enquiry follow-up",
+      "hospital lead management",
+      "WhatsApp automation for hospitals",
+      "elective surgery enquiry nurturing",
+      "healthcare CRM automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Marketing",
+    "Patient Relations and Counselling Manager",
+    "International Patient Desk Lead",
+    "Business Development Head"
+  ],
+  "problem": {
+    "intro": "Hospitals receive enquiries about surgeries, treatments and health check-up packages through website forms, WhatsApp, social ads, listing sites and phone calls. Many are never followed up, get a generic reply or wait days for a cost estimate, and the patient chooses another hospital. Counsellors spend time on unqualified enquiries while serious ones wait.",
+    "pain_points": [
+      {
+        "title": "Enquiries spread across channels",
+        "detail": "Forms, WhatsApp chats, ad leads and missed calls sit in different inboxes with no single owner."
+      },
+      {
+        "title": "Slow first response",
+        "detail": "Enquiries that arrive in the evening or on Sunday wait until staff are back, by which time the patient has moved on."
+      },
+      {
+        "title": "Estimate bottleneck",
+        "detail": "Patients want an indicative cost, but estimates depend on reports, insurance and room choice, and billing is busy."
+      },
+      {
+        "title": "No tracking to outcome",
+        "detail": "Marketing cannot tell which channels lead to consultations and admissions, so budgets follow guesswork."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an enquiry follow-up system that brings every patient enquiry into one CRM queue, whether it starts on the website, WhatsApp, a social ad, a listing site or a missed call. A WhatsApp assistant replies promptly in the patient's language with approved information about the department, doctors and consultation process, and collects what the counsellor needs: procedure of interest, city, payment mode or insurer, preferred dates and existing reports. It offers OPD or teleconsultation slots and sends reminders. Counsellors receive a summary with the uploaded reports and send indicative estimates prepared by billing. The assistant never gives medical opinions or promises outcomes.",
+    "capabilities": [
+      "Lead capture from website forms, WhatsApp, Meta and Google ad forms, listing sites and missed-call numbers",
+      "WhatsApp replies in English, Hindi and regional languages from an approved content library",
+      "Structured intake of procedure interest, city, insurer or cash, preferred dates and report uploads",
+      "OPD and teleconsultation booking with reminders",
+      "Counsellor routing by department, language and domestic or international enquiry",
+      "Channel-to-consultation and admission reporting for marketing"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture",
+      "detail": "Enquiries from every channel are de-duplicated by phone number and created as leads in the CRM."
+    },
+    {
+      "step": 2,
+      "title": "Screen for urgency",
+      "detail": "Messages that describe an emergency get immediate emergency guidance and a staff alert instead of an enquiry flow."
+    },
+    {
+      "step": 3,
+      "title": "Acknowledge and collect",
+      "detail": "The WhatsApp assistant replies with approved information and collects intake details and reports."
+    },
+    {
+      "step": 4,
+      "title": "Route to a counsellor",
+      "detail": "Qualified enquiries go to the right counsellor with a summary, and billing prepares any estimate."
+    },
+    {
+      "step": 5,
+      "title": "Book and remind",
+      "detail": "The assistant offers consultation slots, books them in the HIS and sends reminders."
+    },
+    {
+      "step": 6,
+      "title": "Track outcomes",
+      "detail": "Consultations, admissions and drop-offs are recorded against the source channel."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Enquiry from web, WhatsApp, ads, calls\"] --> B[\"De-duplicate and create CRM lead\"]\n  B --> C{\"Emergency described?\"}\n  C -->|\"yes\"| D(\"Emergency guidance and staff alert\")\n  C -->|\"no\"| E[\"Approved reply and intake questions\"]\n  E --> F[\"Collect reports and preferences\"]\n  F --> G(\"Counsellor reviews and sends estimate\")\n  G --> H[\"Book consultation and remind\"]\n  H --> I[\"Outcome tracked to channel\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Lead capture",
+        "components": [
+          "Website form and ad lead webhooks",
+          "WhatsApp Business API",
+          "Missed-call and IVR logs",
+          "Listing site lead imports"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "LLM assistant restricted to approved content",
+          "Emergency phrase detection",
+          "Secure report upload handling"
+        ]
+      },
+      {
+        "name": "CRM and routing",
+        "components": [
+          "CRM lead records",
+          "Counsellor routing rules",
+          "Consent and opt-out registry"
+        ]
+      },
+      {
+        "name": "Scheduling and analytics",
+        "components": [
+          "HIS appointment API",
+          "Reminder scheduler",
+          "Channel-to-admission reporting"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Lead capture\"]\n    L1[\"Web forms and ad webhooks\"]\n    L2[\"WhatsApp Business API\"]\n    L3[\"Missed call and IVR logs\"]\n  end\n  subgraph S2[\"Conversation\"]\n    C1[\"Approved-content assistant\"]\n    C2[\"Emergency phrase detector\"]\n  end\n  subgraph S3[\"CRM and routing\"]\n    R1[\"CRM lead record\"]\n    R2(\"Patient counsellor\")\n    R3[\"Consent registry\"]\n  end\n  subgraph S4[\"Scheduling and analytics\"]\n    H1[\"HIS appointment API\"]\n    H2[\"Channel outcome reports\"]\n  end\n  L1 --> R1\n  L2 --> C2 --> C1\n  L3 --> R1\n  C1 --> R1\n  R3 --> C1\n  R1 --> R2\n  R2 --> H1\n  C1 --> H1\n  H1 --> H2"
+  },
+  "inputs": [
+    "Website form and ad leads",
+    "WhatsApp messages and missed-call logs",
+    "Approved content on departments, doctors and packages",
+    "Doctor schedules for consultations",
+    "Consent and opt-out records",
+    "Billing-approved package prices and estimate templates"
+  ],
+  "outputs": [
+    "Unified, de-duplicated enquiry queue in the CRM",
+    "Intake summaries with uploaded reports for counsellors",
+    "Booked consultations with reminders",
+    "Emergency alerts to staff",
+    "Channel-to-consultation and admission reports"
+  ],
+  "human_in_the_loop": "Counsellors handle every qualified enquiry and send any cost estimate, which billing prepares. Clinicians review the medical content in the approved library, and the assistant hands over to staff on any clinical question.",
+  "integrations": [
+    "CRM such as LeadSquared, Salesforce, Zoho or HubSpot",
+    "WhatsApp Business API",
+    "Meta and Google ad lead forms",
+    "HIS appointment module",
+    "Cloud telephony for missed-call numbers"
+  ],
+  "guardrails": [
+    "No medical opinions, diagnoses or outcome promises in any message",
+    "Prices shared only from billing-approved packages or counsellor estimates",
+    "Emergency phrases trigger emergency guidance and a staff alert",
+    "Opt-in respected and opt-outs honoured across channels",
+    "Patient-shared reports stored securely, with access limited to counsellors and doctors"
+  ],
+  "compliance_notes": [
+    "Health information shared by enquirers handled with consent and purpose limitation under the DPDP Act 2023.",
+    "SMS and calls follow TRAI commercial communication rules, and WhatsApp messages use approved templates with opt-in.",
+    "Content avoids outcome claims, consistent with the medical ethics and advertising norms that apply to healthcare providers."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Enquiries for two or three elective services, such as orthopaedics, cataract surgery or health check-up packages, from website and WhatsApp channels.",
+    "deliverables": [
+      "Approved content library for the pilot services",
+      "WhatsApp assistant and CRM integration",
+      "Counsellor routing and summaries",
+      "Channel reporting dashboard",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to first response",
+        "how": "Time from enquiry to first reply, compared with the month before the pilot."
+      },
+      {
+        "metric": "Intake completeness",
+        "how": "Enquiries reaching a counsellor with procedure, city, payment mode and reports captured."
+      },
+      {
+        "metric": "Consultations booked",
+        "how": "Consultations booked from pilot enquiries, tracked through the HIS."
+      },
+      {
+        "metric": "Counsellor feedback",
+        "how": "Counsellor rating of summary usefulness on a sample of handovers."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the assistant answer medical questions?",
+      "a": "No. It shares approved information about services, doctors and processes, and passes any clinical question to a counsellor or doctor. It never comments on a patient's condition or reports."
+    },
+    {
+      "q": "Can it give cost estimates?",
+      "a": "It can share fixed package prices your billing team has approved. Estimates that depend on reports, insurance or room choice are prepared by billing and sent by the counsellor."
+    },
+    {
+      "q": "Does it handle international patient enquiries?",
+      "a": "Yes. International enquiries can go to your international patient desk with language, country and documents captured. Visa and medical travel paperwork stays with that team."
+    },
+    {
+      "q": "How do you keep messages compliant?",
+      "a": "Messages come from an approved library reviewed by your marketing, legal and clinical teams. Opt-ins, opt-outs and TRAI rules for SMS and calls are applied automatically."
+    }
+  ],
+  "related": [
+    "appointment-booking-voice-agent",
+    "healthcare-chatbot-safety-testing",
+    "post-discharge-follow-up-calls",
+    "counselling-funnel-lead-nurture"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/patient-enquiry-follow-up-automation/"
+}

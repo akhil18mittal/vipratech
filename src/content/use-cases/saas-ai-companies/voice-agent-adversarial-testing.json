@@ -1,0 +1,224 @@
+{
+  "slug": "voice-agent-adversarial-testing",
+  "industry": "saas-ai-companies",
+  "title": "Voice Agent Adversarial Testing",
+  "capability": "ai-security",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Adversarial test calls to your voice agent in English, Hindi and Hinglish: identity bypass, data disclosure, off-script promises and speech-layer flaws, with PASS, RISK and FAIL evidence.",
+  "seo": {
+    "title": "Voice Agent Adversarial Testing and Red-Teaming | VipraTech",
+    "description": "Synthetic adversarial callers test voice agents for identity bypass, data leakage, unsafe promises and speech-layer flaws in English, Hindi and Hinglish.",
+    "keywords": [
+      "voice agent red teaming",
+      "voice AI security testing",
+      "conversational AI adversarial testing",
+      "Hindi voice bot testing",
+      "voice bot jailbreak testing"
+    ]
+  },
+  "designed_for": [
+    "Founder or CTO, Voice AI Company",
+    "Head of Conversational AI",
+    "CISO at a company deploying voice agents",
+    "QA Lead, Voice Platform"
+  ],
+  "problem": {
+    "intro": "Voice agents now verify callers, take payments, book appointments and handle complaints. They combine speech recognition, an LLM, text-to-speech and tool calls in real time, and each layer can fail in ways a text chatbot test will not catch. Callers also behave differently on the phone: they interrupt, switch languages and apply social pressure.",
+    "pain_points": [
+      {
+        "title": "Identity checks that can be talked around",
+        "detail": "Persistent or confused callers can sometimes get an agent to skip verification steps or accept partial answers."
+      },
+      {
+        "title": "Disclosure to the wrong caller",
+        "detail": "Account details, appointment data or another customer's information can be read out when context or authentication is mishandled."
+      },
+      {
+        "title": "Off-script commitments",
+        "detail": "Agents may promise refunds, waivers or outcomes that policy does not allow, especially under emotional pressure."
+      },
+      {
+        "title": "Speech-layer surprises",
+        "detail": "Mis-transcribed words, code-switching, background noise and barge-in can change what the LLM believes the caller said."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build and run adversarial test calls against your voice agent. Synthetic callers, driven by multi-turn playbooks and spoken through text-to-speech with different voices, accents and noise levels, call or stream into your agent the same way customers do. Playbooks cover verification bypass attempts, social engineering, requests for other customers' data, pressure to make unauthorised commitments, attempts to make the agent ignore its rules, abusive callers, switching between English, Hindi and Hinglish, and interruption patterns. Each call is recorded, transcribed and scored against your policy, then reviewed by a tester. Findings are graded PASS, RISK or FAIL and mapped to OWASP LLM and agentic risks, MITRE ATLAS and NIST AI RMF, with recordings as evidence.",
+    "capabilities": [
+      "Multi-turn adversarial playbooks for verification bypass, social engineering and data disclosure",
+      "Synthetic callers with varied voices, accents, noise and interruption patterns",
+      "English, Hindi and Hinglish code-switching scenarios",
+      "Checks for unauthorised commitments and policy breaches",
+      "Tool-call checks where the agent books, takes payments or updates records",
+      "PASS, RISK and FAIL evidence with recordings, mapped to OWASP, MITRE ATLAS and NIST AI RMF"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture the policy",
+      "detail": "We record what the agent may and may not say or do: verification steps, disclosures, commitments and escalation rules."
+    },
+    {
+      "step": 2,
+      "title": "Design playbooks",
+      "detail": "Multi-turn adversarial playbooks are written for each risk area and language mix."
+    },
+    {
+      "step": 3,
+      "title": "Place test calls",
+      "detail": "Synthetic callers run the playbooks against a test number or streaming endpoint."
+    },
+    {
+      "step": 4,
+      "title": "Score the calls",
+      "detail": "Audio, transcripts and tool calls are scored against the policy automatically."
+    },
+    {
+      "step": 5,
+      "title": "Tester review",
+      "detail": "A tester listens to RISK and FAIL calls, confirms findings and rates severity."
+    },
+    {
+      "step": 6,
+      "title": "Report and retest",
+      "detail": "You receive evidence and fixes, and failed playbooks are rerun after changes."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Capture agent policy and rules\"] --> B[\"Write adversarial playbooks\"]\n  B --> C[\"Synthetic callers place test calls\"]\n  C --> D[\"Score audio, transcript and tools\"]\n  D --> E{\"Risk or fail?\"}\n  E -->|\"yes\"| F(\"Tester listens and confirms\")\n  E -->|\"no\"| G[\"Log pass with recording\"]\n  F --> H[\"Evidence report and fixes\"]\n  G --> H\n  H --> I[\"Rerun failed playbooks\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Playbooks",
+        "components": [
+          "Policy rules for verification, disclosure and commitments",
+          "Multi-turn adversarial playbook library",
+          "Language and persona variations"
+        ]
+      },
+      {
+        "name": "Caller simulation",
+        "components": [
+          "Text-to-speech with voice and accent variation",
+          "Noise and interruption injection",
+          "SIP or WebRTC call placement"
+        ]
+      },
+      {
+        "name": "Capture",
+        "components": [
+          "Call recording",
+          "Transcription",
+          "Tool-call log from the agent platform"
+        ]
+      },
+      {
+        "name": "Scoring and review",
+        "components": [
+          "Policy scorer",
+          "Tester review console"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "PASS, RISK and FAIL evidence pack",
+          "Framework mapping"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Playbooks\"]\n    P1[\"Policy rules\"]\n    P2[\"Adversarial playbooks\"]\n  end\n  subgraph S2[\"Caller simulation\"]\n    C1[\"Voice and accent TTS\"]\n    C2[\"Noise and barge-in\"]\n    C3[\"SIP or WebRTC dialler\"]\n  end\n  subgraph S3[\"Capture and scoring\"]\n    K1[\"Recording and transcript\"]\n    K2[\"Agent tool-call log\"]\n    K3[\"Policy scorer\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    R1(\"Tester review\")\n    R2[\"Evidence pack\"]\n  end\n  P2 --> C1 --> C2 --> C3\n  C3 --> K1\n  C3 --> K2\n  P1 --> K3\n  K1 --> K3\n  K2 --> K3\n  K3 --> R1 --> R2"
+  },
+  "inputs": [
+    "Test phone number or streaming endpoint for the voice agent",
+    "Agent prompt, call flows and tool definitions",
+    "Verification and disclosure policy",
+    "Target languages and caller personas",
+    "Test customer records in a staging system"
+  ],
+  "outputs": [
+    "Call recordings and transcripts for every test",
+    "Findings graded PASS, RISK or FAIL",
+    "Mapping to OWASP LLM and agentic risks, MITRE ATLAS and NIST AI RMF",
+    "Specific prompt, flow and tool fixes",
+    "Regression playbook set"
+  ],
+  "human_in_the_loop": "A tester listens to every RISK and FAIL call before it becomes a finding, because tone, timing and partial disclosures are hard to judge from a transcript alone. Your team decides on fixes and release timing.",
+  "integrations": [
+    "Voice platforms such as Vapi, Retell, LiveKit or Pipecat-based stacks, or in-house telephony",
+    "SIP trunk or cloud telephony test numbers",
+    "Staging CRM or booking system",
+    "Issue tracker such as Jira or Linear",
+    "CI for scheduled regression calls"
+  ],
+  "guardrails": [
+    "Calls only to test numbers or endpoints you provide",
+    "Synthetic personas and test data only",
+    "Recordings encrypted and kept for an agreed period",
+    "Call volume limits agreed to control telephony cost",
+    "No testing against third-party numbers"
+  ],
+  "compliance_notes": [
+    "Evidence can support TRAI and DPDP Act 2023 reviews for Indian calling use cases, and GDPR reviews where EU callers are involved.",
+    "Test categories map to the OWASP Top 10 for LLM Applications and MITRE ATLAS."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One voice agent flow, such as account enquiries with caller verification, tested in two languages with a focused playbook set.",
+    "deliverables": [
+      "Policy and playbook set agreed with you",
+      "Test call runs with recordings",
+      "Evidence report with PASS, RISK and FAIL findings",
+      "Fix recommendations and retest",
+      "Playbooks handed over for regression"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Findings by category",
+        "how": "Confirmed RISK and FAIL results per playbook category and language."
+      },
+      {
+        "metric": "Verification bypass handling",
+        "how": "Share of verification-bypass playbooks the agent handled correctly, confirmed by a tester."
+      },
+      {
+        "metric": "Transcription-driven failures",
+        "how": "Failures traced to speech recognition errors rather than dialogue logic."
+      },
+      {
+        "metric": "Retest outcomes",
+        "how": "Failed playbooks that pass after your fixes."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you test in Hindi and Hinglish?",
+      "a": "Yes. Playbooks run in English, Hindi and Hinglish, including mid-sentence switching, which is where many voice agents behave differently. Other Indian languages can be added with native-speaker review."
+    },
+    {
+      "q": "Can you test a voice agent built on a third-party platform?",
+      "a": "Yes. We call a test number or connect to the streaming endpoint, so the platform does not matter. Tool-call logs from the platform make findings more precise."
+    },
+    {
+      "q": "How is this different from QA testing?",
+      "a": "QA checks that the agent does what it should for normal callers. Adversarial testing checks what it does when a caller is trying to make it fail, mislead it or extract data."
+    },
+    {
+      "q": "Do real customers ever hear the test calls?",
+      "a": "No. Tests run only against test numbers or endpoints and staging data you provide."
+    }
+  ],
+  "related": [
+    "ai-agent-red-teaming",
+    "continuous-ai-security-regression-in-ci",
+    "voice-agent-jailbreak-testing",
+    "collections-voice-agent-conduct-testing"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/voice-agent-adversarial-testing/"
+}

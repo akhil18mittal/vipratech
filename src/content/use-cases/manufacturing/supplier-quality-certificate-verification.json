@@ -1,0 +1,220 @@
+{
+  "slug": "supplier-quality-certificate-verification",
+  "industry": "manufacturing",
+  "title": "Supplier Quality Certificate Verification",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check mill test certificates and certificates of conformance against your material specs, tie heat numbers to GRNs, and flag out-of-spec, missing or reused certificates for IQC.",
+  "seo": {
+    "title": "Mill Test Certificate Verification with AI | VipraTech",
+    "description": "AI reads mill test certificates and CoCs, checks chemistry and mechanical values against specs, matches heat numbers to GRNs and flags issues for IQC.",
+    "keywords": [
+      "mill test certificate verification",
+      "MTC checking automation",
+      "incoming quality inspection AI",
+      "certificate of conformance extraction",
+      "supplier quality management"
+    ]
+  },
+  "designed_for": [
+    "Supplier Quality Head",
+    "Incoming Quality (IQC) Engineer",
+    "Quality Head",
+    "Stores and Inward Manager"
+  ],
+  "problem": {
+    "intro": "Every lot of steel, castings, forgings or fasteners should arrive with a certificate: a mill test certificate with chemistry and mechanical results, or a certificate of conformance. Incoming quality checks these by eye against spec tables while trucks wait at the gate.",
+    "pain_points": [
+      {
+        "title": "Values checked by eye",
+        "detail": "IQC compares carbon, manganese, sulphur, tensile and hardness values against grade limits by reading tables, which is slow and easy to get wrong."
+      },
+      {
+        "title": "Heat numbers that do not tie up",
+        "detail": "The heat number on the certificate, the invoice and the tag on the bundle often differ, and the mismatch is found only when a customer asks for traceability."
+      },
+      {
+        "title": "Reused or altered certificates",
+        "detail": "Some certificates are copies from an earlier lot or edited PDFs, and spotting them needs a memory of every certificate seen before."
+      },
+      {
+        "title": "Audit and traceability requests",
+        "detail": "Customer audits ask for the trail from a finished part back to the heat, and assembling it from paper files takes days."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a certificate checker that reads mill test certificates, certificates of conformance and lab test reports, extracts the chemistry and mechanical tables, heat or lot numbers and certificate type, and compares every value with the limits in your approved spec library. It ties the heat number to the GRN, the supplier invoice and a photo of the material tag. It checks that the certificate type matches what the PO asked for, such as EN 10204 3.1 or 3.2, and looks for signs of reuse or editing. Conforming certificates are linked to the GRN; anything else goes to IQC with the reason.",
+    "capabilities": [
+      "Extracts chemistry, mechanical properties, heat number, grade and standard from varied certificate layouts",
+      "Checks each value against minimum and maximum limits from your approved spec library by grade and revision",
+      "Ties heat or lot numbers across certificate, invoice, GRN and material tag photo",
+      "Verifies certificate type against the PO requirement, for example EN 10204 3.1 or 3.2",
+      "Flags possible reuse, such as the same heat number from different suppliers or repeated certificate numbers",
+      "Detects PDF edits and font or layout anomalies for IQC to investigate"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect certificates at inward",
+      "detail": "Certificates arrive with the material, by supplier email or through the supplier portal, and are linked to the GRN."
+    },
+    {
+      "step": 2,
+      "title": "Extract values",
+      "detail": "OCR and an LLM read the tables and header fields, with a confidence score for each value."
+    },
+    {
+      "step": 3,
+      "title": "Check against spec",
+      "detail": "Each value is compared with limits from the approved spec for that grade and PO."
+    },
+    {
+      "step": 4,
+      "title": "Cross-check traceability",
+      "detail": "Heat number, quantity and certificate type are checked against the invoice, GRN and tag photo."
+    },
+    {
+      "step": 5,
+      "title": "IQC decides exceptions",
+      "detail": "Out-of-spec, unreadable or suspicious certificates go to IQC with the reason highlighted."
+    },
+    {
+      "step": 6,
+      "title": "Record and link",
+      "detail": "The decision and certificate are linked to the GRN and inspection lot for traceability."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Certificate arrives with GRN\"] --> B[\"Extract chemistry and mechanicals\"]\n  B --> C[\"Compare with approved spec limits\"]\n  C --> D[\"Match heat number to GRN and tag\"]\n  D --> E{\"All checks pass with confidence?\"}\n  E -->|\"yes\"| F[\"Link certificate to inspection lot\"]\n  E -->|\"no\"| G(\"IQC engineer reviews reason\")\n  G --> H{\"Accept, deviate or reject?\"}\n  H -->|\"accept or deviate\"| F\n  H -->|\"reject\"| I[\"Raise supplier NCR\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Inward desk scans and supplier email connector",
+          "Supplier portal upload",
+          "GRN linkage from the ERP"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with table structure recognition",
+          "LLM extractor with certificate schema"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "Approved spec library by grade and revision",
+          "Limit checker and certificate-type rules",
+          "Traceability and reuse checks",
+          "PDF tamper indicators"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "IQC review screen",
+          "Supplier NCR draft"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "Certificate store linked to GRN and inspection lot",
+          "Audit log of decisions"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Inward scans and supplier email\"]\n    I2[\"GRN data from ERP\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"Table-aware OCR\"]\n    E2[\"LLM certificate extractor\"]\n  end\n  subgraph S3[\"Verification\"]\n    V1[\"Spec library by grade\"]\n    V2[\"Limit and type checks\"]\n    V3[\"Heat number and reuse checks\"]\n  end\n  subgraph S4[\"Review and records\"]\n    R1(\"IQC review screen\")\n    R2[\"Certificate store and audit log\"]\n    R3[\"Supplier NCR draft\"]\n  end\n  I1 --> E1 --> E2\n  E2 --> V2\n  V1 --> V2\n  I2 --> V3\n  V2 --> V3\n  V3 --> R1\n  V3 --> R2\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Mill test certificates and certificates of conformance",
+    "Third-party lab test reports",
+    "Purchase orders with grade and certificate requirements",
+    "GRN, supplier invoice and material tag photos",
+    "Approved material spec library by grade and revision"
+  ],
+  "outputs": [
+    "Structured certificate record with all tested values",
+    "Pass or exception result per value, with the spec limit shown",
+    "Heat number traceability link from certificate to GRN and inspection lot",
+    "Flags for suspected reuse or editing",
+    "Draft supplier non-conformance report for rejected lots"
+  ],
+  "human_in_the_loop": "IQC engineers make every accept, deviate or reject decision on flagged certificates; the system never accepts material outside spec. Supplier quality engineers own any corrective action request raised from a rejection.",
+  "integrations": [
+    "SAP QM inspection lots or ERP GRN records",
+    "Supplier portal or email inbox",
+    "Quality management system for NCRs and SCARs",
+    "Document management system for the certificate archive"
+  ],
+  "guardrails": [
+    "Spec limits come only from the approved, versioned spec library",
+    "Any unreadable or out-of-limit value puts the lot on hold for IQC",
+    "Tamper and reuse signals are flags for investigation, not verdicts",
+    "Every decision logged with the reviewer and reason"
+  ],
+  "compliance_notes": [
+    "EN 10204 defines inspection document types such as 3.1 and 3.2; the system checks the type supplied against the PO requirement.",
+    "Linking certificates to GRNs and lots helps evidence material traceability for IATF 16949 and customer audits."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One material category, such as steel bar and plate or castings, from the main suppliers in that category, run alongside current IQC checks.",
+    "deliverables": [
+      "Spec library loaded for the pilot grades",
+      "Working certificate extraction and checks",
+      "IQC review screen",
+      "Agreement report against IQC decisions on the same lots",
+      "Roll-out plan for other material categories"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Value extraction accuracy",
+        "how": "Extracted values compared with IQC's manual reading of the same certificates."
+      },
+      {
+        "metric": "Agreement with IQC decisions",
+        "how": "Share of certificates where the system's pass or exception matched IQC's decision."
+      },
+      {
+        "metric": "Flags confirmed as genuine",
+        "how": "IQC feedback on each traceability, reuse or tamper flag."
+      },
+      {
+        "metric": "IQC time per certificate",
+        "how": "Timed on a sample with and without the checker."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Supplier certificates come in every layout imaginable. Does that break it?",
+      "a": "No. The extractor reads the certificate in context rather than relying on a fixed template, so new layouts work without set-up. Values it cannot read with confidence are flagged for IQC."
+    },
+    {
+      "q": "Can it tell whether a certificate is fake?",
+      "a": "It flags signals such as edited PDFs, reused certificate numbers or the same heat number from different suppliers. Whether a certificate is genuine is decided by your IQC and supplier quality team, often with a check test."
+    },
+    {
+      "q": "Where do the spec limits come from?",
+      "a": "From your approved spec library: the national and international standards you purchase against, plus drawing and customer requirements. We load and version it with your quality team, and the checker uses nothing else."
+    },
+    {
+      "q": "Does it work for imported material with certificates in other languages?",
+      "a": "Certificates in common European and Asian languages can be read, and values are compared by field rather than by wording. We test with your actual import certificates during the pilot."
+    }
+  ],
+  "related": [
+    "po-invoice-three-way-matching",
+    "visual-quality-inspection",
+    "engineering-drawing-and-spec-extraction",
+    "coa-extraction-and-spec-matching"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/supplier-quality-certificate-verification/"
+}

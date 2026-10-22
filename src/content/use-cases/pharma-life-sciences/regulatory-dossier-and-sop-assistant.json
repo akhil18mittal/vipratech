@@ -1,0 +1,216 @@
+{
+  "slug": "regulatory-dossier-and-sop-assistant",
+  "industry": "pharma-life-sciences",
+  "title": "Regulatory Dossier and SOP Q&A Assistant",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "A question-answering assistant over your effective SOPs, specifications and CTD dossier modules that cites the exact section, respects versions and access rights, and says when it does not know.",
+  "seo": {
+    "title": "SOP and Regulatory Dossier Q&A Assistant | VipraTech",
+    "description": "AI assistant that answers questions from SOPs, specifications and CTD dossiers with page citations, version control and role-based access.",
+    "keywords": [
+      "SOP assistant pharma",
+      "regulatory dossier search AI",
+      "CTD module question answering",
+      "GxP document assistant",
+      "pharma RAG assistant"
+    ]
+  },
+  "designed_for": [
+    "Head of Quality Assurance",
+    "Regulatory Affairs Manager",
+    "QA Documentation Lead",
+    "Plant Head"
+  ],
+  "problem": {
+    "intro": "A plant can hold thousands of controlled documents: SOPs, work instructions, specifications, validation protocols and the CTD modules filed for each market. When an operator, auditor or regulatory associate needs an answer, they search the DMS by document number and read until they find it, and sometimes they find a superseded version.",
+    "pain_points": [
+      {
+        "title": "Answers buried in long documents",
+        "detail": "Finding the dirty hold time for one vessel or the dissolution method agreed for one market means opening several documents and reading them in full."
+      },
+      {
+        "title": "Version confusion",
+        "detail": "Printed copies and local folders drift from the effective version in the DMS, and people quote superseded SOPs during audits."
+      },
+      {
+        "title": "Slow responses to agency queries",
+        "detail": "Regulatory affairs teams assemble replies to deficiency letters by hunting through Module 2 and Module 3 sections filed years earlier."
+      },
+      {
+        "title": "Uneven answers across shifts",
+        "detail": "New joiners ask supervisors the same questions, and the answer depends on who is on shift and what they remember."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a retrieval-based assistant that indexes only effective, approved documents from your DMS and regulatory archive, tagged with version, effective date, site and market. Users ask in plain English or Hindi and get a short answer that cites the exact section and page, with a link to the controlled copy. If the documents do not contain the answer, the assistant says so instead of improvising. Access follows your existing roles, so a user at one site cannot retrieve another site's dossiers. The assistant is read-only: it never edits documents and does not replace reading the SOP before executing a task.",
+    "capabilities": [
+      "Indexes SOPs, specifications, validation protocols and CTD Modules 2 and 3 by version, site and market",
+      "Answers with section and page citations and opens the controlled copy in the DMS",
+      "Excludes draft, obsolete and withdrawn documents from every answer",
+      "Compares one topic across markets, such as a specification filed in two dossiers",
+      "Filters retrieval by role and site before the model sees any text",
+      "Logs every question, answer and source for QA sampling"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Sync effective documents",
+      "detail": "A connector pulls approved, effective documents and their metadata from the DMS and regulatory archive on a schedule."
+    },
+    {
+      "step": 2,
+      "title": "Parse and index",
+      "detail": "Documents are split by section with tables and headings preserved, and indexed with version, site and market tags."
+    },
+    {
+      "step": 3,
+      "title": "Ask a question",
+      "detail": "A user asks in the web app or Microsoft Teams, and retrieval is restricted to what their role allows."
+    },
+    {
+      "step": 4,
+      "title": "Retrieve and answer",
+      "detail": "Relevant sections are retrieved and the model drafts a short answer that cites each source passage."
+    },
+    {
+      "step": 5,
+      "title": "Check grounding",
+      "detail": "If retrieved text does not support the answer, or sources conflict, the assistant declines and names the document owner."
+    },
+    {
+      "step": 6,
+      "title": "Sample and improve",
+      "detail": "QA samples logged answers each week, marks errors, and retrieval settings are tuned under change control."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Effective documents from DMS\"] --> B[\"Parse sections and tag version\"]\n  B --> C[\"User asks a question\"]\n  C --> D[\"Retrieve sections within user access\"]\n  D --> E{\"Answer supported by sources?\"}\n  E -->|\"yes\"| F[\"Answer with page citations\"]\n  E -->|\"no\"| G[\"Decline and name document owner\"]\n  F --> H(\"QA samples answers weekly\")\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Document sources",
+        "components": [
+          "DMS connector for effective SOPs and specifications",
+          "Regulatory archive for CTD modules",
+          "Metadata sync for version, site and market"
+        ]
+      },
+      {
+        "name": "Indexing",
+        "components": [
+          "Layout-aware parser for tables and headings",
+          "Section-level vector index",
+          "Keyword index for document numbers and test names"
+        ]
+      },
+      {
+        "name": "Answering",
+        "components": [
+          "Role-aware retriever",
+          "LLM answer generator with citation format",
+          "Grounding and conflict check"
+        ]
+      },
+      {
+        "name": "Access and audit",
+        "components": [
+          "SSO with role and site mapping",
+          "Question, answer and source log",
+          "QA sampling dashboard"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Document sources\"]\n    D1[\"DMS connector\"]\n    D2[\"Regulatory archive\"]\n  end\n  subgraph S2[\"Indexing\"]\n    I1[\"Layout-aware parser\"]\n    I2[\"Vector and keyword index\"]\n  end\n  subgraph S3[\"Answering\"]\n    A1[\"Role-aware retriever\"]\n    A2[\"LLM answer with citations\"]\n    A3[\"Grounding check\"]\n  end\n  subgraph S4[\"Access and audit\"]\n    U1[\"SSO and role mapping\"]\n    U2[\"Answer and source log\"]\n    U3(\"QA sampling dashboard\")\n  end\n  D1 --> I1\n  D2 --> I1\n  I1 --> I2\n  I2 --> A1\n  U1 --> A1\n  A1 --> A2 --> A3\n  A3 --> U2\n  U2 --> U3"
+  },
+  "inputs": [
+    "Effective SOPs and work instructions from the DMS",
+    "Specifications and standard test procedures",
+    "CTD Module 2 and Module 3 sections per market",
+    "Validation and qualification protocols",
+    "User roles and site mapping from SSO"
+  ],
+  "outputs": [
+    "Short answers with section and page citations",
+    "Links to the controlled copy in the DMS",
+    "Cross-market comparison tables for a chosen topic",
+    "Log of questions, answers and sources",
+    "List of unanswered questions for document owners"
+  ],
+  "human_in_the_loop": "Document owners decide what gets indexed through the normal DMS approval flow. QA samples logged answers on a fixed schedule and flags errors, and the assistant is positioned as a search aid, not a substitute for reading the controlled SOP.",
+  "integrations": [
+    "Document management system such as Veeva Vault, OpenText or MasterControl (via API or export)",
+    "Regulatory information management or eCTD archive",
+    "Microsoft Teams or an internal web portal",
+    "SSO such as Microsoft Entra ID",
+    "Learning management system for links to training records"
+  ],
+  "guardrails": [
+    "Only effective, approved versions are indexed; drafts and obsolete versions are excluded",
+    "Answers without a supporting citation are blocked",
+    "Retrieval filtered by role, site and market before generation",
+    "Read-only access; the assistant cannot edit or approve documents",
+    "Weekly answer sampling, with errors fed back under change control"
+  ],
+  "compliance_notes": [
+    "If people rely on its answers in GxP work, the assistant is validated for that intended use and kept under change control, in line with EU GMP Annex 11 and 21 CFR Part 11 expectations.",
+    "Designed to support data integrity by keeping a complete log of questions, retrieved sources and answers."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One site's SOP set for one department, such as quality control, plus one product's Module 3 for one market.",
+    "deliverables": [
+      "Indexed document set with version and access mapping",
+      "Working assistant in a test environment for named users",
+      "Question bank of real queries agreed with QA",
+      "Answer accuracy and citation report",
+      "Validation approach and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Answer correctness",
+        "how": "QA reviewers grade each answer in the agreed question bank against the source document."
+      },
+      {
+        "metric": "Citation accuracy",
+        "how": "A reviewer checks whether each cited passage actually contains the stated answer."
+      },
+      {
+        "metric": "Correct refusals",
+        "how": "Questions with no answer in the document set are checked for whether the assistant declined."
+      },
+      {
+        "metric": "Time to find an answer",
+        "how": "Timed searches on sample questions using the DMS alone and using the assistant."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How do you stop it from making things up?",
+      "a": "Answers are generated only from retrieved sections, and a grounding check blocks any answer whose claims the cited text does not support. When nothing relevant is found, the assistant says it cannot answer and points to the document owner. The pilot report counts these refusals separately."
+    },
+    {
+      "q": "Can it answer from obsolete SOPs?",
+      "a": "No. Only documents marked effective in your DMS are indexed, and the index refreshes when a new version becomes effective. Superseded versions drop out of retrieval."
+    },
+    {
+      "q": "Does it work with scanned legacy dossiers?",
+      "a": "Yes. Older dossier PDFs go through OCR with layout detection first. Pages with poor scan quality are listed in the pilot report so you can decide whether to re-scan them."
+    },
+    {
+      "q": "Does this need to be validated?",
+      "a": "If people rely on its answers in GxP activities, yes, proportionate to the risk. We provide user requirements, a risk assessment and test evidence from the pilot question bank that your CSV team can build on."
+    }
+  ],
+  "related": [
+    "batch-manufacturing-record-review",
+    "gxp-ai-tool-validation-and-security",
+    "coa-extraction-and-spec-matching",
+    "maintenance-log-and-sop-assistant"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/regulatory-dossier-and-sop-assistant/"
+}

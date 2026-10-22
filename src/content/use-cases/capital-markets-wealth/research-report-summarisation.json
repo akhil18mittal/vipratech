@@ -1,0 +1,222 @@
+{
+  "slug": "research-report-summarisation",
+  "industry": "capital-markets-wealth",
+  "title": "Research Report Summarisation and Data Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract ratings, targets, estimates and guidance from broker research and company filings, with cited summaries and revision alerts for your analysts' internal use.",
+  "seo": {
+    "title": "Research Report Summarisation and Extraction | VipraTech",
+    "description": "AI that reads broker research, results filings and call transcripts, extracts estimates and guidance with citations, and alerts analysts to revisions.",
+    "keywords": [
+      "research report summarisation",
+      "broker research extraction",
+      "earnings estimate extraction AI",
+      "buy-side research automation",
+      "earnings call transcript summary"
+    ]
+  },
+  "designed_for": [
+    "Head of Research",
+    "Equity or Credit Analyst",
+    "Fund Manager",
+    "Research Data Lead"
+  ],
+  "problem": {
+    "intro": "During results season, a buy-side team receives broker updates, exchange filings, investor presentations and earnings call transcripts for every company it covers, often within the same few days. Analysts need the numbers and the changes, such as revised estimates, new guidance and rating moves, not another stack of PDFs.",
+    "pain_points": [
+      {
+        "title": "Estimates live inside PDFs",
+        "detail": "Target prices, ratings and forward estimates sit in tables in each broker's format, and someone has to key them into a tracking sheet."
+      },
+      {
+        "title": "Changes are what matter",
+        "detail": "Spotting that a broker cut its estimates or that management softened guidance means comparing with the previous report by hand."
+      },
+      {
+        "title": "Generic summaries are not trusted",
+        "detail": "Summaries without page references cannot be checked quickly, so analysts reread the source anyway."
+      },
+      {
+        "title": "Licensing and information barriers",
+        "detail": "Broker research is licensed to named users, and some documents must stay within restricted groups."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a research extraction pipeline for your internal research process. It collects broker reports from your research inbox and filings from the exchanges, parses text and tables, and extracts ratings, target prices, estimates, key financials and management guidance into a structured table per company and broker. Each extracted value is checked against the source table, and each summary statement cites its page. The pipeline compares every report with the previous one from the same source and raises alerts on revisions. Analysts can query the archive and get cited answers, with access respecting research licences and restricted groups. Investment views remain with your analysts.",
+    "capabilities": [
+      "Collects broker reports from the research inbox, and results filings, transcripts and presentations from exchange and company sources",
+      "Extracts ratings, target prices, forward estimates and key financial tables into a structured dataset",
+      "Writes short summaries in which every statement cites its page",
+      "Compares each report with the previous one from the same broker and flags revisions",
+      "Answers analyst questions across the archive with citations, or says the answer was not found",
+      "Applies entitlement-aware access for licensed research and restricted document groups"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect reports and filings",
+      "detail": "Broker research, filings, transcripts and presentations are gathered and tagged by company, source and date."
+    },
+    {
+      "step": 2,
+      "title": "Parse text and tables",
+      "detail": "Documents are parsed with layout preserved, including tables and chart labels."
+    },
+    {
+      "step": 3,
+      "title": "Extract and compare",
+      "detail": "Ratings, targets, estimates and guidance are extracted and compared with the previous report from the same source."
+    },
+    {
+      "step": 4,
+      "title": "Validate numbers and citations",
+      "detail": "Each value is checked against its source cell; uncertain values and citations go to the research data team."
+    },
+    {
+      "step": 5,
+      "title": "Summarise and alert",
+      "detail": "Cited summaries and revision alerts are published to the research database and analyst channels."
+    },
+    {
+      "step": 6,
+      "title": "Query the archive",
+      "detail": "Analysts ask questions across the corpus and get answers with page references."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Broker reports and filings\"] --> B[\"Parse text and tables\"]\n  B --> C[\"Extract ratings, targets, estimates\"]\n  C --> D[\"Compare with previous report\"]\n  D --> E{\"Numbers and citations verified?\"}\n  E -->|\"no\"| F(\"Research data team checks\")\n  E -->|\"yes\"| G[\"Cited summary and revision alert\"]\n  F --> G\n  G --> H(\"Analyst reviews and forms view\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Collection",
+        "components": [
+          "Research inbox connector",
+          "Exchange filings and transcript feeds",
+          "Company, source and date tagging"
+        ]
+      },
+      {
+        "name": "Parsing",
+        "components": [
+          "Layout-aware PDF parser",
+          "Table and chart label extraction"
+        ]
+      },
+      {
+        "name": "Extraction and comparison",
+        "components": [
+          "LLM extractor for ratings, targets and estimates",
+          "Previous-report comparison",
+          "Number-to-source validation"
+        ]
+      },
+      {
+        "name": "Knowledge access",
+        "components": [
+          "Entitlement-aware search index",
+          "Cited question answering"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Research database or Excel export",
+          "Revision alerts to Teams or Slack",
+          "Data team review queue"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Collection\"]\n    C1[\"Research inbox connector\"]\n    C2[\"Filings and transcript feeds\"]\n  end\n  subgraph S2[\"Parsing and extraction\"]\n    P1[\"Layout and table parser\"]\n    P2[\"Estimates and guidance extractor\"]\n    P3[\"Previous report comparison\"]\n    P4[\"Number to source validation\"]\n  end\n  subgraph S3[\"Knowledge access\"]\n    K1[\"Entitlement-aware index\"]\n    K2[\"Cited question answering\"]\n  end\n  subgraph S4[\"Delivery\"]\n    D1(\"Data team review queue\")\n    D2[\"Research database\"]\n    D3[\"Revision alerts\"]\n  end\n  C1 --> P1\n  C2 --> P1\n  P1 --> P2\n  P2 --> P3\n  P3 --> P4\n  P4 --> D1\n  P4 --> D2\n  D2 --> D3\n  P1 --> K1\n  K1 --> K2"
+  },
+  "inputs": [
+    "Broker research reports in PDF",
+    "Quarterly results and annual report filings",
+    "Earnings call transcripts and investor presentations",
+    "Credit rating rationales",
+    "Your coverage universe and estimate tracking template"
+  ],
+  "outputs": [
+    "Structured estimates and ratings table by company and broker",
+    "Cited summaries for each report",
+    "Revision alerts for estimates, targets and guidance",
+    "Cross-broker comparison view for internal use",
+    "Searchable, entitlement-aware research archive"
+  ],
+  "human_in_the_loop": "Analysts review flagged extractions and own every investment view and model change. Summaries and tables are internal working material and are never sent to clients as recommendations.",
+  "integrations": [
+    "Research mailbox on Microsoft 365 or Google Workspace",
+    "Exchange filings and announcements feeds",
+    "Research management system or CRM",
+    "Excel models and data warehouse",
+    "Microsoft Teams or Slack for alerts"
+  ],
+  "guardrails": [
+    "Every number must match a source table cell or it is flagged",
+    "Every summary statement carries a page citation",
+    "No buy, sell or hold views generated by the system",
+    "Access follows research licences and restricted-group rules",
+    "Restricted documents isolated from general search"
+  ],
+  "compliance_notes": [
+    "Outputs are internal research aids; any research distributed to clients must go through your SEBI Research Analyst process and disclosures.",
+    "Access controls respect broker research licensing and internal information barriers."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One sector in your coverage, such as private banks, using the broker reports and filings from the most recent results season.",
+    "deliverables": [
+      "Extraction schema matched to your estimate template",
+      "Working pipeline on the pilot sector",
+      "Revision alert feed",
+      "Accuracy report against analyst-maintained data",
+      "Production plan for full coverage"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Estimate and target extraction accuracy",
+        "how": "Compared with the analyst-maintained tracking sheet for the same reports."
+      },
+      {
+        "metric": "Citation correctness",
+        "how": "Share of sampled summary statements whose cited page supports them."
+      },
+      {
+        "metric": "Analyst time to digest a results batch",
+        "how": "Timed on a sample of companies with and without the pipeline."
+      },
+      {
+        "metric": "Useful revision alerts",
+        "how": "Analyst rating of each alert as useful, duplicate or wrong."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How do you stop it making up numbers?",
+      "a": "Every extracted number is checked against the table cell it came from, and values that cannot be matched are flagged instead of published. Summaries must cite a page for each statement."
+    },
+    {
+      "q": "Can it read tables and charts?",
+      "a": "Tables, yes, including multi-page and footnoted ones. For charts it reads titles, axis labels and data labels where present, but it does not estimate values from bar heights."
+    },
+    {
+      "q": "Will it give buy or sell calls?",
+      "a": "No. It extracts what brokers and companies have said and highlights changes. Investment views remain with your analysts and fund managers."
+    },
+    {
+      "q": "How is broker research licensing handled?",
+      "a": "Access to each document follows the entitlements you hold, so a report licensed to named users is only visible to them, including in search and question answering."
+    }
+  ],
+  "related": [
+    "esg-brsr-report-data-extraction",
+    "research-copilot-data-leakage-testing",
+    "private-markets-fund-document-extraction",
+    "financial-statement-spreading"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/research-report-summarisation/"
+}

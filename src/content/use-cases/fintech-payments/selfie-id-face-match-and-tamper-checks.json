@@ -1,0 +1,224 @@
+{
+  "slug": "selfie-id-face-match-and-tamper-checks",
+  "industry": "fintech-payments",
+  "title": "Selfie-to-ID Face Match and Document Tamper Checks",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Compare a live selfie with the photo on an ID, check liveness and spot edited or replayed ID images, sending borderline cases to a reviewer with highlighted evidence.",
+  "seo": {
+    "title": "Selfie-to-ID Face Match and Tamper Checks | VipraTech",
+    "description": "Face match, passive liveness and ID tamper checks for digital onboarding, with reason codes, heatmaps and reviewer escalation for borderline cases.",
+    "keywords": [
+      "selfie ID face match",
+      "passive liveness detection",
+      "ID document tamper detection",
+      "digital onboarding fraud checks",
+      "fintech KYC computer vision"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Onboarding",
+    "Fraud Risk Manager",
+    "KYC Operations Lead",
+    "Product Manager, Onboarding"
+  ],
+  "problem": {
+    "intro": "Digital onboarding for wallets, cards, lending apps and merchant accounts relies on a selfie and an uploaded ID. Fraudsters reuse stolen ID images, paste a different face onto a genuine card, or hold a phone screen up to the camera instead of their own face.",
+    "pain_points": [
+      {
+        "title": "Screen and printout attacks",
+        "detail": "Basic face match passes when someone presents a photo of the real customer on another device or on paper."
+      },
+      {
+        "title": "Edited ID images",
+        "detail": "Changed dates of birth, swapped photos and altered names are hard to spot at the resolution of a phone upload."
+      },
+      {
+        "title": "Poor capture conditions",
+        "detail": "Low light, glare on laminated cards and basic front cameras make genuine customers fail and drop off."
+      },
+      {
+        "title": "Opaque vendor scores",
+        "detail": "Off-the-shelf APIs return a score without reasons, which makes reviewer decisions and audit explanations difficult."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a face match and document tamper module that runs inside your onboarding flow or as a back-office service. The capture screen guides the user on lighting and framing and runs a passive liveness check. The selfie is compared with the face on the ID, and the ID image is inspected for signs of editing: inconsistent fonts, artefacts around the photo area, template mismatches and screen moire patterns. Each check returns a score with a reason code and a visual highlight. You set thresholds for pass, review and recapture. Borderline cases go to a reviewer with side-by-side images and highlighted regions, and every decision is logged.",
+    "capabilities": [
+      "Guided capture with real-time feedback on blur, glare and framing",
+      "Passive liveness checks for screen replay, printed photos and masks",
+      "Face match between selfie and ID photo with a calibrated similarity score",
+      "Tamper checks on ID images: font and layout consistency, photo-area edits and compression artefacts",
+      "Reason codes and heatmap highlights a reviewer can understand",
+      "Error-rate reporting across lighting conditions, age bands and skin tones on your test set"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Guided capture",
+      "detail": "The app or web flow guides the user to capture the ID and a selfie, with feedback on lighting, blur and glare."
+    },
+    {
+      "step": 2,
+      "title": "Liveness check",
+      "detail": "Passive liveness analysis screens for screen replay, printouts and masks."
+    },
+    {
+      "step": 3,
+      "title": "Document tamper check",
+      "detail": "The ID image is inspected for edits, photo substitution and template inconsistencies."
+    },
+    {
+      "step": 4,
+      "title": "Face match",
+      "detail": "The selfie is compared with the ID photo and scored."
+    },
+    {
+      "step": 5,
+      "title": "Threshold routing",
+      "detail": "Results fall into pass, manual review or recapture according to thresholds you set per product."
+    },
+    {
+      "step": 6,
+      "title": "Reviewer decision",
+      "detail": "A fraud or KYC reviewer decides borderline and flagged cases using side-by-side images, and every outcome is logged."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Guided ID and selfie capture\"] --> B[\"Passive liveness check\"]\n  B --> C[\"ID image tamper analysis\"]\n  C --> D[\"Selfie to ID face match\"]\n  D --> E{\"Scores within pass band?\"}\n  E -->|\"pass\"| F[\"Continue onboarding\"]\n  E -->|\"borderline\"| G(\"Fraud reviewer side-by-side check\")\n  E -->|\"poor capture\"| H[\"Ask user to recapture\"]\n  H --> A\n  G --> I[\"Decision and evidence logged\"]\n  F --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Web and mobile capture component",
+          "On-device quality checks for blur and glare"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Passive liveness model",
+          "Document tamper classifier",
+          "Face embedding and match model"
+        ]
+      },
+      {
+        "name": "Decision",
+        "components": [
+          "Threshold policy per product",
+          "Reason code generator"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Reviewer console with heatmaps",
+          "Case notes and decision log"
+        ]
+      },
+      {
+        "name": "Governance",
+        "components": [
+          "Evaluation suite with lighting and demographic slices",
+          "Image retention and deletion jobs",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Mobile and web capture SDK\"]\n    C2[\"On-device quality checks\"]\n  end\n  subgraph S2[\"Vision models\"]\n    M1[\"Liveness model\"]\n    M2[\"Document tamper classifier\"]\n    M3[\"Face embedding and match\"]\n  end\n  subgraph S3[\"Decision and review\"]\n    D1[\"Threshold policy\"]\n    D2[\"Reason code generator\"]\n    D3(\"Reviewer console\")\n  end\n  subgraph S4[\"Governance\"]\n    G1[\"Evaluation suite by slice\"]\n    G2[\"Image retention and deletion\"]\n    G3[\"Audit log\"]\n  end\n  C1 --> C2\n  C2 --> M1\n  C2 --> M2\n  C2 --> M3\n  M1 --> D1\n  M2 --> D1\n  M3 --> D1\n  D1 --> D2 --> D3\n  D3 --> G3\n  D1 --> G2\n  G1 --> D1"
+  },
+  "inputs": [
+    "Selfie image or short capture sequence",
+    "ID document image: PAN, passport, driving licence or masked Aadhaar",
+    "Device and capture metadata",
+    "Threshold policy per product",
+    "Labelled sample of genuine and fraudulent past cases for calibration"
+  ],
+  "outputs": [
+    "Liveness, tamper and face match scores with reason codes",
+    "Pass, review or recapture outcome",
+    "Heatmaps highlighting suspect regions",
+    "Reviewer decision log",
+    "Evaluation report by lighting, age band and skin tone"
+  ],
+  "human_in_the_loop": "Fraud or KYC reviewers decide every borderline and flagged case. Automated action is limited to asking for a recapture; no customer is refused on a model score alone without the review path your policy defines.",
+  "integrations": [
+    "Your onboarding app or web flow (SDK or API)",
+    "Existing KYC orchestration or verification vendors",
+    "Fraud case management tool",
+    "Object storage with retention policies",
+    "Core system or customer data platform for onboarding status"
+  ],
+  "guardrails": [
+    "Face images and templates encrypted, kept only for the retention period you define, then deleted",
+    "Aadhaar numbers masked in images before storage, per UIDAI rules",
+    "Thresholds calibrated on your own data and reviewed after every model update",
+    "Error rates checked across skin tone, age band and lighting before go-live",
+    "No face data used for training without explicit, recorded consent"
+  ],
+  "compliance_notes": [
+    "Facial images are personal data under the DPDP Act 2023, so consent notices, purpose limitation and deletion are part of the design.",
+    "Strengthens digital onboarding checks but does not replace RBI's video-based customer identification process (V-CIP) where your KYC policy requires it.",
+    "For EU users, biometric data used to identify a person is special-category data under GDPR."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Offline evaluation on a labelled set of past onboarding cases, including known fraud attempts, then a shadow run on live traffic for one product.",
+    "deliverables": [
+      "Capture flow prototype with quality guidance",
+      "Liveness, tamper and face match models configured and calibrated",
+      "Evaluation report by capture condition and demographic slice",
+      "Reviewer console",
+      "Threshold recommendation and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "False accept and false reject rates",
+        "how": "Measured on the labelled set at candidate thresholds and reported by slice."
+      },
+      {
+        "metric": "Recapture rate",
+        "how": "Live sessions asked to recapture, and how many succeed on the next attempt."
+      },
+      {
+        "metric": "Known fraud caught",
+        "how": "Fraudulent submissions in the test set that are flagged versus missed."
+      },
+      {
+        "metric": "Reviewer agreement",
+        "how": "How often reviewers agree with the system's borderline flags."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is this a replacement for video KYC?",
+      "a": "No. Where RBI's KYC directions or your policy require V-CIP, you still need it. This module strengthens digital onboarding checks and can also screen images captured during a video KYC session if your process allows."
+    },
+    {
+      "q": "How do you avoid bias against some users?",
+      "a": "We test on slices of your own data by skin tone, age band, gender where available and lighting, and report error rates for each before go-live. Thresholds are set with those results in view, and borderline cases go to people."
+    },
+    {
+      "q": "Do you store customers' faces?",
+      "a": "Only as long as your policy says. Images and templates are encrypted, retained for the defined period and then deleted, and they are not used for training without explicit consent."
+    },
+    {
+      "q": "Will it work on entry-level Android phones?",
+      "a": "Yes. Quality checks run on the device and heavier models run on the server, so capture works on common entry-level phones. During the pilot we test on the devices most of your users have."
+    }
+  ],
+  "related": [
+    "merchant-onboarding-kyc-verification",
+    "tampered-document-detection",
+    "account-opening-document-verification",
+    "dpdp-ai-data-handling-assessment"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/selfie-id-face-match-and-tamper-checks/"
+}

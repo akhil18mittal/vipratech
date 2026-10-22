@@ -1,0 +1,219 @@
+{
+  "slug": "dealer-lead-routing-and-follow-up",
+  "industry": "automotive-mobility",
+  "title": "Dealer Lead Routing and Follow-Up Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Pull leads from OEM portals, websites, classifieds, social forms and walk-ins into one hub, remove duplicates, route them to the right consultant and run approved WhatsApp follow-ups.",
+  "seo": {
+    "title": "Dealer Lead Routing and Follow-Up Automation | VipraTech",
+    "description": "Lead automation for car and two-wheeler dealers: deduplicate leads from every source, route by location and model, track SLAs, follow up on WhatsApp.",
+    "keywords": [
+      "dealer lead management automation",
+      "car dealer lead routing",
+      "automotive CRM follow-up",
+      "WhatsApp follow-up for dealers",
+      "OEM lead portal sync"
+    ]
+  },
+  "designed_for": [
+    "Dealer Principal or Dealer Group CEO",
+    "General Manager, Sales",
+    "OEM Regional Lead Management Manager",
+    "CRM Manager"
+  ],
+  "problem": {
+    "intro": "A dealer group receives leads from the OEM lead portal, its own websites, car classifieds, social media forms, call-ins, walk-in registers and its own service customers. The same buyer often appears in several places, some leads never get an owner, and the OEM asks for status updates the dealer struggles to provide.",
+    "pain_points": [
+      {
+        "title": "Duplicate and orphan leads",
+        "detail": "The same buyer arrives from several sources while other leads sit unassigned in a portal nobody checks daily."
+      },
+      {
+        "title": "Routing by guesswork",
+        "detail": "Leads go to whoever is free, not by showroom location, model expertise or the buyer's language."
+      },
+      {
+        "title": "Follow-ups depend on memory",
+        "detail": "Consultants juggle many prospects, and follow-up cadences break down in busy months."
+      },
+      {
+        "title": "Status gaps with the OEM",
+        "detail": "Lead outcomes and lost reasons rarely flow back to the OEM portal, which hurts dealer scorecards and makes campaign spend hard to judge."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a lead hub that connects every source your group uses. Incoming leads are normalised, matched against existing records to remove duplicates and enriched with model, location and source. Routing rules set by your sales managers assign each lead by pincode, brand, model, language and consultant workload, and an SLA timer escalates leads that have not been contacted. A language model drafts personalised WhatsApp follow-ups from approved templates and price sheets, and consultants approve any message that mentions price, offers or finance. Outcomes and lost reasons sync back to the DMS and the OEM lead portal, and dashboards show the funnel by source and showroom.",
+    "capabilities": [
+      "Ingests and deduplicates leads from the OEM portal, websites, classifieds, social forms and walk-in registers",
+      "Routes by pincode, brand, model, language and consultant workload",
+      "SLA timers with escalation to team leads for uncontacted leads",
+      "Personalised WhatsApp follow-ups drafted from approved templates and price sheets",
+      "Intent scoring from source, engagement and conversation notes",
+      "Syncs lead status and lost reasons back to the DMS and OEM lead systems"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture leads",
+      "detail": "Leads arrive from every connected source into one hub."
+    },
+    {
+      "step": 2,
+      "title": "Deduplicate and enrich",
+      "detail": "Records are matched to existing customers and leads, and ambiguous matches are queued for a person to confirm."
+    },
+    {
+      "step": 3,
+      "title": "Score and route",
+      "detail": "Rules assign each lead to a showroom and consultant, with an intent score."
+    },
+    {
+      "step": 4,
+      "title": "Watch the SLA",
+      "detail": "Leads not contacted within the agreed time escalate to the team lead for reassignment."
+    },
+    {
+      "step": 5,
+      "title": "Follow up",
+      "detail": "Cadenced WhatsApp messages and call tasks run, with consultants approving any price or offer content."
+    },
+    {
+      "step": 6,
+      "title": "Sync and analyse",
+      "detail": "Status and lost reasons flow to the DMS and OEM portal and feed funnel and source reports."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Leads from portals, web and walk-ins\"] --> B[\"Deduplicate and enrich\"]\n  B --> C[\"Score intent and route to consultant\"]\n  C --> D{\"Contacted within agreed SLA?\"}\n  D -->|\"no\"| E(\"Team lead reassigns or calls\")\n  D -->|\"yes\"| F[\"Follow-up cadence on WhatsApp\"]\n  E --> F\n  F --> G(\"Consultant approves offers and quotes\")\n  G --> H[\"Sync status to DMS and OEM portal\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Sources",
+        "components": [
+          "OEM lead portal connector",
+          "Website and social lead forms",
+          "Classifieds feeds",
+          "Walk-in and call-in registers"
+        ]
+      },
+      {
+        "name": "Lead hub",
+        "components": [
+          "Deduplication and identity matching",
+          "Enrichment and intent scoring",
+          "Routing rules engine"
+        ]
+      },
+      {
+        "name": "Engagement",
+        "components": [
+          "SLA timers and escalations",
+          "WhatsApp template engine with LLM drafts",
+          "Consultant approval queue"
+        ]
+      },
+      {
+        "name": "Systems and reporting",
+        "components": [
+          "DMS and CRM sync",
+          "OEM portal status sync",
+          "Funnel and lost-reason dashboards"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Sources\"]\n    P1[\"OEM lead portal\"]\n    P2[\"Website and social forms\"]\n    P3[\"Walk-in and call-in registers\"]\n  end\n  subgraph S2[\"Lead hub\"]\n    H1[\"Deduplication and matching\"]\n    H2[\"Scoring and routing rules\"]\n  end\n  subgraph S3[\"Engagement\"]\n    E1[\"SLA timers and escalation\"]\n    E2[\"WhatsApp drafts from templates\"]\n    E3(\"Consultant approval\")\n  end\n  subgraph S4[\"Systems and reporting\"]\n    R1[\"DMS and CRM sync\"]\n    R2[\"OEM portal sync\"]\n    R3[\"Funnel dashboard\"]\n  end\n  P1 --> H1\n  P2 --> H1\n  P3 --> H1\n  H1 --> H2\n  H2 --> E1\n  H2 --> E2\n  E2 --> E3\n  E3 --> R1\n  E1 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Leads from the OEM portal, websites, classifieds and social forms",
+    "Walk-in and call-in registers",
+    "Service customers flagged for exchange or upgrade",
+    "Consultant roster, showrooms and pincode coverage",
+    "Approved message templates and price sheets",
+    "Consent and opt-out records"
+  ],
+  "outputs": [
+    "Deduplicated, scored lead records with owners",
+    "SLA breach alerts and reassignments",
+    "WhatsApp follow-up history per lead",
+    "Status and lost reasons synced to the DMS and OEM portal",
+    "Funnel reports by source, showroom and consultant"
+  ],
+  "human_in_the_loop": "Consultants approve every message that mentions price, offers or finance, and team leads handle SLA escalations. Sales managers own the routing rules, and ambiguous duplicate matches are confirmed by a person before records merge.",
+  "integrations": [
+    "Dealer management system or CRM",
+    "OEM lead management portal",
+    "Meta and Google lead forms",
+    "WhatsApp Business API",
+    "Telephony or click-to-call",
+    "BI tools for funnel reporting"
+  ],
+  "guardrails": [
+    "Messages use approved templates and price sheets only",
+    "Opt-outs honoured across every channel immediately",
+    "No false urgency or pressure messaging",
+    "Ambiguous duplicates confirmed by a person, never merged blindly",
+    "Consultant approval for price, offer and finance content"
+  ],
+  "compliance_notes": [
+    "Messaging follows TRAI commercial communication rules and WhatsApp opt-in requirements.",
+    "Lead and customer data handled under the DPDP Act 2023, including consent and retention limits."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One dealer group, two showrooms and one brand, connecting the OEM portal, the website and one classifieds source.",
+    "deliverables": [
+      "Source connectors and deduplication rules",
+      "Routing rules configured with sales managers",
+      "WhatsApp templates and approval flow",
+      "DMS and OEM portal sync",
+      "Funnel dashboard and pilot report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to first contact",
+        "how": "Time from lead creation to first call or message, by source."
+      },
+      {
+        "metric": "Duplicate and unassigned leads",
+        "how": "Counts before and during the pilot."
+      },
+      {
+        "metric": "Follow-up adherence",
+        "how": "Share of leads receiving the agreed cadence."
+      },
+      {
+        "metric": "Lead-to-test-drive conversion",
+        "how": "Tracked by source and showroom across the pilot period."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it work with our OEM's DMS and lead portal?",
+      "a": "We integrate through whatever the OEM allows: APIs, scheduled exports or controlled automation of portal updates. The DMS stays the system of record, and we confirm the route with your OEM contact early."
+    },
+    {
+      "q": "We sell several brands. Can routing handle that?",
+      "a": "Yes. Routing rules can separate brands, showrooms and consultant teams, and the same buyer enquiring about two brands is flagged rather than merged."
+    },
+    {
+      "q": "Is there a risk of our WhatsApp number being blocked?",
+      "a": "We send only to opted-in contacts, use approved templates, respect frequency limits and honour opt-outs instantly, which keeps the account in good standing."
+    },
+    {
+      "q": "Will consultants actually use it?",
+      "a": "Consultants see their leads, drafts and tasks on mobile, and approval takes a tap. We involve a few consultants in the pilot design so the flow fits how they already work."
+    }
+  ],
+  "related": [
+    "test-drive-lead-qualification-voice-agent",
+    "service-booking-and-reminder-voice-agent",
+    "dealer-chatbot-guardrail-testing",
+    "channel-partner-lead-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/dealer-lead-routing-and-follow-up/"
+}

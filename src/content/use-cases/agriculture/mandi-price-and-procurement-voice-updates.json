@@ -1,0 +1,224 @@
+{
+  "slug": "mandi-price-and-procurement-voice-updates",
+  "industry": "agriculture",
+  "title": "Mandi Price and Procurement Voice Updates",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Outbound and inbound voice updates on nearby mandi prices, procurement windows and pickup slots in the farmer's language, with every price dated and sourced, and offers approved by procurement.",
+  "seo": {
+    "title": "Mandi Price and Procurement Voice Updates | VipraTech",
+    "description": "Voice and WhatsApp agent that tells farmers mandi prices, procurement windows and pickup slots in Hindi or regional languages, using dated, sourced data.",
+    "keywords": [
+      "mandi price voice alerts",
+      "procurement voice agent",
+      "FPO procurement automation",
+      "mandi rate updates for farmers",
+      "Hindi voice calls for farmers"
+    ]
+  },
+  "designed_for": [
+    "FPO CEO or Procurement Manager",
+    "Head of Procurement, Agri Aggregator",
+    "Commodity Sourcing Manager, Food Processor",
+    "Operations Lead, Agri Marketplace"
+  ],
+  "problem": {
+    "intro": "Farmers decide when and where to sell based on prices they hear from neighbours, commission agents or a trip to the mandi. FPOs and aggregators who want to buy directly spend hours on the phone confirming rates, quantities and pickup dates, and much of that information is stale by the time it reaches the farmer.",
+    "pain_points": [
+      {
+        "title": "Price information arrives late or second-hand",
+        "detail": "Farmers often hear yesterday's rate, or a rate from a different mandi, and sell below what was available."
+      },
+      {
+        "title": "Procurement coordination by phone",
+        "detail": "Procurement staff call each farmer to confirm quantity, quality and pickup date, which does not scale in a busy week."
+      },
+      {
+        "title": "No-shows and missed slots",
+        "detail": "Farmers miss procurement windows or token slots because reminders never reached them in a form they understood."
+      },
+      {
+        "title": "Unclear offers",
+        "detail": "When the price offered depends on grade, moisture or deductions, misunderstandings turn into disputes at the gate."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice and WhatsApp agent that keeps farmers and FPO members informed about prices and procurement. Each morning it pulls modal, minimum and maximum prices for chosen commodities from public mandi data and your own buying rates, then calls or messages opted-in farmers in their language with the date and source stated. Farmers can call back and ask for the price at a named mandi. For procurement, the agent confirms expected quantity, quality and pickup or delivery slot, explains how grade and moisture affect the offer, and sends reminders. It quotes only rates the procurement manager has approved for that day, and hands disputes and negotiation to staff.",
+    "capabilities": [
+      "Daily price pull from public mandi data and your own rate card",
+      "Outbound calls and WhatsApp voice notes to opted-in farmers in their language",
+      "Inbound price queries by commodity and mandi",
+      "Procurement confirmation of quantity, quality and pickup slot",
+      "Reminders for procurement windows and token slots",
+      "Handover to procurement staff for disputes and negotiation"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Refresh prices and rate card",
+      "detail": "Each morning the system pulls public mandi prices and loads the draft buying rates for the day."
+    },
+    {
+      "step": 2,
+      "title": "Approve the day's offers",
+      "detail": "The procurement manager reviews the rate card and any unusual price movements before outreach starts."
+    },
+    {
+      "step": 3,
+      "title": "Call or message farmers",
+      "detail": "Opted-in farmers receive a call or voice note with prices, dates and sources in their language."
+    },
+    {
+      "step": 4,
+      "title": "Confirm procurement details",
+      "detail": "Interested farmers confirm expected quantity, quality and a pickup or delivery slot."
+    },
+    {
+      "step": 5,
+      "title": "Hand over exceptions",
+      "detail": "Requests for a different price, disputes and unclear answers go to procurement staff."
+    },
+    {
+      "step": 6,
+      "title": "Remind and record",
+      "detail": "Farmers get reminders before their slot, and every interaction updates the procurement plan."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Pull mandi prices and rate card\"] --> B(\"Procurement manager approves rates\")\n  B --> C[\"Call or message opted-in farmers\"]\n  C --> D[\"Confirm quantity and pickup slot\"]\n  D --> E{\"Dispute or unclear answer?\"}\n  E -->|\"yes\"| F(\"Procurement staff follow up\")\n  E -->|\"no\"| G[\"Book slot and send reminder\"]\n  F --> G\n  G --> H[\"Update procurement plan\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data",
+        "components": [
+          "Public mandi price feed connector",
+          "Your buying rate card",
+          "Farmer consent and language preferences"
+        ]
+      },
+      {
+        "name": "Voice and messaging",
+        "components": [
+          "Outbound dialler with calling-window rules",
+          "Inbound voice line",
+          "WhatsApp voice notes and templates"
+        ]
+      },
+      {
+        "name": "Dialogue",
+        "components": [
+          "Price lookup by commodity and mandi",
+          "Procurement confirmation flow",
+          "Grade and deduction explanations from approved text"
+        ]
+      },
+      {
+        "name": "Operations",
+        "components": [
+          "Procurement manager approval screen",
+          "Staff follow-up queue"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "Procurement plan and slot calendar",
+          "Interaction log per farmer"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data\"]\n    D1[\"Mandi price feed\"]\n    D2[\"Draft rate card\"]\n    D3[\"Consent and language list\"]\n  end\n  subgraph S2[\"Voice and messaging\"]\n    V1[\"Outbound dialler\"]\n    V2[\"Inbound voice line\"]\n    V3[\"WhatsApp voice notes\"]\n  end\n  subgraph S3[\"Dialogue\"]\n    G1[\"Price and procurement flow\"]\n  end\n  subgraph S4[\"Operations and records\"]\n    O1(\"Manager approval\")\n    O2(\"Staff follow-up queue\")\n    O3[\"Procurement plan and slots\"]\n  end\n  D1 --> O1\n  D2 --> O1\n  O1 --> G1\n  D3 --> V1\n  V1 --> G1\n  V2 --> G1\n  V3 --> G1\n  G1 --> O2\n  G1 --> O3\n  O2 --> O3"
+  },
+  "inputs": [
+    "Public mandi price data for chosen commodities and markets",
+    "Daily buying rate card for procurement approval",
+    "Farmer list with consent, language and location",
+    "Procurement calendar and pickup capacity",
+    "Grade and deduction rules in approved wording"
+  ],
+  "outputs": [
+    "Daily price calls and voice notes with date and source",
+    "Confirmed quantities and pickup slots",
+    "Reminders and no-show follow-ups",
+    "Exception queue for procurement staff",
+    "Interaction log per farmer"
+  ],
+  "human_in_the_loop": "The procurement manager approves the day's buying rates before any outreach, and procurement staff handle every price negotiation, dispute or unclear confirmation. The agent never commits to a price outside the approved rate card.",
+  "integrations": [
+    "Public mandi price sources such as Agmarknet or e-NAM data, where available",
+    "FPO or procurement ERP",
+    "Cloud telephony and dialler",
+    "WhatsApp Business API",
+    "Pickup and logistics scheduling tool"
+  ],
+  "guardrails": [
+    "Every spoken price includes its date, mandi and source",
+    "Only approved rate-card prices quoted as offers",
+    "Calls only to farmers who opted in, within agreed calling hours",
+    "Stale or missing price data blocks outreach for that commodity",
+    "Clear way to stop calls at any time"
+  ],
+  "compliance_notes": [
+    "Outbound calling follows consent and calling-time practices aligned with TRAI's commercial communication rules.",
+    "Farmer contact details and preferences are handled with consent and purpose limits under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One or two commodities and a few hundred opted-in FPO members in one language, during an active procurement window.",
+    "deliverables": [
+      "Price data connector and rate card approval screen",
+      "Working outbound and inbound voice flows",
+      "WhatsApp voice note templates",
+      "Interaction and confirmation report",
+      "Plan for more commodities and languages"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Reach rate",
+        "how": "Share of opted-in farmers who answered a call or played a voice note."
+      },
+      {
+        "metric": "Confirmation accuracy",
+        "how": "Confirmed quantities and slots compared with what arrived at the collection point."
+      },
+      {
+        "metric": "Price data freshness",
+        "how": "Time between source price publication and farmer notification, logged per run."
+      },
+      {
+        "metric": "Staff time on coordination",
+        "how": "Procurement staff hours spent on confirmation calls, compared with a previous window."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Where do the prices come from?",
+      "a": "Public mandi price sources where available, plus your own buying rates. The agent always says which mandi, which date and which source, and stops outreach for a commodity if the data is stale."
+    },
+    {
+      "q": "Can it negotiate prices with farmers?",
+      "a": "No. It shares approved rates and explains how grade and moisture affect them. Any negotiation or dispute goes to your procurement staff."
+    },
+    {
+      "q": "Will farmers find automated calls intrusive?",
+      "a": "Calls go only to farmers who opted in, at times they prefer, and every call explains how to stop them. Many farmers prefer a voice note they can replay over a long call."
+    },
+    {
+      "q": "Does it work for FPOs without an ERP?",
+      "a": "Yes. The procurement plan can live in a shared sheet or a lightweight database at first, and move into an ERP later."
+    }
+  ],
+  "related": [
+    "farmer-advisory-voice-helpline",
+    "produce-grading-and-sorting",
+    "agri-input-dealer-order-automation",
+    "delivery-status-voice-and-whatsapp-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/mandi-price-and-procurement-voice-updates/"
+}

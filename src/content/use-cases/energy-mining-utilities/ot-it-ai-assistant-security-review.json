@@ -1,0 +1,216 @@
+{
+  "slug": "ot-it-ai-assistant-security-review",
+  "industry": "energy-mining-utilities",
+  "title": "Security Review for OT/IT AI Assistants",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Adversarial testing and architecture review for AI assistants that read historian data, manuals and work orders, covering prompt injection, unsafe advice, data leakage and tool permissions.",
+  "seo": {
+    "title": "Security Review for OT/IT AI Assistants | VipraTech",
+    "description": "Security testing for plant and utility AI copilots: prompt injection, unsafe advice, data leakage and tool permissions, with evidence and retest.",
+    "keywords": [
+      "OT AI security review",
+      "industrial AI copilot security",
+      "prompt injection testing OT",
+      "IEC 62443 AI assistant",
+      "LLM red teaming utilities"
+    ]
+  },
+  "designed_for": [
+    "CISO or Head of OT Security",
+    "Head of Digital and Industry 4.0",
+    "OT/IT Architect",
+    "AI Product Owner"
+  ],
+  "problem": {
+    "intro": "Utilities, mines and plants are piloting AI assistants that summarise alarms, answer questions from OEM manuals, draft work orders and query historian data. These assistants sit close to the IT/OT boundary and take instructions from the text they read, which creates risks a conventional VAPT does not cover.",
+    "pain_points": [
+      {
+        "title": "Assistants straddle the IT/OT boundary",
+        "detail": "A copilot that reads historian tags and writes to the CMMS can become a path across zones the network design was meant to keep apart."
+      },
+      {
+        "title": "Instructions hidden in documents",
+        "detail": "Indirect prompt injection through a vendor manual, work order or email can change what the assistant says or does."
+      },
+      {
+        "title": "Unsafe procedural answers",
+        "detail": "An assistant that can be talked into skipping isolation steps or bypassing an interlock is a safety issue, not just a security bug."
+      },
+      {
+        "title": "Tool permissions grow quietly",
+        "detail": "Read-only pilots acquire write access to tickets, notifications or scripts as features are added, without fresh review."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a structured security review of the assistant before it reaches plant users, and again after significant changes. We map its data flows, tools and identities against your OT zones, then build test playbooks for your setting: direct and indirect prompt injection, jailbreaks aimed at unsafe procedures, leakage of network diagrams, credentials and personal data, and misuse of every tool the assistant can call. Our multi-agent test framework runs these playbooks against a staging instance, never live control systems. Security engineers validate each finding, record reproduction steps and evidence, propose fixes and retest once you have remediated.",
+    "capabilities": [
+      "Architecture and data-flow review against your IT/OT zones and conduits",
+      "Direct and indirect prompt injection tests through manuals, work orders, emails and tickets",
+      "Unsafe-procedure tests such as skipping isolation, bypassing interlocks or silencing alarms",
+      "Tool and permission review for least privilege and read-only access to OT data",
+      "Leakage tests for network diagrams, credentials, plant drawings and personal data",
+      "Evidence pack mapped to OWASP Top 10 for LLM Applications, NIST AI RMF and IEC 62443 concepts"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and rules",
+      "detail": "We agree the assistant, environment, test windows and rules of engagement with your OT and IT security teams."
+    },
+    {
+      "step": 2,
+      "title": "Map data flows and tools",
+      "detail": "We document what the assistant reads, which tools it can call, which identities it uses and where it crosses zone boundaries."
+    },
+    {
+      "step": 3,
+      "title": "Run test campaigns",
+      "detail": "The test framework runs adversarial playbooks against the staging instance and records every prompt, response and tool call."
+    },
+    {
+      "step": 4,
+      "title": "Validate findings",
+      "detail": "A security engineer reproduces each candidate finding and assesses its real impact."
+    },
+    {
+      "step": 5,
+      "title": "Report with fixes",
+      "detail": "Findings are reported with severity, evidence and specific remediation such as permission changes, input filtering or prompt and retrieval fixes."
+    },
+    {
+      "step": 6,
+      "title": "Retest",
+      "detail": "After remediation we rerun the relevant playbooks and close findings with evidence."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope and rules of engagement\"] --> B[\"Map data flows, tools, OT boundary\"]\n  B --> C[\"Run adversarial test campaigns\"]\n  C --> D{\"Finding reproducible?\"}\n  D -->|\"no\"| E[\"Log as observation\"]\n  D -->|\"yes\"| F(\"Security engineer validates impact\")\n  F --> G[\"Report with severity and fixes\"]\n  G --> H[\"Client remediates\"]\n  H --> I{\"Retest passes?\"}\n  I -->|\"no\"| H\n  I -->|\"yes\"| J[\"Close finding with evidence\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scoping",
+        "components": [
+          "Asset and data-flow inventory",
+          "Threat model for the assistant",
+          "Rules of engagement"
+        ]
+      },
+      {
+        "name": "Test framework",
+        "components": [
+          "Attack playbook library",
+          "Multi-agent test orchestrator",
+          "Staging connectors with synthetic plant data"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Response and policy classifiers",
+          "Tool-call monitor",
+          "Human validation by security engineers"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Findings register",
+          "Evidence pack with framework mapping",
+          "Retest tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scoping\"]\n    C1[\"Data-flow inventory\"]\n    C2[\"Threat model\"]\n  end\n  subgraph S2[\"Test framework\"]\n    H1[\"Playbook library\"]\n    H2[\"Multi-agent orchestrator\"]\n    H3[\"Staging assistant instance\"]\n  end\n  subgraph S3[\"Evaluation\"]\n    E1[\"Response classifiers\"]\n    E2[\"Tool-call monitor\"]\n    E3(\"Security engineer validation\")\n  end\n  subgraph S4[\"Reporting\"]\n    R1[\"Findings register\"]\n    R2[\"Evidence pack\"]\n    R3[\"Retest tracker\"]\n  end\n  C1 --> C2\n  C2 --> H1\n  H1 --> H2\n  H2 --> H3\n  H3 --> E1\n  H3 --> E2\n  E1 --> E3\n  E2 --> E3\n  E3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Architecture and network zone diagrams",
+    "System prompts, retrieval sources and tool definitions",
+    "Access to a staging instance with test identities",
+    "Sample documents such as manuals and work orders",
+    "Existing OT security policies and user roles"
+  ],
+  "outputs": [
+    "Findings register with severity and reproduction steps",
+    "Prompt, response and tool-call evidence logs",
+    "Remediation recommendations for each finding",
+    "Mapping to OWASP Top 10 for LLM Applications, NIST AI RMF and IEC 62443 concepts",
+    "Retest report"
+  ],
+  "human_in_the_loop": "Security engineers validate every finding before it is reported, and testing stays within the agreed rules of engagement and staging scope. Your team decides which risks to fix, accept or transfer.",
+  "integrations": [
+    "LLM platforms such as Azure OpenAI, AWS Bedrock or self-hosted models",
+    "Staging copies of historian and CMMS connectors",
+    "SIEM for log review",
+    "Jira or ServiceNow for findings tracking",
+    "Identity provider for test accounts"
+  ],
+  "guardrails": [
+    "No testing against live control systems; staging or replica environments only",
+    "Signed rules of engagement before any test",
+    "Synthetic plant data in test documents",
+    "No destructive payloads or persistence",
+    "Findings shared only through agreed secure channels"
+  ],
+  "compliance_notes": [
+    "Findings can be mapped to IEC 62443 concepts, OWASP Top 10 for LLM Applications and NIST AI RMF to support your OT security programme.",
+    "Helps power-sector entities evidence risk assessment of new digital systems under CEA cyber security guidelines."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One assistant, such as a maintenance copilot that reads manuals and drafts work orders, tested in staging with its current tools and data sources.",
+    "deliverables": [
+      "Data-flow map and threat model",
+      "Test campaign results with evidence",
+      "Findings report with remediation guidance",
+      "Retest of fixed findings",
+      "Recommendations for ongoing regression testing"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Threat coverage",
+        "how": "Categories from the threat model exercised by at least one playbook."
+      },
+      {
+        "metric": "Validated findings by severity",
+        "how": "Count of reproducible findings at each severity after engineer validation."
+      },
+      {
+        "metric": "Tool-policy violations",
+        "how": "Tool calls observed outside the intended permission set during tests."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Share of findings closed on retest."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will your testing touch our live SCADA or DCS?",
+      "a": "No. We test a staging or replica instance of the assistant with synthetic data, under signed rules of engagement. If the assistant has any path to live OT, that path is itself a finding we report."
+    },
+    {
+      "q": "How is this different from our annual VAPT?",
+      "a": "A VAPT tests networks and applications for known vulnerability classes. This review tests how the AI behaves: whether text it reads can change its instructions, whether it gives unsafe procedural advice and whether its tools can be misused. The two complement each other."
+    },
+    {
+      "q": "What do you need from us to start?",
+      "a": "Architecture diagrams, the assistant's prompts and tool definitions, a staging instance with test accounts and a contact in OT security. Sample documents help us build realistic injection tests."
+    },
+    {
+      "q": "Can the tests be repeated after changes?",
+      "a": "Yes. Playbooks are kept as a regression suite, so the same tests run after model, prompt or tool changes, and results are compared with the previous round."
+    }
+  ],
+  "related": [
+    "technical-report-search-assistant",
+    "plant-copilot-security-review",
+    "ai-agent-permission-and-tool-use-review",
+    "continuous-ai-security-regression-in-ci"
+  ],
+  "proof_ref": "cyra-agentic-pentest",
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/ot-it-ai-assistant-security-review/"
+}

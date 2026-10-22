@@ -1,0 +1,219 @@
+{
+  "slug": "service-booking-and-reminder-voice-agent",
+  "industry": "automotive-mobility",
+  "title": "Service Booking and Reminder Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "A voice agent that calls customers when service is due, books workshop slots in the DMS, answers inbound booking calls and runs post-service follow-ups in Hindi, English and regional languages.",
+  "seo": {
+    "title": "Service Booking and Reminder Voice Agent | VipraTech",
+    "description": "Voice agent for dealer workshops: due-service reminder calls, inbound booking, pick-up requests, WhatsApp confirmations and post-service follow-up.",
+    "keywords": [
+      "service reminder voice agent",
+      "dealer workshop booking automation",
+      "car service booking AI calls",
+      "post service follow-up calls",
+      "automotive voice bot Hindi"
+    ]
+  },
+  "designed_for": [
+    "Service Manager",
+    "Customer Relations Manager at a dealership",
+    "Dealer Principal",
+    "OEM After-Sales Retention Lead"
+  ],
+  "problem": {
+    "intro": "Dealer workshops depend on customers returning for periodic maintenance, but reminder calls are made by a small customer relations team working through long due lists. Calls go unanswered, bookings are not entered into the DMS, and post-service follow-up is the first task dropped on a busy day.",
+    "pain_points": [
+      {
+        "title": "Due lists longer than the team",
+        "detail": "Customer relations executives cannot reach every vehicle due for service, so lapsed customers drift to independent garages."
+      },
+      {
+        "title": "Bookings that never reach the DMS",
+        "detail": "Slots agreed on the phone are noted on paper or not at all, leading to overbooked mornings and no-shows."
+      },
+      {
+        "title": "Language mismatch",
+        "detail": "Customers prefer Hindi, Hinglish or a regional language, and a single English script loses them."
+      },
+      {
+        "title": "Follow-up calls skipped",
+        "detail": "Post-service follow-up is often missed, so dissatisfied customers complain to the OEM before the dealer hears about it."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that works from your DMS due list and your inbound service line. It filters numbers against consent and calling-window rules, calls in the customer's preferred language and introduces itself as an automated assistant. It offers available slots from the workshop calendar, records concerns such as noise, weak AC or warning lights as job card notes, offers pick-up and drop where you provide it, and quotes only approved menu prices for standard services. Bookings go straight into the DMS with a WhatsApp confirmation and a reminder the day before. After delivery, it runs follow-up calls and escalates any unhappy customer to the service manager.",
+    "capabilities": [
+      "Outbound due-service reminders from DMS data, with slot booking",
+      "Inbound booking, rescheduling and cancellation on the service line",
+      "Captures customer concerns as job card notes for the service advisor",
+      "Quotes only approved menu prices for standard periodic services",
+      "WhatsApp confirmations and day-before reminders",
+      "Post-service follow-up calls with escalation of dissatisfied customers"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Build the call list",
+      "detail": "Vehicles due for service are pulled from the DMS and filtered for consent, DND preferences and permitted calling hours."
+    },
+    {
+      "step": 2,
+      "title": "Call in the right language",
+      "detail": "The agent calls in the customer's preferred language and states that it is an automated assistant."
+    },
+    {
+      "step": 3,
+      "title": "Offer slots and capture concerns",
+      "detail": "It offers available slots, records concerns and pick-up needs, and answers menu-price questions."
+    },
+    {
+      "step": 4,
+      "title": "Hand over when needed",
+      "detail": "Repair questions, estimates beyond the menu and complaints go to a service advisor with a call summary."
+    },
+    {
+      "step": 5,
+      "title": "Book and confirm",
+      "detail": "Bookings are written to the DMS calendar, followed by a WhatsApp confirmation and reminder."
+    },
+    {
+      "step": 6,
+      "title": "Follow up after service",
+      "detail": "A follow-up call after delivery captures satisfaction and escalates problems to the service manager."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Service due list from DMS\"] --> B{\"Consent and calling window ok?\"}\n  B -->|\"no\"| C[\"Hold for next window or SMS\"]\n  B -->|\"yes\"| D[\"Call in preferred language\"]\n  D --> E[\"Offer slots and capture concerns\"]\n  E --> F{\"Request within agent scope?\"}\n  F -->|\"no\"| G(\"Handover to service advisor\")\n  F -->|\"yes\"| H[\"Book slot in DMS\"]\n  H --> I[\"WhatsApp confirmation and reminder\"]\n  I --> J[\"Post-service follow-up call\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Customer data",
+        "components": [
+          "DMS due list and appointment calendar",
+          "Consent and DND preference check",
+          "Vehicle and service history"
+        ]
+      },
+      {
+        "name": "Voice",
+        "components": [
+          "Telephony and dialer over SIP",
+          "Speech recognition and text-to-speech in Hindi, English and regional languages",
+          "Dialogue manager with booking slots"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Calling window and retry rules",
+          "Approved service menu prices",
+          "Escalation rules"
+        ]
+      },
+      {
+        "name": "Engagement and reporting",
+        "components": [
+          "Service advisor handover with summary",
+          "WhatsApp confirmations",
+          "Booking and follow-up dashboards"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Customer data\"]\n    D1[\"DMS due list\"]\n    D2[\"Consent and DND check\"]\n    D3[\"Workshop calendar\"]\n  end\n  subgraph S2[\"Voice\"]\n    V1[\"Dialer and telephony\"]\n    V2[\"Speech and dialogue manager\"]\n  end\n  subgraph S3[\"Rules\"]\n    L1[\"Calling window rules\"]\n    L2[\"Approved menu prices\"]\n    L3[\"Escalation rules\"]\n  end\n  subgraph S4[\"Engagement and reporting\"]\n    E1(\"Service advisor handover\")\n    E2[\"WhatsApp confirmations\"]\n    E3[\"Booking dashboard\"]\n  end\n  D1 --> D2\n  D2 --> L1\n  L1 --> V1\n  V1 --> V2\n  L2 --> V2\n  V2 --> D3\n  V2 --> L3\n  L3 --> E1\n  D3 --> E2\n  D3 --> E3"
+  },
+  "inputs": [
+    "Service due list from the DMS",
+    "Workshop calendar and bay capacity",
+    "Customer consent and DND preferences",
+    "Approved service menu prices",
+    "Pick-up and drop availability",
+    "Delivered job cards for follow-up calls"
+  ],
+  "outputs": [
+    "Bookings written to the DMS calendar",
+    "Customer concerns attached to upcoming job cards",
+    "WhatsApp confirmations and reminders",
+    "Post-service satisfaction records and escalations",
+    "Call summaries and outcome reports"
+  ],
+  "human_in_the_loop": "Service advisors take over for repair questions, estimates beyond the menu and complaints. Any dissatisfied follow-up response reaches the service manager the same day, and managers review a sample of calls each week.",
+  "integrations": [
+    "Dealer management system appointment API",
+    "Telephony or cloud dialer",
+    "WhatsApp Business API",
+    "CRM",
+    "OEM customer satisfaction or follow-up system"
+  ],
+  "guardrails": [
+    "Calls only within permitted hours and to customers with valid consent",
+    "Identifies itself as an automated assistant at the start of each call",
+    "No repair diagnosis and no prices beyond the approved menu",
+    "Customer can reach a person at any time",
+    "Recordings retained only for the period your policy sets"
+  ],
+  "compliance_notes": [
+    "Calling and messaging follow TRAI commercial communication rules on consent, DND preferences and registered templates.",
+    "Customer data and recordings handled under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One workshop's periodic service reminders and inbound booking line, in Hindi and English plus one regional language if needed.",
+    "deliverables": [
+      "Call scripts and escalation rules agreed with the service manager",
+      "Agent connected to the DMS calendar in test",
+      "WhatsApp confirmation templates",
+      "Live pilot with a call QA dashboard",
+      "Roll-out plan for other workshops"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Booking rate",
+        "how": "Bookings made per connected call, compared with the customer relations team over the same period."
+      },
+      {
+        "metric": "Show-up rate",
+        "how": "Share of agent-made bookings where the vehicle arrived."
+      },
+      {
+        "metric": "Handover reasons",
+        "how": "Count and type of calls passed to advisors."
+      },
+      {
+        "metric": "Opt-outs and complaints",
+        "how": "Customers asking not to be called, or complaining about the calls."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will customers know they are talking to an AI?",
+      "a": "Yes. The agent says so at the start of every call and offers a person whenever the customer asks. Being upfront also keeps the conversation honest if something goes wrong."
+    },
+    {
+      "q": "Which languages does it speak?",
+      "a": "Hindi, English and Hinglish as standard, plus regional languages for your market. We test on recordings of your customers before the pilot goes live."
+    },
+    {
+      "q": "Does it work with our DMS?",
+      "a": "Yes, through the DMS appointment API or a staging integration agreed with your DMS provider. Bookings appear in the same calendar your advisors already use."
+    },
+    {
+      "q": "Is this compliant with TRAI rules?",
+      "a": "The agent calls only within permitted hours, checks consent and DND preferences and uses registered headers and templates for messages. Your compliance team approves the scripts and calling rules before go-live."
+    }
+  ],
+  "related": [
+    "service-centre-plate-and-document-capture",
+    "test-drive-lead-qualification-voice-agent",
+    "dealer-lead-routing-and-follow-up",
+    "consumer-durables-service-booking-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/service-booking-and-reminder-voice-agent/"
+}

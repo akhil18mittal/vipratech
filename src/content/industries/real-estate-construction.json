@@ -1,0 +1,121 @@
+{
+  "slug": "real-estate-construction",
+  "name": "Real Estate & Construction",
+  "seo": {
+    "title": "AI for Real Estate: RERA, RA Bills and Leads | VipraTech",
+    "description": "AI for Indian developers and contractors: RERA data extraction, RA bill checks against BOQ, site photo progress tracking and lead follow-up agents.",
+    "keywords": [
+      "AI for real estate developers",
+      "RERA data extraction",
+      "RA bill verification against BOQ",
+      "construction progress monitoring AI",
+      "property lead qualification voice agent",
+      "construction site safety AI",
+      "channel partner lead automation"
+    ]
+  },
+  "hero": {
+    "headline": "Checked contractor bills, reconciled demand letters and no property lead left waiting",
+    "subheadline": "We build document, vision and voice systems for developers and contractors that read RERA filings, agreements and RA bills, track sites from photos and follow up leads in Hindi and English. Your engineers, lawyers and sales teams keep the decisions."
+  },
+  "intro": "Real estate runs on paper and phone calls. A single residential project produces a RERA registration, quarterly progress updates, approved plans, a title chain going back decades, an agreement for sale per unit, a demand letter at every slab and a steady stream of running account bills from contractors. Sales depends on calling portal and broker leads back before a competitor does. AI helps today where the work is reading, matching and following up: extracting fields from filings and bills, checking them against the BOQ or cost sheet, tracking progress from site photos and qualifying enquiries. It does not replace a lawyer's title opinion, an engineer's stage certificate or a quantity surveyor's measurement, and we design every system so those people sign off.",
+  "challenges": [
+    {
+      "title": "Compliance paperwork that never stops",
+      "detail": "RERA registration details, quarterly progress updates and professional certificates have to agree with internal schedules, sales records and accounts, and they are usually prepared by hand from spreadsheets."
+    },
+    {
+      "title": "Leakage in contractor billing",
+      "detail": "RA bills arrive with cumulative quantities, extra items and recoveries that billing engineers check line by line against the BOQ and measurement book, often under pressure to release payment."
+    },
+    {
+      "title": "Collections linked to construction stages",
+      "detail": "Demand letters go out at each milestone, but money comes back as home-loan disbursements, part-payments and TDS-deducted amounts that are hard to match to the right unit."
+    },
+    {
+      "title": "Leads that go cold",
+      "detail": "Portal, social, walk-in and channel partner leads land in different places, first calls are slow outside office hours, and duplicate claims between brokers turn into disputes."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Reads RERA filings, agreements for sale, title deeds, RA bills, demand letters and bank credits, and checks them against the BOQ, cost sheet or RERA record, with uncertain items routed to the responsible engineer, lawyer or accountant."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Turns geotagged site photos, drone images and existing CCTV into floor-by-floor progress status and safety observations, with photo evidence that a site engineer or safety officer confirms."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Calls new enquiries in Hindi, English or Hinglish, qualifies budget and configuration, books and confirms site visits and hands warm leads to presales with a call summary."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Automates channel partner lead registration, ownership checks and brokerage tracking, and runs buyer nurture sequences built only from approved project facts."
+    }
+  ],
+  "featured_use_cases": [
+    "rera-project-data-extraction",
+    "contractor-bill-verification-against-boq",
+    "property-lead-qualification-voice-agent"
+  ],
+  "use_cases": [
+    "rera-project-data-extraction",
+    "sale-agreement-and-title-review",
+    "contractor-bill-verification-against-boq",
+    "customer-demand-and-receipt-reconciliation",
+    "construction-progress-monitoring",
+    "construction-site-safety-compliance",
+    "property-lead-qualification-voice-agent",
+    "site-visit-booking-and-reminders",
+    "channel-partner-lead-automation",
+    "buyer-nurture-campaigns"
+  ],
+  "regulatory_context": [
+    {
+      "name": "Real Estate (Regulation and Development) Act, 2016 and state RERA rules",
+      "note": "Covers project and agent registration, quarterly updates on the state RERA portal, a separate project account for buyer money and agreement-for-sale formats prescribed by state rules. Our systems help prepare and cross-check this information; filing and certification stay with the promoter and its professionals."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Applies to buyer, lead, broker and worker personal data. We design for notice, consent where needed, purpose limitation and retention limits, and keep data in your cloud account or an India region."
+    },
+    {
+      "name": "TRAI commercial communication rules (TCCCPR 2018)",
+      "note": "Govern promotional calls and SMS, including customer preferences and registered headers and templates. Outbound lead and nurture agents are configured to respect consent records, preferences and the calling windows you set."
+    },
+    {
+      "name": "BOCW Act 1996 and the OSH Code 2020",
+      "note": "Set safety, welfare and record-keeping duties for construction sites, with the OSH Code consolidating the earlier construction workers law. Site safety monitoring helps safety officers spot and evidence issues; it does not replace statutory inspections or their judgement."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can you work with any state's RERA portal?",
+      "a": "Each state portal has its own layout and document formats, so we build and test a collector per state. A typical pilot covers one state, and we add others once field mappings are agreed. Where a portal needs a login or captcha, a person completes that step."
+    },
+    {
+      "q": "Will the AI give a legal opinion on title or approve a contractor bill?",
+      "a": "No. It extracts, compares and flags. Your advocate gives the title opinion, your quantity surveyor certifies the bill and your accounts team approves allocations. Every flag links to the page it came from so they can check it quickly."
+    },
+    {
+      "q": "Our site teams share photos on WhatsApp. Is that good enough?",
+      "a": "It is a start. Progress and safety models work better with consistent angles, so we usually agree a short list of fixed photo points per tower and add GPS and timestamp checks. Existing CCTV can be used for safety monitoring where camera positions allow."
+    },
+    {
+      "q": "Which CRM and ERP systems do you integrate with?",
+      "a": "We connect through APIs, webhooks or scheduled exports to common real estate CRMs such as Salesforce, LeadSquared or Sell.Do, ERPs such as SAP or Farvision, and Tally for accounts. Where there is no API, we start with a structured Excel or database hand-off."
+    }
+  ],
+  "related_industries": [
+    "nbfc-lending",
+    "legal",
+    "banking"
+  ],
+  "cta": {
+    "headline": "Pick one project and one painful workflow",
+    "text": "Book a discovery call and we will scope a short pilot on one project, such as RA bill checks for a single contractor or lead qualification for one launch, run in parallel with your current process."
+  },
+  "url": "/industries/real-estate-construction/"
+}

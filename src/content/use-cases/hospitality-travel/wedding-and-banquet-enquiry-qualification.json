@@ -1,0 +1,218 @@
+{
+  "slug": "wedding-and-banquet-enquiry-qualification",
+  "industry": "hospitality-travel",
+  "title": "Wedding and Banquet Enquiry Qualification",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Qualify wedding and banquet enquiries on WhatsApp and calls: dates, functions, guest counts, menus and rooms, checked against the venue calendar, with indicative packages and visits booked.",
+  "seo": {
+    "title": "Wedding and Banquet Enquiry Qualification AI | VipraTech",
+    "description": "AI that qualifies wedding and banquet enquiries by date, functions, guest count, menu and rooms, checks the venue calendar and books visits for sales.",
+    "keywords": [
+      "banquet enquiry management",
+      "wedding venue lead qualification",
+      "banquet hall booking automation",
+      "wedding venue WhatsApp assistant",
+      "event enquiry tracking for hotels"
+    ]
+  },
+  "designed_for": [
+    "Banquet Sales Manager",
+    "Wedding Venue Owner",
+    "Catering and Events Manager",
+    "Sales Coordinator"
+  ],
+  "problem": {
+    "intro": "Wedding and banquet enquiries arrive from venue listing sites, Instagram, Google, referrals and walk-ins, and most begin with the same message: what is your rate? A useful answer depends on the date, the functions, guest count per function, menu, rooms for the wedding party and decor. Sales managers spend their day collecting these details from families who are comparing many venues.",
+    "pain_points": [
+      {
+        "title": "Rate questions without context",
+        "detail": "Per-plate prices and venue rent depend on date, menu and guest count, so a quick number either scares the family away or sets the wrong expectation."
+      },
+      {
+        "title": "Auspicious dates clash",
+        "detail": "Popular muhurat dates draw many enquiries for the same lawn or hall, and tentative holds without follow-up block dates that never convert."
+      },
+      {
+        "title": "Multi-function events are complex",
+        "detail": "Mehendi, haldi, sangeet, wedding and reception may need different spaces, menus and timings, plus a room block for guests."
+      },
+      {
+        "title": "Leads lost between calls",
+        "detail": "Families call back after visiting other venues, and without notes on what they wanted, the conversation starts again from scratch."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an enquiry assistant for WhatsApp and phone that collects what the banquet team needs before a quote. It asks about the event, dates and flexibility, functions, guest count per function, veg, non-veg or Jain menus, budget per plate, rooms for the wedding party, decor and music. It checks the venue calendar for the lawn and halls, explains what is free on those dates and gives an indicative package range from your approved rate card, clearly labelled as indicative. Qualified families are offered a venue visit or food tasting. The banquet manager receives a structured summary and score, and decides whether to place a tentative hold with an expiry date.",
+    "capabilities": [
+      "Structured capture of event type, dates, functions, guest counts and menu preferences",
+      "Venue calendar check for lawns, halls and room blocks on requested dates",
+      "Indicative package ranges from your approved rate card, never final quotes",
+      "Venue visit and food tasting bookings with reminders",
+      "Lead scoring by date fit, budget fit and decision stage",
+      "Tentative hold tracking with expiry reminders to the family and the sales team"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture the enquiry",
+      "detail": "Enquiries from listings, Instagram, Google, calls and walk-ins are logged in one place with their source."
+    },
+    {
+      "step": 2,
+      "title": "Collect event details",
+      "detail": "The assistant asks about dates, functions, guests, menus, rooms and budget in Hindi or English, by chat or call."
+    },
+    {
+      "step": 3,
+      "title": "Check the calendar",
+      "detail": "Requested dates are checked against the venue calendar for each space and against the room inventory."
+    },
+    {
+      "step": 4,
+      "title": "Share an indicative range",
+      "detail": "An indicative package range is shared from the approved rate card, and alternative dates are offered if spaces are taken."
+    },
+    {
+      "step": 5,
+      "title": "Book a visit",
+      "detail": "Qualified families are offered a venue visit or tasting, and the banquet manager receives a summary."
+    },
+    {
+      "step": 6,
+      "title": "Manage holds and follow-up",
+      "detail": "The manager decides on tentative holds and quotes, and the assistant tracks expiry and reminds both sides."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Wedding or banquet enquiry\"] --> B[\"Collect dates, functions and guests\"]\n  B --> C[\"Check venue and room calendar\"]\n  C --> D{\"Dates available?\"}\n  D -->|\"no\"| E[\"Offer alternative dates\"]\n  D -->|\"yes\"| F[\"Share indicative package range\"]\n  E --> F\n  F --> G[\"Book venue visit or tasting\"]\n  G --> H(\"Banquet manager quotes and holds\")\n  H --> I[\"Track hold expiry and follow-up\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channels",
+        "components": [
+          "WhatsApp Business API",
+          "Inbound and callback voice agent",
+          "Listing and Instagram lead capture"
+        ]
+      },
+      {
+        "name": "Qualification",
+        "components": [
+          "LLM enquiry dialogue",
+          "Event detail schema",
+          "Lead scoring rules"
+        ]
+      },
+      {
+        "name": "Venue data",
+        "components": [
+          "Banquet calendar by space",
+          "Room inventory from the PMS",
+          "Approved rate card and packages"
+        ]
+      },
+      {
+        "name": "Sales workflow",
+        "components": [
+          "Banquet manager summary and hold screen",
+          "Visit and tasting scheduler",
+          "Hold expiry reminders"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Channels\"]\n  C1[\"WhatsApp enquiries\"]\n  C2[\"Voice enquiries\"]\n  C3[\"Listing and social leads\"]\n  end\n  subgraph S2[\"Qualification\"]\n  Q1[\"LLM enquiry dialogue\"]\n  Q2[\"Lead scoring\"]\n  end\n  subgraph S3[\"Venue data\"]\n  D1[\"Banquet calendar\"]\n  D2[\"Room inventory\"]\n  D3[\"Approved rate card\"]\n  end\n  subgraph S4[\"Sales workflow\"]\n  W1(\"Banquet manager review\")\n  W2[\"Visit scheduler\"]\n  W3[\"Hold expiry reminders\"]\n  end\n  C1 --> Q1\n  C2 --> Q1\n  C3 --> Q1\n  D1 --> Q1\n  D2 --> Q1\n  D3 --> Q1\n  Q1 --> Q2\n  Q2 --> W1\n  Q1 --> W2\n  W1 --> W3"
+  },
+  "inputs": [
+    "Enquiries from venue listings, Instagram, Google, calls and walk-ins",
+    "Banquet calendar for lawns and halls",
+    "Room inventory for wedding party blocks",
+    "Approved rate card, menus and packages",
+    "Banquet manager availability for visits and tastings"
+  ],
+  "outputs": [
+    "Structured enquiry record with event details per function",
+    "Lead score and recommended next step",
+    "Booked venue visits and tastings",
+    "Tentative holds with expiry dates",
+    "Enquiry reports by source, date demand and outcome"
+  ],
+  "human_in_the_loop": "The banquet manager prepares every final quote, approves tentative holds and handles negotiation. The assistant shares only indicative ranges from the approved rate card and hands over as soon as a family wants to negotiate or confirm.",
+  "integrations": [
+    "WhatsApp Business API",
+    "Cloud telephony for calls",
+    "Banquet or event management software, or a shared calendar",
+    "Hotel PMS for room blocks",
+    "CRM or Google Sheets for enquiry tracking"
+  ],
+  "guardrails": [
+    "Indicative ranges always labelled as indicative and subject to the final quote",
+    "No date confirmed or held without the banquet manager's approval",
+    "Calendar checked live before any date is described as available",
+    "Family contact details shared only with the sales team",
+    "Immediate handover for negotiation, complaints or VIP requests"
+  ],
+  "compliance_notes": [
+    "Business-initiated WhatsApp follow-ups use approved templates and opt-in under Meta's policies.",
+    "Enquiry details are processed for event planning, with retention limits, under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "All WhatsApp and phone enquiries for one venue over a period that includes a few auspicious dates, with the banquet manager reviewing every summary.",
+    "deliverables": [
+      "Enquiry flow and event detail schema",
+      "Calendar and rate card configuration",
+      "Banquet manager summary and hold screen",
+      "Pilot enquiry log and review",
+      "Roll-out plan and estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Enquiries fully qualified",
+        "how": "Enquiries where date, functions, guest count and menu were captured before handover."
+      },
+      {
+        "metric": "Visits and tastings booked",
+        "how": "Visits booked from assistant-handled enquiries, and whether they took place."
+      },
+      {
+        "metric": "Banquet manager time per enquiry",
+        "how": "Time spent before the first quote, compared with enquiries from before the pilot."
+      },
+      {
+        "metric": "Holds released on time",
+        "how": "Tentative holds released at expiry rather than left blocking dates."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it give families our prices?",
+      "a": "Only indicative ranges you approve, such as a per-plate range for a menu tier, and only once it knows the date and guest count. Final quotes always come from your banquet manager."
+    },
+    {
+      "q": "Can it handle multi-day weddings with several functions?",
+      "a": "Yes. It records each function separately with date, time, space, guest count and menu, and checks each against the calendar. The summary shows the whole event at a glance."
+    },
+    {
+      "q": "Does it work for corporate events and birthdays too?",
+      "a": "Yes. The flow adapts by event type, asking about seating style, AV and timings for corporate events, or theme and cake for birthdays, while using the same calendar and rate card."
+    },
+    {
+      "q": "Can families speak to it by phone?",
+      "a": "Yes. The same qualification runs as a voice conversation in Hindi or English, and the details reach the banquet manager in the same format as WhatsApp enquiries."
+    }
+  ],
+  "related": [
+    "hotel-whatsapp-booking-assistant",
+    "after-hours-reservation-voice-agent",
+    "kitchen-hygiene-monitoring",
+    "review-response-and-reputation-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/wedding-and-banquet-enquiry-qualification/"
+}

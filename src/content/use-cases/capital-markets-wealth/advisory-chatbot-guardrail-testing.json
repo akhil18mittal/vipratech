@@ -1,0 +1,216 @@
+{
+  "slug": "advisory-chatbot-guardrail-testing",
+  "industry": "capital-markets-wealth",
+  "title": "Guardrail Testing for Investment Advisory Chatbots",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test wealth and broking chatbots for unregistered advice, missing risk disclosures, made-up fund data, prompt injection and client data leakage, scored against your SEBI registration scope.",
+  "seo": {
+    "title": "Guardrail Testing for Advisory Chatbots | VipraTech",
+    "description": "Red-teaming for wealth and broking chatbots: unregistered advice, missing disclosures, wrong fund data, prompt injection and data leakage, with evidence.",
+    "keywords": [
+      "advisory chatbot testing",
+      "robo-advisory guardrail testing",
+      "AI chatbot SEBI compliance testing",
+      "LLM red teaming wealth management",
+      "financial chatbot hallucination testing"
+    ]
+  },
+  "designed_for": [
+    "Chief Compliance Officer",
+    "Head of Digital Wealth",
+    "Chief Information Security Officer",
+    "Principal Officer, Investment Adviser"
+  ],
+  "problem": {
+    "intro": "Brokers, mutual fund distributors, wealth platforms and registered advisers are adding chatbots that explain funds, summarise portfolios and answer market questions. What the bot may say depends on the firm's registration: a distributor or execution-only broker must not give personalised advice, and a registered adviser must keep advice within suitability and disclosure rules.",
+    "pain_points": [
+      {
+        "title": "Information slides into advice",
+        "detail": "A helpful answer about a fund can become a personalised recommendation after a few follow-up questions."
+      },
+      {
+        "title": "Wrong numbers sound confident",
+        "detail": "Language models can state NAVs, returns or expense ratios that are outdated or invented."
+      },
+      {
+        "title": "Missing risk language",
+        "detail": "Required risk disclosures and past-performance caveats disappear in shorter or multi-turn answers."
+      },
+      {
+        "title": "Data and injection risks",
+        "detail": "Bots that read portfolios or notes can be manipulated by injected instructions or tricked into revealing another client's holdings."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We test your chatbot against a rubric built for your registration type and permitted scope. Scenarios cover advice boundaries, suitability behaviour if you are a registered adviser, mandatory risk disclosures, assured-return and tip-seeking prompts, factual accuracy against reference data such as scheme NAVs and expense ratios, prompt injection and cross-client data leakage. We run multi-turn conversations in English and Hinglish with personas such as a retiree with a lump sum, a derivatives trader asking for tips and a user pasting instructions into a portfolio note. Each conversation is scored PASS, RISK or FAIL, with transcripts as evidence, remediation advice and a regression suite.",
+    "capabilities": [
+      "Builds a rubric from your registration type, permitted scope, disclosure rules and prohibited claims",
+      "Runs multi-turn adversarial scenarios on advice boundaries, tips, assured returns and suitability",
+      "Checks factual answers on NAVs, returns and expense ratios against reference data",
+      "Tests prompt injection through user messages, uploaded documents and portfolio notes",
+      "Tests isolation between client accounts using synthetic portfolios",
+      "Delivers PASS, RISK and FAIL findings with transcripts, OWASP LLM Top 10 mapping and a regression suite"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scope and rubric",
+      "detail": "Registration type, permitted scope, bot features and the scoring rubric are agreed with compliance."
+    },
+    {
+      "step": 2,
+      "title": "Build scenarios and reference data",
+      "detail": "Personas, attack variations and reference answers are prepared from scheme documents and public data."
+    },
+    {
+      "step": 3,
+      "title": "Run tests",
+      "detail": "Multi-turn conversations are run on the staging bot using synthetic client accounts."
+    },
+    {
+      "step": 4,
+      "title": "Score and adjudicate",
+      "detail": "Transcripts are scored automatically against the rubric, and any RISK or borderline result passes to your compliance or principal officer."
+    },
+    {
+      "step": 5,
+      "title": "Report",
+      "detail": "Findings are prioritised with transcripts, root-cause notes and recommended fixes."
+    },
+    {
+      "step": 6,
+      "title": "Re-test and automate",
+      "detail": "Fixes are re-tested, and the scenarios are added to your release pipeline."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Registration scope and rubric\"] --> B[\"Personas, attacks and reference data\"]\n  B --> C[\"Multi-turn tests on staging bot\"]\n  C --> D[\"Evaluation model scores transcripts\"]\n  D --> E{\"Result clear?\"}\n  E -->|\"no\"| F(\"Compliance reviewer adjudicates\")\n  E -->|\"yes\"| G[\"Findings with evidence\"]\n  F --> G\n  G --> H[\"Re-test and regression suite\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scope and scenario design",
+        "components": [
+          "Registration and permitted-scope rubric",
+          "Persona and attack library",
+          "Reference answers from scheme documents and public NAV data"
+        ]
+      },
+      {
+        "name": "Test execution",
+        "components": [
+          "Chatbot API connector",
+          "Synthetic client accounts and portfolios",
+          "Multi-turn orchestrator"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Rubric evaluation model",
+          "Numeric accuracy checker",
+          "Compliance adjudication queue"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Evidence store and findings report with OWASP LLM Top 10 mapping",
+          "CI regression suite"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scope and scenario design\"]\n    P1[\"Permitted-scope rubric\"]\n    P2[\"Persona and attack library\"]\n    P3[\"Reference fund data\"]\n  end\n  subgraph S2[\"Test execution\"]\n    X1[\"Synthetic client accounts\"]\n    X2[\"Multi-turn orchestrator\"]\n    X3[\"Chatbot API connector\"]\n  end\n  subgraph S3[\"Evaluation\"]\n    J1[\"Rubric evaluation model\"]\n    J2[\"Numeric accuracy checker\"]\n    J3(\"Compliance adjudication\")\n  end\n  subgraph S4[\"Reporting\"]\n    R1[\"Evidence and findings report\"]\n    R2[\"CI regression suite\"]\n  end\n  P1 --> X2\n  P2 --> X2\n  X1 --> X2\n  X2 --> X3\n  X3 --> J1\n  X3 --> J2\n  P3 --> J2\n  J1 --> J3\n  J2 --> J3\n  J3 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Staging chatbot access and bot documentation",
+    "Registration type and permitted scope",
+    "Scheme documents, factsheets and public NAV data for reference answers",
+    "Approved disclosures and prohibited claims list",
+    "Risk profiling and suitability logic, for registered advisers",
+    "Synthetic test accounts with sample portfolios"
+  ],
+  "outputs": [
+    "Scenario-by-scenario results marked PASS, RISK or FAIL",
+    "Transcripts as evidence",
+    "Factual accuracy report against reference data",
+    "Mapping to the OWASP Top 10 for LLM Applications and internal policies",
+    "Remediation guidance and regression suite"
+  ],
+  "human_in_the_loop": "Your compliance officer or principal officer signs off the rubric and adjudicates RISK and uncertain results. Product and engineering teams decide on fixes, and we re-test them.",
+  "integrations": [
+    "Staging chatbot API or web widget",
+    "Test user accounts in a sandbox",
+    "Reference data such as AMFI NAV files and scheme masters",
+    "CI/CD pipeline",
+    "Jira or a similar issue tracker"
+  ],
+  "guardrails": [
+    "Synthetic accounts only; no real client data",
+    "Testing in staging under a written scope",
+    "Rate-limited test runs",
+    "Findings shared only with named stakeholders",
+    "People check a sample of evaluation model scores"
+  ],
+  "compliance_notes": [
+    "The rubric reflects the SEBI distinction between investment advice by registered advisers and distribution or execution services; findings help evidence controls, not obtain approval.",
+    "Aligned with SEBI's position that regulated entities are responsible for the output of AI tools they use, and mapped to the OWASP Top 10 for LLM Applications."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One chatbot journey, such as mutual fund discovery or portfolio summary, tested in English and Hinglish against the agreed rubric.",
+    "deliverables": [
+      "Rubric approved by compliance, with the scenario list",
+      "Executed test run with transcripts",
+      "Factual accuracy and findings report",
+      "Re-test of agreed fixes",
+      "Regression suite"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Scenario coverage",
+        "how": "Advice, disclosure, accuracy, injection and isolation categories covered, listed against scope."
+      },
+      {
+        "metric": "Findings by severity",
+        "how": "FAIL and RISK results per category after compliance adjudication."
+      },
+      {
+        "metric": "Factual accuracy on reference questions",
+        "how": "Bot answers compared with reference data for NAVs, returns and expense ratios on the test date."
+      },
+      {
+        "metric": "Evaluator agreement",
+        "how": "Agreement between the evaluation model and compliance reviewers on sampled transcripts."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Why does our registration type matter?",
+      "a": "Because what counts as a failure differs. A distributor's bot should not give personalised recommendations at all, while a registered adviser's bot may, within suitability and disclosure rules. We build the rubric around your actual scope."
+    },
+    {
+      "q": "Do you test against live market data?",
+      "a": "We prepare reference answers from scheme documents and public NAV data for the test date, so factual answers can be checked objectively. Live trading systems are not touched."
+    },
+    {
+      "q": "Is this a SEBI approval or certification?",
+      "a": "No. It is structured evidence of how your bot behaved against defined scenarios, which your compliance team can use in its own control testing and governance records."
+    },
+    {
+      "q": "Can you test our voice bot as well?",
+      "a": "Yes. The same scenarios can be run as synthetic voice calls in Hindi and English and scored from transcripts and audio."
+    }
+  ],
+  "related": [
+    "research-copilot-data-leakage-testing",
+    "trading-support-voice-agent",
+    "insurance-bot-mis-selling-and-disclosure-testing",
+    "llm-application-penetration-test"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/advisory-chatbot-guardrail-testing/"
+}

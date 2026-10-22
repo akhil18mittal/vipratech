@@ -1,0 +1,219 @@
+{
+  "slug": "pharmacy-shelf-and-expiry-monitoring",
+  "industry": "healthcare",
+  "title": "Pharmacy Shelf and Expiry Monitoring",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Photograph pharmacy shelves, ward stores and crash cart drawers to read batch and expiry dates, find near-expiry and missing items, and flag look-alike medicines stored side by side.",
+  "seo": {
+    "title": "Pharmacy Expiry and Crash Cart Checks with AI | VipraTech",
+    "description": "Computer vision for hospital pharmacy: read batch and expiry from shelf photos, check crash carts and flag look-alike medicines stored together.",
+    "keywords": [
+      "pharmacy expiry monitoring",
+      "crash cart check automation",
+      "hospital pharmacy computer vision",
+      "LASA medicine storage",
+      "medicine batch and expiry OCR"
+    ]
+  },
+  "designed_for": [
+    "Chief Pharmacist",
+    "Hospital Pharmacy Manager",
+    "Nursing Superintendent",
+    "Materials and Purchase Manager"
+  ],
+  "problem": {
+    "intro": "Hospital pharmacies and ward stores hold thousands of items, many in strips and vials with tiny printed batch and expiry details. Expiry checks are done by hand, monthly at best, and crash cart checks rely on a nurse ticking a list at the end of a shift. Expired stock, missing emergency drugs and look-alike medicines stored together are found too late.",
+    "pain_points": [
+      {
+        "title": "Manual expiry checks",
+        "detail": "Reading expiry dates strip by strip takes hours, so checks are infrequent and near-expiry stock is missed."
+      },
+      {
+        "title": "Crash cart readiness",
+        "detail": "A missing or expired item in an emergency trolley is a serious risk, yet checks are tick-box and hard to verify."
+      },
+      {
+        "title": "Look-alike, sound-alike medicines",
+        "detail": "Similar packaging stored side by side raises the chance of picking errors."
+      },
+      {
+        "title": "Stock records drift from shelves",
+        "detail": "Pharmacy system stock and physical stock diverge, hiding both shortages and dead stock."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a shelf and expiry monitoring app for pharmacy and nursing teams. Staff photograph a shelf, a ward store rack or each drawer of a crash cart with a phone or tablet. Computer vision identifies products from their packaging, reads batch numbers and expiry dates from labels and counts visible units where possible. Results are compared with the pharmacy system and, for crash carts, with the approved list for that trolley. The app shows near-expiry items by date band, missing or extra items and look-alike medicines stored side by side, and records who checked what and when. Pharmacists confirm uncertain readings and decide on removal or restocking.",
+    "capabilities": [
+      "Product recognition from strip, carton and vial packaging in your formulary",
+      "OCR of batch number and expiry date on small and curved labels",
+      "Crash cart drawer checks against the approved item list for each trolley",
+      "Near-expiry bands and first-expiry-first-out prompts based on your thresholds",
+      "Look-alike, sound-alike adjacency alerts from your LASA list",
+      "Comparison of visible stock with the pharmacy system"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture",
+      "detail": "Staff photograph a shelf, rack or crash cart drawer with the app, which guides them to cover each section."
+    },
+    {
+      "step": 2,
+      "title": "Recognise and read",
+      "detail": "Products are identified, and batch numbers and expiry dates are read from labels."
+    },
+    {
+      "step": 3,
+      "title": "Compare",
+      "detail": "Readings are compared with pharmacy system stock or the crash cart list."
+    },
+    {
+      "step": 4,
+      "title": "Confirm uncertain readings",
+      "detail": "Unclear labels and uncertain products are queued for a pharmacist to confirm."
+    },
+    {
+      "step": 5,
+      "title": "Alert and act",
+      "detail": "Near-expiry, expired, missing and LASA adjacency alerts go to the pharmacist or ward in-charge to act on."
+    },
+    {
+      "step": 6,
+      "title": "Record",
+      "detail": "The check, findings and actions are logged with time and user for audit."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Photo of shelf or crash cart drawer\"] --> B[\"Recognise products\"]\n  B --> C[\"Read batch and expiry\"]\n  C --> D{\"Labels read with confidence?\"}\n  D -->|\"yes\"| F[\"Compare with stock or checklist\"]\n  D -->|\"no\"| E(\"Pharmacist confirms reading\")\n  E --> F\n  F --> G[\"Expiry, missing and LASA alerts\"]\n  G --> H(\"Ward in-charge or pharmacist acts\")\n  H --> I[\"Check logged for audit\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Mobile app with guided capture",
+          "Optional fixed shelf cameras"
+        ]
+      },
+      {
+        "name": "Vision",
+        "components": [
+          "Product recognition model trained on your formulary packaging",
+          "Label OCR for batch and expiry",
+          "Visible unit counting"
+        ]
+      },
+      {
+        "name": "Matching",
+        "components": [
+          "Pharmacy system stock connector",
+          "Crash cart list library",
+          "LASA list and adjacency rules"
+        ]
+      },
+      {
+        "name": "Review and alerts",
+        "components": [
+          "Pharmacist confirmation queue",
+          "Alerts to pharmacy and wards"
+        ]
+      },
+      {
+        "name": "Audit",
+        "components": [
+          "Check log with user and time",
+          "Reports for the pharmacy and therapeutics committee"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Guided mobile capture\"]\n    C2[\"Optional shelf cameras\"]\n  end\n  subgraph S2[\"Vision\"]\n    V1[\"Product recognition\"]\n    V2[\"Batch and expiry OCR\"]\n  end\n  subgraph S3[\"Matching\"]\n    M1[\"Pharmacy stock connector\"]\n    M2[\"Crash cart checklists\"]\n    M3[\"LASA adjacency rules\"]\n  end\n  subgraph S4[\"Review and audit\"]\n    R1(\"Pharmacist confirmation queue\")\n    R2[\"Alerts to pharmacy and wards\"]\n    R3[\"Check log and reports\"]\n  end\n  C1 --> V1\n  C2 --> V1\n  V1 --> V2\n  V2 --> M1\n  V2 --> M2\n  V1 --> M3\n  V2 --> R1\n  M1 --> R2\n  M2 --> R2\n  M3 --> R2\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Photos of shelves, ward store racks and crash cart drawers",
+    "Formulary with product packaging images",
+    "Pharmacy system stock by location, batch and expiry",
+    "Crash cart lists per trolley type",
+    "LASA medicine list and near-expiry thresholds"
+  ],
+  "outputs": [
+    "Near-expiry and expired item lists by location",
+    "Crash cart check reports with missing or expired items",
+    "LASA adjacency alerts",
+    "Stock discrepancy list for the pharmacy system",
+    "Audit log of checks and actions"
+  ],
+  "human_in_the_loop": "Pharmacists confirm uncertain readings and decide on every removal, return or restock. For crash carts, the ward in-charge nurse remains responsible for the check; the app provides evidence and catches what a tick-list can miss.",
+  "integrations": [
+    "Pharmacy or inventory module of the HIS",
+    "Materials management or purchase system",
+    "Hospital-issued phones or tablets",
+    "Messaging or task tool for alerts",
+    "Pharmacy and therapeutics committee reporting"
+  ],
+  "guardrails": [
+    "Uncertain expiry readings never marked as safe; they go to a pharmacist",
+    "Product recognition limited to your formulary, with unknown items flagged",
+    "Capture guidance keeps patients and patient data out of photos",
+    "Thresholds and LASA lists owned and versioned by pharmacy"
+  ],
+  "compliance_notes": [
+    "Supports, but does not replace, pharmacy record-keeping duties under drug control rules, including registers for scheduled and controlled medicines.",
+    "Medication storage and expiry checks are a regular focus of accreditation reviews such as NABH, and the check log helps you evidence them."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Main pharmacy shelves for a set of high-value or critical items, plus crash carts in two wards or one ICU.",
+    "deliverables": [
+      "Packaging image set for the pilot items",
+      "Mobile capture app with expiry reading",
+      "Crash cart list configuration",
+      "Accuracy report against manual checks",
+      "Roll-out plan and pharmacy system integration plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Expiry reading accuracy",
+        "how": "App readings compared with manual reading of the same items."
+      },
+      {
+        "metric": "Product recognition accuracy",
+        "how": "Correct identification on sampled photos, checked by a pharmacist."
+      },
+      {
+        "metric": "Crash cart findings",
+        "how": "Missing or expired items found by the app compared with the manual checklist on the same day."
+      },
+      {
+        "metric": "Check time",
+        "how": "Time per shelf or trolley check with the app compared with the current method."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read tiny expiry dates on blister strips?",
+      "a": "Often, with good capture guidance and lighting, but not always. Any reading below the confidence threshold goes to a pharmacist, and expired or unclear items are never marked as fine."
+    },
+    {
+      "q": "Do we need fixed cameras?",
+      "a": "No. Most pharmacies start with phones or tablets. Fixed shelf cameras are an option for high-value areas once the app is working well."
+    },
+    {
+      "q": "How does it handle new products or packaging changes?",
+      "a": "Unknown packaging is flagged, and a pharmacist adds the product with a few photos. The model is updated on a schedule agreed with your team."
+    },
+    {
+      "q": "Does it connect to our pharmacy software?",
+      "a": "Yes, through an API, a database view or a scheduled export of stock by location, batch and expiry. If integration is not possible at first, the app works from a stock export."
+    }
+  ],
+  "related": [
+    "hand-hygiene-and-ppe-monitoring",
+    "shelf-availability-and-planogram-compliance",
+    "packaging-and-label-inspection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/pharmacy-shelf-and-expiry-monitoring/"
+}

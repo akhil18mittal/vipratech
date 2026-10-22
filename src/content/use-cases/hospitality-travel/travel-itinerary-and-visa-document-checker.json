@@ -1,0 +1,215 @@
+{
+  "slug": "travel-itinerary-and-visa-document-checker",
+  "industry": "hospitality-travel",
+  "title": "Travel Itinerary and Visa Document Checker",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check each traveller's visa file against the destination checklist: passport validity, finances, bookings, insurance and letters, with date and name mismatches flagged before submission.",
+  "seo": {
+    "title": "Visa Document Checker for Travel Agents | VipraTech",
+    "description": "AI that checks visa document files and itineraries for completeness and consistency: passport validity, finances, bookings, insurance and name mismatches.",
+    "keywords": [
+      "visa document checklist automation",
+      "travel agency visa processing AI",
+      "Schengen visa document check",
+      "itinerary and booking consistency check",
+      "visa file review tool"
+    ]
+  },
+  "designed_for": [
+    "Visa Operations Manager",
+    "Travel Consultant",
+    "Corporate Travel Desk Manager",
+    "Tour Operator Operations Head"
+  ],
+  "problem": {
+    "intro": "A visa application is built from a dozen documents per traveller: passport, photographs, bank statements, income tax returns, salary slips, employer letters, flight and hotel bookings, travel insurance and a cover letter. Each destination has its own checklist, and a single inconsistency, such as hotel dates that do not match the flights, can lead to a refusal or a second appointment.",
+    "pain_points": [
+      {
+        "title": "Checklists that keep changing",
+        "detail": "Embassy and visa centre requirements differ by destination and change from time to time, and consultants work from old printouts."
+      },
+      {
+        "title": "Inconsistencies across documents",
+        "detail": "Names spelled differently from the passport, hotel nights that do not cover the itinerary or insurance that ends before the return flight are easy to miss."
+      },
+      {
+        "title": "Group and family files",
+        "detail": "Tour groups and families multiply the paperwork, and one missing salary slip holds up the whole appointment."
+      },
+      {
+        "title": "Sensitive financial documents in chat",
+        "detail": "Bank statements and tax returns arrive over WhatsApp and email and end up in personal folders."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a visa file checker that works from your agency's own destination checklists, which your visa team maintains with source and date. Travellers or consultants upload documents to a secure link. The system classifies each document, extracts names, passport details, dates, balances, cover periods and booking details, and checks completeness against the checklist for that destination and visa type. It then checks consistency across the file: names against the passport, itinerary dates against flights, hotels, insurance and leave letters, passport validity and statement periods. The consultant receives a status sheet with every issue and its source page. The system never predicts visa outcomes.",
+    "capabilities": [
+      "Destination and visa-type checklists maintained by your team, versioned with source and date",
+      "Classification of passports, statements, ITRs, salary slips, letters, bookings and insurance certificates",
+      "Extraction of names, dates, balances, cover periods and booking references",
+      "Cross-document checks for names, travel dates, hotel nights and insurance cover",
+      "Passport validity, statement period and photograph specification checks",
+      "Traveller-friendly list of missing or inconsistent items to fix"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Open the file",
+      "detail": "The consultant selects destination, visa type and travellers, and the matching checklist version is attached."
+    },
+    {
+      "step": 2,
+      "title": "Collect documents",
+      "detail": "Travellers upload documents through a secure link, and the system classifies each one."
+    },
+    {
+      "step": 3,
+      "title": "Extract details",
+      "detail": "Names, passport details, dates, balances, cover periods and bookings are extracted with confidence scores."
+    },
+    {
+      "step": 4,
+      "title": "Check completeness and consistency",
+      "detail": "Documents are compared with the checklist and with each other, and gaps and mismatches are listed."
+    },
+    {
+      "step": 5,
+      "title": "Consultant review",
+      "detail": "The consultant reviews flags, asks travellers for fixes and marks the file as ready."
+    },
+    {
+      "step": 6,
+      "title": "Prepare for submission",
+      "detail": "A checked document index and summary support the appointment or online submission."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Select destination and visa type\"] --> B[\"Traveller uploads documents\"]\n  B --> C[\"Classify and extract details\"]\n  C --> D[\"Check against checklist\"]\n  D --> E[\"Cross-check names and dates\"]\n  E --> F{\"Missing or inconsistent items?\"}\n  F -->|\"yes\"| G[\"Request fixes from traveller\"]\n  G --> B\n  F -->|\"no\"| H(\"Consultant approves file\")\n  H --> I[\"Document index for submission\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Secure upload link per traveller",
+          "Email and WhatsApp forwarding into the file"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Document classifier",
+          "OCR and passport MRZ reader",
+          "LLM field extractor"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Versioned destination checklists",
+          "Cross-document consistency rules",
+          "Photograph specification checks"
+        ]
+      },
+      {
+        "name": "Review and output",
+        "components": [
+          "Consultant review screen",
+          "Traveller fix list",
+          "Document index and summary"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n  I1[\"Secure upload link\"]\n  I2[\"Email and WhatsApp forwarding\"]\n  end\n  subgraph S2[\"Document understanding\"]\n  U1[\"Document classifier\"]\n  U2[\"OCR and MRZ reader\"]\n  U3[\"LLM field extractor\"]\n  end\n  subgraph S3[\"Rules\"]\n  K1[\"Versioned checklists\"]\n  K2[\"Consistency rules\"]\n  end\n  subgraph S4[\"Review and output\"]\n  R1(\"Consultant review\")\n  R2[\"Traveller fix list\"]\n  R3[\"Document index\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2\n  U2 --> U3\n  U3 --> K2\n  K1 --> K2\n  K2 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Passport scans and photographs",
+    "Bank statements, ITRs and salary slips",
+    "Employer, leave or business invitation letters",
+    "Flight and hotel bookings and the day-wise itinerary",
+    "Travel insurance certificate",
+    "Your agency's destination checklists"
+  ],
+  "outputs": [
+    "Completeness status per traveller and document",
+    "Consistency flags with source pages",
+    "Fix list for the traveller",
+    "Checked document index for submission",
+    "File history for the agency's records"
+  ],
+  "human_in_the_loop": "The visa consultant reviews every flag and decides when a file is ready. The visa team owns and updates checklists from official sources; the system checks against them but does not interpret embassy policy.",
+  "integrations": [
+    "Travel agency CRM or back-office system",
+    "Secure document storage",
+    "WhatsApp Business API and email for document requests",
+    "Flight and hotel booking systems",
+    "Visa centre appointment workflows, used by staff"
+  ],
+  "guardrails": [
+    "Never predicts approval or refusal, and never advises how to present facts",
+    "Checklists versioned with source and date, with outdated versions flagged",
+    "Financial documents encrypted and deleted after the agreed period",
+    "Access limited to the assigned consultant and visa team",
+    "Low-confidence extractions shown for checking, never passed silently"
+  ],
+  "compliance_notes": [
+    "Passport and financial documents are personal data under the DPDP Act 2023, and the design follows purpose limitation and retention limits.",
+    "Where the agency serves travellers or partners in the EU, processing can be configured with GDPR requirements in mind."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One or two high-volume destinations, such as Schengen countries and the UK, for files prepared during the pilot, checked in parallel with your consultants.",
+    "deliverables": [
+      "Checklist configuration for the pilot destinations",
+      "Secure upload and document classification",
+      "Consultant review screen and traveller fix list",
+      "Pilot report on issues found",
+      "Roll-out plan for other destinations"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Issues found before submission",
+        "how": "Flags the consultant confirms as genuine, compared with their own check of the same files."
+      },
+      {
+        "metric": "Extraction accuracy",
+        "how": "Extracted names, dates and amounts compared with consultant entries."
+      },
+      {
+        "metric": "Consultant time per file",
+        "how": "Time from first document to ready status, with and without the checker."
+      },
+      {
+        "metric": "Rework after submission",
+        "how": "Files that needed additional documents after submission, compared with files from before the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Who keeps the checklists up to date?",
+      "a": "Your visa team, using official embassy and visa centre sources. The system stores each checklist with its source and date, and warns consultants when a checklist has not been reviewed recently."
+    },
+    {
+      "q": "Can it tell us whether a visa will be approved?",
+      "a": "No. Decisions belong to the embassy or consulate. The checker helps you submit complete and consistent files; it does not predict outcomes or advise on how to present a case."
+    },
+    {
+      "q": "How are bank statements and tax returns protected?",
+      "a": "Documents are uploaded through a secure link rather than chat, encrypted at rest, visible only to the assigned team and deleted after the period you set."
+    },
+    {
+      "q": "Does it handle corporate and group travel?",
+      "a": "Yes. Group files show status per traveller, and shared documents such as invitation letters are linked across the group while personal documents are checked individually."
+    }
+  ],
+  "related": [
+    "travel-quote-generation-automation",
+    "guest-id-and-check-in-document-capture",
+    "hotel-whatsapp-booking-assistant"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/travel-itinerary-and-visa-document-checker/"
+}

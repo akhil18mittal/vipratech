@@ -1,0 +1,216 @@
+{
+  "slug": "post-discharge-follow-up-calls",
+  "industry": "healthcare",
+  "title": "Post-Discharge Follow-Up Calls",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Scripted follow-up calls after discharge, in the patient's language, that check medicines, follow-up visits and clinician-defined warning signs and hand any concern to a nurse.",
+  "seo": {
+    "title": "Post-Discharge Follow-Up Voice Calls | VipraTech",
+    "description": "Outbound voice agent that calls discharged patients with clinician-approved scripts, checks medicines and follow-ups, and escalates concerns to nurses.",
+    "keywords": [
+      "post-discharge follow-up calls",
+      "patient follow-up voice agent",
+      "hospital readmission prevention outreach",
+      "nurse escalation automation",
+      "care coordination voice AI"
+    ]
+  },
+  "designed_for": [
+    "Nursing Superintendent",
+    "Care Coordination or Patient Experience Manager",
+    "Quality Manager (NABH)",
+    "Head of Clinical Operations"
+  ],
+  "problem": {
+    "intro": "The days after discharge are when patients are unsure about medicines, miss follow-up visits or notice symptoms they do not know how to judge. Many hospitals intend to call every discharged patient, but nurses and coordinators cannot reach everyone, and the calls that do happen are rarely recorded in a structured way.",
+    "pain_points": [
+      {
+        "title": "Coverage gaps",
+        "detail": "Follow-up calls happen when staff have time, so many discharged patients are never called."
+      },
+      {
+        "title": "Late detection of concerns",
+        "detail": "A patient who has not started their medicines or has a warning sign may only come to notice at readmission."
+      },
+      {
+        "title": "Unstructured notes",
+        "detail": "Call outcomes sit in registers or free-text notes, so quality teams cannot see patterns by department."
+      },
+      {
+        "title": "Language and hearing barriers",
+        "detail": "Elderly patients and family members need slow, clear calls in their own language, at times that suit them."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an outbound voice agent that calls discharged patients, or their nominated caregiver, at intervals your clinical team sets. It follows a script approved by your doctors and nursing leadership for that department: whether medicines were collected and are being taken as prescribed, whether the follow-up appointment is booked, and a set of yes-or-no questions about warning signs your clinicians define. Answers are recorded in structured form. Any yes to a warning-sign question, any confusion about medicines or any request to speak to someone creates an immediate task for a nurse, who calls back. The agent never interprets symptoms or gives advice.",
+    "capabilities": [
+      "Outbound calls at clinician-set intervals after discharge, with retry rules and caregiver contacts",
+      "Department-specific scripts approved by doctors and nursing leadership",
+      "Structured capture of medicine collection, adherence questions and follow-up booking status",
+      "Clinician-defined warning-sign questions with immediate escalation on any positive answer",
+      "Follow-up appointment booking or rebooking during the call",
+      "Department dashboards for quality and patient experience teams"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Schedule from discharge data",
+      "detail": "Discharged patients, their department, follow-up date and preferred language are pulled from the HIS."
+    },
+    {
+      "step": 2,
+      "title": "Call the patient or caregiver",
+      "detail": "The agent calls at the agreed interval and confirms it is speaking with the patient or the nominated caregiver."
+    },
+    {
+      "step": 3,
+      "title": "Run the approved script",
+      "detail": "It asks about medicines, the follow-up visit and the department's warning-sign questions."
+    },
+    {
+      "step": 4,
+      "title": "Escalate concerns",
+      "detail": "Any warning sign, confusion or request for a person creates an urgent nurse task with the call summary."
+    },
+    {
+      "step": 5,
+      "title": "Book the follow-up",
+      "detail": "If the follow-up visit is not booked, the agent offers slots and books one."
+    },
+    {
+      "step": 6,
+      "title": "Record and close",
+      "detail": "Structured answers go to the care coordination dashboard, and nurses close every escalation."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Discharge list from HIS\"] --> B[\"Call patient or caregiver\"]\n  B --> C[\"Confirm identity and language\"]\n  C --> D[\"Ask approved questions\"]\n  D --> E{\"Warning sign or concern?\"}\n  E -->|\"yes\"| F(\"Nurse calls back urgently\")\n  E -->|\"no\"| G{\"Follow-up visit booked?\"}\n  G -->|\"no\"| H[\"Offer and book slot\"]\n  G -->|\"yes\"| I[\"Structured outcome to dashboard\"]\n  H --> I\n  F --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scheduling",
+        "components": [
+          "HIS discharge feed",
+          "Call scheduler with retry and quiet-hour rules"
+        ]
+      },
+      {
+        "name": "Voice and script",
+        "components": [
+          "Outbound telephony",
+          "Speech recognition and text-to-speech in patient languages",
+          "Clinician-approved script library",
+          "Dialogue manager bound to the script"
+        ]
+      },
+      {
+        "name": "Escalation",
+        "components": [
+          "Warning-sign rule engine",
+          "Nurse escalation queue"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "Care coordination dashboard",
+          "Structured outcome write-back to HIS",
+          "Recordings and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scheduling\"]\n    A1[\"HIS discharge feed\"]\n    A2[\"Call scheduler\"]\n  end\n  subgraph S2[\"Voice and script\"]\n    B1[\"Outbound telephony\"]\n    B2[\"Speech recognition and TTS\"]\n    B3[\"Approved script library\"]\n    B4[\"Script-bound dialogue manager\"]\n  end\n  subgraph S3[\"Escalation\"]\n    C1[\"Warning sign rules\"]\n    C2(\"Nurse escalation queue\")\n  end\n  subgraph S4[\"Records\"]\n    D1[\"Care coordination dashboard\"]\n    D2[\"HIS outcome write-back\"]\n  end\n  A1 --> A2 --> B1 --> B2 --> B4\n  B3 --> B4\n  B4 --> C1\n  C1 --> C2\n  B4 --> D1\n  C2 --> D1\n  D1 --> D2"
+  },
+  "inputs": [
+    "Discharge list with department, diagnosis category and follow-up date",
+    "Patient and caregiver contact details and preferred language",
+    "Department scripts and warning-sign questions approved by clinicians",
+    "Doctor schedules for follow-up booking",
+    "Nurse escalation roster"
+  ],
+  "outputs": [
+    "Structured call outcome for each patient",
+    "Urgent nurse tasks with call summaries",
+    "Booked or rebooked follow-up appointments",
+    "Department-level follow-up dashboards",
+    "Recordings and transcripts for audit"
+  ],
+  "human_in_the_loop": "Clinicians write and approve every script and warning-sign question, and a nurse calls back on every escalation. The agent does not interpret answers clinically or tell a patient what to do about a symptom; it routes concerns to people.",
+  "integrations": [
+    "HIS discharge and appointment modules",
+    "Cloud telephony provider",
+    "WhatsApp Business API for follow-up confirmations",
+    "Nursing task or care coordination tool",
+    "Quality and patient feedback systems"
+  ],
+  "guardrails": [
+    "Script-bound dialogue, so the agent cannot improvise medical content",
+    "Any positive warning-sign answer escalates, with no model judgement on severity",
+    "Emergency phrases trigger direction to emergency care and an immediate staff alert",
+    "Identity check before any health information is discussed",
+    "Calls only within agreed hours and stopped at the patient's request"
+  ],
+  "compliance_notes": [
+    "Patient consent for follow-up calls captured and recorded at discharge, in line with the DPDP Act 2023.",
+    "Designed as a communication aid; clinical assessment of every escalation stays with nurses and doctors.",
+    "Structured outcomes can support the follow-up and patient feedback evidence used in accreditation reviews such as NABH."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Follow-up calls for patients discharged from one or two departments, using a script approved by the department head, with nurses handling every escalation.",
+    "deliverables": [
+      "Approved department scripts and warning-sign lists",
+      "Outbound agent connected to discharge data",
+      "Nurse escalation queue",
+      "Department dashboard",
+      "Pilot review with clinical and quality leads"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Reach",
+        "how": "Discharged patients successfully contacted, compared with the manual call register before the pilot."
+      },
+      {
+        "metric": "Escalation handling",
+        "how": "Time from escalation to nurse callback, and nurse judgement of whether each escalation was appropriate."
+      },
+      {
+        "metric": "Follow-up booking",
+        "how": "Patients without a booked follow-up who were booked during the call."
+      },
+      {
+        "metric": "Script adherence",
+        "how": "Clinical review of a sample of calls against the approved script."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does the AI decide whether a symptom is serious?",
+      "a": "No. Clinicians define the questions, and any positive answer goes to a nurse. The agent does not grade severity or advise the patient."
+    },
+    {
+      "q": "Who receives the call if the patient is elderly or unwell?",
+      "a": "You can record a nominated caregiver at discharge. The agent confirms who it is speaking with and follows your rules on what can be discussed with a caregiver."
+    },
+    {
+      "q": "Which languages are supported?",
+      "a": "Hindi, English and Hinglish, plus the regional languages of your catchment area. Scripts in each language are translated and approved by clinicians before use."
+    },
+    {
+      "q": "What happens if the patient asks a medical question?",
+      "a": "The agent explains that a nurse will call back, records the question in a task and continues the script. It never answers clinical questions itself."
+    }
+  ],
+  "related": [
+    "appointment-booking-voice-agent",
+    "discharge-summary-and-record-structuring",
+    "patient-enquiry-follow-up-automation",
+    "healthcare-chatbot-safety-testing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/post-discharge-follow-up-calls/"
+}

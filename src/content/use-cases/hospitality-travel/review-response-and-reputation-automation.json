@@ -1,0 +1,215 @@
+{
+  "slug": "review-response-and-reputation-automation",
+  "industry": "hospitality-travel",
+  "title": "Review Response and Reputation Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Collect reviews from Google, OTAs and Tripadvisor, draft specific replies in your voice, route complaints to the GM and turn recurring themes into weekly actions for each department.",
+  "seo": {
+    "title": "Hotel Review Response and Reputation AI | VipraTech",
+    "description": "AI that drafts specific replies to Google and OTA hotel reviews, routes complaints to managers and reports recurring themes for housekeeping and F&B.",
+    "keywords": [
+      "hotel review response AI",
+      "online reputation management for hotels",
+      "Google review reply automation",
+      "OTA review management",
+      "guest feedback analysis"
+    ]
+  },
+  "designed_for": [
+    "General Manager",
+    "Guest Relations Manager",
+    "Marketing Manager",
+    "Quality and Operations Head for hotel groups"
+  ],
+  "problem": {
+    "intro": "Reviews on Google, Booking.com, MakeMyTrip, Agoda, Tripadvisor and Airbnb shape both search visibility and guest choice. Replying well takes time, so many hotels ignore reviews, paste the same thank-you line or answer a complaint days later. The useful signal in reviews, such as repeated comments about AC noise or slow breakfast service, rarely reaches the team that can fix it.",
+    "pain_points": [
+      {
+        "title": "Replies that sound copied",
+        "detail": "The same thank-you line under every review tells future guests that nobody reads them."
+      },
+      {
+        "title": "Complaints answered late or defensively",
+        "detail": "Negative reviews need a measured reply from someone senior, and they wait in a queue or get an emotional response."
+      },
+      {
+        "title": "Scattered platforms",
+        "detail": "Google and each OTA have their own extranet or dashboard, so reviews are checked irregularly."
+      },
+      {
+        "title": "No loop back to operations",
+        "detail": "Themes about housekeeping, food, staff or maintenance stay on review sites instead of reaching department heads."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a review workflow that brings reviews from Google Business Profile and OTAs into one queue, using platform APIs or exports where available. Each review is classified by theme, sentiment, language and urgency, and matched to the stay where possible. An LLM drafts a reply that responds to what the guest actually wrote, in your property's voice and the guest's language. Positive reviews go to a quick approval queue. Negative reviews, and anything about safety, hygiene, discrimination or billing, go to the GM with the draft and the stay details. A weekly report shows recurring themes by department, and opted-in guests are invited to review after checkout without filtering by sentiment.",
+    "capabilities": [
+      "Review collection from Google Business Profile and OTAs via APIs or exports",
+      "Theme, sentiment, language and urgency classification",
+      "Specific reply drafts in your property's voice and the guest's language",
+      "Approval queues: one click for positive reviews, GM review for complaints",
+      "Weekly theme reports by department with example quotes",
+      "Post-checkout review requests on WhatsApp to every opted-in guest"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect reviews",
+      "detail": "New reviews are pulled from Google and OTA sources into one queue several times a day."
+    },
+    {
+      "step": 2,
+      "title": "Classify",
+      "detail": "Each review is tagged by theme, sentiment, language and urgency, and linked to the stay where possible."
+    },
+    {
+      "step": 3,
+      "title": "Draft replies",
+      "detail": "The LLM drafts a reply that addresses the specific points raised, following your tone and policies."
+    },
+    {
+      "step": 4,
+      "title": "Route for approval",
+      "detail": "Positive replies go to quick approval, and complaints and sensitive topics go to the GM."
+    },
+    {
+      "step": 5,
+      "title": "Publish",
+      "detail": "Approved replies are posted through the platform API or pasted into the extranet by staff."
+    },
+    {
+      "step": 6,
+      "title": "Report themes",
+      "detail": "Weekly summaries show recurring issues by department for managers to act on in their meetings."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Reviews from Google and OTAs\"] --> B[\"Classify theme, sentiment, urgency\"]\n  B --> C[\"Draft specific reply\"]\n  C --> D{\"Negative or sensitive?\"}\n  D -->|\"yes\"| E(\"GM reviews and edits\")\n  D -->|\"no\"| F(\"Staff quick approval\")\n  E --> G[\"Publish reply\"]\n  F --> G\n  B --> H[\"Weekly theme report by department\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Sources",
+        "components": [
+          "Google Business Profile API",
+          "OTA review exports or APIs",
+          "Post-stay WhatsApp feedback"
+        ]
+      },
+      {
+        "name": "Understanding",
+        "components": [
+          "Theme and sentiment classifier",
+          "Language detection",
+          "Stay matching with PMS data"
+        ]
+      },
+      {
+        "name": "Drafting and approval",
+        "components": [
+          "LLM reply drafter with a brand voice guide",
+          "Policy rules for sensitive topics",
+          "Approval queues for staff and the GM"
+        ]
+      },
+      {
+        "name": "Insights",
+        "components": [
+          "Weekly department theme report",
+          "Rating and response time tracking"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Sources\"]\n  A1[\"Google Business Profile\"]\n  A2[\"OTA reviews\"]\n  A3[\"Post-stay feedback\"]\n  end\n  subgraph S2[\"Understanding\"]\n  B1[\"Theme and sentiment classifier\"]\n  B2[\"Stay matching\"]\n  end\n  subgraph S3[\"Drafting and approval\"]\n  C1[\"LLM reply drafter\"]\n  C2(\"GM and staff approval\")\n  C3[\"Publish or copy reply\"]\n  end\n  subgraph S4[\"Insights\"]\n  D1[\"Department theme report\"]\n  D2[\"Response time tracking\"]\n  end\n  A1 --> B1\n  A2 --> B1\n  A3 --> B1\n  B1 --> B2\n  B2 --> C1\n  C1 --> C2\n  C2 --> C3\n  B1 --> D1\n  C3 --> D2"
+  },
+  "inputs": [
+    "Reviews from Google Business Profile, Booking.com, MakeMyTrip, Agoda, Tripadvisor and Airbnb",
+    "Post-stay feedback collected on WhatsApp",
+    "Stay details from the PMS where available",
+    "Brand voice guide and reply policies",
+    "Department and escalation contacts"
+  ],
+  "outputs": [
+    "Draft replies for every review",
+    "Approved replies, published or ready to paste",
+    "Escalations to the GM with stay context",
+    "Weekly theme report by department",
+    "Response time and rating trend tracking"
+  ],
+  "human_in_the_loop": "Staff approve every reply before it is published, and the GM handles all negative and sensitive reviews personally. Compensation, refunds or offers are never mentioned in public replies without management approval.",
+  "integrations": [
+    "Google Business Profile API",
+    "OTA extranets and review exports",
+    "Hotel PMS for stay matching",
+    "WhatsApp Business API for post-stay requests",
+    "Email or Slack for weekly reports"
+  ],
+  "guardrails": [
+    "No reply published without human approval",
+    "No guest personal details, room numbers or booking data in public replies",
+    "Review requests sent to all opted-in guests, never filtered by expected sentiment",
+    "No incentives for reviews, and no fake or staff-written reviews",
+    "Sensitive topics always escalated to the GM"
+  ],
+  "compliance_notes": [
+    "Review requests follow platform rules, which generally prohibit selectively soliciting positive reviews or offering incentives for them.",
+    "Guest feedback and stay data are processed within purpose and retention limits under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Google and two OTA review sources for one property, with every draft reviewed by the GM or guest relations team.",
+    "deliverables": [
+      "Brand voice guide and reply policies",
+      "Unified review queue with drafts",
+      "Approval workflow",
+      "First weekly theme reports",
+      "Roll-out plan for further properties"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Response time to reviews",
+        "how": "Hours from review posting to published reply, before and during the pilot."
+      },
+      {
+        "metric": "Drafts approved without edits",
+        "how": "Drafts approved as written versus edited, split by sentiment."
+      },
+      {
+        "metric": "Themes acted on",
+        "how": "Issues from the weekly report that department heads log as actions."
+      },
+      {
+        "metric": "Reviews from post-stay requests",
+        "how": "New reviews attributed to post-checkout requests."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it reply to reviews without approval?",
+      "a": "We recommend approval for every reply and require it for negative reviews. Positive reviews go into a quick queue where staff can approve a batch in a few minutes."
+    },
+    {
+      "q": "Which platforms can it connect to?",
+      "a": "Google Business Profile has an API for reviews and replies. OTA access varies: some offer partner APIs, others need exports or a staff member to paste approved replies into the extranet. We map what is possible for your listings."
+    },
+    {
+      "q": "Will replies sound automated?",
+      "a": "Drafts respond to the specific points in each review and follow a voice guide written with you, including how formal to be. Staff edits during the pilot are used to tune the drafts."
+    },
+    {
+      "q": "Can it reply in Hindi or other languages?",
+      "a": "Yes. It drafts replies in the language the guest used, including Hindi and common foreign languages, and staff can view an English translation before approving."
+    }
+  ],
+  "related": [
+    "hotel-whatsapp-booking-assistant",
+    "housekeeping-room-inspection",
+    "kitchen-hygiene-monitoring",
+    "review-and-ugc-insights"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/review-response-and-reputation-automation/"
+}

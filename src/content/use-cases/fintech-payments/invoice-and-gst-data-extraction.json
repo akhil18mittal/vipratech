@@ -1,0 +1,223 @@
+{
+  "slug": "invoice-and-gst-data-extraction",
+  "industry": "fintech-payments",
+  "title": "Invoice and GST Data Extraction for B2B Payments",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract GSTINs, HSN lines, tax splits and IRN data from supplier invoices before a B2B payment or invoice financing is released, with tax-logic and duplicate checks.",
+  "seo": {
+    "title": "GST Invoice Data Extraction for B2B Payments | VipraTech",
+    "description": "Extract supplier GSTIN, HSN line items, CGST, SGST and IGST splits and e-invoice IRN data, then validate and de-duplicate before payment or financing.",
+    "keywords": [
+      "GST invoice extraction",
+      "e-invoice IRN QR decoding",
+      "B2B payments invoice automation",
+      "duplicate invoice detection",
+      "invoice financing document checks"
+    ]
+  },
+  "designed_for": [
+    "Head of B2B Payments Operations",
+    "Accounts Payable Product Manager",
+    "Credit Operations Manager for invoice financing",
+    "Finance Controller"
+  ],
+  "problem": {
+    "intro": "B2B payment and invoice-financing platforms receive supplier invoices as PDFs, scans, Excel exports and e-invoice printouts with an IRN and signed QR code. Before money moves, someone has to confirm who is billing whom, for what, with what tax, and that the same invoice has not already been paid or financed.",
+    "pain_points": [
+      {
+        "title": "Endless layouts",
+        "detail": "Every supplier's invoice looks different, and template-based OCR breaks on new formats, multi-page line items and stamps over text."
+      },
+      {
+        "title": "Tax field errors",
+        "detail": "A wrong place of supply, CGST and SGST charged on an inter-state supply or a mistyped GSTIN causes input tax credit problems for the buyer later."
+      },
+      {
+        "title": "Duplicate payment and double financing",
+        "detail": "The same invoice resubmitted with a reformatted number or as a different file can be paid or financed twice."
+      },
+      {
+        "title": "Changed bank details",
+        "detail": "Invoices carrying new bank account details are a common fraud route, and a busy reviewer may not compare them with the supplier master."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an invoice extraction service that plugs into your payment or financing workflow through an API. It reads invoices in any common format, extracts header fields, line items with HSN or SAC codes and the CGST, SGST, IGST and cess split, and decodes the e-invoice QR code where present. It validates GSTIN structure, checks tax logic against the place of supply, recomputes totals and matches the invoice to its purchase order or payment request. A duplicate check compares supplier, invoice number, date and amount with everything already processed, allowing for reformatted numbers. Any bank detail that differs from the supplier master is always flagged. Exceptions go to an operations queue with the reason.",
+    "capabilities": [
+      "Extracts supplier and buyer GSTIN, invoice number and date, place of supply, line items, HSN or SAC codes and tax splits",
+      "Decodes the signed QR code on e-invoices and compares IRN data with the printed values",
+      "Validates GSTIN structure and checks intra-state versus inter-state tax logic",
+      "Recomputes line totals, tax amounts and invoice total, and flags arithmetic or rounding errors",
+      "Detects likely duplicates across reformatted invoice numbers and re-uploaded files",
+      "Returns structured JSON through an API, with confidence scores and page references"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the invoice",
+      "detail": "Invoices arrive through your platform's upload, an email-in address or an ERP integration, attached to a payment or financing request."
+    },
+    {
+      "step": 2,
+      "title": "Extract fields and lines",
+      "detail": "OCR and an LLM extract header, line and tax fields, and any e-invoice QR code is decoded."
+    },
+    {
+      "step": 3,
+      "title": "Validate tax and arithmetic",
+      "detail": "GSTIN structure, place-of-supply tax logic and totals are checked, and QR data is compared with printed values."
+    },
+    {
+      "step": 4,
+      "title": "Match and de-duplicate",
+      "detail": "The invoice is matched to its PO or payment request, compared with previously processed invoices and checked against supplier bank details."
+    },
+    {
+      "step": 5,
+      "title": "Resolve exceptions",
+      "detail": "Low-confidence fields, failed checks and possible duplicates go to an operations reviewer with the reason shown."
+    },
+    {
+      "step": 6,
+      "title": "Release structured data",
+      "detail": "Approved invoice data flows back to your payment or financing engine and to the ERP export."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Invoice attached to payment request\"] --> B[\"Extract header, lines, tax split\"]\n  B --> C[\"Decode e-invoice QR if present\"]\n  C --> D[\"GSTIN, tax logic and total checks\"]\n  D --> E[\"PO match, duplicate, bank checks\"]\n  E --> F{\"All checks clear?\"}\n  F -->|\"yes\"| G[\"Structured data to payment engine\"]\n  F -->|\"no\"| H(\"Operations reviewer resolves\")\n  H --> G",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Upload API",
+          "Email-in mailbox",
+          "ERP or AP connector"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with table detection",
+          "LLM extractor with GST invoice schema",
+          "E-invoice QR decoder"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "GSTIN and tax logic rules",
+          "PO matcher",
+          "Duplicate index with fuzzy matching",
+          "Supplier bank detail check"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception queue",
+          "Reviewer screen with source highlights"
+        ]
+      },
+      {
+        "name": "Delivery and audit",
+        "components": [
+          "Webhook back to the payment or financing engine",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Upload API\"]\n    I2[\"Email-in and ERP connector\"]\n  end\n  subgraph S2[\"Extraction\"]\n    J1[\"OCR with table detection\"]\n    J2[\"LLM GST invoice extractor\"]\n    J3[\"E-invoice QR decoder\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"GSTIN and tax logic rules\"]\n    V2[\"PO and bank detail checks\"]\n    V3[\"Duplicate index\"]\n  end\n  subgraph S4[\"Review and delivery\"]\n    R1(\"Exception reviewer\")\n    R2[\"Webhook to payment engine\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> J1\n  I2 --> J1\n  J1 --> J2\n  J1 --> J3\n  J2 --> V1\n  J3 --> V1\n  V1 --> V2 --> V3\n  V3 --> R1\n  V3 --> R2\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Supplier GST invoices as PDF, scan or photo",
+    "E-invoice printouts with IRN and signed QR code",
+    "Purchase orders or payment requests",
+    "Supplier master with GSTINs and bank details",
+    "History of processed invoices"
+  ],
+  "outputs": [
+    "Structured invoice JSON with line items and tax split",
+    "Result of each validation check",
+    "Duplicate alerts showing the matching earlier invoice",
+    "Exception queue with reasons",
+    "ERP-ready export"
+  ],
+  "human_in_the_loop": "Operations reviewers resolve every exception, including possible duplicates, bank detail changes and tax-logic failures, before payment or financing proceeds. The service decides only whether an invoice needs a human look, never whether a supplier is paid.",
+  "integrations": [
+    "Your payment, AP or invoice-financing platform (API)",
+    "Tally, SAP, Oracle or Zoho Books",
+    "Email inbox used for invoice intake",
+    "GST verification API from your existing GSP or provider",
+    "Data warehouse for MIS"
+  ],
+  "guardrails": [
+    "No field auto-accepted below its agreed confidence threshold",
+    "Duplicate check runs before any payment or financing release",
+    "Bank details that differ from the supplier master always flagged",
+    "Invoices and extracted data stay in your cloud region",
+    "Monthly sample audit of auto-cleared invoices"
+  ],
+  "compliance_notes": [
+    "Supports the record-keeping behind GST input tax credit checks; final tax treatment remains with your finance or tax team.",
+    "Supplier personal data, such as proprietor names, handled in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Invoices from your highest-volume suppliers in one buyer programme, processed in shadow mode alongside current manual checks.",
+    "deliverables": [
+      "GST invoice schema and validation rules agreed with finance",
+      "Extraction API running on a sample of historical invoices",
+      "Duplicate detection report on historical data",
+      "Reviewer screen",
+      "Accuracy report and integration plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field-level accuracy",
+        "how": "Extracted values compared with manually keyed values for the same invoices."
+      },
+      {
+        "metric": "Line-item accuracy",
+        "how": "HSN codes, quantities, rates and amounts compared line by line on a sample."
+      },
+      {
+        "metric": "Duplicate detection",
+        "how": "Known historical duplicates found or missed, plus false alarms reviewed by operations."
+      },
+      {
+        "metric": "Exception volume and reasons",
+        "how": "Invoices routed for review, grouped by failure reason."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it confirm that an invoice is a genuine e-invoice?",
+      "a": "It decodes the signed QR code and compares it with the printed invoice. If you use a GST verification provider, it can also check GSTIN status and e-invoice details through that provider's API."
+    },
+    {
+      "q": "What about invoices without an IRN?",
+      "a": "Many suppliers are below the e-invoicing turnover threshold, so IRN is treated as optional. Those invoices rely on extraction, validation and duplicate rules."
+    },
+    {
+      "q": "How does it cope with poor scans and handwritten bills?",
+      "a": "It handles skewed scans and phone photos well enough for most printed invoices, and any field below the confidence threshold goes to a reviewer. Accuracy is reported separately for clean PDFs, scans and photos in the pilot."
+    },
+    {
+      "q": "How is it priced?",
+      "a": "We start with a fixed-price pilot. Production cost depends mainly on invoice volume and page count, and we estimate it per thousand invoices once the pilot shows real page counts and exception rates."
+    }
+  ],
+  "related": [
+    "settlement-reconciliation",
+    "vendor-invoice-and-credit-note-reconciliation",
+    "gst-return-reconciliation",
+    "po-invoice-three-way-matching"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/invoice-and-gst-data-extraction/"
+}

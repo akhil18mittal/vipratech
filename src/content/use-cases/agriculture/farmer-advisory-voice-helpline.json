@@ -1,0 +1,222 @@
+{
+  "slug": "farmer-advisory-voice-helpline",
+  "industry": "agriculture",
+  "title": "Farmer Advisory Voice Helpline in Hindi and Regional Languages",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "A voice helpline that answers farmers' routine questions on sowing, irrigation, weather and schemes in Hindi and regional languages, and hands crop-protection and dose questions to agronomists.",
+  "seo": {
+    "title": "Farmer Advisory Voice Helpline in Hindi | VipraTech",
+    "description": "Voice AI that answers farmer calls in Hindi and regional languages from agronomist-approved content, handing dose and diagnosis questions to experts.",
+    "keywords": [
+      "farmer helpline voice AI",
+      "Hindi voice agent for farmers",
+      "kisan call centre automation",
+      "regional language agri advisory",
+      "agritech voice assistant"
+    ]
+  },
+  "designed_for": [
+    "Head of Farmer Services",
+    "Kisan Helpline Operations Manager",
+    "Agritech Product Head",
+    "FPO Federation Programme Manager"
+  ],
+  "problem": {
+    "intro": "Many farmers would rather call than type, and they tend to call at the same times: early morning, evening, and in the weeks around sowing and spraying. Helpline teams answer the same questions on seed rates, irrigation timing, weather and scheme status again and again, while urgent pest calls wait in the queue.",
+    "pain_points": [
+      {
+        "title": "Peak-season call spikes",
+        "detail": "Calls surge around sowing, monsoon breaks and pest outbreaks, and missed calls rarely get a callback."
+      },
+      {
+        "title": "Language and dialect coverage",
+        "detail": "One helpline may need Hindi, Marathi, Gujarati and Telugu, and staffing every language for every hour is not practical."
+      },
+      {
+        "title": "Repetitive questions",
+        "detail": "Many calls ask about the same sowing windows, seed varieties, weather or PM-KISAN status, which keeps agronomists from harder cases."
+      },
+      {
+        "title": "No structured record",
+        "detail": "Call notes are short or missing, so the team cannot see which issues are rising in which district."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound voice agent on your helpline number that speaks with farmers in Hindi and the regional languages you serve. It recognises speech that mixes local dialect with crop and brand names, works out the crop, location and question, and answers from a knowledge base built from your agronomists' package of practices, approved advisories and weather feeds. It can read out scheme information from approved sources and book callbacks. Questions about disease diagnosis, chemical products or doses, and any case where the agent is unsure, go to an agronomist with a summary. Every call produces a structured record by crop, district and topic.",
+    "capabilities": [
+      "Speech recognition tuned for Hindi, regional languages and mixed crop and brand terms",
+      "Answers grounded in an agronomist-approved knowledge base with source tracking",
+      "Location-aware weather and crop calendar information",
+      "Warm transfer or scheduled callback to agronomists with a call summary",
+      "Structured call records by crop, district and issue",
+      "Missed-call callbacks and peak-hour overflow handling"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Farmer calls the helpline",
+      "detail": "The agent greets the farmer in the language of the number dialled, or asks which language they prefer."
+    },
+    {
+      "step": 2,
+      "title": "Understand the question",
+      "detail": "It captures crop, location and question, asking short follow-up questions when something is unclear."
+    },
+    {
+      "step": 3,
+      "title": "Check the topic",
+      "detail": "Routine topics are answered; diagnosis, chemical dose and complaint topics are routed to people."
+    },
+    {
+      "step": 4,
+      "title": "Answer from approved content",
+      "detail": "The agent answers from the knowledge base and checks the farmer has understood."
+    },
+    {
+      "step": 5,
+      "title": "Hand over when needed",
+      "detail": "An agronomist receives a summary and takes the call live or calls back within the agreed window."
+    },
+    {
+      "step": 6,
+      "title": "Record the call",
+      "detail": "A structured record and summary are saved to your CRM for follow-up and trend analysis."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Farmer calls helpline\"] --> B[\"Detect language and greet\"]\n  B --> C[\"Capture crop, place and question\"]\n  C --> D{\"Routine topic and confident?\"}\n  D -->|\"yes\"| E[\"Answer from approved knowledge base\"]\n  D -->|\"no\"| F(\"Agronomist takes call or calls back\")\n  E --> G[\"Check farmer understood\"]\n  F --> G\n  G --> H[\"Save structured call record\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Helpline number via SIP or cloud telephony",
+          "Language selection and recorded-call notice"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Speech recognition for Hindi and regional languages",
+          "Crop and brand name vocabulary",
+          "Text-to-speech in each language"
+        ]
+      },
+      {
+        "name": "Dialogue and knowledge",
+        "components": [
+          "Dialogue manager with topic routing",
+          "Retrieval over approved package of practices and advisories",
+          "Weather and crop calendar lookup"
+        ]
+      },
+      {
+        "name": "Handover",
+        "components": [
+          "Agronomist transfer and callback queue",
+          "Call summary generator"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "CRM call records",
+          "Topic and district trend reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Helpline number and SIP trunk\"]\n    T2[\"Language selection\"]\n  end\n  subgraph S2[\"Speech\"]\n    P1[\"Speech recognition\"]\n    P2[\"Text to speech\"]\n  end\n  subgraph S3[\"Dialogue and knowledge\"]\n    K1[\"Topic router\"]\n    K2[\"Approved knowledge retrieval\"]\n    K3[\"Weather and crop calendar\"]\n  end\n  subgraph S4[\"Handover and records\"]\n    H1(\"Agronomist callback queue\")\n    H2[\"CRM call record\"]\n  end\n  T1 --> T2 --> P1\n  P1 --> K1\n  K1 --> K2\n  K1 --> K3\n  K1 --> H1\n  K2 --> P2\n  K3 --> P2\n  P2 --> H2\n  H1 --> H2"
+  },
+  "inputs": [
+    "Inbound farmer calls",
+    "Agronomist-approved package of practices by crop and state",
+    "Current advisories and weather feeds",
+    "Scheme information from approved sources",
+    "Farmer profile from your CRM, where available"
+  ],
+  "outputs": [
+    "Spoken answers in the farmer's language",
+    "Agronomist transfers and callback tasks with summaries",
+    "Structured call records by crop, district and topic",
+    "Weekly trend report of rising issues"
+  ],
+  "human_in_the_loop": "Agronomists take every call involving disease diagnosis, chemical products or doses, and any call the agent cannot answer confidently. They also approve every knowledge base change before the agent can use it.",
+  "integrations": [
+    "Cloud telephony or existing IVR via SIP",
+    "CRM or helpdesk such as Salesforce, Zoho or Freshdesk",
+    "Weather data provider",
+    "WhatsApp Business API for follow-up messages",
+    "Your farmer database"
+  ],
+  "guardrails": [
+    "Answers only from approved content, with no generated product doses",
+    "Topic router that always transfers diagnosis and dose questions",
+    "Recorded-call notice at the start of each call",
+    "Daily agronomist review of a sample of calls",
+    "Farmers can ask for a person at any point in the call"
+  ],
+  "compliance_notes": [
+    "Call recordings and farmer details are handled with notice, consent and retention limits aligned with the DPDP Act 2023.",
+    "Product guidance stays within approved, registered uses as agreed with your agronomy team."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One language, two or three crops and a set of routine topics on an overflow or after-hours line, with agronomists available for every handover.",
+    "deliverables": [
+      "Knowledge base built from your approved content",
+      "Working voice agent on a test or overflow number",
+      "Agronomist handover and callback flow",
+      "Call review report with transcripts and outcomes",
+      "Plan for more languages and topics"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Answer quality",
+        "how": "Agronomists grade a sample of answered calls as correct, incomplete or wrong."
+      },
+      {
+        "metric": "Containment of routine topics",
+        "how": "Share of routine-topic calls completed without handover, reviewed for correctness."
+      },
+      {
+        "metric": "Speech recognition accuracy",
+        "how": "Transcripts compared with human transcription on a sample of calls, by dialect."
+      },
+      {
+        "metric": "Callback completion",
+        "how": "Callbacks requested compared with callbacks completed within the agreed window."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which languages can it speak?",
+      "a": "We start with the language that carries most of your calls, then add others. Hindi, Marathi, Gujarati, Telugu, Tamil, Kannada, Bengali and Punjabi are all workable, and each is tested on recordings from your own callers before go-live."
+    },
+    {
+      "q": "What happens when a farmer asks about pesticides?",
+      "a": "The agent recognises crop-protection and dose questions and transfers them to an agronomist or books a callback. It does not invent product advice."
+    },
+    {
+      "q": "Can it use our existing helpline number?",
+      "a": "Usually yes, through your telephony provider's SIP or API integration. It can take all calls, only overflow, or only after-hours calls."
+    },
+    {
+      "q": "How do we keep the knowledge base current?",
+      "a": "Your agronomists update advisories through a review screen, and nothing goes live without their approval. Each answer can be traced to the content it used."
+    }
+  ],
+  "related": [
+    "crop-disease-detection-from-photos",
+    "mandi-price-and-procurement-voice-updates",
+    "farm-advisory-chatbot-safety-testing",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/farmer-advisory-voice-helpline/"
+}

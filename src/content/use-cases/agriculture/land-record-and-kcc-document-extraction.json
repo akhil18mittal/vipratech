@@ -1,0 +1,222 @@
+{
+  "slug": "land-record-and-kcc-document-extraction",
+  "industry": "agriculture",
+  "title": "Land Record and KCC Loan Document Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read Khatauni, 7/12, Jamabandi and other land records plus KCC loan papers, extract holdings and crops, convert local area units, and flag mismatches before a credit officer sanctions.",
+  "seo": {
+    "title": "Land Record and KCC Document Extraction | VipraTech",
+    "description": "AI that reads land records such as Khatauni, 7/12 and Jamabandi plus KCC loan files, converts local units and flags mismatches for credit officers.",
+    "keywords": [
+      "land record extraction AI",
+      "KCC loan document processing",
+      "7/12 extract OCR",
+      "Khatauni data extraction",
+      "agri loan document automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Agri Lending",
+    "Rural Branch Credit Manager",
+    "Credit Operations Lead, NBFC",
+    "Loan Processing Team Lead"
+  ],
+  "problem": {
+    "intro": "A Kisan Credit Card or crop loan file depends on land records that look different in every state: a Khatauni in Uttar Pradesh, a 7/12 extract in Maharashtra, a Jamabandi in Punjab or Rajasthan, an RTC in Karnataka. Credit staff read these by hand, convert bighas and gunthas to acres, and check owner names against KYC before they can assess the loan.",
+    "pain_points": [
+      {
+        "title": "State-by-state formats",
+        "detail": "Each state's record has its own layout, language and terms, so one checklist does not fit every branch."
+      },
+      {
+        "title": "Local area units",
+        "detail": "Holdings appear in bigha, biswa, guntha, kanal or hectare, and the size of a bigha differs between states and even districts."
+      },
+      {
+        "title": "Name and share mismatches",
+        "detail": "Joint holdings, transliterated names and inherited shares make it hard to confirm how much land the applicant actually holds."
+      },
+      {
+        "title": "Missed charges and mutations",
+        "detail": "Existing bank charges, pending mutations and other lenders' entries in the record are easy to overlook under volume."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a document pipeline for agri-loan files. It accepts scanned or downloaded land records and KCC application documents, identifies the state format, and extracts owner names, survey or khasra numbers, holding area, share, crop and any recorded charge or mutation. Area is converted to a standard unit using a district-level unit table your credit team approves. Names are matched against KYC with transliteration-aware comparison. The pipeline compares the holding and declared crops with the scale of finance used to size the limit, and flags gaps. Credit officers see every extracted value next to its source text, and any low-confidence field or failed check goes to them for confirmation.",
+    "capabilities": [
+      "Recognises common state land record formats and local-language text",
+      "Extracts owner, share, survey or khasra number, area, crop and charge entries",
+      "Converts bigha, guntha, kanal and other units using an approved district table",
+      "Transliteration-aware name matching against KYC documents",
+      "Checks holding and crops against scale of finance inputs",
+      "Source-linked review screen for credit officers"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect the loan file",
+      "detail": "Land records, KCC application, KYC and no-dues certificates arrive from the branch, a field agent app or a permitted portal download."
+    },
+    {
+      "step": 2,
+      "title": "Identify and extract",
+      "detail": "Each document is classified by type and state format, and fields are extracted with a confidence score."
+    },
+    {
+      "step": 3,
+      "title": "Normalise units and names",
+      "detail": "Area is converted to a standard unit and names are matched across land record and KYC."
+    },
+    {
+      "step": 4,
+      "title": "Run credit checks",
+      "detail": "The pipeline checks holdings, shares, charges and crops against the application and scale of finance."
+    },
+    {
+      "step": 5,
+      "title": "Credit officer review",
+      "detail": "Low-confidence fields and failed checks go to the credit officer with the source text highlighted."
+    },
+    {
+      "step": 6,
+      "title": "Send to the loan system",
+      "detail": "Structured data and the review trail are pushed to the loan origination system for sanction."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Loan file from branch or app\"] --> B[\"Classify document and state format\"]\n  B --> C[\"Extract owner, khasra, area, crop\"]\n  C --> D[\"Convert units and match names\"]\n  D --> E{\"Fields confident and checks pass?\"}\n  E -->|\"yes\"| G[\"Push to loan origination system\"]\n  E -->|\"no\"| F(\"Credit officer confirms or corrects\")\n  F --> G\n  G --> H[\"Store review trail\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Branch scan and field app upload",
+          "Permitted state portal download intake",
+          "Loan-file grouping by application"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR for Devanagari and regional scripts",
+          "State format classifier",
+          "LLM field extractor with per-state schemas"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "District unit conversion table",
+          "Transliteration-aware name matcher",
+          "Scale of finance and charge checks"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Credit officer review screen with source highlights",
+          "Query log for missing documents"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "Loan origination system adapter",
+          "Audit log of values and edits"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Branch and field app upload\"]\n    I2[\"Portal download intake\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Regional script OCR\"]\n    U2[\"State format classifier\"]\n    U3[\"Field extractor\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"Unit conversion table\"]\n    V2[\"Name matcher\"]\n    V3[\"Scale of finance checks\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Credit officer review\")\n    R2[\"Loan system adapter\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2 --> U3\n  U3 --> V1 --> V2 --> V3\n  V3 --> R1\n  V3 --> R2\n  R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "Land records such as Khatauni, 7/12 extract, Jamabandi, RTC or Patta",
+    "KCC or crop loan application form",
+    "KYC documents with masked Aadhaar",
+    "No-dues certificates from other lenders",
+    "Scale of finance table for the district and crop"
+  ],
+  "outputs": [
+    "Structured holding record with owners, shares, survey numbers and area in a standard unit",
+    "Name match results across documents",
+    "Flags for charges, mutations and shortfalls against the requested limit",
+    "Field-level confidence with source links",
+    "Audit trail of extraction and edits"
+  ],
+  "human_in_the_loop": "Credit officers confirm low-confidence fields, resolve name and share mismatches, and decide on every flagged charge or mutation. Sanction decisions stay entirely with the lender.",
+  "integrations": [
+    "Loan origination system via API or staging table",
+    "Core banking system",
+    "State land record portals, where access is permitted",
+    "Document management system",
+    "Field agent mobile app"
+  ],
+  "guardrails": [
+    "Unit conversion only from a table approved by the credit team, with district overrides",
+    "No automated sanction or rejection",
+    "Masked Aadhaar only; full numbers never stored",
+    "Every value linked to its source text",
+    "Periodic re-check of auto-cleared files by credit audit"
+  ],
+  "compliance_notes": [
+    "Supports the documentation and audit trail lenders keep under RBI directions on the Kisan Credit Card scheme.",
+    "Aadhaar is handled in masked form per UIDAI rules, and personal data in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "KCC files using one state's land record format, drawn from a few branches and processed in parallel with current manual checks.",
+    "deliverables": [
+      "Extraction schema and unit table agreed with credit",
+      "Working pipeline on de-identified historic files",
+      "Credit officer review screen",
+      "Accuracy report against officer-entered data",
+      "Plan for additional states"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Compared with the values credit officers entered for the same files."
+      },
+      {
+        "metric": "Unit conversion correctness",
+        "how": "Converted areas checked against manual calculations on a sample."
+      },
+      {
+        "metric": "Flags confirmed as genuine",
+        "how": "Credit officer feedback on each name, charge or shortfall flag."
+      },
+      {
+        "metric": "Processing time per file",
+        "how": "Timed on a sample of files with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which states' land records can it read?",
+      "a": "We start with the state formats that make up most of your book and add others one at a time. Each new format is tested on real samples before it is switched on."
+    },
+    {
+      "q": "Can it fetch records from state portals?",
+      "a": "Where your institution has permitted access, the pipeline can take portal downloads directly. Otherwise it works from scans or files uploaded by branches and field agents."
+    },
+    {
+      "q": "How does it handle handwritten mutation entries?",
+      "a": "Handwritten entries are extracted where legible, and anything uncertain goes to the credit officer instead of being guessed. The pilot report shows handwritten and printed accuracy separately."
+    },
+    {
+      "q": "Does the AI decide the loan amount?",
+      "a": "No. It prepares checked data and flags gaps against the scale of finance. The credit officer and your sanctioning authority decide the limit."
+    }
+  ],
+  "related": [
+    "farmer-onboarding-kyc",
+    "warehouse-receipt-and-quality-certificate-extraction",
+    "property-title-document-summarisation",
+    "loan-application-document-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/land-record-and-kcc-document-extraction/"
+}

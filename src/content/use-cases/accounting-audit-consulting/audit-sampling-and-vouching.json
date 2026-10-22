@@ -1,0 +1,222 @@
+{
+  "slug": "audit-sampling-and-vouching",
+  "industry": "accounting-audit-consulting",
+  "title": "Audit Sampling and Vouching from Invoices",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Select samples from the ledger, pull invoices, GRNs and payment proofs, and check each voucher against the entry, with every exception sent to the audit senior.",
+  "seo": {
+    "title": "AI Audit Sampling and Vouching | VipraTech",
+    "description": "AI that selects audit samples, reads invoices, GRNs and bank advices, tests attributes against the ledger and builds a vouching sheet for review.",
+    "keywords": [
+      "audit vouching automation",
+      "AI audit sampling",
+      "invoice vouching software",
+      "statutory audit automation India",
+      "audit working paper AI"
+    ]
+  },
+  "designed_for": [
+    "Audit Partner",
+    "Audit Manager",
+    "Audit Senior",
+    "Head of Internal Audit"
+  ],
+  "problem": {
+    "intro": "In statutory, tax and internal audits, teams pick samples from the purchase, sales and expense ledgers and vouch each entry against invoices, GRNs, purchase orders and bank payments. The client sends documents in batches over email and WhatsApp, and the working paper that records what was checked is often assembled at the end from memory.",
+    "pain_points": [
+      {
+        "title": "Vouching consumes junior time",
+        "detail": "Articled assistants open every PDF to check party, GSTIN, date, amount and approval, and type the result into a sheet, entry after entry."
+      },
+      {
+        "title": "Sample selection is hard to defend",
+        "detail": "Haphazard picks and undocumented criteria make it difficult to show a reviewer how the sample was drawn or to re-perform it."
+      },
+      {
+        "title": "Supporting documents arrive incomplete",
+        "detail": "Missing GRNs, unsigned invoices and bills in another entity's name are tracked in a side spreadsheet that falls out of date."
+      },
+      {
+        "title": "Thin working papers",
+        "detail": "Reviewers see ticks without the evidence behind them, which leads to review points and rework late in the engagement."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a vouching assistant that takes the ledger export from Tally, SAP or Zoho Books, checks the population against the trial balance and helps the engagement team pick samples by a documented method: monetary unit, stratified, random with a recorded seed, or key items above a threshold. For each sampled entry it reads the invoice, purchase order, GRN and bank debit, extracts the attributes your audit programme requires and compares them with the ledger. Matches, mismatches and missing documents land in a vouching sheet with links to the source page, and the audit senior clears or escalates each exception.",
+    "capabilities": [
+      "Sample selection by monetary unit, stratified, random-with-seed or key-item rules, with parameters recorded",
+      "Reads tax invoices, purchase orders, GRNs, delivery challans and bank advices, including phone photos",
+      "Attribute tests per audit programme: party, GSTIN, invoice date against booking period, amounts, tax rate, approval",
+      "Cut-off checks for entries booked around the period end",
+      "Pending-document list generated for each client contact",
+      "Vouching sheet export in the firm's working paper format with source-page links"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Import the ledger and set the population",
+      "detail": "The ledger export is loaded and its totals are agreed to the trial balance before anything is sampled."
+    },
+    {
+      "step": 2,
+      "title": "Select samples",
+      "detail": "The senior chooses the method and parameters; the tool draws the sample and records the seed and criteria."
+    },
+    {
+      "step": 3,
+      "title": "Collect supporting documents",
+      "detail": "Client uploads are mapped to sampled entries, and a pending list goes back to the client for anything missing."
+    },
+    {
+      "step": 4,
+      "title": "Extract and compare attributes",
+      "detail": "OCR and an LLM read each document and compare the required attributes with the ledger entry."
+    },
+    {
+      "step": 5,
+      "title": "Review exceptions",
+      "detail": "Mismatches and low-confidence attributes go to the audit senior, who clears, escalates or requests more evidence."
+    },
+    {
+      "step": 6,
+      "title": "Produce the working paper",
+      "detail": "The vouching sheet, selection log and reviewer actions are exported to the engagement file."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Ledger export and trial balance\"] --> B[\"Select samples with recorded method\"]\n  B --> C[\"Map client documents to samples\"]\n  C --> D{\"All documents received?\"}\n  D -->|\"no\"| E[\"Pending list sent to client\"]\n  E --> C\n  D -->|\"yes\"| F[\"Extract and compare attributes\"]\n  F --> G{\"Mismatch or low confidence?\"}\n  G -->|\"yes\"| H(\"Audit senior reviews exception\")\n  G -->|\"no\"| I[\"Vouching working paper\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data intake",
+        "components": [
+          "Ledger and trial balance import from Tally, SAP or Zoho Books",
+          "Client document upload portal",
+          "Email and WhatsApp document drop"
+        ]
+      },
+      {
+        "name": "Sampling",
+        "components": [
+          "Population check against trial balance",
+          "Sampling engine with monetary unit, stratified and random methods",
+          "Selection log with seed and parameters"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with layout detection",
+          "Classifier for invoices, POs, GRNs and bank advices",
+          "LLM attribute extractor with schemas"
+        ]
+      },
+      {
+        "name": "Testing and review",
+        "components": [
+          "Attribute comparison and cut-off rules",
+          "Senior review screen with source highlights"
+        ]
+      },
+      {
+        "name": "Working papers",
+        "components": [
+          "Vouching sheet export",
+          "Audit trail of reviewer actions"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data intake\"]\n    I1[\"Ledger and trial balance import\"]\n    I2[\"Client document portal\"]\n  end\n  subgraph S2[\"Sampling\"]\n    P1[\"Population check to trial balance\"]\n    P2[\"Sampling engine with seed log\"]\n  end\n  subgraph S3[\"Document understanding\"]\n    U1[\"OCR and layout\"]\n    U2[\"Document classifier\"]\n    U3[\"LLM attribute extractor\"]\n  end\n  subgraph S4[\"Testing and working papers\"]\n    T1[\"Attribute and cut-off rules\"]\n    T2(\"Audit senior review screen\")\n    T3[\"Vouching sheet and audit trail\"]\n  end\n  I1 --> P1 --> P2\n  P2 --> U1\n  I2 --> U1\n  U1 --> U2 --> U3\n  U3 --> T1\n  T1 --> T2\n  T2 --> T3\n  T1 --> T3"
+  },
+  "inputs": [
+    "General ledger or purchase register export",
+    "Trial balance for the period",
+    "Tax invoices, debit notes and credit notes",
+    "Purchase orders, GRNs and delivery challans",
+    "Bank statements and payment advices",
+    "Audit programme attribute list"
+  ],
+  "outputs": [
+    "Sample selection log with method, parameters and seed",
+    "Vouching sheet with attribute results and source links",
+    "Exception list for senior review",
+    "Pending-document list per client contact",
+    "Reviewer sign-off trail"
+  ],
+  "human_in_the_loop": "The audit senior approves the sampling method and parameters before selection and clears every exception. The engagement manager reviews the working paper; the tool records evidence and never forms the audit conclusion.",
+  "integrations": [
+    "Tally Prime, SAP or Zoho Books exports (Excel, XML or API)",
+    "Audit working paper software or the firm's Excel templates",
+    "Google Drive or SharePoint client folders",
+    "Email and WhatsApp Business API for document requests"
+  ],
+  "guardrails": [
+    "Population totals agreed to the trial balance before sampling",
+    "Selection parameters and seed logged so the sample can be re-performed",
+    "No exception is cleared without a named reviewer",
+    "Every attribute linked to its source page",
+    "Client data segregated by engagement with role-based access"
+  ],
+  "compliance_notes": [
+    "Designed to help engagement teams document sampling and evidence in line with ICAI Standards on Auditing such as SA 230, SA 500 and SA 530.",
+    "The engagement team remains responsible for evaluating evidence and forming the audit opinion."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One audit area, such as purchases and expenses, for one or two completed prior-year engagements, compared with the vouching your team already performed.",
+    "deliverables": [
+      "Attribute schema mapped to your audit programme",
+      "Working pipeline on prior-year samples",
+      "Vouching sheet in your working paper format",
+      "Comparison report against the manual vouching",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Attribute extraction accuracy",
+        "how": "Compared with the values recorded in the team's manual vouching sheet for the same entries."
+      },
+      {
+        "metric": "Exceptions agreed by the senior",
+        "how": "Share of tool-raised exceptions the audit senior confirms as genuine."
+      },
+      {
+        "metric": "Time per sampled voucher",
+        "how": "Timed on a sample of entries vouched with and without the tool."
+      },
+      {
+        "metric": "Missing-document detection",
+        "how": "Compared with the PBC follow-ups the team actually raised on those engagements."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does the tool decide sample sizes?",
+      "a": "No. Your engagement team sets materiality, risk assessment and sample size under your firm's methodology. The tool applies the selection method you choose and records the parameters and seed so the selection can be re-performed."
+    },
+    {
+      "q": "Can we put the output straight into our working papers?",
+      "a": "The vouching sheet exports in your working paper format with links to each source page. The senior's review and sign-off are recorded on it, and retention follows your firm's documentation policy."
+    },
+    {
+      "q": "What about poor scans and invoices in Hindi or regional languages?",
+      "a": "Phone photos, skewed scans and bilingual invoices are handled, and any attribute the system is unsure about goes to review rather than being marked as matched. The pilot reports accuracy separately for clean and poor-quality documents."
+    },
+    {
+      "q": "Where is client data kept?",
+      "a": "In your cloud account or an India region, segregated by client and engagement, with access limited to the engagement team. Data is deleted at the end of the retention period your firm sets."
+    }
+  ],
+  "related": [
+    "bank-and-ledger-reconciliation",
+    "gst-return-reconciliation",
+    "expense-claim-forensic-review",
+    "client-document-collection-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/audit-sampling-and-vouching/"
+}

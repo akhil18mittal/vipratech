@@ -1,0 +1,221 @@
+{
+  "slug": "branch-queue-and-footfall-analytics",
+  "industry": "banking",
+  "title": "Branch Queue and Footfall Analytics",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Turn existing branch CCTV into anonymous counts of footfall, queue length and counter wait times, so branch and regional managers can plan staffing and act on long queues.",
+  "seo": {
+    "title": "Branch Queue and Footfall Analytics with CCTV | VipraTech",
+    "description": "Computer vision on existing branch CCTV for anonymous footfall, queue and wait-time analytics, with no face recognition and video kept on site.",
+    "keywords": [
+      "bank branch footfall analytics",
+      "branch queue monitoring CCTV",
+      "queue wait time analytics bank",
+      "privacy-safe people counting",
+      "branch staffing analytics"
+    ]
+  },
+  "designed_for": [
+    "Head of Branch Banking",
+    "Regional Branch Manager",
+    "Branch Operations Excellence Lead",
+    "Chief Information Security Officer"
+  ],
+  "problem": {
+    "intro": "Branch managers know their busy days, but rarely have data on how long customers queue at cash counters, how footfall shifts across the month or which branches are short-staffed at pension and salary peaks. Token systems record service time only once a ticket is issued, and many customers never take one.",
+    "pain_points": [
+      {
+        "title": "No measure of real waiting time",
+        "detail": "Queue management systems miss walk-ins who wait without a token, and nothing records customers who leave before being served."
+      },
+      {
+        "title": "Staffing based on habit",
+        "detail": "Counter staffing follows old rosters rather than observed demand by hour, day and month-end peaks."
+      },
+      {
+        "title": "CCTV used only after incidents",
+        "detail": "Branch cameras record continuously, but the footage is reviewed only when there is a security event."
+      },
+      {
+        "title": "Privacy concerns block analytics",
+        "detail": "Banks rightly hesitate to run video analytics that could identify customers or monitor individual employees."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an edge analytics service that reads the video streams your branch cameras already produce and outputs only anonymous counts. A detection model counts people entering, estimates queue length in defined zones such as the cash counter, passbook printer and enquiry desk, and derives approximate wait times from queue movement. No faces are recognised, no identities are stored and video does not leave the branch network; only aggregated numbers reach a central dashboard. Regional managers see footfall and queue patterns by branch and hour, and branch managers get alerts when a queue passes a threshold they set, so they can open another counter.",
+    "capabilities": [
+      "People counting at entrances from existing CCTV, processed on an edge device in the branch",
+      "Zone-based queue length and wait-time estimates for cash, enquiry and service counters",
+      "Counter open or closed status from zone occupancy, without identifying staff",
+      "Configurable queue alerts to branch managers by app or SMS",
+      "Hourly, daily and month-end demand patterns across branches for rostering",
+      "Optional after-hours ATM lobby occupancy alerts for the security team"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map the branch",
+      "detail": "For each camera we mark entry lines and queue zones with the branch team, and record which areas are excluded."
+    },
+    {
+      "step": 2,
+      "title": "Process video on site",
+      "detail": "An edge device reads camera streams over the branch network and runs detection without storing video."
+    },
+    {
+      "step": 3,
+      "title": "Count and estimate",
+      "detail": "People crossing entry lines and standing in queue zones are counted, and wait times are estimated from queue movement."
+    },
+    {
+      "step": 4,
+      "title": "Check thresholds",
+      "detail": "When a queue or wait estimate passes the branch threshold, an alert goes to the branch manager."
+    },
+    {
+      "step": 5,
+      "title": "Branch manager acts",
+      "detail": "The manager opens a counter or redirects customers, and marks the alert as useful or not."
+    },
+    {
+      "step": 6,
+      "title": "Plan centrally",
+      "detail": "Aggregated counts feed regional dashboards and staffing plans."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Existing branch CCTV streams\"] --> B[\"Edge device detects people\"]\n  B --> C[\"Count entries and queue zones\"]\n  C --> D[\"Estimate wait times\"]\n  D --> E{\"Queue above branch threshold?\"}\n  E -->|\"yes\"| F(\"Branch manager alert and action\")\n  E -->|\"no\"| G[\"Aggregate counts only\"]\n  F --> G\n  G --> H[\"Regional footfall and staffing view\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Cameras and network",
+        "components": [
+          "Existing IP cameras or NVR streams over RTSP",
+          "Isolated branch network segment for the edge device"
+        ]
+      },
+      {
+        "name": "Edge processing",
+        "components": [
+          "Person detection model on an edge device",
+          "Zone and line configuration per camera",
+          "Queue length and wait-time estimator",
+          "In-memory processing with no video storage"
+        ]
+      },
+      {
+        "name": "Alerts",
+        "components": [
+          "Threshold engine per branch and zone",
+          "Branch manager notifications by app or SMS"
+        ]
+      },
+      {
+        "name": "Central reporting",
+        "components": [
+          "Aggregated metrics store",
+          "Regional and branch dashboards",
+          "Device health and model monitoring"
+        ]
+      },
+      {
+        "name": "Governance",
+        "components": [
+          "Privacy configuration register",
+          "Customer notice and signage templates"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Cameras and network\"]\n    C1[\"IP cameras\"]\n    C2[\"NVR streams\"]\n  end\n  subgraph S2[\"Edge processing\"]\n    E1[\"Person detection\"]\n    E2[\"Zone configuration\"]\n    E3[\"Queue and wait estimator\"]\n  end\n  subgraph S3[\"Alerts\"]\n    A1[\"Threshold engine\"]\n    A2(\"Branch manager app\")\n  end\n  subgraph S4[\"Central reporting\"]\n    R1[\"Aggregated metrics store\"]\n    R2[\"Regional dashboard\"]\n    R3[\"Device health monitor\"]\n  end\n  C1 --> E1\n  C2 --> E1\n  E2 --> E3\n  E1 --> E3\n  E3 --> A1 --> A2\n  E3 --> R1 --> R2\n  E1 --> R3"
+  },
+  "inputs": [
+    "Video streams from existing branch IP cameras or NVRs",
+    "Branch layout and counter map",
+    "Counter opening hours and staffing rosters",
+    "Queue management token data, where available",
+    "Alert thresholds set by branch and regional managers"
+  ],
+  "outputs": [
+    "Hourly footfall counts per branch",
+    "Queue length and estimated wait time per zone",
+    "Queue alerts and manager responses",
+    "Demand patterns for staffing and rostering",
+    "Device and data-quality health reports"
+  ],
+  "human_in_the_loop": "Branch managers decide how to respond to every alert, and regional teams decide staffing changes from the trends. People set and approve zone layouts and thresholds, and any change to what the cameras are used for goes through the bank's information security review.",
+  "integrations": [
+    "Branch CCTV and NVR systems",
+    "Queue management or token system",
+    "HRMS or rostering tool",
+    "BI dashboard tools such as Power BI",
+    "Bank SMS gateway or internal messaging app for alerts"
+  ],
+  "guardrails": [
+    "No face recognition, identity matching or individual tracking",
+    "Video processed in memory on site; only counts leave the branch",
+    "Strong room, locker area and staff-only zones excluded by configuration",
+    "No metrics on individual employee productivity",
+    "Branch notice telling customers that cameras support anonymous queue counts"
+  ],
+  "compliance_notes": [
+    "Designed for data minimisation under the DPDP Act 2023: no identification, no video export and aggregate output only.",
+    "Edge devices are managed under the bank's IT governance and information security controls."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Two or three branches with different footfall profiles, using existing cameras, with counts checked against manual observation on selected days.",
+    "deliverables": [
+      "Camera and zone mapping for the pilot branches",
+      "Edge devices running anonymous counting",
+      "Branch and regional dashboard",
+      "Accuracy report against manual counts",
+      "Roll-out plan with hardware and cost per branch"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Footfall count accuracy",
+        "how": "Automated entry counts compared with manual tallies over sampled hours."
+      },
+      {
+        "metric": "Queue length estimate accuracy",
+        "how": "Estimates compared with observed queue lengths at set intervals."
+      },
+      {
+        "metric": "Alert usefulness",
+        "how": "Branch managers mark each alert as useful, too early or not needed."
+      },
+      {
+        "metric": "Edge device reliability",
+        "how": "Uptime and stream availability logged per device."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you use face recognition?",
+      "a": "No. The system detects that a person is present and counts them, without recognising faces or linking detections to identities. Nothing that could identify a customer is stored."
+    },
+    {
+      "q": "Do we need new cameras?",
+      "a": "Usually not. Most branch IP cameras are adequate if they cover the entrance and counter areas. During setup we assess each camera's angle and resolution and suggest repositioning where a zone is not visible."
+    },
+    {
+      "q": "Are staff monitored?",
+      "a": "No. We report counter open or closed status from zone occupancy, never individual identity, attendance or productivity. This is fixed in configuration and recorded in the privacy register."
+    },
+    {
+      "q": "What hardware is needed?",
+      "a": "A small edge device per branch, connected to the camera network. The specification depends on the number of cameras and is confirmed during the pilot."
+    }
+  ],
+  "related": [
+    "cheque-image-and-signature-verification",
+    "multilingual-banking-voice-agent",
+    "customer-complaint-triage-and-routing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/branch-queue-and-footfall-analytics/"
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "contract-clause-extraction-and-risk-flags",
+  "industry": "legal",
+  "title": "Contract Clause Extraction and Risk Flags",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract key clauses, dates and obligations from executed and incoming contracts, compare them with your playbook and flag deviations, with every item linked to the clause it came from.",
+  "seo": {
+    "title": "Contract Clause Extraction and Risk Flags | VipraTech",
+    "description": "AI that extracts clauses, renewal dates and obligations from contracts, compares them with your playbook and flags risks for lawyer review.",
+    "keywords": [
+      "contract clause extraction",
+      "AI contract review India",
+      "contract risk flagging",
+      "contract obligation tracking",
+      "legacy contract digitisation"
+    ]
+  },
+  "designed_for": [
+    "General Counsel",
+    "Head of Legal Operations",
+    "Contract Manager",
+    "Law Firm Partner (Commercial)"
+  ],
+  "problem": {
+    "intro": "Most organisations hold years of executed contracts as scanned PDFs on shared drives: MSAs, SOWs, leases, distribution and vendor agreements, each with amendments and side letters. Nobody can say quickly which contracts auto-renew next quarter, which carry uncapped indemnities or which need consent on a change of control.",
+    "pain_points": [
+      {
+        "title": "Unknown obligations",
+        "detail": "Renewal dates, notice periods, exclusivity and minimum commitments are buried in clauses that nobody re-reads after signing."
+      },
+      {
+        "title": "Amendments change the picture",
+        "detail": "Addenda and side letters modify the main agreement, and a review that misses them gives the wrong answer."
+      },
+      {
+        "title": "Inconsistent first-pass review",
+        "detail": "Different lawyers flag different risks in incoming paper, so the business gets uneven turnaround and advice."
+      },
+      {
+        "title": "Scanned and stamped documents",
+        "detail": "Contracts executed on stamp paper, signed by hand and scanned at low quality defeat simple text search."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a contract review pipeline that reads executed and incoming contracts, including scanned and stamped copies, splits them into clauses and links amendments to the clauses they change. It extracts the terms your team cares about, such as parties, term, renewal, termination rights, notice periods, liability caps, indemnities, governing law, dispute resolution, assignment, change of control and data protection, each with a citation to clause and page. Extracted positions are compared with your playbook and fallbacks, and deviations are flagged with the reason. Lawyers review flags on one screen, and confirmed data feeds your contract repository and renewal calendar.",
+    "capabilities": [
+      "Clause segmentation for scanned, stamped and signed contracts in English and Hindi",
+      "Links amendments, addenda and side letters to the clauses they modify",
+      "Extracts parties, dates, renewal, termination, liability, indemnity, governing law and dispute resolution",
+      "Compares each position with your standard and fallback positions",
+      "Flags missing clauses, such as data protection or limitation of liability",
+      "Builds an obligation and renewal calendar from confirmed data"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect contracts",
+      "detail": "Contracts are loaded from shared drives, the CLM or email, and grouped with their amendments."
+    },
+    {
+      "step": 2,
+      "title": "Segment and read",
+      "detail": "OCR and layout analysis split each document into numbered clauses and schedules."
+    },
+    {
+      "step": 3,
+      "title": "Extract key terms",
+      "detail": "Agreed fields are extracted, each with a confidence score and a clause citation."
+    },
+    {
+      "step": 4,
+      "title": "Compare with the playbook",
+      "detail": "Positions are checked against your standard and fallback positions, and gaps are flagged."
+    },
+    {
+      "step": 5,
+      "title": "Lawyer review",
+      "detail": "A lawyer confirms, corrects or dismisses each flag and each low-confidence field."
+    },
+    {
+      "step": 6,
+      "title": "Update the repository",
+      "detail": "Confirmed terms go to the contract repository, and renewal and notice alerts are scheduled."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Contracts and amendments\"] --> B[\"OCR and clause segmentation\"]\n  B --> C[\"Extract key terms with citations\"]\n  C --> D[\"Compare with playbook\"]\n  D --> E{\"Deviation or low confidence?\"}\n  E -->|\"yes\"| F(\"Lawyer reviews flag\")\n  E -->|\"no\"| G[\"Confirmed clause register\"]\n  F --> G\n  G --> H[\"Renewal and obligation alerts\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Shared drive and CLM connectors",
+          "Email intake for counterparty paper",
+          "Amendment grouping by contract"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with layout and stamp detection",
+          "Clause segmenter",
+          "LLM term extractor with schemas"
+        ]
+      },
+      {
+        "name": "Playbook engine",
+        "components": [
+          "Standard and fallback positions per clause",
+          "Deviation and missing-clause rules",
+          "Risk rating logic agreed with legal"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Lawyer review screen with clause highlights",
+          "Decision and comment log"
+        ]
+      },
+      {
+        "name": "Repository and alerts",
+        "components": [
+          "Clause register export to the CLM",
+          "Renewal and notice calendar",
+          "Audit trail"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Shared drive and CLM\"]\n    I2[\"Email intake\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and layout\"]\n    U2[\"Clause segmenter\"]\n    U3[\"Term extractor\"]\n  end\n  subgraph S3[\"Playbook engine\"]\n    P1[\"Standard and fallback positions\"]\n    P2[\"Deviation rules\"]\n  end\n  subgraph S4[\"Review and repository\"]\n    R1(\"Lawyer review screen\")\n    R2[\"Clause register\"]\n    R3[\"Renewal calendar\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2\n  U2 --> U3\n  U3 --> P2\n  P1 --> P2\n  P2 --> R1\n  U3 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Executed contracts, including scanned and stamped copies",
+    "Amendments, addenda and side letters",
+    "Incoming counterparty drafts",
+    "Your contract playbook and fallback positions",
+    "List of fields and risk categories to track"
+  ],
+  "outputs": [
+    "Clause register with citations to clause and page",
+    "Deviation and missing-clause flags with reasons",
+    "Renewal, notice and obligation calendar",
+    "Portfolio view of risk positions across contracts",
+    "Audit trail of lawyer confirmations"
+  ],
+  "human_in_the_loop": "A lawyer confirms every flagged deviation and every low-confidence field before it enters the register. Risk ratings are suggestions; legal decides what is acceptable and what to renegotiate.",
+  "integrations": [
+    "Contract lifecycle management system",
+    "Document management system such as iManage or SharePoint",
+    "Email for counterparty paper",
+    "Calendar and task tools for renewal alerts",
+    "ERP or procurement system for vendor master data"
+  ],
+  "guardrails": [
+    "Every extracted value cites the clause and page it came from",
+    "Playbook positions owned and versioned by the legal team",
+    "No contract marked acceptable without lawyer review",
+    "Documents processed in your environment, and models do not train on them",
+    "Matter or business-unit access controls carried into the tool"
+  ],
+  "compliance_notes": [
+    "Contracts contain personal data of signatories and counterparties; designed to support DPDP Act 2023 security safeguards and access control.",
+    "The tool supports lawyers' review; it does not provide legal advice."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One contract type, such as vendor MSAs or commercial leases, using a sample of executed agreements whose positions your team already knows.",
+    "deliverables": [
+      "Field list and playbook encoded with your legal team",
+      "Clause register for the pilot set",
+      "Lawyer review screen",
+      "Accuracy report against lawyer-reviewed answers",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Compared with a lawyer-prepared answer sheet for the pilot contracts."
+      },
+      {
+        "metric": "Deviation flag precision",
+        "how": "Share of flags the reviewing lawyer confirmed as genuine."
+      },
+      {
+        "metric": "Missed issues",
+        "how": "Issues found by lawyers that the system did not flag, from a blind sample."
+      },
+      {
+        "metric": "Review time per contract",
+        "how": "Timed for comparable contracts with and without the tool."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it work on old scanned contracts?",
+      "a": "Yes, within limits. OCR handles most scans and stamp-paper first pages, and fields it cannot read confidently go to a lawyer. The pilot report separates accuracy for digital and scanned documents."
+    },
+    {
+      "q": "Can we use our own playbook?",
+      "a": "Yes. The playbook is configuration owned by your legal team, with standard positions, fallbacks and escalation rules for each clause."
+    },
+    {
+      "q": "Does it understand amendments?",
+      "a": "It links amendments and side letters to the clauses they change and shows the current position with its history. Lawyers confirm the link when it is uncertain."
+    },
+    {
+      "q": "Is our data used to train models?",
+      "a": "No. We use models and settings that do not retain or train on your documents, and processing stays in your cloud account or chosen region."
+    }
+  ],
+  "related": [
+    "nda-review-and-redlines",
+    "due-diligence-data-room-review",
+    "legal-ai-confidentiality-testing",
+    "sale-agreement-and-title-review"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/legal/contract-clause-extraction-and-risk-flags/"
+}

@@ -1,0 +1,224 @@
+{
+  "slug": "crop-insurance-field-photo-verification",
+  "industry": "agriculture",
+  "title": "Field Survey Photo Verification for Crop Insurance",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Check geotagged field survey photos for crop insurance claims for location, timing, crop type, visible damage and reuse, so claim officers spend their time on cases that need judgement.",
+  "seo": {
+    "title": "Crop Insurance Field Photo Verification | VipraTech",
+    "description": "AI checks of geotagged crop insurance survey photos for location, timing, crop type, visible damage and photo reuse, with claim officers deciding.",
+    "keywords": [
+      "crop insurance photo verification",
+      "PMFBY survey photo AI",
+      "geotagged field photo validation",
+      "crop loss survey automation",
+      "agri insurance claims AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Crop Insurance Claims",
+    "Agri Claims Operations Manager",
+    "Survey Agency Project Manager",
+    "Fraud Control Lead, General Insurer"
+  ],
+  "problem": {
+    "intro": "Crop insurance claims for localised calamities and post-harvest losses depend on field surveys, crop cutting experiments and the photos surveyors upload from the field. In a bad season, thousands of photos arrive within a few weeks, and claim teams cannot check every one for location, timing or reuse.",
+    "pain_points": [
+      {
+        "title": "Photos that do not match the plot",
+        "detail": "Geotags fall outside the insured survey number, or the photo shows a different crop from the one declared at sowing."
+      },
+      {
+        "title": "Reused and recycled images",
+        "detail": "The same photo, or a near-copy, appears across several claims or comes from a previous season."
+      },
+      {
+        "title": "Timing gaps",
+        "detail": "Photos taken before the reported event or long after harvest weaken the evidence but are hard to spot manually."
+      },
+      {
+        "title": "Survey backlog during calamities",
+        "detail": "After heavy rain, hail or a pest outbreak, claim teams face a spike in surveys with fixed reporting timelines."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a verification layer that checks every survey photo and its metadata before a claim officer opens the file. It compares the photo's geotag with the plot boundary or survey number on record, checks the timestamp against the reported loss event and crop calendar, and confirms the visible crop matches the sowing declaration. A vision model describes visible damage such as lodging, waterlogging or pest attack, without estimating a payable loss. Perceptual hashing finds reused or near-duplicate photos across claims and seasons. Survey forms are read so their details can be compared with the photos. Each claim gets a checklist of passed and failed checks, and failed or uncertain items go to a claim officer.",
+    "capabilities": [
+      "Geotag check against plot boundary or survey number coordinates",
+      "Timestamp check against the reported event date and crop calendar",
+      "Crop type recognition compared with the sowing declaration",
+      "Visible damage description such as lodging, waterlogging or pest attack",
+      "Duplicate and near-duplicate photo detection across claims and seasons",
+      "Per-claim evidence checklist for claim officers"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the survey packet",
+      "detail": "Photos, metadata and survey forms arrive from the surveyor app or survey agency upload, grouped by claim or intimation number."
+    },
+    {
+      "step": 2,
+      "title": "Check location and time",
+      "detail": "Geotags and timestamps are compared with the insured plot and the reported loss event."
+    },
+    {
+      "step": 3,
+      "title": "Check crop and damage",
+      "detail": "The vision model confirms the crop type and describes visible damage in standard categories."
+    },
+    {
+      "step": 4,
+      "title": "Check for reuse",
+      "detail": "Each photo is compared with earlier photos across claims and seasons to find copies and near-copies."
+    },
+    {
+      "step": 5,
+      "title": "Route by result",
+      "detail": "Claims where all checks pass go forward; failed or uncertain checks go to a claim officer or for re-survey."
+    },
+    {
+      "step": 6,
+      "title": "Officer decision and record",
+      "detail": "The claim officer decides with the checklist and photos in front of them, and the decision and evidence are logged."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Survey photos and forms arrive\"] --> B[\"Check geotag against plot\"]\n  B --> C[\"Check timestamp against event\"]\n  C --> D[\"Recognise crop and visible damage\"]\n  D --> E[\"Search for reused photos\"]\n  E --> F{\"All checks passed?\"}\n  F -->|\"yes\"| G[\"Forward claim with checklist\"]\n  F -->|\"no\"| H(\"Claim officer review or re-survey\")\n  H --> G\n  G --> I[\"Log decision and evidence\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Surveyor app or agency upload connector",
+          "EXIF and metadata extraction",
+          "Survey form OCR"
+        ]
+      },
+      {
+        "name": "Spatial and time checks",
+        "components": [
+          "Plot boundary and survey number lookup",
+          "Geofence and distance check",
+          "Event and crop calendar rules"
+        ]
+      },
+      {
+        "name": "Vision",
+        "components": [
+          "Crop type classifier",
+          "Damage category detector",
+          "Perceptual hash index for reuse detection"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Claim officer checklist screen",
+          "Re-survey request workflow"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "Evidence store with original files",
+          "Audit log of checks and decisions"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Surveyor app upload\"]\n    I2[\"Metadata and form extraction\"]\n  end\n  subgraph S2[\"Checks\"]\n    K1[\"Plot boundary lookup\"]\n    K2[\"Geofence and time rules\"]\n    K3[\"Crop and damage models\"]\n    K4[\"Photo reuse index\"]\n  end\n  subgraph S3[\"Review\"]\n    R1(\"Claim officer checklist\")\n    R2[\"Re-survey request\"]\n  end\n  subgraph S4[\"Records\"]\n    E1[\"Evidence store\"]\n    E2[\"Audit log\"]\n  end\n  I1 --> I2\n  I2 --> K1 --> K2\n  I2 --> K3\n  I2 --> K4\n  K2 --> R1\n  K3 --> R1\n  K4 --> R1\n  R1 --> R2\n  R1 --> E1 --> E2"
+  },
+  "inputs": [
+    "Geotagged survey and crop cutting experiment photos",
+    "Survey forms and claim intimation details",
+    "Insured plot details with survey or khasra numbers",
+    "Sowing declaration and crop calendar",
+    "Reported loss event dates and affected areas"
+  ],
+  "outputs": [
+    "Per-claim verification checklist with pass, fail or uncertain status",
+    "Flags for location, timing, crop mismatch and photo reuse",
+    "Visible damage description per photo",
+    "Re-survey requests",
+    "Audit trail for each claim"
+  ],
+  "human_in_the_loop": "Claim officers and surveyors decide every claim. The system checks evidence and describes visible damage, but it never estimates payable loss or rejects a claim on its own; failed checks lead to review or re-survey, not automatic denial.",
+  "integrations": [
+    "Surveyor mobile app or survey agency portal",
+    "Insurer claims system",
+    "Land record and plot boundary data, where available",
+    "National Crop Insurance Portal data exports, where available",
+    "GIS tools for plot mapping"
+  ],
+  "guardrails": [
+    "No automatic claim rejection from any single check",
+    "GPS drift tolerances agreed with the claims team",
+    "Original files kept unchanged, with checks run on copies",
+    "Farmer identity and location data restricted by role",
+    "Regular sampling of passed claims by a senior claims officer"
+  ],
+  "compliance_notes": [
+    "Designed to support the photo, geotag and survey evidence practices described in PMFBY operational guidelines, without replacing the surveyor's assessment.",
+    "Claim records and audit trails help insurers evidence fair claim handling under IRDAI expectations."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Photos from one completed season's surveys in one or two districts, re-checked against decisions already made, before any use on live claims.",
+    "deliverables": [
+      "Check rules agreed with your claims team",
+      "Verification pipeline run on historic survey photos",
+      "Claim officer checklist screen",
+      "Report comparing flags raised with past decisions",
+      "Plan for live use in the next season"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Flags confirmed by officers",
+        "how": "Share of flags that claim officers agree are genuine issues on review."
+      },
+      {
+        "metric": "Duplicate photos found",
+        "how": "Count of reused or near-duplicate photos detected and confirmed by manual check."
+      },
+      {
+        "metric": "Crop recognition agreement",
+        "how": "Model crop type compared with the sowing declaration and the officer's judgement."
+      },
+      {
+        "metric": "Officer review time per claim",
+        "how": "Time to review a claim with and without the checklist, measured on a sample."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can this decide how much crop was lost?",
+      "a": "No. It checks whether the photo evidence is consistent and describes visible damage. Loss assessment stays with surveyors, crop cutting experiments and the claim officer."
+    },
+    {
+      "q": "What if GPS is inaccurate in the field?",
+      "a": "Phone GPS can drift, so the location check uses tolerances agreed with your team and treats small deviations as uncertain rather than failed. Officers see the distance on a map before deciding."
+    },
+    {
+      "q": "Does it work with photos from different surveyor apps?",
+      "a": "Yes, as long as photos keep their metadata or the app records location and time separately. If metadata has been stripped, the system flags the photo so it can be retaken."
+    },
+    {
+      "q": "How is farmer data protected?",
+      "a": "Data stays in your cloud or an India region, access is restricted by role, and only the fields needed for verification are processed. Original files are never modified."
+    }
+  ],
+  "related": [
+    "crop-disease-detection-from-photos",
+    "land-record-and-kcc-document-extraction",
+    "motor-claim-damage-assessment",
+    "tampered-document-detection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/crop-insurance-field-photo-verification/"
+}

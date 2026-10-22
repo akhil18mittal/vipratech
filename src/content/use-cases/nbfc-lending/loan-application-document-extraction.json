@@ -1,0 +1,223 @@
+{
+  "slug": "loan-application-document-extraction",
+  "industry": "nbfc-lending",
+  "title": "Loan Application Document Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read loan files from branches, DSAs and digital journeys, extract KYC, income and business fields into your LOS, and flag missing or inconsistent documents before credit review.",
+  "seo": {
+    "title": "Loan Application Document Extraction with AI | VipraTech",
+    "description": "AI that classifies loan file documents, extracts KYC, salary, ITR and GST fields into your LOS, and flags missing or inconsistent items for underwriting.",
+    "keywords": [
+      "loan application document extraction",
+      "LOS data entry automation",
+      "NBFC document processing AI",
+      "ITR and salary slip extraction",
+      "DSA file processing"
+    ]
+  },
+  "designed_for": [
+    "Head of Credit Operations",
+    "Central Processing Hub Manager",
+    "Chief Credit Officer",
+    "Head of DSA and Channel Partnerships"
+  ],
+  "problem": {
+    "intro": "A personal, business or loan-against-property file brings together KYC, salary slips or ITRs, GST returns, Udyam registration, bank statements and property papers. Files sourced by DSAs often arrive as WhatsApp photos or merged PDFs, and the processing hub types fields into the LOS before an underwriter can even open the case.",
+    "pain_points": [
+      {
+        "title": "Re-keying before credit review",
+        "detail": "Processing staff key applicant, employer, income and business details from documents into LOS screens, and every typo travels into the credit memo."
+      },
+      {
+        "title": "Incomplete files found late",
+        "detail": "Missing ITR years, unsigned forms or an expired address proof are found by the underwriter, sending the file back to the DSA."
+      },
+      {
+        "title": "Inconsistencies across documents",
+        "detail": "Income on salary slips, Form 16, ITR and bank credits, or turnover across GST returns and financials, rarely match exactly and need judgement."
+      },
+      {
+        "title": "Formats that vary by segment",
+        "detail": "Salaried, self-employed professional and small business files each need different documents and fields, which template-based tools handle poorly."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an extraction pipeline that takes the whole loan file, splits merged PDFs and photo sets into documents, classifies each one and extracts the fields your LOS and credit memo need for that segment. A language model reads documents in context, so a salary slip from a small employer or a CA-prepared computation of income is still captured correctly. The pipeline checks the file against your document checklist for the product, compares names, dates of birth, addresses and income figures across documents, and lists inconsistencies with page references. Clean files are posted to the LOS; low-confidence fields and checklist gaps go to a processing executive.",
+    "capabilities": [
+      "Splits merged PDFs and phone-photo sets into individual documents and classifies them",
+      "Extracts KYC, employment, salary, ITR computation, GST return and Udyam fields with page references",
+      "Segment-specific checklists for salaried, self-employed and business loans",
+      "Cross-document checks on identity, address and declared versus documented income",
+      "Masks Aadhaar at intake and reads PAN, voter ID, passport and driving licence",
+      "Posts structured data to the LOS and returns a gap list to the DSA or branch"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect the file",
+      "detail": "Documents arrive from the DSA portal, branch scanners, email or the digital journey and are grouped under the application ID."
+    },
+    {
+      "step": 2,
+      "title": "Split and classify",
+      "detail": "Merged files are split, pages are typed, and duplicates and unreadable pages are identified."
+    },
+    {
+      "step": 3,
+      "title": "Extract fields",
+      "detail": "Segment-specific schemas extract identity, employment, income and business fields with confidence scores."
+    },
+    {
+      "step": 4,
+      "title": "Check the file",
+      "detail": "The product checklist confirms required documents, and cross-document rules compare identity and income figures."
+    },
+    {
+      "step": 5,
+      "title": "Processing review",
+      "detail": "Low-confidence fields, inconsistencies and gaps go to a processing executive who confirms values or requests documents."
+    },
+    {
+      "step": 6,
+      "title": "Post to the LOS",
+      "detail": "Verified data and the evidence trail are posted to the LOS, ready for underwriting."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"File from DSA, branch or app\"] --> B[\"Split, classify, mask Aadhaar\"]\n  B --> C[\"Extract segment-specific fields\"]\n  C --> D[\"Checklist and cross-document checks\"]\n  D --> E{\"Gaps or low-confidence fields?\"}\n  E -->|\"yes\"| F(\"Processing executive review\")\n  F --> G[\"Gap list back to DSA or branch\"]\n  E -->|\"no\"| H[\"Post structured data to LOS\"]\n  F --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "DSA portal and branch scanner connectors",
+          "Email and digital journey upload API",
+          "Application-level grouping"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR for scans and phone photos",
+          "Page classifier for KYC, income and business documents",
+          "LLM extractor with segment schemas"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Product checklist engine",
+          "Cross-document identity and income checks",
+          "Confidence scoring"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Processing executive queue",
+          "Gap list generator for DSAs and branches"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "LOS API adapter",
+          "Audit log of values and edits"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"DSA portal and branch scans\"]\n    I2[\"Digital journey uploads\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and page splitting\"]\n    U2[\"Document classifier\"]\n    U3[\"LLM segment extractor\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"Checklist engine\"]\n    V2[\"Cross-document checks\"]\n    V3[\"Confidence scoring\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Processing executive queue\")\n    R2[\"LOS adapter\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2 --> U3\n  U3 --> V1\n  U3 --> V2\n  U3 --> V3\n  V1 --> R1\n  V2 --> R1\n  V3 --> R1\n  V3 --> R2\n  R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "Loan application form and declarations",
+    "KYC documents: PAN, masked Aadhaar, voter ID, passport or driving licence",
+    "Salary slips, Form 16 and employment letters",
+    "ITR acknowledgements, computation of income and financial statements",
+    "GST returns, Udyam registration and business licences",
+    "Product document checklist and credit memo field list"
+  ],
+  "outputs": [
+    "Structured, LOS-ready applicant and income data",
+    "Checklist status with missing and expired items",
+    "Cross-document inconsistency list with page links",
+    "Gap list for the DSA or branch",
+    "Audit trail of extracted values and edits"
+  ],
+  "human_in_the_loop": "Processing executives confirm low-confidence fields and resolve inconsistencies, and underwriters assess every file. The pipeline does not judge creditworthiness; it hands over clean, verifiable data.",
+  "integrations": [
+    "Loan origination system (via API or staging table)",
+    "DSA portal or partner app",
+    "Credit bureau integration already used by the lender",
+    "Document management system",
+    "CRM for application tracking"
+  ],
+  "guardrails": [
+    "Aadhaar masked at intake per UIDAI rules",
+    "Field-level confidence thresholds agreed with credit operations",
+    "Inconsistencies reported, never silently resolved",
+    "Personal data masked in logs and kept in the lender's chosen region",
+    "Sampling of auto-posted files for quality checks"
+  ],
+  "compliance_notes": [
+    "Supports need-based data collection and purpose limitation expected under RBI digital lending rules and the DPDP Act 2023.",
+    "Keeps a document-level audit trail useful for internal audit and partner due diligence."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One product and segment, such as unsecured business loans for self-employed borrowers, on de-identified historical files from two or three DSAs, compared with LOS data keyed by your team.",
+    "deliverables": [
+      "Checklist and extraction schema for the pilot product",
+      "Working pipeline on de-identified files",
+      "Processing review screen",
+      "Field accuracy and checklist report",
+      "Production plan with LOS integration approach"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Extracted values compared with LOS data verified by processing staff for the same files."
+      },
+      {
+        "metric": "Checklist gap detection",
+        "how": "Gaps found by the pipeline compared with gaps underwriters raised on the same files."
+      },
+      {
+        "metric": "Fields routed for review",
+        "how": "Low-confidence fields per file, by document type."
+      },
+      {
+        "metric": "Processing time per file",
+        "how": "Timed for executives with and without the pipeline on matched samples."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read documents photographed on a phone?",
+      "a": "Yes. The pipeline corrects skew and lighting and reads typical DSA phone photos. Fields it cannot read with confidence are sent for review, and the pilot reports accuracy separately for scans and photos."
+    },
+    {
+      "q": "Does it handle ITRs and CA-prepared financials?",
+      "a": "Yes. It reads ITR acknowledgements, computations of income, balance sheets and profit and loss statements, and maps key figures to your credit memo fields. Credit judgement on those figures stays with the underwriter."
+    },
+    {
+      "q": "Will it slow down DSA submissions?",
+      "a": "No. Processing runs in the background after upload, and DSAs receive a gap list sooner than they would after manual review."
+    },
+    {
+      "q": "Which LOS platforms do you integrate with?",
+      "a": "We integrate through the LOS's APIs or a staging table, which covers common commercial and in-house systems. The exact mapping is agreed with your IT team in the pilot."
+    }
+  ],
+  "related": [
+    "bank-statement-analysis-for-underwriting",
+    "property-title-document-summarisation",
+    "loan-lead-qualification-agent",
+    "account-opening-document-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/loan-application-document-extraction/"
+}

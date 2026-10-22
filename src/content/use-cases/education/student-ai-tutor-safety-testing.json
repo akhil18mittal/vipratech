@@ -1,0 +1,223 @@
+{
+  "slug": "student-ai-tutor-safety-testing",
+  "industry": "education",
+  "title": "Safety Testing for Student-Facing AI Tutors",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Red-team your AI tutor or doubt-solving bot before students use it: unsafe content, jailbreaks, confidently wrong answers, integrity bypasses and leaks of other students' data.",
+  "seo": {
+    "title": "Safety Testing for Student AI Tutors | VipraTech",
+    "description": "Adversarial testing of AI tutors and doubt-solving bots for child safety, jailbreaks, academic integrity, answer accuracy and student data leakage.",
+    "keywords": [
+      "AI tutor safety testing",
+      "edtech chatbot red teaming",
+      "child safety LLM testing",
+      "doubt solving bot evaluation",
+      "AI tutor data leakage test"
+    ]
+  },
+  "designed_for": [
+    "CTO (Edtech)",
+    "Head of Product, Learning Apps",
+    "Trust and Safety Lead",
+    "Academic Quality Head"
+  ],
+  "problem": {
+    "intro": "Coaching institutes and edtech companies are adding AI tutors that solve doubts from a photo, explain concepts in Hinglish and chat with students late at night. Most users are teenagers under exam pressure. A tutor that can be talked into unsafe content, gives a confidently wrong derivation or reveals another student's data creates a safety incident, not just a bug.",
+    "pain_points": [
+      {
+        "title": "Teenagers test boundaries",
+        "detail": "Students will try role-play, language switching and persistence to get the tutor to say things it should not."
+      },
+      {
+        "title": "Confident wrong answers",
+        "detail": "A wrong physics or chemistry solution explained fluently is worse than no answer, especially the night before an exam."
+      },
+      {
+        "title": "Integrity bypass",
+        "detail": "Tutors meant to guide step by step can be pushed into handing over full answers during live tests or graded assignments."
+      },
+      {
+        "title": "Student data in context",
+        "detail": "Tutors that read progress records, chat history or uploaded images can leak one student's data to another, or follow instructions hidden in an uploaded image."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a structured red-team of your tutor through the channels students use: app chat, image upload and voice mode where you offer it. Multi-turn playbooks in English, Hindi and Hinglish probe age-inappropriate content, handling of self-harm and distress, jailbreaks through role-play, academic-integrity bypasses, prompt injection hidden in uploaded question images, retrieval of other students' records and system-prompt extraction. A solution-accuracy set checks answers against faculty-verified solutions. Each test is scored PASS, RISK or FAIL with the full transcript as evidence, then reviewed by our security lead and your academic or safety reviewer. You get prioritised fixes and a re-test.",
+    "capabilities": [
+      "Multi-turn adversarial playbooks in English, Hindi and Hinglish, by text and voice",
+      "Child-safety checks for unsafe content, distress handling and escalation to humans",
+      "Academic-integrity tests against exam-mode and assignment-mode policies",
+      "Indirect prompt injection through uploaded images, PDFs and question text",
+      "Cross-student data leakage and access-control tests on tutor memory and records",
+      "Solution-accuracy benchmark against faculty-verified answers for each subject"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scope and policies",
+      "detail": "We agree the tutor's channels, age bands, content policy, integrity rules and the data it can access."
+    },
+    {
+      "step": 2,
+      "title": "Build playbooks",
+      "detail": "Attack and accuracy scenarios are written for your subjects, languages and student personas."
+    },
+    {
+      "step": 3,
+      "title": "Run tests",
+      "detail": "Playbooks run against a staging tutor, automated and by hand, across chat, image upload and voice."
+    },
+    {
+      "step": 4,
+      "title": "Score results",
+      "detail": "Each conversation is scored PASS, RISK or FAIL by rules and an evaluator model."
+    },
+    {
+      "step": 5,
+      "title": "Human review",
+      "detail": "Our security lead and your academic or safety reviewer confirm every RISK and FAIL."
+    },
+    {
+      "step": 6,
+      "title": "Report and re-test",
+      "detail": "You receive evidence, mapped risks and fixes, and we re-run the failed tests after changes."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope tutor, age bands, policies\"] --> B[\"Build attack and accuracy playbooks\"]\n  B --> C[\"Run tests in English, Hindi, Hinglish\"]\n  C --> D[\"Score PASS, RISK or FAIL\"]\n  D --> E{\"RISK or FAIL found?\"}\n  E -->|\"yes\"| F(\"Reviewers confirm findings\")\n  E -->|\"no\"| G[\"Record PASS evidence\"]\n  F --> H[\"Report with fixes\"]\n  G --> H\n  H --> I[\"Re-test after changes\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Test design",
+        "components": [
+          "Policy and age-band profile",
+          "Attack playbook library",
+          "Faculty-verified solution sets"
+        ]
+      },
+      {
+        "name": "Execution",
+        "components": [
+          "Chat and API test runner",
+          "Image and document injection payloads",
+          "Voice-mode test runner"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Rule-based checks for unsafe content and personal data",
+          "Evaluator model for policy adherence",
+          "Answer comparison against verified solutions"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Reviewer console for RISK and FAIL results",
+          "Severity rating and fix recommendations"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Evidence pack with transcripts",
+          "Mapping to OWASP LLM Top 10 and NIST AI RMF",
+          "Re-test tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Test design\"]\n    T1[\"Policy and age-band profile\"]\n    T2[\"Playbook library\"]\n    T3[\"Verified solution sets\"]\n  end\n  subgraph S2[\"Execution\"]\n    X1[\"Chat and API runner\"]\n    X2[\"Image injection payloads\"]\n    X3[\"Voice-mode runner\"]\n  end\n  subgraph S3[\"Evaluation and review\"]\n    E1[\"Rules and evaluator model\"]\n    E2[\"Answer comparison\"]\n    E3(\"Reviewer console\")\n  end\n  subgraph S4[\"Reporting\"]\n    R1[\"Evidence pack\"]\n    R2[\"Re-test tracker\"]\n  end\n  T1 --> T2\n  T2 --> X1\n  T2 --> X2\n  T2 --> X3\n  X1 --> E1\n  X2 --> E1\n  X3 --> E1\n  T3 --> E2\n  X1 --> E2\n  E1 --> E3\n  E2 --> E3\n  E3 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Staging access to the tutor via app, API or voice",
+    "Content policy, age bands and escalation procedures",
+    "Description of data the tutor can read, such as progress records or chat history",
+    "Faculty-verified solutions for the accuracy set",
+    "Test student accounts with synthetic data"
+  ],
+  "outputs": [
+    "PASS, RISK and FAIL results per playbook, with transcripts",
+    "Prioritised findings with severity and suggested fixes",
+    "Mapping to the OWASP Top 10 for LLM Applications and NIST AI RMF",
+    "Answer-accuracy report by subject and topic",
+    "Re-test results after fixes"
+  ],
+  "human_in_the_loop": "Every RISK and FAIL is confirmed by our security lead and your academic or trust-and-safety reviewer before it goes into the report. Decisions on launch and acceptable risk stay with your leadership.",
+  "integrations": [
+    "Tutor staging environment and API",
+    "Mobile and web app builds for manual tests",
+    "Issue tracker such as Jira",
+    "CI pipeline for regression runs",
+    "Content moderation service, if you use one"
+  ],
+  "guardrails": [
+    "Tests run only on staging with synthetic student accounts, never real student data",
+    "Harmful test prompts kept in a restricted library and never published",
+    "Self-harm scenarios written with care and reviewed by your safety lead",
+    "Findings shared only with named contacts",
+    "Re-tests reuse the same playbooks so results are comparable"
+  ],
+  "compliance_notes": [
+    "Helps you evidence safeguards for children's data under the DPDP Act 2023, including the restrictions on tracking, behavioural monitoring and targeted advertising directed at children.",
+    "Findings map to the OWASP Top 10 for LLM Applications and NIST AI RMF; for UK users, the ICO's Age Appropriate Design Code may also be relevant."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One tutor feature, for example photo-based doubt solving for one subject, tested across chat and image upload in English and Hinglish.",
+    "deliverables": [
+      "Agreed test scope and policy profile",
+      "Playbooks for safety, integrity, privacy and accuracy",
+      "Scored evidence pack with transcripts",
+      "Findings report with fixes",
+      "One re-test after fixes"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Findings by severity",
+        "how": "Count of confirmed RISK and FAIL results by category and severity."
+      },
+      {
+        "metric": "Answer accuracy",
+        "how": "Tutor answers compared with faculty-verified solutions on the accuracy set."
+      },
+      {
+        "metric": "Escalation behaviour",
+        "how": "Distress scenarios in which the tutor stopped and pointed to a person or helpline as your policy requires."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Previously failed tests that pass on re-test."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you test with real student data?",
+      "a": "No. We use synthetic student accounts and staging data. If the tutor reads real records in production, we test its access controls with synthetic records that mimic them."
+    },
+    {
+      "q": "Can you test a voice-mode tutor?",
+      "a": "Yes. Voice playbooks run in Hindi, Hinglish and English, including interruptions and code-switching, which often get past text-only safety filters."
+    },
+    {
+      "q": "Will the report tell us the tutor is safe for children?",
+      "a": "It shows, with evidence, where the tutor passed, where it was at risk and where it failed against the agreed policy. The decision to launch remains yours, and we recommend repeating the tests after major model or prompt changes."
+    },
+    {
+      "q": "Can this run continuously?",
+      "a": "Yes. After the first assessment the playbooks can run in your CI pipeline on every release, with new attacks added as they appear."
+    }
+  ],
+  "related": [
+    "question-bank-tagging-and-generation",
+    "online-test-proctoring-assistance",
+    "voice-agent-adversarial-testing",
+    "rag-data-leakage-and-access-control-testing"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/education/student-ai-tutor-safety-testing/"
+}

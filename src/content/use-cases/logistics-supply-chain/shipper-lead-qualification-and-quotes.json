@@ -1,0 +1,218 @@
+{
+  "slug": "shipper-lead-qualification-and-quotes",
+  "industry": "logistics-supply-chain",
+  "title": "Shipper Lead Qualification and Quote Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Qualify inbound shipper enquiries from web, email and WhatsApp, collect lane, volume and cargo details, and draft quotes from your rate cards for a salesperson to approve.",
+  "seo": {
+    "title": "Shipper Lead Qualification and Quote Automation | VipraTech",
+    "description": "AI that qualifies shipper enquiries, captures lanes, volumes and cargo details, and drafts quotes from your rate cards for sales team approval.",
+    "keywords": [
+      "freight quote automation",
+      "logistics lead qualification",
+      "shipper enquiry management",
+      "3PL sales automation",
+      "freight RFQ response"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales",
+    "Pricing Manager",
+    "Inside Sales Lead",
+    "Branch Business Development Manager"
+  ],
+  "problem": {
+    "intro": "Logistics companies get enquiries from website forms, emails, WhatsApp, marketplaces and referrals: a one-off part load from Pune to Guwahati, a monthly FTL contract, an export LCL shipment, a warehousing requirement. Sales teams chase missing details, wait on pricing, and many leads go cold before a quote reaches the shipper.",
+    "pain_points": [
+      {
+        "title": "Enquiries missing key details",
+        "detail": "Origin, destination, cargo type, weight, dimensions, frequency and timelines arrive incomplete, so the first exchanges are spent collecting basics."
+      },
+      {
+        "title": "Slow quotes",
+        "detail": "Pricing teams build quotes by hand from rate cards, vendor rates and surcharges, and simple spot quotes wait behind large RFQs."
+      },
+      {
+        "title": "Poor-fit leads take time",
+        "detail": "Enquiries for lanes, cargo types or volumes you do not serve get the same attention as good-fit ones."
+      },
+      {
+        "title": "No follow-up discipline",
+        "detail": "Quotes sent by email are not followed up consistently, and nobody records why leads were lost."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an enquiry assistant that responds on your website, email and WhatsApp, asks for missing details in a short conversation and structures the lead: lanes, mode, cargo, weight and dimensions, frequency, special handling and timelines. It checks fit against your service coverage and minimum volumes, scores the lead and routes it to the right branch or vertical. For standard lanes it drafts a quote from your rate cards, fuel surcharge and accessorial rules; for RFQs it extracts lane tables from the shipper's spreadsheet into your pricing template. A salesperson approves every quote, and follow-ups and outcomes are recorded in your CRM.",
+    "capabilities": [
+      "Captures enquiries from web forms, email, WhatsApp and marketplaces in one queue",
+      "Asks follow-up questions to complete lane, cargo, volume and timeline details",
+      "Scores fit against your lanes, modes, cargo types and minimum volumes",
+      "Drafts spot quotes from rate cards, fuel surcharge and accessorial rules",
+      "Extracts lane tables from RFQ spreadsheets into your pricing template",
+      "Schedules follow-ups and records win or loss reasons in the CRM"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Enquiry arrives",
+      "detail": "A shipper submits a form, sends an email or messages on WhatsApp, and the enquiry lands in one queue."
+    },
+    {
+      "step": 2,
+      "title": "Complete the details",
+      "detail": "The assistant asks for missing information such as dimensions, frequency or pickup dates."
+    },
+    {
+      "step": 3,
+      "title": "Score and route",
+      "detail": "The lead is scored against your coverage and routed to the right branch, vertical or inside sales."
+    },
+    {
+      "step": 4,
+      "title": "Draft the quote",
+      "detail": "Standard lanes get a draft quote from rate cards; RFQ lanes are extracted for the pricing team."
+    },
+    {
+      "step": 5,
+      "title": "Sales approval",
+      "detail": "A salesperson or pricing manager reviews, edits and approves the quote before it is sent."
+    },
+    {
+      "step": 6,
+      "title": "Follow up and record",
+      "detail": "Follow-ups are scheduled, and outcomes and reasons are recorded in the CRM."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Enquiry from web, email or WhatsApp\"] --> B[\"Collect missing lane and cargo details\"]\n  B --> C[\"Score fit and route lead\"]\n  C --> D{\"Standard lane with rate card?\"}\n  D -->|\"yes\"| E[\"Draft quote from rate card\"]\n  D -->|\"no\"| F(\"Pricing team builds quote\")\n  E --> G(\"Salesperson approves quote\")\n  F --> G\n  G --> H[\"Send quote and schedule follow-up\"]\n  H --> I[\"Record outcome in CRM\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Lead capture",
+        "components": [
+          "Website form and chat widget",
+          "Email parser for enquiry inboxes",
+          "WhatsApp Business API"
+        ]
+      },
+      {
+        "name": "Qualification",
+        "components": [
+          "Conversational detail collection",
+          "Fit scoring against coverage rules",
+          "Branch and vertical routing"
+        ]
+      },
+      {
+        "name": "Pricing",
+        "components": [
+          "Rate card and surcharge rule store",
+          "Quote draft generator",
+          "RFQ spreadsheet extractor"
+        ]
+      },
+      {
+        "name": "Sales workflow",
+        "components": [
+          "Approval screen for sales and pricing",
+          "CRM integration",
+          "Follow-up scheduler"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Lead capture\"]\n    L1[\"Web form and chat\"]\n    L2[\"Email parser\"]\n    L3[\"WhatsApp Business API\"]\n  end\n  subgraph S2[\"Qualification\"]\n    Q1[\"Detail collection\"]\n    Q2[\"Fit scoring and routing\"]\n  end\n  subgraph S3[\"Pricing\"]\n    P1[\"Rate card rules\"]\n    P2[\"Quote drafter\"]\n    P3[\"RFQ extractor\"]\n  end\n  subgraph S4[\"Sales workflow\"]\n    W1(\"Sales approval screen\")\n    W2[\"CRM\"]\n    W3[\"Follow-up scheduler\"]\n  end\n  L1 --> Q1\n  L2 --> Q1\n  L3 --> Q1\n  Q1 --> Q2\n  Q2 --> P2\n  Q2 --> P3\n  P1 --> P2\n  P2 --> W1\n  P3 --> W1\n  W1 --> W2\n  W1 --> W3"
+  },
+  "inputs": [
+    "Enquiries from forms, email, WhatsApp and marketplaces",
+    "Rate cards, fuel surcharge and accessorial rules",
+    "Service coverage: lanes, pin codes, modes and cargo types",
+    "RFQ spreadsheets from shippers",
+    "CRM account and opportunity data"
+  ],
+  "outputs": [
+    "Structured, scored leads routed to the right team",
+    "Draft spot quotes for approval",
+    "RFQ lane tables in your pricing template",
+    "Follow-up schedule and reminders",
+    "Win or loss reasons and pipeline reports"
+  ],
+  "human_in_the_loop": "A salesperson or pricing manager approves every quote before it reaches the shipper, and pricing builds all non-standard and contract quotes. The system never commits capacity or rates on its own.",
+  "integrations": [
+    "CRM such as Salesforce, Zoho or HubSpot",
+    "Website and chat widget",
+    "WhatsApp Business API",
+    "Email inbox for enquiries",
+    "TMS or pricing tool holding rate cards"
+  ],
+  "guardrails": [
+    "No quote sent without human approval",
+    "Quotes carry a validity period and stated assumptions",
+    "Only current, approved rate cards used",
+    "Shipper data used only for the enquiry and follow-ups they asked for",
+    "Opt-outs honoured on WhatsApp and email follow-ups"
+  ],
+  "compliance_notes": [
+    "Follow-up messages follow WhatsApp Business policies and TRAI commercial communication rules where applicable.",
+    "Lead personal data is processed in line with the DPDP Act 2023, and GDPR for shippers in the EU."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Inbound enquiries for one mode, such as PTL or FTL, from the website and WhatsApp, with quote drafts for your most-quoted lanes.",
+    "deliverables": [
+      "Enquiry flows for web and WhatsApp",
+      "Digitised rate cards for the pilot lanes",
+      "Quote approval screen",
+      "CRM integration in a test environment",
+      "Pilot report on lead quality and quote turnaround"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Enquiry completeness",
+        "how": "Leads arriving at sales with all required details, out of all pilot leads."
+      },
+      {
+        "metric": "Time to first quote",
+        "how": "Time from enquiry to approved quote, compared with recent enquiries before the pilot."
+      },
+      {
+        "metric": "Quote edit rate",
+        "how": "Changes salespeople make to drafted quotes before approval."
+      },
+      {
+        "metric": "Routing accuracy",
+        "how": "Leads re-routed by sales because they reached the wrong team."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the system send quotes without our approval?",
+      "a": "No. Every quote is drafted for a salesperson or pricing manager to review and approve. You may later allow automatic sending for specific standard lanes, but that is your decision."
+    },
+    {
+      "q": "Our pricing depends on vendor rates that change daily. Can it handle that?",
+      "a": "For spot pricing tied to market vendor rates, the system collects the enquiry and drafts the quote structure, and your pricing team adds the rate. Standard contract lanes can use stored rate cards."
+    },
+    {
+      "q": "Can it read shipper RFQ spreadsheets?",
+      "a": "Yes. RFQ files with lane tables are extracted into your pricing template, with unclear rows flagged. Your pricing team then fills in or reviews the rates."
+    },
+    {
+      "q": "Which CRM do you support?",
+      "a": "We integrate through your CRM's API, for example Salesforce, Zoho or HubSpot. If you do not use a CRM yet, the pilot can start with a simple lead board."
+    }
+  ],
+  "related": [
+    "freight-invoice-audit",
+    "delivery-status-voice-and-whatsapp-agent",
+    "outbound-sdr-research-agent",
+    "travel-quote-generation-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/shipper-lead-qualification-and-quotes/"
+}

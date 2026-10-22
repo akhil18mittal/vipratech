@@ -1,0 +1,225 @@
+{
+  "slug": "broker-kyc-onboarding-verification",
+  "industry": "capital-markets-wealth",
+  "title": "KYC and Onboarding Document Verification for Brokers",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check account opening packets for brokers and depository participants: cross-match KYC fields, apply segment and entity checklists, and prepare a discrepancy list for the checker.",
+  "seo": {
+    "title": "Broker KYC and Onboarding Verification AI | VipraTech",
+    "description": "AI for brokers and DPs that cross-checks PAN, masked Aadhaar, address, bank and income proofs, applies KYC checklists and prepares files for checkers.",
+    "keywords": [
+      "broker KYC verification",
+      "demat account opening automation",
+      "KRA KYC checks",
+      "derivatives activation income proof",
+      "KYC maker checker AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Client Onboarding",
+    "KYC Checker Team Lead",
+    "Compliance Officer",
+    "NRI and Corporate Desk Manager"
+  ],
+  "problem": {
+    "intro": "Every trading and demat account starts with a KYC packet: PAN, masked Aadhaar or DigiLocker e-KYC, address and bank proof, signature, in-person verification and nomination details, plus income proof if the client wants derivatives. Checkers verify each packet before upload to a KRA, and volumes surge whenever a popular IPO opens.",
+    "pain_points": [
+      {
+        "title": "Name and address mismatches",
+        "detail": "Small differences between PAN, Aadhaar, bank records and the application lead to KRA rejections that send the client back to the start."
+      },
+      {
+        "title": "Derivatives activation needs judgement",
+        "detail": "Income proofs range from ITRs and salary slips to bank statements and holding statements, and checkers must confirm each meets your policy."
+      },
+      {
+        "title": "Non-individual and NRI files are slow",
+        "detail": "Company, partnership, trust, HUF and NRI accounts each need different documents, and missing items surface late."
+      },
+      {
+        "title": "Checker queues spike unpredictably",
+        "detail": "IPO openings and market rallies bring sudden volume, and quality slips when checkers rush."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a maker-checker assistant for your onboarding team. It classifies every document in the packet, extracts names, dates of birth, PAN, addresses, bank details and signatures, and cross-matches them with each other and with the record fetched from the KRA or CKYC. It applies checklists for the client's entity type and requested segments, checks that derivatives requests carry an acceptable income proof, and confirms expiry dates and legibility. Mismatches and missing items become a discrepancy list with document references and a drafted message for the client. Clean files go to a checker for fast approval; no account is approved without a person.",
+    "capabilities": [
+      "Classifies PAN, masked Aadhaar or DigiLocker e-KYC, address proofs, bank proofs, income proofs and entity documents",
+      "Cross-matches name, date of birth, address and PAN across documents and the KRA or CKYC record",
+      "Applies checklists by entity type: individual, NRI, HUF, partnership, company or trust",
+      "Checks that derivatives segment requests carry an acceptable income proof under your policy",
+      "Verifies presence of signature, photograph, nomination or opt-out declaration and FATCA self-certification",
+      "Produces a discrepancy list and a drafted client message, with a maker-checker audit trail"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the packet",
+      "detail": "The application and documents arrive from your e-KYC journey, branch or partner channel."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document is identified and key fields are extracted, with Aadhaar masked on capture."
+    },
+    {
+      "step": 3,
+      "title": "Cross-match records",
+      "detail": "Fields are compared across documents and with the KRA or CKYC record."
+    },
+    {
+      "step": 4,
+      "title": "Apply checklists",
+      "detail": "Entity-type and segment checklists confirm the required documents and an acceptable income proof."
+    },
+    {
+      "step": 5,
+      "title": "Checker review",
+      "detail": "Files with discrepancies go to a checker with a drafted client message; clean files go to a checker for fast approval."
+    },
+    {
+      "step": 6,
+      "title": "Upload and record",
+      "detail": "Approved records are uploaded to the KRA and back office, and the audit trail is stored."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Account opening packet received\"] --> B[\"Classify and extract, mask Aadhaar\"]\n  B --> C[\"Cross-match with KRA or CKYC record\"]\n  C --> D[\"Entity and segment checklists\"]\n  D --> E{\"Mismatch or missing item?\"}\n  E -->|\"yes\"| F(\"Checker resolves and requests documents\")\n  E -->|\"no\"| G(\"Checker fast-track approval\")\n  F --> G\n  G --> H[\"Upload to KRA and back office\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "e-KYC journey and branch upload connectors",
+          "DigiLocker document fetch",
+          "Application data loader"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Document classifier",
+          "OCR and field extractor",
+          "Aadhaar masking on capture",
+          "Signature and photograph presence check"
+        ]
+      },
+      {
+        "name": "Verification rules",
+        "components": [
+          "Cross-document field matching",
+          "KRA and CKYC record comparison",
+          "Entity-type and segment checklists"
+        ]
+      },
+      {
+        "name": "Checker workspace",
+        "components": [
+          "Discrepancy list with document links",
+          "Drafted client messages",
+          "Maker-checker approval log"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "KRA upload through your existing interface",
+          "Back-office and CRM adapters"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"e-KYC and branch upload\"]\n    I2[\"DigiLocker fetch\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Classifier and OCR\"]\n    U2[\"Aadhaar masking\"]\n    U3[\"Field extractor\"]\n  end\n  subgraph S3[\"Verification rules\"]\n    V1[\"Cross-document matching\"]\n    V2[\"KRA and CKYC comparison\"]\n    V3[\"Entity and segment checklists\"]\n  end\n  subgraph S4[\"Checker workspace and integration\"]\n    W1(\"Checker workspace\")\n    W2[\"KRA upload interface\"]\n    W3[\"Back office and audit log\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2\n  U2 --> U3\n  U3 --> V1\n  V1 --> V2\n  V2 --> V3\n  V3 --> W1\n  W1 --> W2\n  W2 --> W3"
+  },
+  "inputs": [
+    "Account opening form and application data",
+    "PAN, masked Aadhaar or DigiLocker e-KYC, and address proof",
+    "Bank proof such as a cancelled cheque or bank statement",
+    "Income proof for derivatives activation",
+    "In-person verification record, photograph and signature",
+    "Entity documents for non-individual and NRI accounts"
+  ],
+  "outputs": [
+    "Field-level verification report",
+    "Discrepancy list linked to the relevant documents",
+    "Drafted deficiency message to the client",
+    "Checklist status by entity type and segment",
+    "Maker-checker audit trail"
+  ],
+  "human_in_the_loop": "A checker approves every account, including clean files on the fast track, and resolves each discrepancy. Compliance owns the checklists and acceptable-document rules; the assistant applies them and never overrides a KRA status.",
+  "integrations": [
+    "Onboarding and e-KYC platform",
+    "KRA and CKYC interfaces through your existing integration",
+    "DigiLocker",
+    "Broking back-office system",
+    "CRM for client communication"
+  ],
+  "guardrails": [
+    "Aadhaar masked on capture and handled per UIDAI rules",
+    "No account approved without a checker",
+    "Acceptable-document rules configured and versioned by compliance",
+    "Personal data masked in logs and processed in an India region",
+    "Every verification result linked to the document and field it came from"
+  ],
+  "compliance_notes": [
+    "SEBI KYC norms and the KRA framework set what must be collected and verified; the assistant applies your documented checklist and records the maker-checker trail.",
+    "Aadhaar is handled per UIDAI rules, and personal data under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Resident individual accounts and derivatives activation requests from your digital journey, processed in shadow mode next to your checker team.",
+    "deliverables": [
+      "Checklist and rule set agreed with compliance",
+      "Working assistant on de-identified historical and live packets",
+      "Checker workspace",
+      "Agreement report against checker decisions",
+      "Plan for NRI and non-individual coverage"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with checker decisions",
+        "how": "Assistant outcomes compared with checker decisions on the same packets."
+      },
+      {
+        "metric": "Discrepancies caught and missed",
+        "how": "Issues the checker found that the assistant also flagged, and any it missed."
+      },
+      {
+        "metric": "Checker handling time",
+        "how": "Time per packet with and without the discrepancy list."
+      },
+      {
+        "metric": "Deficiency requests per application",
+        "how": "Count of client follow-ups needed, compared with a recent baseline period."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it handle NRI and corporate accounts?",
+      "a": "Yes. Each entity type has its own checklist, for example board resolutions and authorised signatory lists for companies, or overseas address and bank details for NRIs. A typical pilot starts with resident individuals and adds these next."
+    },
+    {
+      "q": "Do you store Aadhaar numbers?",
+      "a": "No. Aadhaar is masked at capture and handled per UIDAI rules. Where DigiLocker or offline e-KYC is used, only the fields your process needs are kept."
+    },
+    {
+      "q": "Will it auto-approve clean applications?",
+      "a": "No. Clean files move to a fast-track queue, but a checker still approves each one. This keeps the maker-checker control your compliance team relies on."
+    },
+    {
+      "q": "Can it compare signatures?",
+      "a": "It checks that a signature is present and legible and can flag obvious differences between the form and other documents. The final signature judgement stays with the checker."
+    }
+  ],
+  "related": [
+    "client-statement-and-portfolio-extraction",
+    "dormant-account-reactivation",
+    "account-opening-document-verification",
+    "merchant-onboarding-kyc-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/broker-kyc-onboarding-verification/"
+}

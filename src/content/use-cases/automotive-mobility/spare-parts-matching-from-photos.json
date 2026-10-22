@@ -1,0 +1,217 @@
+{
+  "slug": "spare-parts-matching-from-photos",
+  "industry": "automotive-mobility",
+  "title": "Spare Parts Catalogue Matching from Photos",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Identify spare parts from customer or mechanic photos by reading part numbers, matching catalogue images and filtering by vehicle fitment, then confirm stock and price before quoting.",
+  "seo": {
+    "title": "Spare Parts Matching from Photos with AI | VipraTech",
+    "description": "AI that identifies spare parts from photos using part number OCR, catalogue image matching and VIN-based fitment, then checks stock and price.",
+    "keywords": [
+      "spare parts identification from photo",
+      "auto parts catalogue matching AI",
+      "VIN based parts lookup",
+      "WhatsApp spare parts enquiry",
+      "aftermarket parts search"
+    ]
+  },
+  "designed_for": [
+    "Dealer Parts Manager",
+    "Aftermarket Distributor Owner",
+    "Parts Counter Executive",
+    "E-commerce Catalogue Manager"
+  ],
+  "problem": {
+    "intro": "Mechanics and customers send parts counters a photo of a worn brake pad, filter, lamp or sensor along with the car model and year. Finding the right part number means searching the electronic parts catalogue by model, variant and fitment, and the answer often depends on one experienced counter executive.",
+    "pain_points": [
+      {
+        "title": "Wrong parts and returns",
+        "detail": "Lookalike parts across variants, fuel types and model years lead to wrong orders, returns and an unhappy garage."
+      },
+      {
+        "title": "Worn or missing part numbers",
+        "detail": "Stamped numbers wear off and labels peel away, leaving only the shape and a few markings to go on."
+      },
+      {
+        "title": "Expertise concentrated in a few people",
+        "detail": "Fast, accurate identification depends on senior counter staff, which caps how many enquiries a counter can handle."
+      },
+      {
+        "title": "WhatsApp enquiries pile up",
+        "detail": "Photo enquiries arrive all day and wait until someone has time to search the catalogue."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a parts identification service that takes a photo and vehicle details from WhatsApp or the counter app. It first narrows the search to the vehicle's fitment list, decoded from the VIN or RC details. It then reads any stamped numbers, labels or barcodes and compares the part's shape against catalogue images within that list, producing a ranked shortlist with the evidence for each candidate. Supersession and interchange tables are applied, and stock, price and alternate locations come from your DMS or ERP. A parts executive confirms the part number before a quote goes back on WhatsApp or an order is created.",
+    "capabilities": [
+      "Reads stamped and printed part numbers, OEM labels and barcodes from photos",
+      "Narrows candidates by make, model, variant, fuel type and year from the VIN or RC",
+      "Compares part shape with catalogue images within the vehicle's fitment list",
+      "Applies supersession and interchange tables to reach current part numbers",
+      "Shows stock, price and alternate branch availability from the DMS or ERP",
+      "Handles intake and replies on WhatsApp with the confirmed part and quote"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the enquiry",
+      "detail": "A photo and vehicle details arrive on WhatsApp or are captured at the counter."
+    },
+    {
+      "step": 2,
+      "title": "Decode fitment",
+      "detail": "The VIN or RC details are decoded to the exact model, variant and year to narrow the catalogue."
+    },
+    {
+      "step": 3,
+      "title": "Read and match",
+      "detail": "Part numbers and labels are read, and the shape is matched against catalogue images in the fitment list."
+    },
+    {
+      "step": 4,
+      "title": "Confirm the part",
+      "detail": "The parts executive confirms a clear leading candidate in one tap, or chooses from the shortlist when candidates are close."
+    },
+    {
+      "step": 5,
+      "title": "Check stock and price",
+      "detail": "Supersessions are applied, and stock and price are pulled from the DMS or ERP."
+    },
+    {
+      "step": 6,
+      "title": "Quote and order",
+      "detail": "The quote goes back on WhatsApp, and confirmed orders become a pick list or sales order."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Part photo and vehicle details\"] --> B[\"Decode fitment from VIN or RC\"]\n  B --> C[\"Read part numbers and match shape\"]\n  C --> D{\"Single confident match?\"}\n  D -->|\"yes\"| E(\"Executive confirms proposed part\")\n  D -->|\"no\"| F(\"Executive picks from shortlist\")\n  E --> G[\"Apply supersession, check stock\"]\n  F --> G\n  G --> H[\"Quote sent on WhatsApp\"]\n  H --> I[\"Pick list or order on confirmation\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "WhatsApp Business API",
+          "Counter app and web upload",
+          "VIN and RC reader"
+        ]
+      },
+      {
+        "name": "Catalogue data",
+        "components": [
+          "Electronic parts catalogue import",
+          "Catalogue image index",
+          "Supersession and interchange tables"
+        ]
+      },
+      {
+        "name": "Matching",
+        "components": [
+          "Part number and label OCR",
+          "Visual similarity model",
+          "Fitment filter and ranker"
+        ]
+      },
+      {
+        "name": "Review and commerce",
+        "components": [
+          "Parts executive shortlist screen",
+          "DMS or ERP stock and price API",
+          "Quote and order creation"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"WhatsApp and counter app\"]\n    I2[\"VIN and RC reader\"]\n  end\n  subgraph S2[\"Catalogue data\"]\n    D1[\"Parts catalogue import\"]\n    D2[\"Catalogue image index\"]\n    D3[\"Supersession tables\"]\n  end\n  subgraph S3[\"Matching\"]\n    M1[\"Part number OCR\"]\n    M2[\"Visual similarity model\"]\n    M3[\"Fitment filter and ranker\"]\n  end\n  subgraph S4[\"Review and commerce\"]\n    R1(\"Parts executive shortlist\")\n    R2[\"DMS or ERP stock and price\"]\n    R3[\"Quote and order\"]\n  end\n  I1 --> M1\n  I1 --> M2\n  I2 --> M3\n  D1 --> M3\n  D2 --> M2\n  M1 --> M3\n  M2 --> M3\n  M3 --> R1\n  D3 --> R2\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Part photos from customers, mechanics or counter staff",
+    "VIN, RC details or model, variant and year",
+    "Electronic parts catalogue data and images under your licence",
+    "Supersession and interchange tables",
+    "Stock and price from the DMS or ERP"
+  ],
+  "outputs": [
+    "Ranked candidate part numbers with fitment evidence",
+    "Confirmed part number and current supersession",
+    "Quotes sent on WhatsApp",
+    "Pick lists or sales orders",
+    "Log of unmatched enquiries showing catalogue gaps"
+  ],
+  "human_in_the_loop": "The parts executive confirms every part number before a quote is sent. Safety-critical parts such as brake, steering and suspension components are always checked against catalogue fitment by staff.",
+  "integrations": [
+    "Dealer management system or ERP such as Tally or SAP Business One",
+    "OEM electronic parts catalogue or licensed aftermarket catalogue data",
+    "WhatsApp Business API",
+    "E-commerce storefront or B2B ordering portal",
+    "Barcode scanners at the counter"
+  ],
+  "guardrails": [
+    "Matches only within the vehicle's fitment list unless staff widen the search",
+    "Shortlists instead of a single answer when candidates are close",
+    "Staff confirmation for safety-critical parts",
+    "Catalogue data used only under your licence terms",
+    "Every quote logged with the evidence used to identify the part"
+  ],
+  "compliance_notes": [
+    "Customer phone numbers and chat history handled under the DPDP Act 2023, with WhatsApp messages sent only to opted-in contacts."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One dealer parts counter for one brand, covering fast-moving categories such as filters, brake pads, lamps and clutch parts.",
+    "deliverables": [
+      "Catalogue and image index for the pilot brand",
+      "WhatsApp and counter intake flow",
+      "Shortlist screen for parts executives",
+      "Identification accuracy report",
+      "Plan for further brands and categories"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Shortlist accuracy",
+        "how": "Whether the confirmed part number appears first or within the shortlist, checked against the executive's final choice."
+      },
+      {
+        "metric": "Enquiry response time",
+        "how": "Time from photo received to quote sent, compared with the current counter."
+      },
+      {
+        "metric": "Wrong-part returns",
+        "how": "Returns logged as wrong part during the pilot."
+      },
+      {
+        "metric": "Unmatched enquiries",
+        "how": "Enquiries the system could not narrow down, grouped by category."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it work for multi-brand aftermarket parts?",
+      "a": "Yes, if you have licensed catalogue data and images for those brands. Aftermarket identification leans more on fitment filtering and cross-reference tables, which we load during setup."
+    },
+    {
+      "q": "Where does the catalogue data come from?",
+      "a": "From the OEM electronic parts catalogue your dealership already licenses, or from an aftermarket catalogue provider. We work within those licence terms and do not scrape catalogues."
+    },
+    {
+      "q": "What if the part has no visible number?",
+      "a": "The system relies on vehicle fitment and shape matching, and shows a shortlist with catalogue images side by side. The executive can ask the customer for one more photo from a specific angle."
+    },
+    {
+      "q": "Can it handle two-wheeler and commercial vehicle parts?",
+      "a": "Yes, provided catalogue data is available. Two-wheeler parts are often small and similar, so we pay particular attention to fitment filtering in those categories."
+    }
+  ],
+  "related": [
+    "used-car-inspection-and-damage-detection",
+    "dealer-lead-routing-and-follow-up",
+    "warranty-claim-document-processing",
+    "catalog-enrichment-from-product-images"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/spare-parts-matching-from-photos/"
+}

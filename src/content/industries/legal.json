@@ -1,0 +1,116 @@
+{
+  "slug": "legal",
+  "name": "Legal",
+  "seo": {
+    "title": "AI for Legal Teams: Contracts, Courts, Research | VipraTech",
+    "description": "AI for law firms and in-house legal: contract review, NDA redlines, case chronologies, cause list tracking and citation-checked research.",
+    "keywords": [
+      "AI for law firms India",
+      "contract review AI",
+      "legal document automation",
+      "cause list tracking software",
+      "citation checking AI",
+      "legal AI security testing"
+    ]
+  },
+  "hero": {
+    "headline": "AI that reads the file and checks the citations, so lawyers spend time on judgement",
+    "subheadline": "We build document, voice and security systems for law firms, in-house legal teams and legal operations. Every output links to its source, and advocates review and decide."
+  },
+  "intro": "Legal work is document work under time pressure: contracts to review against a playbook, case files running to thousands of pages, data rooms to index before signing and daily cause lists across many courts. AI helps where the task is reading, extracting, comparing and tracking, provided every statement can be traced to a page and checked by a lawyer. It is not a source of legal advice, and it should never be trusted to cite case law it has not retrieved and verified. Confidentiality and privilege shape every design choice we make: matter-level access controls, no training on client documents, and testing to show that one client's information cannot reach another matter team.",
+  "challenges": [
+    {
+      "title": "Volume against the clock",
+      "detail": "Diligence deadlines, limitation periods and hearing dates leave little time to read everything that matters, and junior lawyers spend long hours on first-pass review."
+    },
+    {
+      "title": "Hallucinated authority is unacceptable",
+      "detail": "Courts in several jurisdictions have criticised filings that cited non-existent cases produced by AI tools, so any research output has to be verifiable line by line."
+    },
+    {
+      "title": "Confidentiality, privilege and ethical walls",
+      "detail": "Client documents cannot leak across matters or to vendors, and an AI tool that ignores ethical walls creates professional risk for the firm."
+    },
+    {
+      "title": "Court information is fragmented",
+      "detail": "Cause lists, orders and case status sit on separate portals for the Supreme Court, High Courts, district courts and tribunals, each with its own format."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Extracts clauses and obligations, drafts playbook-based redlines, builds case chronologies with page citations, indexes data rooms, tracks cause lists and orders, and verifies citations in research and drafts."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Takes inbound client enquiries in Hindi and English without giving advice, and turns permitted recordings of arbitral hearings and meetings into reviewed transcripts and minutes."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Tests legal copilots and client chatbots for cross-matter leakage, privilege exposure, prompt injection hidden in documents and weak access controls."
+    }
+  ],
+  "featured_use_cases": [
+    "contract-clause-extraction-and-risk-flags",
+    "legal-research-with-citation-checking",
+    "court-order-and-cause-list-tracking"
+  ],
+  "use_cases": [
+    "contract-clause-extraction-and-risk-flags",
+    "nda-review-and-redlines",
+    "case-file-summarisation-and-chronology",
+    "due-diligence-data-room-review",
+    "court-order-and-cause-list-tracking",
+    "legal-research-with-citation-checking",
+    "bulk-legal-notice-automation",
+    "client-intake-voice-agent",
+    "hearing-transcription-and-minutes",
+    "legal-ai-confidentiality-testing"
+  ],
+  "regulatory_context": [
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Client files hold personal data of clients, counterparties and witnesses. Firms and legal departments need purpose limitation, reasonable security safeguards and breach handling for the AI systems that process them."
+    },
+    {
+      "name": "Bar Council of India rules",
+      "note": "Restrict advocates from soliciting work or advertising and require confidentiality towards clients, so client-facing AI should handle inbound enquiries only and protect what clients disclose."
+    },
+    {
+      "name": "Privilege under Indian evidence law",
+      "note": "Professional communications between advocate and client are protected under Indian evidence law, now the Bharatiya Sakshya Adhiniyam 2023. AI tools must not expose privileged material to third parties."
+    },
+    {
+      "name": "GDPR and the EU AI Act",
+      "note": "Cross-border matters involving EU personal data bring GDPR obligations, and the EU AI Act sets risk-based requirements for AI systems used in the EU."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Does the AI give legal advice?",
+      "a": "No. It reads, extracts, compares, tracks and drafts for review. Advocates and in-house counsel decide what advice to give and what to file, and every output links back to its source document."
+    },
+    {
+      "q": "How do you prevent hallucinated case law?",
+      "a": "Research answers cite only judgments that were actually retrieved, and a separate checker confirms that each citation exists and that quoted text appears in the judgment. Signals of later treatment are flagged for the lawyer, and unverified citations are removed or clearly marked."
+    },
+    {
+      "q": "Where are client documents processed?",
+      "a": "In your cloud account or an India region of a major cloud provider, with matter-level access controls. We use models that do not retain or train on your data, and logs exclude document content."
+    },
+    {
+      "q": "Can it work with Hindi and regional-language court records?",
+      "a": "Yes. OCR and extraction support Hindi and English, including scanned district court orders and handwritten order sheets, with lower-confidence text marked for review. Other Indian languages can be added for specific courts."
+    }
+  ],
+  "related_industries": [
+    "nbfc-lending",
+    "accounting-audit-consulting",
+    "real-estate-construction"
+  ],
+  "cta": {
+    "headline": "Bring one matter type or one contract stack",
+    "text": "Pick a workflow that hurts, such as NDA review, cause list tracking or a diligence index. We will run a short pilot on de-identified or consented documents and go through the output with your lawyers line by line."
+  },
+  "url": "/industries/legal/"
+}

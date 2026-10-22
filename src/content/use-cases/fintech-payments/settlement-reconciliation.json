@@ -1,0 +1,223 @@
+{
+  "slug": "settlement-reconciliation",
+  "industry": "fintech-payments",
+  "title": "Settlement Report and Bank Statement Reconciliation",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Match gateway transaction logs, acquirer and UPI settlement files and escrow bank statements, explain the breaks and send only the unexplained ones to your reconciliation team.",
+  "seo": {
+    "title": "AI Settlement and Bank Statement Reconciliation | VipraTech",
+    "description": "Reconcile transaction logs, acquirer and UPI settlement files and escrow statements, including net batches, with AI-proposed explanations for breaks.",
+    "keywords": [
+      "settlement reconciliation",
+      "payment aggregator escrow reconciliation",
+      "UPI settlement file matching",
+      "MDR and net settlement matching",
+      "AI reconciliation breaks"
+    ]
+  },
+  "designed_for": [
+    "Head of Reconciliation",
+    "Settlement Operations Manager",
+    "Financial Controller",
+    "Treasury Manager"
+  ],
+  "problem": {
+    "intro": "A payment aggregator reconciles at least three views of the same money: its own transaction log, settlement reports from acquiring and UPI partner banks, and credits in the escrow account statement. Fees, GST on fees, refunds, chargebacks and net settlement mean the numbers rarely match line for line, and every source uses its own formats and references.",
+    "pain_points": [
+      {
+        "title": "Many-to-one matching",
+        "detail": "One bank credit can cover thousands of transactions net of MDR, GST and refunds, which spreadsheet lookups cannot explain."
+      },
+      {
+        "title": "Format drift",
+        "detail": "Acquirers change column names, layouts and reference formats without notice, and reconciliation scripts quietly break."
+      },
+      {
+        "title": "Suspense and ageing",
+        "detail": "Unexplained differences sit in suspense, and by the time someone investigates, the context has gone."
+      },
+      {
+        "title": "Escrow scrutiny",
+        "detail": "Merchant payouts must tie back to escrow credits, and auditors and partner banks expect a clear trail."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reconciliation engine that ingests your transaction log, settlement files and bank statements in whatever format they arrive, normalises them and matches them at the right level: one-to-one, one-to-many and net batch. Deterministic rules handle known patterns such as MDR, GST on fees, refunds, chargeback debits and reserves. Where rules run out, a language model reads the remaining context, such as statement narrations, file headers and emailed advices from the bank, and proposes an explanation with the supporting lines. Your reconciliation analyst accepts or rejects each proposal. Every break has an age, an owner and an audit trail, and approved matches feed your merchant payout and GL posting.",
+    "capabilities": [
+      "Parses CSV, Excel, fixed-width and PDF settlement reports and bank statements, and detects layout changes",
+      "Matches one-to-one, one-to-many and net batches using UTR, RRN, ARN and amount-date windows",
+      "Applies rules for MDR, GST on fees, refunds, chargeback debits, reserves and holds",
+      "Proposes explanations for unmatched items from narrations and bank emails, with evidence",
+      "Tracks break ageing, ownership and resolution notes",
+      "Produces payout-ready and GL-ready files from approved matches"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Ingest the sources",
+      "detail": "Transaction logs, acquirer and UPI settlement files and escrow statements are pulled daily by SFTP, API or mailbox."
+    },
+    {
+      "step": 2,
+      "title": "Normalise",
+      "detail": "Each file is mapped to a common schema, and layout changes are held for confirmation rather than silently misread."
+    },
+    {
+      "step": 3,
+      "title": "Match with rules",
+      "detail": "Deterministic rules match transactions to settlements and settlements to bank credits, including net batches."
+    },
+    {
+      "step": 4,
+      "title": "Explain the remainder",
+      "detail": "For unmatched items, the model proposes a likely explanation with the supporting lines and documents."
+    },
+    {
+      "step": 5,
+      "title": "Analyst review",
+      "detail": "Reconciliation analysts accept, correct or reject each proposal and assign open breaks to an owner."
+    },
+    {
+      "step": 6,
+      "title": "Post and report",
+      "detail": "Approved matches feed merchant payouts and GL entries, and open breaks appear in an ageing report."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Txn logs, settlement files, statements\"] --> B[\"Normalise to common schema\"]\n  B --> C{\"Layout change detected?\"}\n  C -->|\"yes\"| D(\"Ops confirms new mapping\")\n  C -->|\"no\"| E[\"Rule matching including net batches\"]\n  D --> E\n  E --> F{\"Unmatched items left?\"}\n  F -->|\"yes\"| G[\"LLM proposes explanation\"]\n  G --> H(\"Recon analyst accepts or rejects\")\n  F -->|\"no\"| I[\"Payout and GL files\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "SFTP and bank API pulls",
+          "Mailbox parser for emailed MIS",
+          "File layout change detector"
+        ]
+      },
+      {
+        "name": "Normalisation",
+        "components": [
+          "Schema mapper per source",
+          "Reference cleaner for UTR, RRN and ARN"
+        ]
+      },
+      {
+        "name": "Matching",
+        "components": [
+          "Rule engine for one-to-one and one-to-many",
+          "Net batch solver",
+          "LLM break explainer"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Break workbench with ageing and owners",
+          "Maker-checker approval for adjustments"
+        ]
+      },
+      {
+        "name": "Output and audit",
+        "components": [
+          "Payout file generator",
+          "GL posting export",
+          "Audit trail"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"SFTP and bank API pulls\"]\n    I2[\"Mailbox MIS parser\"]\n    I3[\"Layout change detector\"]\n  end\n  subgraph S2[\"Normalise and match\"]\n    M1[\"Schema mapper per source\"]\n    M2[\"Rule engine\"]\n    M3[\"Net batch solver\"]\n  end\n  subgraph S3[\"Explain and review\"]\n    J1[\"LLM break explainer\"]\n    J2(\"Recon analyst workbench\")\n  end\n  subgraph S4[\"Output and audit\"]\n    P1[\"Payout file generator\"]\n    P2[\"GL export\"]\n    P3[\"Audit trail\"]\n  end\n  I1 --> I3\n  I2 --> I3\n  I3 --> M1 --> M2 --> M3\n  M3 --> J1 --> J2\n  M3 --> P1\n  J2 --> P1\n  P1 --> P2 --> P3"
+  },
+  "inputs": [
+    "Gateway or switch transaction logs",
+    "Acquirer settlement reports and UPI settlement files",
+    "Escrow account bank statements in MT940, CSV or PDF",
+    "MDR and pricing schedule per merchant",
+    "Refund and chargeback registers",
+    "Emails and advices from partner banks"
+  ],
+  "outputs": [
+    "Matched transaction-to-settlement-to-credit records",
+    "Explained and unexplained break lists with ageing",
+    "Payout-ready merchant settlement file",
+    "GL posting file",
+    "Daily reconciliation summary for finance"
+  ],
+  "human_in_the_loop": "Analysts approve every model-proposed explanation and every manual match, with maker-checker on write-offs and adjustments. Rule-based matches are sampled daily, and payouts are released by your treasury team, not by the engine.",
+  "integrations": [
+    "Payment gateway or switch database",
+    "Acquiring and partner bank SFTP or API",
+    "Core ledger or ERP such as SAP, Oracle or Tally",
+    "Merchant payout system",
+    "BI tool such as Power BI or Metabase"
+  ],
+  "guardrails": [
+    "Model explanations are proposals only and never close a break without analyst approval",
+    "Maker-checker on any adjustment or write-off",
+    "Layout changes stop the affected file from auto-processing until a person confirms the mapping",
+    "Every match records the rule or reviewer that made it",
+    "Bank and merchant account numbers masked in logs"
+  ],
+  "compliance_notes": [
+    "Supports the escrow reconciliation and audit trail that payment aggregators are expected to maintain under RBI directions.",
+    "Payment data processed and stored in India, consistent with RBI's direction on storage of payment system data."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One acquirer and one UPI partner bank reconciled against your escrow statement for a recent historical month, followed by a short period of daily live runs.",
+    "deliverables": [
+      "Source mappings for the pilot files",
+      "Rule set for known fee, refund and chargeback patterns",
+      "Break workbench with model explanations",
+      "Comparison against your existing reconciliation output",
+      "Production plan covering the remaining sources"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Rule-based match coverage",
+        "how": "Transactions and credits matched by rules, compared with your current reconciliation for the same period."
+      },
+      {
+        "metric": "Explanation acceptance",
+        "how": "Model-proposed explanations accepted by analysts without changes."
+      },
+      {
+        "metric": "Break ageing",
+        "how": "Age profile of open breaks during the live period compared with the prior month."
+      },
+      {
+        "metric": "Analyst effort per day",
+        "how": "Timed effort to close the daily reconciliation, with and without the engine."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it handle net settlements where fees are already deducted?",
+      "a": "Yes. Net batch matching is central to the design. The engine rebuilds the expected net amount from transactions, MDR, GST and adjustments and compares it with the bank credit."
+    },
+    {
+      "q": "What happens when an acquirer changes its file format?",
+      "a": "The layout detector notices new, renamed or missing columns and holds that file until a person confirms the mapping. It does not guess silently."
+    },
+    {
+      "q": "Is the language model making accounting entries?",
+      "a": "No. Rules make deterministic matches, the model only proposes explanations for what remains, and an analyst approves them. GL and payout files are generated from approved matches only."
+    },
+    {
+      "q": "Does this replace our existing reconciliation tool?",
+      "a": "Not necessarily. It can run as a layer that works the breaks your current tool leaves, or as the primary engine for new sources. The pilot compares both options on your data."
+    }
+  ],
+  "related": [
+    "chargeback-dispute-evidence-pack",
+    "invoice-and-gst-data-extraction",
+    "bank-and-ledger-reconciliation",
+    "vendor-invoice-and-credit-note-reconciliation"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/settlement-reconciliation/"
+}

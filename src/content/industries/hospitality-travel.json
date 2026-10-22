@@ -1,0 +1,121 @@
+{
+  "slug": "hospitality-travel",
+  "name": "Hospitality & Travel",
+  "seo": {
+    "title": "AI for Hotels and Travel: Bookings and Ops | VipraTech",
+    "description": "AI for hotels, wedding venues and travel agents: WhatsApp booking, after-hours voice reservations, guest ID capture, invoice checks and quotes.",
+    "keywords": [
+      "AI for hotels India",
+      "WhatsApp hotel booking assistant",
+      "hotel reservation voice agent",
+      "guest ID capture and Form C",
+      "banquet enquiry automation",
+      "travel agent quote automation",
+      "hotel review response AI"
+    ]
+  },
+  "hero": {
+    "headline": "More direct bookings, faster check-ins and fewer missed enquiries, day and night",
+    "subheadline": "We build WhatsApp, voice, document and vision systems for hotels, wedding venues and travel businesses, designed around how a front desk, banquet office and kitchen actually run."
+  },
+  "intro": "Hospitality is a people business with a paperwork and phone problem behind it. Enquiries arrive on WhatsApp, phone, Instagram and OTAs at all hours, a wedding enquiry needs a dozen questions answered before a quote, every adult guest needs an ID on the register, and vendor bills pile up from vegetable suppliers to laundries. AI helps where the work is repetitive and rule-based: answering availability and rate questions, taking bookings with UPI payment, capturing IDs, matching invoices, checking visa files and spotting housekeeping or hygiene lapses in photos. It should not replace the welcome at the front desk, a manager handling a complaint or a revenue manager setting prices, and we design every system to hand over to them.",
+  "challenges": [
+    {
+      "title": "Enquiries at all hours, on every channel",
+      "detail": "Guests message on WhatsApp, call late at night and enquire through Instagram and Google while one or two people run the front desk, and unanswered enquiries often become OTA bookings with commission."
+    },
+    {
+      "title": "Commission-heavy distribution",
+      "detail": "OTAs bring visibility but take a commission on every booking, and direct channels are rarely staffed well enough to convert the guests who come to them first."
+    },
+    {
+      "title": "Check-in compliance under time pressure",
+      "detail": "Every adult guest's ID must be recorded, foreign nationals' details reported through Form C and registers kept for local police requirements, often while a queue forms at the desk."
+    },
+    {
+      "title": "Consistency across shifts and suppliers",
+      "detail": "Housekeeping standards, kitchen hygiene and supplier billing depend on people across shifts with high turnover, and lapses show up first in guest reviews."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Turns WhatsApp, banquet and travel enquiries into qualified bookings and quotes, and drafts review responses, with staff approving prices, offers and replies to complaints."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Answers reservation calls after hours in Hindi and English, checks availability and rates, sends payment links and transfers urgent in-house matters to the duty manager."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Captures guest IDs and Form C details at check-in, matches vendor invoices with purchase orders and receiving records, and checks visa files against agency checklists."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Reviews housekeeping photos against room standards and monitors kitchens for hygiene lapses and pests, with supervisors and chefs confirming each finding."
+    }
+  ],
+  "featured_use_cases": [
+    "hotel-whatsapp-booking-assistant",
+    "wedding-and-banquet-enquiry-qualification",
+    "guest-id-and-check-in-document-capture"
+  ],
+  "use_cases": [
+    "hotel-whatsapp-booking-assistant",
+    "after-hours-reservation-voice-agent",
+    "wedding-and-banquet-enquiry-qualification",
+    "guest-id-and-check-in-document-capture",
+    "hotel-vendor-invoice-processing",
+    "travel-itinerary-and-visa-document-checker",
+    "review-response-and-reputation-automation",
+    "travel-quote-generation-automation",
+    "housekeeping-room-inspection",
+    "kitchen-hygiene-monitoring"
+  ],
+  "regulatory_context": [
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Guest IDs, contact details, payment references and stay history are personal data. We design for notice, purpose limitation, retention limits and secure storage, with Aadhaar handled per UIDAI rules and shown only in masked form."
+    },
+    {
+      "name": "Foreign guest reporting (Form C)",
+      "note": "Hotels and other accommodation providers in India must report foreign nationals' stay details to the immigration authorities through the online Form C system within the prescribed time, and local police may set further guest register requirements. Our systems prepare the data; staff submit it."
+    },
+    {
+      "name": "FSSAI licensing and hygiene requirements",
+      "note": "Food businesses, including hotel kitchens and banquet caterers, need an FSSAI licence or registration and must follow the hygiene and sanitation practices set out in Schedule 4. Kitchen monitoring helps evidence day-to-day practice; it does not replace inspections."
+    },
+    {
+      "name": "GDPR and platform policies",
+      "note": "Travel businesses handling data of people in the EU may fall under GDPR, and WhatsApp and review platforms have their own rules on opt-in, templates and soliciting reviews, which our systems are configured to respect."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Does it work with our PMS and channel manager?",
+      "a": "We integrate through APIs, where available, with common hotel systems such as eZee, Hotelogix, IDS or Opera, and channel managers such as STAAH, AxisRooms or SiteMinder. For smaller properties without an API, we can start with a shared availability sheet that staff update, then move to an integration."
+    },
+    {
+      "q": "Is this only for large hotel chains?",
+      "a": "No. Many of these systems suit independent hotels, resorts and wedding venues, where one missed call or an unchecked bill hurts more. We size the pilot to the property, often starting with a single channel such as WhatsApp bookings."
+    },
+    {
+      "q": "Will guests know they are dealing with AI?",
+      "a": "Yes. Our assistants identify themselves and offer a person whenever the guest asks or the request needs judgement, such as complaints, special requests or group negotiations."
+    },
+    {
+      "q": "Which languages can guests use?",
+      "a": "Hindi, English and Hinglish as standard, with regional languages added where speech and text models perform well in testing. Written replies, such as review responses, can also be drafted in common foreign languages for international guests."
+    }
+  ],
+  "related_industries": [
+    "retail-ecommerce",
+    "real-estate-construction",
+    "telecom-contact-centers"
+  ],
+  "cta": {
+    "headline": "Start with the enquiries you are missing",
+    "text": "Book a discovery call and we will scope a short pilot for one property and one channel, such as WhatsApp bookings or after-hours calls, measured against how you work today."
+  },
+  "url": "/industries/hospitality-travel/"
+}

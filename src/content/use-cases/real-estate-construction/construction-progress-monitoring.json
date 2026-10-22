@@ -1,0 +1,228 @@
+{
+  "slug": "construction-progress-monitoring",
+  "industry": "real-estate-construction",
+  "title": "Construction Progress Monitoring from Site Photos",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Turn geotagged site photos, drone images and time-lapse cameras into tower-by-tower progress status against the schedule, with photo evidence a site engineer confirms.",
+  "seo": {
+    "title": "Construction Progress Monitoring with AI | VipraTech",
+    "description": "AI that reads site photos, drone images and time-lapse feeds to track slab, masonry and facade progress per tower against the schedule, with evidence.",
+    "keywords": [
+      "construction progress monitoring AI",
+      "site photo progress tracking",
+      "drone construction progress",
+      "slab cycle tracking",
+      "RERA progress evidence"
+    ]
+  },
+  "designed_for": [
+    "Project Director",
+    "Planning and Monitoring Manager",
+    "Lender's Independent Engineer",
+    "CRM Head for buyer updates"
+  ],
+  "problem": {
+    "intro": "Progress on a residential project is reported through weekly site reports, WhatsApp photos and planning spreadsheets, each prepared by a different person. Management, lenders, the RERA quarterly update and buyers all ask how far along each tower is, and they get slightly different answers.",
+    "pain_points": [
+      {
+        "title": "Reports that depend on who writes them",
+        "detail": "Floor and activity status is typed by site engineers from memory and photos, so the same tower can be reported at different stages by different teams."
+      },
+      {
+        "title": "Photos without structure",
+        "detail": "Thousands of photos sit in WhatsApp groups and phones with no link to a tower, floor or activity, and old photos get reused."
+      },
+      {
+        "title": "Late view of slippage",
+        "detail": "Slab cycle delays and stalled finishing on some floors show up in the schedule only at a month-end review."
+      },
+      {
+        "title": "Evidence requests from every direction",
+        "detail": "Lenders, auditors, the RERA update and buyer communication each need photo evidence, and the planning team assembles it by hand every time."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a progress monitoring system around a fixed set of photo points per tower, plus drone flights or time-lapse cameras where you have them. Site staff capture photos through a simple mobile flow that records GPS and time. Vision models identify the construction stage visible at each point, such as excavation, raft, columns, slab cast, blockwork, plaster, windows or facade, and count floors where the view allows. Results are mapped to your tower and floor structure and compared with the planned schedule. The site engineer confirms any change of stage before it reaches a report. Confirmed status and photos then feed management dashboards, lender reports and draft progress notes.",
+    "capabilities": [
+      "Mobile capture flow with fixed photo points, GPS and timestamp checks",
+      "Stage recognition for structure, masonry, plaster, MEP rough-in and facade work",
+      "Floor and slab counting from elevation photos and drone images",
+      "Comparison of observed stage with the planned schedule per tower and floor",
+      "Detection of reused or out-of-location photos",
+      "Dated photo evidence packs for lenders, audits and buyer updates"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Set up photo points",
+      "detail": "We agree fixed capture points and angles per tower with the planning team and map them to towers, floors and activities."
+    },
+    {
+      "step": 2,
+      "title": "Capture on schedule",
+      "detail": "Site staff capture photos weekly, or drones and time-lapse cameras upload automatically, with GPS and time recorded."
+    },
+    {
+      "step": 3,
+      "title": "Check photo validity",
+      "detail": "Location, timestamp and duplicate checks reject reused, blurred or out-of-place images and ask for a recapture."
+    },
+    {
+      "step": 4,
+      "title": "Recognise stage",
+      "detail": "Vision models classify the stage at each point and count floors or slabs where visible, with a confidence score."
+    },
+    {
+      "step": 5,
+      "title": "Engineer confirmation",
+      "detail": "Stage changes and low-confidence results are confirmed or corrected by the site engineer."
+    },
+    {
+      "step": 6,
+      "title": "Compare with schedule",
+      "detail": "Confirmed status is compared with the baseline schedule, and slippage is flagged per tower and activity."
+    },
+    {
+      "step": 7,
+      "title": "Publish reports and evidence",
+      "detail": "Dashboards update and dated evidence packs are prepared for management, lenders and buyer communication."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  P[\"Fixed photo points per tower\"] --> A[\"Photos, drone and time-lapse\"]\n  A --> B{\"GPS, time and quality valid?\"}\n  B -->|\"no\"| C[\"Request recapture\"]\n  B -->|\"yes\"| D[\"Recognise stage and floors\"]\n  D --> E(\"Site engineer confirms change\")\n  E --> F[\"Compare with planned schedule\"]\n  F --> G[\"Progress dashboard\"]\n  F --> H[\"Evidence pack for lenders and RERA\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Mobile capture app with photo point guidance",
+          "Drone image upload",
+          "Time-lapse camera feeds"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "GPS and timestamp checks",
+          "Duplicate and reuse detection",
+          "Image quality scoring"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Construction stage classifier",
+          "Floor and slab counter",
+          "Change detection between captures"
+        ]
+      },
+      {
+        "name": "Project context",
+        "components": [
+          "Tower, floor and activity map",
+          "Baseline schedule from Primavera or MS Project"
+        ]
+      },
+      {
+        "name": "Review and reporting",
+        "components": [
+          "Site engineer confirmation screen",
+          "Progress dashboard",
+          "Evidence pack generator"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n  P1[\"Mobile photo capture\"]\n  P2[\"Drone and time-lapse uploads\"]\n  end\n  subgraph S2[\"Validation\"]\n  V1[\"GPS and timestamp checks\"]\n  V2[\"Duplicate and quality checks\"]\n  end\n  subgraph S3[\"Vision models and project context\"]\n  M1[\"Stage classifier\"]\n  M2[\"Floor and slab counter\"]\n  M3[\"Schedule comparison\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n  R1(\"Site engineer confirmation\")\n  R2[\"Progress dashboard\"]\n  R3[\"Evidence pack generator\"]\n  end\n  P1 --> V1\n  P2 --> V1\n  V1 --> V2\n  V2 --> M1\n  M1 --> M2\n  M2 --> R1\n  R1 --> M3\n  M3 --> R2\n  M3 --> R3"
+  },
+  "inputs": [
+    "Geotagged photos from fixed capture points",
+    "Drone images or orthomosaics where available",
+    "Time-lapse camera feeds",
+    "Tower, floor and activity structure",
+    "Baseline and current schedule from Primavera, MS Project or Excel"
+  ],
+  "outputs": [
+    "Stage status per tower, floor and activity",
+    "Slippage flags against the schedule",
+    "Dated, location-checked photo evidence packs",
+    "Weekly progress dashboard",
+    "Engineer confirmation log"
+  ],
+  "human_in_the_loop": "The site engineer confirms every change in stage and any low-confidence result before it reaches a report. Stage completion certificates for RERA, lenders or demand letters remain the responsibility of the project's architect and engineer.",
+  "integrations": [
+    "Primavera P6, MS Project or Excel schedules",
+    "Drone survey providers' image exports",
+    "Time-lapse camera platforms",
+    "Real estate CRM for buyer progress updates",
+    "Power BI or a web dashboard"
+  ],
+  "guardrails": [
+    "No automatic stage completion certificates or demand triggers",
+    "Photos rejected when GPS, time or location do not match the capture point",
+    "Confidence shown on every stage result",
+    "People in photos are not identified, and faces can be blurred in shared evidence",
+    "Model performance reviewed per tower as construction changes the view"
+  ],
+  "compliance_notes": [
+    "Helps the promoter and its professionals evidence progress shown in RERA quarterly updates; certification stays with the architect and engineer.",
+    "Site photos may show workers, so storage and sharing follow DPDP Act 2023 principles of minimisation."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Two towers at one site, with fixed photo points captured weekly and results compared with the site team's own progress reports.",
+    "deliverables": [
+      "Photo point plan and capture flow",
+      "Stage recognition tuned on your site's photos",
+      "Weekly progress view for the two towers",
+      "Comparison with site reports",
+      "Plan and estimate for full site roll-out"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Stage recognition accuracy",
+        "how": "Model output compared with the site engineer's confirmed stage at each photo point."
+      },
+      {
+        "metric": "Photo rejections and reasons",
+        "how": "Count of photos rejected for GPS, time, quality or duplication, by reason."
+      },
+      {
+        "metric": "Agreement with site reports",
+        "how": "Differences between confirmed status and the weekly site report, reviewed with the planning team."
+      },
+      {
+        "metric": "Time to assemble evidence",
+        "how": "Time to produce a lender or management evidence pack with and without the system."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need drones?",
+      "a": "No. A disciplined set of fixed photo points from phones is enough for structure and facade stages. Drones help with large plotted developments and earthworks, and time-lapse cameras help with tall towers."
+    },
+    {
+      "q": "Can it see internal finishing work?",
+      "a": "Partly. Internal stages need photos from inside agreed flats or floors, so the photo plan includes sample internal points. External views cannot show internal finishing, and the report says so."
+    },
+    {
+      "q": "Can the result trigger demand letters automatically?",
+      "a": "We do not recommend it. The system can tell the CRM team that a slab looks complete, but the demand should follow the engineer's or architect's certificate as your agreement requires."
+    },
+    {
+      "q": "What about photos taken in poor light or during the monsoon?",
+      "a": "Quality checks reject very dark or blurred images and ask for a recapture. Results carry a confidence score, and difficult photos go to the engineer rather than being guessed."
+    }
+  ],
+  "related": [
+    "construction-site-safety-compliance",
+    "contractor-bill-verification-against-boq",
+    "rera-project-data-extraction",
+    "buyer-nurture-campaigns"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/construction-progress-monitoring/"
+}

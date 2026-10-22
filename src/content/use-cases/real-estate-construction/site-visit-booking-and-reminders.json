@@ -1,0 +1,217 @@
+{
+  "slug": "site-visit-booking-and-reminders",
+  "industry": "real-estate-construction",
+  "title": "Site Visit Booking and Reminder Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Book site visits against sales manager slots, confirm and remind by voice and WhatsApp, rearrange pick-ups, recover no-shows and capture post-visit feedback for the sales team.",
+  "seo": {
+    "title": "Site Visit Booking and Reminder Voice Agent | VipraTech",
+    "description": "AI agent that books property site visits, sends voice and WhatsApp reminders with location, reschedules no-shows and logs post-visit feedback in the CRM.",
+    "keywords": [
+      "site visit booking automation",
+      "real estate site visit reminders",
+      "property site visit no-shows",
+      "WhatsApp site visit confirmation",
+      "post site visit feedback calls"
+    ]
+  },
+  "designed_for": [
+    "Presales Manager",
+    "Site Sales Manager",
+    "Sales Operations Executive",
+    "Head of Sales"
+  ],
+  "problem": {
+    "intro": "For most housing projects the site visit is the step that turns an enquiry into a booking. Visits cluster on weekends, sales managers are double-booked one hour and idle the next, and many scheduled visitors simply do not turn up.",
+    "pain_points": [
+      {
+        "title": "Weekend crush, weekday gaps",
+        "detail": "Visits pile up on Saturday and Sunday afternoons while sales managers have free weekday slots, and the sample flat gets crowded."
+      },
+      {
+        "title": "No-shows with no follow-up",
+        "detail": "When a visitor does not arrive, nobody calls the same day, and the lead drifts to another project."
+      },
+      {
+        "title": "Logistics handled by hand",
+        "detail": "Location pins, pick-up cabs, parking and who will meet the visitor are coordinated over personal phones."
+      },
+      {
+        "title": "Feedback lost after the visit",
+        "detail": "Objections about price, layout, floor or location are discussed at site but rarely recorded, so follow-up stays generic."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice and WhatsApp agent that manages the site visit from booking to follow-up. It offers slots from each sales manager's calendar and the sample flat's capacity, nudges flexible visitors towards weekday slots, and confirms on WhatsApp with the location pin, landmark and contact person. It calls or messages the day before and on the morning of the visit, arranges or changes a pick-up if you offer one, and alerts the site team when a visitor is running late. If a visitor does not arrive, it calls to reschedule the same day. After the visit it calls for feedback, records objections and the next step, and updates the CRM.",
+    "capabilities": [
+      "Slot booking against sales manager calendars and sample flat capacity",
+      "WhatsApp confirmation with location pin, landmark, parking and contact person",
+      "Day-before and same-day reminders by voice or WhatsApp, with one-tap rescheduling",
+      "Pick-up requests and changes routed to the transport coordinator",
+      "Same-day no-show calls to reschedule or close the lead with a reason",
+      "Post-visit feedback calls capturing objections, interest level and next step"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Book the visit",
+      "detail": "Leads from presales or the qualification agent are offered slots from sales manager calendars, and the booking is written to the CRM."
+    },
+    {
+      "step": 2,
+      "title": "Confirm and share directions",
+      "detail": "A WhatsApp confirmation carries the location pin, timing, contact person and pick-up details if requested."
+    },
+    {
+      "step": 3,
+      "title": "Remind and reconfirm",
+      "detail": "The agent reminds the visitor the day before and that morning, and offers to reschedule if plans have changed."
+    },
+    {
+      "step": 4,
+      "title": "Track arrival",
+      "detail": "The site team marks arrival, and late or missing visitors trigger a call."
+    },
+    {
+      "step": 5,
+      "title": "Recover no-shows",
+      "detail": "Visitors who did not arrive are called the same day to reschedule or to record why they dropped out."
+    },
+    {
+      "step": 6,
+      "title": "Collect feedback",
+      "detail": "After the visit, the agent calls for feedback and objections, and the sales manager reviews the summary and sets the next action."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Qualified lead\"] --> B[\"Offer slots from sales calendars\"]\n  B --> C[\"WhatsApp confirmation with location\"]\n  C --> D[\"Day-before and morning reminders\"]\n  D --> E{\"Visitor arrived?\"}\n  E -->|\"no\"| F[\"Same-day reschedule call\"]\n  F --> B\n  E -->|\"yes\"| G[\"Post-visit feedback call\"]\n  G --> H(\"Sales manager sets next step\")\n  H --> I[\"CRM updated\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scheduling",
+        "components": [
+          "Sales manager calendars",
+          "Sample flat capacity rules",
+          "Booking service linked to the CRM"
+        ]
+      },
+      {
+        "name": "Messaging and voice",
+        "components": [
+          "WhatsApp Business API templates",
+          "Outbound voice agent in Hindi and English",
+          "Rescheduling flows"
+        ]
+      },
+      {
+        "name": "Site operations",
+        "components": [
+          "Arrival check-in by the site team",
+          "Pick-up request queue for transport"
+        ]
+      },
+      {
+        "name": "Follow-up and CRM",
+        "components": [
+          "Feedback call script and summariser",
+          "Sales manager review",
+          "CRM update and visit reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scheduling\"]\n  B1[\"Sales manager calendars\"]\n  B2[\"Booking service\"]\n  end\n  subgraph S2[\"Messaging and voice\"]\n  M1[\"WhatsApp templates\"]\n  M2[\"Voice reminder agent\"]\n  end\n  subgraph S3[\"Site operations\"]\n  O1(\"Site team arrival check-in\")\n  O2[\"Pick-up request queue\"]\n  end\n  subgraph S4[\"Follow-up and CRM\"]\n  F1[\"Feedback call and summary\"]\n  F2(\"Sales manager review\")\n  F3[\"CRM and visit reports\"]\n  end\n  B1 --> B2\n  B2 --> M1\n  B2 --> M2\n  M1 --> O2\n  M2 --> O1\n  O1 --> F1\n  F1 --> F2\n  F2 --> F3\n  B2 --> F3"
+  },
+  "inputs": [
+    "Qualified leads with preferred dates",
+    "Sales manager rosters and calendars",
+    "Project location pin, landmarks and parking details",
+    "Pick-up policy and transport coordinator contacts",
+    "Feedback questions agreed with sales"
+  ],
+  "outputs": [
+    "Booked, confirmed and rescheduled visits in the CRM",
+    "Reminder and confirmation history per lead",
+    "No-show list with reasons",
+    "Post-visit feedback summaries with objections",
+    "Weekly visit funnel report by source and sales manager"
+  ],
+  "human_in_the_loop": "Sales managers review every post-visit summary and set the next action, and the site team confirms arrivals. Requests about price negotiation, specific unit allocation or complaints are passed to a person immediately.",
+  "integrations": [
+    "Real estate CRM such as Salesforce, LeadSquared or Sell.Do",
+    "WhatsApp Business API",
+    "Cloud telephony for outbound calls",
+    "Google or Microsoft calendars",
+    "Cab booking or transport coordinator workflow"
+  ],
+  "guardrails": [
+    "Uses only pre-approved WhatsApp templates for business-initiated messages",
+    "Limits reminders to an agreed number per visit and honours opt-outs",
+    "Does not discuss price negotiation or unit allocation",
+    "Shares contact details of the site team only with the lead who booked",
+    "Every call and message logged against the lead"
+  ],
+  "compliance_notes": [
+    "WhatsApp messaging follows Meta's opt-in and template rules, and calls respect TRAI preferences and your consent records.",
+    "Visitor contact details and feedback are processed for the stated purpose under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One project's site visits over three weekends, with the agent handling confirmations, reminders, no-show calls and feedback for a defined set of bookings.",
+    "deliverables": [
+      "Booking and reminder flows connected to your CRM and calendars",
+      "WhatsApp templates submitted for approval",
+      "Feedback call script in Hindi and English",
+      "Pilot visit funnel report",
+      "Roll-out plan and estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Visit attendance",
+        "how": "Booked visits that took place, agent-handled versus the usual process."
+      },
+      {
+        "metric": "No-shows rescheduled",
+        "how": "Missed visits the agent rebooked that later took place."
+      },
+      {
+        "metric": "Feedback captured",
+        "how": "Visits with a recorded objection and next step in the CRM."
+      },
+      {
+        "metric": "Spread of visits across the week",
+        "how": "Distribution of visits across days and sales managers before and during the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can visitors reschedule by themselves?",
+      "a": "Yes. The WhatsApp confirmation includes reschedule and cancel options, and the voice agent can change the slot during a reminder call. Changes update the sales manager's calendar straight away."
+    },
+    {
+      "q": "How does it know a visitor has arrived?",
+      "a": "The site team marks arrival on a simple screen or the CRM app, or scans the QR code from the visitor's confirmation at reception. Without an arrival mark, the agent follows up as a possible no-show."
+    },
+    {
+      "q": "Will it annoy buyers with too many messages?",
+      "a": "We agree a reminder limit per visit with your team and stop as soon as the visitor confirms or opts out. Messages are short and carry only what the visitor needs."
+    },
+    {
+      "q": "Does it work across multiple projects?",
+      "a": "Yes. Each project has its own location details, slots and sales roster, and leads interested in more than one project can be offered combined visits if your team runs them."
+    }
+  ],
+  "related": [
+    "property-lead-qualification-voice-agent",
+    "buyer-nurture-campaigns",
+    "channel-partner-lead-automation",
+    "appointment-booking-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/site-visit-booking-and-reminders/"
+}

@@ -1,0 +1,221 @@
+{
+  "slug": "court-order-and-cause-list-tracking",
+  "industry": "legal",
+  "title": "Court Order and Cause List Tracking",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Track daily cause lists and new orders across the Supreme Court, High Courts, district courts and tribunals for your matters, extract next dates and directions, and alert the responsible counsel.",
+  "seo": {
+    "title": "Court Cause List and Order Tracking with AI | VipraTech",
+    "description": "Automated tracking of cause lists and orders across Indian courts and tribunals, with next dates and directions extracted and counsel alerted.",
+    "keywords": [
+      "cause list tracking software",
+      "court order tracking India",
+      "eCourts case status automation",
+      "litigation calendar automation",
+      "next date of hearing alerts"
+    ]
+  },
+  "designed_for": [
+    "Litigation Manager (In-House)",
+    "Head of Legal, Bank or NBFC",
+    "Law Firm Litigation Partner",
+    "Legal Operations Lead"
+  ],
+  "problem": {
+    "intro": "A bank, insurer or large company may have thousands of live matters across High Courts, district courts, consumer commissions, DRTs and NCLT benches. Each forum publishes cause lists and orders on its own portal and in its own format, sometimes late in the evening, and a matter missed on the list can lead to an adverse or ex parte order.",
+    "pain_points": [
+      {
+        "title": "Many portals, many formats",
+        "detail": "Cause lists arrive as PDFs and web pages with different layouts, item numbers and court-room details for each forum."
+      },
+      {
+        "title": "Name and number variations",
+        "detail": "Parties appear with abbreviations or misspellings, and old and new case numbers or CNR numbers do not always match the matter register."
+      },
+      {
+        "title": "Directions buried in orders",
+        "detail": "Deadlines such as filing a reply, paying costs or appearing in person sit inside the text of the daily order."
+      },
+      {
+        "title": "Manual checking by clerks",
+        "detail": "Litigation clerks search portals every evening, and the matter management system lags behind reality."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a tracking service that collects published cause lists, supplementary lists and orders from the court and tribunal portals relevant to your matters, within each portal's terms of use. It parses listings and matches them to your matter register by case number, CNR, party names and advocate names, with fuzzy matching for variants. New orders are downloaded and read to extract the next date, purpose of listing and directions, such as filing deadlines, costs and appearance requirements. Uncertain matches go to a litigation clerk. Confirmed updates reach the matter management system, the calendar and the responsible counsel by email or WhatsApp.",
+    "capabilities": [
+      "Collects cause lists, supplementary lists and orders from multiple court and tribunal portals",
+      "Matches listings to matters by case number, CNR, party and advocate names, including variants",
+      "Extracts next date, purpose of listing and directions from daily orders, including Hindi orders",
+      "Flags matters listed unexpectedly or missing from lists where they were expected",
+      "Updates the matter management system and counsel calendars",
+      "Sends morning alerts with item number and court room to the responsible counsel"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the matter register",
+      "detail": "Case numbers, CNR numbers, parties, forum and responsible counsel are imported from your matter system."
+    },
+    {
+      "step": 2,
+      "title": "Collect lists and orders",
+      "detail": "Published cause lists and new orders are collected from each relevant portal on a schedule."
+    },
+    {
+      "step": 3,
+      "title": "Match listings",
+      "detail": "Listings are matched to matters, with confidence scores for name and number variations."
+    },
+    {
+      "step": 4,
+      "title": "Confirm uncertain matches",
+      "detail": "A litigation clerk confirms or rejects low-confidence matches."
+    },
+    {
+      "step": 5,
+      "title": "Extract from orders",
+      "detail": "Next date, purpose and directions are extracted from each new order, with a link to the PDF."
+    },
+    {
+      "step": 6,
+      "title": "Alert and update",
+      "detail": "Counsel receive alerts, and the matter system and calendar are updated."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Matter register with case numbers\"] --> B[\"Collect cause lists and orders\"]\n  B --> C[\"Parse and match to matters\"]\n  C --> D{\"Match confident?\"}\n  D -->|\"no\"| E(\"Litigation clerk confirms\")\n  D -->|\"yes\"| F[\"Extract next date and directions\"]\n  E --> F\n  F --> G[\"Update matter system and calendar\"]\n  G --> H[\"Alert responsible counsel\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Collection",
+        "components": [
+          "Portal collectors per court and tribunal",
+          "Schedule and change detection",
+          "Order PDF downloader"
+        ]
+      },
+      {
+        "name": "Parsing and matching",
+        "components": [
+          "Cause list parsers per format",
+          "Case number and CNR normaliser",
+          "Fuzzy party and advocate name matcher"
+        ]
+      },
+      {
+        "name": "Order understanding",
+        "components": [
+          "OCR for English and Hindi orders",
+          "Extractor for next date, purpose and directions"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Clerk confirmation queue",
+          "Exception list for missing or unexpected listings"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Matter management system adapter",
+          "Calendar sync",
+          "Email and WhatsApp alerts"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Collection\"]\n    C1[\"Court and tribunal collectors\"]\n    C2[\"Order PDF downloader\"]\n  end\n  subgraph S2[\"Parsing and matching\"]\n    P1[\"Cause list parsers\"]\n    P2[\"Case number normaliser\"]\n    P3[\"Name matcher\"]\n  end\n  subgraph S3[\"Order understanding and review\"]\n    O1[\"OCR English and Hindi\"]\n    O2[\"Directions extractor\"]\n    O3(\"Clerk confirmation queue\")\n  end\n  subgraph S4[\"Delivery\"]\n    D1[\"Matter system adapter\"]\n    D2[\"Calendar sync\"]\n    D3[\"Counsel alerts\"]\n  end\n  C1 --> P1\n  P1 --> P2\n  P2 --> P3\n  P3 --> O3\n  C2 --> O1\n  O1 --> O2\n  P3 --> D1\n  O3 --> D1\n  O2 --> D1\n  D1 --> D2\n  D1 --> D3"
+  },
+  "inputs": [
+    "Matter register: case numbers, CNR, parties, forum and counsel",
+    "List of courts and tribunals to monitor",
+    "Advocate names as they appear in listings",
+    "Alert preferences for each counsel",
+    "Existing matter management data"
+  ],
+  "outputs": [
+    "Daily listings matched to matters, with item number and court room",
+    "Extracted next dates, purposes and directions with order links",
+    "Exception list of unmatched or unexpected listings",
+    "Updated matter system and calendars",
+    "Morning alerts to responsible counsel"
+  ],
+  "human_in_the_loop": "Litigation clerks confirm uncertain matches and review the exception list, and counsel read the actual order before acting on any extracted direction. The service tracks and alerts; it does not decide case strategy.",
+  "integrations": [
+    "Supreme Court, High Court, district court (eCourts) and tribunal portals",
+    "Matter or litigation management system",
+    "Outlook or Google calendars",
+    "Email and WhatsApp Business API",
+    "Document management system for order PDFs"
+  ],
+  "guardrails": [
+    "Respects each portal's terms of use and does not bypass captchas or access controls",
+    "Every extracted date and direction links to the source order",
+    "Unmatched or ambiguous listings go to the exception list and are never dropped silently",
+    "Alerts prompt counsel to read the full order",
+    "Collection failures reported the same day so clerks can check by hand"
+  ],
+  "compliance_notes": [
+    "Court records are public, but the matter register links them to clients; designed to support DPDP Act 2023 safeguards for client data.",
+    "Where a portal requires a captcha or login, a staff member completes that step or an official channel is used."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "A defined set of live matters in two or three forums, for example one High Court and its district courts, tracked alongside your clerks' current process.",
+    "deliverables": [
+      "Collectors and parsers for the pilot forums",
+      "Matching rules tuned on your matter register",
+      "Clerk confirmation and exception screens",
+      "Alerts and matter system updates for pilot matters",
+      "Comparison report against manual tracking"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Listing match accuracy",
+        "how": "Matches confirmed or corrected by clerks during the pilot."
+      },
+      {
+        "metric": "Missed listings",
+        "how": "Listings caught by clerks that the system missed, from daily reconciliation."
+      },
+      {
+        "metric": "Direction extraction accuracy",
+        "how": "Extracted next dates and directions checked against the orders by counsel."
+      },
+      {
+        "metric": "Alert timeliness",
+        "how": "Time between a list or order being published and the alert reaching counsel."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which courts can you track?",
+      "a": "Any forum that publishes cause lists or orders online, including the Supreme Court, High Courts, district courts through eCourts, and tribunals such as NCLT, DRTs and consumer commissions. We start with the forums where most of your matters sit."
+    },
+    {
+      "q": "Do you get around captchas on court sites?",
+      "a": "No. We respect each portal's terms and access controls. Where a captcha or login is needed, a staff member completes that step or an official channel is used."
+    },
+    {
+      "q": "What if a party name is spelt differently?",
+      "a": "Fuzzy matching handles common variants and abbreviations, and anything uncertain goes to a clerk to confirm. Confirmed variants are remembered for next time."
+    },
+    {
+      "q": "Can it read Hindi orders from district courts?",
+      "a": "Yes. OCR and extraction work on Hindi and English orders. Low-confidence extractions are marked so counsel check the order directly."
+    }
+  ],
+  "related": [
+    "case-file-summarisation-and-chronology",
+    "bulk-legal-notice-automation",
+    "hearing-transcription-and-minutes"
+  ],
+  "proof_ref": "rera-data-aggregator",
+  "content_type": "use-case",
+  "url": "/use-cases/legal/court-order-and-cause-list-tracking/"
+}

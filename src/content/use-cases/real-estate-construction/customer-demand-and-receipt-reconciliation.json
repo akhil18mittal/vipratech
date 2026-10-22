@@ -1,0 +1,217 @@
+{
+  "slug": "customer-demand-and-receipt-reconciliation",
+  "industry": "real-estate-construction",
+  "title": "Customer Demand Letter and Receipt Reconciliation",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Match stage-linked demand letters with bank credits, home-loan disbursements, TDS certificates and GST, unit by unit, and give the CRM team an accurate statement of account.",
+  "seo": {
+    "title": "Demand Letter and Receipt Reconciliation AI | VipraTech",
+    "description": "AI that matches construction-linked demands with buyer payments, loan disbursements, TDS and GST, and prepares accurate unit-wise statements of account.",
+    "keywords": [
+      "demand letter reconciliation",
+      "real estate collections reconciliation",
+      "builder receipt matching",
+      "construction linked plan payments",
+      "Form 16B TDS tracking"
+    ]
+  },
+  "designed_for": [
+    "Head of CRM and Collections",
+    "Finance and Accounts Manager",
+    "Post-Sales Executive",
+    "Chief Financial Officer"
+  ],
+  "problem": {
+    "intro": "On a construction-linked plan, every slab or milestone triggers a demand to every buyer in that tower. The money comes back in pieces: buyer contributions, disbursements from several lenders, TDS deducted by the buyer and GST on each instalment. The CRM and accounts teams spend days matching credits to units before they can send an accurate statement or a reminder.",
+    "pain_points": [
+      {
+        "title": "Bank credits without a unit reference",
+        "detail": "Disbursements show only a lender's name or loan account, and buyer transfers carry a name that may not match the allottee."
+      },
+      {
+        "title": "TDS gaps that look like shortfalls",
+        "detail": "When a buyer has deducted TDS but the certificate has not arrived, the unit looks short-paid and gets an incorrect reminder."
+      },
+      {
+        "title": "Interest and GST errors",
+        "detail": "Interest on delayed payment, GST on each instalment and waivers agreed by sales are calculated in spreadsheets that drift from the agreement terms."
+      },
+      {
+        "title": "Disputes at possession",
+        "detail": "Buyers challenge statements of account at possession or resale, and reconstructing years of demands and receipts pulls the team away from current collections."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reconciliation engine that reads demand letters, payment plans, bank statements, lender disbursement advices, TDS certificates and receipts, and maintains a ledger per unit. It matches each credit to a unit using amounts, names, loan references, dates and open demands, and proposes the match with a confidence score. Credits it cannot place go to an unallocated queue with suggested units. It tracks pending TDS certificates against each deduction, computes interest and GST from terms configured from your agreement, and produces a statement of account and an overdue list. Accounts approve allocations and waivers before anything reaches a buyer.",
+    "capabilities": [
+      "Reads demand letters, payment schedules, bank statements, lender disbursement advices and receipts",
+      "Matches credits to units using amount, payer name, loan account, date and open demands",
+      "Tracks buyer TDS deductions against Form 16B certificates received",
+      "Splits receipts into base price, GST and other charges as per your configuration",
+      "Calculates interest on delayed payment from configured agreement terms, with approved waivers applied",
+      "Generates unit-wise statements of account and overdue lists for reminders"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load demands and plans",
+      "detail": "Payment plans, milestone dates and demand letters raised for each unit are imported from the CRM or read from PDFs."
+    },
+    {
+      "step": 2,
+      "title": "Ingest receipts",
+      "detail": "Bank statements, lender disbursement advices, cheque and UPI receipts and TDS certificates are read daily."
+    },
+    {
+      "step": 3,
+      "title": "Match credits to units",
+      "detail": "Each credit is matched to a unit and demand with a confidence score and the evidence for the match."
+    },
+    {
+      "step": 4,
+      "title": "Route exceptions",
+      "detail": "Low-confidence matches, unidentified credits and TDS gaps go to an accounts queue with suggested units."
+    },
+    {
+      "step": 5,
+      "title": "Accounts approval",
+      "detail": "An accountant confirms allocations, interest waivers and corrections, and the ledger updates."
+    },
+    {
+      "step": 6,
+      "title": "Issue statements and reminders",
+      "detail": "Approved statements of account are generated, and genuine overdues feed the reminder workflow."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Demands and payment plans\"] --> C[\"Match credits to units\"]\n  B[\"Bank credits, disbursements, TDS\"] --> C\n  C --> D{\"Match confident and complete?\"}\n  D -->|\"no\"| E(\"Accounts allocation review\")\n  D -->|\"yes\"| F[\"Update unit ledger\"]\n  E --> F\n  F --> G[\"Compute interest, GST, TDS gaps\"]\n  G --> H[\"Statement of account and overdues\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "CRM export of units, plans and demands",
+          "Bank statement and disbursement advice reader",
+          "TDS certificate and receipt intake"
+        ]
+      },
+      {
+        "name": "Matching",
+        "components": [
+          "Payer and loan reference resolver",
+          "Amount and demand matcher with confidence",
+          "Unallocated credit queue"
+        ]
+      },
+      {
+        "name": "Ledger and rules",
+        "components": [
+          "Unit ledger",
+          "Interest, GST and charges rules",
+          "TDS certificate tracker"
+        ]
+      },
+      {
+        "name": "Review and output",
+        "components": [
+          "Accounts review screen",
+          "Statement of account generator",
+          "CRM and accounting sync"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n  I1[\"CRM demands and plans\"]\n  I2[\"Bank and lender statements\"]\n  I3[\"TDS certificates and receipts\"]\n  end\n  subgraph S2[\"Matching\"]\n  M1[\"Payer and loan resolver\"]\n  M2[\"Credit to demand matcher\"]\n  end\n  subgraph S3[\"Ledger and rules\"]\n  L1[\"Unit ledger\"]\n  L2[\"Interest and GST rules\"]\n  L3[\"TDS tracker\"]\n  end\n  subgraph S4[\"Review and output\"]\n  R1(\"Accounts review\")\n  R2[\"Statement generator\"]\n  R3[\"CRM and accounts sync\"]\n  end\n  I2 --> M1\n  M1 --> M2\n  I1 --> M2\n  I3 --> L3\n  M2 --> R1\n  M2 --> L1\n  R1 --> L1\n  L1 --> L2\n  L2 --> R2\n  L3 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Payment plans and milestone completion dates",
+    "Demand letters and cost sheets per unit",
+    "Bank statements of collection accounts",
+    "Lender disbursement advices and tripartite agreement details",
+    "Form 16B TDS certificates and buyer receipts",
+    "Agreed interest terms and approved waivers"
+  ],
+  "outputs": [
+    "Unit-wise ledger with matched demands and receipts",
+    "Unallocated credits list with suggested units",
+    "Pending TDS certificates per unit",
+    "Statements of account ready for review",
+    "Overdue list for reminders, excluding TDS and allocation gaps"
+  ],
+  "human_in_the_loop": "Accountants approve every allocation below the confidence threshold, every interest calculation that leads to a charge and every waiver. Statements and reminders go out only after the CRM team has reviewed them.",
+  "integrations": [
+    "Real estate CRM or ERP such as Salesforce, Sell.Do or Farvision",
+    "Bank statement downloads or bank APIs",
+    "Tally or SAP for accounts",
+    "Email and WhatsApp for statements and reminders",
+    "Shared drive for lender advices and TDS certificates"
+  ],
+  "guardrails": [
+    "No buyer communication without human approval",
+    "Interest and GST rules configured from your agreement and checked by finance",
+    "Every match stores its evidence: amount, reference and demand",
+    "Allocations are reversible, with a logged reason",
+    "Bank and identity data masked in logs"
+  ],
+  "compliance_notes": [
+    "Helps track TDS deducted by buyers on property purchases and the certificates they issue, as configured by your finance team.",
+    "Keeps receipts traceable by project and collection account, which supports the CA certification needed for withdrawals from the RERA project account."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One tower, reconciling demands and receipts for a recent period from bank statements and CRM data, compared with the ledger your accounts team already maintains.",
+    "deliverables": [
+      "Matching rules and interest configuration for the pilot tower",
+      "Reconciled unit ledgers and unallocated credit list",
+      "Accounts review screen",
+      "Draft statements of account for a sample of units",
+      "Comparison report against your existing ledger"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Correct automatic matches",
+        "how": "Accountant review of matched credits against your existing ledger."
+      },
+      {
+        "metric": "Unallocated credits resolved",
+        "how": "Credits in your suspense list that the engine places with a suggestion the accountant accepts."
+      },
+      {
+        "metric": "TDS gaps identified",
+        "how": "Units flagged for a missing Form 16B that the team confirms."
+      },
+      {
+        "metric": "Time to produce statements",
+        "how": "Time taken for a batch of statements with and without the engine."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it handle home loans from many different banks?",
+      "a": "Yes. Disbursement advices and statement narrations differ by lender, so we build a resolver that learns each lender's reference format and links it to the buyer's loan account. New lenders are added as they appear."
+    },
+    {
+      "q": "Will it send reminders on its own?",
+      "a": "No. It produces an overdue list that excludes units waiting only on a TDS certificate or an unallocated credit. Your CRM team approves the list before any reminder goes out."
+    },
+    {
+      "q": "How is interest on delayed payment calculated?",
+      "a": "From the terms your finance and legal teams configure from the agreement, such as rate and calculation basis, with waivers applied once approved. Each calculation shows its inputs so it can be explained to a buyer."
+    },
+    {
+      "q": "Can it rebuild history for units sold years ago?",
+      "a": "Yes, from historical bank statements, demands and receipts, though older scanned documents need more review. Many teams start with current towers and backfill older ones before possession."
+    }
+  ],
+  "related": [
+    "contractor-bill-verification-against-boq",
+    "sale-agreement-and-title-review",
+    "buyer-nurture-campaigns",
+    "bank-and-ledger-reconciliation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/customer-demand-and-receipt-reconciliation/"
+}

@@ -1,0 +1,221 @@
+{
+  "slug": "agent-and-posp-lead-nurturing",
+  "industry": "insurance",
+  "title": "Agent and POSP Lead Nurturing Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "WhatsApp-first journeys that move agent and POSP prospects from sign-up to certification and first sale, and help active POSPs follow up on renewals with approved content.",
+  "seo": {
+    "title": "Agent and POSP Lead Nurturing Automation | VipraTech",
+    "description": "Automation for insurers and brokers to nurture agent and POSP prospects through onboarding and training, and support active POSPs with approved content.",
+    "keywords": [
+      "POSP onboarding automation",
+      "insurance agent recruitment",
+      "POSP lead nurturing",
+      "insurance distribution WhatsApp",
+      "agency channel automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Agency or POSP Channel",
+    "Channel Manager",
+    "Distribution Marketing Lead",
+    "Head of Broking Operations"
+  ],
+  "problem": {
+    "intro": "Insurers and broking firms recruit agents and POSPs through campaigns, referrals and partner networks, but many prospects stall between sign-up and their first policy. They have to submit documents, complete the mandated training, pass the examination and then actually start selling, often with little support from an overstretched channel manager.",
+    "pain_points": [
+      {
+        "title": "Drop-off at every onboarding step",
+        "detail": "Prospects stop at document upload, training modules or exam scheduling, and nobody notices until the month-end funnel review."
+      },
+      {
+        "title": "Channel managers chase blindly",
+        "detail": "Managers call long lists without knowing who is close to certification and who has gone cold."
+      },
+      {
+        "title": "Certified POSPs go inactive",
+        "detail": "Newly certified POSPs often do not make a first sale because they lack leads, content or reminders about their customers' renewals."
+      },
+      {
+        "title": "Uncontrolled messaging risk",
+        "detail": "POSPs forwarding home-made creatives or promising more than the product offers create mis-selling and advertising compliance risk."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a lead nurturing system on top of your CRM and WhatsApp Business account. It captures prospects from campaigns, referrals and your website, removes duplicates and scores them on likely completion. Conversational WhatsApp journeys in Hindi and regional languages guide each prospect through document upload, training modules and exam booking, with reminders timed to where they stopped. Channel managers get a daily list of prospects who are close to certification or stuck, with context. Once certified, POSPs receive renewal reminders for their customers, approved product content limited to what they are certified to sell, and simple follow-up prompts.",
+    "capabilities": [
+      "Captures and de-duplicates prospects from campaigns, referrals, partners and web forms",
+      "Scores prospects on likely completion using onboarding behaviour and profile data",
+      "Runs WhatsApp journeys for document upload, training progress and exam booking in Hindi and regional languages",
+      "Gives channel managers a prioritised daily call list with the reason for each call",
+      "Sends certified POSPs renewal reminders for their own customers and compliance-approved product content",
+      "Tracks the funnel from sign-up to first sale by source, region and channel manager"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture and de-duplicate",
+      "detail": "Prospects from all sources are captured into the CRM with consent, and duplicates are merged."
+    },
+    {
+      "step": 2,
+      "title": "Score and segment",
+      "detail": "Each prospect is scored and placed in a journey based on where they are in onboarding."
+    },
+    {
+      "step": 3,
+      "title": "Nudge through onboarding",
+      "detail": "WhatsApp and SMS journeys prompt document upload, training modules and exam booking."
+    },
+    {
+      "step": 4,
+      "title": "Escalate to a channel manager",
+      "detail": "Prospects who are close to certification or stuck are added to the channel manager's call list."
+    },
+    {
+      "step": 5,
+      "title": "Support after certification",
+      "detail": "Once the insurer or broker certifies them, POSPs receive approved content, customer renewal reminders and follow-up prompts."
+    },
+    {
+      "step": 6,
+      "title": "Review the funnel",
+      "detail": "Conversion by step, source and manager is reported weekly to refine the journeys."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Prospect captured with consent\"] --> B[\"Score and assign journey\"]\n  B --> C[\"WhatsApp nudges for each step\"]\n  C --> D{\"Stuck or close to certification?\"}\n  D -->|\"yes\"| E(\"Channel manager calls prospect\")\n  D -->|\"no\"| G[\"Continue automated journey\"]\n  E --> F[\"Certified through insurer process\"]\n  G --> F\n  F --> H[\"Approved content and renewal prompts\"]\n  H --> I[\"Weekly funnel review\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Lead capture",
+        "components": [
+          "Campaign, referral and web form connectors",
+          "Consent capture",
+          "De-duplication and CRM sync"
+        ]
+      },
+      {
+        "name": "Scoring and orchestration",
+        "components": [
+          "Completion likelihood model",
+          "Journey orchestrator with step triggers"
+        ]
+      },
+      {
+        "name": "Messaging",
+        "components": [
+          "WhatsApp Business API templates",
+          "DLT-registered SMS",
+          "Approved content library with product-scope tags"
+        ]
+      },
+      {
+        "name": "Field enablement",
+        "components": [
+          "Channel manager daily call list",
+          "POSP customer renewal reminder feed"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Funnel dashboard by source and region",
+          "Opt-out and complaint log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Lead capture\"]\n    L1[\"Campaign and referral connectors\"]\n    L2[\"Consent and de-duplication\"]\n  end\n  subgraph S2[\"Scoring and orchestration\"]\n    Q1[\"Completion likelihood model\"]\n    Q2[\"Journey orchestrator\"]\n  end\n  subgraph S3[\"Messaging and field enablement\"]\n    M1[\"WhatsApp and SMS templates\"]\n    M2[\"Approved content library\"]\n    M3(\"Channel manager call list\")\n    M4[\"POSP renewal reminders\"]\n  end\n  subgraph S4[\"Systems and reporting\"]\n    R1[\"CRM and onboarding portal\"]\n    R2[\"LMS and exam status\"]\n    R3[\"Funnel dashboard\"]\n  end\n  L1 --> L2\n  L2 --> R1\n  R1 --> Q1\n  R2 --> Q1\n  Q1 --> Q2\n  Q2 --> M1\n  M2 --> M1\n  Q2 --> M3\n  Q2 --> M4\n  M1 --> R3\n  M3 --> R3"
+  },
+  "inputs": [
+    "Prospect leads from campaigns, referrals, partners and the website",
+    "Onboarding status from the POSP portal, LMS and exam system",
+    "Customer and renewal lists for certified POSPs",
+    "Compliance-approved templates and product content",
+    "Consent and opt-out records"
+  ],
+  "outputs": [
+    "Prospect scores and journey assignments",
+    "Automated WhatsApp and SMS journeys with reminders",
+    "Daily call lists for channel managers",
+    "Renewal reminders and content packs for certified POSPs",
+    "Funnel dashboard from sign-up to first sale"
+  ],
+  "human_in_the_loop": "Channel managers decide whom to call and handle every conversation about earnings, products or concerns. Compliance approves every template and content item before it enters the library, and certification stays with the insurer's or broker's authorised process.",
+  "integrations": [
+    "CRM such as LeadSquared, Salesforce or Zoho",
+    "WhatsApp Business API and DLT-registered SMS gateway",
+    "POSP onboarding portal and learning management system",
+    "Insurer or broker sales platform for policy and renewal data",
+    "Marketing analytics or data warehouse"
+  ],
+  "guardrails": [
+    "Only compliance-approved templates and creatives can be sent",
+    "Product content filtered to the categories a POSP is certified to sell",
+    "Consent captured and opt-outs honoured on every channel",
+    "Customer data shared only with the POSP who owns that customer",
+    "Message frequency caps per prospect and per POSP"
+  ],
+  "compliance_notes": [
+    "IRDAI's framework for POSPs sets training, examination and product-scope requirements; the system tracks these steps but does not certify anyone.",
+    "Messages follow TRAI commercial-communication rules through DLT-registered templates and consent checks, and applicant documents are handled under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "The POSP recruitment funnel for one region, plus a cohort of recently certified POSPs who have not yet made a first sale.",
+    "deliverables": [
+      "Journey maps and approved template set",
+      "CRM and WhatsApp integration in a pilot workspace",
+      "Channel manager call list view",
+      "Funnel dashboard",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Step-wise onboarding conversion",
+        "how": "Movement through documents, training and exam, compared with a recent cohort from the same region."
+      },
+      {
+        "metric": "Time from sign-up to certification",
+        "how": "Median days per prospect, from CRM and LMS timestamps."
+      },
+      {
+        "metric": "First-sale activation",
+        "how": "Share of the certified pilot cohort that issues a first policy during the pilot."
+      },
+      {
+        "metric": "Opt-outs and complaints",
+        "how": "Count of opt-outs and complaints per journey."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it work for traditional agents as well as POSPs?",
+      "a": "Yes. Journeys are configurable, so agent recruitment with its own licensing steps can run alongside the POSP flow. Each journey uses its own checklist and content rules."
+    },
+    {
+      "q": "Which languages can the journeys use?",
+      "a": "Hindi and English to start, with regional languages added as needed. Templates in each language go through the same compliance approval."
+    },
+    {
+      "q": "Can POSPs send their own messages to customers?",
+      "a": "They can share content from the approved library, co-branded where your policy allows. The system does not send free-text marketing on their behalf."
+    },
+    {
+      "q": "Will it connect to our LMS and exam system?",
+      "a": "Usually through an API or a daily export. Onboarding status is the key signal for the journeys, so we set up this feed in the first week."
+    }
+  ],
+  "related": [
+    "policy-renewal-voice-agent",
+    "insurance-bot-mis-selling-and-disclosure-testing",
+    "loan-lead-qualification-agent",
+    "channel-partner-lead-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/agent-and-posp-lead-nurturing/"
+}

@@ -1,0 +1,222 @@
+{
+  "slug": "tax-document-extraction",
+  "industry": "accounting-audit-consulting",
+  "title": "TDS and ITR Document Extraction for Tax Practices",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read Form 16, 26AS, AIS, capital gains statements and investment proofs, reconcile TDS and reported income, and hand preparers a draft computation with every mismatch flagged.",
+  "seo": {
+    "title": "Form 16, 26AS and AIS Extraction for ITR | VipraTech",
+    "description": "AI for tax practices: reads Form 16, 26AS, AIS and capital gains statements, reconciles TDS and income, and drafts the computation for review.",
+    "keywords": [
+      "Form 16 extraction",
+      "26AS AIS reconciliation",
+      "ITR preparation automation",
+      "TDS reconciliation software",
+      "capital gains statement extraction"
+    ]
+  },
+  "designed_for": [
+    "Partner, Tax Practice",
+    "ITR Preparation Team Lead",
+    "TDS Compliance Manager",
+    "Family Office Tax Adviser"
+  ],
+  "problem": {
+    "intro": "In the weeks before the July filing deadline, a tax practice receives client folders full of Form 16s, 26AS and AIS downloads, broker capital gains statements, mutual fund consolidated account statements and investment proofs. Preparers re-key figures into the computation, and mismatches between what the employer deducted, what 26AS shows and what AIS reports surface late, sometimes only after filing as a processing intimation or notice.",
+    "pain_points": [
+      {
+        "title": "Many document types per client",
+        "detail": "Form 16 Part A and B, Form 16A, 26AS, AIS, TIS, broker reports, CAS, interest certificates and rent receipts all arrive in different layouts."
+      },
+      {
+        "title": "TDS and income mismatches",
+        "detail": "TDS on a Form 16 that is missing from 26AS, or interest and dividends in AIS that the client never mentioned, are found late."
+      },
+      {
+        "title": "Capital gains detail is tedious",
+        "detail": "Scrip-wise transactions, holding periods and asset classes from different brokers and fund houses take hours to assemble."
+      },
+      {
+        "title": "Season crunch hurts review",
+        "detail": "Juniors prepare under pressure and partners review at the end, when there is little time to chase a missing certificate."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an extraction and reconciliation assistant for tax season. Clients or staff upload the folder, and the system classifies each document, extracts the figures a computation needs and reconciles them: salary and TDS in Form 16 against 26AS by TAN and section, interest and dividends in AIS against bank and company certificates, and capital gains from broker and mutual fund statements by asset class and holding period. The output is a pre-filled working in your computation format, with each figure linked to its source and a mismatch list the preparer must clear. The preparer and reviewing partner make every tax position, and the assistant never files a return.",
+    "capabilities": [
+      "Classifies and reads Form 16 Part A and B, Form 16A, 26AS, AIS and TIS downloads",
+      "Extracts broker capital gains reports and mutual fund CAS into transaction lists with holding periods",
+      "Reconciles TDS by deductor TAN and section between certificates and 26AS",
+      "Highlights AIS entries not reflected in the client's documents, such as interest, dividends or high-value transactions",
+      "Builds a draft income computation and, on request, an old and new regime comparison for the preparer",
+      "Produces a missing-document checklist per client for the collection workflow"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the client folder",
+      "detail": "Documents arrive through the client portal, WhatsApp or staff upload and are grouped by PAN and assessment year."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document is identified and its figures and transactions are extracted with source links."
+    },
+    {
+      "step": 3,
+      "title": "Reconcile TDS and AIS",
+      "detail": "TDS is matched by TAN and section, and AIS entries are compared with the client's own documents."
+    },
+    {
+      "step": 4,
+      "title": "Resolve mismatches",
+      "detail": "Mismatches and low-confidence figures go to the preparer, who confirms them with the client."
+    },
+    {
+      "step": 5,
+      "title": "Draft the computation",
+      "detail": "A computation working is built in the firm's format, with every figure traceable."
+    },
+    {
+      "step": 6,
+      "title": "Partner review",
+      "detail": "The reviewing partner checks the computation and positions before the return is filed through your usual software."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Client tax folder upload\"] --> B[\"Classify Form 16, 26AS, AIS, CAS\"]\n  B --> C[\"Extract figures and transactions\"]\n  C --> D[\"Reconcile TDS and AIS with documents\"]\n  D --> E{\"Mismatches or low confidence?\"}\n  E -->|\"yes\"| F(\"Preparer resolves with client\")\n  E -->|\"no\"| G[\"Draft computation working\"]\n  F --> G\n  G --> H(\"Partner review before filing\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Client portal and WhatsApp upload",
+          "Practice folder sync",
+          "Password-protected PDF handling"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Document classifier",
+          "Form 16, 26AS and AIS extractors",
+          "Capital gains and CAS parser"
+        ]
+      },
+      {
+        "name": "Reconciliation",
+        "components": [
+          "TDS matcher by TAN and section",
+          "AIS against documents comparator",
+          "Capital gains classifier by asset class and holding period"
+        ]
+      },
+      {
+        "name": "Preparation and review",
+        "components": [
+          "Computation builder in the firm's template",
+          "Preparer exception screen",
+          "Partner review checklist"
+        ]
+      },
+      {
+        "name": "Audit",
+        "components": [
+          "Source links for every figure",
+          "Version log of preparer and partner changes"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    K1[\"Client portal and WhatsApp upload\"]\n    K2[\"Password-protected PDF handler\"]\n  end\n  subgraph S2[\"Extraction\"]\n    K3[\"Document classifier\"]\n    K4[\"Form 16, 26AS and AIS extractors\"]\n    K5[\"Capital gains statement parser\"]\n  end\n  subgraph S3[\"Reconciliation\"]\n    K6[\"TDS matcher by TAN and section\"]\n    K7[\"AIS versus documents check\"]\n  end\n  subgraph S4[\"Preparation and review\"]\n    K8(\"Preparer exception screen\")\n    K9[\"Computation builder\"]\n    K10(\"Partner review checklist\")\n  end\n  K1 --> K2 --> K3\n  K3 --> K4\n  K3 --> K5\n  K4 --> K6\n  K4 --> K7\n  K5 --> K7\n  K6 --> K8\n  K7 --> K8\n  K8 --> K9\n  K9 --> K10"
+  },
+  "inputs": [
+    "Form 16 Part A and B and Form 16A",
+    "Form 26AS, AIS and TIS",
+    "Broker capital gains statements and mutual fund CAS",
+    "Bank interest and home loan interest certificates",
+    "Investment and deduction proofs such as 80C and 80D receipts and rent receipts",
+    "Prior-year return and computation"
+  ],
+  "outputs": [
+    "Structured tax data per client and assessment year",
+    "TDS reconciliation by TAN and section",
+    "AIS mismatch list",
+    "Draft computation of income",
+    "Missing-document list per client"
+  ],
+  "human_in_the_loop": "Preparers clear every mismatch and confirm low-confidence figures with the client. The reviewing partner approves the computation and the choice of tax regime before the return is filed on the income-tax portal or through the firm's filing software.",
+  "integrations": [
+    "Tax computation and filing software used by the practice (Excel or JSON import)",
+    "Income-tax portal downloads for 26AS and AIS",
+    "Client portal or WhatsApp Business API",
+    "Google Drive, OneDrive or the practice's document store"
+  ],
+  "guardrails": [
+    "PAN masked in logs, and Aadhaar handled per UIDAI rules with only masked numbers kept",
+    "Document passwords used to open files and never stored",
+    "Every figure linked to its source page",
+    "No filing or submission by the system",
+    "Client data segregated by PAN and engagement"
+  ],
+  "compliance_notes": [
+    "Client PAN, income and bank data are personal data; processing is designed to support DPDP Act 2023 consent, purpose limitation and retention requirements.",
+    "Tax positions and return filing remain the responsibility of the taxpayer and the signing professional."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "A sample of salaried and capital gains clients from last season's completed returns, comparing system drafts with the filed computations.",
+    "deliverables": [
+      "Extraction schemas for the pilot document types",
+      "Working pipeline with TDS and AIS reconciliation",
+      "Draft computations in your format",
+      "Accuracy report against filed computations",
+      "Roll-out plan for the next season"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Figure extraction accuracy",
+        "how": "Extracted values compared with the figures in last season's filed computations."
+      },
+      {
+        "metric": "Mismatches caught",
+        "how": "TDS and AIS differences flagged, as validated by preparers."
+      },
+      {
+        "metric": "Preparer time per client",
+        "how": "Hands-on time to a reviewable draft, compared with the previous season."
+      },
+      {
+        "metric": "Missing-document identification",
+        "how": "Documents flagged as missing compared with what preparers eventually had to chase."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read password-protected Form 16s and statements?",
+      "a": "Yes, when the client or preparer supplies the password, which for many documents follows a pattern based on PAN or date of birth. Passwords are used only to open the file and are not stored."
+    },
+    {
+      "q": "Does it handle capital gains from shares and mutual funds?",
+      "a": "Yes. It reads broker capital gains reports and mutual fund consolidated account statements into transaction lists with acquisition and sale dates, so holding periods and asset classes can be checked. Complex items such as ESOPs, foreign assets or business income are extracted for the preparer rather than computed by default."
+    },
+    {
+      "q": "Will it file the return?",
+      "a": "No. It prepares data and a draft computation. The preparer and partner review, choose positions and file through your usual software or the income-tax portal."
+    },
+    {
+      "q": "Can clients upload documents on WhatsApp?",
+      "a": "Yes, through the firm's WhatsApp Business number or a client portal. Documents land in the client's folder in your storage, not on staff phones."
+    }
+  ],
+  "related": [
+    "client-document-collection-agent",
+    "gst-return-reconciliation",
+    "bank-and-ledger-reconciliation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/tax-document-extraction/"
+}

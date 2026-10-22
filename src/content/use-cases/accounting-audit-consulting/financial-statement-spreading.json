@@ -1,0 +1,222 @@
+{
+  "slug": "financial-statement-spreading",
+  "industry": "accounting-audit-consulting",
+  "title": "Financial Statement Spreading",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read audited financials, notes and schedules in Schedule III, Ind AS or IFRS layouts and map every line into your spreading template or CMA format, each figure traced to its page.",
+  "seo": {
+    "title": "AI Financial Statement Spreading | VipraTech",
+    "description": "AI that extracts balance sheets, P&L and notes from annual reports, maps them to your spread or CMA format and checks every total ties.",
+    "keywords": [
+      "financial statement spreading",
+      "CMA data preparation automation",
+      "annual report data extraction",
+      "due diligence databook automation",
+      "balance sheet extraction AI"
+    ]
+  },
+  "designed_for": [
+    "Transaction Advisory Manager",
+    "Valuation Analyst",
+    "CMA and Project Finance Team Lead",
+    "Due Diligence Partner"
+  ],
+  "problem": {
+    "intro": "Advisory, valuation and project-finance teams spend hours copying balance sheets, profit and loss statements and notes from annual reports into a standard model before any analysis starts. Every company groups items differently, the real detail sits in the notes, and a typo in a re-keyed figure can travel through ratios, CMA data and valuation outputs unnoticed.",
+    "pain_points": [
+      {
+        "title": "No two annual reports look alike",
+        "detail": "Schedule III, Ind AS and IFRS layouts, standalone and consolidated sets, and scanned older years all need different handling."
+      },
+      {
+        "title": "Mapping needs the notes",
+        "detail": "Other current liabilities may hide statutory dues, capital creditors and advances, and the right template line depends on the note breakdown."
+      },
+      {
+        "title": "Re-keying errors spread",
+        "detail": "A transposed figure breaks the balance check or, worse, balances by coincidence and flows into every downstream ratio."
+      },
+      {
+        "title": "Multi-year comparisons drift",
+        "detail": "Restated comparatives and reclassifications between years are easy to miss when each year is keyed separately."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a spreading assistant that takes annual reports, audited financial statements or MCA-filed financials and maps them into your firm's template: a standard spread, a CMA data format for working capital proposals, or a due diligence databook. It finds the primary statements and notes, extracts every line with its note reference, and proposes a mapping to your template lines based on the note detail rather than the caption alone. Arithmetic checks confirm that subtotals, totals and the balance sheet hold, and that comparatives agree with last year's spread. Lines with low mapping confidence or failed checks are queued for an analyst before ratios are calculated.",
+    "capabilities": [
+      "Locates the balance sheet, profit and loss, cash flow and notes in long annual reports, including scanned years",
+      "Extracts line items with note references across standalone, consolidated, current and comparative columns",
+      "Proposes template mappings from note breakdowns and remembers analyst corrections for each client",
+      "Tie-out checks on subtotals, balance sheet balance, cash flow and comparatives against the prior spread",
+      "Flags restatements, reclassifications and auditor qualifications or emphasis-of-matter paragraphs",
+      "Exports to your Excel model, a CMA format or your credit or valuation template"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Upload the financial statements",
+      "detail": "Annual reports, audited statements or XBRL filings for the years in scope are added to the engagement."
+    },
+    {
+      "step": 2,
+      "title": "Locate statements and notes",
+      "detail": "Pages are classified so that the primary statements and each note are found, whatever the report's layout."
+    },
+    {
+      "step": 3,
+      "title": "Extract line items",
+      "detail": "Figures are extracted with captions, note references and column context, each linked to its page."
+    },
+    {
+      "step": 4,
+      "title": "Map to the template",
+      "detail": "Each line is mapped to your spreading template using the note breakdown and earlier corrections."
+    },
+    {
+      "step": 5,
+      "title": "Check and confirm",
+      "detail": "Tie-out failures and low-confidence mappings go to an analyst, who confirms or corrects them."
+    },
+    {
+      "step": 6,
+      "title": "Calculate and export",
+      "detail": "Ratios are calculated and the spread is exported with a page-level trace for every figure."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Annual report or audited financials\"] --> B[\"Locate statements and notes\"]\n  B --> C[\"Extract line items with note refs\"]\n  C --> D[\"Map lines to spreading template\"]\n  D --> E{\"Totals tie and mapping confident?\"}\n  E -->|\"yes\"| G[\"Calculate ratios\"]\n  E -->|\"no\"| F(\"Analyst confirms mapping\")\n  F --> G\n  G --> H[\"Spread with page-level trace\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "PDF upload for annual reports",
+          "XBRL import for MCA filings",
+          "OCR for scanned statements"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Page classifier for statements and notes",
+          "Table extractor",
+          "LLM line-item and note parser"
+        ]
+      },
+      {
+        "name": "Mapping and checks",
+        "components": [
+          "Template mapping with client-specific rules",
+          "Arithmetic tie-out engine",
+          "Comparatives checker against prior spreads"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Analyst mapping workbench",
+          "Correction memory per client and template"
+        ]
+      },
+      {
+        "name": "Output",
+        "components": [
+          "Ratio calculator",
+          "Excel and CMA exporter",
+          "Audit trail of mappings and edits"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    F1[\"Annual report PDF upload\"]\n    F2[\"MCA XBRL import\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Page classifier for statements\"]\n    D2[\"Table and note extractor\"]\n  end\n  subgraph S3[\"Mapping and checks\"]\n    M1[\"Template mapping with client rules\"]\n    M2[\"Arithmetic tie-out engine\"]\n    M3[\"Comparatives check\"]\n  end\n  subgraph S4[\"Review and output\"]\n    R1(\"Analyst mapping workbench\")\n    R2[\"Ratio calculator\"]\n    R3[\"Excel and CMA exporter\"]\n  end\n  F1 --> D1 --> D2\n  D2 --> M1\n  F2 --> M1\n  M1 --> M2 --> M3\n  M3 --> R1\n  R1 --> M1\n  M3 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Annual reports or audited financial statements (PDF)",
+    "Notes to accounts and schedules",
+    "XBRL financial statements filed with MCA, where available",
+    "Prior-year spreads for the same company",
+    "Your spreading template or CMA format"
+  ],
+  "outputs": [
+    "Multi-year spread in your template",
+    "Mapping table with note references and source pages",
+    "Tie-out exception report",
+    "Ratio sheet",
+    "Flags for qualifications, restatements and reclassifications"
+  ],
+  "human_in_the_loop": "Analysts confirm every mapping below the confidence threshold and every failed tie-out before ratios are calculated. Interpretation of the numbers, including any credit view, valuation assumption or projection, stays with the advisory team.",
+  "integrations": [
+    "Excel models and CMA templates",
+    "Bank loan origination or credit appraisal systems, for CMA submissions",
+    "MCA filings and XBRL files",
+    "SharePoint or Google Drive engagement folders"
+  ],
+  "guardrails": [
+    "Every figure traced to its page and note",
+    "Balance sheet must balance before export",
+    "No silent reclassification; every mapping change is logged with the user",
+    "Analyst corrections reused only for the same client and template",
+    "The model does not generate projections or assumptions"
+  ],
+  "compliance_notes": [
+    "Financial statements of unlisted clients are confidential; processing stays in your environment with access limited to the engagement team.",
+    "A spread supports analysis; it is not an audit or assurance opinion on the underlying statements."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Three years of financials for a sample of companies from recent engagements, spread into your current template and compared with your analysts' spreads.",
+    "deliverables": [
+      "Mapping set-up for your template or CMA format",
+      "Working pipeline on the pilot companies",
+      "Analyst workbench with tie-out checks",
+      "Accuracy report against existing spreads",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Line-level extraction accuracy",
+        "how": "Extracted figures compared with the analysts' completed spreads for the same companies."
+      },
+      {
+        "metric": "Mapping agreement",
+        "how": "Share of template mappings analysts accept without change."
+      },
+      {
+        "metric": "Analyst time per company",
+        "how": "Hands-on time to a reviewed spread, compared with manual spreading."
+      },
+      {
+        "metric": "Genuine tie-out exceptions",
+        "how": "Analyst feedback on whether each flagged tie-out failure pointed to a real issue."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it work on older, scanned annual reports?",
+      "a": "Yes, with OCR and layout detection. Scanned pages produce more low-confidence values, which go to the analyst, and the pilot reports accuracy separately for digital and scanned statements."
+    },
+    {
+      "q": "Can it use our own spreading template or a bank's CMA format?",
+      "a": "Yes. Your template is the target. We set up the mapping to your line items, and analyst corrections are remembered for that client and template."
+    },
+    {
+      "q": "Will it generate projections or a credit view?",
+      "a": "No. It produces the historical spread, tie-out checks and ratios. Projections, assumptions and any credit or valuation conclusion remain your team's work."
+    },
+    {
+      "q": "Does it handle Ind AS, IFRS and consolidated statements?",
+      "a": "Yes. It distinguishes standalone from consolidated statements and current from comparative columns, and it flags restated comparatives so they are not mixed with previously reported figures."
+    }
+  ],
+  "related": [
+    "engagement-proposal-drafting",
+    "audit-sampling-and-vouching",
+    "bank-statement-analysis-for-underwriting",
+    "due-diligence-data-room-review"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/financial-statement-spreading/"
+}

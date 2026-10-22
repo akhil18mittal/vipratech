@@ -1,0 +1,225 @@
+{
+  "slug": "distributor-trade-claims-settlement",
+  "industry": "retail-ecommerce",
+  "title": "Distributor Trade Claims and Scheme Settlement",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read distributor claim sheets and proofs, apply scheme rules from your circulars, recalculate eligible amounts, catch duplicates and give finance a clean credit note sheet to approve.",
+  "seo": {
+    "title": "Distributor Trade Claims and Scheme Settlement | VipraTech",
+    "description": "AI checks distributor scheme, damage and display claims against invoices, proofs and circulars, recalculates amounts and flags duplicates for finance.",
+    "keywords": [
+      "distributor claims settlement",
+      "trade scheme claim automation",
+      "FMCG claims reconciliation",
+      "secondary scheme claim validation",
+      "credit note sheet automation",
+      "trade promotion claims AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales Finance",
+    "Trade Marketing Manager",
+    "Claims Settlement Team Lead",
+    "Head of Distribution"
+  ],
+  "problem": {
+    "intro": "FMCG and packaged-food brands run many schemes through distributors at once: quantity slabs, free goods, retailer display payments, damage and expiry returns, rate differences, and transport or salesman reimbursements. Every month each distributor sends a claim sheet with supporting invoices and proofs, and a small team checks them before finance issues credit notes.",
+    "pain_points": [
+      {
+        "title": "Every distributor's sheet looks different",
+        "detail": "Claims arrive as spreadsheets, PDFs and photos in each distributor's own format, so the team re-keys before it can check anything."
+      },
+      {
+        "title": "Scheme rules live in circulars",
+        "detail": "Validity dates, eligible SKUs, slabs and caps are scattered across circulars and emails, and different checkers apply them differently."
+      },
+      {
+        "title": "Duplicates and ineligible lines",
+        "detail": "The same invoice claimed twice, claims under expired schemes or for ineligible SKUs, and inflated quantities slip through under volume."
+      },
+      {
+        "title": "Settlement backlogs hurt the relationship",
+        "detail": "Slow settlement delays credit notes, and distributors hold payments or cut orders while they wait."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a claims platform that reads each distributor's claim sheet and supporting documents, normalises every line into a standard claim structure and matches it to secondary invoices, retailer acknowledgements and photo proofs. A scheme rule engine, configured from your circulars with validity dates, SKUs, slabs and caps, checks eligibility and recalculates the amount for each line. Duplicates are checked across months and distributors. Lines that pass go to a credit note sheet; uncertain or failed lines go to an exception queue with the reason and are never silently passed. Finance keeps final approval, and every decision is logged.",
+    "capabilities": [
+      "Reads claim sheets, invoices, retailer acknowledgements and display photos in any distributor format",
+      "Scheme rule engine built from circulars, with validity dates, SKU lists, slabs, caps and version history",
+      "Recalculates the eligible amount for every claim line and shows it beside the claimed amount",
+      "Detects duplicate claims across months, schemes and distributors",
+      "Exception queue with reason codes for finance and trade marketing",
+      "Credit note sheet for finance approval and a line-by-line settlement statement for each distributor"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive claims and proofs",
+      "detail": "Distributors upload claim sheets and supporting documents through a portal or email, tagged by month and scheme."
+    },
+    {
+      "step": 2,
+      "title": "Normalise claim lines",
+      "detail": "Each line is extracted into a standard structure of distributor, scheme, invoice, SKU, quantity and claimed amount."
+    },
+    {
+      "step": 3,
+      "title": "Match proofs",
+      "detail": "Lines are matched to secondary invoices, acknowledgements and photos from the DMS and uploads."
+    },
+    {
+      "step": 4,
+      "title": "Apply scheme rules and recalculate",
+      "detail": "The rule engine checks eligibility, recalculates the amount and looks for duplicates."
+    },
+    {
+      "step": 5,
+      "title": "Exception review",
+      "detail": "Uncertain or failed lines go to finance or trade marketing with the reason and evidence."
+    },
+    {
+      "step": 6,
+      "title": "Approve and settle",
+      "detail": "Finance approves the credit note sheet, and distributors receive a line-by-line settlement statement."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Distributor claim sheet and proofs\"] --> B[\"Normalise claim lines\"]\n  B --> C[\"Match to invoices and proofs\"]\n  C --> D[\"Apply scheme rules and recalculate\"]\n  D --> E{\"Proof found, rules pass, no duplicate?\"}\n  E -->|\"yes\"| F[\"Add to credit note sheet\"]\n  E -->|\"no or unsure\"| G(\"Finance or trade marketing review\")\n  G --> F\n  F --> H(\"Finance approves CN sheet\")\n  H --> I[\"Settlement statement to distributor\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Distributor portal and email upload",
+          "DMS secondary sales and invoice feed",
+          "Scheme circular register"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Spreadsheet normaliser for varied claim formats",
+          "OCR and LLM extraction for invoices and acknowledgements"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Scheme rule engine with versioned circulars",
+          "Proof matcher",
+          "Recalculation and duplicate detection"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception queue with reason codes",
+          "Finance approval of credit note sheets"
+        ]
+      },
+      {
+        "name": "Settlement and audit",
+        "components": [
+          "Credit note sheet export to the ERP",
+          "Distributor settlement statements",
+          "Audit trail of every line decision"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Distributor portal and email\"]\n    I2[\"DMS invoice feed\"]\n    I3[\"Scheme circular register\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Claim sheet normaliser\"]\n    D2[\"OCR and LLM extraction\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Scheme rule engine\"]\n    R2[\"Proof matcher\"]\n    R3[\"Recalculation and duplicates\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Exception queue\")\n    V2(\"Finance approval\")\n    V3[\"CN sheet and statements\"]\n  end\n  I1 --> D1\n  I1 --> D2\n  D1 --> R2\n  D2 --> R2\n  I2 --> R2\n  I3 --> R1\n  R2 --> R3\n  R1 --> R3\n  R3 --> V1 --> V2\n  R3 --> V2\n  V2 --> V3"
+  },
+  "inputs": [
+    "Distributor claim sheets in Excel, CSV or PDF",
+    "Secondary sales invoices from the DMS",
+    "Retailer acknowledgements, display photos and damage or expiry notes",
+    "Scheme circulars with dates, SKUs, slabs and caps",
+    "Previous claims and settlements for duplicate checks",
+    "Finance mapping of claim types to ledgers"
+  ],
+  "outputs": [
+    "Normalised claim lines with recalculated eligible amounts",
+    "Exception list with reason codes and evidence",
+    "Duplicate claim alerts",
+    "Credit note sheet for finance approval",
+    "Settlement statement for each distributor",
+    "Audit trail of every line decision"
+  ],
+  "human_in_the_loop": "Finance keeps final approval of every credit note sheet, and trade marketing rules on any scheme interpretation the rule engine cannot settle. Uncertain lines are always flagged for a person rather than passed.",
+  "integrations": [
+    "Distributor management system for secondary sales",
+    "ERP such as SAP or Tally for credit notes",
+    "Distributor portal or claims mailbox",
+    "Shared drive or SharePoint for circulars",
+    "BI tools for claims reporting"
+  ],
+  "guardrails": [
+    "No line approved without a matched proof",
+    "Scheme rules versioned with a reference to the source circular",
+    "Recalculated amount always shown beside the claimed amount",
+    "Duplicates blocked until a reviewer clears them",
+    "Input formats agreed and frozen before go-live"
+  ],
+  "compliance_notes": [
+    "The GST treatment of scheme discounts and credit notes depends on how schemes are agreed and documented; the system keeps the links between circular, invoice and credit note that your tax team needs.",
+    "A complete audit trail supports statutory audit of trade spends."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One claim type, such as quantity-slab schemes, for the distributors of one region, using one month of finance-settled claims as the benchmark.",
+    "deliverables": [
+      "Rule configuration for the pilot schemes",
+      "Working claims pipeline and exception queue",
+      "Credit note sheet in your finance format",
+      "Line-level comparison with finance-settled outcomes",
+      "Roll-out plan for other claim types and regions"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with finance outcomes",
+        "how": "Line-level approve, reject and amount results compared with finance's settled claims."
+      },
+      {
+        "metric": "Duplicates and ineligible lines caught",
+        "how": "Flags raised by the system and confirmed by finance."
+      },
+      {
+        "metric": "Share of lines needing review",
+        "how": "Lines routed to the exception queue, by reason code."
+      },
+      {
+        "metric": "Settlement cycle time",
+        "how": "Time from claim receipt to an approved credit note sheet, compared with the current process."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our schemes change every month. How are rules kept up to date?",
+      "a": "Trade marketing or the claims team enters each new circular into the rule register with its dates, SKUs and slabs, and the engine applies the version valid for the claim period. Ambiguous circulars are flagged for clarification instead of guessed."
+    },
+    {
+      "q": "Will distributors need to change their claim format?",
+      "a": "Not necessarily. The system reads varied formats, though agreeing a standard template over time reduces exceptions. We freeze the formats used in the pilot before sign-off."
+    },
+    {
+      "q": "Can it check display claim photos?",
+      "a": "It checks that a photo exists, matches the retailer and period, and is not reused from another claim. Judging whether the display met the agreed standard can be added with shelf recognition."
+    },
+    {
+      "q": "Where does the data sit?",
+      "a": "In your cloud account or an India region of a major cloud provider. Distributor and pricing data is not used to train models, and access is role-based."
+    }
+  ],
+  "related": [
+    "vendor-invoice-and-credit-note-reconciliation",
+    "shelf-availability-and-planogram-compliance",
+    "dealer-reorder-automation",
+    "gst-return-reconciliation"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/distributor-trade-claims-settlement/"
+}

@@ -1,0 +1,221 @@
+{
+  "slug": "dealer-reorder-automation",
+  "industry": "manufacturing",
+  "title": "Dealer Lead and Reorder Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Use dealer billing history to send timely WhatsApp reorder suggestions, flag dealers going quiet, and qualify new dealer enquiries before they reach the area sales manager.",
+  "seo": {
+    "title": "Dealer Reorder and Lead Automation | VipraTech",
+    "description": "WhatsApp reorder suggestions from dealer billing history, lapsed-dealer alerts for sales officers and qualification of new dealer enquiries for ASMs.",
+    "keywords": [
+      "dealer reorder automation",
+      "distributor WhatsApp marketing",
+      "dealer lead qualification",
+      "secondary sales automation",
+      "B2B WhatsApp reorder"
+    ]
+  },
+  "designed_for": [
+    "National Sales Head",
+    "Channel Sales Manager",
+    "Area Sales Manager",
+    "Sales Excellence or CRM Lead"
+  ],
+  "problem": {
+    "intro": "Sales officers spend most of their time with the dealers who already order often, while smaller dealers drift to a competitor without anyone noticing. New dealer enquiries from the website, B2B marketplaces and trade fairs sit in spreadsheets until someone finds time to call.",
+    "pain_points": [
+      {
+        "title": "Small dealers go quiet",
+        "detail": "Dealers outside the sales officer's regular beat stop ordering, and the drop shows up only in the quarterly review."
+      },
+      {
+        "title": "Leads that go cold",
+        "detail": "Enquiries from IndiaMART, the website and expos are not qualified or routed for days, and good prospects sign with another brand."
+      },
+      {
+        "title": "Broadcast messages",
+        "detail": "Reorder reminders and scheme updates go out as the same WhatsApp broadcast to every dealer, so they are ignored or blocked."
+      },
+      {
+        "title": "No record of why",
+        "detail": "When a dealer stops ordering, nobody records whether it was price, credit, stock or service."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an automation layer on top of your billing and DMS data. For each dealer it learns the usual purchase cycle by SKU group and, when a reorder is due, sends a WhatsApp suggestion based on recent run rate that the dealer can confirm in one tap as a draft order. Dealers who miss their usual window are flagged to the sales officer with context. New enquiries are qualified by a WhatsApp or web assistant that asks about territory, business type, current brands and expected volumes, then routed to the right ASM in the CRM with a summary. Messages use only approved templates and schemes.",
+    "capabilities": [
+      "Learns each dealer's purchase cycle by SKU group from invoice history",
+      "Sends WhatsApp reorder suggestions with one-tap confirmation as a draft order",
+      "Flags dealers who miss their usual ordering window, with last order, outstanding and open complaints",
+      "Qualifies new dealer enquiries from website, marketplace and expo leads and routes them to the right ASM",
+      "Tailors scheme messages to the SKUs and slabs relevant to each dealer",
+      "Records lapse reasons captured by sales officers for monthly review"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Sync billing and lead data",
+      "detail": "Dealer invoices, outstanding and lead feeds are synced daily from ERP, DMS and lead sources."
+    },
+    {
+      "step": 2,
+      "title": "Score reorder and lapse risk",
+      "detail": "Each dealer's purchase cycle is compared with recent orders to find due reorders and lapsing dealers."
+    },
+    {
+      "step": 3,
+      "title": "Choose the action",
+      "detail": "Due reorders get a WhatsApp suggestion; lapsing or key dealers become sales officer tasks."
+    },
+    {
+      "step": 4,
+      "title": "Qualify new enquiries",
+      "detail": "A WhatsApp or web assistant asks qualifying questions and checks the territory against your dealer map."
+    },
+    {
+      "step": 5,
+      "title": "Sales follow-up",
+      "detail": "ASMs receive qualified leads and sales officers receive lapse tasks with context in the CRM."
+    },
+    {
+      "step": 6,
+      "title": "Confirm and learn",
+      "detail": "Confirmed draft orders go to the order desk, and outcomes feed into the next cycle."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Billing, DMS and lead feeds\"] --> B[\"Score reorder and lapse risk\"]\n  B --> C{\"Reorder due or dealer lapsing?\"}\n  C -->|\"reorder due\"| D[\"WhatsApp reorder suggestion\"]\n  C -->|\"lapsing\"| E(\"Sales officer call task\")\n  D --> F[\"Dealer confirms draft order\"]\n  F --> G(\"Order desk checks and books\")\n  H[\"New dealer enquiry\"] --> I[\"Qualify by WhatsApp assistant\"]\n  I --> J(\"ASM follow-up in CRM\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data sync",
+        "components": [
+          "ERP and DMS invoice and outstanding feed",
+          "Lead feeds from website, marketplaces and expo forms",
+          "Dealer territory map"
+        ]
+      },
+      {
+        "name": "Scoring",
+        "components": [
+          "Purchase cycle model by dealer and SKU group",
+          "Lapse-risk rules and priority scoring"
+        ]
+      },
+      {
+        "name": "Engagement",
+        "components": [
+          "WhatsApp Business API with approved templates",
+          "Lead qualification assistant",
+          "Frequency caps and opt-out handling"
+        ]
+      },
+      {
+        "name": "Sales workflow",
+        "components": [
+          "CRM tasks for sales officers and ASMs",
+          "Draft order handoff to the order desk"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Reorder confirmation and lapse dashboards",
+          "Holdout comparison for impact measurement"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data sync\"]\n    D1[\"ERP and DMS invoices\"]\n    D2[\"Lead feeds\"]\n  end\n  subgraph S2[\"Scoring\"]\n    C1[\"Purchase cycle model\"]\n    C2[\"Lapse risk and priority\"]\n  end\n  subgraph S3[\"Engagement\"]\n    E1[\"WhatsApp templates and caps\"]\n    E2[\"Lead qualification assistant\"]\n  end\n  subgraph S4[\"Sales workflow\"]\n    W1(\"Sales officer and ASM tasks\")\n    W2[\"Draft order to order desk\"]\n  end\n  subgraph S5[\"Reporting\"]\n    R1[\"Dashboards and holdout view\"]\n  end\n  D1 --> C1 --> C2\n  C2 --> E1\n  C2 --> W1\n  D2 --> E2 --> W1\n  E1 --> W2\n  W2 --> R1\n  W1 --> R1"
+  },
+  "inputs": [
+    "Dealer-wise invoice history by SKU from ERP or DMS",
+    "Outstanding, credit and complaint status per dealer",
+    "Lead feeds from the website, B2B marketplaces and trade fair forms",
+    "Dealer territory map and ASM assignments",
+    "Approved scheme circulars and WhatsApp templates"
+  ],
+  "outputs": [
+    "WhatsApp reorder suggestions and confirmed draft orders",
+    "Lapse alerts and call tasks for sales officers",
+    "Qualified dealer leads routed to ASMs with summaries",
+    "Lapse reason log and monthly review dashboard",
+    "Holdout comparison of reorder behaviour"
+  ],
+  "human_in_the_loop": "The order desk checks every dealer-confirmed draft order before booking, and ASMs decide on new dealer onboarding, including credit and GST checks. Marketing approves templates, schemes and frequency rules before any message goes out.",
+  "integrations": [
+    "SAP, Tally or DMS for invoices and outstanding",
+    "WhatsApp Business API provider",
+    "CRM such as Salesforce, Zoho or LeadSquared",
+    "Lead sources such as website forms and IndiaMART lead exports",
+    "Sales force automation app used by sales officers"
+  ],
+  "guardrails": [
+    "Messages only to dealers who have opted in, with frequency caps and quiet hours",
+    "Prices and schemes taken only from approved masters",
+    "No credit or delivery promises in automated messages",
+    "Opt-outs honoured immediately across channels",
+    "Holdout group kept to measure real impact"
+  ],
+  "compliance_notes": [
+    "Dealer proprietors are individuals, so their contact data falls under the DPDP Act 2023; consent and withdrawal are tracked.",
+    "WhatsApp messages follow the platform's opt-in and template rules, and SMS fallbacks use DLT-registered templates under TRAI rules."
+  ],
+  "pilot": {
+    "duration": "6 weeks",
+    "scope": "Dealers in one region with at least six months of billing history, plus new dealer enquiries for that region, with a holdout group of similar dealers.",
+    "deliverables": [
+      "Purchase cycle and lapse model for pilot dealers",
+      "WhatsApp reorder and lead qualification flows",
+      "CRM tasks for sales officers and ASMs",
+      "Pilot report comparing messaged and holdout dealers",
+      "Roll-out plan and running cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Reorder suggestion acceptance",
+        "how": "Share of suggestions confirmed by dealers as draft orders."
+      },
+      {
+        "metric": "Reorder behaviour against holdout",
+        "how": "Order frequency and value of messaged dealers compared with the holdout group over the pilot."
+      },
+      {
+        "metric": "Lead response time",
+        "how": "Time from enquiry capture to qualified handover and to first ASM contact."
+      },
+      {
+        "metric": "Opt-out and block rate",
+        "how": "Dealer opt-outs and WhatsApp blocks per message sent."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will dealers find automated messages annoying?",
+      "a": "They do when messages are generic and frequent. Here each message is triggered by that dealer's own cycle, uses only SKUs they buy, and is capped. We track opt-outs and blocks every week of the pilot."
+    },
+    {
+      "q": "Do we need a DMS for this to work?",
+      "a": "No. Dealer-wise invoice history from SAP or Tally is enough to start. A DMS adds secondary sales data, which improves the suggestions where you have it."
+    },
+    {
+      "q": "Does the sales officer still own the relationship?",
+      "a": "Yes. Key dealers can be excluded from automated messages, and sales officers see every suggestion and confirmation in their app. The system gives them a better call list rather than replacing visits."
+    },
+    {
+      "q": "How do you prove it made a difference?",
+      "a": "We keep a holdout group of similar dealers who receive no automated messages and compare their ordering with the messaged group. The pilot report shows both."
+    }
+  ],
+  "related": [
+    "dealer-order-taking-voice-agent",
+    "consumer-durables-service-booking-voice-agent",
+    "distributor-trade-claims-settlement",
+    "dealer-lead-routing-and-follow-up"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/dealer-reorder-automation/"
+}

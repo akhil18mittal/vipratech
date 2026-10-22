@@ -1,0 +1,217 @@
+{
+  "slug": "rm-meeting-notes-and-crm-agent",
+  "industry": "capital-markets-wealth",
+  "title": "RM Meeting Notes and CRM Update Agent",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Turn RM client meetings and voice notes in English or Hindi into structured notes, CRM updates and follow-up drafts, with compliance mentions flagged and the RM approving everything.",
+  "seo": {
+    "title": "RM Meeting Notes and CRM Update Agent | VipraTech",
+    "description": "AI that turns relationship manager meetings and voice notes into structured notes, CRM updates and draft follow-ups, with RM approval and compliance flags.",
+    "keywords": [
+      "RM meeting notes AI",
+      "wealth CRM automation",
+      "relationship manager productivity",
+      "meeting transcription CRM update",
+      "private banking CRM agent"
+    ]
+  },
+  "designed_for": [
+    "Head of Wealth or Private Banking",
+    "Relationship Manager",
+    "Sales Operations and CRM Lead",
+    "Compliance Officer"
+  ],
+  "problem": {
+    "intro": "Relationship managers spend their best hours with clients and their worst hours updating the CRM. Notes end up in notebooks, WhatsApp chats or memory, follow-ups slip, and when compliance or a new RM needs to know what was discussed, the record is thin.",
+    "pain_points": [
+      {
+        "title": "CRM updates lag the meeting",
+        "detail": "Notes are written days later or not at all, so pipeline reports and service follow-ups are unreliable."
+      },
+      {
+        "title": "Action items get lost",
+        "detail": "Promises such as sending a scheme document, updating a nominee or checking a maturity date depend on the RM's memory."
+      },
+      {
+        "title": "Thin records for compliance",
+        "detail": "Registered advisers must keep records of client interactions, and distributors need evidence of what was explained, but notes are often brief."
+      },
+      {
+        "title": "Mixed-language conversations",
+        "detail": "Meetings move between English, Hindi and regional languages, which generic transcription tools handle poorly."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an agent that turns client meetings into CRM records. With the client's consent, the RM records the meeting or dictates a voice note afterwards on a mobile app. The agent transcribes the audio, including mixed English and Hindi, and drafts a structured note: attendees, goals and life events discussed, products or topics covered, client questions, action items with owners and dates, and the next meeting. Mentions of complaints, risk profile changes or requests outside the client's profile are flagged for compliance review. The RM edits and approves the note, and only then does the agent update CRM fields, create tasks and draft a follow-up for the RM to send.",
+    "capabilities": [
+      "Records meetings or post-meeting voice notes on mobile, with consent captured first",
+      "Transcribes mixed English, Hindi and selected regional languages, with speaker separation",
+      "Drafts structured notes with goals, life events, topics discussed, client questions and action items",
+      "Flags complaints, risk profile changes and other compliance-relevant mentions for review",
+      "Updates CRM fields and creates tasks only after RM approval",
+      "Drafts follow-up emails or WhatsApp messages for the RM to edit and send"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture with consent",
+      "detail": "The RM records the meeting with client consent, or dictates a voice note after it."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe",
+      "detail": "Audio is transcribed with speakers separated, including mixed-language speech."
+    },
+    {
+      "step": 3,
+      "title": "Draft the note",
+      "detail": "A structured note with action items and next steps is drafted against your CRM fields."
+    },
+    {
+      "step": 4,
+      "title": "Flag compliance mentions",
+      "detail": "Complaints, risk profile changes and similar mentions are flagged to a compliance queue."
+    },
+    {
+      "step": 5,
+      "title": "RM approves",
+      "detail": "The RM edits and approves the note; nothing is written to the CRM before this."
+    },
+    {
+      "step": 6,
+      "title": "Update CRM and follow up",
+      "detail": "CRM fields and tasks are updated, and a follow-up draft is prepared for the RM."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Meeting audio or RM voice note\"] --> B[\"Transcribe and separate speakers\"]\n  B --> C[\"Draft note and action items\"]\n  C --> D{\"Compliance-relevant mention?\"}\n  D -->|\"yes\"| E(\"Compliance reviewer checks\")\n  D -->|\"no\"| F(\"RM edits and approves note\")\n  E --> F\n  F --> G[\"Update CRM fields and tasks\"]\n  G --> H[\"Draft follow-up for RM to send\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Mobile recording app with consent prompt",
+          "Calendar integration for meeting context"
+        ]
+      },
+      {
+        "name": "Speech and notes",
+        "components": [
+          "Speech recognition for English, Hindi and mixed speech",
+          "Speaker separation",
+          "LLM note drafter mapped to CRM fields",
+          "Compliance mention detector"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "RM approval screen",
+          "Compliance review queue"
+        ]
+      },
+      {
+        "name": "CRM and messaging",
+        "components": [
+          "CRM adapter for fields, activities and tasks",
+          "Email and WhatsApp draft generator",
+          "Audit log and audio retention rules"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Mobile recorder with consent\"]\n    C2[\"Calendar context\"]\n  end\n  subgraph S2[\"Speech and notes\"]\n    T1[\"Speech recognition\"]\n    N1[\"Note and action drafter\"]\n    N2[\"Compliance mention detector\"]\n  end\n  subgraph S3[\"Review\"]\n    R1(\"RM approval screen\")\n    R2(\"Compliance queue\")\n  end\n  subgraph S4[\"CRM and messaging\"]\n    M1[\"CRM adapter\"]\n    M2[\"Follow-up draft generator\"]\n    M3[\"Audit log\"]\n  end\n  C1 --> T1\n  C2 --> N1\n  T1 --> N1\n  N1 --> N2\n  N1 --> R1\n  N2 --> R2\n  R2 --> R1\n  R1 --> M1\n  R1 --> M2\n  M1 --> M3"
+  },
+  "inputs": [
+    "Meeting recordings or RM voice notes",
+    "Client profile, risk category and holdings summary from the CRM",
+    "Calendar entries for meeting context",
+    "Compliance topics and keywords to flag",
+    "CRM field schema and task types"
+  ],
+  "outputs": [
+    "Structured meeting notes in the CRM",
+    "Updated CRM fields, activities and next steps",
+    "Tasks with owners and due dates",
+    "Draft follow-up emails or WhatsApp messages",
+    "Compliance flag log"
+  ],
+  "human_in_the_loop": "The RM reviews and approves every note before anything is written to the CRM, and sends every client message personally. Compliance reviews flagged mentions, and the agent never generates recommendations.",
+  "integrations": [
+    "CRM such as Salesforce Financial Services Cloud, Microsoft Dynamics 365 or Zoho",
+    "Microsoft Outlook or Google Calendar",
+    "Mobile recording app",
+    "Email and WhatsApp Business",
+    "Data warehouse for activity reporting"
+  ],
+  "guardrails": [
+    "Client consent captured before any recording",
+    "No CRM write without RM approval",
+    "No automatic sending of messages to clients",
+    "No product recommendations generated by the agent",
+    "Audio retained only for the agreed period, with access limited to the RM's own clients"
+  ],
+  "compliance_notes": [
+    "Helps advisers keep the records of client interactions that SEBI's Investment Adviser regulations expect, while the RM remains responsible for their content.",
+    "Recording consent and retention follow the DPDP Act 2023, and client messages stay under your communication approval policy."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "A small group of RMs in one team or city, covering in-person meetings and post-meeting voice notes in English and Hindi.",
+    "deliverables": [
+      "Note template mapped to your CRM fields",
+      "Mobile capture and transcription set-up",
+      "RM approval screen and CRM integration in a test environment",
+      "Compliance flag rules and review queue",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time from meeting to CRM note",
+        "how": "CRM timestamps compared with meeting times, before and during the pilot."
+      },
+      {
+        "metric": "RM acceptance of drafts",
+        "how": "Share of draft notes approved with minor or no edits, from the approval screen."
+      },
+      {
+        "metric": "Action items closed on time",
+        "how": "Tasks created by the agent and completed by their due date."
+      },
+      {
+        "metric": "Weekly active RMs",
+        "how": "RMs using the agent at least once per week."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do clients need to agree to recording?",
+      "a": "Yes. The app asks the RM to capture consent before recording. If a client declines, the RM can dictate a voice note after the meeting instead."
+    },
+    {
+      "q": "Can it handle meetings in Hindi or mixed languages?",
+      "a": "Yes. Speech recognition is configured for English, Hindi and mixed speech, with regional languages added where needed. Notes are written in English for the CRM unless you prefer otherwise."
+    },
+    {
+      "q": "Does audio leave our environment?",
+      "a": "It can stay entirely within your cloud account. Where a managed speech service is used, we configure it in your chosen region with no data retention."
+    },
+    {
+      "q": "Will it work with our CRM?",
+      "a": "Yes, through the CRM's API. We map the note template to your fields during the pilot, including custom objects for wealth workflows."
+    }
+  ],
+  "related": [
+    "client-statement-and-portfolio-extraction",
+    "dormant-account-reactivation",
+    "meeting-minutes-drafting",
+    "retail-banking-cross-sell-outreach"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/rm-meeting-notes-and-crm-agent/"
+}

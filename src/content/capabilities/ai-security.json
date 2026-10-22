@@ -1,0 +1,106 @@
+{
+  "slug": "ai-security",
+  "name": "AI Security & Compliance",
+  "seo": {
+    "title": "AI Red-Teaming and LLM Security Testing | VipraTech",
+    "description": "Red-teaming for LLM apps, AI agents and voice agents, mapped to OWASP LLM Top 10, MITRE ATLAS and NIST AI RMF, with evidence your auditors can use.",
+    "keywords": [
+      "AI red teaming",
+      "LLM security testing",
+      "voice agent security testing",
+      "AI agent penetration test",
+      "OWASP LLM Top 10 assessment"
+    ]
+  },
+  "hero": {
+    "headline": "Find out how your AI fails before your customers do",
+    "subheadline": "We test LLM applications, AI agents and voice agents the way attackers and difficult customers will, and give you evidence mapped to the frameworks your risk team asks about."
+  },
+  "intro": "Our founder spent eight years building a penetration-testing-as-a-service platform and later its agentic AI testing. We apply the same discipline to AI systems: scoped engagements, reproducible attacks, clear severity, and retests after fixes. Findings map to the OWASP Top 10 for LLM Applications, MITRE ATLAS and NIST AI RMF, with India-specific checks for DPDP, RBI and TRAI expectations where relevant.",
+  "what_we_build": [
+    "LLM application penetration tests",
+    "AI agent red-teaming for tool misuse and goal hijacking",
+    "Voice agent adversarial testing in Hindi and Hinglish",
+    "RAG data-leakage and access-control testing",
+    "Jailbreak and safety regression suites in CI",
+    "Evidence packs for AI governance reviews"
+  ],
+  "how_we_work": [
+    "Scope the system, data and threat model with you",
+    "Run automated and manual adversarial testing",
+    "Report findings with reproduction steps and fixes",
+    "Retest and hand over a regression suite"
+  ],
+  "proof_refs": [
+    "cyra-agentic-pentest",
+    "autosentinx-voice-red-team",
+    "llm-endpoint-security-scanner",
+    "ai-remediation-pipeline"
+  ],
+  "faqs": [
+    {
+      "q": "Is this the same as a normal penetration test?",
+      "a": "No. A normal test covers your web app and infrastructure. AI red-teaming covers prompt injection, jailbreaks, data leakage through retrieval, unsafe tool use and conversational manipulation, which standard scanners do not test."
+    },
+    {
+      "q": "Can you test our vendor's voice agent?",
+      "a": "Yes, with written permission from you and, where needed, the vendor. Vendors can also commission the test themselves and share the report in bank and enterprise security reviews."
+    },
+    {
+      "q": "Do you certify compliance?",
+      "a": "No. We provide independent technical evidence that supports your compliance and governance work. Certification and legal sign-off stay with your auditors and counsel."
+    }
+  ],
+  "url": "/solutions/ai-security/",
+  "use_cases": [
+    "bank-chatbot-and-voice-agent-red-teaming",
+    "ai-model-governance-evidence-pack",
+    "collections-voice-agent-conduct-testing",
+    "insurance-bot-mis-selling-and-disclosure-testing",
+    "advisory-chatbot-guardrail-testing",
+    "research-copilot-data-leakage-testing",
+    "llm-app-pre-launch-security-assessment",
+    "ai-agent-permission-and-tool-use-review",
+    "dpdp-ai-data-handling-assessment",
+    "healthcare-chatbot-safety-testing",
+    "gxp-ai-tool-validation-and-security",
+    "logistics-ai-agent-security-testing",
+    "plant-copilot-security-review",
+    "shopping-assistant-guardrail-testing",
+    "student-ai-tutor-safety-testing",
+    "legal-ai-confidentiality-testing",
+    "ai-assurance-delivery-partner",
+    "voice-agent-jailbreak-testing",
+    "ai-calling-compliance-evidence",
+    "ot-it-ai-assistant-security-review",
+    "dealer-chatbot-guardrail-testing",
+    "farm-advisory-chatbot-safety-testing",
+    "llm-application-penetration-test",
+    "ai-agent-red-teaming",
+    "voice-agent-adversarial-testing",
+    "rag-data-leakage-and-access-control-testing",
+    "continuous-ai-security-regression-in-ci",
+    "eu-ai-act-iso-42001-evidence-pack",
+    "agentic-security-testing-for-web-apps"
+  ],
+  "industries": [
+    "accounting-audit-consulting",
+    "agriculture",
+    "automotive-mobility",
+    "banking",
+    "capital-markets-wealth",
+    "education",
+    "energy-mining-utilities",
+    "fintech-payments",
+    "healthcare",
+    "insurance",
+    "legal",
+    "logistics-supply-chain",
+    "manufacturing",
+    "nbfc-lending",
+    "pharma-life-sciences",
+    "retail-ecommerce",
+    "saas-ai-companies",
+    "telecom-contact-centers"
+  ]
+}

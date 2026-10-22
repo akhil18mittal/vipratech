@@ -1,0 +1,216 @@
+{
+  "slug": "chargeback-dispute-evidence-pack",
+  "industry": "fintech-payments",
+  "title": "Chargeback and Dispute Evidence Pack Assembly",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Gather order, delivery, authentication and refund records for each chargeback, check them against the reason code and draft a representment pack for your disputes analyst.",
+  "seo": {
+    "title": "Chargeback Evidence Pack Automation with AI | VipraTech",
+    "description": "AI that collects order, delivery, 3-D Secure and refund evidence per chargeback, maps it to the reason code and drafts a representment pack for review.",
+    "keywords": [
+      "chargeback evidence automation",
+      "chargeback representment",
+      "UPI dispute management",
+      "dispute evidence pack",
+      "payment aggregator chargebacks"
+    ]
+  },
+  "designed_for": [
+    "Disputes and Chargeback Manager",
+    "Payment Operations Lead",
+    "Merchant Risk Analyst",
+    "Finance Controller at high-volume merchants"
+  ],
+  "problem": {
+    "intro": "Each chargeback arrives with a reason code, an amount and a response deadline set by the network or the acquiring bank. Winning it depends on sending the evidence that reason code needs: an invoice, proof of delivery, authentication results, refund records or customer emails, spread across systems owned by different teams and often by the merchant.",
+    "pain_points": [
+      {
+        "title": "Evidence scattered across systems",
+        "detail": "Order data, courier proof of delivery, 3-D Secure results, refund status and support tickets live in different tools, and some sit with the merchant."
+      },
+      {
+        "title": "Packs that miss the reason code",
+        "detail": "Packs often contain plenty of documents but not the specific evidence the reason code calls for, so defensible cases are lost."
+      },
+      {
+        "title": "Deadline misses",
+        "detail": "Disputes received in bulk files are worked in arrival order, and high-value cases close to their deadline slip through."
+      },
+      {
+        "title": "Unstructured merchant chasing",
+        "detail": "Requests to merchants for invoices or delivery proof go out as free-text emails, and replies come back as screenshots and forwarded threads."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a dispute evidence assistant that reads each incoming card chargeback or UPI dispute, identifies the reason code and the evidence that code requires, and gathers it from your systems and the merchant. It pulls transaction and authentication records, matches courier proof of delivery to the shipping address, checks whether a refund was already processed and extracts the relevant lines from customer emails and chats. It then drafts a representment pack: a short case summary, an evidence index and supporting documents in the order your acquirer expects. Cases where a refund already exists or the evidence is thin are marked for acceptance, with reasons. A disputes analyst reviews and decides.",
+    "capabilities": [
+      "Parses chargeback notifications and bulk dispute files, including reason code, amount, ARN and deadline",
+      "Maps each reason code to an evidence checklist your team maintains, for card networks and UPI",
+      "Retrieves order, invoice, delivery, authentication and refund records by transaction reference",
+      "Matches courier proof of delivery, OTP or signature confirmation to the order address",
+      "Extracts relevant statements from customer emails and chat transcripts with timestamps",
+      "Drafts a case summary and evidence index, and marks cases better accepted than contested"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Ingest and prioritise disputes",
+      "detail": "Notifications and dispute files are parsed into cases with reason code, amount, reference and deadline, then ordered by time left and value."
+    },
+    {
+      "step": 2,
+      "title": "Gather evidence",
+      "detail": "Records are pulled from your order, payment, logistics and support systems by transaction reference."
+    },
+    {
+      "step": 3,
+      "title": "Check against the reason code",
+      "detail": "Collected evidence is compared with the checklist for that code; gaps trigger a structured request to the merchant."
+    },
+    {
+      "step": 4,
+      "title": "Draft the pack",
+      "detail": "A case summary, evidence index and ordered documents are assembled in your acquirer's format."
+    },
+    {
+      "step": 5,
+      "title": "Analyst review",
+      "detail": "The disputes analyst edits the pack and decides whether to contest or accept."
+    },
+    {
+      "step": 6,
+      "title": "Submit and track",
+      "detail": "The analyst submits through the acquirer portal or usual channel, and the outcome is recorded against the reason code."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Dispute file from acquirer\"] --> B[\"Parse case and set priority\"]\n  B --> C[\"Pull order, delivery, auth, refunds\"]\n  C --> D{\"Evidence meets reason code list?\"}\n  D -->|\"no\"| E[\"Structured request to merchant\"]\n  E --> C\n  D -->|\"yes\"| F[\"Draft summary and evidence index\"]\n  F --> G(\"Disputes analyst reviews\")\n  G --> H{\"Contest or accept?\"}\n  H -->|\"contest\"| I[\"Submit representment pack\"]\n  H -->|\"accept\"| J[\"Record acceptance and reason\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Acquirer dispute file and email parser",
+          "Case store with deadline tracking"
+        ]
+      },
+      {
+        "name": "Evidence retrieval",
+        "components": [
+          "Connectors to order, gateway and refund systems",
+          "Courier proof-of-delivery lookup",
+          "Support ticket and email search"
+        ]
+      },
+      {
+        "name": "Reasoning",
+        "components": [
+          "Reason-code evidence checklists",
+          "LLM case summariser",
+          "Gap and acceptance logic"
+        ]
+      },
+      {
+        "name": "Review and submission",
+        "components": [
+          "Analyst workspace with pack editor",
+          "Pack generator in acquirer format",
+          "Outcome tracker by reason code"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Dispute file and email parser\"]\n    I2[\"Case store with deadlines\"]\n  end\n  subgraph S2[\"Evidence retrieval\"]\n    E1[\"Order and payment connectors\"]\n    E2[\"Courier POD lookup\"]\n    E3[\"Support ticket search\"]\n  end\n  subgraph S3[\"Reasoning\"]\n    R1[\"Reason code checklist\"]\n    R2[\"LLM case summariser\"]\n  end\n  subgraph S4[\"Review and submission\"]\n    W1(\"Analyst pack editor\")\n    W2[\"Pack generator\"]\n    W3[\"Outcome tracker\"]\n  end\n  I1 --> I2\n  I2 --> E1\n  I2 --> E2\n  I2 --> E3\n  E1 --> R1\n  E2 --> R1\n  E3 --> R1\n  R1 --> R2 --> W1\n  W1 --> W2 --> W3"
+  },
+  "inputs": [
+    "Chargeback notifications and bulk dispute files from acquiring banks",
+    "Transaction and 3-D Secure authentication records",
+    "Order details, invoices and terms accepted at checkout",
+    "Courier proof of delivery and tracking events",
+    "Refund and reversal records",
+    "Customer emails, chat transcripts and call notes"
+  ],
+  "outputs": [
+    "Prioritised dispute queue with deadlines",
+    "Draft representment pack with case summary and evidence index",
+    "Evidence gap list per case",
+    "Contest-or-accept recommendation with reasons",
+    "Outcome log by reason code and merchant"
+  ],
+  "human_in_the_loop": "A disputes analyst reviews every pack and makes the contest-or-accept decision. Nothing is submitted to an acquirer or network without that sign-off, because representment statements must be accurate and defensible.",
+  "integrations": [
+    "Payment gateway or switch transaction database",
+    "Acquirer dispute portals and SFTP dispute files",
+    "Order management systems or merchant APIs",
+    "Courier and logistics tracking APIs",
+    "Freshdesk, Zendesk or a similar support desk"
+  ],
+  "guardrails": [
+    "Card numbers masked or tokenised throughout; packs never include full card data",
+    "Summaries state only what the evidence shows, with no assumed customer intent",
+    "Deadline alerts escalate cases close to expiry",
+    "Per-merchant access controls so one merchant's data never appears in another's pack",
+    "No automatic submission under any condition"
+  ],
+  "compliance_notes": [
+    "Checklists follow card network and NPCI dispute rules as configured by your team, so rule changes are made in the checklist rather than in code.",
+    "Customer personal data is used only for dispute handling, consistent with purpose limitation under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One reason-code family, such as goods or services not received, for two or three high-dispute merchants, run alongside your current analysts.",
+    "deliverables": [
+      "Reason-code evidence checklists for the pilot scope",
+      "Connectors to order, refund and courier data for the pilot merchants",
+      "Draft packs for live or recent disputes",
+      "Analyst feedback log",
+      "Roll-out plan for the remaining reason codes"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Pack completeness",
+        "how": "Drafted packs that contain every item on the reason-code checklist, confirmed by an analyst."
+      },
+      {
+        "metric": "Analyst preparation time",
+        "how": "Time from case opening to a submission-ready pack, compared with recent manually prepared cases."
+      },
+      {
+        "metric": "Deadline adherence",
+        "how": "Cases submitted before the acquirer deadline during the pilot window."
+      },
+      {
+        "metric": "Outcomes by reason code",
+        "how": "Won, lost and accepted cases recorded as network results arrive, reported as observed."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it handle UPI disputes as well as card chargebacks?",
+      "a": "Yes. UPI disputes and card chargebacks have different reason codes and timelines, so each has its own checklist and case type. The same evidence connectors serve both."
+    },
+    {
+      "q": "Will it submit disputes automatically?",
+      "a": "No. It drafts the pack and recommends contest or accept. Your analyst reviews, edits and submits."
+    },
+    {
+      "q": "What if the merchant holds most of the evidence?",
+      "a": "The assistant sends a structured request listing exactly which items that reason code needs and by when, through email or a merchant dashboard link. Whatever the merchant uploads is read back into the case."
+    },
+    {
+      "q": "Can it predict which disputes we will win?",
+      "a": "We do not present win predictions as facts. The system shows whether the evidence matches the checklist and records outcomes, so over time your team can see which evidence types matter for which reason codes."
+    }
+  ],
+  "related": [
+    "settlement-reconciliation",
+    "payment-support-voice-agent",
+    "invoice-and-gst-data-extraction",
+    "customer-complaint-triage-and-routing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/chargeback-dispute-evidence-pack/"
+}

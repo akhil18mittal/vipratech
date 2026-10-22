@@ -1,0 +1,121 @@
+{
+  "slug": "capital-markets-wealth",
+  "name": "Capital Markets & Wealth Management",
+  "seo": {
+    "title": "AI for Brokers, AMCs & Wealth Managers | VipraTech",
+    "description": "Custom AI for brokers, AMCs, wealth managers and private markets: statement and KYC extraction, fund documents, support voice agents and AI testing.",
+    "keywords": [
+      "AI for wealth management India",
+      "AI for stock brokers",
+      "CAS statement extraction",
+      "broker KYC automation",
+      "private markets document extraction",
+      "advisory chatbot guardrail testing",
+      "BRSR data extraction"
+    ]
+  },
+  "hero": {
+    "headline": "AI for statements, KYC, research and client service that your compliance team can audit",
+    "subheadline": "We build document, voice, AI-security and CRM automation systems for brokers, AMCs, wealth managers, family offices and private markets investors. They handle facts and service; advice stays with your registered professionals."
+  },
+  "intro": "Capital markets firms handle a steady flow of documents and conversations: consolidated account statements, KYC packets, broker research, capital call notices, BRSR filings, support calls and RM meetings. Applied AI helps by reading these documents into structured, source-linked data, answering factual account queries in Hindi or Gujarati, capturing meeting notes into the CRM and testing client-facing chatbots before they go live. It does not pick stocks, build portfolios, time markets or give personalised advice. Under SEBI rules, investment advice and research belong to registered advisers and analysts, so we design every system to keep client-facing outputs factual and leave every judgement with a qualified person.",
+  "challenges": [
+    {
+      "title": "Client data arrives in many formats",
+      "detail": "Holdings sit across depository CAS, registrar statements, PMS and AIF reports and overseas custodians, and RMs rebuild portfolios in spreadsheets."
+    },
+    {
+      "title": "Onboarding and KYC volumes are uneven",
+      "detail": "Account opening surges around popular IPOs and market rallies, while KRA rejections, derivatives activation and NRI or corporate files need careful checking."
+    },
+    {
+      "title": "Too much to read, too little time",
+      "detail": "Results seasons, broker research, fund reports and sustainability filings pile up faster than analysts and operations teams can extract what matters."
+    },
+    {
+      "title": "AI raises conduct and data questions",
+      "detail": "A chatbot that drifts into stock tips or a copilot that exposes restricted research creates regulatory and reputational risk."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Extraction from CAS and portfolio statements, KYC packets, research reports, fund documents and BRSR filings, with every value linked to its source."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Inbound voice agents for payout, margin and order-rejection queries that verify clients and decline advice or order requests, plus speech capture for RM meetings."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Guardrail testing for advisory chatbots and data-leakage testing for internal research copilots, with evidence your compliance and security teams can file."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "RM meeting notes captured into the CRM, and consent-based re-activation journeys for dormant trading accounts."
+    }
+  ],
+  "featured_use_cases": [
+    "client-statement-and-portfolio-extraction",
+    "private-markets-fund-document-extraction",
+    "advisory-chatbot-guardrail-testing"
+  ],
+  "use_cases": [
+    "client-statement-and-portfolio-extraction",
+    "broker-kyc-onboarding-verification",
+    "research-report-summarisation",
+    "private-markets-fund-document-extraction",
+    "esg-brsr-report-data-extraction",
+    "trading-support-voice-agent",
+    "advisory-chatbot-guardrail-testing",
+    "research-copilot-data-leakage-testing",
+    "rm-meeting-notes-and-crm-agent",
+    "dormant-account-reactivation"
+  ],
+  "regulatory_context": [
+    {
+      "name": "SEBI Investment Advisers and Research Analysts Regulations",
+      "note": "Investment advice and published research are reserved for SEBI-registered advisers and analysts. Our systems keep client-facing outputs factual and leave advice and research views to registered professionals."
+    },
+    {
+      "name": "SEBI KYC norms and the KRA framework",
+      "note": "Intermediaries must collect and verify client KYC and upload records to a KYC Registration Agency. Our onboarding tools apply your documented checklist and keep a maker-checker trail."
+    },
+    {
+      "name": "SEBI cyber resilience and AI accountability",
+      "note": "SEBI's cybersecurity and cyber resilience framework applies to regulated entities, and SEBI has made clear that firms remain responsible for the output of AI tools they use and for the data those tools handle."
+    },
+    {
+      "name": "DPDP Act 2023 and GDPR",
+      "note": "Client statements, KYC documents and meeting recordings are personal data. We build for consent, purpose limitation and masked logs, and apply GDPR where EU investors are involved."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Will your AI give investment advice or stock recommendations?",
+      "a": "No. We build systems that extract, summarise, verify and route. Advice, research views and suitability decisions stay with your SEBI-registered professionals, and client-facing agents are designed to decline advice requests."
+    },
+    {
+      "q": "Do you work with global private markets firms as well as Indian brokers?",
+      "a": "Yes. Fund document extraction and research tools handle global formats such as capital account statements and LPAs, while KYC, CAS and voice work cover Indian market specifics."
+    },
+    {
+      "q": "Where is client data processed?",
+      "a": "In your cloud account or an India region of a major cloud provider, or another region if your investors' data rules require it. Logs are masked, and we use model endpoints that do not retain or train on your data."
+    },
+    {
+      "q": "How do we start?",
+      "a": "With a three- or four-week pilot on one document type, one support queue or one chatbot, run alongside your current process. You get a working system, a measured report and a costed production plan."
+    }
+  ],
+  "related_industries": [
+    "banking",
+    "fintech-payments",
+    "accounting-audit-consulting"
+  ],
+  "cta": {
+    "headline": "Start with one statement type, queue or chatbot",
+    "text": "Book a discovery call and we will scope a short pilot on your de-identified documents or staging systems, with measures agreed before we start."
+  },
+  "url": "/industries/capital-markets-wealth/"
+}

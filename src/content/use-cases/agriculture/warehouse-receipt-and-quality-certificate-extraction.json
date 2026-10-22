@@ -1,0 +1,223 @@
+{
+  "slug": "warehouse-receipt-and-quality-certificate-extraction",
+  "industry": "agriculture",
+  "title": "Warehouse Receipt and Quality Certificate Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract and cross-check warehouse receipts, e-NWRs, quality certificates and stack details for commodity finance, so credit and collateral teams catch mismatches before disbursal.",
+  "seo": {
+    "title": "Warehouse Receipt and Quality Certificate AI | VipraTech",
+    "description": "AI that extracts warehouse receipts and assayer quality certificates, matches them to stacks and loan terms, and flags gaps for collateral managers.",
+    "keywords": [
+      "warehouse receipt finance automation",
+      "e-NWR data extraction",
+      "commodity quality certificate extraction",
+      "collateral management AI",
+      "pledge finance document checks"
+    ]
+  },
+  "designed_for": [
+    "Head of Commodity Finance",
+    "Collateral Manager",
+    "Credit Operations Manager, Agri NBFC",
+    "Operations Head, Warehouse Service Provider"
+  ],
+  "problem": {
+    "intro": "Loans against stored commodities depend on documents that must agree with each other: the warehouse receipt or e-NWR, the assayer's quality certificate, stack cards, insurance cover and the loan terms. When these are checked by hand, a mismatch in quantity, grade or validity date can slip through until there is a problem with the stock.",
+    "pain_points": [
+      {
+        "title": "Documents that do not agree",
+        "detail": "Bag counts, net weight, variety or grade can differ between the receipt, the quality certificate and the stack card."
+      },
+      {
+        "title": "Validity and tenure gaps",
+        "detail": "Receipts or insurance that expire before the loan matures create exposure that is easy to miss."
+      },
+      {
+        "title": "Quality parameters buried in certificates",
+        "detail": "Moisture, foreign matter, damaged grains and other parameters appear in different layouts from different assayers."
+      },
+      {
+        "title": "Manual re-keying across systems",
+        "detail": "The same receipt data is typed into the loan system, the collateral register and the MIS."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a pipeline that reads each commodity finance file: physical or electronic warehouse receipts, quality certificates, stack cards, insurance policies and the borrower's loan request. It extracts receipt number, depositor, warehouse, commodity, variety, quantity, weight, quality parameters and validity dates. The system then matches documents against each other and against the loan terms, checking quantities, grade, lien status, insurance and expiry dates. Quality parameters are compared with the lender's acceptance norms for that commodity. Each check links to its source on the page. Clean files move to the loan system; mismatches and borderline quality results go to the collateral manager's exception queue, with an audit trail of every change.",
+    "capabilities": [
+      "Extracts warehouse receipt, e-NWR and stack card fields",
+      "Reads quality certificates from different assayers into one schema",
+      "Matches quantity, weight, commodity and grade across documents",
+      "Checks receipt, insurance and loan tenure dates",
+      "Compares quality parameters with commodity acceptance norms",
+      "Exception queue and audit trail for collateral managers"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the finance file",
+      "detail": "Receipts, certificates, stack cards and insurance documents arrive from the warehouse provider, a repository statement or the borrower."
+    },
+    {
+      "step": 2,
+      "title": "Extract fields",
+      "detail": "Each document is classified and its fields extracted with confidence scores and page references."
+    },
+    {
+      "step": 3,
+      "title": "Cross-match documents",
+      "detail": "Quantities, commodity, grade and dates are matched across all documents in the file."
+    },
+    {
+      "step": 4,
+      "title": "Check against loan terms",
+      "detail": "Validity, insurance, lien status and quality parameters are compared with the loan request and acceptance norms."
+    },
+    {
+      "step": 5,
+      "title": "Exception review",
+      "detail": "Mismatches and borderline results go to the collateral manager, who confirms, corrects or rejects."
+    },
+    {
+      "step": 6,
+      "title": "Hand over to the loan system",
+      "detail": "Structured collateral data and the audit trail move to the loan and collateral systems."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Receipt, certificate and stack card\"] --> B[\"Classify and extract fields\"]\n  B --> C[\"Match quantity, grade and dates\"]\n  C --> D[\"Check tenure, insurance and norms\"]\n  D --> E{\"All matched and within norms?\"}\n  E -->|\"yes\"| G[\"Push to loan and collateral system\"]\n  E -->|\"no\"| F(\"Collateral manager exception review\")\n  F --> G\n  G --> H[\"Store audit trail\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Warehouse provider and borrower uploads",
+          "Repository statement import, where available",
+          "File grouping by loan request"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with table detection",
+          "Document classifier",
+          "LLM extractor with receipt and certificate schemas"
+        ]
+      },
+      {
+        "name": "Matching and rules",
+        "components": [
+          "Cross-document matcher",
+          "Tenure and insurance date checks",
+          "Commodity acceptance norm rules"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception queue with source highlights",
+          "Reviewer decision capture"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "Loan management system adapter",
+          "Collateral register update",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Provider and borrower uploads\"]\n    I2[\"Repository statement import\"]\n  end\n  subgraph S2[\"Extraction\"]\n    X1[\"OCR and tables\"]\n    X2[\"Receipt and certificate extractor\"]\n  end\n  subgraph S3[\"Matching and rules\"]\n    M1[\"Cross-document matcher\"]\n    M2[\"Tenure and insurance checks\"]\n    M3[\"Quality norm rules\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Collateral manager queue\")\n    R2[\"Loan system adapter\"]\n    R3[\"Collateral register\"]\n    R4[\"Audit log\"]\n  end\n  I1 --> X1\n  I2 --> X2\n  X1 --> X2 --> M1\n  M1 --> M2 --> M3\n  M3 --> R1\n  M3 --> R2\n  R1 --> R2\n  R2 --> R3 --> R4"
+  },
+  "inputs": [
+    "Warehouse receipts or e-NWR details",
+    "Assayer quality certificates",
+    "Stack cards and deposit notes",
+    "Insurance policies covering stored goods",
+    "Loan request and commodity acceptance norms"
+  ],
+  "outputs": [
+    "Structured collateral record per receipt",
+    "Cross-document match results",
+    "Flags for tenure, insurance, lien and quality gaps",
+    "Exception queue for collateral managers",
+    "Audit trail of checks and edits"
+  ],
+  "human_in_the_loop": "Collateral managers and credit officers review every mismatch, borderline quality result and expiry gap. Disbursal decisions and physical stock inspection remain with the lender and its collateral manager.",
+  "integrations": [
+    "Loan management system",
+    "Collateral or warehouse management system",
+    "e-NWR repository statements, where the lender has access",
+    "Document management system",
+    "Insurance records"
+  ],
+  "guardrails": [
+    "No disbursal decision made by the system",
+    "Acceptance norms configured and versioned by the credit team",
+    "Every extracted value linked to its source page",
+    "Alerts ahead of receipt or insurance expiry",
+    "Sample-based review of auto-cleared files"
+  ],
+  "compliance_notes": [
+    "Designed for lending against receipts issued by warehouses registered under the Warehousing (Development and Regulation) Act 2007 and regulated by WDRA.",
+    "Keeps an audit trail that supports internal audit and RBI expectations on credit documentation."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Files for one or two commodities, such as wheat and chana, from a few warehouses, processed in parallel with your current checks.",
+    "deliverables": [
+      "Extraction schemas for receipts and certificates",
+      "Matching and norm rules agreed with credit",
+      "Working pipeline and exception queue",
+      "Accuracy and flag report on historic files",
+      "Roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Extraction accuracy",
+        "how": "Compared with values entered by credit operations for the same files."
+      },
+      {
+        "metric": "Mismatches caught",
+        "how": "Count of quantity, grade, date and insurance mismatches flagged and confirmed by collateral managers."
+      },
+      {
+        "metric": "False flags",
+        "how": "Flags the collateral manager marks as not an issue, tracked to tune rules."
+      },
+      {
+        "metric": "File processing time",
+        "how": "Timed on a sample of files with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it work with electronic warehouse receipts?",
+      "a": "Yes. It can read e-NWR details from repository statements or exports where your institution has access, and match them against the paper documents in the file."
+    },
+    {
+      "q": "Can it replace physical stock inspection?",
+      "a": "No. It checks that the documents agree and are valid. Physical verification by your collateral manager or warehouse auditor is still needed."
+    },
+    {
+      "q": "How are different assayers' certificates handled?",
+      "a": "Each certificate layout is mapped to one schema, so moisture, foreign matter and other parameters are compared the same way whichever assayer issued them. New layouts are added as they appear."
+    },
+    {
+      "q": "Where does our data stay?",
+      "a": "In your cloud account or an India region of a major cloud provider. Access is role-based, and models are configured not to retain or train on your data."
+    }
+  ],
+  "related": [
+    "land-record-and-kcc-document-extraction",
+    "produce-grading-and-sorting",
+    "trade-finance-document-checking",
+    "co-lending-portfolio-file-audit"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/warehouse-receipt-and-quality-certificate-extraction/"
+}

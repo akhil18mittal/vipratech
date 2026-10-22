@@ -1,0 +1,222 @@
+{
+  "slug": "hotel-vendor-invoice-processing",
+  "industry": "hospitality-travel",
+  "title": "Vendor Invoice Processing for Hotels",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read supplier invoices, challans and handwritten market bills, match them to purchase orders, store receipts and agreed rates, and post clean entries to accounts with exceptions flagged.",
+  "seo": {
+    "title": "Hotel Vendor Invoice Processing with AI | VipraTech",
+    "description": "AI that reads hotel supplier invoices and market bills, matches them with POs, receiving records and rate lists, checks GST and posts entries to accounts.",
+    "keywords": [
+      "hotel invoice processing",
+      "hotel accounts payable automation",
+      "F&B purchase invoice matching",
+      "GST invoice extraction for hotels",
+      "hotel purchase control"
+    ]
+  },
+  "designed_for": [
+    "Financial Controller or Accounts Manager",
+    "Purchase Manager",
+    "Store Keeper",
+    "Hotel Owner or General Manager"
+  ],
+  "problem": {
+    "intro": "A hotel buys from dozens of suppliers every week: vegetables, dairy, meat, groceries, LPG, linen laundry, housekeeping supplies and maintenance contracts. Bills arrive as GST invoices, delivery challans and handwritten market slips, and accounts match them by hand to purchase orders and the store receiving register before paying.",
+    "pain_points": [
+      {
+        "title": "Rates that creep",
+        "detail": "Vegetable and dairy rates are agreed weekly, but invoices arrive at different rates and nobody compares every line."
+      },
+      {
+        "title": "Billed versus received",
+        "detail": "Short deliveries, rejected items and weight differences recorded at the receiving bay are not always deducted from the invoice."
+      },
+      {
+        "title": "Handwritten and mixed formats",
+        "detail": "Local suppliers send handwritten bills and challans that are typed into Tally line by line."
+      },
+      {
+        "title": "Duplicates and GST errors",
+        "detail": "The same bill is submitted twice, or tax is charged as IGST instead of CGST and SGST, which affects input tax credit."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an invoice pipeline for hotel purchasing. Invoices, challans and market slips arrive by email, as WhatsApp photos or as scans from the store. OCR and a large language model extract supplier, GSTIN, invoice number, line items, quantities, units, rates and tax. Each line is matched to the purchase order or indent, the store receiving entry and the agreed rate list for that week. The pipeline checks arithmetic, tax type and GSTIN format, and looks for duplicates. Matched invoices are prepared for posting to your accounting system, and mismatches go to an exception queue with the reason and the source document side by side.",
+    "capabilities": [
+      "Extraction from GST invoices, delivery challans and handwritten market bills",
+      "Three-way match of invoice lines with purchase orders or indents and store receiving records",
+      "Rate check against weekly vegetable, dairy and meat rate lists or annual supply contracts",
+      "Short-delivery and rejected-item deductions taken from the receiving register",
+      "GSTIN format, tax type and arithmetic checks, with duplicate detection",
+      "Exception queue and posting file for Tally, Zoho Books or your ERP"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive bills",
+      "detail": "Invoices and challans arrive by email, as WhatsApp photos from the store or as scans, and are grouped by supplier and date."
+    },
+    {
+      "step": 2,
+      "title": "Extract lines",
+      "detail": "Supplier details, line items, quantities, units, rates and tax are extracted with confidence scores."
+    },
+    {
+      "step": 3,
+      "title": "Match with PO and receipt",
+      "detail": "Each line is matched to the purchase order or indent, the store receiving entry and the agreed rate."
+    },
+    {
+      "step": 4,
+      "title": "Run checks",
+      "detail": "Arithmetic, GST, duplicates, rate differences and short deliveries are checked against your tolerances."
+    },
+    {
+      "step": 5,
+      "title": "Review exceptions",
+      "detail": "Accounts or the purchase manager review flagged lines and record decisions or debit notes."
+    },
+    {
+      "step": 6,
+      "title": "Post to accounts",
+      "detail": "Approved invoices are exported to the accounting system with links to the source documents."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Invoices, challans and market bills\"] --> B[\"Extract lines with OCR and LLM\"]\n  B --> C[\"Match PO, receipt and rate list\"]\n  C --> D[\"GST, duplicate and arithmetic checks\"]\n  D --> E{\"Within tolerance?\"}\n  E -->|\"no\"| F(\"Accounts or purchase review\")\n  E -->|\"yes\"| G[\"Prepare posting entry\"]\n  F --> G\n  G --> H[\"Post to Tally or ERP\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Email and WhatsApp photo intake",
+          "Store scanner upload",
+          "Supplier and date grouping"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR for printed and handwritten bills",
+          "LLM line-item extractor"
+        ]
+      },
+      {
+        "name": "Matching and checks",
+        "components": [
+          "PO and receiving record matcher",
+          "Rate list comparison",
+          "GST, arithmetic and duplicate rules"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception queue with source view",
+          "Debit note suggestions"
+        ]
+      },
+      {
+        "name": "Accounting",
+        "components": [
+          "Posting file or API for Tally, Zoho Books or ERP",
+          "Purchase and supplier rate reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n  I1[\"Email and WhatsApp photos\"]\n  I2[\"Store scanner upload\"]\n  end\n  subgraph S2[\"Extraction\"]\n  E1[\"OCR printed and handwritten\"]\n  E2[\"LLM line extractor\"]\n  end\n  subgraph S3[\"Matching and checks\"]\n  M1[\"PO and receipt matcher\"]\n  M2[\"Rate list check\"]\n  M3[\"GST and duplicate rules\"]\n  end\n  subgraph S4[\"Review and accounting\"]\n  R1(\"Exception review\")\n  R2[\"Accounts posting\"]\n  R3[\"Purchase reports\"]\n  end\n  I1 --> E1\n  I2 --> E1\n  E1 --> E2\n  E2 --> M1\n  M1 --> M2\n  M2 --> M3\n  M3 --> R1\n  M3 --> R2\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Supplier GST invoices and delivery challans",
+    "Handwritten market purchase bills",
+    "Purchase orders and kitchen indents",
+    "Store receiving register or goods receipt notes",
+    "Weekly rate lists and annual supply contracts",
+    "Supplier master with GSTINs"
+  ],
+  "outputs": [
+    "Structured invoice records with line items",
+    "Match status per line, with reasons for exceptions",
+    "Suggested debit notes for short deliveries and rate differences",
+    "Posting file or entries for the accounting system",
+    "Supplier rate variance and purchase reports"
+  ],
+  "human_in_the_loop": "Accounts approve every exception, and the purchase manager decides on rate disputes and debit notes. Payment approval stays with the financial controller or owner, as it does today.",
+  "integrations": [
+    "Tally, Zoho Books, SAP Business One or your ERP",
+    "Hotel inventory or store management module",
+    "Email and WhatsApp for bill intake",
+    "GSTR-2B downloads for input tax credit checks",
+    "Shared drive or document management for bill archives"
+  ],
+  "guardrails": [
+    "No invoice posted or paid without the configured approval",
+    "Every extracted value linked to the bill image",
+    "Tolerances for rates and quantities set by finance, not by the model",
+    "Duplicate checks across supplier, invoice number, date and amount",
+    "Low-confidence handwritten bills always sent for review"
+  ],
+  "compliance_notes": [
+    "GST checks help protect input tax credit by catching wrong tax types and invalid GSTINs before posting.",
+    "Keeps an audit trail linking each payment to its invoice, receipt and approval."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "F&B purchases at one property, including vegetables, dairy, meat and groceries, matched against indents, POs and the store receiving register in parallel with accounts.",
+    "deliverables": [
+      "Extraction schema and matching rules for your suppliers",
+      "Exception queue and review screen",
+      "Posting file format for your accounting system",
+      "Pilot exceptions report",
+      "Roll-out plan for other purchase categories"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Line-level extraction accuracy",
+        "how": "Compared with entries made by accounts for the same bills."
+      },
+      {
+        "metric": "Exceptions confirmed as genuine",
+        "how": "Accounts and purchase feedback on each flagged rate, quantity or GST issue."
+      },
+      {
+        "metric": "Processing time per bill",
+        "how": "Time from bill receipt to posting, before and during the pilot."
+      },
+      {
+        "metric": "Handwritten bill coverage",
+        "how": "Handwritten bills processed without manual re-typing, counted against all handwritten bills received."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read handwritten bills from local vendors?",
+      "a": "Yes, for reasonably clear handwriting on typical market slips. Lines it reads with low confidence are flagged for review, and the pilot reports accuracy separately for handwritten bills."
+    },
+    {
+      "q": "Does it work with Tally?",
+      "a": "Yes. We usually produce an import file or use Tally's integration options to create purchase entries, with a link to the bill image stored for reference. Systems such as Zoho Books or SAP Business One connect through their APIs."
+    },
+    {
+      "q": "What if we do not raise purchase orders for daily vegetables?",
+      "a": "Many hotels buy daily produce against a kitchen indent and a weekly rate list. The pipeline can match against the indent, the receiving entry and the rate list instead of a PO."
+    },
+    {
+      "q": "Can it help with food cost control?",
+      "a": "It produces clean, item-level purchase data by supplier and category, which feeds food cost reports. It does not replace stock counts or recipe costing, but it makes the purchase side reliable."
+    }
+  ],
+  "related": [
+    "kitchen-hygiene-monitoring",
+    "guest-id-and-check-in-document-capture",
+    "po-invoice-three-way-matching",
+    "vendor-invoice-and-credit-note-reconciliation"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/hotel-vendor-invoice-processing/"
+}

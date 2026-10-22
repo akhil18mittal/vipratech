@@ -1,0 +1,223 @@
+{
+  "slug": "regulatory-return-preparation-assistant",
+  "industry": "banking",
+  "title": "Regulatory Return Preparation Assistant",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Prepare RBI return workings from core banking and GL extracts, run validation and variance checks before upload, and draft explanations that reporting teams review and sign off.",
+  "seo": {
+    "title": "RBI Return Preparation Assistant for Banks | VipraTech",
+    "description": "AI assistant that maps RBI return instructions to source data, runs validation and variance checks, and drafts explanations for regulatory reporting teams.",
+    "keywords": [
+      "RBI regulatory return preparation",
+      "regulatory reporting automation bank",
+      "CIMS return validation",
+      "automated data flow RBI returns",
+      "return variance analysis AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Regulatory Reporting",
+    "Chief Financial Officer",
+    "Chief Compliance Officer",
+    "Financial Controller"
+  ],
+  "problem": {
+    "intro": "Banks file a long calendar of returns to RBI, from Form A and Form VIII to BSR, ALM and large-credit reporting, many of them through the CIMS portal. The figures come from core banking, treasury and GL systems, but the mapping from source data to each return line often lives in spreadsheets and in the heads of a few people.",
+    "pain_points": [
+      {
+        "title": "Mappings held in personal workbooks",
+        "detail": "The logic that turns GL heads and CBS fields into return lines sits in spreadsheets, so every change of staff or format is a risk."
+      },
+      {
+        "title": "Late discovery of validation failures",
+        "detail": "Validation errors and cross-return inconsistencies are often found at upload time, close to the deadline."
+      },
+      {
+        "title": "Variance explanations written from scratch",
+        "detail": "Each period, analysts trace large movements back to accounts and transactions and write the commentary by hand."
+      },
+      {
+        "title": "Circular changes that ripple through returns",
+        "detail": "When RBI revises a return format or definition, teams must work out which data elements, mappings and returns are affected."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a preparation assistant around your existing reporting process. A language model reads the return instructions, RBI circulars and your internal mapping notes, and helps the team keep a documented map from each return line to source fields and GL heads. The figures themselves are computed by version-controlled SQL against CBS, treasury and GL extracts, never by the model. Before upload, the assistant runs format validations, cross-return consistency checks and period-on-period variance tests, then drafts explanations for material movements by drilling into the underlying accounts. When a circular changes a return, it lists the affected lines and mappings for the team to update.",
+    "capabilities": [
+      "Searchable library of return instructions, circulars and mapping notes with cited answers",
+      "Documented line-to-source mapping for each return, versioned with maker-checker approval",
+      "Return figures computed by reviewed SQL, never by the language model",
+      "Pre-upload format validation and cross-return consistency checks",
+      "Variance analysis with drill-down to GL heads and large accounts, plus drafted commentary",
+      "Change-impact list when an RBI circular amends a return format or definition"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Pull source extracts",
+      "detail": "Period-end extracts from CBS, treasury and the GL are loaded into a reporting staging area and reconciled to control totals."
+    },
+    {
+      "step": 2,
+      "title": "Compute return lines",
+      "detail": "Reviewed SQL mappings compute each return line, and every figure keeps a link to its source query and accounts."
+    },
+    {
+      "step": 3,
+      "title": "Validate and compare",
+      "detail": "Format rules, cross-return checks and variances against prior periods identify the items that need attention."
+    },
+    {
+      "step": 4,
+      "title": "Draft explanations",
+      "detail": "For material variances, the assistant drills into contributing accounts and drafts commentary with references."
+    },
+    {
+      "step": 5,
+      "title": "Reviewer sign-off",
+      "detail": "The reporting analyst and the approving officer review figures, flags and commentary before anything is finalised."
+    },
+    {
+      "step": 6,
+      "title": "Prepare the upload package",
+      "detail": "The approved return is formatted for CIMS or the bank's reporting tool, and the evidence pack is archived."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"CBS, treasury and GL extracts\"] --> B[\"Reconcile to control totals\"]\n  B --> C[\"Compute lines with reviewed SQL\"]\n  C --> D[\"Validation and variance checks\"]\n  D --> E{\"Failures or material variance?\"}\n  E -->|\"yes\"| F[\"Drill down and draft explanation\"]\n  E -->|\"no\"| G(\"Analyst and approver sign-off\")\n  F --> G\n  G --> H[\"Upload package and evidence archive\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data",
+        "components": [
+          "CBS, treasury and GL extract loaders",
+          "Reporting staging database",
+          "Control-total reconciliation"
+        ]
+      },
+      {
+        "name": "Computation",
+        "components": [
+          "Version-controlled SQL mappings per return line",
+          "Mapping register with maker-checker approvals"
+        ]
+      },
+      {
+        "name": "Knowledge",
+        "components": [
+          "Indexed return instructions and RBI circulars",
+          "LLM question answering with citations",
+          "Circular change-impact analyser"
+        ]
+      },
+      {
+        "name": "Validation and analysis",
+        "components": [
+          "Format and cross-return validation rules",
+          "Variance engine with drill-down",
+          "Commentary drafter"
+        ]
+      },
+      {
+        "name": "Review and output",
+        "components": [
+          "Reviewer workspace with sign-off",
+          "Upload file builder",
+          "Evidence archive"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data\"]\n    D1[\"Source extract loaders\"]\n    D2[\"Reporting staging database\"]\n  end\n  subgraph S2[\"Computation and knowledge\"]\n    C1[\"Reviewed SQL mappings\"]\n    C2[\"Mapping register\"]\n    K1[\"Circular and instruction index\"]\n  end\n  subgraph S3[\"Validation and analysis\"]\n    V1[\"Validation rules\"]\n    V2[\"Variance engine\"]\n    V3[\"Commentary drafter\"]\n  end\n  subgraph S4[\"Review and output\"]\n    R1(\"Analyst and approver workspace\")\n    R2[\"Upload file builder\"]\n    R3[\"Evidence archive\"]\n  end\n  D1 --> D2 --> C1\n  C2 --> C1\n  K1 --> C2\n  C1 --> V1\n  C1 --> V2\n  V2 --> V3\n  K1 --> V3\n  V1 --> R1\n  V3 --> R1\n  R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "Period-end CBS, treasury and GL extracts",
+    "Return templates and RBI reporting instructions",
+    "RBI circulars and master directions relevant to each return",
+    "Existing mapping workbooks and prior-period returns",
+    "Internal reporting policy and materiality thresholds"
+  ],
+  "outputs": [
+    "Computed return lines with source traceability",
+    "Validation and cross-return exception list",
+    "Variance analysis with drafted commentary",
+    "Change-impact list for amended returns",
+    "Signed-off evidence pack per return and period"
+  ],
+  "human_in_the_loop": "Reporting analysts review every exception and variance explanation, and the designated approving officer signs off each return. The assistant never submits a return; upload stays a controlled manual step.",
+  "integrations": [
+    "Core banking system and GL (read-only extracts)",
+    "Treasury system",
+    "Existing regulatory reporting tool or data warehouse",
+    "RBI CIMS upload formats",
+    "Document repository for circulars and policies"
+  ],
+  "guardrails": [
+    "Figures come only from reviewed SQL; the language model cannot change a reported number",
+    "Mapping changes require maker-checker approval",
+    "Every commentary sentence links to the accounts or data it describes",
+    "Read-only access to source systems",
+    "Full version history of mappings, figures and sign-offs"
+  ],
+  "compliance_notes": [
+    "Designed to support RBI's expectation of accurate, timely returns and its push towards automated data flow from source systems.",
+    "Keeps the evidence trail that internal audit and RBI inspection teams ask for when reviewing how returns were prepared."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Two returns chosen with the reporting team, typically one balance-sheet return and one liquidity return, rebuilt for two or three past periods and compared with what was filed.",
+    "deliverables": [
+      "Documented line-to-source mapping for the pilot returns",
+      "Reviewed SQL computations with traceability",
+      "Validation and variance checks with drafted commentary",
+      "Reconciliation report against filed returns",
+      "Plan for extending to the wider return calendar"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Line-level agreement with filed returns",
+        "how": "Each computed line compared with the figure filed for the same period, with every difference explained."
+      },
+      {
+        "metric": "Issues caught before upload",
+        "how": "Issues the checks raise compared with those historically found at upload or through RBI queries."
+      },
+      {
+        "metric": "Commentary usefulness",
+        "how": "Analysts rate each drafted explanation as usable, needs edits or wrong."
+      },
+      {
+        "metric": "Preparation effort",
+        "how": "Analyst hours logged for the pilot returns compared with the team's usual effort."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will a language model calculate our regulatory figures?",
+      "a": "No. Figures are produced by version-controlled SQL that your team reviews and approves. The language model reads instructions, helps document mappings and drafts commentary, and it cannot alter a computed figure."
+    },
+    {
+      "q": "Does it file returns on CIMS?",
+      "a": "No. It prepares an upload-ready file and an evidence pack. Upload and submission remain controlled steps carried out by authorised staff."
+    },
+    {
+      "q": "Our data sits across several systems. Is that a problem?",
+      "a": "That is the usual situation. The pilot starts from the extracts your team already uses, reconciles their totals and documents where each field comes from, which is useful even before any automation."
+    },
+    {
+      "q": "Can it keep up with new circulars?",
+      "a": "When a circular is added to the library, the assistant lists the returns, lines and mappings that refer to the affected terms, for your team to confirm. Interpretation of the circular stays with compliance and reporting staff."
+    }
+  ],
+  "related": [
+    "ai-model-governance-evidence-pack",
+    "trade-finance-document-checking",
+    "customer-complaint-triage-and-routing",
+    "bank-and-ledger-reconciliation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/regulatory-return-preparation-assistant/"
+}

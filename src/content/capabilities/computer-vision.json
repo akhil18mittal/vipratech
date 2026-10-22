@@ -1,0 +1,104 @@
+{
+  "slug": "computer-vision",
+  "name": "Computer Vision",
+  "seo": {
+    "title": "Computer Vision for Inspection and Safety | VipraTech",
+    "description": "Custom computer vision for quality inspection, safety compliance, damage assessment and shelf monitoring, using your cameras and photos.",
+    "keywords": [
+      "computer vision company India",
+      "visual inspection AI",
+      "PPE detection",
+      "damage detection from photos",
+      "shelf monitoring AI"
+    ]
+  },
+  "hero": {
+    "headline": "Cameras and photos that flag what needs attention",
+    "subheadline": "We build vision systems for inspection, safety and verification that work with the cameras and phone photos you already have, and hand decisions to your supervisors."
+  },
+  "intro": "Vision projects fail when they chase a demo instead of an operational decision. We start from the decision a supervisor, assessor or inspector makes today, collect the images that matter, and build a model and review flow around that decision. Edge or cloud deployment is chosen for your sites, bandwidth and privacy needs.",
+  "what_we_build": [
+    "Defect and damage detection",
+    "PPE, zone and safety-rule monitoring",
+    "Shelf, planogram and pick-pack verification",
+    "Photo verification for field visits and surveys",
+    "Meter, plate and label reading",
+    "Dashboards and alert routing to supervisors"
+  ],
+  "how_we_work": [
+    "Define the decision and the defect classes with your team",
+    "Collect and label images from your real conditions",
+    "Train and test on held-out sites or shifts",
+    "Deploy with a review loop that keeps improving the model"
+  ],
+  "proof_refs": [],
+  "faqs": [
+    {
+      "q": "Do we need new cameras?",
+      "a": "Often not. Many use cases work with existing CCTV or phone photos. If image quality limits accuracy, the pilot shows where a better camera position or lighting would help."
+    },
+    {
+      "q": "Edge or cloud?",
+      "a": "Both are possible. Sites with weak connectivity or strict privacy rules usually run on an edge device, with only alerts and samples sent to the cloud."
+    },
+    {
+      "q": "Does this replace our safety or QC staff?",
+      "a": "No. It flags events and defects so supervisors spend time on the cases that need them. Statutory safety systems stay in place."
+    }
+  ],
+  "url": "/solutions/computer-vision/",
+  "use_cases": [
+    "cheque-image-and-signature-verification",
+    "branch-queue-and-footfall-analytics",
+    "field-collection-visit-photo-verification",
+    "vehicle-asset-inspection-for-auto-loans",
+    "motor-claim-damage-assessment",
+    "selfie-id-face-match-and-tamper-checks",
+    "hand-hygiene-and-ppe-monitoring",
+    "pharmacy-shelf-and-expiry-monitoring",
+    "packaging-and-label-inspection",
+    "tablet-and-vial-defect-detection",
+    "parcel-damage-and-dimension-detection",
+    "warehouse-safety-monitoring",
+    "visual-quality-inspection",
+    "ppe-and-safety-zone-compliance",
+    "shelf-availability-and-planogram-compliance",
+    "dark-store-picking-and-packing-qc",
+    "catalog-enrichment-from-product-images",
+    "construction-progress-monitoring",
+    "construction-site-safety-compliance",
+    "housekeeping-room-inspection",
+    "kitchen-hygiene-monitoring",
+    "answer-sheet-and-omr-evaluation",
+    "online-test-proctoring-assistance",
+    "tower-site-inspection",
+    "mine-safety-monitoring",
+    "conveyor-and-equipment-anomaly-detection",
+    "solar-panel-drone-inspection",
+    "meter-reading-from-photos",
+    "used-car-inspection-and-damage-detection",
+    "service-centre-plate-and-document-capture",
+    "spare-parts-matching-from-photos",
+    "crop-disease-detection-from-photos",
+    "produce-grading-and-sorting",
+    "crop-insurance-field-photo-verification"
+  ],
+  "industries": [
+    "agriculture",
+    "automotive-mobility",
+    "banking",
+    "education",
+    "energy-mining-utilities",
+    "fintech-payments",
+    "healthcare",
+    "hospitality-travel",
+    "insurance",
+    "logistics-supply-chain",
+    "manufacturing",
+    "nbfc-lending",
+    "pharma-life-sciences",
+    "real-estate-construction",
+    "retail-ecommerce",
+    "telecom-contact-centers"
+  ]
+}

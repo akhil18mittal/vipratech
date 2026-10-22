@@ -1,0 +1,217 @@
+{
+  "slug": "voice-agent-jailbreak-testing",
+  "industry": "telecom-contact-centers",
+  "title": "Voice Agent Red-Teaming and Jailbreak Testing",
+  "capability": "ai-security",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Adversarial phone calls against your voice agent in Hindi, Hinglish and English, testing verification bypass, data leakage, prompt injection and off-script promises, with recorded evidence.",
+  "seo": {
+    "title": "Voice Agent Red-Teaming and Jailbreak Testing | VipraTech",
+    "description": "Adversarial calls in Hindi, Hinglish and English that test voice agents for verification bypass, data leakage and prompt injection, with audio evidence.",
+    "keywords": [
+      "voice agent red teaming",
+      "voice bot jailbreak testing",
+      "conversational AI security testing",
+      "Hindi voice agent security",
+      "SIM swap social engineering test"
+    ]
+  },
+  "designed_for": [
+    "Chief Information Security Officer",
+    "Head of Conversational AI",
+    "Fraud Risk Manager",
+    "Contact Centre Technology Head"
+  ],
+  "problem": {
+    "intro": "A voice agent connected to account systems is a new front door for fraud. Callers can try to talk it past verification, coax out another customer's details, trigger a SIM replacement request or get it to promise a waiver it has no authority to give. They can also switch language or talk over it to slip past guardrails that were only tested in English text.",
+    "pain_points": [
+      {
+        "title": "Text-only testing misses voice paths",
+        "detail": "Barge-in, background voices, DTMF input and speech recognition errors create attack routes that a chat-based test never exercises."
+      },
+      {
+        "title": "Social engineering and SIM fraud",
+        "detail": "Impersonation and urgency tactics that work on human agents can work on voice agents too, with direct fraud consequences."
+      },
+      {
+        "title": "Language switching evades guardrails",
+        "detail": "A refusal that holds in English can fail when the same request is made in Hinglish or a regional language."
+      },
+      {
+        "title": "No repeatable evidence",
+        "detail": "Ad hoc testing before launch leaves nothing to re-run when the prompt, model or tools change."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We test your voice agent the way a determined caller would, over the same phone line or SIP endpoint your customers use. We build multi-turn attack playbooks for your agent's scope: verification bypass and impersonation, account and personal data leakage, prompt injection through spoken instructions, system prompt disclosure, unauthorised actions such as SIM replacement or plan changes, off-script offers and refunds, and abusive responses. Synthetic caller voices run the playbooks in Hindi, Hinglish, English and agreed regional languages, with accents, background noise, interruptions and DTMF input. Every call is recorded, scored PASS, RISK or FAIL and verified by an engineer, and you keep a regression suite to re-run after changes.",
+    "capabilities": [
+      "Attack playbooks for verification bypass, impersonation, data leakage, prompt injection and unauthorised actions",
+      "Calls over real telephony or SIP with synthetic voices, accents, noise, barge-in and DTMF",
+      "Language-switching attacks across Hindi, Hinglish, English and agreed regional languages",
+      "PASS, RISK and FAIL scoring with call audio, transcript and the turn where the failure occurred",
+      "Findings mapped to OWASP Top 10 for LLM Applications and MITRE ATLAS techniques",
+      "Re-runnable regression suite for testing after prompt, model or tool changes"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and rules",
+      "detail": "Test numbers, synthetic accounts, call windows and in-scope behaviours are agreed in writing."
+    },
+    {
+      "step": 2,
+      "title": "Build attack playbooks",
+      "detail": "Multi-turn playbooks are tailored to the agent's intents, tools, languages and fraud risks."
+    },
+    {
+      "step": 3,
+      "title": "Place adversarial calls",
+      "detail": "Synthetic callers run the playbooks over SIP or phone lines, with noise, interruptions and DTMF."
+    },
+    {
+      "step": 4,
+      "title": "Score and verify",
+      "detail": "Each call is scored PASS, RISK or FAIL, and an engineer listens to every ambiguous or failing call."
+    },
+    {
+      "step": 5,
+      "title": "Report findings",
+      "detail": "Findings with audio, transcripts, framework mapping and fix suggestions go to your product and security teams."
+    },
+    {
+      "step": 6,
+      "title": "Retest",
+      "detail": "After fixes, the same playbooks run as a regression suite to confirm closure."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope, test accounts and rules\"] --> B[\"Build multi-turn attack playbooks\"]\n  B --> C[\"Place adversarial calls over SIP\"]\n  C --> D[\"Score each call PASS, RISK, FAIL\"]\n  D --> E{\"Result unambiguous?\"}\n  E -->|\"no\"| F(\"Security engineer verifies audio\")\n  E -->|\"yes\"| G[\"Findings with audio evidence\"]\n  F --> G\n  G --> H(\"Client team fixes agent\")\n  H --> I[\"Regression retest\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Test design",
+        "components": [
+          "Scope and threat model",
+          "Attack playbook library",
+          "Synthetic test accounts"
+        ]
+      },
+      {
+        "name": "Call execution",
+        "components": [
+          "SIP and telephony caller",
+          "Multilingual synthetic attacker voices",
+          "Noise, barge-in and DTMF injector"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Call transcription",
+          "LLM judge with rule checks",
+          "Engineer verification of audio"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Evidence store with call audio",
+          "OWASP LLM and MITRE ATLAS mapping",
+          "Regression suite runner"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Test design\"]\n    D1[\"Scope and threat model\"]\n    D2[\"Attack playbook library\"]\n    D3[\"Synthetic test accounts\"]\n  end\n  subgraph S2[\"Call execution\"]\n    C1[\"SIP caller\"]\n    C2[\"Multilingual attacker voices\"]\n    C3[\"Noise, barge-in and DTMF injector\"]\n  end\n  subgraph S3[\"Evaluation\"]\n    E1[\"Call transcription\"]\n    E2[\"LLM judge with rules\"]\n    E3(\"Engineer listens and verifies\")\n  end\n  subgraph S4[\"Reporting\"]\n    R1[\"Evidence store with audio\"]\n    R2[\"OWASP LLM and ATLAS mapping\"]\n    R3[\"Regression suite runner\"]\n  end\n  D1 --> D2\n  D2 --> C2\n  D3 --> C1\n  C2 --> C3 --> C1\n  C1 --> E1 --> E2 --> E3\n  E3 --> R1 --> R2\n  R1 --> R3\n  R3 --> C1"
+  },
+  "inputs": [
+    "Voice agent test number or SIP endpoint",
+    "Agent scope, system prompt and tool list where shared",
+    "Synthetic test customer accounts",
+    "Verification policy",
+    "Known fraud patterns and past incidents"
+  ],
+  "outputs": [
+    "Test plan and coverage matrix",
+    "Recorded calls with transcripts",
+    "PASS, RISK and FAIL results",
+    "Findings report with fix suggestions",
+    "Regression suite for future releases"
+  ],
+  "human_in_the_loop": "Engineers verify every RISK and FAIL call by listening to the audio before it is reported. Your security and product owners decide severity, fixes and go-live readiness.",
+  "integrations": [
+    "SIP trunks and test phone numbers",
+    "In-house or vendor voice agent platforms",
+    "CI pipeline for regression runs",
+    "Jira or similar for findings tracking"
+  ],
+  "guardrails": [
+    "Tests run only against test numbers and synthetic accounts agreed in writing",
+    "No real customer data used or requested",
+    "Call rates and windows limited to avoid disrupting operations",
+    "Production fraud controls tested only with explicit approval",
+    "Evidence encrypted and shared with named contacts only"
+  ],
+  "compliance_notes": [
+    "Results are mapped to the OWASP Top 10 for LLM Applications and MITRE ATLAS to help your team evidence testing; they do not certify the agent.",
+    "Test evidence can support DPDP Act 2023 expectations for reasonable security safeguards in systems that handle customer data."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One voice agent and one high-risk flow, such as account information or SIM-related requests, with a fixed playbook set and one retest.",
+    "deliverables": [
+      "Threat model and test plan for the pilot flow",
+      "Recorded adversarial calls with verified results",
+      "Findings report with audio evidence and fixes",
+      "Regression suite for the pilot flow",
+      "Retest report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Coverage by risk category",
+        "how": "Playbooks executed per category in the agreed test plan."
+      },
+      {
+        "metric": "Verified findings by severity",
+        "how": "RISK and FAIL results confirmed by engineer review of the audio."
+      },
+      {
+        "metric": "Reproducibility",
+        "how": "Findings that recur when the same playbook is re-run before fixes."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Findings closed on retest after the client team's changes."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will testing affect our production systems or customers?",
+      "a": "We test against test numbers and synthetic accounts agreed in writing, in agreed time windows and at controlled call rates. If you want production testing, it is scoped separately with your security and operations teams."
+    },
+    {
+      "q": "Which voice platforms can you test?",
+      "a": "Any agent reachable by a phone number or SIP endpoint, whether built in-house or on a vendor platform. For agents with tool access, we also review the tool permissions and test them through the conversation."
+    },
+    {
+      "q": "Do you test in regional languages?",
+      "a": "Yes. Hindi, Hinglish and English are standard, and regional languages are added where your agent supports them, because a guardrail that holds in one language can fail in another."
+    },
+    {
+      "q": "How often should we retest?",
+      "a": "After every change to the model, prompt, tools or knowledge base, and on a regular schedule otherwise. The regression suite we hand over can run from your CI pipeline or on demand."
+    }
+  ],
+  "related": [
+    "ai-calling-compliance-evidence",
+    "multilingual-l1-support-voice-agent",
+    "voice-agent-adversarial-testing",
+    "bank-chatbot-and-voice-agent-red-teaming"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/voice-agent-jailbreak-testing/"
+}

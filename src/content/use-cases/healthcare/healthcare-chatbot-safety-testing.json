@@ -1,0 +1,215 @@
+{
+  "slug": "healthcare-chatbot-safety-testing",
+  "industry": "healthcare",
+  "title": "Safety and Patient-Data Leakage Testing for Healthcare Chatbots",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test patient-facing chatbots and voice bots for unsafe medical advice, missed emergency escalation, invented information and cross-patient data leakage, with clinician-reviewed evidence.",
+  "seo": {
+    "title": "Healthcare Chatbot Safety and Leakage Testing | VipraTech",
+    "description": "Clinician-reviewed testing of healthcare chatbots and voice bots for unsafe advice, missed escalation, prompt injection and patient-data leakage.",
+    "keywords": [
+      "healthcare chatbot safety testing",
+      "patient data leakage testing",
+      "medical chatbot red teaming",
+      "health voice bot testing",
+      "LLM safety healthcare"
+    ]
+  },
+  "designed_for": [
+    "Chief Medical Information Officer",
+    "CISO or Head of IT Security",
+    "Head of Digital Health Products",
+    "Chief Medical Officer"
+  ],
+  "problem": {
+    "intro": "Hospitals and health-tech companies are launching chatbots that answer patient questions, explain reports, book appointments and handle insurance queries. In healthcare, a confident wrong answer or a missed warning sign can harm a patient, and a bot connected to records can leak someone else's reports. Generic AI testing checks for neither with clinical judgement.",
+    "pain_points": [
+      {
+        "title": "Unsafe advice under pressure",
+        "detail": "Users push bots on dose changes, stopping a medicine or whether a symptom can wait, and guardrails give way after a few turns."
+      },
+      {
+        "title": "Missed escalation",
+        "detail": "Bots fail to recognise emergency or crisis statements, especially in Hindi, Hinglish or regional languages."
+      },
+      {
+        "title": "Cross-patient data exposure",
+        "detail": "Bots with record or report access may return another patient's data through weak identity checks or prompt injection."
+      },
+      {
+        "title": "Invented facts",
+        "detail": "Bots state doctor availability, package prices or insurance coverage that are not true, causing complaints and lost trust."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We test your healthcare chatbot or voice bot before launch and after major changes. With your clinicians, we write scenario playbooks for your use: medicine and dose questions, symptoms that should trigger escalation, crisis statements, report explanations and insurance queries, in English, Hindi, Hinglish and your regional languages. We run them as multi-turn conversations with rising pressure, alongside security tests for prompt injection, system prompt extraction and attempts to reach other patients' data through tools and retrieval. Each conversation is graded PASS, RISK or FAIL, and every safety-relevant grade is confirmed by your clinicians. You get the evidence, practical fixes and a retest.",
+    "capabilities": [
+      "Scenario playbooks co-written with clinicians for medicines, symptoms, crises, reports and billing",
+      "Multi-turn adversarial conversations in English, Hindi, Hinglish and regional languages",
+      "Emergency and crisis escalation testing against your defined escalation path",
+      "Cross-patient data access testing through identity checks, tools and retrieval",
+      "Prompt injection tests through uploaded reports and free-text fields",
+      "PASS, RISK and FAIL evidence mapped to OWASP Top 10 for LLM Applications and NIST AI RMF"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Define safe behaviour",
+      "detail": "We agree the bot's intended use and, with your clinicians, what a safe response looks like for each scenario type."
+    },
+    {
+      "step": 2,
+      "title": "Build playbooks",
+      "detail": "Scenario playbooks and attack cases are written for your languages, specialties and integrations."
+    },
+    {
+      "step": 3,
+      "title": "Run conversations",
+      "detail": "Automated and manual multi-turn conversations run against a staging bot with synthetic patient records."
+    },
+    {
+      "step": 4,
+      "title": "Grade results",
+      "detail": "Each conversation is graded PASS, RISK or FAIL, and clinicians confirm the safety-relevant grades."
+    },
+    {
+      "step": 5,
+      "title": "Report and fix",
+      "detail": "Findings with transcripts, severity and fixes go to your product, clinical and security leads."
+    },
+    {
+      "step": 6,
+      "title": "Retest",
+      "detail": "After fixes, failed scenarios are rerun and the results recorded for launch approval."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Define safe behaviour with clinicians\"] --> B[\"Write scenario and attack playbooks\"]\n  B --> C[\"Run multi-turn tests on staging bot\"]\n  C --> D{\"Response safe and in policy?\"}\n  D -->|\"yes\"| E[\"Record PASS with transcript\"]\n  D -->|\"unclear\"| F(\"Clinician reviewer grades\")\n  D -->|\"no\"| G[\"Record FAIL with severity\"]\n  E --> H[\"Report with fixes\"]\n  F --> H\n  G --> H\n  H --> I[\"Retest after fixes\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Playbooks",
+        "components": [
+          "Clinical safety scenarios",
+          "Security and privacy attack cases",
+          "Language and code-mixed variants"
+        ]
+      },
+      {
+        "name": "Test runner and target",
+        "components": [
+          "Conversation runner for chat and voice",
+          "Staging chatbot or voice bot",
+          "Synthetic patient records and test accounts"
+        ]
+      },
+      {
+        "name": "Grading",
+        "components": [
+          "Automated policy and leakage checks",
+          "Clinician review panel"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "PASS, RISK and FAIL evidence report",
+          "Remediation and retest tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Playbooks\"]\n    A1[\"Clinical safety scenarios\"]\n    A2[\"Security and privacy attacks\"]\n  end\n  subgraph S2[\"Test runner and target\"]\n    B1[\"Chat and voice test runner\"]\n    B2[\"Staging health bot\"]\n    B3[\"Synthetic patient records\"]\n  end\n  subgraph S3[\"Grading\"]\n    C1[\"Automated policy and leak checks\"]\n    C2(\"Clinician review panel\")\n  end\n  subgraph S4[\"Reporting\"]\n    D1[\"PASS RISK FAIL evidence report\"]\n    D2[\"Remediation and retest tracker\"]\n  end\n  A1 --> B1\n  A2 --> B1\n  B1 --> B2\n  B2 --> B3\n  B2 --> C1\n  C1 --> C2\n  C1 --> D1\n  C2 --> D1\n  D1 --> D2"
+  },
+  "inputs": [
+    "Staging access to the chatbot or voice bot",
+    "Intended-use statement and escalation policy",
+    "Synthetic patient records and test accounts",
+    "Clinician input on safe and unsafe responses",
+    "Architecture notes on tools, retrieval sources and record access"
+  ],
+  "outputs": [
+    "Reusable scenario playbooks",
+    "Graded transcripts with PASS, RISK and FAIL results",
+    "Findings report with severity and fixes",
+    "Clinician-reviewed safety summary for launch approval",
+    "Retest results"
+  ],
+  "human_in_the_loop": "Your clinicians define safe behaviour and confirm every safety-relevant grade, and our testers validate every security finding. The decision to launch stays with your clinical and product leadership.",
+  "integrations": [
+    "Staging environment of the chatbot or voice bot",
+    "Telephony test numbers for voice bots",
+    "LLM provider or gateway logs",
+    "Jira or a similar tracker for findings",
+    "CI pipeline for regression runs"
+  ],
+  "guardrails": [
+    "Synthetic patient data only; no real records used in testing",
+    "Clinical grading done by qualified clinicians, never by a model alone",
+    "Crisis and self-harm scenarios written and reviewed with clinicians",
+    "Rules of engagement with stop conditions and rate limits",
+    "Transcripts and evidence encrypted and deleted at the end of the agreed retention period"
+  ],
+  "compliance_notes": [
+    "Helps evidence pre-launch testing and risk management in line with NIST AI RMF and the OWASP Top 10 for LLM Applications.",
+    "Patient-data leakage testing supports your security safeguards under the DPDP Act 2023, and HIPAA safeguards for US deployments.",
+    "Bots that give diagnostic or treatment recommendations may fall under medical device rules, so the report highlights any responses that cross that line."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One patient-facing bot, such as an appointment and report-query assistant, tested in staging in English and Hindi with one retest.",
+    "deliverables": [
+      "Clinician-reviewed scenario playbooks",
+      "Security and leakage test cases",
+      "Graded transcripts and findings report",
+      "Briefing for clinical, product and security leads",
+      "Retest report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Safety results by scenario type",
+        "how": "PASS, RISK and FAIL counts for medicine, symptom, crisis and billing scenarios."
+      },
+      {
+        "metric": "Escalation reliability",
+        "how": "Emergency and crisis scenarios where the bot followed the defined escalation path."
+      },
+      {
+        "metric": "Data leakage findings",
+        "how": "Validated cases of cross-patient or system data exposure."
+      },
+      {
+        "metric": "Language gap",
+        "how": "Differences in results between English, Hindi and Hinglish versions of the same scenarios."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Who decides what a safe answer is?",
+      "a": "Your clinicians. We bring scenario structures and attack techniques; your doctors and nurses define safe behaviour for your bot and confirm the safety grades."
+    },
+    {
+      "q": "Do you test voice bots as well as chat?",
+      "a": "Yes. Voice bots are tested through test phone numbers or recorded audio, including accents, background noise and code-mixed speech, because guardrails often behave differently in voice."
+    },
+    {
+      "q": "Will you use real patient data?",
+      "a": "No. We use synthetic patient records in a staging environment. If a bot can only be tested in production, we agree strict rules and use dedicated test accounts."
+    },
+    {
+      "q": "How often should we test?",
+      "a": "Before launch, after any change to the model, prompts, tools or data sources, and periodically after that. Playbooks can run in your CI pipeline as regression tests."
+    }
+  ],
+  "related": [
+    "patient-enquiry-follow-up-automation",
+    "appointment-booking-voice-agent",
+    "voice-agent-adversarial-testing",
+    "rag-data-leakage-and-access-control-testing"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/healthcare-chatbot-safety-testing/"
+}

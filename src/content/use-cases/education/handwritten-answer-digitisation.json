@@ -1,0 +1,226 @@
+{
+  "slug": "handwritten-answer-digitisation",
+  "industry": "education",
+  "title": "Handwritten Answer Digitisation",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "computer-vision"
+  ],
+  "summary": "Transcribe handwritten answer booklets in English and Hindi, including equations and diagrams, into searchable text split by question, so evaluators mark on screen and students get real feedback.",
+  "seo": {
+    "title": "Handwritten Answer Sheet Digitisation with AI | VipraTech",
+    "description": "AI that transcribes handwritten answers in English and Hindi, splits them by question and supports on-screen evaluation and feedback by your evaluators.",
+    "keywords": [
+      "handwritten answer digitisation",
+      "answer booklet transcription AI",
+      "on-screen evaluation support",
+      "Hindi handwriting recognition",
+      "UPSC answer writing evaluation"
+    ]
+  },
+  "designed_for": [
+    "Head of Evaluation",
+    "Academic Director",
+    "Answer-Writing Programme Lead",
+    "University Examination Branch Officer"
+  ],
+  "problem": {
+    "intro": "Subjective answers still dominate board-pattern school exams, university semester papers and civil-services answer-writing programmes. The booklets are handwritten, often in Hindi or a mix of scripts, and once marked they sit in storerooms, so evaluators cannot search them, moderators cannot sample them easily and students rarely get feedback beyond a number.",
+    "pain_points": [
+      {
+        "title": "Evaluators juggle paper",
+        "detail": "Booklets move between centres, evaluators and moderators by hand, and pages get misplaced or marked out of order."
+      },
+      {
+        "title": "Feedback is thin",
+        "detail": "With hundreds of copies to check, evaluators write a mark and a word or two, which does little for a student preparing for the next attempt."
+      },
+      {
+        "title": "Handwriting and scripts vary",
+        "detail": "Cursive English, Devanagari, mixed-language answers, equations and labelled diagrams defeat generic OCR."
+      },
+      {
+        "title": "Answers cannot be compared",
+        "detail": "Copied or memorised template answers across students are hard to spot when every answer exists only on paper."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a pipeline that turns scanned or photographed answer booklets into structured, searchable transcripts. It detects question numbers and splits each booklet into answers, transcribes handwriting in English and Hindi, converts equations to LaTeX and keeps diagrams as image crops beside the text. Lines the model is unsure about are marked rather than guessed, and a transcription checker resolves them against the image. Evaluators then mark on screen with the original page and transcript side by side, can see where expected rubric points appear to be addressed, and write feedback that reaches the student through your app or LMS.",
+    "capabilities": [
+      "Question-number detection that splits booklets into answers, even when students skip or reorder questions",
+      "Handwriting recognition for English and Hindi with line-level confidence",
+      "Equation transcription to LaTeX, with diagram crops kept alongside the answer",
+      "Side-by-side on-screen view of the original page and transcript for evaluators",
+      "Optional rubric hints showing where expected points appear, which evaluators can ignore",
+      "Similarity check across answers in the same test to surface possible copying for review"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scan booklets",
+      "detail": "Booklets are scanned at the centre, or photographed by students in remote answer-writing programmes, and grouped by roll number and paper."
+    },
+    {
+      "step": 2,
+      "title": "Split by question",
+      "detail": "Question numbers and page breaks are detected so each answer becomes its own record."
+    },
+    {
+      "step": 3,
+      "title": "Transcribe",
+      "detail": "Handwriting, equations and diagrams are converted, with a confidence score for every line."
+    },
+    {
+      "step": 4,
+      "title": "Check uncertain lines",
+      "detail": "Low-confidence lines are queued for a transcription checker, who corrects them against the image."
+    },
+    {
+      "step": 5,
+      "title": "Evaluate on screen",
+      "detail": "The evaluator marks each answer with the original and transcript side by side and writes feedback."
+    },
+    {
+      "step": 6,
+      "title": "Return and archive",
+      "detail": "Marks and feedback go to the student via the app or LMS, and transcripts are indexed for moderation and search."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scanned or photographed booklets\"] --> B[\"Detect questions and split answers\"]\n  B --> C[\"Transcribe handwriting and equations\"]\n  C --> D{\"Every line above confidence?\"}\n  D -->|\"no\"| E(\"Transcription checker corrects\")\n  D -->|\"yes\"| F(\"Evaluator marks on screen\")\n  E --> F\n  F --> G[\"Feedback to student app or LMS\"]\n  G --> H[\"Searchable transcript archive\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Centre scanning stations",
+          "Student mobile upload for answer-writing programmes",
+          "Booklet grouping by roll number and paper"
+        ]
+      },
+      {
+        "name": "Recognition",
+        "components": [
+          "Page and question segmentation",
+          "Handwriting model for English and Devanagari",
+          "Equation to LaTeX converter",
+          "Diagram region detector"
+        ]
+      },
+      {
+        "name": "Quality control",
+        "components": [
+          "Line-level confidence scoring",
+          "Transcription checker queue",
+          "Cross-answer similarity check"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "On-screen marking view",
+          "Rubric and feedback templates",
+          "Moderation sampling"
+        ]
+      },
+      {
+        "name": "Delivery and storage",
+        "components": [
+          "LMS and student app export",
+          "Search index over transcripts",
+          "Retention and access controls"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Centre scanning stations\"]\n    C2[\"Student mobile upload\"]\n  end\n  subgraph S2[\"Recognition\"]\n    R1[\"Question segmentation\"]\n    R2[\"Handwriting model English and Hindi\"]\n    R3[\"Equation to LaTeX\"]\n  end\n  subgraph S3[\"Quality control\"]\n    Q1[\"Line confidence scoring\"]\n    Q2(\"Transcription checker\")\n    Q3[\"Similarity check\"]\n  end\n  subgraph S4[\"Evaluation and delivery\"]\n    E1(\"On-screen marking\")\n    E2[\"LMS and app export\"]\n    E3[\"Transcript search index\"]\n  end\n  C1 --> R1\n  C2 --> R1\n  R1 --> R2\n  R1 --> R3\n  R2 --> Q1\n  R3 --> Q1\n  Q1 --> Q2\n  Q1 --> E1\n  Q2 --> E1\n  Q1 --> Q3\n  Q3 --> E1\n  E1 --> E2\n  E1 --> E3"
+  },
+  "inputs": [
+    "Scanned answer booklets or student-uploaded photos",
+    "Question paper with question numbering",
+    "Marking scheme or model-answer rubric",
+    "Student roster with roll numbers",
+    "Language and script of the paper"
+  ],
+  "outputs": [
+    "Answer-wise transcripts with line confidence",
+    "LaTeX for equations and image crops for diagrams",
+    "Evaluator marks and written feedback",
+    "Similarity report for possible copying",
+    "Searchable archive for moderation and re-evaluation"
+  ],
+  "human_in_the_loop": "Transcription checkers confirm every low-confidence line, and evaluators award all marks; rubric hints are suggestions only. Similarity flags are reviewed by the academic head before any conclusion is drawn about copying.",
+  "integrations": [
+    "LMS such as Moodle or Google Classroom",
+    "Institute ERP or examination management system",
+    "Student mobile app for answer-writing programmes",
+    "Document scanners and network storage",
+    "Single sign-on for evaluators"
+  ],
+  "guardrails": [
+    "The system never awards or suggests a numeric mark",
+    "Uncertain lines are flagged, never silently completed",
+    "Evaluators see the original page next to every transcript",
+    "Similarity flags are prompts for review, not proof of copying",
+    "Booklet images and transcripts stored with role-based access and an agreed retention period"
+  ],
+  "compliance_notes": [
+    "Answer booklets of school students are children's data under the DPDP Act 2023; processing should be limited to evaluation and feedback, with appropriate consent.",
+    "The evidence trail supports re-evaluation and moderation processes."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One subject paper, or one week of an answer-writing programme, with transcripts checked against the original booklets by your evaluators.",
+    "deliverables": [
+      "Segmentation and transcription set up for your booklet format",
+      "Transcription checker and on-screen marking screens",
+      "Accuracy report by script, handwriting quality and content type",
+      "Evaluator feedback on the marking workflow",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Line transcription accuracy",
+        "how": "Character and word error rates on a sample checked against the booklets, reported separately for English, Hindi and equations."
+      },
+      {
+        "metric": "Share of lines sent to checkers",
+        "how": "Lines below the confidence threshold per booklet."
+      },
+      {
+        "metric": "Evaluator time per booklet",
+        "how": "Timed on paper and on screen for comparable booklets."
+      },
+      {
+        "metric": "Feedback usefulness",
+        "how": "Feedback captured per answer, plus a short student survey on whether it helped."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read Hindi and mixed Hindi-English answers?",
+      "a": "Yes. Devanagari and English are supported, including answers that switch between them. Accuracy depends on handwriting and scan quality, so the pilot reports results separately by script."
+    },
+    {
+      "q": "Does AI give the marks?",
+      "a": "No. Evaluators mark every answer. The system transcribes, organises and can point to where rubric points appear, but the evaluator decides."
+    },
+    {
+      "q": "What happens to diagrams and maths?",
+      "a": "Equations are converted to LaTeX for display and search, and diagrams are kept as image crops next to the transcript, so the evaluator always sees what the student drew."
+    },
+    {
+      "q": "Can students upload photos instead of scanned booklets?",
+      "a": "Yes. Answer-writing programmes often run on phone photos. The pipeline corrects perspective and lighting, and asks the student to re-upload any page it cannot read."
+    }
+  ],
+  "related": [
+    "answer-sheet-and-omr-evaluation",
+    "question-bank-tagging-and-generation",
+    "parent-progress-update-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/handwritten-answer-digitisation/"
+}

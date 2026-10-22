@@ -1,0 +1,223 @@
+{
+  "slug": "legal-ai-confidentiality-testing",
+  "industry": "legal",
+  "title": "Confidentiality and Privilege Leakage Testing for Legal AI",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test your legal copilot, contract tool or client chatbot for cross-matter leakage, privilege exposure, prompt injection hidden in documents and weak access controls, with evidence and fixes.",
+  "seo": {
+    "title": "Confidentiality Testing for Legal AI Tools | VipraTech",
+    "description": "Security testing of legal AI copilots and chatbots for cross-matter data leakage, privilege exposure, ethical wall bypass and document prompt injection.",
+    "keywords": [
+      "legal AI security testing",
+      "ethical wall AI testing",
+      "privilege leakage LLM",
+      "RAG access control testing",
+      "prompt injection in documents"
+    ]
+  },
+  "designed_for": [
+    "Chief Information Security Officer (Law Firm)",
+    "Head of Knowledge and Innovation",
+    "General Counsel",
+    "IT Director (Legal)"
+  ],
+  "problem": {
+    "intro": "Firms and legal departments are connecting AI copilots to document management systems, matter workspaces and data rooms. The features that make them useful, retrieval across documents and memory of past work, can expose one client's information to another matter team, reveal privileged advice, or follow instructions a counterparty has planted inside a document.",
+    "pain_points": [
+      {
+        "title": "Ethical walls not enforced",
+        "detail": "Retrieval layers sometimes index content without carrying over matter permissions, so a user can see material from a walled-off matter."
+      },
+      {
+        "title": "Instructions hidden in documents",
+        "detail": "A counterparty draft or data room file can contain text that tells the AI to downplay a risk or reveal other content."
+      },
+      {
+        "title": "Privileged content in logs and vendors",
+        "detail": "Prompts, outputs and telemetry may store privileged material with a vendor or in logs that wider teams can read."
+      },
+      {
+        "title": "Client chatbots oversharing",
+        "detail": "A client-facing assistant can be coaxed into revealing other clients' names, fees or internal guidance."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a confidentiality-focused security assessment of your legal AI tool. With your team we map matters, permissions and data flows, then seed canary documents into restricted test matters. Testers act as users on other matters and as external clients, trying direct questions, multi-turn social engineering, system-prompt extraction and indirect prompt injection through uploaded contracts, emails and data room files. We check whether retrieval honours matter permissions, what prompts and outputs are stored and where, and whether agent tools such as email or document export can be misused. Findings come with evidence, severity, mapping to the OWASP Top 10 for LLM Applications and fixes, followed by a re-test.",
+    "capabilities": [
+      "Ethical wall testing with canary documents in restricted test matters",
+      "Indirect prompt injection through contracts, emails and data room files",
+      "Client-chatbot tests for disclosure of other clients' information and internal guidance",
+      "System-prompt and configuration extraction attempts",
+      "Review of logging, telemetry and vendor retention of prompts and outputs",
+      "Tool-use abuse tests for email, export and document-sharing actions"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map matters and data flows",
+      "detail": "We document matter permissions, connected repositories, vendors, logs and the tools the AI can use."
+    },
+    {
+      "step": 2,
+      "title": "Seed canaries",
+      "detail": "Unique canary documents are placed in restricted test matters with your IT team's approval."
+    },
+    {
+      "step": 3,
+      "title": "Run attacks",
+      "detail": "Testers attempt cross-matter retrieval, injection through documents, prompt extraction and tool misuse."
+    },
+    {
+      "step": 4,
+      "title": "Check leakage paths",
+      "detail": "Logs, telemetry and vendor settings are inspected for retained privileged or client content."
+    },
+    {
+      "step": 5,
+      "title": "Confirm findings",
+      "detail": "Each suspected leak is reproduced and reviewed with your security lead."
+    },
+    {
+      "step": 6,
+      "title": "Report and re-test",
+      "detail": "You receive evidence, severity and fixes, and we re-test after remediation."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Map matters, permissions, tools\"] --> B[\"Seed canary documents\"]\n  B --> C[\"Cross-matter and injection attacks\"]\n  C --> D[\"Inspect logs and vendor retention\"]\n  D --> E{\"Leak reproduced?\"}\n  E -->|\"yes\"| F(\"Security lead confirms severity\")\n  E -->|\"no\"| G[\"Record control as effective\"]\n  F --> H[\"Report with evidence and fixes\"]\n  G --> H\n  H --> I[\"Re-test after remediation\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scoping",
+        "components": [
+          "Matter and permission map",
+          "Data flow and vendor inventory",
+          "Rules of engagement"
+        ]
+      },
+      {
+        "name": "Test assets",
+        "components": [
+          "Canary documents for restricted matters",
+          "Injection payload library for contracts and emails",
+          "Test user personas across matters"
+        ]
+      },
+      {
+        "name": "Execution",
+        "components": [
+          "Automated prompt and retrieval test runner",
+          "Manual multi-turn testing",
+          "Tool-use abuse scenarios"
+        ]
+      },
+      {
+        "name": "Analysis",
+        "components": [
+          "Canary detection in outputs and logs",
+          "Reproduction and severity rating"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Evidence pack with transcripts",
+          "Mapping to OWASP LLM Top 10 and NIST AI RMF",
+          "Re-test tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scoping\"]\n    M1[\"Matter and permission map\"]\n    M2[\"Data flow inventory\"]\n  end\n  subgraph S2[\"Test assets\"]\n    A1[\"Canary documents\"]\n    A2[\"Injection payloads\"]\n    A3[\"Test user personas\"]\n  end\n  subgraph S3[\"Execution and analysis\"]\n    X1[\"Automated test runner\"]\n    X2[\"Manual multi-turn testing\"]\n    X3[\"Canary detection\"]\n  end\n  subgraph S4[\"Reporting\"]\n    R1(\"Security lead review\")\n    R2[\"Evidence pack\"]\n    R3[\"Re-test tracker\"]\n  end\n  M1 --> A1\n  M1 --> A3\n  M2 --> A2\n  A1 --> X1\n  A2 --> X1\n  A3 --> X2\n  X1 --> X3\n  X2 --> X3\n  X3 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Staging or controlled production access to the AI tool",
+    "Matter and permission structure, including ethical walls",
+    "List of connected repositories, vendors and tools",
+    "Test accounts across matters and roles",
+    "Rules of engagement agreed with IT and risk"
+  ],
+  "outputs": [
+    "Findings with reproduction steps and evidence",
+    "Severity ratings and recommended fixes",
+    "Mapping to the OWASP Top 10 for LLM Applications and NIST AI RMF",
+    "Review of data retention and logging",
+    "Re-test report after remediation"
+  ],
+  "human_in_the_loop": "Your security lead and our tester confirm each finding together before it is reported, and your risk and IT leadership decide on remediation and go-live. No real client documents are used as test material.",
+  "integrations": [
+    "Legal AI copilot or chatbot under test",
+    "Document management system such as iManage, NetDocuments or SharePoint",
+    "Identity provider and matter permission system",
+    "Logging and SIEM tools",
+    "Issue tracker for remediation"
+  ],
+  "guardrails": [
+    "Only synthetic canary documents and test matters are used",
+    "Testing follows written rules of engagement and agreed time windows",
+    "Findings and evidence shared only with named contacts",
+    "Any real client data seen during testing is reported and not retained",
+    "Re-tests reuse the same scenarios so results are comparable"
+  ],
+  "compliance_notes": [
+    "Helps you evidence the confidentiality safeguards expected under Bar Council of India rules and the protection of privilege under Indian evidence law.",
+    "Supports DPDP Act 2023 security safeguard obligations and, for EU data, GDPR security requirements."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One AI tool connected to one document repository, tested across a small set of restricted test matters and user roles.",
+    "deliverables": [
+      "Scoping and rules of engagement",
+      "Canary and injection test assets",
+      "Findings report with evidence and fixes",
+      "Logging and vendor retention review",
+      "One re-test after remediation"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Confirmed findings by severity",
+        "how": "Count of reproduced findings by category and severity."
+      },
+      {
+        "metric": "Canary exposure",
+        "how": "Canary documents retrieved or quoted to users without matter access."
+      },
+      {
+        "metric": "Injection success",
+        "how": "Planted document instructions that changed the tool's behaviour."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Findings that no longer reproduce on re-test."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you need access to real client files?",
+      "a": "No. We use synthetic canary documents in test matters. If testers see real client data by accident, it is reported immediately and not retained."
+    },
+    {
+      "q": "Can you test a vendor's legal AI product we have licensed?",
+      "a": "Yes, within your licence terms and with the vendor's agreement where required. Many of the most important tests concern how the tool is connected to your systems and permissions."
+    },
+    {
+      "q": "What is indirect prompt injection?",
+      "a": "It is text inside a document, email or web page that the AI reads and treats as an instruction, such as a hidden line telling it to describe a contract as low risk. Legal tools read counterparty documents constantly, so we test this specifically."
+    },
+    {
+      "q": "How often should we test?",
+      "a": "Before launch, after major changes to models, prompts, connected repositories or permissions, and periodically after that. The test suite can be re-run to compare results over time."
+    }
+  ],
+  "related": [
+    "contract-clause-extraction-and-risk-flags",
+    "due-diligence-data-room-review",
+    "rag-data-leakage-and-access-control-testing",
+    "client-intake-voice-agent"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/legal/legal-ai-confidentiality-testing/"
+}

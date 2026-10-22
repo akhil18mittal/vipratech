@@ -1,0 +1,225 @@
+{
+  "slug": "loan-lead-qualification-agent",
+  "industry": "nbfc-lending",
+  "title": "Loan Lead Qualification Agent for DSA and Web Leads",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Contact new loan leads from DSAs, aggregators and your website within minutes by voice or WhatsApp, check serviceability and basic fit with consent, and route ready applicants to sales.",
+  "seo": {
+    "title": "Loan Lead Qualification Agent for NBFCs | VipraTech",
+    "description": "AI agent that calls or messages new loan leads in Hindi and regional languages, checks pincode, product fit and consent, dedupes and routes them to sales.",
+    "keywords": [
+      "loan lead qualification AI",
+      "DSA lead management automation",
+      "NBFC lead calling bot",
+      "loan enquiry WhatsApp bot",
+      "lead routing for lenders"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales and Distribution",
+    "Tele-Sales Manager",
+    "Head of DSA Channel",
+    "Digital Acquisition Head"
+  ],
+  "problem": {
+    "intro": "Loan leads arrive from website forms, aggregator platforms, DSAs, connectors and missed-call campaigns, at all hours and in mixed quality. Many are duplicates, outside serviceable pincodes or not ready to apply, and genuine applicants lose interest when the first call comes a day later.",
+    "pain_points": [
+      {
+        "title": "Slow first contact",
+        "detail": "Tele-sales teams work leads in batches, so applicants who enquired in the evening or on a Sunday wait until the next working day."
+      },
+      {
+        "title": "Unserviceable and duplicate leads",
+        "detail": "Leads outside branch coverage, for unsupported products or already in the LOS use up calling capacity."
+      },
+      {
+        "title": "Inconsistent qualification",
+        "detail": "Different callers ask different questions, so sales officers receive leads missing basics such as income type, amount or city."
+      },
+      {
+        "title": "Attribution disputes with DSAs",
+        "detail": "When a lead comes from several sources, it is unclear which DSA or campaign gets credit, which causes payout friction."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a qualification agent that contacts each new lead by voice or WhatsApp within minutes, in the applicant's preferred language. It names the lender and any partner it calls for, takes consent for the conversation and any bureau check, and asks a short set of questions agreed with your credit and sales teams: product, amount, city and pincode, employment type, income band and existing EMIs. It checks serviceability against your branch and pincode master, dedupes against the LOS and CRM, and applies simple pre-screening rules that indicate fit without any credit promise. Qualified leads go to the right branch, RM or tele-sales queue with a summary and document checklist, and the source is recorded.",
+    "capabilities": [
+      "First contact by voice or WhatsApp within minutes of lead creation, within permitted hours",
+      "Short qualification flow in Hindi, Hinglish, English and selected regional languages",
+      "Consent capture for the conversation and for any bureau enquiry",
+      "Pincode serviceability, product fit and dedupe against the LOS and CRM",
+      "Routing to branch, RM or tele-sales queues with summary and document checklist",
+      "Source attribution across DSAs, aggregators and campaigns"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture the lead",
+      "detail": "Leads from web forms, aggregators, DSA apps and missed calls enter the CRM through an API or file feed."
+    },
+    {
+      "step": 2,
+      "title": "Dedupe and check basics",
+      "detail": "The lead is checked against the LOS and CRM, and against serviceable pincodes and products."
+    },
+    {
+      "step": 3,
+      "title": "Contact and qualify",
+      "detail": "The agent calls or messages, takes consent and asks the agreed qualification questions."
+    },
+    {
+      "step": 4,
+      "title": "Pre-screen",
+      "detail": "Simple rules indicate fit, need for more information or no fit, without any credit commitment."
+    },
+    {
+      "step": 5,
+      "title": "Route or nurture",
+      "detail": "Qualified leads go to the right sales queue with a summary; others get a follow-up date or a polite close."
+    },
+    {
+      "step": 6,
+      "title": "Record attribution and outcomes",
+      "detail": "Source, conversation outcome and later application status are recorded for DSA payouts and campaign reports."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Lead from web, DSA or aggregator\"] --> B[\"Dedupe and pincode check\"]\n  B --> C[\"Call or WhatsApp with consent\"]\n  C --> D[\"Ask qualification questions\"]\n  D --> E{\"Fits product and serviceable?\"}\n  E -->|\"yes\"| F(\"Sales officer or RM takes over\")\n  E -->|\"no\"| G[\"Nurture or close politely\"]\n  F --> H[\"Record outcome and attribution\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Lead intake",
+        "components": [
+          "Web form and aggregator APIs",
+          "DSA app and connector feeds",
+          "Missed-call and campaign sources"
+        ]
+      },
+      {
+        "name": "Checks",
+        "components": [
+          "Dedupe against LOS and CRM",
+          "Pincode and product serviceability master",
+          "Calling window and consent rules"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Voice agent with Indian-language speech",
+          "WhatsApp flow with approved templates",
+          "Qualification dialogue manager"
+        ]
+      },
+      {
+        "name": "Routing",
+        "components": [
+          "Pre-screen rules",
+          "Queue routing to branch, RM or tele-sales",
+          "Nurture scheduler"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "CRM update and attribution log",
+          "Funnel and DSA payout reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Lead intake\"]\n    L1[\"Web and aggregator APIs\"]\n    L2[\"DSA and connector feeds\"]\n  end\n  subgraph S2[\"Checks\"]\n    K1[\"LOS and CRM dedupe\"]\n    K2[\"Pincode serviceability\"]\n  end\n  subgraph S3[\"Conversation\"]\n    C1[\"Voice agent\"]\n    C2[\"WhatsApp flow\"]\n    C3[\"Qualification dialogue\"]\n  end\n  subgraph S4[\"Routing and reporting\"]\n    R1[\"Pre-screen rules\"]\n    R2(\"Sales queue handover\")\n    R3[\"Attribution and funnel reports\"]\n  end\n  L1 --> K1\n  L2 --> K1\n  K1 --> K2\n  K2 --> C1\n  K2 --> C2\n  C1 --> C3\n  C2 --> C3\n  C3 --> R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "New leads from web forms, aggregators, DSA apps and missed calls",
+    "Branch and pincode serviceability master",
+    "Product rules and qualification questions agreed with credit and sales",
+    "Existing customer and application data for dedupe",
+    "Consent and contact preferences"
+  ],
+  "outputs": [
+    "Qualified leads with summary and document checklist",
+    "Routing to branch, RM or tele-sales queues",
+    "Nurture schedule for leads not yet ready",
+    "Source attribution records for DSA payouts",
+    "Funnel reports by source, product and language"
+  ],
+  "human_in_the_loop": "Sales officers and RMs take every qualified lead and handle all discussion of rates, eligibility and documents beyond the basics. Credit decisions follow your normal application and underwriting process; the agent never indicates approval.",
+  "integrations": [
+    "CRM such as Salesforce, LeadSquared or Zoho",
+    "Loan origination system for dedupe and status",
+    "Telephony or dialler provider",
+    "WhatsApp Business API through an approved provider",
+    "DSA portal and aggregator lead APIs"
+  ],
+  "guardrails": [
+    "No promise of approval, sanction amount or rate; only indicative fit",
+    "Lender and any lending service provider named at the start of every conversation",
+    "Consent captured and logged before any bureau enquiry",
+    "Calls only within permitted hours and only to leads who submitted an enquiry or consented",
+    "Rates, fees and product facts read only from approved content"
+  ],
+  "compliance_notes": [
+    "Supports RBI digital lending expectations on transparency, including disclosure of the lender and lending service providers, and DPDP Act 2023 consent.",
+    "Outbound calls and messages follow TRAI commercial communication rules and the lender's DLT registrations."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Leads for one product from the website and two DSAs, contacted by the agent in two languages, with outcomes compared against the current tele-sales process on a split of leads.",
+    "deliverables": [
+      "Qualification script and pre-screen rules agreed with credit and sales",
+      "Working voice and WhatsApp agent connected to the CRM",
+      "Routing and attribution setup",
+      "Comparison report against the current process",
+      "Plan for more products, sources and languages"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to first contact",
+        "how": "Minutes from lead creation to first contact attempt, compared with the current process."
+      },
+      {
+        "metric": "Qualification completeness",
+        "how": "Leads handed to sales with all required fields, checked by sales officers."
+      },
+      {
+        "metric": "Lead-to-application conversion",
+        "how": "Applications logged in the LOS from agent-qualified leads, compared with the control split."
+      },
+      {
+        "metric": "Sales officer feedback",
+        "how": "Officers rate handed-over leads as ready, needs work or not relevant."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the agent tell applicants they are eligible?",
+      "a": "No. It can say that the applicant appears to fit a product and that a sales officer will follow up. Eligibility, amount and rate are decided only after your normal application and credit process."
+    },
+    {
+      "q": "Can it handle leads that come in at night?",
+      "a": "It can reply on WhatsApp at any time and schedules calls within permitted hours. A lead that arrives at night receives a WhatsApp message straight away and a call the next morning."
+    },
+    {
+      "q": "How do you avoid calling people who did not ask?",
+      "a": "The agent contacts only leads that came through your consented sources, checks consent and preference records, and honours opt-outs immediately."
+    },
+    {
+      "q": "Does it help with DSA payout disputes?",
+      "a": "It records each lead's source, timestamps and dedupe results, giving your channel team a clear record when several sources submit the same applicant."
+    }
+  ],
+  "related": [
+    "loan-application-document-extraction",
+    "emi-reminder-voice-and-whatsapp-agent",
+    "retail-banking-cross-sell-outreach",
+    "property-lead-qualification-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/loan-lead-qualification-agent/"
+}

@@ -1,0 +1,216 @@
+{
+  "slug": "inspection-and-maintenance-report-extraction",
+  "industry": "energy-mining-utilities",
+  "title": "Inspection and Maintenance Report Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract readings, observations and recommendations from test reports, NDT surveys, vendor service reports and job cards into your CMMS, with out-of-limit values flagged for engineers.",
+  "seo": {
+    "title": "Inspection and Maintenance Report Extraction | VipraTech",
+    "description": "AI that reads test reports, inspection checklists and job cards, extracts readings and recommendations, checks limits and updates your CMMS.",
+    "keywords": [
+      "inspection report extraction",
+      "transformer test report digitisation",
+      "maintenance report AI",
+      "CMMS data entry automation",
+      "DGA report extraction"
+    ]
+  },
+  "designed_for": [
+    "Maintenance Planning Engineer",
+    "Asset Management and Reliability Lead",
+    "Head of Operations and Maintenance",
+    "Testing and Commissioning In-charge"
+  ],
+  "problem": {
+    "intro": "Power plants, substations, mines and refineries generate a steady flow of test and inspection reports: transformer oil and dissolved gas analysis, insulation resistance and relay tests, ultrasonic thickness surveys, lifting equipment examinations and vendor service visits. Most arrive as PDFs or scans in each vendor's format, and the readings rarely reach the asset record in a form anyone can trend.",
+    "pain_points": [
+      {
+        "title": "Readings locked in vendor PDFs",
+        "detail": "Each testing agency and OEM uses its own layout, so values are re-typed into spreadsheets, if they are entered at all."
+      },
+      {
+        "title": "No trend across years",
+        "detail": "Comparing this year's oil test or insulation resistance with earlier results means digging through folders by hand."
+      },
+      {
+        "title": "Recommendations that never close",
+        "detail": "Vendor recommendations such as oil filtration, re-tightening or replacement sit in report text with no owner or due date."
+      },
+      {
+        "title": "Audit and inspection preparation",
+        "detail": "Finding the last valid examination report for a pressure vessel or crane before an inspection takes hours of searching."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a report pipeline that collects inspection and test documents from email, vendor portals and scanned job cards. Each report is classified by type, matched to the asset tag in your register and read by OCR with table extraction and a language model working to a schema for that report type. Readings are captured with units and test conditions, normalised, checked against acceptance limits taken from your standards and OEM manuals, and compared with the asset's previous results. Observations and recommendations become tracked action items. Uncertain values and out-of-limit flags go to an engineer, and approved data is written to the CMMS with a link to the source page.",
+    "capabilities": [
+      "Classifies report types such as oil and DGA, insulation resistance, relay test, thickness survey, lifting equipment examination and vendor service report",
+      "Extracts tabular readings with units, test conditions and dates, including from scanned pages",
+      "Matches each report to the correct asset tag in the CMMS register",
+      "Checks values against configured acceptance limits and the asset's previous results",
+      "Turns vendor recommendations into action items with owners and due dates",
+      "Links every stored value to its page in the source report"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect reports",
+      "detail": "Reports arrive from shared mailboxes, vendor portals, scanners and mobile uploads of handwritten job cards."
+    },
+    {
+      "step": 2,
+      "title": "Classify and match asset",
+      "detail": "Each document is classified by report type and matched to the asset tag, using nameplate details where tags are missing."
+    },
+    {
+      "step": 3,
+      "title": "Extract readings and observations",
+      "detail": "OCR and an LLM extract readings, units, test conditions, observations and recommendations into the schema for that report type."
+    },
+    {
+      "step": 4,
+      "title": "Validate",
+      "detail": "Values are checked for confidence, acceptance limits and change against previous results."
+    },
+    {
+      "step": 5,
+      "title": "Engineer review",
+      "detail": "An engineer confirms uncertain values and decides on out-of-limit flags before they change the asset record."
+    },
+    {
+      "step": 6,
+      "title": "Update CMMS and track actions",
+      "detail": "Approved results are written to the asset record, and recommendations open as tracked actions."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Reports from email, portals, scans\"] --> B[\"Classify and match asset tag\"]\n  B --> C[\"Extract readings and recommendations\"]\n  C --> D{\"Confident and within limits?\"}\n  D -->|\"yes\"| E[\"Write to asset record in CMMS\"]\n  D -->|\"no\"| F(\"Maintenance engineer reviews\")\n  F --> E\n  E --> G[\"Open actions for recommendations\"]\n  G --> H[\"Trend views and audit file\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Mailbox and vendor portal connectors",
+          "Scanner and mobile upload",
+          "Asset register sync from the CMMS"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with table extraction",
+          "Report type classifier",
+          "LLM extractor with per-report schemas"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Unit normalisation",
+          "Acceptance limit rules",
+          "Trend comparison with previous tests"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Engineer review screen with source highlights",
+          "CMMS API adapter",
+          "Action tracker and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    G1[\"Mailbox and portal connectors\"]\n    G2[\"Scan and mobile upload\"]\n    G3[\"Asset register sync\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and table extraction\"]\n    U2[\"Report type classifier\"]\n    U3[\"LLM extractor with schemas\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"Unit normalisation\"]\n    V2[\"Acceptance limit rules\"]\n    V3[\"Trend comparison\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Engineer review screen\")\n    R2[\"CMMS adapter\"]\n    R3[\"Action tracker\"]\n  end\n  G1 --> U1\n  G2 --> U1\n  U1 --> U2\n  U2 --> U3\n  G3 --> U3\n  U3 --> V1\n  V1 --> V2\n  V2 --> V3\n  V3 --> R1\n  V3 --> R2\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Transformer oil test and dissolved gas analysis reports",
+    "Insulation resistance, polarisation index and relay test reports",
+    "Ultrasonic thickness and other NDT survey reports",
+    "Lifting equipment and pressure vessel examination reports",
+    "Vendor service reports and handwritten job cards",
+    "Asset register and acceptance limits from standards and OEM manuals"
+  ],
+  "outputs": [
+    "Structured test results stored against each asset",
+    "Out-of-limit and deteriorating-trend flags",
+    "Action items from vendor recommendations with owners",
+    "Searchable inspection history for audits",
+    "Audit log of extracted values and engineer edits"
+  ],
+  "human_in_the_loop": "Engineers confirm uncertain values and every out-of-limit flag before the asset record changes. Decisions on outages, repairs and replacements remain with the asset owner; the system does not interpret results beyond the limits you configure.",
+  "integrations": [
+    "SAP PM, IBM Maximo or another CMMS",
+    "SharePoint or a document management system",
+    "Testing laboratory and OEM vendor portals",
+    "Shared mailboxes",
+    "Asset health dashboards or BI tools"
+  ],
+  "guardrails": [
+    "Acceptance limits come from your standards and OEM documents and are version-controlled, never generated by the model",
+    "Unit and range sanity checks before any value is stored",
+    "Every value traceable to its page in the source report",
+    "Recommendations are never closed automatically",
+    "Access to vendor and asset reports controlled by role"
+  ],
+  "compliance_notes": [
+    "Keeps inspection and test records retrievable for statutory electrical, boiler, pressure vessel and lifting equipment inspections; the inspections themselves remain with competent persons."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Two report types, such as transformer oil and DGA reports and insulation resistance tests, for one substation cluster or plant, including a backlog of past reports.",
+    "deliverables": [
+      "Extraction schemas agreed with your maintenance engineers",
+      "Working pipeline on real reports from your vendors",
+      "Engineer review screen",
+      "Accuracy report against engineer-entered values",
+      "CMMS integration plan and roll-out estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field-level accuracy",
+        "how": "Extracted values compared with values entered or verified by engineers."
+      },
+      {
+        "metric": "Asset matching accuracy",
+        "how": "Share of reports linked to the correct asset tag on a checked sample."
+      },
+      {
+        "metric": "Review share",
+        "how": "Values routed to engineers because of low confidence or limit failures."
+      },
+      {
+        "metric": "Engineer time per report",
+        "how": "Timed on a sample of reports with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read handwritten job cards and checklists?",
+      "a": "Yes for most legible handwriting, especially where the form layout is consistent. Values the model is unsure about go to an engineer rather than being guessed, and the pilot reports printed and handwritten accuracy separately."
+    },
+    {
+      "q": "Our testing vendors all use different formats. Is that a problem?",
+      "a": "No. The language model reads each report in context against a schema for the report type, so a new vendor layout does not need a new template. We still test on samples from each major vendor before roll-out."
+    },
+    {
+      "q": "Will it diagnose transformer faults from DGA results?",
+      "a": "No. It flags values and trends against the limits and interpretation rules you configure, and the engineer makes the diagnosis. That keeps engineering judgement with the people accountable for it."
+    },
+    {
+      "q": "How does it connect to SAP PM or Maximo?",
+      "a": "Through the CMMS API or a staging table, usually writing measurement documents, notifications or attachments against the functional location or asset. We agree the exact objects with your SAP or Maximo team during the pilot."
+    }
+  ],
+  "related": [
+    "technical-report-search-assistant",
+    "field-technician-voice-reporting",
+    "permit-and-compliance-document-tracking",
+    "maintenance-log-and-sop-assistant"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/inspection-and-maintenance-report-extraction/"
+}

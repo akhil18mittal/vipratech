@@ -1,0 +1,221 @@
+{
+  "slug": "order-status-and-returns-voice-agent",
+  "industry": "retail-ecommerce",
+  "title": "Order Status and Returns Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A multilingual voice agent that answers where-is-my-order calls from live courier data, starts returns and exchanges under your policy, and hands disputes to an agent with context.",
+  "seo": {
+    "title": "Order Status and Returns Voice Agent | VipraTech",
+    "description": "Voice agent for e-commerce and D2C that answers order status calls, books returns and exchanges under policy and gives refund status in Hindi and English.",
+    "keywords": [
+      "order status voice agent",
+      "WISMO automation",
+      "returns and exchange voice bot",
+      "ecommerce customer support AI",
+      "Hindi voice agent for ecommerce"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Experience",
+    "Support Operations Manager",
+    "D2C Founder or COO",
+    "Returns and Reverse Logistics Lead"
+  ],
+  "problem": {
+    "intro": "For most online sellers, where-is-my-order is the largest single reason customers get in touch, followed by returns, exchanges and refund status. Agents answer by switching between the OMS, courier panels and the payment gateway, while customers in smaller towns prefer to call and speak in their own language.",
+    "pain_points": [
+      {
+        "title": "WISMO fills the queue",
+        "detail": "Simple status calls crowd out the complaints and disputes that genuinely need a person."
+      },
+      {
+        "title": "Too many screens",
+        "detail": "Agents look up the OMS, courier tracking, reverse pickup status and refund status separately to give one answer."
+      },
+      {
+        "title": "Return policy applied unevenly",
+        "detail": "Rules on non-returnable categories, return windows and exchange stock are interpreted differently by different agents."
+      },
+      {
+        "title": "Language and channel preference",
+        "detail": "Many customers would rather call in Hindi, Tamil, Bengali or another language than use chat or email."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound voice agent connected to your OMS, courier tracking and payment gateway. It verifies the caller by registered number or OTP, finds the order and answers status questions from live tracking, including delays and failed delivery attempts. For returns and exchanges it calls your policy engine, which checks category, window, condition and exchange stock. It books the reverse pickup, explains the refund timeline and sends a WhatsApp confirmation, in Hindi, English or a regional language. Disputes, damaged-item complaints, high-value orders and frustrated callers go to a human agent with a call summary.",
+    "capabilities": [
+      "Verifies callers by registered number or OTP before sharing order details",
+      "Answers status from live OMS and courier data, including delays, failed attempts and rescheduling",
+      "Starts returns and exchanges through your policy engine, including category, window and stock rules",
+      "Books reverse pickups and gives refund status from the payment gateway or wallet",
+      "Speaks Hindi, English, Hinglish and regional languages, with WhatsApp follow-up messages",
+      "Hands over to a human agent with a call summary for disputes, damage claims and escalations"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Verify the caller",
+      "detail": "The agent matches the calling number to orders or sends an OTP, then confirms which order the call is about."
+    },
+    {
+      "step": 2,
+      "title": "Understand the request",
+      "detail": "The caller explains in their own words, and the agent classifies it as status, return, exchange, refund or other."
+    },
+    {
+      "step": 3,
+      "title": "Fetch live data",
+      "detail": "Order, shipment, pickup and refund status are fetched from the OMS, courier and payment systems."
+    },
+    {
+      "step": 4,
+      "title": "Apply policy",
+      "detail": "For returns and exchanges, the policy engine decides eligibility and the agent explains the result."
+    },
+    {
+      "step": 5,
+      "title": "Act or hand over",
+      "detail": "Eligible requests are booked; disputes, damage claims and escalations go to a human agent with a summary."
+    },
+    {
+      "step": 6,
+      "title": "Confirm on WhatsApp",
+      "detail": "The customer receives a confirmation with the pickup window or the next update."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Customer calls support line\"] --> B[\"Verify by number or OTP\"]\n  B --> C[\"Classify request in caller language\"]\n  C --> D[\"Fetch OMS, courier and refund data\"]\n  D --> E{\"Policy allows and no dispute?\"}\n  E -->|\"yes\"| F[\"Answer, or book return or exchange\"]\n  E -->|\"no\"| G(\"Human agent with call summary\")\n  F --> H[\"WhatsApp confirmation\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Support number on cloud telephony or a contact centre platform",
+          "Call recording with disclosure"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Multilingual speech-to-text and text-to-speech",
+          "LLM dialogue manager with intent and slot schemas",
+          "Escalation and frustration rules"
+        ]
+      },
+      {
+        "name": "Commerce data",
+        "components": [
+          "OMS order and return APIs",
+          "Courier and aggregator tracking APIs",
+          "Payment gateway refund status"
+        ]
+      },
+      {
+        "name": "Policy",
+        "components": [
+          "Return and exchange policy engine",
+          "Customer verification service"
+        ]
+      },
+      {
+        "name": "Handover and audit",
+        "components": [
+          "Agent desktop handover with summary",
+          "Transcripts with PII redaction and QA sampling"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Support number\"]\n  end\n  subgraph S2[\"Conversation\"]\n    C1[\"Speech to text and voice\"]\n    C2[\"LLM dialogue manager\"]\n  end\n  subgraph S3[\"Commerce data and policy\"]\n    D1[\"OMS orders and returns\"]\n    D2[\"Courier tracking\"]\n    D3[\"Refund status\"]\n    D4[\"Return policy engine\"]\n  end\n  subgraph S4[\"Handover and audit\"]\n    H1(\"Human agent desktop\")\n    H2[\"Redacted transcripts and QA\"]\n    H3[\"WhatsApp confirmation\"]\n  end\n  T1 --> C1 --> C2\n  C2 --> D1\n  C2 --> D2\n  C2 --> D3\n  D1 --> D4\n  D4 --> C2\n  C2 --> H1\n  C2 --> H3\n  C2 --> H2"
+  },
+  "inputs": [
+    "Inbound calls to the support number",
+    "Order and return data from the OMS",
+    "Shipment tracking from couriers or aggregators",
+    "Refund status from the payment gateway",
+    "Return and exchange policy by category"
+  ],
+  "outputs": [
+    "Answered status calls and booked returns or exchanges",
+    "Reverse pickup requests in the OMS or courier system",
+    "WhatsApp confirmations to customers",
+    "Human handovers with call summaries",
+    "Daily report of intents, languages and handover reasons"
+  ],
+  "human_in_the_loop": "Disputes, damaged or wrong item claims, high-value orders and any caller who asks for a person go to a human agent with a summary. Refunds outside policy are decided only by your CX team.",
+  "integrations": [
+    "OMS such as Unicommerce, Shopify or an in-house system",
+    "Courier and shipping aggregator APIs",
+    "Payment gateway refund APIs",
+    "Helpdesk such as Freshdesk or Zendesk",
+    "WhatsApp Business API"
+  ],
+  "guardrails": [
+    "Caller verification before any order detail is shared",
+    "Return eligibility decided by the policy engine, not the language model",
+    "Delivery dates quoted only from courier data",
+    "Immediate handover on request or detected frustration",
+    "Card and bank details never collected by voice"
+  ],
+  "compliance_notes": [
+    "Return, refund and grievance information follows your published policy, in line with the Consumer Protection (E-Commerce) Rules 2020.",
+    "Call recordings and transcripts are personal data under the DPDP Act 2023; PII is redacted in logs and retention is limited."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Status and return-initiation calls for one brand or channel in Hindi and English, with overflow and after-hours calls routed to the agent first.",
+    "deliverables": [
+      "Call flows and policy rules agreed with CX",
+      "Working agent on a pilot number or overflow queue",
+      "Integrations with OMS, courier tracking and refund status",
+      "Pilot report on resolution, accuracy and handovers",
+      "Roll-out plan with language additions"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Resolved without handover",
+        "how": "Calls completed by the agent with no repeat call about the same order within the agreed window."
+      },
+      {
+        "metric": "Policy decision accuracy",
+        "how": "QA review of a sample of return and exchange outcomes against your policy."
+      },
+      {
+        "metric": "Handover reasons",
+        "how": "Logged reason for each transfer, reviewed weekly with CX."
+      },
+      {
+        "metric": "Customer satisfaction",
+        "how": "Post-call survey compared with human-handled calls of the same type."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will customers know they are talking to an AI?",
+      "a": "Yes. The agent introduces itself as an automated assistant, and callers can ask for a person at any point. Clear disclosure also reduces complaints."
+    },
+    {
+      "q": "How does it handle angry customers?",
+      "a": "It listens for frustration and requests for a person, then hands over with a summary so the customer does not repeat themselves. It does not argue or try to keep the caller."
+    },
+    {
+      "q": "Can it process refunds?",
+      "a": "It reports refund status and books returns that your policy engine approves. Refund exceptions are decided by your CX team."
+    },
+    {
+      "q": "Which systems do you need access to?",
+      "a": "Read access to orders, shipments and refunds, and write access to create returns and pickups. We use your existing APIs, or a middleware layer if your OMS has limited APIs."
+    }
+  ],
+  "related": [
+    "cod-confirmation-calls",
+    "dark-store-picking-and-packing-qc",
+    "delivery-status-voice-and-whatsapp-agent",
+    "payment-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/order-status-and-returns-voice-agent/"
+}

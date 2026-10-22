@@ -1,0 +1,221 @@
+{
+  "slug": "dark-store-picking-and-packing-qc",
+  "industry": "retail-ecommerce",
+  "title": "Dark-Store Picking and Packing QC",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "A camera at the packing station checks each tote against the order before the bag is sealed, catching wrong variants, missing items and near-expiry stock, and keeps an image per order.",
+  "seo": {
+    "title": "Dark-Store Picking and Packing QC with AI | VipraTech",
+    "description": "Packing-station cameras check quick commerce orders against the pick list, flag wrong variants, missing items and near-expiry stock, and store evidence.",
+    "keywords": [
+      "dark store packing QC",
+      "quick commerce order accuracy",
+      "AI packing station camera",
+      "order verification computer vision",
+      "missing item complaint evidence"
+    ]
+  },
+  "designed_for": [
+    "Head of Dark Store Operations",
+    "City Operations Manager",
+    "Dark Store Manager",
+    "Head of Customer Experience"
+  ],
+  "problem": {
+    "intro": "Quick commerce dark stores pick and pack an order in a few minutes, with no time for a second check. Toned milk instead of full cream, a 500 g pack instead of 1 kg or a missing item becomes a complaint, a refund and sometimes a lost customer.",
+    "pain_points": [
+      {
+        "title": "Wrong variants and missing items",
+        "detail": "Look-alike packs, sizes and flavours are easy to mix up at speed, and each mistake turns into a refund or a re-delivery."
+      },
+      {
+        "title": "Near-expiry stock reaching customers",
+        "detail": "Dairy, bread and fresh items close to their date get picked during rush hours, leading to complaints and food-safety risk."
+      },
+      {
+        "title": "No evidence for complaints",
+        "detail": "When a customer reports a missing item, support has no record of what went into the bag and often refunds by default."
+      },
+      {
+        "title": "Speed leaves no room for checks",
+        "detail": "A manual second check at the packing station would slow every order, so it is skipped."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a packing-station check around an overhead camera above the tote or bag area. As the packer places items, the model identifies each product and compares it with the order lines from your WMS: right SKU, right variant, right count. Where the date is visible, it reads the expiry and applies your category shelf-life rule. If everything matches, the packer seals and dispatches as usual. If something is missing, extra or uncertain, the screen shows exactly which line to recheck. Every order gets an image linked to its order ID, which support can open when a complaint arrives.",
+    "capabilities": [
+      "Identifies products in the tote and matches them to order lines by SKU, variant and count",
+      "Reads printed expiry dates where visible and applies your minimum shelf-life rules by category",
+      "Flags damaged, leaking or crushed packs for replacement before sealing",
+      "Shows the packer which line to recheck without stopping the station",
+      "Stores an image per order, linked to the order ID, for complaint handling",
+      "Store dashboards of mismatch types by SKU, shift and picker"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the order",
+      "detail": "The packer scans the order or tote, and the station pulls order lines from the WMS."
+    },
+    {
+      "step": 2,
+      "title": "Capture the tote",
+      "detail": "The overhead camera captures items as they are placed in the packing area."
+    },
+    {
+      "step": 3,
+      "title": "Match items to the order",
+      "detail": "The model identifies each product and compares SKU, variant, count and visible expiry with the order."
+    },
+    {
+      "step": 4,
+      "title": "Packer rechecks flags",
+      "detail": "Mismatches and uncertain items appear on screen for the packer to fix or confirm."
+    },
+    {
+      "step": 5,
+      "title": "Seal and dispatch",
+      "detail": "Once every line matches or is confirmed, the bag is sealed and handed to the rider."
+    },
+    {
+      "step": 6,
+      "title": "Keep evidence and report",
+      "detail": "The image is stored against the order ID, and mismatch data feeds store dashboards."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Packer scans order or tote\"] --> B[\"Pull order lines from WMS\"]\n  B --> C[\"Camera captures items in tote\"]\n  C --> D[\"Match SKU, variant, count, expiry\"]\n  D --> E{\"All lines matched with confidence?\"}\n  E -->|\"yes\"| F[\"Seal bag and dispatch\"]\n  E -->|\"no\"| G(\"Packer rechecks flagged line\")\n  G --> H{\"Fixed or confirmed?\"}\n  H -->|\"yes\"| F\n  H -->|\"no\"| I(\"Shift lead decides substitution\")\n  I --> F\n  F --> J[\"Image stored against order ID\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Station hardware",
+        "components": [
+          "Overhead camera and LED light above the packing area",
+          "Edge device or mini PC at the station",
+          "Packer screen or tablet"
+        ]
+      },
+      {
+        "name": "Recognition",
+        "components": [
+          "Product recognition model trained on the store assortment",
+          "Expiry date OCR",
+          "Damage and leak detector"
+        ]
+      },
+      {
+        "name": "Order logic",
+        "components": [
+          "WMS order line fetch",
+          "Variant, count and shelf-life rules by category"
+        ]
+      },
+      {
+        "name": "Evidence and support",
+        "components": [
+          "Order image store with retention policy",
+          "Support console view by order ID"
+        ]
+      },
+      {
+        "name": "Operations reporting",
+        "components": [
+          "Mismatch dashboard by store, SKU and shift",
+          "New SKU onboarding queue"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Station hardware\"]\n    H1[\"Overhead camera and light\"]\n    H2[\"Edge device\"]\n    H3(\"Packer screen\")\n  end\n  subgraph S2[\"Recognition\"]\n    R1[\"Product recognition model\"]\n    R2[\"Expiry date OCR\"]\n  end\n  subgraph S3[\"Order logic\"]\n    L1[\"WMS order lines\"]\n    L2[\"Variant, count and shelf-life rules\"]\n  end\n  subgraph S4[\"Evidence and reporting\"]\n    E1[\"Order image store\"]\n    E2[\"Support console\"]\n    E3[\"Mismatch dashboard\"]\n  end\n  H1 --> H2 --> R1\n  H2 --> R2\n  R1 --> L2\n  R2 --> L2\n  L1 --> L2\n  L2 --> H3\n  L2 --> E1\n  E1 --> E2\n  L2 --> E3"
+  },
+  "inputs": [
+    "Order lines and tote IDs from the WMS",
+    "Product images for the dark store assortment",
+    "Category shelf-life and substitution rules",
+    "Overhead camera images at the packing station",
+    "Customer complaint tickets referencing order IDs"
+  ],
+  "outputs": [
+    "Match or recheck prompt per order on the packer screen",
+    "Image per order linked to the order ID",
+    "Near-expiry and damaged-pack flags",
+    "Mismatch dashboard by store, SKU, shift and picker",
+    "Evidence view for support agents handling complaints"
+  ],
+  "human_in_the_loop": "Packers resolve every flagged line before sealing, and shift leads decide substitutions. Support agents decide refunds using the order image; the system provides evidence and does not approve or deny refunds.",
+  "integrations": [
+    "WMS or dark-store management system",
+    "Customer support platform such as Freshdesk or Zendesk",
+    "Product information or catalogue system for reference images",
+    "Cloud storage for order images",
+    "BI dashboards for city operations"
+  ],
+  "guardrails": [
+    "Time budget per check so the station keeps its pace",
+    "Manual fallback when the camera or model is unavailable",
+    "Uncertain items always shown to the packer, never silently passed",
+    "Camera framed on the packing area, not on staff faces",
+    "Order images kept only for the agreed retention period"
+  ],
+  "compliance_notes": [
+    "Expiry checks help evidence FSSAI expectations that food sold online reaches customers with adequate remaining shelf life.",
+    "Images exclude staff faces and are kept only as long as complaint handling needs, in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Two or three packing stations in one dark store, covering the store's highest-volume categories, with post-pack audits as the benchmark.",
+    "deliverables": [
+      "Station hardware specification and installation",
+      "Recognition model for the pilot assortment",
+      "Packer screen and order image store",
+      "Accuracy report against post-pack audits and complaints",
+      "Roll-out plan with per-station cost"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Mismatch detection",
+        "how": "Flags compared with errors found in post-pack audits of the same orders."
+      },
+      {
+        "metric": "False flags",
+        "how": "Flags the packer confirmed as correct, checked against audit samples."
+      },
+      {
+        "metric": "Time added per order",
+        "how": "Packing duration from WMS timestamps, with and without the check."
+      },
+      {
+        "metric": "Complaints with evidence",
+        "how": "Share of missing or wrong item complaints on pilot orders where support could open the order image."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it slow down packing?",
+      "a": "It is designed to run while the packer works, not as an extra step. We measure packing time from WMS timestamps during the pilot and tune camera position and screen prompts so the station keeps pace."
+    },
+    {
+      "q": "How does it handle new SKUs, which we add every week?",
+      "a": "New products are added from catalogue images and a few photos taken at the station. Until a SKU is learned, the system marks it as unverified rather than guessing."
+    },
+    {
+      "q": "Can it read expiry dates on every product?",
+      "a": "Only where the date faces the camera. Many dates are printed on the back or bottom, so expiry checks work best for categories where packers place the date face up, such as dairy and bread."
+    },
+    {
+      "q": "Do customers see the image?",
+      "a": "That is your choice. Most teams use it internally for complaint handling first, and some share it with the customer when a complaint is disputed."
+    }
+  ],
+  "related": [
+    "shelf-availability-and-planogram-compliance",
+    "order-status-and-returns-voice-agent",
+    "vendor-invoice-and-credit-note-reconciliation",
+    "parcel-damage-and-dimension-detection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/dark-store-picking-and-packing-qc/"
+}

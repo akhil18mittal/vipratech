@@ -1,0 +1,121 @@
+{
+  "slug": "saas-ai-companies",
+  "name": "SaaS & AI Product Companies",
+  "seo": {
+    "title": "AI Security Testing for SaaS and AI Products | VipraTech",
+    "description": "LLM and agent pentesting, voice agent red-teaming, RAG access-control tests, CI security regression and audit evidence for SaaS and AI teams.",
+    "keywords": [
+      "LLM penetration testing",
+      "AI red teaming services",
+      "OWASP LLM Top 10 testing",
+      "AI agent security testing",
+      "prompt injection testing",
+      "ISO 42001 evidence",
+      "voice agent red teaming"
+    ]
+  },
+  "hero": {
+    "headline": "Test your LLM features, agents and voice bots the way an attacker would",
+    "subheadline": "Security testing and evidence for SaaS and AI product teams, from a founder who spent eight years building a penetration-testing-as-a-service platform before moving into agentic AI pentesting and LLM red-teaming."
+  },
+  "intro": "SaaS and AI product companies are shipping copilots, RAG search, autonomous agents and voice bots faster than their security programmes can test them. Traditional pentests cover the web app and API, but rarely the model, its prompts, its retrieval layer or the tools an agent can call. AI helps here in two ways: as the subject of testing, where we probe LLM features for prompt injection, data leakage and excessive agency, and as a testing tool, where agentic test runners explore your app and APIs. It does not replace a human tester's judgement on business logic or severity, and it does not make you compliant on its own. We build tests and evidence your engineers and auditors can verify.",
+  "challenges": [
+    {
+      "title": "New attack surface, old test scope",
+      "detail": "Pentest scopes still list URLs and APIs, while the new risk sits in system prompts, retrieved documents, tool permissions and model output that flows into other systems."
+    },
+    {
+      "title": "Non-deterministic behaviour",
+      "detail": "The same prompt can pass today and fail after a model version change, a prompt edit or a new document in the index, so one-off tests age quickly."
+    },
+    {
+      "title": "Enterprise buyers asking harder questions",
+      "detail": "Security questionnaires now ask how you test for prompt injection, RAG tenant isolation and agent permissions, and expect evidence rather than assurances."
+    },
+    {
+      "title": "Regulation and standards arriving",
+      "detail": "The EU AI Act, ISO/IEC 42001 and frameworks such as NIST AI RMF mean customers and auditors want documented testing, oversight and risk records."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "ai-security",
+      "summary": "LLM application pentests, agent and voice agent red-teaming, RAG access-control testing, CI regression suites and evidence packs mapped to OWASP, MITRE ATLAS and NIST AI RMF."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Synthetic adversarial callers in English, Hindi and Hinglish that test voice agents across speech recognition, dialogue and tool calls."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Questionnaire answering and evidence assembly from your own policies and reports, and embeddable extraction modules for document-heavy SaaS products."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Research and personalisation agents that help SDR teams write grounded, cited outreach, and faster security reviews that keep enterprise deals moving."
+    }
+  ],
+  "featured_use_cases": [
+    "llm-application-penetration-test",
+    "ai-agent-red-teaming",
+    "continuous-ai-security-regression-in-ci"
+  ],
+  "use_cases": [
+    "llm-application-penetration-test",
+    "ai-agent-red-teaming",
+    "voice-agent-adversarial-testing",
+    "rag-data-leakage-and-access-control-testing",
+    "continuous-ai-security-regression-in-ci",
+    "eu-ai-act-iso-42001-evidence-pack",
+    "agentic-security-testing-for-web-apps",
+    "security-questionnaire-answering-assistant",
+    "document-extraction-module-for-saas",
+    "outbound-sdr-research-agent"
+  ],
+  "regulatory_context": [
+    {
+      "name": "EU AI Act",
+      "note": "Sets risk-based obligations for AI systems placed on the EU market, phased in over several years, including documentation, logging, human oversight, accuracy and cybersecurity expectations for high-risk systems. Whether a given system is in scope is a legal question for your counsel."
+    },
+    {
+      "name": "ISO/IEC 42001",
+      "note": "An international standard for AI management systems. Certification is carried out by accredited bodies; testing records, risk assessments and oversight evidence feed the management system and its audits."
+    },
+    {
+      "name": "GDPR and India's DPDP Act 2023",
+      "note": "Personal data in prompts, logs, embeddings and fine-tuning sets is still personal data, so retention limits, purpose limitation and access rights apply to AI features as they do to the rest of the product."
+    },
+    {
+      "name": "OWASP Top 10 for LLM Applications, MITRE ATLAS and NIST AI RMF",
+      "note": "Voluntary frameworks rather than laws, but widely used by enterprise buyers and auditors as the reference for how LLM and AI risks are identified, tested and managed."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How is an LLM pentest different from a normal web app pentest?",
+      "a": "A web app pentest checks authentication, authorisation, injection and configuration in your application and APIs. An LLM pentest adds the model layer: prompt injection, system-prompt leakage, data disclosure through retrieval, unsafe handling of model output and what an agent can do with its tools. We usually test both together, because the most serious issues sit where they meet."
+    },
+    {
+      "q": "Will testing affect production?",
+      "a": "We prefer a staging environment with production-like configuration and test data. Where production testing is needed, we agree scope, rate limits, test accounts and stop conditions in writing before starting, and avoid destructive actions."
+    },
+    {
+      "q": "Can you help us with an ISO/IEC 42001 audit or the EU AI Act?",
+      "a": "We help you produce the testing records and technical evidence those processes ask for, mapped to the relevant requirements. Certification decisions belong to your auditor, and legal classification under the EU AI Act belongs to your counsel."
+    },
+    {
+      "q": "Do you only test, or do you help fix?",
+      "a": "Both. Findings come with root causes and specific fixes, and we can draft remediation changes as pull requests for your engineers to review, then retest to confirm."
+    }
+  ],
+  "related_industries": [
+    "fintech-payments",
+    "telecom-contact-centers",
+    "banking"
+  ],
+  "cta": {
+    "headline": "Scope a first test on one AI feature",
+    "text": "Pick the LLM feature, agent or voice bot that worries you most. We will agree a short written scope and show you verified findings with evidence."
+  },
+  "url": "/industries/saas-ai-companies/"
+}

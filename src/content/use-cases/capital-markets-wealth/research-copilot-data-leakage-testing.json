@@ -1,0 +1,217 @@
+{
+  "slug": "research-copilot-data-leakage-testing",
+  "industry": "capital-markets-wealth",
+  "title": "Data-Leakage Testing for Internal Research Copilots",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test internal research and RM copilots for leakage across information barriers, research entitlements and client data, including prompt injection through ingested documents.",
+  "seo": {
+    "title": "Data-Leakage Testing for Research Copilots | VipraTech",
+    "description": "Security testing for internal AI copilots at AMCs, brokers and banks: information-barrier leakage, entitlement gaps, prompt injection and data flows.",
+    "keywords": [
+      "research copilot security testing",
+      "RAG data leakage testing",
+      "information barrier AI testing",
+      "LLM copilot access control",
+      "AI security capital markets"
+    ]
+  },
+  "designed_for": [
+    "Chief Information Security Officer",
+    "Head of Compliance and Control Room",
+    "Head of Data and AI Platform",
+    "Research Platform Owner"
+  ],
+  "problem": {
+    "intro": "Internal copilots now sit on top of research notes, licensed broker research, client portfolios, deal documents and meeting transcripts. If the retrieval layer ignores who is allowed to see what, a public-side analyst can surface private-side information, an RM can see another team's clients, or a poisoned PDF in the research inbox can steer the copilot's answers.",
+    "pain_points": [
+      {
+        "title": "Permissions get lost in the index",
+        "detail": "Document-level access rules in SharePoint or the research system are often not carried into the vector index the copilot searches."
+      },
+      {
+        "title": "Information barriers are hard to test",
+        "detail": "Control rooms know which groups must not see which information, but rarely have a way to test that the copilot respects it."
+      },
+      {
+        "title": "Ingested content can carry instructions",
+        "detail": "Emails, PDFs and web pages fed into the copilot can contain hidden instructions that change its behaviour or exfiltrate data."
+      },
+      {
+        "title": "Data flows beyond the firm",
+        "detail": "Prompts, retrieved passages and logs may reach third-party model providers or telemetry tools that nobody reviewed."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a security assessment of your copilot focused on data leakage. We map data sources, roles and entitlements, including information barrier rules from your control room, and create test accounts for each role. We seed synthetic canary documents into restricted collections, so leakage can be proven without touching real sensitive information. We then try to retrieve restricted content through direct questions, indirect and multi-step prompts, summarisation requests, tool calls and prompt injection planted in ingested documents. We also review caches, conversation memory, logs and outbound calls to model providers. Every confirmed leak comes with reproduction steps, a root cause and a fix, and the tests become a regression suite.",
+    "capabilities": [
+      "Maps data sources, roles, entitlements and information barrier rules into a test matrix",
+      "Seeds synthetic canary documents in restricted collections to prove leakage safely",
+      "Attempts cross-role retrieval through direct, indirect, multi-step and summarisation prompts",
+      "Tests prompt injection planted in emails, PDFs and web content the copilot ingests",
+      "Reviews caches, memory, logs and outbound calls to model providers and telemetry",
+      "Reports confirmed leakage paths with reproduction steps, root cause and regression tests"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map access",
+      "detail": "Data sources, roles, entitlements and information barrier rules are documented with the platform team and control room."
+    },
+    {
+      "step": 2,
+      "title": "Seed canaries",
+      "detail": "Synthetic canary documents are placed in restricted collections, and test accounts are created per role."
+    },
+    {
+      "step": 3,
+      "title": "Run leakage and injection tests",
+      "detail": "Each role attempts to reach restricted content, and planted injections are triggered."
+    },
+    {
+      "step": 4,
+      "title": "Inspect data flows",
+      "detail": "Caches, memory, logs and outbound model calls are reviewed for sensitive content."
+    },
+    {
+      "step": 5,
+      "title": "Confirm findings",
+      "detail": "Suspected leaks are verified and confirmed with the control room before reporting."
+    },
+    {
+      "step": 6,
+      "title": "Fix and re-test",
+      "detail": "Fixes such as metadata filters and access propagation are re-tested and added to a regression suite."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Map sources, roles and barriers\"] --> B[\"Seed synthetic canary documents\"]\n  B --> C[\"Role-based leakage tests\"]\n  C --> D[\"Injection via ingested documents\"]\n  D --> E[\"Inspect logs, caches and model calls\"]\n  E --> F{\"Restricted content exposed?\"}\n  F -->|\"yes\"| G(\"Control room confirms finding\")\n  F -->|\"no\"| H[\"Record passed control\"]\n  G --> I[\"Fix, re-test and add to suite\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Access mapping and setup",
+        "components": [
+          "Data source and entitlement inventory",
+          "Information barrier rules from the control room",
+          "Per-role test accounts",
+          "Synthetic canary documents"
+        ]
+      },
+      {
+        "name": "Execution",
+        "components": [
+          "Prompt campaign runner with direct, indirect and multi-step probes",
+          "Injection payloads planted in test documents",
+          "Tool-call and summarisation probes"
+        ]
+      },
+      {
+        "name": "Data-flow review",
+        "components": [
+          "Log, cache and conversation memory inspection",
+          "Outbound model provider call capture",
+          "SIEM correlation"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Control room confirmation of findings",
+          "Findings with reproduction steps and root cause",
+          "Regression suite for CI"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Access mapping and setup\"]\n    M1[\"Entitlement and barrier matrix\"]\n    M2[\"Per-role test accounts\"]\n    M3[\"Synthetic canary documents\"]\n  end\n  subgraph S2[\"Execution\"]\n    E1[\"Prompt campaign runner\"]\n    E2[\"Injection document tests\"]\n    E3[\"Copilot retrieval and tools\"]\n  end\n  subgraph S3[\"Data-flow review\"]\n    D1[\"Log and cache inspection\"]\n    D2[\"Outbound model call capture\"]\n  end\n  subgraph S4[\"Reporting\"]\n    R1(\"Control room confirmation\")\n    R2[\"Findings and regression suite\"]\n  end\n  M1 --> M2\n  M2 --> E1\n  M3 --> E3\n  E1 --> E3\n  E2 --> E3\n  E3 --> D1\n  E3 --> D2\n  D1 --> R1\n  D2 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Copilot architecture and data source inventory",
+    "Role, entitlement and information barrier matrix",
+    "Test accounts for each role in a staging environment",
+    "Restricted and watch list handling procedures",
+    "Logging, caching and model provider configuration"
+  ],
+  "outputs": [
+    "Confirmed leakage findings with reproduction steps",
+    "Entitlement mapping gaps between source systems and the index",
+    "Prompt injection test results",
+    "Data-flow review of logs, caches and providers",
+    "Remediation plan and regression suite"
+  ],
+  "human_in_the_loop": "The control room or compliance team defines what counts as restricted for each test and confirms every leakage finding before it is reported. Platform owners approve and schedule fixes.",
+  "integrations": [
+    "Copilot staging environment",
+    "Identity provider such as Microsoft Entra ID or Okta",
+    "Vector database and document stores",
+    "SIEM for log review",
+    "CI/CD pipeline for regression tests"
+  ],
+  "guardrails": [
+    "Synthetic canaries only; no real unpublished price sensitive information is used",
+    "Testing in staging or agreed windows under a written scope",
+    "Seeded data removed at the end of the engagement",
+    "Findings encrypted and shared only with named owners",
+    "No data leaves your environment during testing"
+  ],
+  "compliance_notes": [
+    "Helps evidence the information barrier controls expected under SEBI's insider trading regulations, which govern the handling of unpublished price sensitive information.",
+    "Findings map to the OWASP Top 10 for LLM Applications and support the controls expected under SEBI's cyber resilience framework."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One internal copilot, tested across two or three roles separated by an information barrier or entitlement boundary.",
+    "deliverables": [
+      "Access and barrier test matrix",
+      "Seeded canaries and test accounts in staging",
+      "Executed test campaign",
+      "Findings report with remediation plan",
+      "Regression suite and clean-up confirmation"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Role and source coverage",
+        "how": "Roles, data sources and barrier rules tested, listed against the access map."
+      },
+      {
+        "metric": "Confirmed leakage paths",
+        "how": "Leaks verified by the control room, by severity and root cause."
+      },
+      {
+        "metric": "Injection success",
+        "how": "Planted injection attempts that changed copilot behaviour or exposed data."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Findings that no longer reproduce on re-test."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you need access to our real research or deal data?",
+      "a": "No. We use synthetic canary documents and test accounts, and only need enough access to place canaries in the right collections. Real sensitive content stays untouched."
+    },
+    {
+      "q": "Does this replace a standard penetration test?",
+      "a": "No. It focuses on how the copilot handles data and permissions. A conventional application and infrastructure test is still useful, and we can scope one alongside."
+    },
+    {
+      "q": "Can you test vendor copilots as well as in-house ones?",
+      "a": "Yes, within what the vendor's terms and your configuration allow. For vendor tools the focus is on your connectors, permissions and data sources rather than the vendor's own platform."
+    },
+    {
+      "q": "How often should this be repeated?",
+      "a": "Whenever you add a data source, change permissions or upgrade the model or retrieval layer, and at a regular interval agreed with your CISO. The regression suite makes repeat runs straightforward."
+    }
+  ],
+  "related": [
+    "advisory-chatbot-guardrail-testing",
+    "research-report-summarisation",
+    "rag-data-leakage-and-access-control-testing",
+    "legal-ai-confidentiality-testing"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/research-copilot-data-leakage-testing/"
+}

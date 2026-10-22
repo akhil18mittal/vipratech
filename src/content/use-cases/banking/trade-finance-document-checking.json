@@ -1,0 +1,223 @@
+{
+  "slug": "trade-finance-document-checking",
+  "industry": "banking",
+  "title": "Trade Finance Document Checking (LCs, Bills of Lading)",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Examine LC presentations against the credit terms, UCP 600 and ISBP, and give trade operations a draft discrepancy list with every finding tied to a document and clause.",
+  "seo": {
+    "title": "AI Trade Finance Document Checking for LCs | VipraTech",
+    "description": "AI that examines LC document sets, bills of lading, invoices and certificates against credit terms and UCP 600, and drafts discrepancies for checkers.",
+    "keywords": [
+      "trade finance document checking AI",
+      "letter of credit document examination",
+      "bill of lading discrepancy check",
+      "UCP 600 automation",
+      "LC discrepancy detection"
+    ]
+  },
+  "designed_for": [
+    "Head of Trade Finance Operations",
+    "Trade Services Document Checker",
+    "Trade Centre Manager",
+    "Head of Trade Compliance"
+  ],
+  "problem": {
+    "intro": "A single LC presentation can contain a draft, commercial invoice, packing list, bill of lading, insurance certificate, certificate of origin and inspection certificate, each to be checked against the MT700 terms and against each other. Checkers do this within the five-banking-day examination period of UCP 600, often across many presentations at once, and both a missed discrepancy and a wrongly raised one carry cost.",
+    "pain_points": [
+      {
+        "title": "Line-by-line comparison under time pressure",
+        "detail": "Goods description, quantities, amounts, ports and dates must agree across every document and with the credit, which is slow and error-prone by eye."
+      },
+      {
+        "title": "Amendments that change the rules mid-way",
+        "detail": "MT707 amendments alter shipment dates, tolerances or document requirements, and checkers must apply the latest accepted terms to each presentation."
+      },
+      {
+        "title": "Bill of lading details that hide discrepancies",
+        "detail": "On-board notations, clauses that make a bill unclean, transhipment and consignee or notify-party wording are easy to miss on scanned, carrier-specific layouts."
+      },
+      {
+        "title": "Compliance checks on top of examination",
+        "detail": "Vessel names, ports, parties and goods also need sanctions, dual-use and trade-based money laundering screening, often in a separate system."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an examination assistant for trade operations. It reads the credit and every amendment from the SWIFT messages and builds a structured list of terms and document requirements. It then extracts data from each document in the presentation, including scanned bills of lading and stamped certificates. A rules layer encodes checks drawn from UCP 600, ISBP and your bank's internal practice, and a language model compares goods descriptions and clauses where wording differs. The output is a draft discrepancy list, each item citing the document, field and credit clause, plus screening data passed to your sanctions process. The checker accepts, edits or rejects each item.",
+    "capabilities": [
+      "Parses MT700 and MT707 messages into a structured term sheet, applying accepted amendments in order",
+      "Extracts data from invoices, packing lists, bills of lading, airway bills, insurance documents and certificates of origin",
+      "Checks dates, amounts, tolerances, ports, presentation period and consistency across documents",
+      "Reads bill of lading notations and clauses that bear on clean, on-board and transhipment status",
+      "Packages vessel, port, party and goods data for the bank's sanctions and dual-use screening",
+      "Drafts discrepancy wording for the checker to use in an MT734 or MT750 message"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the credit",
+      "detail": "The MT700 and any accepted MT707 amendments are parsed into a term sheet of conditions and required documents."
+    },
+    {
+      "step": 2,
+      "title": "Receive the presentation",
+      "detail": "Scanned or electronic documents arrive from the trade front office or customer portal and are split and classified."
+    },
+    {
+      "step": 3,
+      "title": "Extract document data",
+      "detail": "Goods description, quantities, values, dates, ports and parties are extracted with page references."
+    },
+    {
+      "step": 4,
+      "title": "Run examination rules",
+      "detail": "Checks on credit terms, cross-document consistency and presentation timing produce candidate discrepancies with confidence."
+    },
+    {
+      "step": 5,
+      "title": "Screen and route",
+      "detail": "Parties, vessels, ports and goods go to the existing screening process, and uncertain items are marked for close review."
+    },
+    {
+      "step": 6,
+      "title": "Checker decision",
+      "detail": "The document checker accepts, edits or rejects each item and records the examination outcome in the trade system."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"MT700 and amendments\"] --> B[\"Build structured term sheet\"]\n  C[\"Presentation documents\"] --> D[\"Classify and extract fields\"]\n  B --> E[\"Examination rules and LLM comparison\"]\n  D --> E\n  E --> I[\"Screening data to sanctions system\"]\n  E --> F{\"Discrepancy or low confidence?\"}\n  F -->|\"yes\"| G(\"Checker reviews flagged items\")\n  F -->|\"no\"| H(\"Checker confirms clean note\")\n  G --> J[\"Outcome recorded in trade system\"]\n  H --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "SWIFT MT700 and MT707 message parser",
+          "Scanned presentation intake from the trade front office",
+          "Grouping by LC and bill reference"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR tuned for carrier and insurer layouts",
+          "Classifier for trade document types",
+          "LLM extractor with per-document schemas"
+        ]
+      },
+      {
+        "name": "Examination",
+        "components": [
+          "Rule engine for credit terms and cross-document checks",
+          "LLM comparison of goods descriptions and clauses",
+          "Screening data packager"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Checker workbench with side-by-side document view",
+          "Discrepancy wording drafts"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "Trade finance back-office adapter",
+          "Audit log of findings and checker decisions"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"SWIFT message parser\"]\n    I2[\"Presentation scan intake\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and layout\"]\n    U2[\"Trade document classifier\"]\n    U3[\"LLM field extractor\"]\n  end\n  subgraph S3[\"Examination\"]\n    E1[\"Credit terms rule engine\"]\n    E2[\"Clause and description comparer\"]\n    E3[\"Screening data packager\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Checker workbench\")\n    R2[\"Trade system adapter\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> E1\n  I2 --> U1 --> U2 --> U3\n  U3 --> E1\n  U3 --> E2\n  U3 --> E3\n  E1 --> R1\n  E2 --> R1\n  E3 --> R1\n  R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "MT700 letter of credit and MT707 amendments",
+    "Commercial invoice and packing list",
+    "Bill of lading or airway bill",
+    "Insurance certificate or policy",
+    "Certificates of origin, inspection and beneficiary certificates",
+    "Bill of exchange or draft"
+  ],
+  "outputs": [
+    "Structured term sheet for each credit",
+    "Draft discrepancy list citing document, field and credit clause",
+    "Cross-document consistency report",
+    "Screening data set for sanctions and dual-use checks",
+    "Audit record of checker decisions"
+  ],
+  "human_in_the_loop": "The document checker decides every discrepancy and the examination outcome; the assistant only drafts. Sanctions and dual-use hits are decided by the compliance team in the bank's existing screening process.",
+  "integrations": [
+    "Trade finance back-office system (via API or file exchange)",
+    "SWIFT interface for MT7xx messages",
+    "Sanctions screening system already in use",
+    "Document imaging or management system",
+    "Customer trade portal for document uploads"
+  ],
+  "guardrails": [
+    "Every finding cites the document, page and credit clause it relies on",
+    "No SWIFT message is sent without checker approval",
+    "Examination rules versioned and approved by trade operations before use",
+    "Low-confidence fields marked visibly, never silently accepted",
+    "Customer and counterparty data kept in the bank's chosen environment"
+  ],
+  "compliance_notes": [
+    "Examination rules are drawn from ICC UCP 600, ISBP and the bank's own practice; the checker remains responsible for the examination.",
+    "Supports the bank's trade-based money laundering controls by surfacing data for screening; it does not replace the sanctions system."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Export LC presentations for one product line, such as sight LCs for engineering goods, using historical presentations whose examination outcomes are already recorded.",
+    "deliverables": [
+      "Term sheet and examination rule set agreed with trade operations",
+      "Working examination assistant on historical presentations",
+      "Checker workbench",
+      "Comparison of drafted discrepancies with recorded checker findings",
+      "Roll-out plan covering import LCs and collections"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Discrepancy recall",
+        "how": "Recorded checker discrepancies that the assistant also raised, on historical presentations."
+      },
+      {
+        "metric": "False discrepancies",
+        "how": "Raised items that checkers rejected as not discrepant, by rule."
+      },
+      {
+        "metric": "Bill of lading field accuracy",
+        "how": "Extracted values compared with checker-verified values on a sample of scanned bills."
+      },
+      {
+        "metric": "Examination time per presentation",
+        "how": "Timed for checkers working with and without the assistant."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it decide whether documents comply?",
+      "a": "No. It drafts findings with references so the checker can decide faster. The examination outcome, any refusal and any request for an applicant waiver remain decisions for the checker and the bank."
+    },
+    {
+      "q": "Can it handle scanned bills of lading from different carriers?",
+      "a": "Yes. Layout-aware OCR and a language model read carrier-specific formats, including stamps and on-board notations. Fields it cannot read with confidence are highlighted for the checker."
+    },
+    {
+      "q": "How are UCP 600 and ISBP applied?",
+      "a": "We encode checks as versioned rules reviewed by your trade specialists, and use the language model only where wording must be compared, such as goods descriptions. Each finding shows which rule produced it."
+    },
+    {
+      "q": "Can it work with electronic trade documents?",
+      "a": "Yes. Where your bank receives electronic bills of lading or structured data from trade platforms, the extractor reads that data directly and the same examination rules apply."
+    }
+  ],
+  "related": [
+    "regulatory-return-preparation-assistant",
+    "account-opening-document-verification",
+    "customs-and-shipping-document-extraction",
+    "ai-model-governance-evidence-pack"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/trade-finance-document-checking/"
+}

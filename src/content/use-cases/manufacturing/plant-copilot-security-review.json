@@ -1,0 +1,222 @@
+{
+  "slug": "plant-copilot-security-review",
+  "industry": "manufacturing",
+  "title": "Security Review for Plant and Enterprise AI Copilots",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test copilots that touch SAP, CMMS, drawings and costings for prompt injection, data leakage and unsafe tool access before they reach plant users, with validated findings and fixes.",
+  "seo": {
+    "title": "Plant AI Copilot Security Review | VipraTech",
+    "description": "Security testing for manufacturing copilots connected to SAP, CMMS and drawings: prompt injection, data leakage and tool permissions, mapped to OWASP LLM.",
+    "keywords": [
+      "AI copilot security review",
+      "LLM security testing manufacturing",
+      "prompt injection testing",
+      "OWASP Top 10 for LLM",
+      "OT AI assistant security"
+    ]
+  },
+  "designed_for": [
+    "CISO or Head of IT Security",
+    "CIO or Head of Digital",
+    "OT Security Lead",
+    "AI Programme Manager"
+  ],
+  "problem": {
+    "intro": "Manufacturers are connecting LLM copilots to SAP, maintenance systems, drawing vaults and shared drives so engineers and managers can ask questions in plain language. Each connection widens what a cleverly worded prompt, or a poisoned document, can reach.",
+    "pain_points": [
+      {
+        "title": "Everything indexed, nothing segmented",
+        "detail": "Copilots built on shared drives can surface costings, customer drawings or HR files to users who should never see them."
+      },
+      {
+        "title": "Tools with write access",
+        "detail": "Assistants that can create work orders, change master data or call MES APIs can be steered into actions nobody intended."
+      },
+      {
+        "title": "Injection through supplier documents",
+        "detail": "A supplier PDF or email with hidden instructions can redirect a procurement or quality copilot that reads it."
+      },
+      {
+        "title": "Reviews that miss AI risks",
+        "detail": "Standard application security reviews do not test prompt injection or retrieval leakage, and OEM customers now ask suppliers how AI tools handle their IP."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a structured security review of your copilot before roll-out or after a major change. We map its data sources, user roles, tools and network paths, including any route towards OT systems, and build a threat model with your IT and OT owners. We then run automated adversarial test suites and manual testing for prompt injection, indirect injection through documents, data leakage across roles, plants and customers, excessive tool permissions and unsafe outputs. Every finding is validated by an engineer, given a severity and reproduction steps, and mapped to the OWASP Top 10 for LLM Applications. We retest after your fixes.",
+    "capabilities": [
+      "Threat model covering data sources, roles, tools and any path towards OT networks",
+      "Direct and indirect prompt injection tests, including poisoned PDFs, emails and drawing notes",
+      "Cross-role, cross-plant and cross-customer data leakage tests on retrieval and memory",
+      "Tool and permission review for actions in SAP, CMMS, MES or ticketing systems",
+      "Findings with severity, evidence and reproduction steps, mapped to OWASP LLM Top 10 and MITRE ATLAS",
+      "Retest after fixes and a regression test pack for future releases"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and rules",
+      "detail": "We agree the copilot, environments, test accounts, time windows and what is out of bounds, especially OT."
+    },
+    {
+      "step": 2,
+      "title": "Map and threat-model",
+      "detail": "Data sources, roles, tools and network paths are mapped, and threats are ranked with your owners."
+    },
+    {
+      "step": 3,
+      "title": "Run adversarial tests",
+      "detail": "Automated suites and manual testers probe injection, leakage, tool misuse and unsafe outputs."
+    },
+    {
+      "step": 4,
+      "title": "Validate findings",
+      "detail": "An engineer reproduces each candidate issue; anything unconfirmed is dropped or marked as an observation."
+    },
+    {
+      "step": 5,
+      "title": "Report and remediate",
+      "detail": "You receive validated findings with evidence and fixes, and walk through them with our team."
+    },
+    {
+      "step": 6,
+      "title": "Retest",
+      "detail": "After your fixes, we retest each finding and hand over a regression test pack."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agree scope, accounts and limits\"] --> B[\"Map data, roles and tools\"]\n  B --> C[\"Threat model with IT and OT owners\"]\n  C --> D[\"Run automated and manual tests\"]\n  D --> E{\"Issue reproduced by engineer?\"}\n  E -->|\"yes\"| F[\"Record finding with evidence\"]\n  E -->|\"no\"| G[\"Log as observation\"]\n  F --> H(\"Owners review and fix\")\n  H --> I[\"Retest and regression pack\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scoping",
+        "components": [
+          "Asset and data-source inventory",
+          "Role and permission matrix",
+          "Rules of engagement with OT exclusions"
+        ]
+      },
+      {
+        "name": "Test generation",
+        "components": [
+          "Adversarial prompt library for injection and jailbreaks",
+          "Poisoned document set for indirect injection",
+          "Role-based leakage test cases"
+        ]
+      },
+      {
+        "name": "Execution",
+        "components": [
+          "Automated test runner against the copilot API or UI",
+          "Manual expert testing",
+          "Tool-call and log capture"
+        ]
+      },
+      {
+        "name": "Validation and reporting",
+        "components": [
+          "Engineer validation and severity rating",
+          "Evidence pack mapped to OWASP LLM Top 10",
+          "Remediation guidance"
+        ]
+      },
+      {
+        "name": "Regression",
+        "components": [
+          "Retest of fixed findings",
+          "Regression suite for future releases"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scoping\"]\n    P1[\"Data source inventory\"]\n    P2[\"Role and permission matrix\"]\n  end\n  subgraph S2[\"Test generation\"]\n    G1[\"Adversarial prompt library\"]\n    G2[\"Poisoned document set\"]\n  end\n  subgraph S3[\"Execution\"]\n    E1[\"Automated test runner\"]\n    E2[\"Manual expert testing\"]\n    E3[\"Tool call and log capture\"]\n  end\n  subgraph S4[\"Validation and reporting\"]\n    V1(\"Engineer validation\")\n    V2[\"Evidence pack and fixes\"]\n  end\n  subgraph S5[\"Regression\"]\n    R1[\"Retest and regression suite\"]\n  end\n  P1 --> G2\n  P2 --> G1\n  G1 --> E1\n  G2 --> E1\n  E2 --> E3\n  E1 --> E3 --> V1 --> V2 --> R1"
+  },
+  "inputs": [
+    "Copilot architecture, prompts and tool definitions",
+    "Data source list and access model",
+    "Test accounts for each user role",
+    "Staging or test environment access",
+    "Existing security policies and OT network boundaries"
+  ],
+  "outputs": [
+    "Threat model and test plan",
+    "Validated findings with severity, evidence and reproduction steps",
+    "Mapping of findings to OWASP LLM Top 10 and MITRE ATLAS",
+    "Remediation guidance for prompts, retrieval, permissions and monitoring",
+    "Retest results and regression test pack"
+  ],
+  "human_in_the_loop": "Our security engineers validate every automated finding before it reaches the report, and your IT, OT and data owners approve the scope and decide how to treat each risk. No test touches live OT control systems.",
+  "integrations": [
+    "Copilot platforms such as Azure OpenAI, Microsoft Copilot Studio or custom LLM apps",
+    "SAP, CMMS and MES APIs used as copilot tools",
+    "SharePoint, network drives or PLM vaults used for retrieval",
+    "Issue trackers such as Jira for findings",
+    "CI pipelines for regression tests"
+  ],
+  "guardrails": [
+    "Testing only within agreed scope, accounts and time windows",
+    "No write actions against production ERP, MES or OT systems",
+    "Synthetic test data used in place of real customer drawings or personal data where possible",
+    "Findings and evidence stored encrypted with restricted access"
+  ],
+  "compliance_notes": [
+    "Findings are mapped to the OWASP Top 10 for LLM Applications and can feed risk records aligned with the NIST AI RMF and ISO/IEC 42001.",
+    "For copilots near industrial control systems, scoping respects your IEC 62443 zones and conduits."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One copilot in a staging environment, such as a maintenance assistant connected to SAP PM and a manuals library, with two or three user roles.",
+    "deliverables": [
+      "Rules of engagement and threat model",
+      "Executed test plan with logs",
+      "Validated findings report with remediation guidance",
+      "Read-out session with IT, OT and the copilot team",
+      "Retest of fixed findings"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Test coverage",
+        "how": "Test cases executed per OWASP LLM category, data source and tool."
+      },
+      {
+        "metric": "Validated findings by severity",
+        "how": "Count of engineer-confirmed findings at each severity level."
+      },
+      {
+        "metric": "Leakage exposure",
+        "how": "Restricted documents or records reachable from each test role."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Status of each finding on retest after remediation."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will testing disrupt production?",
+      "a": "No. We test in staging or with read-only test accounts, inside agreed time windows. Any test that could write to a real system is either run against a test instance or left out of scope."
+    },
+    {
+      "q": "We use Microsoft Copilot, not a custom build. Is this still relevant?",
+      "a": "Yes. Off-the-shelf copilots inherit your SharePoint and Teams permissions, so oversharing is a common finding. We test what each role can retrieve and whether connectors or plugins widen that."
+    },
+    {
+      "q": "How is this different from a normal penetration test?",
+      "a": "A normal test covers the web application and infrastructure. This review targets the model layer: prompts, retrieval, memory, tool calls and the way documents can steer the model. We can coordinate with your existing pentest provider."
+    },
+    {
+      "q": "Can our OEM customers see the results?",
+      "a": "The report includes an executive summary written so it can be shared with customers under NDA, while detailed reproduction steps stay internal."
+    }
+  ],
+  "related": [
+    "maintenance-log-and-sop-assistant",
+    "ot-it-ai-assistant-security-review",
+    "rag-data-leakage-and-access-control-testing",
+    "ai-agent-permission-and-tool-use-review"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/plant-copilot-security-review/"
+}

@@ -1,0 +1,125 @@
+{
+  "slug": "nbfc-lending",
+  "name": "NBFCs & Lending",
+  "seo": {
+    "title": "AI for NBFCs: Loan Documents to Collections | VipraTech",
+    "description": "Applied AI for NBFCs and lenders: loan document extraction, bank statement analysis, co-lending file audits and conduct-safe collections voice agents.",
+    "keywords": [
+      "AI for NBFC",
+      "loan document extraction AI",
+      "bank statement analysis underwriting",
+      "collections voice agent India",
+      "co-lending file audit",
+      "digital lending compliance AI",
+      "EMI reminder WhatsApp bot"
+    ]
+  },
+  "hero": {
+    "headline": "Lending operations AI that checks its work, from loan file to collections call",
+    "subheadline": "We build document, voice, vision and AI-security systems for NBFCs and lenders that speed up underwriting and servicing, while credit decisions stay with your teams and collections stay within conduct rules."
+  },
+  "intro": "Lending runs on documents and conversations. A loan file collects KYC, income proof, bank statements and property papers, often sent by DSAs as phone photos, and collections depend on a constant stream of calls and field visits. AI helps today by reading and cross-checking these files, analysing statements, and handling reminder and early-collections conversations in Hindi and regional languages under strict conduct rules. It should not approve loans, set limits or decide recovery action, and RBI expects lenders to stay accountable for what their agents and technology partners do. Our systems are built around that: evidence for every extracted value, confidence thresholds, real-time conduct guardrails and human sign-off wherever credit or customer harm is at stake.",
+  "challenges": [
+    {
+      "title": "Files sourced through many hands",
+      "detail": "Applications arrive from branches, DSAs, connectors and digital journeys in every format, so credit teams spend time chasing and re-keying documents before they can assess risk."
+    },
+    {
+      "title": "Thin-file and self-employed borrowers",
+      "detail": "Many borrowers have limited bureau history and informal income, so underwriting relies on bank statements, GST returns and field checks that are slow to analyse."
+    },
+    {
+      "title": "Collections conduct under scrutiny",
+      "detail": "RBI holds lenders responsible for the behaviour of their recovery agents and partners, and one abusive call or visit can become a complaint, a penalty or a news story."
+    },
+    {
+      "title": "Partnership and portfolio diligence",
+      "detail": "Co-lending, direct assignment and securitisation need file-level checks that partner banks and investors increasingly want evidenced rather than asserted."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Extracts and cross-checks loan application documents, bank statements, property papers and portfolio files, with every value linked to its source page for credit and audit teams."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Runs EMI reminder and early-bucket collections conversations in Hindi, Hinglish and regional languages, with conduct rules enforced on every utterance."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Verifies field visit photos and vehicle or asset images for location, time, reuse and identifiers such as chassis numbers and number plates."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Tests collections voice agents, in-house or vendor-built, against fair-practice and recovery-conduct scenarios, with reproducible audio evidence."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Qualifies DSA and web leads quickly by voice or WhatsApp, checks serviceability and consent, and routes ready applicants to the right sales team."
+    }
+  ],
+  "featured_use_cases": [
+    "bank-statement-analysis-for-underwriting",
+    "collections-voice-agent-with-conduct-guardrails",
+    "co-lending-portfolio-file-audit"
+  ],
+  "use_cases": [
+    "loan-application-document-extraction",
+    "bank-statement-analysis-for-underwriting",
+    "property-title-document-summarisation",
+    "co-lending-portfolio-file-audit",
+    "collections-voice-agent-with-conduct-guardrails",
+    "emi-reminder-voice-and-whatsapp-agent",
+    "field-collection-visit-photo-verification",
+    "vehicle-asset-inspection-for-auto-loans",
+    "collections-voice-agent-conduct-testing",
+    "loan-lead-qualification-agent"
+  ],
+  "regulatory_context": [
+    {
+      "name": "RBI digital lending regulations",
+      "note": "RBI's digital lending rules, first issued in 2022 and since updated, cover disclosures such as the Key Fact Statement, oversight of lending service providers, need-based data collection with consent, repayments directly to the lender and grievance redressal."
+    },
+    {
+      "name": "RBI Fair Practices Code and recovery-agent guidance",
+      "note": "Lenders must ensure recovery agents do not harass or intimidate borrowers, and RBI expects recovery calls only between 8 a.m. and 7 p.m. Lenders remain responsible for agents and outsourced partners acting on their behalf."
+    },
+    {
+      "name": "RBI Account Aggregator framework",
+      "note": "RBI's NBFC-Account Aggregator framework lets borrowers share bank statements and other financial data digitally with explicit, revocable consent, reducing reliance on uploaded PDFs."
+    },
+    {
+      "name": "Digital Personal Data Protection Act 2023 (India)",
+      "note": "Requires a lawful basis such as consent, purpose limitation and security safeguards for personal data, which shapes how loan files, call recordings and field photos are processed and retained."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Will the AI approve or reject loans?",
+      "a": "No. It extracts, checks and summarises so credit teams decide faster with better evidence. Credit decisions, deviations and sanctions stay with your authorised officers under your credit policy."
+    },
+    {
+      "q": "How do you keep collections calls within RBI conduct expectations?",
+      "a": "Every voice agent we build has a policy layer that enforces calling windows, identity confirmation, prohibited language and third-party rules before anything is said, and it transfers sensitive cases to people. We also test agents adversarially before and after launch."
+    },
+    {
+      "q": "Can these systems work with our LOS and LMS?",
+      "a": "Yes. We integrate through APIs, SFTP or staging tables with commercial and in-house loan origination and loan management systems, and agree field mappings with your IT team during the pilot."
+    },
+    {
+      "q": "Which languages do the voice and WhatsApp agents support?",
+      "a": "Hindi, Hinglish and English as standard, with Marathi, Gujarati, Tamil, Telugu, Kannada, Bengali and others added based on your borrower geography. We test every language with native speakers from the relevant region before launch."
+    }
+  ],
+  "related_industries": [
+    "banking",
+    "fintech-payments",
+    "automotive-mobility"
+  ],
+  "cta": {
+    "headline": "Test one lending workflow on your own files",
+    "text": "Book a discovery call to scope a short pilot, from statement analysis to a conduct-safe reminder agent, and judge it on measured results before scaling."
+  },
+  "url": "/industries/nbfc-lending/"
+}

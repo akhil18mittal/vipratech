@@ -1,0 +1,215 @@
+{
+  "slug": "customs-and-shipping-document-extraction",
+  "industry": "logistics-supply-chain",
+  "title": "Customs and Shipping Document Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract and cross-check data from commercial invoices, packing lists, bills of lading, airway bills and certificates of origin, and prepare checked job data for bill of entry or shipping bill filing.",
+  "seo": {
+    "title": "Customs and Shipping Document Extraction AI | VipraTech",
+    "description": "AI that extracts data from invoices, packing lists, bills of lading and airway bills, cross-checks them and prepares job data for customs filing.",
+    "keywords": [
+      "customs document extraction",
+      "bill of lading OCR",
+      "commercial invoice data extraction",
+      "customs broker automation",
+      "shipping bill preparation"
+    ]
+  },
+  "designed_for": [
+    "Customs Broker Operations Head",
+    "Freight Forwarding Manager",
+    "EXIM Documentation Executive",
+    "Import-Export Manager"
+  ],
+  "problem": {
+    "intro": "Every import or export job brings a set of documents from shippers, consignees and carriers: commercial invoice, packing list, bill of lading or airway bill, certificate of origin, insurance certificate and sometimes licences or test reports. Documentation executives at customs brokers and forwarders key the same data into their operating system and the customs filing, then check documents against each other by eye.",
+    "pain_points": [
+      {
+        "title": "Re-keying from many layouts",
+        "detail": "Each supplier's invoice and each carrier's bill of lading looks different, so templates break and data is typed by hand."
+      },
+      {
+        "title": "Inconsistencies across documents",
+        "detail": "Quantities, weights, container numbers, Incoterms and consignee details that differ between invoice, packing list and BL lead to queries and amendments."
+      },
+      {
+        "title": "Classification and valuation risk",
+        "detail": "Goods descriptions too vague to support the declared HS code, or invoice values that do not add up, attract customs queries."
+      },
+      {
+        "title": "Deadline pressure",
+        "detail": "Filing delays add demurrage and detention, so documentation teams work under constant pressure around vessel cut-offs and arrivals."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a document pipeline for customs brokers, forwarders and EXIM teams. Each job's documents are classified and key fields extracted: parties, invoice lines with description, quantity, unit price and value, HS codes where stated, Incoterms, container and seal numbers, weights, ports and dates. The system cross-checks documents against each other and the job record, recalculates invoice totals, and flags vague descriptions or missing documents. A documentation executive reviews the checked data on one screen before it goes to your operating system or filing software. Classification and valuation decisions stay with your licensed customs broker.",
+    "capabilities": [
+      "Classifies job documents: commercial invoice, packing list, BL, AWB, certificate of origin and insurance",
+      "Extracts parties, invoice lines, values, Incoterms, containers, seals, weights, ports and dates",
+      "Cross-checks quantities, weights and parties across invoice, packing list and transport document",
+      "Recalculates invoice line totals and currency values",
+      "Flags vague goods descriptions and documents missing for the job type",
+      "Exports checked data to your forwarding or customs filing software"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect job documents",
+      "detail": "Documents arrive by email or customer portal and are grouped by job or shipment reference."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document is classified and its fields extracted with source references."
+    },
+    {
+      "step": 3,
+      "title": "Cross-check",
+      "detail": "Values are compared across documents and with the booking or job record, and totals are recalculated."
+    },
+    {
+      "step": 4,
+      "title": "Flag issues",
+      "detail": "Mismatches, vague descriptions and missing documents are listed with the documents involved."
+    },
+    {
+      "step": 5,
+      "title": "Executive review",
+      "detail": "The documentation executive confirms the data, resolves flags with the customer and approves the job."
+    },
+    {
+      "step": 6,
+      "title": "Export for filing",
+      "detail": "Approved data goes to the forwarding system or filing software for bill of entry or shipping bill preparation."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Job documents from email or portal\"] --> B[\"Classify and extract fields\"]\n  B --> C[\"Cross-check invoice, packing list, BL\"]\n  C --> D[\"Recalculate totals, check completeness\"]\n  D --> E{\"Any mismatch or gap?\"}\n  E -->|\"yes\"| F(\"Documentation executive resolves\")\n  E -->|\"no\"| G[\"Approve job data\"]\n  F --> G\n  G --> H[\"Export to filing software\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Shared mailbox and customer portal connectors",
+          "Job grouping by reference"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Document classifier",
+          "OCR and table extraction",
+          "LLM field extractor with trade document schemas"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Cross-document consistency rules",
+          "Invoice arithmetic and currency checks",
+          "Job-type document checklist"
+        ]
+      },
+      {
+        "name": "Review and export",
+        "components": [
+          "Single-screen review with source highlights",
+          "Export to forwarding or filing software",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    N1[\"Mailbox and portal\"]\n    N2[\"Job grouping\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"Document classifier\"]\n    E2[\"OCR and tables\"]\n    E3[\"Field extractor\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"Consistency rules\"]\n    V2[\"Arithmetic checks\"]\n    V3[\"Document checklist\"]\n  end\n  subgraph S4[\"Review and export\"]\n    R1(\"Executive review screen\")\n    R2[\"Filing software export\"]\n    R3[\"Audit log\"]\n  end\n  N1 --> N2 --> E1\n  E1 --> E2 --> E3\n  E3 --> V1\n  E3 --> V2\n  N2 --> V3\n  V1 --> R1\n  V2 --> R1\n  V3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Commercial invoices and packing lists",
+    "Bills of lading, sea waybills and airway bills",
+    "Certificates of origin and insurance certificates",
+    "Booking or job details from the forwarding system",
+    "Customer product master with past descriptions and HS codes where available"
+  ],
+  "outputs": [
+    "Structured job data with source links",
+    "Cross-document mismatch list",
+    "Missing-document checklist per job",
+    "Data export for bill of entry or shipping bill preparation",
+    "Audit trail of edits and approvals"
+  ],
+  "human_in_the_loop": "Documentation executives approve all job data before export and resolve mismatches with the shipper or consignee. HS classification, valuation and filing decisions remain with your licensed customs broker.",
+  "integrations": [
+    "Freight forwarding or customs brokerage software (via API or file import)",
+    "ICEGATE filing through your existing filing software",
+    "Email and customer portals",
+    "ERP for importer or exporter master data",
+    "Document management system"
+  ],
+  "guardrails": [
+    "The system never sets a final HS code; any suggestion is labelled for the broker to decide",
+    "Every field linked to its source document and page",
+    "Export only after executive approval",
+    "Customer documents segregated by account",
+    "Extraction schema changes versioned and tested"
+  ],
+  "compliance_notes": [
+    "Supports accurate declarations under the Customs Act 1962 by checking consistency between commercial and transport documents before filing.",
+    "Customer commercial data is kept confidential and processed in your chosen cloud region."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One trade lane or customer group, for imports or exports, using recently filed jobs plus a live parallel run.",
+    "deliverables": [
+      "Field schemas for the pilot document types",
+      "Working extraction and cross-check pipeline",
+      "Review screen for documentation executives",
+      "Accuracy report against filed job data",
+      "Integration and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Extracted values compared with the data in filed jobs for the same documents."
+      },
+      {
+        "metric": "Mismatch flags confirmed",
+        "how": "Flags the documentation executive confirms as genuine discrepancies."
+      },
+      {
+        "metric": "Preparation time per job",
+        "how": "Time to prepare job data with and without the pipeline on comparable jobs."
+      },
+      {
+        "metric": "Amendments on pilot jobs",
+        "how": "Post-filing amendments needed on pilot jobs, tracked with their reasons."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can the system classify goods under HS codes?",
+      "a": "It can suggest candidate codes from descriptions and your past classifications for a broker to consider, but it does not decide classification. Final HS codes and valuation stay with your licensed customs broker."
+    },
+    {
+      "q": "Which document formats work?",
+      "a": "Digital PDFs, scans, photos and Excel packing lists. Documents in other languages from your regular trading partners can be tested during the pilot."
+    },
+    {
+      "q": "Does it file directly on ICEGATE?",
+      "a": "No. It exports checked data to the filing software your team already uses, which handles submission."
+    },
+    {
+      "q": "Can it work for EU or other customs regimes?",
+      "a": "Yes. Extraction and cross-checks work the same way, and the export format is mapped to the target system. Regime-specific rules are configured with your team."
+    }
+  ],
+  "related": [
+    "e-way-bill-and-gst-document-validation",
+    "freight-invoice-audit",
+    "trade-finance-document-checking",
+    "invoice-and-gst-data-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/customs-and-shipping-document-extraction/"
+}

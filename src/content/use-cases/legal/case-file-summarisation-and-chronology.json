@@ -1,0 +1,223 @@
+{
+  "slug": "case-file-summarisation-and-chronology",
+  "industry": "legal",
+  "title": "Case File Summarisation and Chronology",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Turn a litigation file of pleadings, affidavits, exhibits and orders into an indexed list of dates and events, a party and witness index and issue summaries, each line linked to its page.",
+  "seo": {
+    "title": "Case File Summarisation and Chronology with AI | VipraTech",
+    "description": "AI that indexes litigation files, builds a list of dates and events with page citations and drafts issue-wise summaries for counsel to verify.",
+    "keywords": [
+      "case file summarisation AI",
+      "litigation chronology tool",
+      "list of dates and events",
+      "legal document indexing",
+      "Hindi court record OCR"
+    ]
+  },
+  "designed_for": [
+    "Litigation Partner",
+    "Senior Associate (Disputes)",
+    "Head of Litigation (In-House)",
+    "Advocate-on-Record"
+  ],
+  "problem": {
+    "intro": "A commercial suit, arbitration or writ petition can arrive with thousands of pages: plaint, written statement, replication, affidavits of evidence, exhibits, correspondence and years of interim orders, often scanned, sometimes in Hindi, with handwritten order sheets from the district court. Before any strategy work, someone has to read it all and build the chronology.",
+    "pain_points": [
+      {
+        "title": "Chronologies built by hand",
+        "detail": "Associates spend days preparing the list of dates and events, and it goes stale the moment a new affidavit is filed."
+      },
+      {
+        "title": "Facts without sources",
+        "detail": "Summaries that do not cite pages are hard to rely on when preparing for a hearing or a cross-examination."
+      },
+      {
+        "title": "Contradictions are missed",
+        "detail": "Dates, amounts and statements that differ between pleadings, affidavits and documents are easy to overlook in a large file."
+      },
+      {
+        "title": "Mixed scripts and poor scans",
+        "detail": "Hindi orders, handwritten notings and low-quality photocopies defeat standard search."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a case-file assistant that ingests the paper book or matter folder, runs OCR in English and Hindi, classifies each document and indexes it by type, date and filing party. It extracts dated events, amounts, parties and witnesses and builds a list of dates and events in which every entry cites the document and page. Issue-wise summaries are drafted from the pleadings and evidence, and possible contradictions are listed for counsel, such as a date in the plaint that differs from an exhibit. Associates verify entries against the source in one click, and the chronology updates when new documents are added.",
+    "capabilities": [
+      "OCR for English and Hindi, including handwritten order sheets, with low-confidence text marked",
+      "Document index by type, date, filing party and exhibit number",
+      "List of dates and events with a document and page citation for every entry",
+      "Party, witness and entity index across the file",
+      "Issue-wise summaries drawn from the pleadings and evidence",
+      "Contradiction list across pleadings, affidavits and exhibits for counsel to assess"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the file",
+      "detail": "The paper book, matter folder or court-downloaded documents are uploaded for the matter."
+    },
+    {
+      "step": 2,
+      "title": "OCR and classify",
+      "detail": "Each document is read and classified as plaint, reply, affidavit, exhibit, order and so on."
+    },
+    {
+      "step": 3,
+      "title": "Extract events and entities",
+      "detail": "Dates, events, amounts, parties and witnesses are extracted with page references."
+    },
+    {
+      "step": 4,
+      "title": "Build the chronology",
+      "detail": "Events are ordered into a list of dates and events, and conflicting dates are flagged."
+    },
+    {
+      "step": 5,
+      "title": "Associate verification",
+      "detail": "An associate checks flagged entries, and a sample of the others, against the source pages."
+    },
+    {
+      "step": 6,
+      "title": "Export and update",
+      "detail": "The verified chronology, index and summaries are exported to Word and refreshed as new filings arrive."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Paper book or matter folder\"] --> B[\"OCR in English and Hindi\"]\n  B --> C[\"Classify and index documents\"]\n  C --> D[\"Extract dated events and parties\"]\n  D --> E[\"Build list of dates and events\"]\n  E --> F{\"Conflicts or low confidence?\"}\n  F -->|\"yes\"| G(\"Associate verifies against source\")\n  F -->|\"no\"| H[\"Draft issue-wise summaries\"]\n  G --> H\n  H --> I[\"Export to Word for counsel\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Matter folder and DMS connector",
+          "Import of court downloads",
+          "Paper book page numbering"
+        ]
+      },
+      {
+        "name": "Document processing",
+        "components": [
+          "OCR for English and Devanagari",
+          "Classifier for pleadings, affidavits, exhibits and orders",
+          "Page-level text store"
+        ]
+      },
+      {
+        "name": "Extraction and analysis",
+        "components": [
+          "Event, date and amount extractor",
+          "Party and witness resolver",
+          "Contradiction detector"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Verification screen with source page view",
+          "Associate edits and notes"
+        ]
+      },
+      {
+        "name": "Output",
+        "components": [
+          "List of dates and events in Word",
+          "Document index and issue summaries",
+          "Version history as the file grows"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Matter folder and DMS\"]\n    I2[\"Court downloads\"]\n  end\n  subgraph S2[\"Document processing\"]\n    P1[\"OCR English and Hindi\"]\n    P2[\"Document classifier\"]\n    P3[\"Page text store\"]\n  end\n  subgraph S3[\"Extraction and analysis\"]\n    X1[\"Event and date extractor\"]\n    X2[\"Party and witness index\"]\n    X3[\"Contradiction detector\"]\n  end\n  subgraph S4[\"Review and output\"]\n    R1(\"Associate verification\")\n    R2[\"Chronology and index export\"]\n  end\n  I1 --> P1\n  I2 --> P1\n  P1 --> P2\n  P2 --> P3\n  P3 --> X1\n  P3 --> X2\n  X1 --> X3\n  X2 --> X3\n  X3 --> R1\n  X1 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Pleadings: plaint or petition, written statement, replication and rejoinder",
+    "Affidavits of evidence and witness statements",
+    "Exhibits and correspondence",
+    "Interim orders and order sheets",
+    "Matter details: parties, court and case number"
+  ],
+  "outputs": [
+    "Document index with type, date and filing party",
+    "List of dates and events with page citations",
+    "Party, witness and entity index",
+    "Issue-wise summaries for counsel",
+    "Contradiction list for review"
+  ],
+  "human_in_the_loop": "Associates verify every flagged entry, and a sample of the rest, before the chronology is used, and counsel decide what any contradiction means for the case. Summaries are working notes for lawyers, not opinions.",
+  "integrations": [
+    "Document management system",
+    "Matter or practice management software",
+    "Microsoft Word for exports",
+    "Court e-filing downloads",
+    "Secure cloud storage per matter"
+  ],
+  "guardrails": [
+    "Every chronology entry cites a document and page",
+    "Low-confidence OCR text visibly marked",
+    "Contradictions presented as questions for counsel, not conclusions",
+    "Matter-level access controls with no cross-matter retrieval",
+    "Documents not used to train models"
+  ],
+  "compliance_notes": [
+    "Case files contain personal and sometimes sensitive data of parties and witnesses; designed to support DPDP Act 2023 safeguards.",
+    "Internal notes and drafts are stored separately from the evidence index to help protect privileged work."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Two or three closed or consented matters of different sizes, with chronologies compared against ones your team has already prepared.",
+    "deliverables": [
+      "Document types and chronology format agreed with your litigation team",
+      "Indexed files and chronologies for the pilot matters",
+      "Verification screen",
+      "Comparison report against your existing chronologies",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Event recall",
+        "how": "Events in your existing chronology that the system also captured."
+      },
+      {
+        "metric": "Citation accuracy",
+        "how": "Entries whose cited page actually supports the event, from associate checks."
+      },
+      {
+        "metric": "OCR quality on Hindi and handwritten pages",
+        "how": "Character error rate on a sample of pages, by script and source."
+      },
+      {
+        "metric": "Associate time to a usable chronology",
+        "how": "Time spent verifying and editing, compared with building one from scratch."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read handwritten district court order sheets?",
+      "a": "Often, but not always. Handwritten notings are read where legible and marked with lower confidence; illegible pages are flagged so an associate can transcribe them."
+    },
+    {
+      "q": "Is the summary a legal opinion?",
+      "a": "No. It is a working summary of what the documents say, with citations, to help counsel prepare. Analysis and advice stay with the lawyers."
+    },
+    {
+      "q": "How do we handle new filings mid-case?",
+      "a": "Add them to the matter folder. The index, chronology and contradiction list are updated, and changes since the last version are highlighted."
+    },
+    {
+      "q": "Where is the data stored?",
+      "a": "In your environment or a chosen India region, with access restricted to the matter team. Models do not train on your files."
+    }
+  ],
+  "related": [
+    "hearing-transcription-and-minutes",
+    "legal-research-with-citation-checking",
+    "court-order-and-cause-list-tracking",
+    "due-diligence-data-room-review"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/legal/case-file-summarisation-and-chronology/"
+}

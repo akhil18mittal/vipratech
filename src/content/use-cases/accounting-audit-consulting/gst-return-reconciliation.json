@@ -1,0 +1,223 @@
+{
+  "slug": "gst-return-reconciliation",
+  "industry": "accounting-audit-consulting",
+  "title": "GST Return Reconciliation (GSTR-2B vs Books)",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Match GSTR-2B and 2A data against the purchase register invoice by invoice, find ITC at risk before GSTR-3B is filed, and draft supplier follow-ups for approval.",
+  "seo": {
+    "title": "GSTR-2B vs Purchase Register Reconciliation | VipraTech",
+    "description": "AI reconciliation of GSTR-2B and GSTR-2A against the purchase register: normalised invoice matching, ITC-at-risk reports and supplier follow-ups.",
+    "keywords": [
+      "GSTR-2B reconciliation",
+      "GSTR-2B vs purchase register",
+      "ITC reconciliation software",
+      "GST reconciliation for CA firms",
+      "GSTR-2A matching"
+    ]
+  },
+  "designed_for": [
+    "Partner, GST Practice",
+    "Indirect Tax Manager",
+    "Accounts Payable Lead",
+    "CFO of a multi-GSTIN business"
+  ],
+  "problem": {
+    "intro": "Before filing GSTR-3B each month, someone downloads GSTR-2B for every GSTIN and compares it with the purchase register. Input tax credit depends on suppliers reporting invoices correctly, so differences in invoice numbers, GSTINs, dates or tax heads turn directly into credit that is deferred, reversed or questioned later in an ASMT-10 scrutiny notice or a DRC-01C intimation.",
+    "pain_points": [
+      {
+        "title": "Invoice numbers never match exactly",
+        "detail": "INV/24-25/0045 in the books is 45 or INV0045 in GSTR-2B, so lookups fail and juniors match lines by eye."
+      },
+      {
+        "title": "Volume across GSTINs and clients",
+        "detail": "Firms run this for many clients and registrations against the same monthly deadline, and the reconciliation gets squeezed."
+      },
+      {
+        "title": "Supplier follow-up is manual",
+        "detail": "Emails to suppliers who missed GSTR-1, used the wrong GSTIN or reported the wrong period are drafted one by one and tracked in a spreadsheet."
+      },
+      {
+        "title": "Decisions are not recorded",
+        "detail": "When a notice arrives months later, it is hard to show why credit was claimed or deferred for a particular invoice."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a GST reconciliation engine that takes GSTR-2B and, where needed, GSTR-2A files for each GSTIN, downloaded from the portal or fetched through your GSP, and reconciles them against the purchase register from the books. It normalises invoice numbers, GSTINs, dates and tax heads, then matches in passes: exact, normalised invoice number, value and date within tolerance, and one-to-many for split or consolidated invoices. Where only invoice PDFs exist, the document layer extracts the fields first. Every line lands in a category, such as matched, value mismatch, in books but not in 2B, or wrong GSTIN. The accountant decides ITC treatment, and supplier follow-ups are drafted for approval.",
+    "capabilities": [
+      "Imports GSTR-2B and GSTR-2A JSON or Excel files per GSTIN, plus purchase register exports",
+      "Invoice-number normalisation for prefixes, financial-year tags, separators and leading zeros",
+      "Tolerance-based matching on taxable value, IGST, CGST and SGST split, and invoice dates",
+      "Extracts fields from purchase invoice PDFs where the register is incomplete",
+      "Categorised mismatch report with ITC-at-risk summary by supplier",
+      "Drafts supplier follow-up emails and carries open items into the next month"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load 2B and the purchase register",
+      "detail": "GSTR-2B files for each GSTIN and the purchase register for the same period are imported side by side."
+    },
+    {
+      "step": 2,
+      "title": "Normalise fields",
+      "detail": "Invoice numbers, GSTINs, dates and tax heads are cleaned so formatting differences do not block matches."
+    },
+    {
+      "step": 3,
+      "title": "Match in passes",
+      "detail": "Exact, normalised, tolerance and one-to-many passes run in order, each match tagged with the rule that produced it."
+    },
+    {
+      "step": 4,
+      "title": "Review mismatches",
+      "detail": "Low-confidence matches and mismatched lines go to the tax associate, who confirms the category."
+    },
+    {
+      "step": 5,
+      "title": "Decide ITC and follow up",
+      "detail": "The GST manager decides whether credit is claimed, deferred or reversed, and approves supplier emails."
+    },
+    {
+      "step": 6,
+      "title": "Report for GSTR-3B",
+      "detail": "An ITC working and supplier-wise open items are produced for return preparation and carried forward."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"GSTR-2B files per GSTIN\"] --> C[\"Normalise invoice, GSTIN, tax heads\"]\n  B[\"Purchase register from books\"] --> C\n  C --> D[\"Match in passes with tolerances\"]\n  D --> E{\"Matched with high confidence?\"}\n  E -->|\"yes\"| F[\"ITC eligible summary\"]\n  E -->|\"no\"| G(\"Tax associate reviews mismatch\")\n  G --> H(\"Manager decides ITC and follow-up\")\n  F --> I[\"Working for GSTR-3B preparation\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data intake",
+        "components": [
+          "GST portal JSON and Excel import",
+          "Optional GSP API connector",
+          "Purchase register import from the books"
+        ]
+      },
+      {
+        "name": "Normalisation",
+        "components": [
+          "Invoice number normaliser",
+          "GSTIN format, checksum and state-code validation",
+          "Tax-head mapping"
+        ]
+      },
+      {
+        "name": "Matching",
+        "components": [
+          "Pass-based matcher with client tolerances",
+          "Invoice PDF extractor for register gaps",
+          "Mismatch categoriser"
+        ]
+      },
+      {
+        "name": "Review and action",
+        "components": [
+          "Mismatch workbench for tax associates",
+          "ITC decision log",
+          "Supplier email drafts"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "GSTR-3B ITC working",
+          "Supplier-wise ageing of open items"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data intake\"]\n    G1[\"GSTR-2B and 2A import\"]\n    G2[\"Purchase register import\"]\n    G3[\"Invoice PDF extractor\"]\n  end\n  subgraph S2[\"Normalisation\"]\n    N1[\"Invoice number normaliser\"]\n    N2[\"GSTIN and tax-head validation\"]\n  end\n  subgraph S3[\"Matching\"]\n    M1[\"Pass-based matcher with tolerances\"]\n    M2[\"Mismatch categoriser\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    R1(\"Tax associate workbench\")\n    R2[\"ITC decision log\"]\n    R3[\"Supplier email drafts\"]\n    R4[\"GSTR-3B working report\"]\n  end\n  G1 --> N1\n  G2 --> N1\n  G3 --> N1\n  N1 --> N2 --> M1 --> M2\n  M2 --> R1\n  M2 --> R4\n  R1 --> R2\n  R1 --> R3\n  R2 --> R4"
+  },
+  "inputs": [
+    "GSTR-2B and GSTR-2A downloads per GSTIN",
+    "Purchase register or ledger export",
+    "Purchase invoice PDFs where needed",
+    "Vendor master with GSTINs and contacts",
+    "Open items carried forward from earlier months"
+  ],
+  "outputs": [
+    "Line-level reconciliation with mismatch category",
+    "ITC-at-risk summary by supplier",
+    "Working for the ITC section of GSTR-3B",
+    "Supplier follow-up email drafts",
+    "Decision log for audit and notice replies"
+  ],
+  "human_in_the_loop": "The tax associate confirms low-confidence matches, and the GST manager or partner decides whether each disputed credit is claimed, deferred or reversed. Supplier emails are sent only after a person approves them.",
+  "integrations": [
+    "GST portal downloads or a GSP API",
+    "Tally Prime, Zoho Books or SAP",
+    "Gmail or Outlook for supplier follow-ups",
+    "Practice management software",
+    "Excel templates used for return preparation"
+  ],
+  "guardrails": [
+    "GSTIN format and checksum validation before matching",
+    "Tolerances set per client and logged with each match",
+    "No automatic ITC decisions; a named person records each one",
+    "Open items carried forward so nothing drops out between months",
+    "Totals tied back to the GSTR-2B summary and the books"
+  ],
+  "compliance_notes": [
+    "Under GST, input tax credit generally depends on the supplier reporting the invoice so that it appears in the recipient's GSTR-2B; the tool helps you evidence that check, while eligibility decisions stay with the tax professional.",
+    "The decision log supports replies to scrutiny notices by showing what was matched, by which rule, and who decided."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Two or three GSTINs over the last three return periods, reconciled in parallel with your existing process.",
+    "deliverables": [
+      "Normalisation and matching rules tuned to the pilot clients",
+      "Reconciliation output in your format",
+      "Mismatch workbench and decision log",
+      "Comparison report against your manual reconciliation",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with manual reconciliation",
+        "how": "Line-by-line comparison of match categories with the team's completed reconciliations."
+      },
+      {
+        "metric": "Additional mismatches found",
+        "how": "Count of discrepancies the manual process missed, as confirmed by the tax associate."
+      },
+      {
+        "metric": "Preparation time per GSTIN",
+        "how": "Hands-on time per GSTIN per month, compared with the current process."
+      },
+      {
+        "metric": "Supplier follow-up closure",
+        "how": "Open items resolved in the following month after supplier emails were sent."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need GSP or API access to the GST portal?",
+      "a": "No. The engine works with GSTR-2B and GSTR-2A files downloaded from the portal. If you already use a GSP, we can fetch the same data through it to save the download step."
+    },
+    {
+      "q": "How does it deal with different invoice number formats?",
+      "a": "It normalises prefixes, financial-year tags, separators and leading zeros before matching, then applies amount and date tolerances you set for each client. Every match shows which rule produced it."
+    },
+    {
+      "q": "Can it file GSTR-3B or claim ITC for us?",
+      "a": "No. It prepares the reconciliation and the ITC working. The decision to claim, defer or reverse credit and the filing itself stay with your team."
+    },
+    {
+      "q": "We handle many clients. Is data kept separate?",
+      "a": "Yes. Each client and GSTIN is a separate workspace with its own access controls, tolerances and history, so carry-forward items and decisions never mix across clients."
+    }
+  ],
+  "related": [
+    "bank-and-ledger-reconciliation",
+    "tax-document-extraction",
+    "audit-sampling-and-vouching",
+    "invoice-and-gst-data-extraction"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/gst-return-reconciliation/"
+}

@@ -1,0 +1,227 @@
+{
+  "slug": "visual-quality-inspection",
+  "industry": "manufacturing",
+  "title": "Visual Quality Inspection on Production Lines",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Cameras and vision models at the inspection station flag scratches, dents, missing features and print errors, divert clear rejects and hold borderline parts for an inspector.",
+  "seo": {
+    "title": "AI Visual Inspection for Production Lines | VipraTech",
+    "description": "Vision models at the line flag surface defects, missing features and print errors, divert rejects via the PLC and hold borderline parts for inspectors.",
+    "keywords": [
+      "AI visual inspection",
+      "automated defect detection",
+      "machine vision quality control",
+      "end of line inspection AI",
+      "surface defect detection"
+    ]
+  },
+  "designed_for": [
+    "Plant Head",
+    "Quality Head",
+    "Line Quality Engineer",
+    "Manufacturing Engineering Manager"
+  ],
+  "problem": {
+    "intro": "Most plants still rely on inspectors at the end of the line, checking parts under a lamp against limit samples. It works until volumes rise, shifts change or a new variant arrives, and then defects reach the customer's incoming inspection.",
+    "pain_points": [
+      {
+        "title": "Inspector fatigue and drift",
+        "detail": "Detection of small scratches, burrs or short shots varies by inspector, by shift and by the hour of the shift."
+      },
+      {
+        "title": "Escapes found by the customer",
+        "detail": "Defects that slip through come back as line rejections, sorting at the customer's site and 8D reports that consume the quality team."
+      },
+      {
+        "title": "Brittle rule-based vision",
+        "detail": "Older vision systems tuned with fixed thresholds break with lighting changes, part variants and reflective surfaces, so operators put them in bypass."
+      },
+      {
+        "title": "No image record for traceability",
+        "detail": "When a complaint arrives, there is no picture of how that serial or batch looked when it left the line."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inspection station around your part: camera, lens, lighting and trigger chosen for the defect classes that matter, and models trained on your good parts and real defects. The model scores each part against your defect library and returns pass, fail or uncertain within the station's cycle time. Clear failures go to the NG bin through a PLC signal. Uncertain parts are held for an inspector instead of being passed. Every image is stored against the part serial or batch, so quality engineers get a defect Pareto by shift and a visual record for customer complaints.",
+    "capabilities": [
+      "Detects surface defects such as scratches, dents, porosity, burrs, paint runs and short shots",
+      "Checks presence and position of features such as holes, clips, fasteners, O-rings and labels",
+      "Reads printed date codes, batch numbers and part markings for legibility and correctness",
+      "Anomaly model trained on good parts to catch defect types not yet in the library",
+      "Sends reject signals to the PLC over digital I/O or OPC UA within the station cycle time",
+      "Stores every image with its verdict, part serial, model version and shift"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Trigger at the station",
+      "detail": "A photo-sensor or PLC signal fires the camera when the part is in position under controlled lighting."
+    },
+    {
+      "step": 2,
+      "title": "Capture images",
+      "detail": "One or more cameras capture the part from the agreed angles, with a quick check for blur or glare."
+    },
+    {
+      "step": 3,
+      "title": "Score against the defect library",
+      "detail": "Detection and anomaly models score the images for each defect class agreed with the quality team."
+    },
+    {
+      "step": 4,
+      "title": "Decide pass, fail or uncertain",
+      "detail": "Clear passes continue, clear fails are diverted to the NG bin, and anything in between is held."
+    },
+    {
+      "step": 5,
+      "title": "Inspector review of held parts",
+      "detail": "An inspector checks held parts at the rework station against limit samples and records the verdict."
+    },
+    {
+      "step": 6,
+      "title": "Log and trace",
+      "detail": "The image, verdict, part serial, model version and shift are written to the traceability store."
+    },
+    {
+      "step": 7,
+      "title": "Analyse and improve",
+      "detail": "Quality engineers review the defect Pareto, label new examples and approve model updates."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Part in position at station\"] --> B[\"Capture images under fixed lighting\"]\n  B --> C[\"Defect and anomaly models score\"]\n  C --> D{\"Confident pass or fail?\"}\n  D -->|\"pass\"| E[\"Part continues on line\"]\n  D -->|\"fail\"| F[\"PLC diverts part to NG bin\"]\n  D -->|\"uncertain\"| G(\"Inspector checks at rework station\")\n  E --> H[\"Log image, verdict and serial\"]\n  F --> H\n  G --> H\n  H --> I[\"Defect Pareto and model updates\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Industrial area-scan or line-scan cameras",
+          "Dome, ring or backlight chosen per defect type",
+          "PLC or photo-sensor trigger"
+        ]
+      },
+      {
+        "name": "Edge inference",
+        "components": [
+          "Industrial PC with GPU at the line",
+          "Defect detection and segmentation models",
+          "Anomaly model trained on good parts"
+        ]
+      },
+      {
+        "name": "Line integration",
+        "components": [
+          "Reject signal via digital I/O or OPC UA",
+          "Part serial or batch from MES or barcode scan"
+        ]
+      },
+      {
+        "name": "Review and labelling",
+        "components": [
+          "Inspector review screen at the rework station",
+          "Labelling tool and defect library with limit samples"
+        ]
+      },
+      {
+        "name": "Analytics and model operations",
+        "components": [
+          "Defect Pareto by shift, line and class",
+          "Model registry with versioning and rollback",
+          "Drift checks on lighting and image quality"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Industrial cameras\"]\n    C2[\"Controlled lighting\"]\n    C3[\"PLC or sensor trigger\"]\n  end\n  subgraph S2[\"Edge inference\"]\n    E1[\"Industrial PC with GPU\"]\n    E2[\"Defect and anomaly models\"]\n  end\n  subgraph S3[\"Line integration\"]\n    L1[\"Reject signal to PLC\"]\n    L2[\"Part serial from MES\"]\n  end\n  subgraph S4[\"Review and labelling\"]\n    R1(\"Inspector review screen\")\n    R2[\"Defect library and labels\"]\n  end\n  subgraph S5[\"Analytics and model ops\"]\n    A1[\"Defect Pareto dashboard\"]\n    A2[\"Model registry and drift checks\"]\n  end\n  C3 --> C1\n  C2 --> C1\n  C1 --> E1 --> E2\n  E2 --> L1\n  E2 --> R1\n  L2 --> A1\n  E2 --> A1\n  R1 --> R2 --> A2\n  A2 --> E2"
+  },
+  "inputs": [
+    "Images from line cameras at the inspection station",
+    "Golden samples and limit samples agreed with quality",
+    "Labelled defect images from past rejections and rework",
+    "Part serial or batch data from MES or barcode",
+    "Defect classes and acceptance criteria from the control plan"
+  ],
+  "outputs": [
+    "Pass, fail or hold verdict per part within the cycle time",
+    "Reject signal to the PLC for NG diversion",
+    "Image record per part serial with verdict and model version",
+    "Defect Pareto by class, shift and line",
+    "Labelled examples for the next model update"
+  ],
+  "human_in_the_loop": "Inspectors decide every part the model holds as uncertain, using the same limit samples they use today. Quality engineers approve each model update and any change to defect classes, and line-stop decisions stay with the shift supervisor.",
+  "integrations": [
+    "PLC via digital I/O, fieldbus gateway or OPC UA",
+    "MES or traceability system for part serials",
+    "SPC or quality management software",
+    "Plant network storage or a private cloud bucket for images",
+    "Andon or line display for alerts"
+  ],
+  "guardrails": [
+    "Uncertain parts are held for an inspector, never passed by default",
+    "Shift-start check with golden and known-defect samples",
+    "Model version recorded against every verdict, with rollback",
+    "Alerts when lighting, focus or camera position drifts",
+    "Camera framing limited to the part, not operators"
+  ],
+  "compliance_notes": [
+    "Inspection images and verdicts can serve as evidence for ISO 9001 and IATF 16949 traceability records; the quality system and its controls stay with you.",
+    "Cameras are framed on parts so the system does not process images of workers."
+  ],
+  "pilot": {
+    "duration": "4 to 6 weeks",
+    "scope": "One inspection station, one part family and the three to five defect classes that cause most rejections, run in shadow mode next to manual inspection.",
+    "deliverables": [
+      "Camera, lens and lighting specification for the station",
+      "Trained models for the agreed defect classes",
+      "Inspector review screen and image log",
+      "Comparison report against inspector verdicts on the same parts",
+      "Line roll-out plan with hardware and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Defect detection rate",
+        "how": "Share of inspector-confirmed defective parts that the model failed or held, on the same parts."
+      },
+      {
+        "metric": "False reject rate",
+        "how": "Good parts the model failed or held, confirmed by inspector re-check."
+      },
+      {
+        "metric": "Share of parts held for review",
+        "how": "Count of uncertain verdicts per shift, which drives inspector workload."
+      },
+      {
+        "metric": "Added time at the station",
+        "how": "Time from trigger to verdict, compared with the station's cycle time."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How many defect images do we need to start?",
+      "a": "Fewer than most teams expect, because the anomaly model learns from good parts and flags anything unusual. For each named defect class we collect real examples from rejection bins and rework during the pilot. Rare defects stay with the anomaly model and the inspector until enough examples exist."
+    },
+    {
+      "q": "Can it keep up with our line speed?",
+      "a": "The model runs on edge hardware next to the station, so there is no round trip to the cloud. We size the camera, lens and compute to your cycle time during the pilot and report the measured time per part."
+    },
+    {
+      "q": "Will it work on shiny, oily or dark parts?",
+      "a": "Reflective and oily surfaces are mostly a lighting problem. We choose dome, low-angle or polarised lighting for the defect type and test on your real parts before you commit to hardware."
+    },
+    {
+      "q": "Do our images leave the plant?",
+      "a": "Not unless you want them to. Inference and image storage can stay on the plant network, with only summary data sent to a dashboard. Model training can also run on-premise."
+    }
+  ],
+  "related": [
+    "supplier-quality-certificate-verification",
+    "engineering-drawing-and-spec-extraction",
+    "ppe-and-safety-zone-compliance",
+    "tablet-and-vial-defect-detection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/visual-quality-inspection/"
+}

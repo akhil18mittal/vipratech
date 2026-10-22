@@ -1,0 +1,221 @@
+{
+  "slug": "shelf-availability-and-planogram-compliance",
+  "industry": "retail-ecommerce",
+  "title": "Shelf Availability and Planogram Compliance",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Turn merchandiser and store shelf photos into SKU-level facings, out-of-stock gaps, price-label checks and planogram scores, with doubtful detections sent to a reviewer.",
+  "seo": {
+    "title": "Shelf Availability and Planogram Compliance AI | VipraTech",
+    "description": "AI reads shelf photos to count facings, spot out-of-stocks, check price labels and score planogram compliance for brands and retailers, with human review.",
+    "keywords": [
+      "planogram compliance AI",
+      "shelf image recognition",
+      "out of stock detection",
+      "retail execution audit",
+      "share of shelf measurement"
+    ]
+  },
+  "designed_for": [
+    "Head of Trade Marketing",
+    "Retail Execution Manager",
+    "Category Manager",
+    "Store Operations Head"
+  ],
+  "problem": {
+    "intro": "Brands pay for shelf space, end caps and chiller visibility, and retailers commit to planograms, but nobody can check every shelf every week. Merchandiser audits are sampled, slow to compile and hard to verify.",
+    "pain_points": [
+      {
+        "title": "Audits that are slow and sampled",
+        "detail": "Manual audits cover a fraction of stores, and results reach the category team weeks after the shelf has changed."
+      },
+      {
+        "title": "Unverifiable photos",
+        "detail": "Merchandisers upload photos from the app, but old images, reused shots and photos from the wrong store are hard to catch."
+      },
+      {
+        "title": "Look-alike packs",
+        "detail": "Pack sizes, flavours and new variants look similar, so manual counts of facings and share of shelf are inconsistent."
+      },
+      {
+        "title": "Paid visibility without proof",
+        "detail": "Display and visibility payments to retailers are made on claimed execution, with little photo evidence linked to each payout."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a shelf recognition system trained on your pack images, including variants and recent launches. Photos come from a merchandiser app or fixed shelf cameras. Each image first passes a quality and authenticity check for blur, angle, timestamp, location and duplicates, and a poor shot triggers an immediate retake. The model then detects each SKU, counts facings, finds gaps, reads shelf-edge price labels and compares the shelf with the planogram for that store. Low-confidence products go to a reviewer, whose labels improve the model. Category and sales teams get store scorecards and task lists.",
+    "capabilities": [
+      "Recognises your SKUs and key competitors' by pack, including size and flavour variants",
+      "Counts facings and share of shelf, and detects out-of-stock gaps",
+      "Compares the shelf with the store's planogram and lists misplaced or missing SKUs",
+      "Reads shelf-edge labels and flags price or MRP mismatches",
+      "Checks photo quality, timestamp, GPS and duplicates at capture, before the merchandiser leaves the store",
+      "Store scorecards and corrective tasks sent back to merchandisers and store managers"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture shelf photos",
+      "detail": "Merchandisers photograph bays in the app, or fixed cameras capture shelves on a schedule."
+    },
+    {
+      "step": 2,
+      "title": "Check image quality and authenticity",
+      "detail": "Blur, angle, timestamp, location and duplicate checks run at once, and poor images prompt a retake."
+    },
+    {
+      "step": 3,
+      "title": "Recognise SKUs and gaps",
+      "detail": "The model detects SKUs, counts facings, reads price labels and finds empty slots."
+    },
+    {
+      "step": 4,
+      "title": "Route low-confidence items",
+      "detail": "Products the model is unsure about go to a reviewer for labelling before they count."
+    },
+    {
+      "step": 5,
+      "title": "Compare with planogram",
+      "detail": "The shelf is compared with the planogram and visibility agreement for that store."
+    },
+    {
+      "step": 6,
+      "title": "Score and assign tasks",
+      "detail": "Store scores, out-of-stock lists and corrective tasks go to sales and store teams."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Shelf photo from app or camera\"] --> B{\"Image sharp and authentic?\"}\n  B -->|\"no\"| C[\"Prompt merchandiser to retake\"]\n  C --> A\n  B -->|\"yes\"| D[\"Detect SKUs, facings and gaps\"]\n  D --> E{\"All SKUs above confidence?\"}\n  E -->|\"no\"| F(\"Reviewer labels uncertain packs\")\n  E -->|\"yes\"| G[\"Compare with store planogram\"]\n  F --> G\n  G --> H[\"Store score and corrective tasks\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Merchandiser mobile app with guided capture",
+          "Fixed shelf cameras where installed",
+          "Store and visit metadata"
+        ]
+      },
+      {
+        "name": "Image checks",
+        "components": [
+          "Blur and angle quality gate",
+          "Timestamp, GPS and duplicate-image checks"
+        ]
+      },
+      {
+        "name": "Recognition",
+        "components": [
+          "SKU detection model trained on your packs",
+          "Price label OCR",
+          "Gap and facing counter"
+        ]
+      },
+      {
+        "name": "Compliance and review",
+        "components": [
+          "Planogram comparison engine",
+          "Reviewer labelling queue",
+          "Model retraining with confirmed labels"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Store and category scorecards",
+          "Task feed to the sales force or store app"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Merchandiser app\"]\n    C2[\"Fixed shelf cameras\"]\n  end\n  subgraph S2[\"Image checks\"]\n    Q1[\"Quality gate\"]\n    Q2[\"Authenticity checks\"]\n  end\n  subgraph S3[\"Recognition\"]\n    R1[\"SKU detection model\"]\n    R2[\"Price label OCR\"]\n  end\n  subgraph S4[\"Compliance and review\"]\n    P1[\"Planogram comparison\"]\n    P2(\"Reviewer labelling queue\")\n  end\n  subgraph S5[\"Reporting\"]\n    T1[\"Store scorecards\"]\n    T2[\"Corrective task feed\"]\n  end\n  C1 --> Q1\n  C2 --> Q1\n  Q1 --> Q2 --> R1\n  R1 --> R2\n  R1 --> P2\n  P2 --> R1\n  R2 --> P1\n  R1 --> P1\n  P1 --> T1\n  P1 --> T2"
+  },
+  "inputs": [
+    "Shelf photos from the merchandiser app or fixed cameras",
+    "Pack images for your SKUs and key competitors",
+    "Store-wise planograms and visibility agreements",
+    "Price lists and MRP master",
+    "Store master with location and visit schedule"
+  ],
+  "outputs": [
+    "SKU-level facings, share of shelf and out-of-stock list per store",
+    "Planogram compliance score with misplaced and missing SKUs",
+    "Price label mismatch flags",
+    "Photo authenticity flags for audit",
+    "Corrective tasks for merchandisers and store managers"
+  ],
+  "human_in_the_loop": "Reviewers label packs the model is unsure about, and new launches, before they count in scores. Area sales managers decide any visibility payout or penalty using the photo evidence; the system does not calculate payouts on its own.",
+  "integrations": [
+    "Sales force automation or merchandiser app",
+    "Planogram software or planogram files from category teams",
+    "DMS or retailer master for store lists",
+    "BI tools such as Power BI or Looker",
+    "Cloud storage for shelf images"
+  ],
+  "guardrails": [
+    "Image quality and authenticity gate at capture",
+    "Low-confidence detections excluded from scores until reviewed",
+    "Shopper faces blurred in stored images",
+    "Payouts and penalties never calculated without a manager's review"
+  ],
+  "compliance_notes": [
+    "Shoppers who appear in photos are blurred, supporting data minimisation under the DPDP Act 2023.",
+    "In-store photography follows the terms agreed with each retailer."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One category, such as biscuits or personal care, in twenty to thirty stores of one city, using merchandiser photos alongside the current manual audit.",
+    "deliverables": [
+      "SKU recognition model for the pilot category",
+      "Capture checks inside your merchandiser app or a pilot app",
+      "Store scorecards and task feed",
+      "Accuracy report against manual audits of the same shelves",
+      "Roll-out plan covering categories, cities and devices"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "SKU recognition accuracy",
+        "how": "Detections compared with a manual count on a sample of the same photos."
+      },
+      {
+        "metric": "Out-of-stock agreement",
+        "how": "Gaps flagged by the model compared with a physical audit in pilot stores."
+      },
+      {
+        "metric": "Photo rejection at capture",
+        "how": "Share of photos sent back for retake, by reason."
+      },
+      {
+        "metric": "Audit effort per store",
+        "how": "Time from visit to a completed store report, compared with the current process."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How many images of each SKU do you need?",
+      "a": "We start from your pack artwork and a set of real shelf photos for each SKU, then add examples as reviewers confirm uncertain detections. New launches are added the same way before they count in scores."
+    },
+    {
+      "q": "Does it work in general trade stores, not just modern trade?",
+      "a": "Yes, though kirana shelves are more crowded and less orderly. Guided capture in the app and clear rules on what counts, such as the brand's chiller or a specific bay, keep results consistent."
+    },
+    {
+      "q": "Can it run on low-end Android phones?",
+      "a": "Capture and quality checks run on the phone, while recognition runs in the cloud once the image uploads. Images queue offline and sync when the network returns."
+    },
+    {
+      "q": "Can we measure competitors too?",
+      "a": "Yes. Competitor packs can be added to the model for share-of-shelf measurement. Only what is visible on the shelf is measured."
+    }
+  ],
+  "related": [
+    "dark-store-picking-and-packing-qc",
+    "catalog-enrichment-from-product-images",
+    "distributor-trade-claims-settlement",
+    "pharmacy-shelf-and-expiry-monitoring"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/shelf-availability-and-planogram-compliance/"
+}

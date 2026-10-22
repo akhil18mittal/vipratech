@@ -1,0 +1,217 @@
+{
+  "slug": "field-technician-voice-reporting",
+  "industry": "energy-mining-utilities",
+  "title": "Field Technician Voice Reporting",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Linemen, fitters and plant technicians speak their job report in Hindi or a regional language, and the system turns it into a structured CMMS entry for supervisor approval.",
+  "seo": {
+    "title": "Field Technician Voice Reporting with AI | VipraTech",
+    "description": "Voice reporting for linemen and maintenance crews: speak in Hindi or a regional language, get structured job reports and spares entries for approval.",
+    "keywords": [
+      "field technician voice reporting",
+      "voice to work order",
+      "lineman job report app",
+      "maintenance report by voice",
+      "Hindi voice data entry"
+    ]
+  },
+  "designed_for": [
+    "Field Operations Manager",
+    "Junior Engineer or Maintenance Supervisor",
+    "Head of Operations and Maintenance",
+    "Control Room Shift Engineer"
+  ],
+  "problem": {
+    "intro": "After restoring a transformer, changing an idler or clearing a breakdown, technicians are expected to fill a job completion report, record spares used and note the cause. Gloves, poles, poor connectivity and small phone keyboards mean reports are written hours later from memory, if at all.",
+    "pain_points": [
+      {
+        "title": "Late reports written from memory",
+        "detail": "Restoration times, causes and readings are reconstructed at the end of the shift and often lose detail."
+      },
+      {
+        "title": "Free text nobody can analyse",
+        "detail": "Typed notes like 'fuse changed, ok now' cannot be trended to find repeat faults on the same asset."
+      },
+      {
+        "title": "Typing is impractical in the field",
+        "detail": "Technicians on poles, in conveyor galleries or wearing gloves cannot easily fill long mobile forms."
+      },
+      {
+        "title": "Spares used but not recorded",
+        "detail": "Materials drawn for a job are not booked against it, so store balances and job costs drift."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice reporting flow for the mobile app your crews already carry, or a phone number they can call. The technician speaks naturally in Hindi, Hinglish or a regional language, mixing in technical terms such as DT, HT fuse, ABC cable, isolator, idler or gearbox. Speech recognition tuned to that vocabulary produces a transcript, and a language model fills the report template: asset, complaint or work order number, fault, cause, action taken, spares used and restoration time. If a mandatory field is missing, the app asks for it by voice. Photos attach to the report, recordings queue offline, and a supervisor approves before anything updates the CMMS or store records.",
+    "capabilities": [
+      "Speech capture in Hindi, Hinglish and regional languages with domain vocabulary",
+      "Fills job completion, breakdown and outage restoration templates",
+      "Asks follow-up questions by voice for missing mandatory fields",
+      "Matches spoken asset names and spares to asset tags and store codes",
+      "Offline recording with automatic sync when the network returns",
+      "Supervisor approval queue with transcript, audio and photos side by side"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Record at job end",
+      "detail": "The technician opens the job in the app, or calls the reporting number, and describes the work by voice, attaching photos."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe",
+      "detail": "Speech recognition with your vocabulary produces a transcript and handles code-mixed speech."
+    },
+    {
+      "step": 3,
+      "title": "Fill the template",
+      "detail": "A language model maps the transcript to report fields and matches assets and spares to codes."
+    },
+    {
+      "step": 4,
+      "title": "Check completeness",
+      "detail": "If mandatory fields such as cause or restoration time are missing, the app asks for them by voice."
+    },
+    {
+      "step": 5,
+      "title": "Supervisor approval",
+      "detail": "The junior engineer or supervisor reviews the draft with audio and photos, then approves or returns it."
+    },
+    {
+      "step": 6,
+      "title": "Update systems",
+      "detail": "Approved reports update the work order in the CMMS, the outage record and spares consumption in stores."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Technician records voice note\"] --> B[\"Transcribe with domain vocabulary\"]\n  B --> C[\"Fill job report template\"]\n  C --> D{\"Mandatory fields complete?\"}\n  D -->|\"no\"| E[\"Voice prompt for missing details\"]\n  E --> B\n  D -->|\"yes\"| F(\"Supervisor reviews draft\")\n  F --> G{\"Approved?\"}\n  G -->|\"no\"| H(\"Returned to technician with notes\")\n  G -->|\"yes\"| I[\"Update CMMS, OMS and stores\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Mobile app with offline queue",
+          "Call-in reporting number",
+          "Photo attachment"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Speech recognition with custom vocabulary",
+          "Code-mixed language handling"
+        ]
+      },
+      {
+        "name": "Structuring",
+        "components": [
+          "LLM template filler",
+          "Asset and spares code matcher",
+          "Completeness checker"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Supervisor approval screen",
+          "CMMS and OMS adapter",
+          "Inventory system update"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    M1[\"Mobile app with offline queue\"]\n    M2[\"Call-in reporting number\"]\n  end\n  subgraph S2[\"Speech\"]\n    W1[\"Speech recognition\"]\n    W2[\"Custom vocabulary\"]\n  end\n  subgraph S3[\"Structuring\"]\n    F1[\"Template filler\"]\n    F2[\"Asset and spares matcher\"]\n    F3[\"Completeness checker\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Supervisor approval\")\n    R2[\"CMMS and OMS adapter\"]\n    R3[\"Inventory update\"]\n  end\n  M1 --> W1\n  M2 --> W1\n  W2 --> W1\n  W1 --> F1\n  F1 --> F2\n  F2 --> F3\n  F3 --> M1\n  F3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Voice notes or calls from technicians",
+    "Photos of the asset before and after the job",
+    "Work order or complaint number",
+    "Asset register and spares catalogue with store codes",
+    "Report templates and mandatory fields"
+  ],
+  "outputs": [
+    "Structured job completion and breakdown reports",
+    "Outage restoration times recorded against complaints",
+    "Spares consumption entries for stores",
+    "Searchable transcripts and audio",
+    "List of reports returned for correction"
+  ],
+  "human_in_the_loop": "A supervisor or junior engineer approves every report before it updates the CMMS, outage records or inventory. Permit-to-work closure and line clearance remain with the authorised person under your existing procedure; the system only drafts the report.",
+  "integrations": [
+    "SAP PM, IBM Maximo or another CMMS",
+    "Outage management system",
+    "ERP stores module such as SAP MM",
+    "Existing workforce mobile app",
+    "Microsoft Teams or WhatsApp for supervisor notifications"
+  ],
+  "guardrails": [
+    "Never closes a permit-to-work or declares equipment safe",
+    "Asks rather than guesses when a field is unclear",
+    "Asset and spares matches shown with alternatives for confirmation",
+    "Audio retained only for the period your policy sets",
+    "Supervisor edits logged against each report"
+  ],
+  "compliance_notes": [
+    "Permit-to-work and line clearance follow your safety rules and CEA safety regulations; voice reports do not change those steps.",
+    "Worker voice recordings are personal data and are handled with notice and retention limits under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One maintenance crew or subdivision and two report types, such as breakdown restoration and preventive maintenance completion, in Hindi plus the local language.",
+    "deliverables": [
+      "Vocabulary list and templates agreed with supervisors",
+      "Voice reporting in the pilot app or a call-in number",
+      "Supervisor approval screen",
+      "Transcription and field accuracy report",
+      "Integration plan for the CMMS and stores"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "First-submission completeness",
+        "how": "Share of reports with all mandatory fields filled when first submitted."
+      },
+      {
+        "metric": "Supervisor edits",
+        "how": "Number of fields changed by supervisors per report."
+      },
+      {
+        "metric": "Domain term accuracy",
+        "how": "Transcription accuracy on a sample containing asset and spares terms."
+      },
+      {
+        "metric": "Report delay",
+        "how": "Time from job completion to submitted report, compared with current practice."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it work in noisy places like substations and conveyor galleries?",
+      "a": "We test on recordings from your sites and tune for background noise. Short follow-up questions help where a phrase was not caught, and the technician can always type a correction."
+    },
+    {
+      "q": "What if there is no network on site?",
+      "a": "Recordings are stored on the phone and processed when the network returns. The technician gets any follow-up questions then, while the job is still fresh."
+    },
+    {
+      "q": "Which languages are supported?",
+      "a": "Hindi and Hinglish, plus regional languages such as Marathi, Gujarati, Odia, Bengali, Telugu or Tamil depending on your crews. Technical terms in English are handled within the same sentence."
+    },
+    {
+      "q": "Does this replace our permit-to-work system?",
+      "a": "No. Permit issue, isolation and closure stay in your existing process. The voice report records what was done once the job is complete."
+    }
+  ],
+  "related": [
+    "inspection-and-maintenance-report-extraction",
+    "meter-reading-from-photos",
+    "conveyor-and-equipment-anomaly-detection",
+    "mr-call-reporting-by-voice"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/field-technician-voice-reporting/"
+}

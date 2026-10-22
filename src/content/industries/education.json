@@ -1,0 +1,125 @@
+{
+  "slug": "education",
+  "name": "Education & Coaching",
+  "seo": {
+    "title": "AI for Education & Coaching: Exams, Admissions | VipraTech",
+    "description": "AI for coaching institutes, schools and universities: OMR and answer sheet checking, admission documents, enquiry voice agents and parent updates.",
+    "keywords": [
+      "AI for coaching institutes",
+      "OMR sheet evaluation software",
+      "admission document verification AI",
+      "education voice agent Hindi",
+      "AI tutor safety testing",
+      "parent WhatsApp progress updates",
+      "question bank tagging AI"
+    ]
+  },
+  "hero": {
+    "headline": "Clear exam, admission and parent-update backlogs with AI, while teachers stay in charge",
+    "subheadline": "We build document, vision, voice and outreach systems for coaching institutes, schools, universities and edtech companies. Each one prepares the work and flags exceptions; faculty, exam cells and counsellors make the decisions."
+  },
+  "intro": "Education runs on paper and conversations at a scale few sectors match: OMR sheets from weekly tests, handwritten answer booklets, admission files full of mark sheets and certificates, and thousands of calls and WhatsApp messages from parents. AI helps today where the task is repetitive and checkable: reading bubbles and marks grids, transcribing answers, tagging question banks, checking documents against eligibility rules and answering routine admission and fee queries in Hindi and English. It does not replace an examiner's judgement, a counsellor's conversation with an anxious family or a teacher's knowledge of a student. Most learners are minors, so we treat student records as children's data: collected with parental consent, minimised, and never used for profiling or targeted advertising.",
+  "challenges": [
+    {
+      "title": "Evaluation load after every test",
+      "detail": "Kota-style institutes run weekly and fortnightly tests across many batches, and schools and universities face term-end evaluation peaks. Results, totals and re-check requests all land on a small exam cell."
+    },
+    {
+      "title": "Admission season compresses months into weeks",
+      "detail": "Enquiry calls, document verification and counselling-round reporting all peak together, and missed calls or slow verification cost seats and goodwill."
+    },
+    {
+      "title": "Parents expect timely, personal updates",
+      "detail": "Families want attendance, test performance and fee status on WhatsApp in their own language, but mentors cannot write hundreds of individual messages after each test."
+    },
+    {
+      "title": "Student data is children's data",
+      "detail": "Most learners are under 18, so consent, data minimisation and care around monitoring are not optional, and any AI tutor or proctoring tool must be safe for young users."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "computer-vision",
+      "summary": "Reads OMR bubbles and handwritten marks grids from ordinary scans and phone photos, and flags remote-test proctoring events for human review instead of disqualifying candidates."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Transcribes handwritten answers, structures and tags question banks, and checks mark sheets, transfer certificates and category certificates against admission rules."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Answers admission and fee calls in Hindi, Hinglish and English from approved prospectus and fee data, and hands families to a counsellor or the accounts office when needed."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Tests student-facing AI tutors for unsafe content, jailbreaks, confidently wrong solutions and leakage of other students' data, before launch and after every major change."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Nurtures counselling leads through guardians and adult learners, and sends parents progress updates on WhatsApp with consent, frequency caps and mentor review for sensitive cases."
+    }
+  ],
+  "featured_use_cases": [
+    "answer-sheet-and-omr-evaluation",
+    "question-bank-tagging-and-generation",
+    "admission-enquiry-voice-agent"
+  ],
+  "use_cases": [
+    "answer-sheet-and-omr-evaluation",
+    "online-test-proctoring-assistance",
+    "handwritten-answer-digitisation",
+    "question-bank-tagging-and-generation",
+    "admission-document-verification",
+    "admission-enquiry-voice-agent",
+    "fee-reminder-voice-and-whatsapp-agent",
+    "student-ai-tutor-safety-testing",
+    "counselling-funnel-lead-nurture",
+    "parent-progress-update-automation"
+  ],
+  "regulatory_context": [
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Treats anyone under 18 as a child, requires verifiable parental consent before processing a child's personal data, and restricts tracking, behavioural monitoring and targeted advertising directed at children."
+    },
+    {
+      "name": "TRAI commercial communication rules",
+      "note": "Admission calls, promotional SMS and fee reminders sent by voice or SMS must follow India's registration, template and customer-preference requirements, which treat promotional and service messages differently."
+    },
+    {
+      "name": "Ministry of Education guidelines for coaching centres (2024)",
+      "note": "Address misleading claims about results, student wellbeing, counselling and fee refunds, with implementation through state governments. AI-written outreach and voice scripts should meet the same standard."
+    },
+    {
+      "name": "GDPR and FERPA for overseas students",
+      "note": "Institutions and edtech platforms serving students in Europe or the US may also fall under GDPR or the US FERPA rules on education records, so data flows should be designed to evidence both."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Will AI give marks or decide results?",
+      "a": "No. The systems read, transcribe, total and flag. Marks, results, answer-key challenges and any disciplinary decision stay with faculty and the exam cell, and every AI output can be traced to the original sheet or recording."
+    },
+    {
+      "q": "How do you handle children's data?",
+      "a": "We collect only what the workflow needs, rely on parental consent for students under 18 and keep data in your cloud account or an India region. We avoid behavioural profiling and targeted advertising aimed at children, and retention periods agreed with you are enforced in the system."
+    },
+    {
+      "q": "Do the voice and WhatsApp agents work in Hindi and regional languages?",
+      "a": "Yes. We build for Hindi, Hinglish and English first and add regional languages such as Marathi, Bengali, Tamil or Telugu based on your student mix. The pilot tests language quality with real parent and student conversations."
+    },
+    {
+      "q": "Can this connect to our ERP, LMS or test platform?",
+      "a": "Usually, yes, through APIs, scheduled exports or Excel and CSV imports. We agree formats with your IT or academic operations team in the first week of the pilot."
+    }
+  ],
+  "related_industries": [
+    "saas-ai-companies",
+    "telecom-contact-centers",
+    "fintech-payments"
+  ],
+  "cta": {
+    "headline": "Start with one test cycle or one admission season",
+    "text": "Tell us where the backlog is worst, whether that is test evaluation, admission documents or parent calls. We will scope a short pilot on your own data and walk you through what it found before any wider roll-out."
+  },
+  "url": "/industries/education/"
+}

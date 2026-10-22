@@ -1,0 +1,225 @@
+{
+  "slug": "emi-reminder-voice-and-whatsapp-agent",
+  "industry": "nbfc-lending",
+  "title": "EMI Reminder and Payment-Link Agent (Voice + WhatsApp)",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Pre-due EMI reminders and bounce follow-ups by WhatsApp and voice in the borrower's language, with UPI payment links, mandate help and receipts, before accounts reach collections.",
+  "seo": {
+    "title": "EMI Reminder Agent on WhatsApp and Voice | VipraTech",
+    "description": "AI agent that sends EMI reminders by WhatsApp and voice in Hindi and regional languages, shares UPI payment links, handles bounces and confirms payments.",
+    "keywords": [
+      "EMI reminder WhatsApp bot",
+      "EMI reminder voice call AI",
+      "NACH bounce follow-up",
+      "UPI payment link loan EMI",
+      "pre-due reminder automation NBFC"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Service",
+    "Head of Collections",
+    "Digital Channels Manager",
+    "Branch Operations Head"
+  ],
+  "problem": {
+    "intro": "Many missed EMIs are not about unwillingness to pay: a low balance on the debit date, a mandate that failed to register, a changed bank account or a simple lapse of memory. A timely reminder in the borrower's language, with a way to pay at once, can stop some of these accounts from ever reaching a collector.",
+    "pain_points": [
+      {
+        "title": "Generic SMS reminders",
+        "detail": "English SMS reminders are ignored or misunderstood by borrowers who prefer Hindi or a regional language."
+      },
+      {
+        "title": "Bounces discovered after the fact",
+        "detail": "When a NACH debit is returned, borrowers often do not know until a collector calls, and bounce charges add friction."
+      },
+      {
+        "title": "Mandate and account problems",
+        "detail": "Failed mandate registrations and changed bank accounts need a guided fix, which branch staff handle one call at a time."
+      },
+      {
+        "title": "No two-way conversation",
+        "detail": "One-way messages cannot answer simple questions about the amount due, charges or how to pay, so borrowers call or visit the branch instead."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reminder agent that works on WhatsApp and by voice, chosen per borrower from consent, preference and past responses. Before the due date it sends a WhatsApp template reminder with the amount and date, and calls borrowers who do not read messages or have missed before. On a NACH or e-mandate return, it informs the borrower, explains charges from your schedule and shares a UPI payment link. It answers common questions from approved content, guides mandate re-registration through your existing link, confirms payments when the gateway reports them and sends a receipt. Anything outside its scope goes to customer service with the conversation history.",
+    "capabilities": [
+      "WhatsApp template reminders and two-way chat in English, Hindi and regional languages",
+      "Outbound reminder calls for borrowers who prefer voice or have missed before",
+      "NACH and e-mandate bounce notices with charges taken from the lender's schedule",
+      "UPI payment links and QR codes, with payment confirmation and receipts",
+      "Guided mandate re-registration and bank account change through the lender's existing journey",
+      "Channel and timing choice per borrower based on consent and response history"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Pick the cohort",
+      "detail": "Accounts due in the coming days, or with a fresh mandate return, are selected from the LMS with consent and language preferences."
+    },
+    {
+      "step": 2,
+      "title": "Choose channel and time",
+      "detail": "The agent selects WhatsApp, voice or both for each borrower, within permitted hours and frequency limits."
+    },
+    {
+      "step": 3,
+      "title": "Remind and inform",
+      "detail": "It sends the reminder or bounce notice with amount, date and charges from the lender's records."
+    },
+    {
+      "step": 4,
+      "title": "Answer and offer payment",
+      "detail": "It answers questions from approved content and shares a UPI payment link or a mandate fix link."
+    },
+    {
+      "step": 5,
+      "title": "Route exceptions",
+      "detail": "Disputes, hardship, complaints or unclear requests go to customer service with the conversation history."
+    },
+    {
+      "step": 6,
+      "title": "Confirm and record",
+      "detail": "Payments are confirmed from the gateway, receipts are sent and outcomes are written back to the LMS."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Due and bounced accounts from LMS\"] --> B[\"Choose WhatsApp or voice per borrower\"]\n  B --> C[\"Send reminder or bounce notice\"]\n  C --> D[\"Answer questions, share UPI link\"]\n  D --> E{\"Dispute, hardship or out of scope?\"}\n  E -->|\"yes\"| F(\"Customer service agent\")\n  E -->|\"no\"| G[\"Confirm payment and send receipt\"]\n  F --> H[\"Update LMS with outcome\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data and scheduling",
+        "components": [
+          "LMS due-date and mandate return feed",
+          "Consent and language preference store",
+          "Channel and timing selector"
+        ]
+      },
+      {
+        "name": "Channels",
+        "components": [
+          "WhatsApp Business API with approved templates",
+          "Outbound voice with Indian-language speech",
+          "SMS fallback"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "LLM dialogue manager limited to approved content",
+          "Intent and escalation detection"
+        ]
+      },
+      {
+        "name": "Payments",
+        "components": [
+          "UPI payment link and QR generator",
+          "Payment gateway status webhook",
+          "Receipt generator"
+        ]
+      },
+      {
+        "name": "Integration and reporting",
+        "components": [
+          "LMS write-back adapter",
+          "Customer service handover",
+          "Reminder outcome dashboard"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data and scheduling\"]\n    A1[\"LMS due and bounce feed\"]\n    A2[\"Consent and language store\"]\n    A3[\"Channel selector\"]\n  end\n  subgraph S2[\"Channels\"]\n    C1[\"WhatsApp Business API\"]\n    C2[\"Outbound voice\"]\n  end\n  subgraph S3[\"Conversation\"]\n    D1[\"Dialogue manager\"]\n    D2[\"Escalation detector\"]\n  end\n  subgraph S4[\"Payments and integration\"]\n    P1[\"UPI link and QR\"]\n    P2[\"Gateway webhook and receipts\"]\n    P3[\"LMS write-back\"]\n    P4(\"Customer service handover\")\n  end\n  A1 --> A3\n  A2 --> A3\n  A3 --> C1\n  A3 --> C2\n  C1 --> D1\n  C2 --> D1\n  D1 --> D2 --> P4\n  D1 --> P1 --> P2 --> P3"
+  },
+  "inputs": [
+    "Upcoming dues and mandate return data from the LMS",
+    "Borrower consent, language and channel preferences",
+    "Approved WhatsApp templates and voice scripts",
+    "Charges schedule and approved FAQ content",
+    "Payment gateway status events"
+  ],
+  "outputs": [
+    "Reminders and bounce notices delivered per channel",
+    "UPI payment links, confirmations and receipts",
+    "Mandate re-registration requests started",
+    "Escalations to customer service with context",
+    "Reminder outcome and payment reports"
+  ],
+  "human_in_the_loop": "Customer service staff take disputes, hardship cases, complaints and any request outside the approved scope. Collections and compliance teams approve templates, scripts and contact rules before use.",
+  "integrations": [
+    "Loan management system",
+    "WhatsApp Business API through an approved provider",
+    "Voice dialler or telephony provider",
+    "Payment gateway or UPI payment link provider",
+    "NACH and e-mandate management platform"
+  ],
+  "guardrails": [
+    "WhatsApp messages only to borrowers with recorded consent, using approved templates",
+    "Amounts and charges always read from the LMS, never generated by the model",
+    "Payment links only from the lender's gateway, never to personal accounts or third-party UPI IDs",
+    "Frequency caps and permitted hours per borrower",
+    "Opt-out from WhatsApp and calls honoured immediately"
+  ],
+  "compliance_notes": [
+    "Designed to support the RBI digital lending requirement that repayments go directly to the lender's account without third-party pool accounts, and DPDP Act 2023 consent requirements.",
+    "Reminder templates carry no promotional content; channel use follows WhatsApp policies and TRAI commercial communication rules."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Pre-due reminders and NACH bounce follow-ups for one product in two languages, compared with the current SMS reminder process on a matched group of accounts.",
+    "deliverables": [
+      "Approved templates, scripts and contact rules",
+      "Working WhatsApp and voice reminder agent",
+      "Payment link and receipt integration",
+      "Comparison report against current reminders",
+      "Plan for further products and languages"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "On-time payment against control",
+        "how": "Payment by the due date for borrowers reached by the agent, compared with a matched group on current reminders."
+      },
+      {
+        "metric": "Bounce cure before collections",
+        "how": "Bounced accounts paid before moving to the collections queue, compared with the control group."
+      },
+      {
+        "metric": "Engagement by channel and language",
+        "how": "WhatsApp replies and call connects by language, tracked for each cohort."
+      },
+      {
+        "metric": "Escalations and opt-outs",
+        "how": "Escalations, complaints and opt-outs per contact, with reasons."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Why both WhatsApp and voice?",
+      "a": "Borrowers differ. Some read and reply on WhatsApp, others need a call, and some do not use a smartphone. The agent chooses per borrower and learns from who responds where."
+    },
+    {
+      "q": "Can borrowers pay from within WhatsApp?",
+      "a": "They receive a UPI link or QR code from your payment gateway, which opens their UPI app. Payment goes directly to your collection account, and the agent confirms it when the gateway reports success."
+    },
+    {
+      "q": "How is this different from a collections agent?",
+      "a": "This agent is a service touch before and just after a missed debit, focused on information and easy payment. Accounts overdue beyond the stage you define move to the collections workflow and its stricter conduct controls."
+    },
+    {
+      "q": "Do we need new WhatsApp templates?",
+      "a": "Usually yes. We draft utility templates with your team for approval through your WhatsApp provider, in each language you need."
+    }
+  ],
+  "related": [
+    "collections-voice-agent-with-conduct-guardrails",
+    "loan-lead-qualification-agent",
+    "collections-voice-agent-conduct-testing",
+    "fee-reminder-voice-and-whatsapp-agent"
+  ],
+  "proof_ref": "whatsapp-hotel-booking",
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/emi-reminder-voice-and-whatsapp-agent/"
+}

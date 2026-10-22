@@ -1,0 +1,125 @@
+{
+  "slug": "retail-ecommerce",
+  "name": "Retail, D2C & Quick Commerce",
+  "seo": {
+    "title": "AI for Retail, D2C & Quick Commerce | VipraTech",
+    "description": "AI for retailers, D2C brands and quick commerce: shelf and dark-store vision, claims and credit note reconciliation, COD calls and WhatsApp journeys.",
+    "keywords": [
+      "AI for retail",
+      "AI for D2C brands",
+      "quick commerce AI",
+      "planogram compliance AI",
+      "trade claims reconciliation",
+      "COD confirmation calls",
+      "retail AI India"
+    ]
+  },
+  "hero": {
+    "headline": "AI that checks shelves and packing stations, reconciles claims and confirms COD orders",
+    "subheadline": "We build vision, document, voice and WhatsApp systems for retailers, D2C brands and FMCG companies, connected to your OMS, WMS, ERP and DMS, with people approving the decisions that move money."
+  },
+  "intro": "Retail runs on thin margins and high volumes, which makes it a good fit for AI wherever the work is repetitive and checkable: reading shelf photos against a planogram, checking a tote before the bag is sealed, reconciling vendor credit notes and distributor scheme claims, confirming COD orders and answering where-is-my-order calls. It is a poor fit where the input data is wrong or the decision is commercial. A model cannot fix a broken item master, and it should not set prices, approve refunds or decide a distributor's claim on its own. The systems we build flag, match, draft and converse; your category, finance and CX teams decide.",
+  "challenges": [
+    {
+      "title": "Paperwork that leaks margin",
+      "detail": "Vendor credit notes, short-supply debit notes and distributor scheme claims are reconciled in spreadsheets, so money owed is missed and duplicate claims slip through."
+    },
+    {
+      "title": "Execution at the shelf and the packing station",
+      "detail": "Planograms drift, items go out of stock, and in a dark store a wrong variant or missing item becomes a refund within minutes."
+    },
+    {
+      "title": "COD, RTO and returns",
+      "detail": "Unconfirmed COD orders, incomplete addresses and avoidable returns cost shipping both ways and tie up inventory in transit."
+    },
+    {
+      "title": "Catalogue content at scale",
+      "detail": "Each marketplace and quick-commerce partner wants different attributes and images, and listing errors lead to rejections, poor search and compliance risk."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "computer-vision",
+      "summary": "Shelf photo audits against planograms, packing-station checks in dark stores and attribute extraction from product images."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Reconciling vendor invoices, credit notes and RTV documents, and settling distributor scheme claims against invoices and proofs."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Order status, returns and COD confirmation calls in Hindi, English and regional languages, connected to your OMS and courier data."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Guardrail and security testing for AI shopping assistants that can quote prices, apply coupons or look up orders."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Abandoned cart and win-back journeys on WhatsApp and email, and review insights that tell product teams what to fix."
+    }
+  ],
+  "featured_use_cases": [
+    "distributor-trade-claims-settlement",
+    "cod-confirmation-calls",
+    "dark-store-picking-and-packing-qc"
+  ],
+  "use_cases": [
+    "shelf-availability-and-planogram-compliance",
+    "dark-store-picking-and-packing-qc",
+    "catalog-enrichment-from-product-images",
+    "vendor-invoice-and-credit-note-reconciliation",
+    "distributor-trade-claims-settlement",
+    "order-status-and-returns-voice-agent",
+    "cod-confirmation-calls",
+    "shopping-assistant-guardrail-testing",
+    "abandoned-cart-and-win-back-automation",
+    "review-and-ugc-insights"
+  ],
+  "regulatory_context": [
+    {
+      "name": "Consumer Protection Act 2019 and E-Commerce Rules 2020 (India)",
+      "note": "Require e-commerce entities to disclose return, refund and grievance information and prohibit unfair trade practices. The CCPA guidelines on dark patterns (2023) also restrict false urgency and similar design tricks."
+    },
+    {
+      "name": "Legal Metrology (Packaged Commodities) Rules 2011 (India)",
+      "note": "Set mandatory declarations for pre-packaged goods, such as net quantity, MRP and manufacturer or importer details, which must also be displayed on e-commerce listings."
+    },
+    {
+      "name": "DPDP Act 2023 (India) and GDPR",
+      "note": "Customer phone numbers, addresses, call recordings and purchase history are personal data. Consent, purpose limitation and retention rules apply, and GDPR applies when you serve customers in the EU."
+    },
+    {
+      "name": "TRAI commercial-communication rules (TCCCPR 2018)",
+      "note": "Govern promotional calls and SMS in India, including registration of headers and templates on DLT platforms and respect for customer preferences."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "We are a D2C brand on Shopify. Is this only for large retailers?",
+      "a": "No. COD confirmation, order status calls, abandoned cart journeys and catalogue enrichment suit D2C brands well and connect to Shopify, WooCommerce or your OMS. Shelf audits and trade claims matter more to FMCG brands selling through distributors."
+    },
+    {
+      "q": "Can the voice agents speak regional languages?",
+      "a": "Yes. Hindi, English and Hinglish are standard, and we add Tamil, Telugu, Kannada, Marathi, Bengali or others based on your customer mix. We test with your real call recordings during the pilot."
+    },
+    {
+      "q": "Who approves refunds, claims and credit notes?",
+      "a": "Your team does. The systems prepare evidence, recalculate amounts and route exceptions; finance, CX and category teams make the decisions that move money."
+    },
+    {
+      "q": "How long does a pilot take?",
+      "a": "Most pilots run three to six weeks on one category, one store cluster, one claim type or one channel, alongside your current process. You get a measured report and a costed roll-out plan."
+    }
+  ],
+  "related_industries": [
+    "logistics-supply-chain",
+    "manufacturing",
+    "fintech-payments"
+  ],
+  "cta": {
+    "headline": "Pick one leak and measure it",
+    "text": "Book a discovery call. We will choose one narrow pilot, such as COD confirmation, one claim type or one dark store, run it alongside your current process and report what we measured."
+  },
+  "url": "/industries/retail-ecommerce/"
+}

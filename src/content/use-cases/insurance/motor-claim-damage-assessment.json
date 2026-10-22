@@ -1,0 +1,227 @@
+{
+  "slug": "motor-claim-damage-assessment",
+  "industry": "insurance",
+  "title": "Motor Claim Damage Assessment from Photos",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Detect damaged panels and damage types from guided claim photos, check them against the workshop estimate and pre-inspection images, and give surveyors a structured evidence pack.",
+  "seo": {
+    "title": "Motor Claim Damage Assessment from Photos | VipraTech",
+    "description": "Computer vision that detects vehicle damage from claim photos, checks workshop estimates and pre-inspection images, and prepares evidence for surveyors.",
+    "keywords": [
+      "motor claim damage assessment",
+      "vehicle damage detection AI",
+      "car insurance claim photos",
+      "motor surveyor tools",
+      "break-in inspection AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Motor Claims",
+    "Motor Surveyor and Loss Assessor",
+    "Motor Claims Desk Manager",
+    "Break-in Inspection Team Lead"
+  ],
+  "problem": {
+    "intro": "A motor own-damage claim usually starts with photos taken at the roadside or the garage, followed by a workshop estimate listing parts to replace and labour to charge. Surveyors compare the two, often across many claims a day, and decide what was damaged in this accident, what can be repaired and what was already there.",
+    "pain_points": [
+      {
+        "title": "Surveyor capacity is stretched",
+        "detail": "Surveyors travel between workshops and review photo sets remotely, and simple claims wait behind complex ones."
+      },
+      {
+        "title": "Estimates drift from the damage",
+        "detail": "Workshop estimates can include replacement of parts that look repairable or that show no visible damage in the photos."
+      },
+      {
+        "title": "Old damage and reused photos",
+        "detail": "Pre-existing dents, photos from a previous claim or images taken before the policy began are hard to catch without side-by-side comparison."
+      },
+      {
+        "title": "Poor photo sets cause rework",
+        "detail": "Blurred, dark or incomplete photos mean another visit or another request to the customer, which delays the repair."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a computer vision service that receives guided photos from your self-inspection app or a WhatsApp link, checks that they are usable and cover the required angles, and then detects vehicle parts and damage types such as dents, scratches, cracks, broken glass and deformation. Each damaged panel gets a severity estimate and a repair-or-replace suggestion. The service reads the workshop estimate and highlights lines with no matching visible damage, compares photos with pre-inspection or earlier-claim images to spot pre-existing damage, and checks image metadata for reuse. Surveyors receive a damage map and evidence pack and make the assessment.",
+    "capabilities": [
+      "Guided capture checks for blur, lighting, distance and required angles, with instant retake prompts",
+      "Detects vehicle parts and damage types per panel, with a severity estimate and confidence",
+      "Suggests repair or replace per part, using your surveyor guidelines as the reference",
+      "Reads the workshop estimate and flags parts or labour lines with no matching visible damage",
+      "Compares with pre-inspection and earlier claim photos to highlight pre-existing damage",
+      "Checks image metadata and near-duplicates to catch reused or out-of-period photos"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture guided photos",
+      "detail": "The customer, garage or field inspector follows an on-screen guide in the app or a WhatsApp link."
+    },
+    {
+      "step": 2,
+      "title": "Check photo quality",
+      "detail": "Blur, lighting and angle coverage are checked, and missing or unusable shots are requested again immediately."
+    },
+    {
+      "step": 3,
+      "title": "Detect parts and damage",
+      "detail": "Models identify panels and damage types and estimate severity for each."
+    },
+    {
+      "step": 4,
+      "title": "Compare with estimate and history",
+      "detail": "The workshop estimate, pre-inspection photos and earlier claims are compared with the detected damage."
+    },
+    {
+      "step": 5,
+      "title": "Flag mismatches",
+      "detail": "Estimate lines without visible damage, possible pre-existing damage and reuse signals are flagged."
+    },
+    {
+      "step": 6,
+      "title": "Surveyor assesses",
+      "detail": "The surveyor reviews the damage map and flags, then records the assessment in the motor claims system."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Guided photos from app or WhatsApp\"] --> B{\"Photos usable and complete?\"}\n  B -->|\"no\"| C[\"Retake prompt to customer\"]\n  C --> A\n  B -->|\"yes\"| D[\"Detect parts, damage and severity\"]\n  D --> E[\"Compare with estimate and history\"]\n  E --> F{\"Mismatches or reuse signals?\"}\n  F -->|\"yes\"| G(\"Surveyor reviews flagged lines\")\n  F -->|\"no\"| H(\"Surveyor confirms damage map\")\n  G --> I[\"Assessment recorded in claims system\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Self-inspection app SDK",
+          "WhatsApp Business capture link",
+          "On-device photo quality checks"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Part segmentation model",
+          "Damage type and severity model",
+          "Number plate, VIN and odometer reader"
+        ]
+      },
+      {
+        "name": "Comparison",
+        "components": [
+          "Workshop estimate extractor",
+          "Pre-inspection and prior claim image matching",
+          "Metadata and near-duplicate checks"
+        ]
+      },
+      {
+        "name": "Surveyor review",
+        "components": [
+          "Damage map and evidence pack",
+          "Flag review queue",
+          "Correction capture for model retraining"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "Motor claims system adapter",
+          "Parts catalogue and labour rate lookup"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    K1[\"App and WhatsApp capture\"]\n    K2[\"Photo quality checks\"]\n  end\n  subgraph S2[\"Vision models\"]\n    V1[\"Part segmentation\"]\n    V2[\"Damage and severity model\"]\n    V3[\"Plate, VIN and odometer reader\"]\n  end\n  subgraph S3[\"Comparison\"]\n    C1[\"Estimate extractor\"]\n    C2[\"History image matching\"]\n    C3[\"Metadata and reuse checks\"]\n  end\n  subgraph S4[\"Surveyor review and integration\"]\n    R1(\"Surveyor evidence pack\")\n    R2[\"Motor claims adapter\"]\n    R3[\"Corrections for retraining\"]\n  end\n  K1 --> K2\n  K2 --> V1\n  V1 --> V2\n  K2 --> V3\n  V2 --> C1\n  V2 --> C2\n  K2 --> C3\n  C1 --> R1\n  C2 --> R1\n  C3 --> R1\n  V3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Guided photos or short video of the damaged vehicle",
+    "Workshop repair estimate",
+    "RC, driving licence and policy details",
+    "Pre-inspection or break-in inspection photos",
+    "Claim intimation details: date, place and cause of loss",
+    "Parts catalogue and labour rates you use for assessment"
+  ],
+  "outputs": [
+    "Damage map by panel with damage type, severity and confidence",
+    "Repair-or-replace suggestion per part",
+    "Photo quality and angle coverage report",
+    "Estimate reconciliation flags",
+    "Pre-existing damage and reuse alerts",
+    "Evidence pack for the surveyor"
+  ],
+  "human_in_the_loop": "Licensed surveyors and loss assessors review every damage map and make the assessment, including what is payable. Both the model's suggestions and the surveyor's final decisions are logged, and corrections are used for retraining.",
+  "integrations": [
+    "Motor claims system (via API)",
+    "Self-inspection mobile app or WhatsApp Business API",
+    "Workshop and garage network portal",
+    "Parts catalogue and labour rate master",
+    "Document extraction for RC and driving licence"
+  ],
+  "guardrails": [
+    "Suggestions only; no claim is settled or rejected by the model",
+    "Per-part confidence shown, with low-confidence parts marked for close review",
+    "Faces and third-party number plates blurred before images are used for training",
+    "Image metadata and duplicate checks run on every submission",
+    "Regular review of model performance by vehicle segment and lighting condition"
+  ],
+  "compliance_notes": [
+    "The assessment role of licensed surveyors and loss assessors under Indian insurance law is unchanged; the system prepares evidence for them.",
+    "Blurring bystanders and third-party plates before training supports data minimisation under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Historical, surveyor-closed own-damage claims for the most common private car segments, followed by a short live trial on new claims from a few network garages.",
+    "deliverables": [
+      "Damage taxonomy and photo guide agreed with your surveyors",
+      "Detection models tuned on your historical claim photos",
+      "Surveyor evidence pack view",
+      "Agreement report against surveyor assessments",
+      "Roll-out plan, including two-wheeler and commercial vehicle extension"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Damage detection agreement",
+        "how": "Panels and damage types detected, compared with surveyor-finalised reports on the same claims."
+      },
+      {
+        "metric": "Repair-or-replace agreement",
+        "how": "Model suggestions compared with the surveyor's decision for each part."
+      },
+      {
+        "metric": "Retake rate on live captures",
+        "how": "Share of photo sets that needed one or more retakes during the live trial."
+      },
+      {
+        "metric": "Estimate flags confirmed by surveyors",
+        "how": "Surveyor feedback on each flagged estimate line."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will this replace our surveyors?",
+      "a": "No. It handles the repetitive first look and organises evidence, so surveyors spend their time on judgement. Where a surveyor is required, the surveyor still makes the assessment."
+    },
+    {
+      "q": "Does it work for two-wheelers and commercial vehicles?",
+      "a": "The approach does, but each segment needs its own training data and photo guide. A typical plan starts with private cars and adds two-wheelers once enough surveyor-labelled claims are available."
+    },
+    {
+      "q": "How does it handle night photos, rain and dirt?",
+      "a": "The quality check rejects images that are too dark or obscured and asks for a retake. Performance is reported separately for difficult conditions so you know where to rely on it."
+    },
+    {
+      "q": "Does it estimate repair cost?",
+      "a": "It can price the suggested repairs using your own parts catalogue and labour rates. It does not invent prices, and the surveyor confirms the final figure."
+    }
+  ],
+  "related": [
+    "used-car-inspection-and-damage-detection",
+    "tampered-document-detection",
+    "rc-insurance-puc-document-extraction",
+    "claim-status-voice-helpline"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/motor-claim-damage-assessment/"
+}

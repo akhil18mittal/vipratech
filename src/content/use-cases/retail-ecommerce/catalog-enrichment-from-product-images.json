@@ -1,0 +1,221 @@
+{
+  "slug": "catalog-enrichment-from-product-images",
+  "industry": "retail-ecommerce",
+  "title": "Catalogue Enrichment from Product Images",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Read product photos and back-of-pack images to fill category attributes, mandatory declarations and listing copy for each marketplace, with every value checked before publishing.",
+  "seo": {
+    "title": "Catalogue Enrichment from Product Images | VipraTech",
+    "description": "AI reads product and back-of-pack images to fill marketplace attributes, Legal Metrology declarations and listing copy, with catalogue team approval.",
+    "keywords": [
+      "catalog enrichment AI",
+      "product attribute extraction from images",
+      "marketplace listing automation",
+      "back of pack OCR",
+      "product content generation"
+    ]
+  },
+  "designed_for": [
+    "Head of E-commerce",
+    "Catalogue Manager",
+    "Marketplace Operations Lead",
+    "D2C Brand Manager"
+  ],
+  "problem": {
+    "intro": "Every new SKU needs a listing on your website, two or three marketplaces and several quick-commerce apps, each with its own template, attribute list and image rules. Catalogue teams type attributes from samples and artwork files, and errors show up as rejected listings or returns.",
+    "pain_points": [
+      {
+        "title": "Manual attribute entry",
+        "detail": "Fabric, fit, colour, pattern, net quantity, ingredients and shelf life are keyed by hand from samples, artwork PDFs or photos."
+      },
+      {
+        "title": "A different template per channel",
+        "detail": "Each marketplace has its own mandatory fields and allowed values, so listings bounce back with rejection reasons."
+      },
+      {
+        "title": "Inconsistent attributes",
+        "detail": "The same colour or size is written several different ways, which breaks filters and search on your own site."
+      },
+      {
+        "title": "Missing mandatory declarations",
+        "detail": "Net quantity, MRP, manufacturer or importer details and country of origin missing from a listing create compliance risk and delisting."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an enrichment pipeline that takes product photos, pack artwork and back-of-pack images and produces a complete, channel-ready listing draft. Vision models identify visual attributes such as colour, pattern, neckline or pack type. OCR and an LLM read pack text for net quantity, MRP, ingredients, veg or non-veg mark, FSSAI licence number, manufacturer details and best-before period. Values are normalised to each channel's allowed list and mapped to its template. Titles and bullets are drafted in your brand voice from facts found on the pack or in your product data only. The catalogue team approves before anything is published.",
+    "capabilities": [
+      "Extracts visual attributes such as colour, pattern, sleeve, neckline, material look and pack format",
+      "Reads back-of-pack text for net quantity, MRP, ingredients, allergens, FSSAI licence and manufacturer or importer",
+      "Normalises values to each marketplace's allowed list and fills its flat-file template",
+      "Drafts titles, bullets and descriptions using only facts found on the pack or in product data",
+      "Checks image sets against channel rules for background, count, angles and resolution",
+      "Links every attribute to the image region it came from for quick review"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect product assets",
+      "detail": "Photos, pack artwork and back-of-pack images arrive with the SKU code from the PIM, a shared drive or the photo studio."
+    },
+    {
+      "step": 2,
+      "title": "Extract attributes",
+      "detail": "Vision models read visual attributes and OCR with an LLM reads pack text, each value with a confidence score."
+    },
+    {
+      "step": 3,
+      "title": "Normalise and map",
+      "detail": "Values are mapped to each channel's allowed list and template, and missing mandatory fields are listed."
+    },
+    {
+      "step": 4,
+      "title": "Draft listing copy",
+      "detail": "Titles and bullets are drafted from verified facts, in the style each channel expects."
+    },
+    {
+      "step": 5,
+      "title": "Catalogue review",
+      "detail": "The catalogue executive checks low-confidence values, declarations and copy, then approves the listing."
+    },
+    {
+      "step": 6,
+      "title": "Publish and track",
+      "detail": "Approved listings are exported to each channel, and rejection reasons are fed back into the mapping rules."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Product photos and pack artwork\"] --> B[\"Extract visual attributes\"]\n  A --> C[\"Read back-of-pack declarations\"]\n  B --> D[\"Normalise to channel templates\"]\n  C --> D\n  D --> E{\"Fields complete and confident?\"}\n  E -->|\"no\"| F(\"Executive fixes flagged values\")\n  E -->|\"yes\"| G[\"Draft titles and bullets\"]\n  F --> G\n  G --> H(\"Catalogue team approves listing\")\n  H --> I[\"Export to marketplaces and site\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Asset intake",
+        "components": [
+          "PIM, DAM or shared drive connector",
+          "SKU and asset grouping"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Visual attribute models by category",
+          "Pack text OCR with LLM field parser",
+          "Image rule checker"
+        ]
+      },
+      {
+        "name": "Normalisation",
+        "components": [
+          "Channel attribute dictionaries and allowed values",
+          "Template mapper for marketplace flat files"
+        ]
+      },
+      {
+        "name": "Content and review",
+        "components": [
+          "Copy drafting restricted to verified facts",
+          "Catalogue review screen with image highlights"
+        ]
+      },
+      {
+        "name": "Publishing",
+        "components": [
+          "Marketplace flat-file and API export",
+          "Rejection feedback loop"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Asset intake\"]\n    A1[\"PIM, DAM or shared drive\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"Visual attribute models\"]\n    E2[\"Pack text OCR and parser\"]\n    E3[\"Image rule checker\"]\n  end\n  subgraph S3[\"Normalisation\"]\n    N1[\"Channel dictionaries\"]\n    N2[\"Template mapper\"]\n  end\n  subgraph S4[\"Content and review\"]\n    C1[\"Copy drafting from facts\"]\n    C2(\"Catalogue review screen\")\n  end\n  subgraph S5[\"Publishing\"]\n    P1[\"Marketplace export\"]\n    P2[\"Rejection feedback\"]\n  end\n  A1 --> E1\n  A1 --> E2\n  A1 --> E3\n  E1 --> N2\n  E2 --> N2\n  N1 --> N2\n  N2 --> C1 --> C2\n  E3 --> C2\n  C2 --> P1 --> P2\n  P2 --> N1"
+  },
+  "inputs": [
+    "Product photos from the studio or supplier",
+    "Pack artwork files and back-of-pack images",
+    "Existing product data from the PIM or ERP item master",
+    "Marketplace category templates and allowed values",
+    "Brand voice and copy guidelines"
+  ],
+  "outputs": [
+    "Attribute set per SKU, normalised for each channel",
+    "Filled marketplace flat files or API payloads",
+    "Draft titles, bullets and descriptions",
+    "Missing declaration and image rule report",
+    "Review log of approved and corrected values"
+  ],
+  "human_in_the_loop": "Catalogue executives approve every listing before it is published and confirm any low-confidence attribute. Statutory declarations and any health, ingredient or performance claim are always checked against the pack image by a person.",
+  "integrations": [
+    "PIM or DAM such as Akeneo, Salsify or an in-house system",
+    "Shopify, Magento or your website CMS",
+    "Marketplace seller portals and flat-file templates",
+    "ERP item master",
+    "Shared drives or photo studio storage"
+  ],
+  "guardrails": [
+    "Copy uses only facts present on the pack or in approved product data",
+    "Attribute values restricted to each channel's allowed list",
+    "Every value linked to its source image region",
+    "No listing published without catalogue approval"
+  ],
+  "compliance_notes": [
+    "Mandatory declarations under the Legal Metrology (Packaged Commodities) Rules 2011 are extracted and checked, and the catalogue team confirms them before publishing.",
+    "Food listings carry FSSAI labelling details, such as the licence number and veg or non-veg mark, exactly as printed on the pack."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "A few hundred SKUs from one category, enriched for your website and one marketplace, compared with listings your team prepared.",
+    "deliverables": [
+      "Attribute schema and channel mappings for the pilot category",
+      "Working enrichment pipeline and review screen",
+      "Filled templates for pilot SKUs",
+      "Accuracy report against team-verified listings",
+      "Roll-out plan for other categories and channels"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Attribute accuracy",
+        "how": "Extracted values compared with values verified by the catalogue team."
+      },
+      {
+        "metric": "Declaration completeness",
+        "how": "Share of SKUs with all mandatory declarations captured and confirmed."
+      },
+      {
+        "metric": "Edit effort per SKU",
+        "how": "Fields the reviewer changed and time spent per listing."
+      },
+      {
+        "metric": "Listing rejections",
+        "how": "Marketplace rejection reasons recorded for pilot SKUs after submission."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it make up product claims?",
+      "a": "No. Copy is drafted only from text found on the pack or in your approved product data, so claims such as sugar-free or dermatologically tested appear only if the pack states them. Reviewers see the source for each claim."
+    },
+    {
+      "q": "Can it handle fashion as well as FMCG?",
+      "a": "Yes, with different models. Fashion relies on visual attributes such as pattern, neckline and fit, while FMCG relies more on reading pack text. We pilot on one category first."
+    },
+    {
+      "q": "Does it work with marketplace flat files?",
+      "a": "Yes. We map attributes to each marketplace's current category template and allowed values and produce files or API payloads in that format. When a template changes, the mapping is updated, not the model."
+    },
+    {
+      "q": "Can it write listings in Hindi?",
+      "a": "It can draft Hindi or regional-language descriptions for channels that support them, from the same verified facts. A reviewer fluent in the language approves them."
+    }
+  ],
+  "related": [
+    "shelf-availability-and-planogram-compliance",
+    "review-and-ugc-insights",
+    "shopping-assistant-guardrail-testing",
+    "spare-parts-matching-from-photos"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/catalog-enrichment-from-product-images/"
+}

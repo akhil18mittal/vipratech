@@ -1,0 +1,221 @@
+{
+  "slug": "field-collection-visit-photo-verification",
+  "industry": "nbfc-lending",
+  "title": "Field Collection Visit Photo Verification",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Check geo-tagged photos from field collection visits for location, time, live capture and reuse, so collection managers can trust visit records and spot conduct problems early.",
+  "seo": {
+    "title": "Field Collection Visit Photo Verification | VipraTech",
+    "description": "Computer vision that checks field collection visit photos for location, timestamp, live capture and reuse, and flags suspect visits for managers.",
+    "keywords": [
+      "field collection visit verification",
+      "geo-tagged photo verification",
+      "collection agent visit audit",
+      "photo reuse detection",
+      "field agent monitoring NBFC"
+    ]
+  },
+  "designed_for": [
+    "Head of Field Collections",
+    "Area Collection Manager",
+    "Collections Audit Lead",
+    "Vendor Management Head"
+  ],
+  "problem": {
+    "intro": "Field collection agents, whether employees or outsourced agencies, record visits in a mobile app with photos of the residence or business, receipts and sometimes the visit notice. These records drive agency payouts and recovery strategy, but managers cannot check them all, and fake or reused visit photos and visits at odd hours go unnoticed.",
+    "pain_points": [
+      {
+        "title": "Visits that did not happen",
+        "detail": "Photos taken from a distance, reused from earlier visits or captured from a screen inflate visit counts and agency payouts."
+      },
+      {
+        "title": "Location and time drift",
+        "detail": "Visit locations far from the borrower's address, or timestamps outside permitted hours, are rarely checked against the record."
+      },
+      {
+        "title": "Receipt and cash-handling risk",
+        "detail": "Receipt photos with unclear amounts or numbers make it hard to reconcile cash collected in the field with deposits."
+      },
+      {
+        "title": "Conduct issues surface as complaints",
+        "detail": "Visits at unreasonable hours or repeated visits in one day often come to light only when a borrower complains."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a verification service that checks every visit record submitted from your field collections app. Computer vision models assess whether each photo is a live capture rather than a photo of a screen or printout, detect near-duplicates across all past visits, and read text in the image such as shop boards, house numbers and receipt numbers. The service compares the device location with the borrower's geocoded address and the timestamp with permitted visit hours and the visit plan, and checks receipt numbers and amounts against the collection entry. Each visit receives a status with reasons, suspect visits go to the area collection manager, and agency-level patterns appear in a weekly report.",
+    "capabilities": [
+      "Live-capture checks that flag photos of screens, printouts and old images",
+      "Near-duplicate detection across all past visit photos, by agent and agency",
+      "Location distance check against the geocoded borrower address with configurable tolerance",
+      "Timestamp checks against permitted visit hours and visit frequency rules",
+      "OCR of receipts, shop boards and house numbers matched with visit and collection entries",
+      "Agency and agent pattern reports for vendor reviews, without face recognition"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive visit records",
+      "detail": "Visit entries with photos, device location and timestamps arrive from the field app as they sync."
+    },
+    {
+      "step": 2,
+      "title": "Analyse the photos",
+      "detail": "Models check for live capture, search for near-duplicates and read visible text and receipt details."
+    },
+    {
+      "step": 3,
+      "title": "Check location and time",
+      "detail": "Location is compared with the borrower's address, and time with permitted hours and visit rules."
+    },
+    {
+      "step": 4,
+      "title": "Score the visit",
+      "detail": "Each visit gets a pass, review or fail status with listed reasons."
+    },
+    {
+      "step": 5,
+      "title": "Manager review",
+      "detail": "Area collection managers review flagged visits, record outcomes and raise conduct cases where needed."
+    },
+    {
+      "step": 6,
+      "title": "Report patterns",
+      "detail": "Agency and agent patterns feed vendor reviews, payout checks and training."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Visit record from field app\"] --> B[\"Live capture and duplicate checks\"]\n  B --> C[\"Read receipt and visible text\"]\n  C --> D[\"Location and time rule checks\"]\n  D --> E{\"Any check failed or uncertain?\"}\n  E -->|\"yes\"| F(\"Area collection manager review\")\n  E -->|\"no\"| G[\"Visit marked verified\"]\n  F --> H[\"Agency pattern and payout report\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Field app sync API or storage bucket",
+          "Visit plan and borrower address feed from the collections system"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Live-capture and screen-recapture classifier",
+          "Perceptual hashing and near-duplicate search",
+          "OCR for receipts and signboards"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Distance check against geocoded address",
+          "Visit window and frequency rules",
+          "Receipt and collection entry matcher"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Manager review queue with photo evidence",
+          "Conduct case creation"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Agency and agent pattern dashboard",
+          "Payout validation export"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Field app sync\"]\n    I2[\"Visit plan and addresses\"]\n  end\n  subgraph S2[\"Vision models\"]\n    V1[\"Live capture classifier\"]\n    V2[\"Near-duplicate search\"]\n    V3[\"Receipt and sign OCR\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Distance check\"]\n    R2[\"Visit window rules\"]\n    R3[\"Receipt matcher\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    M1(\"Manager review queue\")\n    M2[\"Agency pattern dashboard\"]\n  end\n  I1 --> V1\n  I1 --> V2\n  I1 --> V3\n  I1 --> R1\n  I2 --> R1\n  I2 --> R2\n  V3 --> R3\n  V1 --> M1\n  V2 --> M1\n  R1 --> M1\n  R2 --> M1\n  R3 --> M1\n  M1 --> M2"
+  },
+  "inputs": [
+    "Visit records with photos, device location and timestamps",
+    "Borrower addresses and visit plans from the collections system",
+    "Collection entries and receipt book series",
+    "Permitted visit hours and frequency rules",
+    "Agent and agency master data"
+  ],
+  "outputs": [
+    "Visit status with pass, review or fail reasons",
+    "Duplicate and recaptured photo alerts",
+    "Location and timing exceptions",
+    "Receipt mismatch list for cash reconciliation",
+    "Agency and agent pattern reports"
+  ],
+  "human_in_the_loop": "Area collection managers review every flagged visit and decide whether it reflects a data issue, a training need or misconduct. Payout adjustments and any action against agents or agencies are decided by people under your vendor management policy.",
+  "integrations": [
+    "Field collections mobile app",
+    "Collections management system",
+    "Geocoding service",
+    "Agency payout and vendor management system",
+    "Complaint management system for conduct cases"
+  ],
+  "guardrails": [
+    "No face recognition of borrowers or agents; photos are checked for capture and content, not identity",
+    "Field app guidance to photograph premises and receipts, not people",
+    "Location tolerances set per area to allow for GPS error in dense or rural areas",
+    "Flags are prompts for review, never automatic penalties",
+    "Photos retained only for the period your policy sets, with access controls"
+  ],
+  "compliance_notes": [
+    "Supports the lender's oversight of recovery agents expected under RBI guidance, including conduct and timing of visits.",
+    "Data minimisation under the DPDP Act 2023: no biometric processing and limited retention of visit photos."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Visit records from one region and a few agencies over recent months, analysed retrospectively, followed by a live run on new visits with manager review.",
+    "deliverables": [
+      "Configured rules for locations, hours and receipts",
+      "Verification service on historical and live visits",
+      "Manager review queue",
+      "Report on flagged visits confirmed by managers",
+      "Roll-out plan across regions and agencies"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Flag confirmation",
+        "how": "Flagged visits that managers confirm as genuine issues, by flag type."
+      },
+      {
+        "metric": "Duplicate and recapture detection",
+        "how": "Known reused or recaptured photos from past audits detected by the service."
+      },
+      {
+        "metric": "Location false alerts",
+        "how": "Location flags cleared as GPS error, by area type."
+      },
+      {
+        "metric": "Manager review effort",
+        "how": "Time per reviewed visit and visits reviewed per manager each week."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will this identify borrowers or agents by face?",
+      "a": "No. The service does not perform face recognition. It checks whether a photo was captured live, whether it repeats earlier images and what text it shows."
+    },
+    {
+      "q": "How do you handle poor GPS in rural areas?",
+      "a": "Tolerances are set per area, and location is one signal among several. A location mismatch on its own sends the visit to review rather than marking it as fake."
+    },
+    {
+      "q": "Do we need to change our field app?",
+      "a": "Usually not. We read the photos and metadata your app already captures. If it does not record location or capture time reliably, we suggest small app changes."
+    },
+    {
+      "q": "Can this support action against agencies?",
+      "a": "It provides evidence and patterns. Decisions on payouts, warnings or termination stay with your vendor management and collections leadership."
+    }
+  ],
+  "related": [
+    "collections-voice-agent-with-conduct-guardrails",
+    "vehicle-asset-inspection-for-auto-loans",
+    "collections-voice-agent-conduct-testing",
+    "crop-insurance-field-photo-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/field-collection-visit-photo-verification/"
+}

@@ -1,0 +1,227 @@
+{
+  "slug": "account-opening-document-verification",
+  "industry": "banking",
+  "title": "Account Opening Document Verification",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "computer-vision"
+  ],
+  "summary": "Check OVDs, PAN, masked Aadhaar, photographs and entity documents in an account opening file against each other and against CKYC, with mismatches routed to an officer.",
+  "seo": {
+    "title": "Account Opening Document Verification with AI | VipraTech",
+    "description": "AI that checks KYC documents for savings and current account opening, cross-matches names, addresses and photos, and flags mismatches for officers.",
+    "keywords": [
+      "account opening document verification",
+      "KYC document checking AI",
+      "CKYC verification automation",
+      "current account opening documents",
+      "OVD verification bank",
+      "masked Aadhaar KYC"
+    ]
+  },
+  "designed_for": [
+    "Head of Branch Banking Operations",
+    "Central Processing Unit Manager",
+    "Chief Compliance Officer",
+    "Digital Onboarding Product Head"
+  ],
+  "problem": {
+    "intro": "A savings account file is a few pages, but a current account for a partnership or private limited company can run to dozens: KYC of every partner or director, beneficial-owner declarations, board resolutions and registration certificates. Central processing teams re-check what branch staff already looked at, and discrepancies surface only after the customer has left the branch.",
+    "pain_points": [
+      {
+        "title": "Name and address mismatches across documents",
+        "detail": "Initials, spelling variants and transliterated names differ between PAN, OVD and the application form, and officers decide each case by eye with no record of why."
+      },
+      {
+        "title": "Entity documents checked inconsistently",
+        "detail": "Partnership deeds, MOA and AOA, board resolutions and beneficial-ownership declarations are long, and the authorised signatory clause is easy to misread."
+      },
+      {
+        "title": "Rework between branch and central processing",
+        "detail": "Files bounce back for a missing self-attestation, an expired passport or an unsigned FATCA declaration, delaying account activation."
+      },
+      {
+        "title": "Weak signals of tampering",
+        "detail": "Edited PAN images, swapped photographs and documents reused across applications are hard to spot when each file is reviewed on its own."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a verification layer that sits between your onboarding channel and account activation. It splits each file into documents, identifies the type of every page and extracts the fields your KYC checklist needs. It then cross-checks name, date of birth, address and photograph across documents, compares them with the CKYC record and PAN verification response where your bank has access, and applies your checklist for individuals, proprietorships, partnerships, LLPs, companies and trusts. Each check returns pass, fail or needs review, with the source page highlighted. Central processing officers work a ranked queue and confirm or override every flag.",
+    "capabilities": [
+      "Classifies OVDs, PAN, masked Aadhaar, photographs, FATCA/CRS forms and entity documents page by page",
+      "Fuzzy name matching that handles initials, transliteration and Hindi or regional-script names",
+      "Photograph comparison between the OVD and the live or branch-captured photo, sent for review on low similarity",
+      "Product checklists for proprietorship, partnership, LLP, company and trust accounts, including beneficial-owner details",
+      "Tamper indicators on images and PDFs, plus reuse detection across recent applications",
+      "Reads authorised-signatory and operating-mandate clauses from board resolutions and deeds"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the onboarding file",
+      "detail": "Documents arrive from the branch scanner, tab-based onboarding app or digital journey, grouped under the application reference."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each page is typed and the fields for that document type are extracted, with Aadhaar numbers masked at intake."
+    },
+    {
+      "step": 3,
+      "title": "Cross-check and look up",
+      "detail": "Names, dates, addresses and photographs are compared across documents and against CKYC and PAN verification responses."
+    },
+    {
+      "step": 4,
+      "title": "Apply the product checklist",
+      "detail": "Rules for the customer type and account variant confirm that every mandatory document, signature and declaration is present and valid."
+    },
+    {
+      "step": 5,
+      "title": "Officer review",
+      "detail": "Mismatches, missing items and tamper signals go to a central processing officer, who confirms, overrides or requests documents."
+    },
+    {
+      "step": 6,
+      "title": "Hand over to account opening",
+      "detail": "Verified data, the checklist result and the evidence trail are posted to the account opening module or a CBS staging layer."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Onboarding file from branch or app\"] --> B[\"Classify pages and mask Aadhaar\"]\n  B --> C[\"Extract KYC and entity fields\"]\n  C --> D[\"Cross-check documents, CKYC and PAN\"]\n  D --> E[\"Apply product checklist\"]\n  E --> F{\"Any mismatch or missing item?\"}\n  F -->|\"yes\"| G(\"CPU officer review\")\n  F -->|\"no\"| H[\"Post verified data to CBS staging\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Branch scanner and onboarding app connectors",
+          "Digital journey upload API",
+          "Aadhaar masking at intake"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with layout and script detection",
+          "Page classifier for OVD, PAN and entity documents",
+          "LLM field extractor with per-document schemas"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "Multilingual name and address matcher",
+          "Photo similarity and tamper checks",
+          "CKYC and PAN verification adapters",
+          "Product checklist rule engine"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Officer queue with source-page highlights",
+          "Override reasons captured per flag"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "Account opening or CBS staging adapter",
+          "Audit log of checks and decisions"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Branch and app uploads\"]\n    I2[\"Aadhaar masking\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and script detection\"]\n    U2[\"Page classifier\"]\n    U3[\"LLM field extractor\"]\n  end\n  subgraph S3[\"Verification\"]\n    V1[\"Name and address matcher\"]\n    V2[\"Photo and tamper checks\"]\n    V3[\"CKYC and PAN adapters\"]\n    V4[\"Product checklist rules\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"CPU officer queue\")\n    R2[\"CBS staging adapter\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> I2 --> U1 --> U2 --> U3\n  U3 --> V1\n  U3 --> V2\n  U3 --> V3\n  V1 --> V4\n  V2 --> V4\n  V3 --> V4\n  V4 --> R1\n  R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "Account opening form and KYC declarations",
+    "OVDs such as passport, driving licence, voter ID or masked Aadhaar",
+    "PAN card or Form 60",
+    "Customer photograph and specimen signature card",
+    "Entity documents: partnership deed, MOA and AOA, board resolution, registration certificates",
+    "FATCA/CRS self-certification and beneficial-owner declaration"
+  ],
+  "outputs": [
+    "Structured KYC record per applicant and related person",
+    "Checklist result with pass, fail or review per item",
+    "Mismatch and tamper flags with source-page links",
+    "Officer decisions and override reasons",
+    "Audit trail ready for internal and concurrent audit"
+  ],
+  "human_in_the_loop": "Central processing officers review every flagged mismatch, missing document and tamper signal, and they alone mark a file as KYC-complete. Photograph similarity is a prompt for review, never an automatic rejection.",
+  "integrations": [
+    "Core banking system or account opening module (via API or staging table)",
+    "CKYC registry access through the bank's existing CERSAI integration",
+    "PAN verification service already used by the bank",
+    "Tab banking or digital onboarding app",
+    "Document management system"
+  ],
+  "guardrails": [
+    "Aadhaar masked at intake so only the last four digits remain, per UIDAI rules",
+    "No auto-rejection: low-similarity photos and mismatches always go to an officer",
+    "Thresholds per check agreed with compliance and reviewed regularly",
+    "Personal data masked in logs and processed in the bank's chosen region",
+    "Sampling of auto-passed files for quality assurance"
+  ],
+  "compliance_notes": [
+    "Designed to support customer due diligence under the RBI KYC Master Direction; KYC sign-off stays with the bank.",
+    "Supports data minimisation and purpose limitation under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Current account opening for proprietorship and partnership firms at one central processing unit, run on de-identified historical files and then on a live shadow sample.",
+    "deliverables": [
+      "Checklist and extraction schema agreed with operations and compliance",
+      "Working verification pipeline on de-identified files",
+      "Officer review screen",
+      "Accuracy and flag-quality report against officer decisions",
+      "Production plan with integration approach and cost"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy by document type",
+        "how": "Compared with values keyed by central processing officers for the same files."
+      },
+      {
+        "metric": "Flag precision",
+        "how": "Raised flags that officers confirm as genuine discrepancies, by flag type."
+      },
+      {
+        "metric": "Missed discrepancies",
+        "how": "Discrepancies officers found that the system did not flag, logged during parallel review."
+      },
+      {
+        "metric": "Officer handling time per file",
+        "how": "Timed on a sample of files reviewed with and without the system."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read regional-language documents?",
+      "a": "Yes. OCR and the extraction models handle Devanagari and other major Indian scripts on documents such as voter IDs and state-issued certificates. Names are matched across scripts using transliteration, and uncertain matches go to an officer."
+    },
+    {
+      "q": "Does it store Aadhaar numbers?",
+      "a": "No. Aadhaar is masked at intake so only the last four digits remain, and our pipeline does not keep the unmasked image. Any full Aadhaar handling stays within your existing UIDAI-compliant processes."
+    },
+    {
+      "q": "Can it support video KYC?",
+      "a": "It can check documents shown or uploaded during a V-CIP session and compare the photograph with the captured image, as an aid to the bank official. The official's live judgement and your V-CIP procedure remain unchanged."
+    },
+    {
+      "q": "How long does integration take?",
+      "a": "A pilot runs on file exports and needs no core banking change. For production, most banks use a staging table or middleware API, and the timeline depends on your change-management process more than on the models."
+    }
+  ],
+  "related": [
+    "cheque-image-and-signature-verification",
+    "customer-complaint-triage-and-routing",
+    "selfie-id-face-match-and-tamper-checks",
+    "broker-kyc-onboarding-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/account-opening-document-verification/"
+}

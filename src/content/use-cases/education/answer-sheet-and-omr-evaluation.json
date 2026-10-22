@@ -1,0 +1,224 @@
+{
+  "slug": "answer-sheet-and-omr-evaluation",
+  "industry": "education",
+  "title": "Answer Sheet and OMR Evaluation Assistance",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Read OMR sheets and the marks grid on answer-booklet covers from ordinary scans or phone photos, apply the right answer key and send every doubtful mark to the exam cell.",
+  "seo": {
+    "title": "OMR and Answer Sheet Evaluation with AI | VipraTech",
+    "description": "Computer vision that reads OMR bubbles and answer-booklet marks grids from scans or photos, checks totals and routes doubtful marks to the exam cell.",
+    "keywords": [
+      "OMR sheet checking software",
+      "AI OMR evaluation",
+      "answer sheet totalling check",
+      "coaching test result processing",
+      "OMR scanning with phone camera"
+    ]
+  },
+  "designed_for": [
+    "Controller of Examinations",
+    "Exam Cell Head",
+    "Academic Operations Manager (Coaching)",
+    "Centre Director"
+  ],
+  "problem": {
+    "intro": "A coaching institute running weekly tests, or a school holding term exams, may process thousands of OMR sheets and answer booklets in a few days. Dedicated OMR machines need special paper and careful handling, and the totalling of subjective marks on booklet covers is still done by hand, so errors surface only when a student asks for a re-check.",
+    "pain_points": [
+      {
+        "title": "Sheets that machines reject",
+        "detail": "Sheets printed on ordinary paper, folded in transit or photographed at a satellite centre fail on hardware readers and end up being checked by hand."
+      },
+      {
+        "title": "Ambiguous bubbles decide ranks",
+        "detail": "Double-filled, faint, erased or ticked bubbles are scored inconsistently, and in a negative-marking test one misread answer can move a student several places in the batch rank list."
+      },
+      {
+        "title": "Wrong roll number or paper set",
+        "detail": "Students bubble the wrong roll number or test booklet series, so the sheet is matched to the wrong student or scored against the wrong key."
+      },
+      {
+        "title": "Totalling errors on subjective papers",
+        "detail": "Examiners write question-wise marks on the booklet cover, and addition or carry-forward mistakes are a common cause of re-evaluation requests and complaints."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an evaluation assistant that reads OMR sheets and booklet cover pages from a standard document scanner or a phone camera. It finds the sheet's anchor marks, corrects skew and reads roll number, paper set and every answer bubble, including the integer-type answer grids used in JEE-style tests. Each bubble gets a fill score, so a faint or double-filled mark is shown to the exam cell instead of being silently scored. For subjective papers it reads the handwritten question-wise marks grid, recomputes the total and flags any mismatch. Scores are calculated with your marking scheme and published only after the exam cell signs off.",
+    "capabilities": [
+      "Reads custom OMR layouts printed on ordinary paper, from flatbed or ADF scans and phone photos",
+      "Detects double-filled, faint, erased and stray marks with a fill score for every bubble",
+      "Validates roll number and paper set against the test roster before scoring",
+      "Supports single-correct, multiple-correct, integer and matrix-match grids with negative and partial marking",
+      "Reads handwritten question-wise marks on booklet covers and recomputes totals",
+      "Keeps a cropped image of every flagged mark for re-checks and answer-key challenges"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scan the sheets",
+      "detail": "Centres scan OMR sheets and booklet covers in batches on a document scanner, or capture them with a phone app where no scanner is available."
+    },
+    {
+      "step": 2,
+      "title": "Align and read",
+      "detail": "The system finds anchor marks, corrects skew and reads roll number, paper set and each bubble or marks-grid cell."
+    },
+    {
+      "step": 3,
+      "title": "Match to the roster",
+      "detail": "Roll numbers and paper sets are checked against the test roster so each sheet is tied to the right student and answer key."
+    },
+    {
+      "step": 4,
+      "title": "Flag doubtful marks",
+      "detail": "Ambiguous bubbles, roster mismatches and totals that do not add up are queued with image crops for the exam cell."
+    },
+    {
+      "step": 5,
+      "title": "Exam cell resolves",
+      "detail": "Staff view each flagged crop, record a decision and the reason, and the decision is logged against the sheet."
+    },
+    {
+      "step": 6,
+      "title": "Score and publish",
+      "detail": "Scores, section-wise marks and batch ranks are computed with your marking scheme and released to the ERP after the controller approves."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scanned OMR sheets and covers\"] --> B[\"Align sheet and read marks\"]\n  B --> C[\"Match roll number and paper set\"]\n  C --> D{\"Doubtful mark or mismatch?\"}\n  D -->|\"yes\"| E(\"Exam cell reviews image crops\")\n  D -->|\"no\"| F[\"Apply answer key and marking scheme\"]\n  E --> F\n  F --> G(\"Controller approves results\")\n  G --> H[\"Publish scores to ERP and app\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Batch import from ADF scanners",
+          "Phone capture app for satellite centres",
+          "Sheet template registry per test format"
+        ]
+      },
+      {
+        "name": "Vision processing",
+        "components": [
+          "Anchor detection and perspective correction",
+          "Bubble fill scoring model",
+          "Handwritten digit reader for marks grids"
+        ]
+      },
+      {
+        "name": "Scoring and validation",
+        "components": [
+          "Roster and paper-set matcher",
+          "Marking-scheme engine with negative and partial marking",
+          "Totals and consistency checks"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exam cell review screen with image crops",
+          "Decision and reason log"
+        ]
+      },
+      {
+        "name": "Publishing and audit",
+        "components": [
+          "ERP and student app export",
+          "Re-check and answer-key challenge records",
+          "Audit trail per sheet"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"ADF scanner batches\"]\n    C2[\"Phone capture app\"]\n  end\n  subgraph S2[\"Vision processing\"]\n    V1[\"Anchor detection and deskew\"]\n    V2[\"Bubble fill scoring\"]\n    V3[\"Marks grid digit reader\"]\n  end\n  subgraph S3[\"Scoring and validation\"]\n    P1[\"Roster and paper-set match\"]\n    P2[\"Marking-scheme engine\"]\n    P3[\"Totals check\"]\n  end\n  subgraph S4[\"Review and publishing\"]\n    R1(\"Exam cell review screen\")\n    R2[\"ERP and app export\"]\n    R3[\"Audit trail\"]\n  end\n  C1 --> V1\n  C2 --> V1\n  V1 --> V2\n  V1 --> V3\n  V2 --> P1\n  P1 --> P2\n  V3 --> P3\n  P1 --> R1\n  P3 --> R1\n  R1 --> P2\n  P2 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Scanned or photographed OMR sheets",
+    "Answer-booklet cover pages with question-wise marks",
+    "Answer keys for each paper set",
+    "Marking scheme, including negative and partial marking rules",
+    "Test roster with roll numbers and batches"
+  ],
+  "outputs": [
+    "Student-wise and section-wise scores",
+    "Batch and centre rank lists for internal use",
+    "Queue of flagged marks with image crops and decisions",
+    "Totalling mismatch report for subjective papers",
+    "Audit trail for re-check requests"
+  ],
+  "human_in_the_loop": "Exam cell staff decide every ambiguous bubble, roster mismatch and totalling discrepancy by looking at the original crop. The controller of examinations approves results before they are published, and answer-key challenges are decided by subject faculty.",
+  "integrations": [
+    "Institute ERP or student information system",
+    "Online test or result portal (via API or CSV import)",
+    "Student and parent mobile app",
+    "Document scanners with network folder output",
+    "Cloud storage for sheet images"
+  ],
+  "guardrails": [
+    "No bubble is scored when its fill score falls in the ambiguous band; it goes to a person",
+    "Roster mismatches block scoring until resolved",
+    "Results stay in draft until the controller approves",
+    "Sheet images kept for an agreed period to support re-checks, then deleted",
+    "A periodic sample of auto-read sheets is re-checked by hand"
+  ],
+  "compliance_notes": [
+    "Scores and sheet images of learners under 18 are children's personal data; designed to support DPDP Act 2023 consent, purpose limitation and retention requirements.",
+    "The audit trail helps the institution show how a disputed score was arrived at."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One recurring test series, for example a weekly JEE or NEET pattern test at two centres, read in parallel with your current OMR process or manual checking.",
+    "deliverables": [
+      "Templates set up for your OMR and booklet cover formats",
+      "Working pipeline on real sheets from the pilot tests",
+      "Exam cell review screen",
+      "Comparison report against your existing scores",
+      "Roll-out plan with hardware and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Bubble read accuracy",
+        "how": "Compared with manual checking on a sample of sheets from each test."
+      },
+      {
+        "metric": "Share of sheets needing review",
+        "how": "Count of sheets with at least one flagged mark, by centre and capture method."
+      },
+      {
+        "metric": "Totalling discrepancies found",
+        "how": "Mismatches flagged on booklet covers and confirmed by the exam cell."
+      },
+      {
+        "metric": "Time from test to result",
+        "how": "Measured from the last sheet scanned to controller approval, before and during the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need special OMR paper or a dedicated OMR machine?",
+      "a": "No. The system is designed for sheets printed on ordinary paper and captured on a document scanner or a phone. Print quality and capture conditions still matter, so the pilot reports accuracy separately for each capture method."
+    },
+    {
+      "q": "How are faint or double-filled bubbles handled?",
+      "a": "Every bubble gets a fill score. Clear marks are scored automatically; anything in the ambiguous band is shown to the exam cell with the image crop, and the decision and reason are logged."
+    },
+    {
+      "q": "Can it handle our marking scheme and question types?",
+      "a": "Yes. Single-correct, multiple-correct with partial marking, integer or numerical-value grids, matrix-match and section-wise negative marking are configured per test, not hard-coded."
+    },
+    {
+      "q": "Will this replace our examiners for subjective papers?",
+      "a": "No. Examiners still mark the answers. The system reads the marks they write on the cover page, recomputes totals and flags mismatches before results go out."
+    }
+  ],
+  "related": [
+    "handwritten-answer-digitisation",
+    "online-test-proctoring-assistance",
+    "parent-progress-update-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/answer-sheet-and-omr-evaluation/"
+}

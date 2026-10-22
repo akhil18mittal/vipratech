@@ -1,0 +1,222 @@
+{
+  "slug": "shopping-assistant-guardrail-testing",
+  "industry": "retail-ecommerce",
+  "title": "Guardrail Testing for AI Shopping Assistants",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Adversarial testing of AI shopping assistants for unauthorised discounts, wrong prices, order-data leakage and unsafe product advice, with validated findings, fixes and a retest.",
+  "seo": {
+    "title": "AI Shopping Assistant Guardrail Testing | VipraTech",
+    "description": "Red-team testing for AI shopping assistants and WhatsApp bots: coupon abuse, price hallucination, order data leakage and prompt injection, with fixes.",
+    "keywords": [
+      "AI shopping assistant testing",
+      "chatbot guardrail testing",
+      "LLM red teaming for ecommerce",
+      "prompt injection testing retail",
+      "OWASP LLM Top 10 testing"
+    ]
+  },
+  "designed_for": [
+    "Head of E-commerce Product",
+    "CTO or Head of Engineering",
+    "CISO",
+    "Head of Customer Experience"
+  ],
+  "problem": {
+    "intro": "Retailers are putting AI assistants on their sites, apps and WhatsApp channels to answer product questions, track orders and apply offers. An assistant that can look up orders or apply coupons can also be talked into doing the wrong thing, and a wrong price stated by your bot is a customer complaint in writing.",
+    "pain_points": [
+      {
+        "title": "Talked into discounts",
+        "detail": "Users try role-play and persistence to get coupons, price matches or free shipping the business never approved."
+      },
+      {
+        "title": "Order tools that leak data",
+        "detail": "An order lookup tool without proper checks can reveal another customer's address or phone number."
+      },
+      {
+        "title": "Hallucinated prices and policies",
+        "detail": "The assistant states a price, stock position or return policy that is not true, and screenshots spread."
+      },
+      {
+        "title": "Injection through product content",
+        "detail": "Reviews, seller descriptions and Q&A that the assistant reads can carry instructions that change its behaviour."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We test your shopping assistant the way a determined customer, a fraudster or a competitor would. We map its knowledge sources, tools and permissions, then run automated adversarial suites and manual sessions in English, Hindi and Hinglish. Tests cover prompt injection, indirect injection through reviews and catalogue text, coupon and price manipulation, cross-customer data access through order tools, system prompt and margin disclosure, unsafe advice on supplements, cosmetics or baby products, and brand-damaging output. Every finding is reproduced by an engineer, rated and mapped to the OWASP Top 10 for LLM Applications. We retest after fixes and hand over a regression pack.",
+    "capabilities": [
+      "Coupon, discount and price-manipulation tests against your actual offer rules",
+      "Cross-customer data access tests on order lookup, returns and address tools",
+      "Direct and indirect prompt injection, including payloads planted in reviews and product Q&A",
+      "Hallucination checks on prices, stock, delivery promises and return policy",
+      "Unsafe-advice and brand-safety tests for sensitive categories in English, Hindi and Hinglish",
+      "Validated findings mapped to OWASP LLM Top 10, with a regression pack for CI"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope",
+      "detail": "We agree the assistant, channels, test accounts, staging environment and what is off limits."
+    },
+    {
+      "step": 2,
+      "title": "Map sources and tools",
+      "detail": "Catalogue, policy and review sources, plus order, coupon and returns tools, are mapped with their permissions."
+    },
+    {
+      "step": 3,
+      "title": "Run adversarial tests",
+      "detail": "Automated suites and manual testers attack the assistant across every mapped risk and language."
+    },
+    {
+      "step": 4,
+      "title": "Validate findings",
+      "detail": "Engineers reproduce each candidate issue and drop anything they cannot confirm."
+    },
+    {
+      "step": 5,
+      "title": "Report and fix",
+      "detail": "You receive validated findings with evidence, severity and recommended fixes."
+    },
+    {
+      "step": 6,
+      "title": "Retest and hand over",
+      "detail": "Fixes are retested, and the test cases become a regression pack for future releases."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agree scope and test accounts\"] --> B[\"Map sources, tools and offers\"]\n  B --> C[\"Run automated adversarial suites\"]\n  B --> D[\"Manual sessions in Hindi and English\"]\n  C --> E{\"Issue reproduced by engineer?\"}\n  D --> E\n  E -->|\"yes\"| F[\"Finding with evidence and fix\"]\n  E -->|\"no\"| G[\"Logged as observation\"]\n  F --> H(\"Product team fixes\")\n  H --> I[\"Retest and regression pack\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scoping",
+        "components": [
+          "Assistant inventory of channels, prompts and models",
+          "Tool and permission map",
+          "Offer and policy rules used as test oracles"
+        ]
+      },
+      {
+        "name": "Attack generation",
+        "components": [
+          "Adversarial prompt library in English, Hindi and Hinglish",
+          "Poisoned review and catalogue content set",
+          "Cross-customer test accounts"
+        ]
+      },
+      {
+        "name": "Execution",
+        "components": [
+          "Automated test runner for web, app and WhatsApp channels",
+          "Manual red-team sessions",
+          "Conversation and tool-call capture"
+        ]
+      },
+      {
+        "name": "Validation and reporting",
+        "components": [
+          "Engineer reproduction and severity rating",
+          "OWASP LLM Top 10 mapping and fix guidance"
+        ]
+      },
+      {
+        "name": "Regression",
+        "components": [
+          "Retest of fixed findings",
+          "Regression suite for CI"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scoping\"]\n    P1[\"Channels, prompts and models\"]\n    P2[\"Tool and permission map\"]\n  end\n  subgraph S2[\"Attack generation\"]\n    G1[\"Adversarial prompt library\"]\n    G2[\"Poisoned reviews and catalogue\"]\n    G3[\"Cross-customer test accounts\"]\n  end\n  subgraph S3[\"Execution\"]\n    E1[\"Automated test runner\"]\n    E2[\"Manual red-team sessions\"]\n  end\n  subgraph S4[\"Validation and regression\"]\n    V1(\"Engineer reproduction\")\n    V2[\"Findings and fixes report\"]\n    V3[\"Regression suite\"]\n  end\n  P1 --> G1\n  P2 --> G3\n  P2 --> G2\n  G1 --> E1\n  G2 --> E1\n  G3 --> E2\n  E1 --> V1\n  E2 --> V1\n  V1 --> V2 --> V3"
+  },
+  "inputs": [
+    "Access to the assistant in staging on web, app or WhatsApp",
+    "System prompts, tool definitions and model configuration",
+    "Offer, coupon and return policy rules",
+    "Test customer accounts with seeded orders",
+    "Sample catalogue, review and Q&A content"
+  ],
+  "outputs": [
+    "Threat model and test plan",
+    "Validated findings with severity, transcripts and reproduction steps",
+    "Mapping to OWASP LLM Top 10",
+    "Fix guidance for prompts, tools, retrieval and output filters",
+    "Retest results and regression pack"
+  ],
+  "human_in_the_loop": "Our engineers reproduce every automated finding before it reaches the report. Your product, legal and CX owners decide how each risk is treated, and tests run only against staging with test accounts.",
+  "integrations": [
+    "Assistant platform or custom LLM application",
+    "Order, coupon and returns APIs in staging",
+    "WhatsApp Business API test number",
+    "Issue tracker such as Jira",
+    "CI pipeline for regression tests"
+  ],
+  "guardrails": [
+    "Tests use seeded test accounts, never real customer data",
+    "No coupons redeemed or orders placed in production",
+    "Testing only within agreed scope and time windows",
+    "Transcripts and findings stored encrypted with restricted access"
+  ],
+  "compliance_notes": [
+    "Wrong prices or policies stated by an assistant can raise issues under the Consumer Protection Act 2019 and E-Commerce Rules 2020; testing helps you find them before customers do.",
+    "Exposure of customer data through order tools is a personal data breach risk under the DPDP Act 2023.",
+    "For EU customers, the EU AI Act includes transparency obligations so that people know when they are interacting with an AI system."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One assistant on one channel, such as website chat or a WhatsApp bot, in staging with its order and coupon tools.",
+    "deliverables": [
+      "Rules of engagement and threat model",
+      "Executed test plan with transcripts",
+      "Validated findings report with fix guidance",
+      "Read-out with product and engineering",
+      "Retest and regression pack"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Test coverage",
+        "how": "Test cases run per OWASP LLM category, tool and language."
+      },
+      {
+        "metric": "Validated findings by severity",
+        "how": "Engineer-confirmed findings at each severity level."
+      },
+      {
+        "metric": "Policy deviation rate",
+        "how": "Share of test conversations where the assistant stated a price, offer or policy that contradicts your rules."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Pass or fail status of each finding on retest."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "We use a vendor's chatbot platform. Can you still test it?",
+      "a": "Yes. We test the assistant as deployed for you, including your prompts, knowledge sources and connected tools. Issues in the platform itself are reported so you can raise them with the vendor."
+    },
+    {
+      "q": "Do you test in Hindi and Hinglish?",
+      "a": "Yes. Guardrails that hold in English often fail in Hindi, Hinglish or transliterated text, so our attack library covers all three."
+    },
+    {
+      "q": "Will testing affect real customers or orders?",
+      "a": "No. Tests run in staging with seeded accounts, and no coupons are redeemed or orders placed in production."
+    },
+    {
+      "q": "How often should we retest?",
+      "a": "After any change to the model, prompts, tools or offer logic, and before major sale events. The regression pack lets your team run the core tests in CI between full reviews."
+    }
+  ],
+  "related": [
+    "catalog-enrichment-from-product-images",
+    "order-status-and-returns-voice-agent",
+    "llm-application-penetration-test",
+    "rag-data-leakage-and-access-control-testing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/shopping-assistant-guardrail-testing/"
+}

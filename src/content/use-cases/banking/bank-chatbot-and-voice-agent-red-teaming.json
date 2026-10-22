@@ -1,0 +1,223 @@
+{
+  "slug": "bank-chatbot-and-voice-agent-red-teaming",
+  "industry": "banking",
+  "title": "Red-Teaming for Bank Chatbots and Voice Agents",
+  "capability": "ai-security",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Adversarial testing of bank chatbots and voice agents for prompt injection, data leakage, account-takeover social engineering and unsafe advice, in English, Hindi and Hinglish.",
+  "seo": {
+    "title": "Red-Teaming for Bank Chatbots and Voice Agents | VipraTech",
+    "description": "Adversarial testing of banking chatbots and voice bots for prompt injection, data leakage and social engineering, mapped to OWASP LLM Top 10 and FREE-AI.",
+    "keywords": [
+      "bank chatbot red teaming",
+      "voice agent security testing bank",
+      "LLM prompt injection testing",
+      "OWASP LLM Top 10 banking",
+      "AI security assessment bank India"
+    ]
+  },
+  "designed_for": [
+    "Chief Information Security Officer",
+    "Head of Digital Banking",
+    "Head of AI and Data Science",
+    "IT Risk and Assurance Manager"
+  ],
+  "problem": {
+    "intro": "Banks are putting language models behind WhatsApp bots, website assistants and voice agents, often built by a vendor and connected to account APIs. Traditional application penetration tests do not exercise how these systems respond to manipulative conversation, and the attack surface now includes everything a customer, or an attacker posing as one, can say.",
+    "pain_points": [
+      {
+        "title": "Conversation as an attack path",
+        "detail": "Prompt injection and jailbreaks can make an assistant ignore its instructions, reveal its system prompt or call tools it should not."
+      },
+      {
+        "title": "Account takeover through social engineering",
+        "detail": "Attackers test whether a bot will change a registered mobile number, reveal balances or skip verification when pressured or confused."
+      },
+      {
+        "title": "Hinglish and voice-specific gaps",
+        "detail": "Guardrails tuned on English text often fail on code-mixed Hindi, transliteration or spoken input with background voices."
+      },
+      {
+        "title": "No evidence for the risk committee",
+        "detail": "Vendors say their bot is safe, but the bank lacks independent, repeatable evidence to show its risk committee and auditors."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a structured red-team engagement against your chatbot or voice agent in a test environment you control. Supervised AI attacker agents and human testers work through multi-turn playbooks covering prompt injection, indirect injection through documents or web content, system prompt and data leakage, tool and API misuse, authentication bypass, unsafe financial advice and mis-selling. For voice agents, attacks are delivered as audio, including code-mixed speech, interruptions and background voices. Each finding records the full conversation, its impact and a PASS, RISK or FAIL verdict mapped to the OWASP Top 10 for LLM Applications, MITRE ATLAS and relevant RBI and DPDP expectations. We retest after fixes.",
+    "capabilities": [
+      "Multi-turn adversarial playbooks in English, Hindi and Hinglish, with regional languages on request",
+      "Tests for prompt injection, jailbreaks, system prompt leakage and cross-customer data exposure",
+      "Authentication bypass and social engineering scenarios against account-linked tools",
+      "Voice attacks delivered as audio, including barge-in, background speech and false context",
+      "Checks for unsafe investment, loan or tax advice and mis-selling of third-party products",
+      "Evidence pack with transcripts, recordings, verdicts and framework mappings, plus retest"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and rules",
+      "detail": "We confirm the bot, channels, tools and test accounts in scope, and the rules of engagement with your security team."
+    },
+    {
+      "step": 2,
+      "title": "Map the attack surface",
+      "detail": "We document the bot's tools, data sources, authentication steps and guardrails from configuration and probing."
+    },
+    {
+      "step": 3,
+      "title": "Run adversarial playbooks",
+      "detail": "Attacker agents and human testers run multi-turn attacks by text and voice against the test environment."
+    },
+    {
+      "step": 4,
+      "title": "Validate findings",
+      "detail": "Every candidate finding is reproduced and checked by a human tester before it is recorded."
+    },
+    {
+      "step": 5,
+      "title": "Report with evidence",
+      "detail": "Findings carry transcripts, recordings, impact, verdicts and framework mappings, with remediation guidance."
+    },
+    {
+      "step": 6,
+      "title": "Retest fixes",
+      "detail": "After your team or vendor fixes issues, we rerun the affected playbooks and update the evidence pack."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope and rules of engagement\"] --> B[\"Map tools, data and guardrails\"]\n  B --> C[\"Run text and voice attack playbooks\"]\n  C --> D{\"Candidate finding reproduces?\"}\n  D -->|\"no\"| C\n  D -->|\"yes\"| E(\"Human tester validates impact\")\n  E --> F[\"Verdict and framework mapping\"]\n  F --> G[\"Evidence pack and remediation advice\"]\n  G --> H[\"Retest after fixes\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scope and setup",
+        "components": [
+          "Rules of engagement and test accounts",
+          "Attack-surface map of tools and data sources"
+        ]
+      },
+      {
+        "name": "Attack generation",
+        "components": [
+          "Supervisor agent selecting playbooks",
+          "Attacker agents for text and voice",
+          "Multilingual and code-mixed prompt library"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Chat connectors for web and WhatsApp test numbers",
+          "Audio synthesis and telephony dialler for voice agents"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Response judges for leakage, policy and tool misuse",
+          "Human validation of each finding",
+          "Mapping to OWASP LLM Top 10, MITRE ATLAS and NIST AI RMF"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Evidence store with transcripts and recordings",
+          "Findings report and retest tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scope and setup\"]\n    A1[\"Rules of engagement\"]\n    A2[\"Attack surface map\"]\n  end\n  subgraph S2[\"Attack generation\"]\n    G1[\"Supervisor agent\"]\n    G2[\"Attacker agents\"]\n    G3[\"Multilingual prompt library\"]\n  end\n  subgraph S3[\"Delivery\"]\n    D1[\"Chat connectors\"]\n    D2[\"Voice dialler and audio\"]\n    T1[\"Bot under test\"]\n  end\n  subgraph S4[\"Evaluation and reporting\"]\n    E1[\"Response judges\"]\n    E2(\"Human validation\")\n    E3[\"Evidence store and report\"]\n  end\n  A1 --> G1\n  A2 --> G1\n  G1 --> G2\n  G3 --> G2\n  G2 --> D1 --> T1\n  G2 --> D2 --> T1\n  T1 --> E1 --> E2 --> E3"
+  },
+  "inputs": [
+    "Access to the chatbot or voice agent in a test or staging environment",
+    "Test customer accounts and synthetic data",
+    "Bot configuration, tool list and guardrail documentation where available",
+    "Bank policies on authentication, advice and disclosures",
+    "Rules of engagement agreed with the CISO's team"
+  ],
+  "outputs": [
+    "Findings report with PASS, RISK and FAIL verdicts",
+    "Full transcripts and audio recordings for every finding",
+    "Mapping to OWASP LLM Top 10, MITRE ATLAS, NIST AI RMF and FREE-AI themes",
+    "Prioritised remediation guidance for the bank or its vendor",
+    "Retest results and an updated evidence pack"
+  ],
+  "human_in_the_loop": "Human testers validate every finding before it enters the report, and the bank's security team approves scope and any test that touches live channels. Verdicts come with evidence so your risk committee can make its own judgement.",
+  "integrations": [
+    "Chatbot or voice agent test endpoints: web, WhatsApp test number, SIP or phone number",
+    "Bank test environment with synthetic customer data",
+    "Vulnerability management or GRC tool for findings",
+    "Issue tracker used by the bot vendor",
+    "CI pipeline for scheduled regression runs, if required"
+  ],
+  "guardrails": [
+    "Testing only in agreed environments with test accounts; no real customer data",
+    "Transactional or destructive tests only with explicit written approval",
+    "Attack prompts and recordings stored encrypted and shared on a need-to-know basis",
+    "Every finding reproduced before reporting",
+    "Agreed stop conditions if testing affects availability"
+  ],
+  "compliance_notes": [
+    "Findings are mapped to the OWASP Top 10 for LLM Applications, NIST AI RMF and themes in RBI's FREE-AI framework, to help the bank evidence AI risk testing.",
+    "Helps evidence safeguards for personal data under the DPDP Act 2023; the report does not certify compliance."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One customer-facing assistant, such as a WhatsApp banking bot, tested in English and Hinglish against a focused set of playbooks for data leakage, authentication bypass and unsafe advice.",
+    "deliverables": [
+      "Rules of engagement and attack-surface map",
+      "Executed playbooks with full transcripts",
+      "Findings report with verdicts and framework mappings",
+      "Remediation walkthrough with your team or vendor",
+      "Retest of fixed findings"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Findings by severity and category",
+        "how": "Validated findings per OWASP LLM category and severity, each with reproduction steps."
+      },
+      {
+        "metric": "Playbook coverage",
+        "how": "Attack scenarios executed against those agreed in scope, by language and channel."
+      },
+      {
+        "metric": "Behaviour consistency across languages",
+        "how": "The same attack run in English, Hindi and Hinglish, comparing the bot's responses."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Findings confirmed fixed on retest, compared with those still reproducible."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How is this different from a normal penetration test?",
+      "a": "A web or API penetration test checks the application and infrastructure. This engagement tests how the language model behaves in conversation and what it can be manipulated into doing with its tools and data. Many banks need both."
+    },
+    {
+      "q": "Do you test in production?",
+      "a": "We prefer a staging environment with test accounts. If a production test is needed, it runs with test accounts, agreed time windows and stop conditions approved by your CISO."
+    },
+    {
+      "q": "Can you test a vendor's bot?",
+      "a": "Yes, with the vendor's cooperation for access and fixes. The report gives the bank independent evidence and gives the vendor reproducible cases to fix."
+    },
+    {
+      "q": "Can testing be repeated after each release?",
+      "a": "Yes. Playbooks are kept as a regression suite, and we can rerun them on a schedule or after each change to the model, prompts or tools."
+    }
+  ],
+  "related": [
+    "ai-model-governance-evidence-pack",
+    "multilingual-banking-voice-agent",
+    "collections-voice-agent-conduct-testing",
+    "llm-application-penetration-test"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/banking/bank-chatbot-and-voice-agent-red-teaming/"
+}

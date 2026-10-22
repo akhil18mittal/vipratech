@@ -1,0 +1,223 @@
+{
+  "slug": "collections-voice-agent-with-conduct-guardrails",
+  "industry": "nbfc-lending",
+  "title": "Collections Voice Agent with Conduct Guardrails",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A collections voice agent for early-bucket accounts that speaks Hindi, Hinglish and regional languages, captures promises to pay and disputes, and enforces conduct rules on every sentence.",
+  "seo": {
+    "title": "Collections Voice Agent with Conduct Guardrails | VipraTech",
+    "description": "AI voice agent for early-stage collections in Hindi and regional languages, with calling-window, disclosure and language guardrails and human escalation.",
+    "keywords": [
+      "collections voice agent",
+      "AI collections calls Hindi",
+      "early bucket collections automation",
+      "recovery agent conduct RBI",
+      "promise to pay voice bot"
+    ]
+  },
+  "designed_for": [
+    "Head of Collections",
+    "Collections Strategy Manager",
+    "Chief Compliance Officer",
+    "Head of Customer Grievances"
+  ],
+  "problem": {
+    "intro": "Early-bucket collections, from the first missed EMI through the SMA-0 and SMA-1 stages, depend on reaching many borrowers quickly with the right message. Tele-calling teams are hard to scale and supervise, and a single call with threatening language, wrong timing or disclosure to a family member can become a complaint and a regulatory issue.",
+    "pain_points": [
+      {
+        "title": "Scale versus supervision",
+        "detail": "Large calling teams are needed at the start of each month, and supervisors can audit only a small sample of calls."
+      },
+      {
+        "title": "Conduct risk on every call",
+        "detail": "Callers under target pressure may threaten, call outside permitted hours or discuss dues with whoever answers the phone."
+      },
+      {
+        "title": "Language mismatch",
+        "detail": "Borrowers respond better in their own language, but calling teams cannot cover every language across geographies."
+      },
+      {
+        "title": "Unstructured outcomes",
+        "detail": "Promises to pay, disputes, hardship reasons and wrong numbers are recorded inconsistently, so follow-up strategy relies on guesswork."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an outbound and callback voice agent for early-bucket accounts. It confirms it is speaking with the borrower before mentioning any dues, states who is calling and on whose behalf, explains the overdue amount from your LMS and offers a UPI payment link by SMS or WhatsApp. It captures promises to pay with date and amount, records disputes and hardship reasons, and transfers to a human collector when the borrower asks, disputes the debt, mentions illness, bereavement or job loss, or becomes distressed. A conduct policy layer checks every planned utterance before it is spoken and enforces calling windows, contact frequency, prohibited phrases and third-party rules.",
+    "capabilities": [
+      "Speaks Hindi, Hinglish, English and selected regional languages, switching when the borrower does",
+      "Right-party confirmation before any mention of the loan or dues",
+      "Real-time conduct guard that blocks threats, misrepresentation and disclosure to third parties",
+      "Calling-window and contact-frequency enforcement per borrower",
+      "Promise-to-pay, dispute, hardship and wrong-number capture into the collections system",
+      "UPI payment links by SMS or WhatsApp, with payment status checked before any follow-up"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Build the call list",
+      "detail": "Accounts by bucket and strategy are pulled from the LMS and filtered for calling window, frequency limits and do-not-call flags."
+    },
+    {
+      "step": 2,
+      "title": "Confirm the right party",
+      "detail": "The agent identifies itself and the lender and confirms the borrower's identity before discussing the account."
+    },
+    {
+      "step": 3,
+      "title": "Explain and listen",
+      "detail": "It states the overdue amount and due date, listens to the borrower's situation and answers questions from approved content."
+    },
+    {
+      "step": 4,
+      "title": "Check for escalation",
+      "detail": "Disputes, hardship, distress or a request for a person trigger a warm transfer or a scheduled human callback."
+    },
+    {
+      "step": 5,
+      "title": "Agree the next step",
+      "detail": "The agent records a promise to pay or sends a payment link, and confirms the agreed date by SMS."
+    },
+    {
+      "step": 6,
+      "title": "Log and review",
+      "detail": "Outcomes, transcripts and conduct-check logs flow to the collections system and QA dashboards."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Bucketed accounts from LMS\"] --> B[\"Calling window and frequency filter\"]\n  B --> C[\"Call and confirm right party\"]\n  C --> D[\"Explain dues from approved content\"]\n  D --> E{\"Dispute, hardship or distress?\"}\n  E -->|\"yes\"| F(\"Human collector takes over\")\n  E -->|\"no\"| G[\"Capture PTP or send UPI link\"]\n  F --> H[\"Outcome and transcript to LMS\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Strategy and scheduling",
+        "components": [
+          "LMS bucket and strategy feed",
+          "Calling-window and contact-frequency scheduler",
+          "Do-not-call and wrong-number suppression"
+        ]
+      },
+      {
+        "name": "Telephony and speech",
+        "components": [
+          "Outbound dialler and SIP integration",
+          "Speech recognition for Indian languages",
+          "Text-to-speech voices per language"
+        ]
+      },
+      {
+        "name": "Dialogue and conduct",
+        "components": [
+          "LLM dialogue manager with approved content",
+          "Conduct policy guard on every utterance",
+          "Escalation detector for disputes, hardship and distress"
+        ]
+      },
+      {
+        "name": "Payments and integration",
+        "components": [
+          "UPI payment link generation",
+          "Collections system and LMS adapters",
+          "Human collector transfer and callback queue"
+        ]
+      },
+      {
+        "name": "Quality and audit",
+        "components": [
+          "Recording and transcript store",
+          "Conduct-check logs and QA dashboard"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Strategy and scheduling\"]\n    A1[\"LMS bucket feed\"]\n    A2[\"Window and frequency scheduler\"]\n  end\n  subgraph S2[\"Telephony and speech\"]\n    T1[\"Dialler and SIP\"]\n    T2[\"Speech recognition and TTS\"]\n  end\n  subgraph S3[\"Dialogue and conduct\"]\n    D1[\"Dialogue manager\"]\n    D2[\"Conduct policy guard\"]\n    D3[\"Escalation detector\"]\n  end\n  subgraph S4[\"Payments and integration\"]\n    P1[\"UPI link service\"]\n    P2[\"Collections system adapter\"]\n    P3(\"Human collector queue\")\n  end\n  subgraph S5[\"Quality and audit\"]\n    Q1[\"Transcripts and conduct logs\"]\n  end\n  A1 --> A2 --> T1 --> T2 --> D1\n  D1 --> D2 --> T2\n  D1 --> D3 --> P3\n  D1 --> P1\n  D1 --> P2\n  D2 --> Q1"
+  },
+  "inputs": [
+    "Overdue account list with bucket, amount and due date from the LMS",
+    "Borrower contact details, language preference and contact history",
+    "Approved collections scripts and FAQs per language",
+    "Calling-window, frequency and do-not-call rules",
+    "Payment link service and payment status feed"
+  ],
+  "outputs": [
+    "Call outcomes: promise to pay, dispute, hardship, wrong number or no answer",
+    "UPI payment links sent and payment confirmations",
+    "Recordings and transcripts with conduct-check logs",
+    "Warm transfers and callback tasks for human collectors",
+    "Daily conduct and outcome dashboards"
+  ],
+  "human_in_the_loop": "Human collectors take every dispute, hardship case, distressed borrower and request for a person. Collections and compliance teams approve scripts and conduct rules, and QA staff review sampled calls plus every call where the conduct guard intervened.",
+  "integrations": [
+    "Loan management and collections system",
+    "Outbound dialler or contact-centre platform",
+    "UPI payment gateway or payment link provider",
+    "SMS gateway and WhatsApp Business API",
+    "Complaint management system"
+  ],
+  "guardrails": [
+    "Calls only inside the configured window, set within RBI's expectation of recovery calls between 8 a.m. and 7 p.m.",
+    "No discussion of dues until the borrower's identity is confirmed",
+    "Blocked phrases and topics: threats, police or court misrepresentation, shaming, contact with employers or neighbours",
+    "Contact-frequency caps per borrower per day and week",
+    "Immediate transfer on dispute, hardship, distress or a request for a human"
+  ],
+  "compliance_notes": [
+    "Designed around RBI's Fair Practices Code and recovery-agent conduct expectations; the lender remains responsible for calls made on its behalf.",
+    "Call notice, purpose limitation and recording retention are configured to support DPDP Act 2023 obligations."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Pre-due and early-bucket accounts for one product in two languages, starting with a small daily volume and QA review of every call in the first week.",
+    "deliverables": [
+      "Scripts, conduct rules and escalation criteria approved by collections and compliance",
+      "Working voice agent connected to the LMS and payment links",
+      "Human transfer and callback flow",
+      "QA review report on conduct and outcomes",
+      "Scale-up plan with language roll-out and cost per connected call"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Conduct guard interventions",
+        "how": "Utterances blocked or rewritten by the guard, each reviewed by QA for correctness."
+      },
+      {
+        "metric": "Right-party contact and outcome capture",
+        "how": "Calls reaching the borrower and outcomes recorded in usable form, checked against transcripts."
+      },
+      {
+        "metric": "Promises to pay kept",
+        "how": "Promises captured by the agent compared with payments by the promised date, alongside accounts called by people."
+      },
+      {
+        "metric": "Escalation appropriateness",
+        "how": "QA review of whether disputes, hardship and distress were recognised and transferred."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How do you stop the agent saying something abusive or misleading?",
+      "a": "The language model never speaks directly. Every planned reply passes a conduct guard that checks it against blocked phrases, approved content and context rules, and anything that fails is replaced or the call is transferred. All interventions are logged for QA."
+    },
+    {
+      "q": "What if someone other than the borrower answers?",
+      "a": "The agent asks for the borrower without mentioning the loan or dues. If the borrower is unavailable, it ends politely or asks for a callback time, and never discusses the account with the third party."
+    },
+    {
+      "q": "Can it handle borrowers who want to negotiate?",
+      "a": "It can explain options your policy allows, such as a payment date within limits you set. Restructuring, settlement or waiver discussions are transferred to authorised staff."
+    },
+    {
+      "q": "Is this suitable for late-stage recovery?",
+      "a": "We recommend it for pre-due reminders and early buckets. Late-stage and legal recovery involve judgement and higher conduct risk, and should stay with trained human teams."
+    }
+  ],
+  "related": [
+    "collections-voice-agent-conduct-testing",
+    "emi-reminder-voice-and-whatsapp-agent",
+    "field-collection-visit-photo-verification",
+    "call-qa-and-compliance-auditing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/collections-voice-agent-with-conduct-guardrails/"
+}

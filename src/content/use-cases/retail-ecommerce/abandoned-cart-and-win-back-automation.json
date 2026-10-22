@@ -1,0 +1,222 @@
+{
+  "slug": "abandoned-cart-and-win-back-automation",
+  "industry": "retail-ecommerce",
+  "title": "Abandoned Cart and Win-Back Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Recover abandoned carts and bring back lapsed customers with WhatsApp and email journeys built around cart contents and purchase cycles, measured against a holdout group.",
+  "seo": {
+    "title": "Abandoned Cart and Win-Back Automation | VipraTech",
+    "description": "WhatsApp and email journeys for D2C brands that recover abandoned carts and win back lapsed buyers, tailored by cart and purchase cycle, with holdouts.",
+    "keywords": [
+      "abandoned cart recovery WhatsApp",
+      "win-back campaigns for D2C",
+      "WhatsApp marketing automation",
+      "repeat purchase automation",
+      "D2C retention marketing AI"
+    ]
+  },
+  "designed_for": [
+    "D2C Founder or Growth Head",
+    "Head of Retention and CRM",
+    "Performance Marketing Manager",
+    "E-commerce Manager"
+  ],
+  "problem": {
+    "intro": "Most visitors who add to cart do not buy, and many first-time customers never order again. Brands respond with the same discount reminder for everyone, which costs margin, trains customers to wait for a coupon and fills WhatsApp with messages people block.",
+    "pain_points": [
+      {
+        "title": "Generic reminders",
+        "detail": "Every abandoner gets the same message and coupon, regardless of what they left, why, or whether they would have returned anyway."
+      },
+      {
+        "title": "Discount dependence",
+        "detail": "Coupons in every reminder erode margin and teach customers to abandon on purpose."
+      },
+      {
+        "title": "WhatsApp quality risk",
+        "detail": "High message volumes with low relevance lead to blocks and reports that hurt your sender quality rating."
+      },
+      {
+        "title": "No proof of impact",
+        "detail": "Recovered orders are counted without a holdout, so nobody knows which would have happened without the message."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build journeys that react to what each customer did. An abandoned cart triggers a WhatsApp or email reminder that shows the actual items, addresses common blockers such as size, delivery time to their pincode or COD availability, and answers replies conversationally, handing anything outside scope to support. Win-back journeys follow each customer's purchase cycle, so a replenishment reminder for a moisturiser arrives around when it is likely to run out. An LLM drafts message variants in your brand voice from approved building blocks, and incentives come only from approved coupon pools. Every journey keeps a holdout group, so impact is measured rather than assumed.",
+    "capabilities": [
+      "Cart and browse abandonment triggers from Shopify, WooCommerce or your storefront",
+      "Messages that show the actual cart items, sizes in stock and delivery time to the customer's pincode",
+      "Conversational replies on WhatsApp for size, delivery and COD questions, with handover to support",
+      "Win-back timing based on each customer's purchase cycle and category",
+      "Message variants drafted in your brand voice from approved templates and claims",
+      "Built-in holdout groups, frequency caps and quiet hours"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture events",
+      "detail": "Cart, checkout, browse and order events stream from your storefront and OMS."
+    },
+    {
+      "step": 2,
+      "title": "Select eligible customers",
+      "detail": "Opt-in status, frequency caps, recent orders and holdout assignment decide who receives a message."
+    },
+    {
+      "step": 3,
+      "title": "Compose the message",
+      "detail": "The message is built from the cart or purchase history, approved templates and any approved incentive."
+    },
+    {
+      "step": 4,
+      "title": "Send and converse",
+      "detail": "WhatsApp or email goes out, and replies are answered within scope or handed to support."
+    },
+    {
+      "step": 5,
+      "title": "Measure against holdout",
+      "detail": "Orders from messaged customers are compared with the holdout group."
+    },
+    {
+      "step": 6,
+      "title": "Marketing review",
+      "detail": "Marketing reviews results, opt-outs and quality rating weekly and approves template or rule changes."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Cart, browse and order events\"] --> B[\"Check opt-in, caps and holdout\"]\n  B --> C{\"Eligible for a message?\"}\n  C -->|\"no\"| D[\"Holdout or suppressed\"]\n  C -->|\"yes\"| E[\"Compose from cart and templates\"]\n  E --> F[\"Send WhatsApp or email\"]\n  F --> G{\"Reply within FAQ scope?\"}\n  G -->|\"yes\"| H[\"Answer and link to checkout\"]\n  G -->|\"no\"| I(\"Support agent takes over\")\n  H --> J(\"Weekly review against holdout\")\n  D --> J\n  I --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Event capture",
+        "components": [
+          "Storefront and OMS webhooks",
+          "Customer profile and consent store"
+        ]
+      },
+      {
+        "name": "Decisioning",
+        "components": [
+          "Eligibility rules, caps and quiet hours",
+          "Purchase-cycle model for win-back timing",
+          "Holdout assignment"
+        ]
+      },
+      {
+        "name": "Content",
+        "components": [
+          "Approved template and claim library",
+          "LLM variant drafting in brand voice",
+          "Approved coupon pools"
+        ]
+      },
+      {
+        "name": "Delivery and conversation",
+        "components": [
+          "WhatsApp Business API and email service",
+          "Reply assistant with support handover"
+        ]
+      },
+      {
+        "name": "Measurement",
+        "components": [
+          "Holdout comparison dashboard",
+          "Opt-out, block and quality rating monitor"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Event capture\"]\n    C1[\"Storefront and OMS events\"]\n    C2[\"Consent store\"]\n  end\n  subgraph S2[\"Decisioning\"]\n    D1[\"Eligibility and caps\"]\n    D2[\"Purchase cycle model\"]\n    D3[\"Holdout assignment\"]\n  end\n  subgraph S3[\"Content\"]\n    T1[\"Approved templates and coupons\"]\n    T2[\"LLM variant drafting\"]\n  end\n  subgraph S4[\"Delivery and conversation\"]\n    W1[\"WhatsApp and email\"]\n    W2(\"Support handover\")\n  end\n  subgraph S5[\"Measurement\"]\n    M1[\"Holdout dashboard\"]\n  end\n  C1 --> D1\n  C2 --> D1\n  C1 --> D2 --> D1\n  D1 --> D3\n  D3 --> T2\n  T1 --> T2\n  T2 --> W1\n  W1 --> W2\n  W1 --> M1\n  D3 --> M1"
+  },
+  "inputs": [
+    "Cart, checkout, browse and order events",
+    "Customer consent and opt-in records",
+    "Order history by customer and category",
+    "Approved templates, claims and coupon pools",
+    "Inventory and pincode serviceability"
+  ],
+  "outputs": [
+    "Abandoned cart and win-back messages tailored to each customer",
+    "Conversational replies and support handovers",
+    "Holdout comparison of conversion and revenue",
+    "Opt-out, block and quality rating reports",
+    "Message variant performance for marketing review"
+  ],
+  "human_in_the_loop": "Marketing approves templates, claims, incentive rules and journey changes before they go live, and reviews results weekly. Replies outside the agreed FAQ scope go to a support agent.",
+  "integrations": [
+    "Shopify, WooCommerce or your storefront",
+    "WhatsApp Business API provider",
+    "Email service or a marketing automation platform such as Klaviyo, MoEngage or CleverTap",
+    "OMS and inventory system",
+    "Helpdesk for handovers"
+  ],
+  "guardrails": [
+    "Messages only to opted-in customers, with frequency caps and quiet hours",
+    "Incentives only from approved coupon pools",
+    "No false urgency or fake scarcity in copy",
+    "Opt-outs honoured immediately across channels",
+    "Holdout group maintained for every journey"
+  ],
+  "compliance_notes": [
+    "Marketing messages rely on consent that customers can withdraw, as the DPDP Act 2023 requires.",
+    "Copy avoids false urgency and other practices listed in the CCPA dark-pattern guidelines.",
+    "SMS fallbacks use DLT-registered headers and templates under TRAI rules."
+  ],
+  "pilot": {
+    "duration": "6 weeks",
+    "scope": "The abandoned cart journey on WhatsApp for one storefront, with a randomly assigned holdout group, plus one win-back journey for a replenishment category.",
+    "deliverables": [
+      "Journey designs and templates approved by marketing",
+      "Working triggers, decisioning and WhatsApp flows",
+      "Reply assistant with support handover",
+      "Holdout-based pilot report",
+      "Roll-out plan and messaging cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Incremental conversion",
+        "how": "Conversion of messaged customers compared with the holdout group."
+      },
+      {
+        "metric": "Cost per incremental order",
+        "how": "Messaging and incentive cost divided by orders above the holdout baseline."
+      },
+      {
+        "metric": "Opt-out and block rate",
+        "how": "Opt-outs, blocks and quality rating changes per thousand messages sent."
+      },
+      {
+        "metric": "Reply handling accuracy",
+        "how": "A sample of conversational replies reviewed for correctness and handover decisions."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Why not just send a coupon to everyone who abandons?",
+      "a": "Because many would have bought anyway, and blanket coupons teach customers to wait. The holdout shows how many orders the reminder actually adds, so incentives can be kept for segments where they make a difference."
+    },
+    {
+      "q": "Will this hurt our WhatsApp quality rating?",
+      "a": "It is designed to protect it: messages go only to opted-in customers, relate to what they did, and are capped. We monitor blocks and the quality rating weekly during the pilot."
+    },
+    {
+      "q": "Can the assistant answer replies like 'is size M available?'",
+      "a": "Yes, from live inventory and your FAQ content. Anything outside that scope, such as a complaint, goes to a support agent."
+    },
+    {
+      "q": "Do we need a CDP?",
+      "a": "No. Storefront and OMS events are enough to start. If you already use a marketing automation platform, we connect to it rather than replace it."
+    }
+  ],
+  "related": [
+    "cod-confirmation-calls",
+    "review-and-ugc-insights",
+    "catalog-enrichment-from-product-images",
+    "dormant-account-reactivation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/abandoned-cart-and-win-back-automation/"
+}

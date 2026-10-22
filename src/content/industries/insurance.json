@@ -1,0 +1,125 @@
+{
+  "slug": "insurance",
+  "name": "Insurance",
+  "seo": {
+    "title": "AI for Insurance: Claims, Underwriting & Voice | VipraTech",
+    "description": "Custom AI for insurers, TPAs and brokers: claim and pre-auth extraction, motor damage triage, renewal voice agents and sales-bot conduct testing.",
+    "keywords": [
+      "AI for insurance India",
+      "insurance claims automation",
+      "TPA pre-authorisation AI",
+      "motor claim damage detection",
+      "insurance voice agent",
+      "insurance chatbot compliance testing",
+      "underwriting submission intake AI"
+    ]
+  },
+  "hero": {
+    "headline": "Claims, underwriting and policyholder service, prepared by AI and decided by your people",
+    "subheadline": "We build document, vision, voice and AI-security systems for insurers, TPAs, brokers and insurtechs. Every extracted field, flag and call outcome links back to its evidence, so assessors, underwriters and compliance teams can check it."
+  },
+  "intro": "Insurance runs on documents and conversations: claim files, pre-authorisation requests, broker submissions, policy wordings, renewal calls and claim-status queries. That is where applied AI helps today. It can read a messy claim file and hand an assessor clean, source-linked fields, flag a pharmacy bill that looks edited, triage motor damage from photos, take routine renewal and status calls in Hindi or Tamil, and test a sales bot for mis-selling before customers meet it. It should not decide claims, set prices, judge medical necessity or label a customer a fraudster. Those calls stay with medical officers, licensed surveyors, underwriters and investigators. We design every system so that people decide, and the evidence behind each suggestion is one click away.",
+  "challenges": [
+    {
+      "title": "Claim and pre-auth files are long and messy",
+      "detail": "Cashless and reimbursement claims arrive as dozens of scanned pages in hospital-specific formats, and assessors re-key data before they can adjudicate."
+    },
+    {
+      "title": "Leakage hides in plain sight",
+      "detail": "Inflated bills, edited dates, reused documents and repair estimates that do not match the damage are hard to spot under daily volume."
+    },
+    {
+      "title": "Distribution conduct is under scrutiny",
+      "detail": "Agents, POSPs, bancassurance staff and now chatbots must explain exclusions, waiting periods and charges correctly, and mis-selling complaints are costly to investigate."
+    },
+    {
+      "title": "Service and renewal calls peak unpredictably",
+      "detail": "Renewal reminders, claim-status queries and hospital helpdesk calls compete for the same contact-centre capacity, often in several languages."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Extraction and checking for claim files, pre-auth requests, broker submissions and policy wordings, with every field linked to its source page."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Damage detection and photo-quality checks for motor claims and break-in inspections, plus image forensics for edited bills and reports."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Multilingual voice agents for renewal reminders and claim-status queries that verify the caller, use approved content and hand over to licensed staff."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Red-teaming of sales and service bots for mis-selling, missing disclosures, prompt injection and policyholder data leakage."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "WhatsApp-first journeys that move agent and POSP prospects through onboarding and help active POSPs follow up on their customers' renewals."
+    }
+  ],
+  "featured_use_cases": [
+    "health-claim-document-extraction",
+    "motor-claim-damage-assessment",
+    "insurance-bot-mis-selling-and-disclosure-testing"
+  ],
+  "use_cases": [
+    "health-claim-document-extraction",
+    "tpa-pre-authorisation-triage",
+    "tampered-document-detection",
+    "commercial-underwriting-submission-intake",
+    "policy-wording-comparison-assistant",
+    "motor-claim-damage-assessment",
+    "policy-renewal-voice-agent",
+    "claim-status-voice-helpline",
+    "insurance-bot-mis-selling-and-disclosure-testing",
+    "agent-and-posp-lead-nurturing"
+  ],
+  "regulatory_context": [
+    {
+      "name": "IRDAI regulations, master circulars and guidelines",
+      "note": "IRDAI rules on policyholder protection, health insurance, claim settlement and information security set expectations on turnaround, disclosure, grievance handling and vendor risk. AI can prepare and flag work, while decisions and accountability stay with the insurer or TPA."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Claim files carry health and identity data. We build for purpose limitation, consent where required, masked logs and agreed retention, with Aadhaar handled per UIDAI rules."
+    },
+    {
+      "name": "TRAI commercial-communication rules",
+      "note": "Outbound renewal calls and messages must follow TRAI's commercial-communication rules, including DLT registration of senders and SMS templates, and must respect customer consent and preference registrations."
+    },
+    {
+      "name": "EU AI Act and GDPR",
+      "note": "For insurers serving EU customers, AI used for risk assessment and pricing in life and health insurance is classed as high-risk under the EU AI Act, alongside GDPR duties for personal data."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Will your AI approve or reject claims?",
+      "a": "No. Our systems extract, check and flag; they do not adjudicate. Assessors, medical officers, surveyors and underwriters make every decision, and the system records what they changed and why."
+    },
+    {
+      "q": "Do you work with TPAs and brokers as well as insurers?",
+      "a": "Yes. Pre-authorisation triage and claim extraction suit TPAs, submission intake and wording comparison suit brokers and commercial underwriters, and POSP journeys suit both insurers and broking firms."
+    },
+    {
+      "q": "Where is policyholder data processed?",
+      "a": "In your cloud account or an India region of a major cloud provider, as your policy requires. Health and identity data is masked in logs, and we can use model endpoints that do not retain or train on your data."
+    },
+    {
+      "q": "How do we start?",
+      "a": "Usually with a three- or four-week pilot on one claim type, one product line or one bot, run alongside your current process. You get a working system, an accuracy or findings report and a costed production plan."
+    }
+  ],
+  "related_industries": [
+    "healthcare",
+    "automotive-mobility",
+    "banking"
+  ],
+  "cta": {
+    "headline": "Pick one claim type, product line or bot to start",
+    "text": "Book a discovery call and we will scope a short pilot on your own de-identified documents or staging bot, with clear measures agreed up front."
+  },
+  "url": "/industries/insurance/"
+}

@@ -1,0 +1,217 @@
+{
+  "slug": "stockist-order-taking-voice-agent",
+  "industry": "pharma-life-sciences",
+  "title": "Distributor and Stockist Order-Taking Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "A voice and WhatsApp agent that takes orders from stockists and chemists by brand and pack, checks stock, schemes and credit, reads the order back and posts it to your ERP or DMS.",
+  "seo": {
+    "title": "Stockist Order-Taking Voice Agent for Pharma | VipraTech",
+    "description": "Voice agent that takes stockist and chemist orders in Hindi and regional languages, checks stock, schemes and credit, and posts orders to your ERP.",
+    "keywords": [
+      "stockist order taking",
+      "pharma distributor ordering voice agent",
+      "chemist order automation",
+      "pharma secondary sales",
+      "voice ordering in Hindi"
+    ]
+  },
+  "designed_for": [
+    "Head of Distribution",
+    "Commercial Operations Manager",
+    "C&F and Depot Manager",
+    "Sales Operations Lead"
+  ],
+  "problem": {
+    "intro": "Pharma companies in India sell through carrying and forwarding agents, stockists and retail chemists. Stockist orders still arrive as calls to the depot, handwritten slips carried by MRs, or WhatsApp photos of order books, and depot staff key them into the ERP or distributor management system.",
+    "pain_points": [
+      {
+        "title": "Orders by phone and photo",
+        "detail": "Order lines arrive as brand nicknames and pack sizes, spoken quickly or written by hand, and get keyed with errors."
+      },
+      {
+        "title": "Scheme confusion",
+        "detail": "Stockists ask about running schemes and free-goods offers, and the answer depends on who picks up the phone."
+      },
+      {
+        "title": "Stock and credit surprises",
+        "detail": "Orders are accepted for products out of stock at the depot or for stockists over their credit limit, and get cut later."
+      },
+      {
+        "title": "MRs carrying orders",
+        "detail": "Field reps spend time relaying orders between chemists and stockists instead of focusing on doctor calls."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an ordering agent that stockists and chemists can call, or message on WhatsApp, in Hindi, English or a regional language. It recognises the customer from the registered number, understands brand names, strengths and pack sizes including common shorthand, and reads back each line. Before confirming, it checks depot stock, current schemes and the stockist's credit status in your ERP, and offers substitutes only from your approved list. Confirmed orders are posted to the ERP or DMS with a WhatsApp acknowledgement. Unclear lines, credit holds and requests outside policy go to depot staff.",
+    "capabilities": [
+      "Takes orders by inbound call, scheduled outbound call or WhatsApp voice and text",
+      "Understands brand, strength and pack names, including common shorthand and Hinglish",
+      "Reads back each order line, free goods and expected value before confirmation",
+      "Checks depot stock, running schemes and credit status in your ERP",
+      "Posts confirmed orders to the ERP or distributor management system",
+      "Hands credit holds, disputes and unclear lines to depot staff with a call summary"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Stockist calls or messages",
+      "detail": "The agent identifies the stockist from the registered number and loads their account context."
+    },
+    {
+      "step": 2,
+      "title": "Capture order lines",
+      "detail": "The stockist speaks or types order lines, and the agent matches each to a SKU, asking about any it is unsure of."
+    },
+    {
+      "step": 3,
+      "title": "Check stock, schemes and credit",
+      "detail": "Each line is checked against depot stock, applicable schemes and the stockist's credit status."
+    },
+    {
+      "step": 4,
+      "title": "Route exceptions",
+      "detail": "Credit holds, unmatched products and special requests go to depot staff with the call summary."
+    },
+    {
+      "step": 5,
+      "title": "Read back and confirm",
+      "detail": "The agent reads back lines, free goods and expected value, and the stockist confirms."
+    },
+    {
+      "step": 6,
+      "title": "Post and acknowledge",
+      "detail": "The confirmed order is posted to the ERP, and a WhatsApp acknowledgement with the order number is sent."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Stockist calls or sends WhatsApp\"] --> B[\"Identify stockist and account\"]\n  B --> C[\"Capture lines and match SKUs\"]\n  C --> D[\"Check stock, scheme and credit\"]\n  D --> E{\"Any line unclear or on hold?\"}\n  E -->|\"yes\"| F(\"Depot staff resolve exception\")\n  E -->|\"no\"| G[\"Read back and confirm order\"]\n  F --> G\n  G --> H[\"Post order to ERP\"]\n  H --> I[\"Send WhatsApp acknowledgement\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channels",
+        "components": [
+          "Telephony with Indian virtual numbers",
+          "WhatsApp Business API"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Speech-to-text and text-to-speech in Hindi and regional languages",
+          "Dialogue manager with order read-back",
+          "SKU matcher with brand and shorthand dictionary"
+        ]
+      },
+      {
+        "name": "Business rules",
+        "components": [
+          "Depot stock lookup",
+          "Scheme and free-goods rules",
+          "Credit status check"
+        ]
+      },
+      {
+        "name": "Integration and review",
+        "components": [
+          "ERP or DMS order API",
+          "Depot staff exception console",
+          "Call recording and transcript log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Channels\"]\n    C1[\"Phone line\"]\n    C2[\"WhatsApp Business API\"]\n  end\n  subgraph S2[\"Conversation\"]\n    V1[\"Speech to text and TTS\"]\n    V2[\"Dialogue manager\"]\n    V3[\"SKU matcher\"]\n  end\n  subgraph S3[\"Business rules\"]\n    B1[\"Depot stock lookup\"]\n    B2[\"Scheme rules\"]\n    B3[\"Credit check\"]\n  end\n  subgraph S4[\"Integration and review\"]\n    R1[\"ERP order API\"]\n    R2(\"Depot exception console\")\n    R3[\"Call log\"]\n  end\n  C1 --> V1\n  V1 --> V2\n  C2 --> V2\n  V2 --> V3\n  V3 --> B1\n  V2 --> B2\n  V2 --> B3\n  B1 --> R1\n  B3 --> R2\n  R2 --> R1\n  V2 --> R3"
+  },
+  "inputs": [
+    "Stockist and chemist master with registered numbers and licence details",
+    "Product master with brand, strength, pack and common aliases",
+    "Depot stock positions",
+    "Running schemes and free-goods rules",
+    "Credit limits and outstanding balances from the ERP"
+  ],
+  "outputs": [
+    "Confirmed orders posted to ERP or DMS",
+    "WhatsApp order acknowledgements",
+    "Exception tickets for credit holds and unclear lines",
+    "Call recordings and transcripts",
+    "Demand signals for lines that could not be supplied"
+  ],
+  "human_in_the_loop": "Depot staff resolve every credit hold, unmatched product and non-standard request before the order is confirmed. Scheme rules and substitute lists are set and approved by the commercial team, not by the agent.",
+  "integrations": [
+    "ERP such as SAP, Tally or a pharma distribution ERP",
+    "Distributor management system",
+    "WhatsApp Business API",
+    "Telephony or cloud contact-centre platform",
+    "CRM holding the stockist and chemist master"
+  ],
+  "guardrails": [
+    "Every order read back and confirmed before posting",
+    "Substitutes offered only from an approved list",
+    "No discounts or schemes beyond configured rules",
+    "No medical or dosing advice; such questions are declined and redirected",
+    "Calls recorded with notice and retained per policy"
+  ],
+  "compliance_notes": [
+    "Designed to accept orders only from stockists and chemists whose drug licence details are on file in your master, with special-category products excluded where your controls require it.",
+    "Outbound calls follow TRAI commercial communication rules and customer preferences, and personal data is processed in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One depot or C&F location and a group of its stockists for one product division, with orders also logged by the usual route for comparison.",
+    "deliverables": [
+      "Product alias dictionary for the pilot division",
+      "Working voice and WhatsApp ordering agent",
+      "ERP or DMS integration in a test environment",
+      "Depot exception console",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Order line accuracy",
+        "how": "Lines captured by the agent compared with the confirmed order in the ERP after depot review."
+      },
+      {
+        "metric": "Exception share",
+        "how": "Orders needing depot staff intervention, grouped by reason."
+      },
+      {
+        "metric": "Order completion time",
+        "how": "Time from call start to confirmed order, from call logs."
+      },
+      {
+        "metric": "Stockist repeat usage",
+        "how": "Stockists placing repeat orders through the agent during the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it understand brand nicknames and short forms?",
+      "a": "Yes. We build an alias dictionary from your past orders and depot staff knowledge. When a name matches more than one SKU, the agent asks a clarifying question."
+    },
+    {
+      "q": "What about narcotic, psychotropic or other controlled products?",
+      "a": "Ordering follows your existing controls. Products that need special handling can be excluded from the agent and routed to depot staff."
+    },
+    {
+      "q": "Will stockists accept talking to an AI?",
+      "a": "The agent tells callers it is automated and offers a human handover at any point. The pilot measures repeat usage so you can judge adoption with real data."
+    },
+    {
+      "q": "Does it replace our DMS?",
+      "a": "No. It is an ordering front end that posts to your existing ERP or DMS. Pricing, schemes and invoicing stay in those systems."
+    }
+  ],
+  "related": [
+    "mr-call-reporting-by-voice",
+    "doctor-engagement-automation",
+    "dealer-order-taking-voice-agent",
+    "distributor-trade-claims-settlement"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/stockist-order-taking-voice-agent/"
+}

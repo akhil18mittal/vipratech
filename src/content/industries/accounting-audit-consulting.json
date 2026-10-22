@@ -1,0 +1,121 @@
+{
+  "slug": "accounting-audit-consulting",
+  "name": "Accounting, Audit & Consulting",
+  "seo": {
+    "title": "AI for Accounting, Audit and Consulting Firms | VipraTech",
+    "description": "Applied AI for CA, audit and advisory firms: vouching, bank and GST reconciliation, tax document extraction, minutes and AI assurance delivery.",
+    "keywords": [
+      "AI for CA firms",
+      "audit automation India",
+      "GSTR-2B reconciliation software",
+      "AI bank reconciliation",
+      "audit vouching AI",
+      "AI for tax practices",
+      "AI assurance for advisory firms"
+    ]
+  },
+  "hero": {
+    "headline": "Spend audit and tax season on judgement, not on re-keying and chasing",
+    "subheadline": "We build AI systems that read invoices, statements and tax forms, reconcile them against the books and draft working papers, with every exception left for your team to decide."
+  },
+  "intro": "Accounting, audit and consulting work runs on documents: invoices and GRNs for vouching, bank statements for reconciliation, GSTR-2B and purchase registers before every GSTR-3B, Form 16, 26AS and AIS during ITR season, and annual reports for spreading and due diligence. AI is now good at reading these documents, matching them against ledgers and portal data, and drafting first versions of working papers, minutes and proposals. It is not a substitute for professional judgement. Materiality, sample sizes, tax positions, audit opinions and engagement acceptance stay with qualified people, and every AI output has to be traceable to its source so that a reviewer, a peer reviewer or a regulator can follow it. We build systems with that boundary designed in.",
+  "challenges": [
+    {
+      "title": "Compliance calendar peaks",
+      "detail": "Monthly GST returns, quarterly TDS returns, the July ITR deadline and tax audits in September stack up, and the same small team of articled assistants and seniors carries every peak."
+    },
+    {
+      "title": "Evidence arrives in every format",
+      "detail": "Client documents come as scanned PDFs, phone photos on WhatsApp, password-protected statements and Tally or Excel exports, so much of a junior's day goes on opening, renaming and re-keying."
+    },
+    {
+      "title": "Sampling limits coverage",
+      "detail": "Manual vouching and expense reviews test a sample, and anomalies that only show up across the full population, such as duplicates or split transactions, are easy to miss."
+    },
+    {
+      "title": "Documentation has to stand up to review",
+      "detail": "Working papers must show what was checked and by whom for engagement quality review, peer review and, for audits under its remit, NFRA inspection. Tools that cannot show their reasoning create more work than they save."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Reads invoices, bank statements, GST portal downloads, tax forms and annual reports, and reconciles them against ledgers and registers with every value linked to its source page."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Transcribes board, committee and client meetings in English, Hindi and Hinglish, and drafts minutes and action lists for the company secretary or partner to finalise."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Runs client document collection on WhatsApp and email, and drafts proposals, RFP responses and engagement letters from the firm's own approved material."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Gives advisory firms a white-label technical team for adversarial testing of clients' chatbots, voice agents and copilots, with evidence mapped to the frameworks used in their reports."
+    }
+  ],
+  "featured_use_cases": [
+    "gst-return-reconciliation",
+    "audit-sampling-and-vouching",
+    "ai-assurance-delivery-partner"
+  ],
+  "use_cases": [
+    "audit-sampling-and-vouching",
+    "bank-and-ledger-reconciliation",
+    "gst-return-reconciliation",
+    "financial-statement-spreading",
+    "expense-claim-forensic-review",
+    "tax-document-extraction",
+    "meeting-minutes-drafting",
+    "client-document-collection-agent",
+    "engagement-proposal-drafting",
+    "ai-assurance-delivery-partner"
+  ],
+  "regulatory_context": [
+    {
+      "name": "ICAI Standards on Auditing (SA 230, SA 500, SA 530)",
+      "note": "Set expectations for audit documentation, audit evidence and audit sampling. AI tools can prepare and organise evidence, but the engagement team must evaluate it and document its own conclusions."
+    },
+    {
+      "name": "Companies Act 2013: audit trail in accounting software",
+      "note": "Companies must keep books in accounting software with an audit trail (edit log) feature, and auditors report on its use. Our tools propose entries for accountants to post, so the client's own audit trail stays intact."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Client files contain personal data such as PAN, salaries, bank transactions and employee expense records. Processing is designed to support purpose limitation, security safeguards and defined retention."
+    },
+    {
+      "name": "GST and income-tax credit rules",
+      "note": "Input tax credit generally depends on supplier-reported invoices appearing in GSTR-2B, and TDS credit on entries in Form 26AS. Our reconciliations help evidence these checks; eligibility decisions stay with the tax professional."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can AI-prepared work be used as audit evidence?",
+      "a": "It can support it. Our systems extract, match and flag; the engagement team reviews the results, clears exceptions and records its own conclusions in the working papers. Every value links back to the source document, so a reviewer can re-perform the check."
+    },
+    {
+      "q": "Will client data leave our control?",
+      "a": "No. We deploy in your cloud account or an India region of a major cloud provider, segregate data by client and engagement, and use model endpoints that do not train on your data. PAN and bank details are masked in logs, and Aadhaar is handled per UIDAI rules."
+    },
+    {
+      "q": "Does it work with Tally, Zoho Books and SAP?",
+      "a": "Yes, through the exports your team already uses, such as Excel, XML or CSV, and through APIs where the software offers them. We do not post entries into client books automatically; proposed entries go to an accountant for approval."
+    },
+    {
+      "q": "How do we start?",
+      "a": "With a fixed-scope pilot of two to four weeks on one engagement type, using prior-period or de-identified data so results can be compared with work your team has already done. The pilot ends with an accuracy report and a costed plan."
+    }
+  ],
+  "related_industries": [
+    "legal",
+    "banking",
+    "nbfc-lending"
+  ],
+  "cta": {
+    "headline": "Start with one engagement",
+    "text": "Pick one reconciliation, one audit area or one tax-season workflow. We will scope a short pilot on your own documents and show the results against work your team has already done."
+  },
+  "url": "/industries/accounting-audit-consulting/"
+}

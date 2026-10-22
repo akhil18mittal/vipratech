@@ -1,0 +1,216 @@
+{
+  "slug": "insurance-bot-mis-selling-and-disclosure-testing",
+  "industry": "insurance",
+  "title": "Mis-Selling and Disclosure Testing for Insurance Bots",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test insurance sales and service bots for mis-selling, missing disclosures, prompt injection and data leakage, in English, Hindi and Hinglish, with transcript evidence for every finding.",
+  "seo": {
+    "title": "Mis-Selling Testing for Insurance Chatbots | VipraTech",
+    "description": "Red-teaming for insurance chatbots and voice bots: mis-selling, missing disclosures, prompt injection and data leakage, with transcript evidence.",
+    "keywords": [
+      "insurance chatbot testing",
+      "mis-selling testing AI",
+      "insurance voice bot red teaming",
+      "AI disclosure compliance testing",
+      "LLM guardrail testing insurance"
+    ]
+  },
+  "designed_for": [
+    "Chief Compliance Officer",
+    "Head of Digital Sales",
+    "Chief Information Security Officer",
+    "Product Owner, Conversational AI"
+  ],
+  "problem": {
+    "intro": "Insurers, brokers and aggregators now sell and service policies through chatbots and voice bots built on large language models. A bot that calls a ULIP risk-free, skips a waiting period, suggests leaving out a pre-existing condition or offers a discount it cannot give creates the same mis-selling exposure as a human seller, at far greater scale.",
+    "pain_points": [
+      {
+        "title": "Disclosures depend on the conversation path",
+        "detail": "A bot may state exclusions and waiting periods in the happy path but drop them when a customer pushes, interrupts or switches language."
+      },
+      {
+        "title": "Customers and attackers both probe",
+        "detail": "Prompt injection, role-play and persistent negotiation can make a bot promise cover, discounts or returns it has no authority to offer."
+      },
+      {
+        "title": "Hinglish and voice are rarely tested",
+        "detail": "Most test sets are English text, while real customers type in Hinglish or speak Hindi over a noisy line."
+      },
+      {
+        "title": "No evidence for the compliance file",
+        "detail": "When the board or an auditor asks how the bot was tested, teams often have screenshots rather than a structured, repeatable record."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a structured red-team engagement against your sales or service bot and leave behind a regression suite. We start from your product documents, such as the customer information sheet, brochure, policy wording and benefit illustration, and turn them into expected disclosures and prohibited claims. We then run multi-turn adversarial conversations in English, Hindi and Hinglish, by text and by synthetic voice calls, using personas such as a senior citizen, a first-time buyer and an aggressive negotiator. Each conversation is scored PASS, RISK or FAIL against a rubric your compliance team signs off, and every finding comes with the transcript or audio and a suggested fix.",
+    "capabilities": [
+      "Builds expected-disclosure and prohibited-claim lists from your product documents and scripts",
+      "Runs multi-turn adversarial playbooks covering mis-selling, disclosure, prompt injection and data leakage",
+      "Tests text bots through their API or web widget and voice bots through synthetic calls in Hindi and Hinglish",
+      "Scores each conversation PASS, RISK or FAIL with an evaluation model, with people adjudicating borderline cases",
+      "Maps security findings to the OWASP Top 10 for LLM Applications",
+      "Packages the scenarios as a regression suite for every future bot release"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and rubric",
+      "detail": "Bots, products, channels and the PASS, RISK and FAIL rubric are agreed with compliance and product owners."
+    },
+    {
+      "step": 2,
+      "title": "Generate scenarios",
+      "detail": "Product documents and complaint themes are turned into scenarios, personas and attack variations."
+    },
+    {
+      "step": 3,
+      "title": "Run conversations",
+      "detail": "Multi-turn conversations are run against the staging bot by text and synthetic voice."
+    },
+    {
+      "step": 4,
+      "title": "Score and adjudicate",
+      "detail": "An evaluation model scores each transcript; uncertain and RISK results go to a compliance reviewer."
+    },
+    {
+      "step": 5,
+      "title": "Report with evidence",
+      "detail": "Findings are grouped by severity and category, with transcripts, audio and recommended fixes."
+    },
+    {
+      "step": 6,
+      "title": "Re-test and automate",
+      "detail": "Fixes are re-tested, and the scenario set joins your release pipeline as a regression suite."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope bots, products and rubric\"] --> B[\"Scenarios from product documents\"]\n  B --> C[\"Multi-turn text and voice tests\"]\n  C --> D[\"Evaluation model scores transcripts\"]\n  D --> E{\"Score clear?\"}\n  E -->|\"no\"| F(\"Compliance reviewer adjudicates\")\n  E -->|\"yes\"| G[\"Findings report with evidence\"]\n  F --> G\n  G --> H[\"Fixes re-tested in regression suite\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scenario design",
+        "components": [
+          "Product fact extractor for CIS, brochure and wording",
+          "Rubric builder",
+          "Persona and attack library in English, Hindi and Hinglish"
+        ]
+      },
+      {
+        "name": "Execution",
+        "components": [
+          "Bot API and web widget connector",
+          "Synthetic voice caller over telephony",
+          "Multi-turn conversation orchestrator"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Rubric-based evaluation model",
+          "Rule checks for prohibited phrases and missing disclosures",
+          "Compliance adjudication queue"
+        ]
+      },
+      {
+        "name": "Reporting and regression",
+        "components": [
+          "Evidence store for transcripts and audio",
+          "Findings report mapped to OWASP LLM Top 10",
+          "CI regression suite"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scenario design\"]\n    P1[\"Product fact extractor\"]\n    P2[\"Rubric builder\"]\n    P3[\"Persona and attack library\"]\n  end\n  subgraph S2[\"Execution\"]\n    E1[\"Text bot connector\"]\n    E2[\"Synthetic voice caller\"]\n    E3[\"Conversation orchestrator\"]\n  end\n  subgraph S3[\"Evaluation\"]\n    J1[\"Rubric evaluation model\"]\n    J2[\"Prohibited phrase rules\"]\n    J3(\"Compliance adjudication\")\n  end\n  subgraph S4[\"Reporting and regression\"]\n    R1[\"Evidence store\"]\n    R2[\"Findings report\"]\n    R3[\"CI regression suite\"]\n  end\n  P1 --> P2\n  P2 --> E3\n  P3 --> E3\n  E3 --> E1\n  E3 --> E2\n  E1 --> J1\n  E2 --> J1\n  J1 --> J2\n  J2 --> J3\n  J3 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Staging endpoint or test number for each bot",
+    "Customer information sheets, brochures, policy wordings and benefit illustrations",
+    "Approved sales scripts and prohibited claims list",
+    "Compliance rubric and escalation rules",
+    "Recent complaint and mis-selling themes"
+  ],
+  "outputs": [
+    "Findings register with PASS, RISK or FAIL per scenario",
+    "Transcripts and audio as evidence",
+    "Mapping of security findings to the OWASP Top 10 for LLM Applications",
+    "Prioritised remediation recommendations",
+    "Regression test suite for future releases"
+  ],
+  "human_in_the_loop": "Compliance officers sign off the rubric and adjudicate every RISK result and any score the evaluation model is unsure about. Product and engineering owners decide which fixes to make and when to re-test.",
+  "integrations": [
+    "Staging chatbot API or web widget",
+    "Telephony test numbers or SIP trunk for voice bots",
+    "CI/CD pipeline such as GitHub Actions or GitLab CI",
+    "Issue tracker such as Jira",
+    "GRC or compliance evidence repository"
+  ],
+  "guardrails": [
+    "Testing only on staging or agreed test windows, under a written scope",
+    "Synthetic personas and data only; no real policyholder information",
+    "Rate limits so testing does not affect shared infrastructure",
+    "Evidence stored with access control and agreed retention",
+    "Evaluation model results sampled and checked by people"
+  ],
+  "compliance_notes": [
+    "The rubric draws on IRDAI expectations on fair disclosure, advertisements and policyholder protection; findings are evidence for your compliance team, not a regulatory certification.",
+    "Security findings map to the OWASP Top 10 for LLM Applications and can feed a NIST AI RMF-style risk register."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One sales journey, such as a term or retail health product bot, tested in English and Hinglish by text, with a smaller voice sample if the bot has a voice channel.",
+    "deliverables": [
+      "Signed-off rubric and scenario catalogue",
+      "Executed test run with transcripts",
+      "Findings report with remediation guidance",
+      "Re-test of agreed fixes",
+      "Regression suite handed over to your team"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Scenario coverage",
+        "how": "Products, disclosures, personas and attack types covered, listed against the agreed scope."
+      },
+      {
+        "metric": "Findings by severity and category",
+        "how": "Count of FAIL and RISK results per category after compliance adjudication."
+      },
+      {
+        "metric": "Evaluator agreement",
+        "how": "Agreement between the evaluation model and compliance reviewers on a sampled set of transcripts."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Share of findings that pass on re-test after remediation."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will testing affect our live customers?",
+      "a": "No. We test staging environments or agreed test numbers under a written scope, with rate limits. No real policyholder data is used."
+    },
+    {
+      "q": "Can you test voice bots in Hindi?",
+      "a": "Yes. We generate synthetic callers in Hindi and Hinglish, including interruptions and background noise, and score the bot's spoken responses from transcripts and audio."
+    },
+    {
+      "q": "Is this a certification of our bot?",
+      "a": "No. It is evidence of how the bot behaved against a defined set of scenarios at a point in time. It helps your compliance team evidence controls, and the regression suite lets you repeat the tests after every change."
+    },
+    {
+      "q": "How often should we re-test?",
+      "a": "After any change to the model, prompts, retrieval content or product documents, and at a regular interval agreed with compliance. The regression suite keeps routine re-tests inexpensive."
+    }
+  ],
+  "related": [
+    "policy-renewal-voice-agent",
+    "policy-wording-comparison-assistant",
+    "bank-chatbot-and-voice-agent-red-teaming",
+    "voice-agent-jailbreak-testing"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/insurance-bot-mis-selling-and-disclosure-testing/"
+}

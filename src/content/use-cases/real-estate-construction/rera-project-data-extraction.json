@@ -1,0 +1,228 @@
+{
+  "slug": "rera-project-data-extraction",
+  "industry": "real-estate-construction",
+  "title": "RERA and Project Document Data Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Collect project listings, unit inventory and filed documents from state RERA portals into a clean, comparable dataset, with quarter-on-quarter changes flagged for analysts.",
+  "seo": {
+    "title": "RERA Project Data Extraction with AI | VipraTech",
+    "description": "Automated collection and extraction of state RERA project data, unit inventory, approvals and quarterly updates into structured Excel or a database.",
+    "keywords": [
+      "RERA data extraction",
+      "RERA project data scraper",
+      "real estate market intelligence India",
+      "RERA quarterly progress report data",
+      "RERA portal automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Business Development or Land Acquisition",
+    "Market Research Analyst at a developer or brokerage",
+    "Construction Finance Credit Manager",
+    "RERA Compliance Manager"
+  ],
+  "problem": {
+    "intro": "State RERA portals hold the most reliable public record of what is being built: promoters, approvals, unit counts, bookings and declared completion dates. But each state publishes it differently, much of it sits in scanned PDFs, and analysts copy it into Excel by hand, one project at a time.",
+    "pain_points": [
+      {
+        "title": "Every state portal is different",
+        "detail": "Field names, page layouts and document lists vary by state, so a template built for one portal breaks on the next."
+      },
+      {
+        "title": "Key facts are buried in PDFs",
+        "detail": "Registration certificates, architect certificates and quarterly progress reports are often scanned, so booked units or revised completion dates never reach the spreadsheet."
+      },
+      {
+        "title": "Changes between quarters go unnoticed",
+        "detail": "Completion date extensions, new towers or jumps in booked inventory matter for pricing and credit decisions, and they are easy to miss without a diff."
+      },
+      {
+        "title": "Stale, inconsistent datasets",
+        "detail": "Manual collection is done once for a land deal or a credit memo and then not refreshed, so different teams quote different numbers for the same micro-market."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a collector for each state RERA portal you care about, plus a document pipeline for the files attached to each project. Browser automation walks the listings at a polite pace, captures project detail pages and downloads filed documents. OCR and a large language model extract the fields you define, such as promoter, registration validity, land area, towers, unit mix, booked units and declared completion date, and normalise them across states. Each run is compared with the previous one, so changes surface as a list rather than a surprise. Low-confidence values go to an analyst before the dataset is published to Excel, a database or your BI tool.",
+    "capabilities": [
+      "Per-state collectors for RERA project listings and detail pages, scheduled weekly or monthly",
+      "Download and classification of filed documents: registration certificate, approvals, architect and engineer certificates, quarterly progress reports",
+      "Extraction of unit mix, carpet areas, booked and unsold units, and declared and revised completion dates",
+      "Normalisation of field names, area units and promoter names across states, with de-duplication by registration number",
+      "Quarter-on-quarter change log for extensions, new phases and inventory movement",
+      "Source link and page reference stored with every extracted value"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree scope and fields",
+      "detail": "Choose states, districts and project types, and fix the field list and output format with your analysts."
+    },
+    {
+      "step": 2,
+      "title": "Collect listings and documents",
+      "detail": "Scheduled browser automation walks the portal listings within agreed rate limits and saves each project page and its attached documents."
+    },
+    {
+      "step": 3,
+      "title": "Extract and normalise",
+      "detail": "OCR and an LLM read pages and PDFs, extract the agreed fields and map them to a common schema across states."
+    },
+    {
+      "step": 4,
+      "title": "Check confidence",
+      "detail": "Values below threshold, or that conflict between the project page and a filed PDF, are queued for an analyst."
+    },
+    {
+      "step": 5,
+      "title": "Compare with the last run",
+      "detail": "A diff engine marks new projects, revised completion dates, added towers and changes in booked units."
+    },
+    {
+      "step": 6,
+      "title": "Analyst review",
+      "detail": "An analyst confirms flagged values and notable changes, with the source page shown next to each field."
+    },
+    {
+      "step": 7,
+      "title": "Publish the dataset",
+      "detail": "The checked dataset is exported to Excel, written to a database or refreshed in your dashboard."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope states and fields\"] --> B[\"Collect RERA listings and pages\"]\n  B --> C[\"Download filed documents\"]\n  C --> D[\"Extract fields with OCR and LLM\"]\n  D --> E{\"Confident and consistent?\"}\n  E -->|\"no\"| F(\"Analyst confirms values\")\n  E -->|\"yes\"| G[\"Diff against previous run\"]\n  F --> G\n  G --> H[\"Publish to Excel or dashboard\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Collection",
+        "components": [
+          "Playwright collectors per state portal",
+          "Scheduler with rate limiting and retries",
+          "Raw page and PDF archive"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with table detection",
+          "Document type classifier",
+          "LLM field extractor with per-state schemas"
+        ]
+      },
+      {
+        "name": "Normalisation",
+        "components": [
+          "State-to-common field mapping",
+          "Area unit and date normalisation",
+          "De-duplication by registration number"
+        ]
+      },
+      {
+        "name": "Review and change tracking",
+        "components": [
+          "Run-to-run diff engine",
+          "Analyst review screen with source links"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Excel export",
+          "Database or API",
+          "BI dashboard refresh"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Collection\"]\n  C1[\"State portal collectors\"]\n  C2[\"Scheduler and rate limiter\"]\n  C3[\"Raw page and PDF archive\"]\n  end\n  subgraph S2[\"Document understanding\"]\n  U1[\"OCR and table detection\"]\n  U2[\"LLM field extractor\"]\n  end\n  subgraph S3[\"Normalisation\"]\n  N1[\"Common schema mapping\"]\n  N2[\"De-duplication\"]\n  end\n  subgraph S4[\"Review and change tracking\"]\n  R1[\"Diff engine\"]\n  R2(\"Analyst review screen\")\n  end\n  subgraph S5[\"Delivery\"]\n  D1[\"Excel and database export\"]\n  D2[\"BI dashboard\"]\n  end\n  C2 --> C1\n  C1 --> C3\n  C3 --> U1\n  U1 --> U2\n  U2 --> N1\n  N1 --> N2\n  N2 --> R1\n  R1 --> R2\n  R2 --> D1\n  D1 --> D2"
+  },
+  "inputs": [
+    "State RERA portal project listings and detail pages",
+    "Registration certificates and approval documents filed on the portal",
+    "Quarterly progress reports and professional certificates",
+    "Target states, districts and project types",
+    "Field definitions and output template from your analysts"
+  ],
+  "outputs": [
+    "Project-level dataset with promoter, approvals, land area and timelines",
+    "Unit mix and inventory table with booked and unsold counts where disclosed",
+    "Quarter-on-quarter change log",
+    "Source link and page reference for every value",
+    "Analyst review log"
+  ],
+  "human_in_the_loop": "Analysts confirm any value below the confidence threshold or in conflict between a project page and its filed documents, and review notable changes before a refreshed dataset is published. Where a portal requires a login or captcha, a person completes that step.",
+  "integrations": [
+    "State RERA portals (public pages only)",
+    "Excel or Google Sheets",
+    "PostgreSQL or your data warehouse",
+    "Power BI, Tableau or Metabase",
+    "Internal land acquisition or credit memo templates"
+  ],
+  "guardrails": [
+    "Collects only publicly disclosed pages, at a request rate agreed in advance and in line with each portal's terms",
+    "No captcha or login bypass; those steps stay with a person",
+    "Every value stored with its source URL and capture date",
+    "Conflicting values are flagged, never silently overwritten",
+    "Personal details that appear in filings are limited to what the analysis needs"
+  ],
+  "compliance_notes": [
+    "RERA disclosures are public, but personal data inside them is still handled with DPDP Act 2023 principles of purpose limitation and minimisation.",
+    "Collection schedules and volumes are designed to avoid placing load on government portals."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One state portal and one city or district, covering residential projects registered in a defined period, with a field list agreed with your analysts.",
+    "deliverables": [
+      "Working collector for one state portal",
+      "Extraction schema for project pages and two or three document types",
+      "Sample dataset in your Excel template",
+      "Change log from two consecutive runs",
+      "Plan and estimate for adding further states"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field-level extraction accuracy",
+        "how": "Compared with values an analyst records manually for a random sample of projects."
+      },
+      {
+        "metric": "Coverage of portal listings",
+        "how": "Projects captured versus projects listed on the portal for the chosen district."
+      },
+      {
+        "metric": "Share of values sent for review",
+        "how": "Count of fields below threshold or in conflict, per project."
+      },
+      {
+        "metric": "Analyst time per refresh",
+        "how": "Time to produce the dataset with the pipeline versus the current manual method."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is it acceptable to collect data from RERA portals?",
+      "a": "RERA portals publish this information for public disclosure. We collect only public pages, follow each portal's terms, keep request rates low and do not bypass captchas or logins. Your legal team should still confirm the intended use, particularly if the dataset will be shared outside your organisation."
+    },
+    {
+      "q": "What happens when a state portal changes its layout?",
+      "a": "Collectors are monitored on every run. When a layout changes, the run reports missing fields instead of publishing partial data, and we update the collector. Ongoing maintenance is part of the production estimate."
+    },
+    {
+      "q": "Can it read quarterly progress reports and certificates, not just the web page?",
+      "a": "Yes. Filed PDFs, including scanned ones, go through OCR and LLM extraction. Values from PDFs are compared with the project page, and conflicts go to an analyst."
+    },
+    {
+      "q": "Can we use this to check our own RERA filings?",
+      "a": "Yes. The same pipeline can compare what your projects show on the portal with your internal sales and construction records, and list differences for your compliance team before the next quarterly update."
+    }
+  ],
+  "related": [
+    "sale-agreement-and-title-review",
+    "construction-progress-monitoring",
+    "customer-demand-and-receipt-reconciliation",
+    "property-title-document-summarisation"
+  ],
+  "proof_ref": "rera-data-aggregator",
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/rera-project-data-extraction/"
+}

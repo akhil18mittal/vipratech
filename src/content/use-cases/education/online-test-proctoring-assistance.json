@@ -1,0 +1,224 @@
+{
+  "slug": "online-test-proctoring-assistance",
+  "industry": "education",
+  "title": "Online Test Proctoring Assistance",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Flag possible malpractice in remote tests from webcam frames and browser events, so a trained proctor reviews short evidence clips and decides, rather than software disqualifying students.",
+  "seo": {
+    "title": "AI Proctoring Assistance for Online Tests | VipraTech",
+    "description": "Computer vision that flags absent faces, extra people, phones and tab switches in remote tests, with proctors reviewing evidence before any action.",
+    "keywords": [
+      "AI proctoring for online exams",
+      "remote test proctoring India",
+      "webcam proctoring assistance",
+      "online scholarship test proctoring",
+      "privacy-first exam proctoring"
+    ]
+  },
+  "designed_for": [
+    "Controller of Examinations",
+    "Head of Online Programmes",
+    "Assessment Product Manager (Edtech)",
+    "Proctoring Operations Lead"
+  ],
+  "problem": {
+    "intro": "Online scholarship tests, mock tests and university semester exams let students sit from home, but institutions still need confidence in the result. Live human proctoring does not scale to thousands of candidates, and many off-the-shelf tools flag so much that proctors stop trusting them, or penalise students for things they cannot control.",
+    "pain_points": [
+      {
+        "title": "Too few proctors per candidate",
+        "detail": "One invigilator can watch only a handful of video tiles, so most of a large remote test goes effectively unwatched."
+      },
+      {
+        "title": "False flags from real homes",
+        "detail": "Shared rooms, poor lighting, low-end webcams and patchy bandwidth produce flags that have nothing to do with cheating."
+      },
+      {
+        "title": "No usable evidence",
+        "detail": "When a result is challenged, the institution often has a risk score but no clip or timeline showing what actually happened."
+      },
+      {
+        "title": "Privacy concerns from parents",
+        "detail": "Continuous recording of minors at home raises questions about consent, storage and who can watch the footage."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a proctoring assistant that sits alongside your test platform. Before the test it compares the candidate's face with the registered photo and records a short room check. During the test it samples webcam frames and browser events and runs detectors for an absent face, more than one person, a phone or book in view, repeated looking away and window switching. Detections are grouped into time-stamped incidents with short clips, not a single opaque score. A proctor reviews each incident and records a decision; the system never ends a test or disqualifies a candidate on its own.",
+    "capabilities": [
+      "Pre-test identity check against the registered photo, with a manual fallback",
+      "Detectors for an absent face, multiple people, phones and printed material in view",
+      "Browser event capture: tab or window switches, copy-paste attempts and full-screen exits",
+      "Incident timeline with short clips and frames instead of one opaque risk score",
+      "Light on-device processing with snapshot upload for low-bandwidth candidates",
+      "Configurable retention, after which frames and clips are deleted automatically"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Consent and set-up",
+      "detail": "The candidate, or a parent for a minor, sees what is captured and why, and the system checks camera, microphone and connection."
+    },
+    {
+      "step": 2,
+      "title": "Identity and room check",
+      "detail": "A face capture is compared with the registered photo and a short room scan is recorded."
+    },
+    {
+      "step": 3,
+      "title": "Monitor during the test",
+      "detail": "Webcam frames and browser events are sampled and passed through the detectors throughout the test."
+    },
+    {
+      "step": 4,
+      "title": "Build incidents",
+      "detail": "Detections that cross agreed thresholds are grouped into incidents with time stamps and clips."
+    },
+    {
+      "step": 5,
+      "title": "Proctor review",
+      "detail": "A proctor watches each incident, marks it as no issue, warning or escalate, and adds a note."
+    },
+    {
+      "step": 6,
+      "title": "Report to the exam controller",
+      "detail": "Escalated incidents and their evidence go to the exam controller, who decides any action after hearing the candidate."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Consent and system check\"] --> B[\"Face match and room scan\"]\n  B --> C[\"Sample webcam frames and events\"]\n  C --> D[\"Run detectors and group incidents\"]\n  D --> E{\"Incident above threshold?\"}\n  E -->|\"no\"| C\n  E -->|\"yes\"| F(\"Proctor reviews clip\")\n  F --> G{\"Escalate?\"}\n  G -->|\"yes\"| H(\"Exam controller hears candidate\")\n  G -->|\"no\"| I[\"Log decision and close\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Candidate client",
+        "components": [
+          "Browser extension or lockdown test client",
+          "Webcam and screen-event capture",
+          "On-device lightweight face detector"
+        ]
+      },
+      {
+        "name": "Vision analysis",
+        "components": [
+          "Face match against the registered photo",
+          "Person, phone and printed-material detectors",
+          "Gaze and presence tracking"
+        ]
+      },
+      {
+        "name": "Incident engine",
+        "components": [
+          "Event fusion with thresholds per test",
+          "Clip and frame extraction",
+          "Incident timeline builder"
+        ]
+      },
+      {
+        "name": "Proctor console",
+        "components": [
+          "Incident review queue",
+          "Decision and note capture",
+          "Escalation to the exam controller"
+        ]
+      },
+      {
+        "name": "Data governance",
+        "components": [
+          "Encrypted storage in your chosen region",
+          "Automatic deletion after the retention period",
+          "Access log for every clip viewed"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Candidate client\"]\n    K1[\"Lockdown client or extension\"]\n    K2[\"On-device face detector\"]\n  end\n  subgraph S2[\"Vision analysis\"]\n    V1[\"Face match\"]\n    V2[\"Person and phone detectors\"]\n    V3[\"Gaze and presence tracking\"]\n  end\n  subgraph S3[\"Incident engine\"]\n    N1[\"Event fusion and thresholds\"]\n    N2[\"Clip extraction\"]\n  end\n  subgraph S4[\"Proctor console and governance\"]\n    P1(\"Proctor review queue\")\n    P2(\"Exam controller escalation\")\n    P3[\"Encrypted storage with retention\"]\n  end\n  K1 --> K2\n  K2 --> V1\n  K2 --> V2\n  K2 --> V3\n  K1 --> N1\n  V1 --> N1\n  V2 --> N1\n  V3 --> N1\n  N1 --> N2\n  N2 --> P1\n  P1 --> P2\n  N2 --> P3"
+  },
+  "inputs": [
+    "Registered candidate photo from admission or test registration",
+    "Webcam frames and optional audio during the test",
+    "Browser and test-client events",
+    "Test schedule and candidate list",
+    "Proctoring policy with thresholds agreed by the exam controller"
+  ],
+  "outputs": [
+    "Incident timeline per candidate with clips and frames",
+    "Proctor decisions with notes",
+    "Escalation report for the exam controller",
+    "Test-level summary of incidents by type",
+    "Deletion log once retention ends"
+  ],
+  "human_in_the_loop": "A trained proctor reviews every incident before anything is recorded against a candidate, and only the exam controller can take action, after giving the candidate a chance to explain. Thresholds are tuned with the exam cell so the number of incidents stays reviewable.",
+  "integrations": [
+    "Online test or CBT platform (via SDK or API)",
+    "Student information system for registered photos",
+    "Single sign-on for students and proctors",
+    "Cloud storage in an India region",
+    "Email or WhatsApp for candidate notices"
+  ],
+  "guardrails": [
+    "No automatic disqualification, test termination or score change",
+    "Clear notice and consent before capture, with parental consent for minors",
+    "Face data used only for that test's identity check, not kept as a biometric profile",
+    "Thresholds reviewed for false flags across lighting, devices and bandwidth",
+    "Clips deleted automatically after the agreed retention period"
+  ],
+  "compliance_notes": [
+    "The DPDP Act 2023 restricts tracking and behavioural monitoring of children; proctoring for minors should be limited to the test window and purpose, with parental consent.",
+    "For candidates in Europe, GDPR treats biometric data used for identification as special-category data, so a lawful basis and impact assessment are needed."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One online test series, such as a scholarship or mock test, with proctors reviewing AI incidents alongside their current method.",
+    "deliverables": [
+      "Proctoring policy and thresholds agreed with the exam cell",
+      "Integration with your test platform for the pilot test",
+      "Proctor console with incident review",
+      "False-flag analysis across devices and conditions",
+      "Recommendation on roll-out, retention and staffing"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Incidents confirmed by proctors",
+        "how": "Share of incidents marked warning or escalate rather than no issue."
+      },
+      {
+        "metric": "False flags by condition",
+        "how": "Incidents marked no issue, broken down by lighting, device type and bandwidth."
+      },
+      {
+        "metric": "Proctor review time",
+        "how": "Average time to review one incident, from console logs."
+      },
+      {
+        "metric": "Technical drop-outs",
+        "how": "Candidates who could not complete the test because of the client, from support tickets."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the system disqualify students automatically?",
+      "a": "No. It only creates incidents with evidence. A proctor reviews each one, and any action is taken by the exam controller after the candidate has been heard."
+    },
+    {
+      "q": "Does it work on low-end laptops and slow connections?",
+      "a": "It is designed to. Basic face detection can run on the device, and only snapshots are uploaded when bandwidth is low. The pilot measures how many candidates face technical problems so you can set minimum requirements."
+    },
+    {
+      "q": "What about bias and false flags?",
+      "a": "Detectors can perform worse in poor lighting or with some cameras. We measure false flags across conditions during the pilot, tune thresholds with your exam cell and keep a human review on every incident."
+    },
+    {
+      "q": "How long is footage kept?",
+      "a": "As long as you decide, usually until the result appeal window closes. Deletion is automatic and logged, and access to clips is restricted and recorded."
+    }
+  ],
+  "related": [
+    "answer-sheet-and-omr-evaluation",
+    "student-ai-tutor-safety-testing",
+    "admission-document-verification",
+    "selfie-id-face-match-and-tamper-checks"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/online-test-proctoring-assistance/"
+}

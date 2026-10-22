@@ -1,0 +1,220 @@
+{
+  "slug": "hand-hygiene-and-ppe-monitoring",
+  "industry": "healthcare",
+  "title": "Hand-Hygiene and PPE Compliance Monitoring",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Measure hand-hygiene opportunities and PPE use at ICU, ward and OT entry points from cameras, with faces blurred on the device and results shown as unit-level trends for infection control.",
+  "seo": {
+    "title": "Hand-Hygiene and PPE Monitoring with AI | VipraTech",
+    "description": "Privacy-first computer vision for infection control: dispenser use at patient-zone entry and PPE at OT and isolation doors, reported as unit-level trends.",
+    "keywords": [
+      "hand hygiene compliance monitoring",
+      "PPE compliance hospital AI",
+      "infection control computer vision",
+      "ICU hand hygiene audit",
+      "OT PPE monitoring"
+    ]
+  },
+  "designed_for": [
+    "Infection Control Officer or Nurse",
+    "Hospital Infection Control Committee Chair",
+    "Nursing Superintendent",
+    "Quality Manager"
+  ],
+  "problem": {
+    "intro": "Infection control teams audit hand hygiene and PPE by direct observation, a few sessions a month per unit. Staff behave differently when an auditor is watching, and the samples are too small to show patterns by shift or location. The infection control committee still needs evidence to target training, dispensers and supplies.",
+    "pain_points": [
+      {
+        "title": "Small observation samples",
+        "detail": "Manual audits cover a small fraction of opportunities, mostly during day shifts."
+      },
+      {
+        "title": "Observer effect",
+        "detail": "Compliance rises while the auditor is present and falls once they leave."
+      },
+      {
+        "title": "PPE lapses at critical points",
+        "detail": "Missing masks, caps or gowns at OT and isolation room entry are noticed only when someone happens to see them."
+      },
+      {
+        "title": "Valid privacy concerns",
+        "detail": "Cameras in clinical areas worry staff and patients, so any system must be designed for privacy from the start."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a computer vision system that watches defined points such as ICU bed-zone entries, isolation room doors, sanitiser dispensers and OT entrances. It detects events that stand in for hand-hygiene opportunities, such as entering a patient zone, and whether a dispenser was used within a set window, and it checks visible PPE such as masks, caps, gowns and gloves where policy requires them. Processing runs on an edge device inside the hospital. Faces are blurred before anything is stored, and only event data and short blurred clips for audit leave the device. Infection control sees compliance trends by unit, shift and location, not a ranking of individuals.",
+    "capabilities": [
+      "Zone-entry and dispenser-use event detection at agreed points",
+      "PPE detection for masks, caps, gowns and gloves at OT and isolation entries",
+      "Edge processing with face blurring before any storage",
+      "Compliance trends by unit, shift and location for infection control",
+      "Optional real-time reminder at OT doors, such as a light or chime",
+      "Sampled blurred clips for auditors to verify detection quality"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree points and rules",
+      "detail": "Infection control and nursing leads choose camera points and define rules, such as dispenser use before entering a bed zone."
+    },
+    {
+      "step": 2,
+      "title": "Detect on the edge",
+      "detail": "Edge devices detect zone entries, dispenser use and visible PPE in real time."
+    },
+    {
+      "step": 3,
+      "title": "Anonymise",
+      "detail": "Faces are blurred and no identity data is stored; only events and blurred audit clips are kept."
+    },
+    {
+      "step": 4,
+      "title": "Check confidence",
+      "detail": "Low-confidence events are left out of metrics or sampled for auditor review."
+    },
+    {
+      "step": 5,
+      "title": "Aggregate and report",
+      "detail": "Events roll up into compliance trends by unit, shift and location on the infection control dashboard."
+    },
+    {
+      "step": 6,
+      "title": "Act on findings",
+      "detail": "The infection control committee reviews trends and decides on training, dispenser placement or supply changes."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Camera at zone, door or dispenser\"] --> B[\"Edge detection of entry and PPE\"]\n  B --> C[\"Blur faces and drop identity\"]\n  C --> D{\"Detection confidence high?\"}\n  D -->|\"yes\"| F[\"Event counted in metrics\"]\n  D -->|\"no\"| E(\"Infection control auditor reviews\")\n  E --> F\n  F --> G[\"Trends by unit, shift, location\"]\n  G --> H(\"Infection control committee acts\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Cameras",
+        "components": [
+          "Dedicated cameras at agreed points",
+          "Existing CCTV where the angle allows"
+        ]
+      },
+      {
+        "name": "Edge processing",
+        "components": [
+          "Edge GPU device per unit",
+          "Zone and dispenser event models",
+          "PPE detection model",
+          "Face blurring"
+        ]
+      },
+      {
+        "name": "Event pipeline",
+        "components": [
+          "Event store without identity data",
+          "Blurred clip sampler"
+        ]
+      },
+      {
+        "name": "Analytics and review",
+        "components": [
+          "Compliance dashboard by unit and shift",
+          "Auditor review queue"
+        ]
+      },
+      {
+        "name": "Governance",
+        "components": [
+          "Access controls and short retention",
+          "Periodic detection accuracy checks against auditor labels"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Cameras\"]\n    K1[\"Dedicated cameras at points\"]\n    K2[\"Existing CCTV feeds\"]\n  end\n  subgraph S2[\"Edge processing\"]\n    E1[\"Zone and dispenser events\"]\n    E2[\"PPE detection\"]\n    E3[\"Face blurring\"]\n  end\n  subgraph S3[\"Event pipeline\"]\n    P1[\"Anonymous event store\"]\n    P2[\"Blurred clip sampler\"]\n  end\n  subgraph S4[\"Analytics and review\"]\n    A1[\"Compliance dashboard\"]\n    A2(\"Auditor review queue\")\n    A3[\"Retention and access controls\"]\n  end\n  K1 --> E1\n  K1 --> E2\n  K2 --> E1\n  E1 --> E3\n  E2 --> E3\n  E3 --> P1\n  E3 --> P2\n  P1 --> A1\n  P2 --> A2\n  A2 --> A1\n  A3 --> P1"
+  },
+  "inputs": [
+    "Camera feeds from agreed points",
+    "Floor plans with bed zones, doors and dispenser locations",
+    "Hand-hygiene and PPE rules from the infection control policy",
+    "Shift schedules for reporting",
+    "Auditor observations for calibration"
+  ],
+  "outputs": [
+    "Hand-hygiene opportunity and dispenser-use events",
+    "PPE compliance events at entry points",
+    "Compliance trends by unit, shift and location",
+    "Blurred clips for auditor verification",
+    "Monthly report for the infection control committee"
+  ],
+  "human_in_the_loop": "Infection control auditors verify sampled events and calibrate the system against their own observations, and the committee decides on any action. The system reports at unit level and is not designed to identify individual staff.",
+  "integrations": [
+    "Existing CCTV or video management system where angles allow",
+    "Edge devices on the hospital network",
+    "Infection control or quality dashboard",
+    "Hospital IT security and network policies",
+    "Optional door-side indicator lights or chimes"
+  ],
+  "guardrails": [
+    "Faces blurred on the edge device before any storage",
+    "No cameras pointed at beds, toilets, changing areas or exposed patients",
+    "Reporting at unit and shift level, never individual staff rankings",
+    "Signage and staff briefings before go-live",
+    "Short retention for clips, with access limited to infection control"
+  ],
+  "compliance_notes": [
+    "Video of staff and patients is personal data under the DPDP Act 2023, so notices, minimisation and short retention are built into the design.",
+    "Supports, but does not replace, the hand-hygiene audits used in infection control programmes and accreditation reviews such as NABH."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One ICU or one OT complex with a small number of camera points, run alongside the infection control team's usual observation audits.",
+    "deliverables": [
+      "Camera point plan and rules agreed with infection control",
+      "Edge deployment with face blurring",
+      "Compliance dashboard",
+      "Comparison of system events with auditor observations",
+      "Privacy review notes and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with auditors",
+        "how": "System events compared with simultaneous auditor observations at the same points."
+      },
+      {
+        "metric": "PPE detection accuracy",
+        "how": "Sampled clips reviewed by auditors for correct and missed PPE events."
+      },
+      {
+        "metric": "Observation coverage",
+        "how": "Hours and shifts observed by the system compared with manual audit in the same period."
+      },
+      {
+        "metric": "Staff acceptance",
+        "how": "Feedback from staff briefings and any concerns raised during the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can a camera really judge the WHO five moments for hand hygiene?",
+      "a": "Not fully. Cameras see proxies, such as entering a patient zone and using a dispenser, and we are clear about that. The system adds coverage and trends to your audits; it does not replace trained observers."
+    },
+    {
+      "q": "Will it be used to discipline staff?",
+      "a": "It is designed for unit-level trends, with faces blurred on the device. How results are used is your policy decision, and we recommend agreeing it with staff before go-live."
+    },
+    {
+      "q": "Can we use our existing CCTV?",
+      "a": "Sometimes. Many CCTV cameras sit too high or at the wrong angle to see hands and dispensers. We survey the points first and recommend dedicated cameras only where needed."
+    },
+    {
+      "q": "Does video leave the hospital?",
+      "a": "No raw video leaves the edge device. Only anonymous events and short blurred clips go to the dashboard, which can run on your servers or in your cloud account."
+    }
+  ],
+  "related": [
+    "pharmacy-shelf-and-expiry-monitoring",
+    "kitchen-hygiene-monitoring",
+    "ppe-and-safety-zone-compliance"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/hand-hygiene-and-ppe-monitoring/"
+}

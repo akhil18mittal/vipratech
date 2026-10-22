@@ -1,0 +1,222 @@
+{
+  "slug": "claim-status-voice-helpline",
+  "industry": "insurance",
+  "title": "Claim Status Voice Helpline for Policyholders",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "An inbound voice agent that verifies callers, explains live claim status in plain language, sends pending-document lists on WhatsApp and transfers complaints and sensitive cases to people.",
+  "seo": {
+    "title": "Claim Status Voice Helpline with AI | VipraTech",
+    "description": "Multilingual voice agent that tells policyholders and hospitals where a claim stands, lists pending documents and routes complaints to your team.",
+    "keywords": [
+      "claim status voice agent",
+      "insurance helpline AI",
+      "claim status IVR",
+      "TPA customer care automation",
+      "WhatsApp claim updates"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Service",
+    "Claims Contact Centre Manager",
+    "Grievance Redressal Officer",
+    "TPA Customer Care Lead"
+  ],
+  "problem": {
+    "intro": "'Where is my claim?' is a question claims contact centres hear all day, from policyholders, family members and hospital insurance desks. Agents look up the claims system, decode internal status codes and read out pending documents, while callers with genuine complaints wait in the same queue.",
+    "pain_points": [
+      {
+        "title": "Status codes mean nothing to callers",
+        "detail": "Labels such as 'query raised' or 'under investigation' need explanation, and different agents explain them differently."
+      },
+      {
+        "title": "Pending documents are hard to communicate",
+        "detail": "Deficiency letters list items in insurance language, so callers ring back after sending the wrong document."
+      },
+      {
+        "title": "Peaks around discharge time",
+        "detail": "Calls spike when hospitals push for discharge approvals, and IVR menus cannot answer claim-specific questions."
+      },
+      {
+        "title": "Complaints get buried",
+        "detail": "Callers unhappy with a deduction or rejection queue alongside simple status checks, and their complaint may not be logged properly."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound voice agent for your claims helpline. It answers in the caller's language, verifies them against the registered mobile number and claim or policy details, and reads the live claim status from your claims or TPA system. Internal status codes are translated into plain explanations your team has approved. If documents are pending, it lists them simply and sends the deficiency letter and an upload link on WhatsApp. Settled claims get payment details after verification. Complaints, disputes about deductions and sensitive cases such as death claims go straight to a person with a call summary, and every interaction is logged as a ticket.",
+    "capabilities": [
+      "Answers in Hindi, English and selected regional languages, detecting the caller's preference",
+      "Verifies callers using the registered mobile and claim or policy details before sharing anything",
+      "Reads live status from the claims or TPA system and explains it using approved templates",
+      "Lists pending documents in plain language and sends the deficiency letter and upload link on WhatsApp",
+      "Shares settlement amount, date and payment reference once the caller is verified",
+      "Transfers complaints, disputes and bereavement calls to a person and logs them in your grievance system"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer and detect language",
+      "detail": "The agent greets the caller, identifies the preferred language and asks for the claim or policy number."
+    },
+    {
+      "step": 2,
+      "title": "Verify the caller",
+      "detail": "Identity is checked against the registered mobile and policy details; unverified callers get general help only."
+    },
+    {
+      "step": 3,
+      "title": "Fetch live status",
+      "detail": "Claim stage, pending items and payment details are pulled from the claims or TPA system."
+    },
+    {
+      "step": 4,
+      "title": "Explain and send documents",
+      "detail": "Status is explained in plain language, and pending-document lists or letters are sent on WhatsApp."
+    },
+    {
+      "step": 5,
+      "title": "Route complaints and sensitive cases",
+      "detail": "Complaints, disputes and bereavement calls go to a claims executive with a summary."
+    },
+    {
+      "step": 6,
+      "title": "Log the interaction",
+      "detail": "A ticket with transcript, intent and outcome is created in the CRM or grievance system."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound call, language detected\"] --> B{\"Caller verified?\"}\n  B -->|\"no\"| C[\"General help and verification retry\"]\n  B -->|\"yes\"| D[\"Fetch live claim status\"]\n  D --> E[\"Explain status and pending items\"]\n  E --> F{\"Complaint or sensitive case?\"}\n  F -->|\"yes\"| G(\"Claims executive takes transfer\")\n  F -->|\"no\"| H[\"Send letters on WhatsApp\"]\n  G --> I[\"Ticket logged with transcript\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Toll-free number and IVR integration",
+          "Speech recognition and text-to-speech for Indian languages"
+        ]
+      },
+      {
+        "name": "Identity and data",
+        "components": [
+          "Caller verification service",
+          "Claims or TPA system status API",
+          "Payment and deficiency letter lookup"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Dialogue manager with intent detection",
+          "Approved status explanation templates",
+          "Complaint and sensitive-case detector"
+        ]
+      },
+      {
+        "name": "Actions",
+        "components": [
+          "WhatsApp Business messaging",
+          "Warm transfer with call summary",
+          "Ticket and grievance creation"
+        ]
+      },
+      {
+        "name": "Monitoring",
+        "components": [
+          "Transcript store with personal data redaction",
+          "Call reason and confusion analytics"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Toll-free line and IVR\"]\n    T2[\"Speech engine\"]\n  end\n  subgraph S2[\"Identity and data\"]\n    D1[\"Caller verification\"]\n    D2[\"Claims status API\"]\n    D3[\"Letters and payment lookup\"]\n  end\n  subgraph S3[\"Conversation\"]\n    C1[\"Dialogue manager\"]\n    C2[\"Approved explanation templates\"]\n    C3[\"Complaint and sensitivity detector\"]\n  end\n  subgraph S4[\"Actions and monitoring\"]\n    A1[\"WhatsApp messaging\"]\n    A2(\"Claims executive transfer\")\n    A3[\"Tickets and analytics\"]\n  end\n  T1 --> T2\n  T2 --> C1\n  C1 --> D1\n  D1 --> D2\n  D2 --> D3\n  D2 --> C2\n  C1 --> C3\n  C2 --> A1\n  C3 --> A2\n  A1 --> A3\n  A2 --> A3"
+  },
+  "inputs": [
+    "Live claim status and history from the claims or TPA system",
+    "Mapping of internal status codes to approved explanations",
+    "Deficiency letters and pending-document lists",
+    "Settlement records with amount, date and payment reference",
+    "Registered mobile and policy details for verification"
+  ],
+  "outputs": [
+    "Plain-language status explanations delivered by voice",
+    "WhatsApp messages with deficiency letters and upload links",
+    "Complaint and grievance tickets with call summaries",
+    "Transcripts with personal data redacted",
+    "Reports on top call reasons and confusing status codes"
+  ],
+  "human_in_the_loop": "Claims executives take every complaint, dispute and bereavement call, and the grievance team owns complaint resolution. Supervisors review samples of automated calls and approve any change to the status explanation templates.",
+  "integrations": [
+    "Claims or TPA system API",
+    "Toll-free and IVR platform",
+    "WhatsApp Business API",
+    "CRM or ticketing such as Salesforce Service Cloud or Freshdesk",
+    "Grievance management system"
+  ],
+  "guardrails": [
+    "No claim information before verification",
+    "Rejection and deduction reasons read only as recorded in the letter, with no speculation",
+    "No promises on settlement dates beyond what the system shows",
+    "Bereavement and distress detected early and handed to a person",
+    "Personal and health data redacted from transcripts and logs"
+  ],
+  "compliance_notes": [
+    "Every complaint is logged and routed into your grievance process, so the helpline supports the redressal mechanism IRDAI requires rather than bypassing it.",
+    "Health and identity data is shared only with verified callers, supporting DPDP Act 2023 obligations."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Status queries on retail health reimbursement claims in Hindi and English during business hours, with fallback to your existing agents.",
+    "deliverables": [
+      "Status code explanation library approved by claims and compliance",
+      "Working voice agent on a test line connected to claim status data",
+      "WhatsApp letter and upload link flow",
+      "Weekly call review with supervisors",
+      "Pilot report and production plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Calls resolved without transfer",
+        "how": "Share of in-scope status calls completed by the agent, checked against repeat calls within the pilot."
+      },
+      {
+        "metric": "Verification success",
+        "how": "Share of callers who complete verification, and where the others drop off."
+      },
+      {
+        "metric": "Explanation accuracy",
+        "how": "Supervisor review of sampled calls against the claim record."
+      },
+      {
+        "metric": "Caller satisfaction",
+        "how": "Short post-call survey by keypad or WhatsApp."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can hospital insurance desks use it too?",
+      "a": "Yes, with a separate verification path for hospitals, such as a provider ID and claim number. Hospital desks usually ask about cashless approval and enhancement status, which the agent reads from the same system."
+    },
+    {
+      "q": "Will it explain why a claim was rejected?",
+      "a": "It reads the reason exactly as recorded in the rejection or deduction letter and offers to send the letter. If the caller disagrees, it registers a complaint and transfers them to a person rather than arguing the case."
+    },
+    {
+      "q": "Which languages are supported?",
+      "a": "A typical first phase covers Hindi and English, with regional languages added according to your policyholder base. We test each language on your own call recordings before go-live."
+    },
+    {
+      "q": "How is caller data protected?",
+      "a": "Verification happens before anything is shared, transcripts are redacted, and data stays in your chosen cloud region with role-based access."
+    }
+  ],
+  "related": [
+    "health-claim-document-extraction",
+    "tpa-pre-authorisation-triage",
+    "policy-renewal-voice-agent",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/claim-status-voice-helpline/"
+}

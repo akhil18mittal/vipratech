@@ -1,0 +1,58 @@
+[
+  {
+    "id": "claims-reconciliation-platform",
+    "title": "Claims reconciliation platform",
+    "client_label": "Packaged-food brand (anonymised)",
+    "capability": "document-intelligence",
+    "summary": "OCR and LLM platform that matches distributor claims spreadsheets against invoices and proofs, applies policy rules, detects duplicates, recalculates amounts, routes uncertain lines to an exception queue and keeps an audit trail. Finance keeps final approval.",
+    "publish_status": "Needs client permission before naming or adding numbers"
+  },
+  {
+    "id": "cyra-agentic-pentest",
+    "title": "Agentic AI penetration-testing platform",
+    "client_label": "NZ penetration-testing-as-a-service company (anonymised)",
+    "capability": "ai-security",
+    "summary": "Supervisor-based multi-agent platform for endpoint discovery, attack-surface mapping, OWASP Top 10 and business-logic testing, live vulnerability validation and exploit-chain evidence.",
+    "publish_status": "Needs client permission before naming"
+  },
+  {
+    "id": "autosentinx-voice-red-team",
+    "title": "AutoSentinx: voice agent red-teaming",
+    "client_label": "VipraTech product",
+    "capability": "ai-security",
+    "summary": "Autonomous red-team and compliance testing for Hindi and Hinglish voice agents, with multi-turn adversarial playbooks and PASS/RISK/FAIL evidence mapped to OWASP LLM and agentic risks, MITRE ATLAS, NIST AI RMF, and RBI, DPDP and TRAI-style requirements.",
+    "publish_status": "Own product, can publish"
+  },
+  {
+    "id": "llm-endpoint-security-scanner",
+    "title": "LLM endpoint security scanner",
+    "client_label": "Security platform (anonymised)",
+    "capability": "ai-security",
+    "summary": "Workflow that scans Azure-hosted and custom HTTP LLM endpoints for prompt injection, jailbreaks and data leakage.",
+    "publish_status": "Needs client permission before naming"
+  },
+  {
+    "id": "ai-remediation-pipeline",
+    "title": "AI remediation pipeline",
+    "client_label": "Security platform (anonymised)",
+    "capability": "ai-security",
+    "summary": "Pipeline that turns security findings into remediation patches and pull requests for developer review.",
+    "publish_status": "Needs client permission before naming"
+  },
+  {
+    "id": "whatsapp-hotel-booking",
+    "title": "WhatsApp hotel booking assistant",
+    "client_label": "Hotel property (anonymised)",
+    "capability": "sales-marketing-automation",
+    "summary": "WhatsApp Cloud API booking flow with availability checks, room, date and guest selection, rates, UPI or QR payment, confirmation and a room catalogue.",
+    "publish_status": "Confirm before naming"
+  },
+  {
+    "id": "rera-data-aggregator",
+    "title": "RERA project data aggregator",
+    "client_label": "Real-estate data project (anonymised)",
+    "capability": "document-intelligence",
+    "summary": "Playwright scraper that collects state RERA project listings and full project details into structured Excel output.",
+    "publish_status": "Needs client permission before naming"
+  }
+]

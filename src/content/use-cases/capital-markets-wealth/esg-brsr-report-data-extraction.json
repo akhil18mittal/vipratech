@@ -1,0 +1,223 @@
+{
+  "slug": "esg-brsr-report-data-extraction",
+  "industry": "capital-markets-wealth",
+  "title": "ESG and BRSR Report Data Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract BRSR and sustainability report indicators into a cited, unit-normalised dataset, compare years and flag gaps, inconsistencies and assurance status for ESG analysts.",
+  "seo": {
+    "title": "ESG and BRSR Report Data Extraction with AI | VipraTech",
+    "description": "AI that extracts BRSR and sustainability indicators, normalises units, compares years and flags disclosure gaps and inconsistencies for ESG analysts.",
+    "keywords": [
+      "BRSR data extraction",
+      "ESG report extraction AI",
+      "BRSR Core KPIs",
+      "sustainability report data",
+      "ESG data automation India"
+    ]
+  },
+  "designed_for": [
+    "Head of ESG Research",
+    "ESG Data Analyst",
+    "Stewardship and Responsible Investment Lead",
+    "Portfolio Monitoring Lead, Private Equity"
+  ],
+  "problem": {
+    "intro": "SEBI requires the largest listed companies to publish a Business Responsibility and Sustainability Report, and investors, lenders and rating teams want that data in a usable form. The indicators are there, across nine principles and a set of BRSR Core KPIs, but they arrive in different layouts, units and levels of completeness, alongside annual reports and standalone sustainability reports.",
+    "pain_points": [
+      {
+        "title": "Indicators scattered across documents",
+        "detail": "Emissions, energy, water, waste, workforce and governance data may sit in the BRSR, the annual report and a sustainability report, with different values in each."
+      },
+      {
+        "title": "Mixed units and restatements",
+        "detail": "Energy in gigajoules or megawatt hours, emissions with or without intensity ratios and restated prior-year figures make comparison slow."
+      },
+      {
+        "title": "Gaps are hard to see",
+        "detail": "A missing leadership indicator or a KPI without assurance is easy to overlook when analysts are keying long lists of fields."
+      },
+      {
+        "title": "Private portfolio data is messier still",
+        "detail": "Unlisted portfolio companies send ESG questionnaires and spreadsheets in their own formats."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an ESG extraction pipeline that takes BRSR filings, using the structured XBRL version where it is filed and the PDF otherwise, along with annual and sustainability reports. It locates each indicator by principle and section, extracts reported values with units and reporting boundary, and normalises them to your chosen units. Intensity ratios are recalculated from reported inputs and compared with what the company states. Year-on-year changes, restatements, missing disclosures and assurance status for BRSR Core KPIs are flagged. Every value carries a citation and a label separating reported figures from derived ones. Analysts review anomalies before data reaches your scoring model.",
+    "capabilities": [
+      "Reads BRSR XBRL filings where available and PDF reports otherwise, including annual and sustainability reports",
+      "Extracts essential and leadership indicators across the nine principles, plus BRSR Core KPIs",
+      "Normalises units and recalculates intensity ratios from reported inputs",
+      "Flags year-on-year anomalies, restatements, missing disclosures and assurance status",
+      "Labels every value as reported or derived, with a citation to the page or XBRL tag",
+      "Maps indicators to your scoring template and, where requested, to GRI or ISSB fields"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect filings and reports",
+      "detail": "BRSR filings, annual reports, sustainability reports and assurance statements are gathered per company and year."
+    },
+    {
+      "step": 2,
+      "title": "Locate and extract indicators",
+      "detail": "Indicators are found by principle and section and extracted with units, boundary and citation."
+    },
+    {
+      "step": 3,
+      "title": "Normalise and recalculate",
+      "detail": "Units are standardised and intensity ratios recomputed from reported inputs."
+    },
+    {
+      "step": 4,
+      "title": "Check consistency",
+      "detail": "Values are compared across documents and years, and gaps and assurance status are flagged."
+    },
+    {
+      "step": 5,
+      "title": "Analyst review",
+      "detail": "Anomalies and low-confidence values go to an ESG analyst for confirmation."
+    },
+    {
+      "step": 6,
+      "title": "Load to your ESG database",
+      "detail": "Reviewed data is exported to your ESG database, scoring model or data warehouse."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"BRSR, annual and ESG reports\"] --> B[\"Locate indicators by principle\"]\n  B --> C[\"Extract values, units and citations\"]\n  C --> D[\"Normalise units and recompute ratios\"]\n  D --> E{\"Anomaly, gap or low confidence?\"}\n  E -->|\"yes\"| F(\"ESG analyst reviews\")\n  E -->|\"no\"| G[\"Load to ESG database\"]\n  F --> G\n  G --> H[\"Scoring model and reports\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Collection",
+        "components": [
+          "Exchange filing downloads including XBRL",
+          "Company investor relations pages",
+          "Portfolio company questionnaire upload"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "XBRL parser",
+          "Layout-aware PDF and table parser",
+          "LLM indicator locator and extractor"
+        ]
+      },
+      {
+        "name": "Normalisation and checks",
+        "components": [
+          "Unit conversion library",
+          "Ratio recalculation",
+          "Year-on-year and cross-document consistency rules"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Analyst review queue with citations",
+          "Reported versus derived labelling"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "ESG database or scoring model adapter",
+          "Data warehouse export",
+          "Version history for restatements"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Collection\"]\n    C1[\"Exchange filings and XBRL\"]\n    C2[\"Annual and ESG reports\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"XBRL parser\"]\n    E2[\"PDF and table parser\"]\n    E3[\"Indicator extractor\"]\n  end\n  subgraph S3[\"Normalisation and checks\"]\n    N1[\"Unit conversion\"]\n    N2[\"Ratio recalculation\"]\n    N3[\"Consistency rules\"]\n  end\n  subgraph S4[\"Review and delivery\"]\n    R1(\"ESG analyst review\")\n    R2[\"ESG database adapter\"]\n    R3[\"Version history\"]\n  end\n  C1 --> E1\n  C2 --> E2\n  E1 --> E3\n  E2 --> E3\n  E3 --> N1\n  N1 --> N2\n  N2 --> N3\n  N3 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "BRSR filings in XBRL and PDF",
+    "Annual reports and standalone sustainability reports",
+    "Assurance statements for BRSR Core KPIs",
+    "Company policies and governance disclosures",
+    "Your ESG scoring template or taxonomy",
+    "ESG questionnaires from unlisted portfolio companies"
+  ],
+  "outputs": [
+    "Indicator-level dataset with citations and units",
+    "Normalised, year-on-year comparable metrics",
+    "Disclosure gap and inconsistency flags",
+    "Assurance status per BRSR Core KPI",
+    "Export to your scoring model or data warehouse"
+  ],
+  "human_in_the_loop": "ESG analysts confirm anomalies and any value that feeds a score or an engagement decision. Scoring methodology, ratings and stewardship actions remain with your team.",
+  "integrations": [
+    "Exchange filing sources and company websites",
+    "ESG data platform or in-house scoring model",
+    "Data warehouse",
+    "Excel for analyst workflows",
+    "Portfolio monitoring tools for private equity"
+  ],
+  "guardrails": [
+    "Every value carries a citation and a unit",
+    "Missing values left blank and flagged, never estimated by the system",
+    "Derived values clearly separated from reported values",
+    "Restatements tracked with version history",
+    "Recalculation differences beyond your tolerance flagged for review"
+  ],
+  "compliance_notes": [
+    "SEBI requires the largest listed companies to publish BRSR, with independent assurance or assessment of BRSR Core KPIs being phased in; the pipeline extracts what is reported and flags what is missing.",
+    "Extraction supports, but does not replace, your ESG methodology or the work of assurance providers and ESG rating providers."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "BRSR filings and annual reports for the companies in one sector, such as cement or IT services, across two reporting years.",
+    "deliverables": [
+      "Indicator list mapped to your scoring template",
+      "Working pipeline on the pilot companies",
+      "Analyst review queue",
+      "Accuracy and coverage report",
+      "Production plan for your full universe"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Indicator extraction accuracy",
+        "how": "Compared with an analyst-entered dataset for the same companies and years."
+      },
+      {
+        "metric": "BRSR Core KPI coverage",
+        "how": "Share of BRSR Core KPIs located and extracted per company."
+      },
+      {
+        "metric": "Anomalies confirmed",
+        "how": "Flags reviewed by analysts and classified as genuine issue, restatement or false alarm."
+      },
+      {
+        "metric": "Analyst time per company",
+        "how": "Timed with and without the pipeline on a sample of companies."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Why not just use the XBRL filings?",
+      "a": "Where XBRL is available and complete, we use it first. Analysts also need context from PDFs, such as boundaries, notes and restatements, and data from annual and sustainability reports that XBRL does not cover."
+    },
+    {
+      "q": "Can it map to GRI, ISSB or CSRD frameworks?",
+      "a": "Yes, as a mapping layer on top of the extracted indicators, for global investors who need it. The mapping is reviewed with your team because definitions do not always line up exactly."
+    },
+    {
+      "q": "Does it handle Scope 3 and value chain disclosures?",
+      "a": "It extracts whatever the company reports, including Scope 3 and value chain data where disclosed, and labels the stated boundary and method. It does not estimate missing Scope 3 figures."
+    },
+    {
+      "q": "Will it calculate ESG scores?",
+      "a": "It can apply your scoring formula to reviewed data, but it does not invent a methodology. Scores remain your team's responsibility."
+    }
+  ],
+  "related": [
+    "research-report-summarisation",
+    "private-markets-fund-document-extraction",
+    "financial-statement-spreading"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/esg-brsr-report-data-extraction/"
+}

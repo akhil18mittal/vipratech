@@ -1,0 +1,220 @@
+{
+  "slug": "rag-data-leakage-and-access-control-testing",
+  "industry": "saas-ai-companies",
+  "title": "RAG Data-Leakage and Access-Control Testing",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test whether your RAG pipeline leaks documents across users, roles or tenants through retrieval, caching, citations or logs, using seeded canary documents and role-based test personas.",
+  "seo": {
+    "title": "RAG Data-Leakage and Access-Control Testing | VipraTech",
+    "description": "RAG security testing: tenant isolation, document permissions, revoked access, cache and log leakage, and indirect prompt injection via uploads.",
+    "keywords": [
+      "RAG security testing",
+      "vector database tenant isolation",
+      "RAG access control testing",
+      "LLM data leakage testing",
+      "multi-tenant AI security"
+    ]
+  },
+  "designed_for": [
+    "CTO of a multi-tenant SaaS",
+    "Head of Platform Engineering",
+    "CISO",
+    "AI Search or Copilot Product Lead"
+  ],
+  "problem": {
+    "intro": "RAG lets your assistant answer from customers' own documents, tickets and records. It also creates a new path to that data: a query, an embedding search and a prompt. If permissions are not enforced at retrieval time, or if caches and logs mix tenants, one customer's question can surface another customer's content.",
+    "pain_points": [
+      {
+        "title": "Filters applied after retrieval",
+        "detail": "Permissions checked only after the top results are fetched, or only in the UI, can still leak content into the prompt and the answer."
+      },
+      {
+        "title": "Shared indexes across tenants",
+        "detail": "A single vector index with metadata filters is only as safe as every query path that remembers to apply them."
+      },
+      {
+        "title": "Stale permissions",
+        "detail": "When a user loses access to a document, its chunks often stay retrievable until the next full re-index."
+      },
+      {
+        "title": "Leakage outside the answer",
+        "detail": "Citations, semantic caches, analytics events and tracing tools can carry another tenant's chunks even when the answer looks clean."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We test your RAG feature for data leakage and access-control gaps from the outside in and the inside out. We seed each test tenant, role and user with unique canary documents, then use test personas to query through every entry point: chat, search, API and integrations. Any canary that appears in an answer, citation, cache hit, log or trace where it should not is a finding. We also review the retrieval code path, index design and permission sync, test what happens when access is revoked or a document is deleted, and check whether uploaded documents can carry instructions that change the assistant's behaviour. Findings map to OWASP LLM risks for sensitive information disclosure and vector and embedding weaknesses.",
+    "capabilities": [
+      "Canary documents seeded per tenant, role and user to detect leakage",
+      "Persona-based queries across chat, search, API and integration entry points",
+      "Permission revocation and deletion tests for stale chunks",
+      "Cache, citation, analytics and trace leakage checks",
+      "Indirect prompt injection tests through uploaded or synced documents",
+      "Review of retrieval code paths, index design and permission sync"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map the data path",
+      "detail": "We map ingestion, chunking, indexes, permission sync, retrieval, caching and logging for the RAG feature."
+    },
+    {
+      "step": 2,
+      "title": "Seed canaries",
+      "detail": "Unique canary documents are added for each test tenant, role and user."
+    },
+    {
+      "step": 3,
+      "title": "Query as each persona",
+      "detail": "Test personas query through every entry point and try to reach content they should not see."
+    },
+    {
+      "step": 4,
+      "title": "Change permissions",
+      "detail": "We revoke access, delete documents and move users between groups, then query again."
+    },
+    {
+      "step": 5,
+      "title": "Detect and review",
+      "detail": "Canary hits in answers, citations, caches and traces are flagged and confirmed by a tester."
+    },
+    {
+      "step": 6,
+      "title": "Report and retest",
+      "detail": "Findings come with fixes to retrieval filters, index design or sync, and are retested after changes."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Map RAG data path\"] --> B[\"Seed canaries per tenant and role\"]\n  B --> C[\"Query as each test persona\"]\n  C --> D[\"Revoke access and query again\"]\n  D --> E{\"Canary seen where not allowed?\"}\n  E -->|\"yes\"| F(\"Tester confirms leakage path\")\n  E -->|\"no\"| G[\"Record control as effective\"]\n  F --> H[\"Fixes and retest\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data path review",
+        "components": [
+          "Ingestion and chunking review",
+          "Index and namespace design review",
+          "Permission sync review"
+        ]
+      },
+      {
+        "name": "Test setup",
+        "components": [
+          "Canary document generator",
+          "Test tenants, roles and personas"
+        ]
+      },
+      {
+        "name": "Test execution",
+        "components": [
+          "Entry point drivers for chat, search and API",
+          "Permission change scripts"
+        ]
+      },
+      {
+        "name": "Detection",
+        "components": [
+          "Canary detector across answers and citations",
+          "Cache, log and trace scanner"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Tester review",
+          "Findings with leakage paths and fixes"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Setup\"]\n    A1[\"Data path review\"]\n    A2[\"Canary generator\"]\n    A3[\"Test personas\"]\n  end\n  subgraph S2[\"Execution\"]\n    E1[\"Chat, search and API drivers\"]\n    E2[\"Permission change scripts\"]\n  end\n  subgraph S3[\"Detection\"]\n    D1[\"Answer and citation scanner\"]\n    D2[\"Cache, log and trace scanner\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    R1(\"Tester review\")\n    R2[\"Findings and fixes\"]\n  end\n  A2 --> E1\n  A3 --> E1\n  A1 --> E2\n  E2 --> E1\n  E1 --> D1\n  E1 --> D2\n  D1 --> R1\n  D2 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Staging environment with at least two test tenants",
+    "Test users for each role and permission level",
+    "Architecture of ingestion, vector store and retrieval",
+    "Read access to logs, traces and caches in staging",
+    "List of connected sources such as Google Drive, SharePoint, Confluence or Jira"
+  ],
+  "outputs": [
+    "Data path diagram with trust boundaries",
+    "Leakage findings with exact path and evidence",
+    "Revocation and deletion test results",
+    "Fixes for retrieval filters, index design and permission sync",
+    "Reusable canary test suite"
+  ],
+  "human_in_the_loop": "A tester confirms every canary hit and traces the leakage path before reporting it. Your engineers decide on the fix, such as per-tenant indexes or retrieval-time permission checks.",
+  "integrations": [
+    "Vector stores such as pgvector, Pinecone, Weaviate, Qdrant, Elasticsearch or OpenSearch",
+    "Connected sources such as SharePoint, Google Drive, Confluence or Jira",
+    "Identity provider and permission service",
+    "Tracing tools such as Langfuse or LangSmith",
+    "CI pipeline for canary regression"
+  ],
+  "guardrails": [
+    "Synthetic canary content only, never real customer documents",
+    "Testing limited to test tenants in staging",
+    "Canaries removed after testing",
+    "Findings shared only with named contacts",
+    "Read-only access to logs and traces"
+  ],
+  "compliance_notes": [
+    "Maps to OWASP Top 10 for LLM Applications categories for sensitive information disclosure and vector and embedding weaknesses.",
+    "Evidence of tenant isolation supports obligations on access to personal data under GDPR and the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One RAG feature with two or three test tenants and its main connected source, tested in staging.",
+    "deliverables": [
+      "Data path diagram",
+      "Canary test suite",
+      "Findings report with fixes",
+      "Retest results",
+      "Suite handed over for CI"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Leakage paths found",
+        "how": "Confirmed canary exposures by path: answer, citation, cache, log or trace."
+      },
+      {
+        "metric": "Revocation lag",
+        "how": "Time between revoking access and the document no longer being retrievable, measured in tests."
+      },
+      {
+        "metric": "Entry points covered",
+        "how": "Entry points tested against those in scope."
+      },
+      {
+        "metric": "Retest results",
+        "how": "Leakage paths confirmed closed after fixes."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you need access to our customers' data?",
+      "a": "No. We work only with synthetic canary documents in test tenants. That is enough to show whether isolation holds."
+    },
+    {
+      "q": "We use metadata filters in a shared index. Is that unsafe?",
+      "a": "Not necessarily. It depends on whether every query path applies the filter and whether caches and logs respect it. Testing shows where the gaps are; some teams then move high-risk tenants to separate namespaces or indexes."
+    },
+    {
+      "q": "Can uploaded documents change how the assistant behaves?",
+      "a": "They can, if retrieved text is treated as instructions. We test this with planted content and recommend ways to keep retrieved data separate from instructions."
+    },
+    {
+      "q": "How do we keep this tested after the first round?",
+      "a": "The canary suite can run in CI on every change to retrieval, indexing or permission sync, so regressions are caught before release."
+    }
+  ],
+  "related": [
+    "llm-application-penetration-test",
+    "continuous-ai-security-regression-in-ci",
+    "research-copilot-data-leakage-testing",
+    "legal-ai-confidentiality-testing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/rag-data-leakage-and-access-control-testing/"
+}

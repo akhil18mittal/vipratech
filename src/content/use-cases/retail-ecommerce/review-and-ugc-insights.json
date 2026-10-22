@@ -1,0 +1,223 @@
+{
+  "slug": "review-and-ugc-insights",
+  "industry": "retail-ecommerce",
+  "title": "Review and UGC Insights for Product Teams",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Classify reviews, Q&A, social comments and return reasons into product issues by SKU and batch, including Hinglish text, and give product teams a weekly digest with source quotes.",
+  "seo": {
+    "title": "Review and UGC Insights for Product Teams | VipraTech",
+    "description": "AI classifies marketplace reviews, social comments and return reasons into product issues by SKU, handles Hinglish and flags emerging problems early.",
+    "keywords": [
+      "review analysis AI",
+      "customer review insights",
+      "UGC analytics for brands",
+      "Hinglish sentiment analysis",
+      "product feedback analysis"
+    ]
+  },
+  "designed_for": [
+    "Head of Product or Category",
+    "Head of Quality",
+    "Head of Customer Experience",
+    "D2C Brand Manager"
+  ],
+  "problem": {
+    "intro": "Customers tell you what is wrong with your products every day, in marketplace reviews, Q&A, Instagram comments, support tickets and return reasons. The feedback is spread across channels, often in Hinglish or regional languages, and reaches the product team as an average star rating.",
+    "pain_points": [
+      {
+        "title": "Too much to read",
+        "detail": "Reviews and comments across marketplaces, your site and social channels outrun any team's ability to read them."
+      },
+      {
+        "title": "Ratings hide reasons",
+        "detail": "A three-star rating could mean poor fit, late delivery or a damaged box, and only the text says which."
+      },
+      {
+        "title": "Hinglish breaks keyword tools",
+        "detail": "Text like 'fitting thodi tight hai' or 'smell achha nahi' defeats sentiment tools built for English."
+      },
+      {
+        "title": "Problems found late",
+        "detail": "A packaging defect or a bad batch shows up in returns weeks after the first reviews mentioned it."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an insights pipeline that collects reviews, Q&A, social comments, support tickets and return reasons from official seller exports, APIs and your own systems. An LLM classifies each item against your product taxonomy, such as size and fit, quality, packaging, delivery, fragrance or skin reaction, at the aspect level and in English, Hindi, Hinglish and regional languages. Mentions are linked to SKU and, where possible, batch or lot. Spike detection flags themes rising faster than usual for a SKU. Product and quality teams get a weekly digest with counts and representative quotes, and safety-related mentions go to quality at once.",
+    "capabilities": [
+      "Collects reviews, Q&A, comments, tickets and return reasons from official exports, APIs and internal systems",
+      "Aspect-level classification against your taxonomy, in English, Hindi, Hinglish and regional languages",
+      "Links feedback to SKU, variant and, where available, batch or lot",
+      "Detects rising themes per SKU and alerts the owning team",
+      "Routes mentions of skin reactions, injuries or contamination to the quality team immediately",
+      "Weekly digest with counts, trends and representative quotes linked to the source"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect feedback",
+      "detail": "Reviews, Q&A, social comments, tickets and return reasons are pulled daily from approved sources."
+    },
+    {
+      "step": 2,
+      "title": "Clean and link",
+      "detail": "Personal details are stripped, and each item is linked to SKU, variant and batch where possible."
+    },
+    {
+      "step": 3,
+      "title": "Classify by aspect",
+      "detail": "The LLM tags each item with aspects and sentiment from your taxonomy, with a confidence score."
+    },
+    {
+      "step": 4,
+      "title": "Detect safety mentions and spikes",
+      "detail": "Safety-related mentions and unusual rises in a theme are flagged."
+    },
+    {
+      "step": 5,
+      "title": "Human review",
+      "detail": "Quality assesses safety mentions, and analysts check low-confidence items and approve taxonomy changes."
+    },
+    {
+      "step": 6,
+      "title": "Publish insights",
+      "detail": "Dashboards and a weekly digest go to product, quality and CX teams."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Reviews, comments, tickets, returns\"] --> B[\"Strip PII and link to SKU\"]\n  B --> C[\"Classify aspects and sentiment\"]\n  C --> D{\"Safety mention or theme spike?\"}\n  D -->|\"safety\"| E(\"Quality team assesses at once\")\n  D -->|\"spike\"| F[\"Alert product owner\"]\n  D -->|\"neither\"| G[\"Add to trend store\"]\n  F --> G\n  E --> G\n  G --> H(\"Analyst checks low-confidence items\")\n  H --> I[\"Weekly digest with quotes\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Collection",
+        "components": [
+          "Marketplace seller exports and APIs",
+          "Own-site reviews and Q&A",
+          "Helpdesk tickets and OMS return reasons",
+          "Social listening exports"
+        ]
+      },
+      {
+        "name": "Preparation",
+        "components": [
+          "PII stripping",
+          "SKU, variant and batch linking",
+          "Language detection and transliteration handling"
+        ]
+      },
+      {
+        "name": "Classification",
+        "components": [
+          "LLM aspect and sentiment classifier using your taxonomy",
+          "Safety mention detector",
+          "Spike detection per SKU and theme"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Analyst review queue for low-confidence items",
+          "Quality team alert inbox"
+        ]
+      },
+      {
+        "name": "Insights",
+        "components": [
+          "Dashboard by SKU, theme and channel",
+          "Weekly digest with source quotes"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Collection\"]\n    C1[\"Marketplace exports\"]\n    C2[\"Site reviews and tickets\"]\n    C3[\"Return reasons\"]\n  end\n  subgraph S2[\"Preparation\"]\n    P1[\"PII stripping\"]\n    P2[\"SKU and batch linking\"]\n  end\n  subgraph S3[\"Classification\"]\n    K1[\"Aspect and sentiment classifier\"]\n    K2[\"Safety and spike detection\"]\n  end\n  subgraph S4[\"Review and insights\"]\n    R1(\"Analyst and quality review\")\n    R2[\"SKU dashboard\"]\n    R3[\"Weekly digest\"]\n  end\n  C1 --> P1\n  C2 --> P1\n  C3 --> P1\n  P1 --> P2 --> K1 --> K2\n  K2 --> R1\n  K1 --> R2\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Marketplace reviews and Q&A from seller exports or APIs",
+    "Reviews and questions from your own site",
+    "Support tickets and chat transcripts",
+    "Return reasons from the OMS",
+    "Product taxonomy, SKU master and batch data"
+  ],
+  "outputs": [
+    "Aspect-level tags and sentiment per feedback item",
+    "Theme trends by SKU, variant, channel and batch",
+    "Spike alerts to product owners",
+    "Safety mention alerts to the quality team",
+    "Weekly digest with representative quotes"
+  ],
+  "human_in_the_loop": "The quality team assesses every safety-related mention, and analysts review low-confidence classifications and approve taxonomy changes. The system does not post public replies or contact reviewers.",
+  "integrations": [
+    "Marketplace seller portals and review exports",
+    "Website review platform",
+    "Helpdesk such as Freshdesk or Zendesk",
+    "OMS for return reasons",
+    "BI tools such as Power BI or Looker"
+  ],
+  "guardrails": [
+    "Data collected only through official exports, APIs or with platform permission",
+    "Personal details stripped before analysis",
+    "Every count links back to source quotes",
+    "Regular sampling of classifications against analyst labels",
+    "Safety mentions routed to people, never closed automatically"
+  ],
+  "compliance_notes": [
+    "Reviewer names and handles are personal data under the DPDP Act 2023 and are removed before analysis.",
+    "Collection follows each platform's terms of service."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Reviews, tickets and return reasons for one category over the past two quarters, with the weekly digest running for the last two weeks of the pilot.",
+    "deliverables": [
+      "Taxonomy agreed with product, quality and CX",
+      "Working collection and classification pipeline",
+      "Dashboard and weekly digest",
+      "Accuracy report against analyst-labelled samples, including Hinglish",
+      "Roll-out plan for other categories and channels"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Classification accuracy",
+        "how": "Tags compared with analyst labels on a random sample, reported separately for English and for Hinglish or regional text."
+      },
+      {
+        "metric": "Issues confirmed actionable",
+        "how": "Spikes and themes the product or quality team confirms as real issues."
+      },
+      {
+        "metric": "Time to surface an issue",
+        "how": "Date a theme was flagged compared with when it appeared in return or complaint reports."
+      },
+      {
+        "metric": "Analyst effort",
+        "how": "Time to prepare the weekly product feedback report, with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read Hinglish and regional languages?",
+      "a": "Yes. The classifier handles code-mixed and transliterated text, as well as Hindi and common regional languages. The pilot reports accuracy for these separately, so you can see where it is strong and where it needs review."
+    },
+    {
+      "q": "Is collecting marketplace reviews allowed?",
+      "a": "We use official seller exports, APIs or reports available to you as a seller, and follow each platform's terms. We do not scrape against terms of service."
+    },
+    {
+      "q": "Can it tell us which batch has a problem?",
+      "a": "Only where batch or lot data can be linked, for example through order and dispatch records or return inspections. Without that link, it reports by SKU and date."
+    },
+    {
+      "q": "Does it write replies to reviews?",
+      "a": "This system focuses on insights for product teams. Drafting replies is possible, but nothing is posted publicly without a person approving it."
+    }
+  ],
+  "related": [
+    "catalog-enrichment-from-product-images",
+    "abandoned-cart-and-win-back-automation",
+    "shopping-assistant-guardrail-testing",
+    "review-response-and-reputation-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/review-and-ugc-insights/"
+}

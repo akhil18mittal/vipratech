@@ -1,0 +1,221 @@
+{
+  "slug": "ai-calling-compliance-evidence",
+  "industry": "telecom-contact-centers",
+  "title": "Compliance Evidence for AI Calling (TRAI and DPDP)",
+  "capability": "ai-security",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Test and document how your AI calling handles consent, DND preferences, calling hours, disclosures, opt-outs and personal data, and give compliance teams and clients an evidence pack.",
+  "seo": {
+    "title": "TRAI and DPDP Compliance Evidence for AI Calling | VipraTech",
+    "description": "Control matrix, test calls and log reconciliation that evidence how AI calling handles consent, DND, disclosures, opt-outs and personal data.",
+    "keywords": [
+      "AI calling compliance",
+      "TRAI TCCCPR compliance evidence",
+      "DPDP compliance voice AI",
+      "BPO client audit evidence",
+      "voice agent compliance testing"
+    ]
+  },
+  "designed_for": [
+    "Chief Compliance Officer",
+    "Data Protection Officer",
+    "BPO Client Audit and Risk Lead",
+    "Head of AI Calling Product"
+  ],
+  "problem": {
+    "intro": "When an operator, BPO or enterprise starts placing calls with an AI agent, the questions from compliance teams, clients and auditors change from whether it works to proof of how it behaves. Did it call only consented numbers within permitted hours, did it disclose that it is automated, did opt-outs take effect, and where do recordings and transcripts go afterwards?",
+    "pain_points": [
+      {
+        "title": "Controls exist only on paper",
+        "detail": "Policies say numbers are scrubbed and opt-outs honoured, but there is no test evidence that the live system does it."
+      },
+      {
+        "title": "Logs are scattered",
+        "detail": "Dialler records, DLT reports, consent systems, CRM and the voice platform each hold part of the story."
+      },
+      {
+        "title": "Every BPO client audits differently",
+        "detail": "Each client sends its own questionnaire, and teams rebuild the same evidence by hand for each one."
+      },
+      {
+        "title": "Rules and behaviour both change",
+        "detail": "Regulations are amended and the agent changes with every model, prompt or campaign update, so one-off evidence goes stale."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an evidence workflow that tests and documents your AI calling against the obligations that apply to you. First we map requirements from TRAI commercial-communication rules, the DPDP Act 2023, client contracts and your own policies into a control matrix that your compliance team approves. Then each control is tested two ways: scripted test calls that probe behaviour, such as disclosure, opt-out and calls attempted outside permitted hours or to suppressed numbers, and log reconciliation that compares calls actually placed with consent records, preference data and suppression lists. Each control gets a PASS, RISK or FAIL result with evidence attached, and a monitoring job re-runs the checks on a schedule.",
+    "capabilities": [
+      "Control matrix built from TRAI commercial-communication rules, the DPDP Act 2023, client contracts and internal policy",
+      "Scripted test calls for disclosure, opt-out, consent capture and out-of-scope handling",
+      "Reconciliation of call logs against consent records, preference data and suppression lists",
+      "Review of recording, transcript and retention settings against stated purpose and policy",
+      "PASS, RISK and FAIL results per control with call audio, logs and screenshots as evidence",
+      "Scheduled re-checks after model, prompt or campaign changes, with drift alerts"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map obligations",
+      "detail": "TRAI rules, DPDP obligations, client clauses and internal policies are mapped to a control matrix."
+    },
+    {
+      "step": 2,
+      "title": "Approve the matrix",
+      "detail": "Your compliance team or DPO approves the controls and the evidence each one needs."
+    },
+    {
+      "step": 3,
+      "title": "Test behaviour and logs",
+      "detail": "Scripted test calls probe agent behaviour while log reconciliation checks the calls actually placed."
+    },
+    {
+      "step": 4,
+      "title": "Review gaps",
+      "detail": "Every RISK or FAIL result goes to the compliance officer, who decides remediation or acceptance."
+    },
+    {
+      "step": 5,
+      "title": "Assemble the evidence pack",
+      "detail": "Results, audio, logs and screenshots are organised by control for internal and client review."
+    },
+    {
+      "step": 6,
+      "title": "Re-check on schedule",
+      "detail": "Checks re-run after changes and at agreed intervals, with drift reported."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Map TRAI, DPDP and client rules\"] --> B[\"Approved control matrix\"]\n  B --> C[\"Scripted test calls\"]\n  B --> D[\"Reconcile call logs and consent\"]\n  C --> E{\"Control result PASS?\"}\n  D --> E\n  E -->|\"no\"| F(\"Compliance officer reviews gap\")\n  E -->|\"yes\"| G[\"Evidence pack per control\"]\n  F --> G\n  G --> H[\"Scheduled re-checks\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Obligations",
+        "components": [
+          "Regulation and contract mapping",
+          "Control matrix repository"
+        ]
+      },
+      {
+        "name": "Evidence collection",
+        "components": [
+          "Call detail records and dialler logs",
+          "Consent and DLT records",
+          "Voice platform configuration and logs",
+          "Test call runner"
+        ]
+      },
+      {
+        "name": "Assessment",
+        "components": [
+          "Log reconciliation engine",
+          "Behaviour evaluator for test calls",
+          "PASS, RISK and FAIL scoring with reviewer sign-off"
+        ]
+      },
+      {
+        "name": "Reporting and monitoring",
+        "components": [
+          "Evidence pack generator",
+          "Client questionnaire mapper",
+          "Scheduled re-check jobs"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Obligations\"]\n    B1[\"TRAI, DPDP and contract mapping\"]\n    B2[\"Control matrix repository\"]\n  end\n  subgraph S2[\"Evidence collection\"]\n    C1[\"CDR and dialler logs\"]\n    C2[\"Consent and DLT records\"]\n    C3[\"Voice platform config\"]\n    C4[\"Test call runner\"]\n  end\n  subgraph S3[\"Assessment\"]\n    A1[\"Log reconciliation engine\"]\n    A2[\"Behaviour evaluator\"]\n    A3(\"Compliance reviewer\")\n  end\n  subgraph S4[\"Reporting and monitoring\"]\n    R1[\"Evidence pack generator\"]\n    R2[\"Client questionnaire mapper\"]\n    R3[\"Scheduled re-check jobs\"]\n  end\n  B1 --> B2\n  B2 --> C4\n  B2 --> A1\n  C1 --> A1\n  C2 --> A1\n  C3 --> A2\n  C4 --> A2\n  A1 --> A3\n  A2 --> A3\n  A3 --> R1 --> R2\n  R1 --> R3\n  R3 --> C4"
+  },
+  "inputs": [
+    "Call detail records and dialler logs",
+    "Consent records and preference or scrubbing data",
+    "Voice agent scripts, prompts and configuration",
+    "Recording and retention settings and privacy notices",
+    "Client contracts and audit questionnaires",
+    "Internal calling and privacy policies"
+  ],
+  "outputs": [
+    "Control matrix with status per control",
+    "Test call recordings and results",
+    "Log reconciliation exceptions",
+    "Evidence pack organised by control",
+    "Remediation list",
+    "Scheduled monitoring reports"
+  ],
+  "human_in_the_loop": "Your compliance officer or DPO approves the control matrix, reviews every RISK and FAIL result and decides remediation or acceptance. Legal interpretation of the rules stays with your compliance and legal advisers; we provide technical tests and evidence.",
+  "integrations": [
+    "Dialler or CCaaS platform",
+    "DLT and telemarketer reports",
+    "Consent management platform",
+    "CRM",
+    "GRC tool or SharePoint for evidence storage",
+    "Voice agent platform APIs"
+  ],
+  "guardrails": [
+    "Test calls placed only to designated test numbers",
+    "Logs pseudonymised before analysis",
+    "Evidence pack access restricted to named reviewers",
+    "Each control records which version of the rules it was mapped to",
+    "No legal opinions in the evidence pack"
+  ],
+  "compliance_notes": [
+    "Designed to help you evidence alignment with TRAI's commercial-communication rules and the DPDP Act 2023; it is not a legal opinion or a certification.",
+    "Where BPO clients are regulated entities such as banks or NBFCs, their regulator's outsourcing and conduct expectations can be added to the control matrix."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One AI calling flow, such as a single outbound campaign or inbound service line, with an approved control matrix, test calls and one month of logs.",
+    "deliverables": [
+      "Approved control matrix for the pilot flow",
+      "Test call results with recordings",
+      "Log reconciliation report",
+      "Evidence pack in your preferred format",
+      "Monitoring plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Control coverage",
+        "how": "Controls with attached evidence compared with the controls in the approved matrix."
+      },
+      {
+        "metric": "Validated exceptions",
+        "how": "Log reconciliation exceptions confirmed by the compliance team."
+      },
+      {
+        "metric": "Evidence acceptance",
+        "how": "Feedback from compliance reviewers or a client auditor on whether the pack answers their questions."
+      },
+      {
+        "metric": "Questionnaire response time",
+        "how": "Time to answer a client audit questionnaire using the pack, compared with the last audit."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is this a legal opinion on our compliance?",
+      "a": "No. We provide technical tests and evidence against a control matrix your compliance or legal team approves. Interpretation of the rules and the final compliance position stay with them."
+    },
+    {
+      "q": "Do you need access to production logs?",
+      "a": "For log reconciliation, yes, but pseudonymised extracts are enough: hashed numbers, timestamps, campaign IDs and outcomes. Test calls are made only to test numbers."
+    },
+    {
+      "q": "Can the controls cover our BPO clients' own requirements?",
+      "a": "Yes. Client contract clauses and sector rules, such as a bank client's expectations on calling conduct, are added to the matrix so one set of evidence can answer several client audits."
+    },
+    {
+      "q": "How often are checks re-run?",
+      "a": "On a schedule you choose and after any change to the model, prompt, script or campaign set-up. Each run is versioned, so you can show auditors the history."
+    }
+  ],
+  "related": [
+    "outbound-sales-voice-agent-with-consent-checks",
+    "voice-agent-jailbreak-testing",
+    "call-qa-and-compliance-auditing",
+    "dpdp-ai-data-handling-assessment"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/ai-calling-compliance-evidence/"
+}

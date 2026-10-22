@@ -1,0 +1,216 @@
+{
+  "slug": "buyer-nurture-campaigns",
+  "industry": "real-estate-construction",
+  "title": "Personalised Nurture Campaigns for Home Buyers",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Keep undecided buyers engaged with WhatsApp and email updates matched to their stage, budget and objections, built from approved project facts, and alert sales when interest returns.",
+  "seo": {
+    "title": "Home Buyer Nurture Campaigns with AI | VipraTech",
+    "description": "AI-assisted WhatsApp and email nurture for home buyers, personalised by stage, configuration and objections, using approved content and opt-in rules.",
+    "keywords": [
+      "real estate lead nurturing",
+      "home buyer WhatsApp campaigns",
+      "property marketing automation",
+      "personalised real estate email",
+      "re-engage cold property leads"
+    ]
+  },
+  "designed_for": [
+    "Marketing Head",
+    "Head of Presales and CRM",
+    "Digital Marketing Manager",
+    "Sales Director"
+  ],
+  "problem": {
+    "intro": "Buying a home is a long decision, and many enquiries take months to turn into a booking, if they ever do. Developers hold large databases of past enquirers and visitors who receive either nothing or the same broadcast as everyone else, so buyers who would have come back for the right reason never hear it.",
+    "pain_points": [
+      {
+        "title": "One message for everyone",
+        "detail": "Broadcasts send the same launch offer to an investor who wanted a 1BHK and a family that visited for a 3BHK."
+      },
+      {
+        "title": "Objections never addressed",
+        "detail": "Buyers who dropped off over price, possession date, floor or loan eligibility never receive the update that answers their concern."
+      },
+      {
+        "title": "Re-engagement goes unnoticed",
+        "detail": "When a cold lead replies, opens a floor plan or asks about a new tower, nobody in sales sees it in time."
+      },
+      {
+        "title": "Content and compliance risk",
+        "detail": "Sales staff forward unapproved price sheets and offers from personal phones, outside opt-in and template rules."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a nurture engine on top of your CRM and WhatsApp Business account. Leads are segmented by stage, configuration, budget, project, location preference and the objections recorded in calls and visit feedback. An LLM drafts short message variants for each segment using only an approved content library: construction progress updates, sample flat videos, new tower or inventory releases, loan explainers, possession timelines as registered and offers approved by sales. Marketing approves templates before use. Messages go out on a schedule with frequency caps and opt-in checks. Replies and clicks are scored, and leads showing renewed interest are passed to presales with context.",
+    "capabilities": [
+      "Segmentation by stage, configuration, budget, project and recorded objections",
+      "LLM-drafted message variants grounded only in an approved content library",
+      "Approval workflow for WhatsApp templates, emails and offers",
+      "Scheduling with frequency caps, quiet hours and opt-in checks",
+      "Reply handling for common questions, with handover for anything else",
+      "Re-engagement scoring and alerts to presales with the lead's history"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Segment the database",
+      "detail": "Leads are grouped by stage, preferences and objections drawn from CRM fields, call notes and visit feedback."
+    },
+    {
+      "step": 2,
+      "title": "Draft from approved content",
+      "detail": "The LLM drafts variants for each segment using only the approved content library and project facts."
+    },
+    {
+      "step": 3,
+      "title": "Marketing approval",
+      "detail": "Marketing reviews and approves drafts, and WhatsApp templates are submitted to Meta where needed."
+    },
+    {
+      "step": 4,
+      "title": "Send with caps",
+      "detail": "Messages go out on schedule, respecting opt-in, frequency caps and quiet hours."
+    },
+    {
+      "step": 5,
+      "title": "Score responses",
+      "detail": "Replies, clicks and questions are scored for intent, and simple questions get approved answers."
+    },
+    {
+      "step": 6,
+      "title": "Hand over interested buyers",
+      "detail": "Leads showing renewed interest are passed to presales with their history and the message that prompted them."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"CRM leads, call notes, feedback\"] --> B[\"Segment by stage and objection\"]\n  B --> C[\"Draft from approved content\"]\n  C --> D(\"Marketing approves templates\")\n  D --> E[\"Send with caps and opt-in checks\"]\n  E --> F{\"Renewed interest detected?\"}\n  F -->|\"yes\"| G[\"Alert presales with context\"]\n  F -->|\"no\"| H[\"Continue nurture sequence\"]\n  H --> E",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data",
+        "components": [
+          "CRM lead, visit and booking data",
+          "Call and visit feedback summaries",
+          "Consent and opt-out registry"
+        ]
+      },
+      {
+        "name": "Content",
+        "components": [
+          "Approved content library",
+          "LLM variant drafter",
+          "Marketing approval workflow"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Scheduler with frequency caps",
+          "WhatsApp Business API and email service"
+        ]
+      },
+      {
+        "name": "Response and handover",
+        "components": [
+          "Reply classifier and approved answers",
+          "Intent scoring",
+          "Presales alerts in the CRM"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data\"]\n  D1[\"CRM leads and visits\"]\n  D2[\"Objections from call notes\"]\n  D3[\"Consent registry\"]\n  end\n  subgraph S2[\"Content\"]\n  C1[\"Approved content library\"]\n  C2[\"LLM variant drafter\"]\n  C3(\"Marketing approval\")\n  end\n  subgraph S3[\"Delivery\"]\n  E1[\"Scheduler with caps\"]\n  E2[\"WhatsApp and email send\"]\n  end\n  subgraph S4[\"Response and handover\"]\n  R1[\"Reply and intent scoring\"]\n  R2[\"Presales alert\"]\n  end\n  D1 --> C2\n  D2 --> C2\n  C1 --> C2\n  C2 --> C3\n  C3 --> E1\n  D3 --> E1\n  E1 --> E2\n  E2 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "CRM lead, visit and booking status",
+    "Call notes and post-visit feedback",
+    "Approved content: progress updates, floor plans, videos, offers",
+    "Consent, opt-out and channel preferences",
+    "Project facts from the RERA registration and price list"
+  ],
+  "outputs": [
+    "Segment definitions and message calendars",
+    "Approved message variants per segment",
+    "Delivery, reply and click logs",
+    "Re-engagement alerts to presales",
+    "Campaign reports by segment and project"
+  ],
+  "human_in_the_loop": "Marketing approves every template, offer and new content item before use, and presales takes over any lead that shows interest or asks something outside the approved answers.",
+  "integrations": [
+    "Real estate CRM such as Salesforce, LeadSquared or Sell.Do",
+    "WhatsApp Business API provider",
+    "Email service such as SendGrid, Amazon SES or Zoho Campaigns",
+    "Website analytics for content clicks",
+    "Digital asset library for videos and floor plans"
+  ],
+  "guardrails": [
+    "Messages built only from the approved content library and RERA-consistent project facts",
+    "No claims about price appreciation or rental returns",
+    "Opt-in checked before every WhatsApp send, and opt-outs honoured immediately",
+    "Frequency caps and quiet hours per lead",
+    "Every message traceable to its approved template and version"
+  ],
+  "compliance_notes": [
+    "WhatsApp campaigns follow Meta's opt-in and template approval rules, and SMS and calls follow TRAI commercial communication rules.",
+    "Marketing content stays consistent with the project's RERA registration details, including the registration number where required.",
+    "Lead data is processed on the basis of consent, with easy withdrawal, under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One project's database of past enquirers and visitors who did not book, split into a few segments, with a holdout group that receives your usual communication.",
+    "deliverables": [
+      "Segment design and approved content library",
+      "Drafted and approved message variants",
+      "Running WhatsApp and email sequences with caps",
+      "Re-engagement alerts in your CRM",
+      "Pilot report comparing segments with the holdout group"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Reply and click rates by segment",
+        "how": "Tracked per message and compared with the holdout group."
+      },
+      {
+        "metric": "Leads returned to presales",
+        "how": "Re-engagement alerts that presales accepts as genuine interest."
+      },
+      {
+        "metric": "Visits and bookings from nurtured leads",
+        "how": "Attributed in the CRM to leads in the pilot segments."
+      },
+      {
+        "metric": "Opt-outs by segment",
+        "how": "Opt-outs per segment and message, used to tune frequency and content."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the AI write offers or prices on its own?",
+      "a": "No. It drafts wording only from facts and offers in the approved library. Prices and offers are added by marketing or sales, and nothing is sent without approval."
+    },
+    {
+      "q": "Do we need a WhatsApp Business API account?",
+      "a": "Yes, for business-initiated campaigns at scale. We help you set it up through a provider, register templates and import opt-in records. Leads without opt-in are reached by email or not at all."
+    },
+    {
+      "q": "Can it respond to buyer replies?",
+      "a": "It answers common questions from approved answers, such as the site address or the registered possession timeline, and passes anything about price, availability or negotiation to presales."
+    },
+    {
+      "q": "How do we know whether it works?",
+      "a": "With a holdout group that receives your usual communication. The pilot compares replies, visits and bookings between nurtured segments and the holdout, so you see the effect on your own data."
+    }
+  ],
+  "related": [
+    "property-lead-qualification-voice-agent",
+    "site-visit-booking-and-reminders",
+    "channel-partner-lead-automation",
+    "abandoned-cart-and-win-back-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/buyer-nurture-campaigns/"
+}

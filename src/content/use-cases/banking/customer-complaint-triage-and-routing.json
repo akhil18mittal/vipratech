@@ -1,0 +1,224 @@
+{
+  "slug": "customer-complaint-triage-and-routing",
+  "industry": "banking",
+  "title": "Customer Complaint Triage and Routing",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Classify complaints from email, branches, social media and RBI CMS, spot urgent cases such as unauthorised transactions, route them to resolver teams and draft acknowledgements.",
+  "seo": {
+    "title": "Bank Complaint Triage and Routing with AI | VipraTech",
+    "description": "AI that classifies bank complaints from every channel, flags unauthorised-transaction and repeat cases, routes them to resolver teams and tracks timelines.",
+    "keywords": [
+      "bank complaint triage AI",
+      "complaint classification banking",
+      "RBI CMS complaint handling",
+      "customer grievance routing",
+      "internal ombudsman complaint review"
+    ]
+  },
+  "designed_for": [
+    "Principal Nodal Officer",
+    "Head of Customer Service",
+    "Grievance Redressal Team Lead",
+    "Internal Ombudsman Secretariat"
+  ],
+  "problem": {
+    "intro": "Complaints reach a bank through branch letters, emails, the contact centre, social media, the website and RBI's Complaint Management System. Each must be logged, categorised, routed and resolved within internal and regulatory timelines, and a misrouted complaint can sit for days before anyone notices.",
+    "pain_points": [
+      {
+        "title": "Free text that resists categories",
+        "detail": "Customers describe a failed UPI transfer, a disputed card charge and a recovery agent's call in one message, often in Hinglish, so manual tagging is inconsistent."
+      },
+      {
+        "title": "Urgent cases buried in volume",
+        "detail": "Reports of unauthorised electronic transactions, fraud or harassment need fast action under RBI's customer liability rules, but arrive mixed with routine requests."
+      },
+      {
+        "title": "Repeat and escalating complainants",
+        "detail": "The same customer writes through several channels, and mentions of the Ombudsman, legal action or social media go unnoticed until escalation happens."
+      },
+      {
+        "title": "Weak root-cause visibility",
+        "detail": "Management reports count complaints by broad category, so the product or process faults behind them stay hidden."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a triage service that reads every incoming complaint, whatever the channel or language, and turns it into a structured case. A language model identifies the product, the issue, transaction references and the outcome the customer wants, then maps the case to your complaint taxonomy and to RBI reporting categories. Rules mark urgent signals such as unauthorised debits, fraud reports and recovery-agent harassment, and link duplicates across channels. The case goes to the resolver team with a drafted acknowledgement and a timeline clock. Before a complaint is partly or wholly rejected, the system prepares the file for internal ombudsman review as your process requires.",
+    "capabilities": [
+      "Reads emails, scanned letters, web forms, social posts and call notes in English, Hindi, Hinglish and regional languages",
+      "Extracts account, card, UPI and transaction references and the resolution the customer asks for",
+      "Maps each case to the bank's taxonomy and to RBI complaint categories",
+      "Flags unauthorised transactions, fraud reports, recovery-agent conduct and escalation language",
+      "Links duplicate and repeat complaints across channels into one case history",
+      "Drafts acknowledgements and response letters for officer approval"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect complaints",
+      "detail": "Connectors pull complaints from email, the CRM, branch scans, social listening tools and RBI CMS exports into one intake queue."
+    },
+    {
+      "step": 2,
+      "title": "Understand the complaint",
+      "detail": "The model extracts product, issue, references, sentiment and the requested outcome, with card, account and Aadhaar numbers masked."
+    },
+    {
+      "step": 3,
+      "title": "Classify and prioritise",
+      "detail": "Cases are mapped to the taxonomy, urgent signals raise priority and duplicates are linked to existing cases."
+    },
+    {
+      "step": 4,
+      "title": "Check confidence",
+      "detail": "Low-confidence classifications go to a triage officer instead of being routed automatically."
+    },
+    {
+      "step": 5,
+      "title": "Route and acknowledge",
+      "detail": "The case reaches the resolver team with a drafted acknowledgement and a timeline based on its category."
+    },
+    {
+      "step": 6,
+      "title": "Track and report",
+      "detail": "Ageing, breaches, rejections due for internal ombudsman review and root-cause themes appear in daily dashboards."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Email, branch, social and CMS intake\"] --> B[\"Extract issue, references, outcome\"]\n  B --> C[\"Map to taxonomy and flag urgency\"]\n  C --> D{\"Classification confident?\"}\n  D -->|\"no\"| E(\"Triage officer confirms\")\n  D -->|\"yes\"| F[\"Route to resolver team\"]\n  E --> F\n  F --> G[\"Draft acknowledgement for approval\"]\n  G --> H{\"Rejection proposed?\"}\n  H -->|\"yes\"| I(\"Internal ombudsman review\")\n  H -->|\"no\"| J[\"Resolve, close and report\"]\n  I --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Email and web form connectors",
+          "CRM and contact-centre notes feed",
+          "Scanned letter OCR",
+          "RBI CMS export loader"
+        ]
+      },
+      {
+        "name": "Understanding",
+        "components": [
+          "Masking of card, account and Aadhaar numbers",
+          "Multilingual LLM extractor",
+          "Duplicate and repeat-case linker"
+        ]
+      },
+      {
+        "name": "Decisioning",
+        "components": [
+          "Taxonomy and RBI category mapper",
+          "Urgency rules for fraud and harassment signals",
+          "Routing matrix by product and region"
+        ]
+      },
+      {
+        "name": "Workspace",
+        "components": [
+          "Triage officer queue",
+          "Acknowledgement and response editor"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Complaint management system adapter",
+          "Ageing and root-cause dashboards"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Email and web forms\"]\n    I2[\"CRM and call notes\"]\n    I3[\"Letters and CMS exports\"]\n  end\n  subgraph S2[\"Understanding\"]\n    U1[\"PII masking\"]\n    U2[\"Multilingual extractor\"]\n    U3[\"Duplicate linker\"]\n  end\n  subgraph S3[\"Decisioning\"]\n    D1[\"Taxonomy mapper\"]\n    D2[\"Urgency rules\"]\n    D3[\"Routing matrix\"]\n  end\n  subgraph S4[\"Workspace and reporting\"]\n    W1(\"Triage officer queue\")\n    W2[\"Complaint system adapter\"]\n    W3[\"Root-cause dashboard\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  I3 --> U1\n  U1 --> U2 --> U3\n  U3 --> D1 --> D2 --> D3\n  D1 --> W1\n  D3 --> W2\n  W1 --> W2\n  W2 --> W3"
+  },
+  "inputs": [
+    "Complaint emails and web form submissions",
+    "Scanned branch complaint letters",
+    "Contact-centre call notes and transcripts",
+    "Social media mentions from the bank's listening tool",
+    "Complaints received through RBI CMS",
+    "Complaint taxonomy, routing matrix and timeline rules"
+  ],
+  "outputs": [
+    "Structured case with product, issue, references and requested outcome",
+    "Priority and urgency flags with reasons",
+    "Routing decision and timeline clock",
+    "Draft acknowledgement and response letters",
+    "Ageing, breach and root-cause reports"
+  ],
+  "human_in_the_loop": "Triage officers confirm low-confidence classifications, and resolver teams own every response and closure. No complaint is rejected without a person's decision, and rejections follow the bank's internal ombudsman process.",
+  "integrations": [
+    "Complaint management system or CRM, such as Salesforce or an in-house tool",
+    "Email and contact-centre platforms",
+    "Social listening tool",
+    "Core banking and card systems for read-only reference lookups",
+    "MIS or BI dashboards"
+  ],
+  "guardrails": [
+    "Card, account and Aadhaar numbers masked before model processing",
+    "Urgent categories always routed to people, with no automatic reply beyond acknowledgement",
+    "Drafted responses require officer approval before sending",
+    "Taxonomy mapping reviewed weekly against officer corrections",
+    "Drafts never promise refunds, compensation or outcomes"
+  ],
+  "compliance_notes": [
+    "Designed to support complaint handling under RBI's grievance redressal expectations and the Integrated Ombudsman Scheme, 2021.",
+    "Supports timely handling of unauthorised electronic transaction complaints under RBI's customer liability framework."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Email and web-form complaints for two products, such as debit cards and UPI, classified in shadow mode alongside your current triage team.",
+    "deliverables": [
+      "Taxonomy and routing matrix configured for the pilot products",
+      "Working triage service on historical and live shadow complaints",
+      "Triage officer review screen",
+      "Classification and routing accuracy report",
+      "Production plan covering more channels and products"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Classification agreement",
+        "how": "Model category compared with the category assigned by experienced triage officers for the same complaints."
+      },
+      {
+        "metric": "Urgent case detection",
+        "how": "Officer review of whether fraud, unauthorised transaction and harassment cases were flagged."
+      },
+      {
+        "metric": "Routing accuracy",
+        "how": "Cases reassigned by resolver teams after initial routing, tracked during shadow mode."
+      },
+      {
+        "metric": "Draft acceptance",
+        "how": "Drafted acknowledgements approved as written, with minor edits or rewritten."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read complaints written in Hinglish or regional languages?",
+      "a": "Yes. The extractor handles English, Hindi, Hinglish and major Indian languages, and keeps the original text beside a working translation so officers can check the meaning. Low-confidence cases go to a person."
+    },
+    {
+      "q": "Will customers receive AI-written replies?",
+      "a": "Only after an officer approves them. The system drafts acknowledgements and responses, and your team edits and sends them through your existing channels."
+    },
+    {
+      "q": "Can it map to RBI reporting categories?",
+      "a": "Yes. Each case carries both your internal taxonomy code and the RBI category used in your complaint reporting, and your team maintains the mapping table."
+    },
+    {
+      "q": "What about complaints already in RBI CMS?",
+      "a": "We ingest CMS exports or your existing download of those complaints, so they appear in the same queue and history as other channels. Responses to RBI continue through the channels your Principal Nodal Officer uses today."
+    }
+  ],
+  "related": [
+    "multilingual-banking-voice-agent",
+    "account-opening-document-verification",
+    "regulatory-return-preparation-assistant",
+    "ticket-and-email-triage"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/customer-complaint-triage-and-routing/"
+}

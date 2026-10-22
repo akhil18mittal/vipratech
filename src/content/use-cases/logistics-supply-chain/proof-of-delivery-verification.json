@@ -1,0 +1,218 @@
+{
+  "slug": "proof-of-delivery-verification",
+  "industry": "logistics-supply-chain",
+  "title": "Proof of Delivery Capture and Verification",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "computer-vision"
+  ],
+  "summary": "Check every POD photo or scan for consignment number, date, signature, stamp and remarks, match it to the shipment in your TMS, and flag short, damaged or doubtful deliveries before billing.",
+  "seo": {
+    "title": "AI Proof of Delivery (POD) Verification | VipraTech",
+    "description": "AI that reads POD photos and scans, checks signature, stamp, date and remarks, matches shipments in your TMS and flags exceptions before billing.",
+    "keywords": [
+      "proof of delivery verification",
+      "POD OCR",
+      "ePOD validation",
+      "delivery exception detection",
+      "LR and POD matching"
+    ]
+  },
+  "designed_for": [
+    "Head of Operations",
+    "Billing and Collections Manager",
+    "Regional Hub Manager",
+    "Key Account Manager"
+  ],
+  "problem": {
+    "intro": "For B2B, FTL and PTL shipments, the signed POD or acknowledged lorry receipt copy is what lets you raise an invoice and defend it later. PODs come back as driver phone photos, branch scans or physical copies weeks later, and a billing team checks each one by eye before the shipment can be closed.",
+    "pain_points": [
+      {
+        "title": "Billing waits for PODs",
+        "detail": "Invoices cannot be raised, or get disputed, until a clean POD is on file, which ties up working capital."
+      },
+      {
+        "title": "Unreadable or incomplete PODs",
+        "detail": "Blurred photos, missing consignee stamps, unsigned copies or the wrong LR number surface only when the customer rejects the invoice."
+      },
+      {
+        "title": "Remarks missed",
+        "detail": "Handwritten remarks such as short receipt, cartons damaged or seal broken are easy to miss and later become claims nobody prepared for."
+      },
+      {
+        "title": "Reused or doubtful PODs",
+        "detail": "The same POD image uploaded against several shipments, or a photo taken far from the delivery address, is hard to spot by hand."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a POD verification service that receives images from your driver app, branch scans or email. It reads the LR or AWB number, invoice references, date, package count, consignee name, signature, stamp and handwritten remarks, and matches the POD to the shipment in your TMS. It compares counts with the manifest, picks out remarks that indicate shortage or damage, checks GPS and timestamp metadata against the delivery address where available, and detects reused images. Clean PODs are marked verified for billing; anything incomplete or doubtful goes to an operations reviewer with the reason.",
+    "capabilities": [
+      "Reads LR or AWB number, invoice references, dates, counts and consignee details from photos and scans",
+      "Detects signature and consignee stamp, and reads handwritten remarks",
+      "Matches each POD to the shipment and invoice in your TMS or ERP",
+      "Flags short receipt, damage and refusal remarks for claims and customer follow-up",
+      "Checks image location and time against the delivery address where captured",
+      "Detects duplicate or reused POD images across shipments"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive POD images",
+      "detail": "PODs arrive from the driver app, branch scanner, WhatsApp, email or customer portal and are queued by shipment."
+    },
+    {
+      "step": 2,
+      "title": "Extract fields",
+      "detail": "The system reads shipment number, dates, counts, consignee details, signature, stamp and remarks."
+    },
+    {
+      "step": 3,
+      "title": "Match to shipment",
+      "detail": "Extracted values are matched to the TMS record and manifest, including package counts."
+    },
+    {
+      "step": 4,
+      "title": "Run checks",
+      "detail": "Completeness, remark, duplicate-image and location checks run on each POD."
+    },
+    {
+      "step": 5,
+      "title": "Review exceptions",
+      "detail": "Incomplete, mismatched or doubtful PODs go to an operations reviewer, who accepts, rejects or requests a re-upload."
+    },
+    {
+      "step": 6,
+      "title": "Release for billing",
+      "detail": "Verified PODs are marked in the TMS, attached to the invoice and published to the customer portal."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"POD image from driver or branch\"] --> B[\"Extract numbers, signature and remarks\"]\n  B --> C[\"Match to shipment in TMS\"]\n  C --> D[\"Completeness and duplicate checks\"]\n  D --> E{\"POD clean and matched?\"}\n  E -->|\"yes\"| F[\"Mark verified for billing\"]\n  E -->|\"no\"| G(\"Operations reviewer decides\")\n  G --> H[\"Request re-upload or raise claim\"]\n  G --> F\n  F --> I[\"Attach POD to invoice\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Driver app upload API",
+          "Branch scan, WhatsApp and email intake",
+          "Image quality check at upload"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with handwriting support",
+          "Signature and stamp detector",
+          "Remark classifier"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "TMS and manifest matcher",
+          "Duplicate image detection",
+          "Location and time check"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Exception review screen",
+          "TMS status update",
+          "Invoice and customer portal attachment"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Driver app upload\"]\n    C2[\"Branch scan and email\"]\n    C3[\"Image quality check\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"OCR with handwriting\"]\n    D2[\"Signature and stamp detector\"]\n    D3[\"Remark classifier\"]\n  end\n  subgraph S3[\"Verification\"]\n    V1[\"TMS and manifest matcher\"]\n    V2[\"Duplicate image check\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Exception review screen\")\n    R2[\"TMS status update\"]\n    R3[\"Invoice attachment\"]\n  end\n  C1 --> C3\n  C2 --> C3\n  C3 --> D1\n  D1 --> D2 --> D3\n  D3 --> V1\n  V1 --> V2\n  V2 --> R1\n  V2 --> R2\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "POD photos from driver apps or WhatsApp",
+    "Branch scans of signed LR or delivery challan copies",
+    "Shipment and manifest data from the TMS",
+    "Customer invoice references",
+    "GPS and timestamp metadata where captured"
+  ],
+  "outputs": [
+    "Verified or exception status per POD",
+    "Extracted POD fields linked to the image",
+    "Shortage, damage and refusal remarks for claims",
+    "Duplicate-image alerts",
+    "POD attached to the invoice and customer portal"
+  ],
+  "human_in_the_loop": "Operations reviewers decide every incomplete, mismatched or doubtful POD and request re-uploads from drivers or branches. Shortage and damage claims are raised and settled by your claims team, not by the system.",
+  "integrations": [
+    "TMS such as an in-house system, Oracle OTM or SAP TM",
+    "Driver or ePOD mobile app",
+    "ERP for invoicing",
+    "Customer portal or EDI",
+    "WhatsApp Business API, email and shared drives for branch uploads"
+  ],
+  "guardrails": [
+    "Low-confidence fields always reviewed before a POD is verified",
+    "Duplicate and location checks flag, never auto-reject",
+    "Original images retained unaltered with an audit log",
+    "Consignee personal data masked in logs and access-restricted",
+    "Weekly sampling of auto-verified PODs"
+  ],
+  "compliance_notes": [
+    "Consignee details and photos are personal data under the DPDP Act 2023; retention follows your contractual and tax record requirements.",
+    "A verified POD record with audit trail helps you evidence delivery in customer disputes and tax audits."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "PODs from one region or one key account, using recent PODs already checked by your billing team, plus a live parallel run.",
+    "deliverables": [
+      "POD field schema agreed with billing and operations",
+      "Working verification pipeline with TMS matching",
+      "Exception review screen",
+      "Accuracy report against your team's checks",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Extracted shipment numbers, dates and counts compared with billing team records."
+      },
+      {
+        "metric": "Exception precision",
+        "how": "Flagged PODs that reviewers confirm as genuinely incomplete, mismatched or doubtful."
+      },
+      {
+        "metric": "Remark capture",
+        "how": "Shortage and damage remarks found by reviewers compared with those the system flagged."
+      },
+      {
+        "metric": "POD-to-invoice time",
+        "how": "Time from POD upload to invoice-ready status, with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our drivers send PODs on WhatsApp. Can you work with that?",
+      "a": "Yes. A WhatsApp Business number can receive POD photos and link them to the shipment by LR number or driver mapping. Many operators move to an app later, but WhatsApp is a quick start."
+    },
+    {
+      "q": "Can it read handwritten remarks in Hindi?",
+      "a": "Handwritten remarks in English and Hindi are read and classified, and anything the system is unsure of goes to review. The pilot reports remark accuracy separately."
+    },
+    {
+      "q": "Will it reject PODs automatically?",
+      "a": "No. It marks PODs as verified or sends them to a reviewer with the reason. Rejections and re-upload requests are decided by your operations team."
+    },
+    {
+      "q": "Does this work for e-commerce ePODs with OTP?",
+      "a": "Yes. The same checks apply to photo or OTP-based ePODs, with more weight on location, time and duplicate checks than on signatures."
+    }
+  ],
+  "related": [
+    "freight-invoice-audit",
+    "e-way-bill-and-gst-document-validation",
+    "parcel-damage-and-dimension-detection",
+    "delivery-status-voice-and-whatsapp-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/proof-of-delivery-verification/"
+}

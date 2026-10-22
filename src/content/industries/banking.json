@@ -1,0 +1,125 @@
+{
+  "slug": "banking",
+  "name": "Banking",
+  "seo": {
+    "title": "AI for Banking: KYC, Trade Finance and Voice | VipraTech",
+    "description": "Applied AI for banks: KYC file checks, trade document examination, complaint triage, multilingual voice agents and red-teaming, with officers deciding.",
+    "keywords": [
+      "AI for banks India",
+      "KYC document verification AI",
+      "trade finance document checking",
+      "banking voice agent Hindi",
+      "bank chatbot red teaming",
+      "AI governance for banks",
+      "cheque signature verification AI"
+    ]
+  },
+  "hero": {
+    "headline": "AI for bank operations that cites its evidence, from KYC files to trade documents",
+    "subheadline": "We build document, voice, vision and AI-security systems for banks that fit existing core banking, clearing and complaint workflows, keep data in your environment and leave decisions with your officers."
+  },
+  "intro": "Banks run on structured systems, yet much of the daily work still starts with a document, a phone call or an image: KYC files, LC presentations, cheque images, complaint letters, branch CCTV. That is where applied AI helps today, reading and cross-checking these inputs, preparing a checked draft and pointing an officer to the exact page or frame that needs judgement. It should not make credit decisions, KYC sign-off, signature verification or regulatory attestations unsupervised. Our systems are built for that split: deterministic rules where the answer must be exact, language models where documents vary, confidence thresholds that route doubt to people, and an audit trail that supervisors, internal audit and RBI inspection teams can follow.",
+  "challenges": [
+    {
+      "title": "Document-heavy work behind digital front ends",
+      "detail": "Account opening, trade finance and servicing still depend on officers reading scanned OVDs, entity documents and shipping papers, even when the customer journey looks digital."
+    },
+    {
+      "title": "Regulatory timelines with little slack",
+      "detail": "KYC updates, complaint resolution, cheque clearing windows and periodic RBI returns all run on fixed timelines, so backlogs quickly become compliance exposure."
+    },
+    {
+      "title": "Customers across many languages",
+      "detail": "Service requests arrive in Hindi, Hinglish and regional languages, and IVR menus built around English push customers to branches or long call queues."
+    },
+    {
+      "title": "AI adoption under supervisory scrutiny",
+      "detail": "Boards, auditors and RBI expect banks to evidence how AI systems are inventoried, tested and monitored, while customer-facing bots open new fraud and data-leakage paths."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Reads OVDs, LC document sets, complaint letters and return instructions, extracts fields with page references and runs the bank's own checklists before an officer signs off."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Flags cheque signature and field mismatches for inward-clearing officers, and turns existing branch CCTV into anonymous queue and footfall counts."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Handles authenticated service requests in Hindi, Hinglish and regional languages, and hands over to a contact-centre agent with full context when needed."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Red-teams bank chatbots and voice agents for prompt injection, data leakage and social engineering, and assembles AI governance evidence for boards and auditors."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Scores cross-sell propensity from consented banking data and drafts personalised, consent-checked outreach that relationship managers approve."
+    }
+  ],
+  "featured_use_cases": [
+    "account-opening-document-verification",
+    "trade-finance-document-checking",
+    "bank-chatbot-and-voice-agent-red-teaming"
+  ],
+  "use_cases": [
+    "account-opening-document-verification",
+    "trade-finance-document-checking",
+    "regulatory-return-preparation-assistant",
+    "customer-complaint-triage-and-routing",
+    "multilingual-banking-voice-agent",
+    "cheque-image-and-signature-verification",
+    "branch-queue-and-footfall-analytics",
+    "bank-chatbot-and-voice-agent-red-teaming",
+    "ai-model-governance-evidence-pack",
+    "retail-banking-cross-sell-outreach"
+  ],
+  "regulatory_context": [
+    {
+      "name": "RBI Master Direction on KYC (2016, as amended)",
+      "note": "Sets customer due diligence, officially valid documents, V-CIP, CKYC and periodic KYC update requirements. Our document checks are designed to support these processes, not to replace the bank's KYC sign-off."
+    },
+    {
+      "name": "Digital Personal Data Protection Act 2023 (India)",
+      "note": "Requires a lawful basis such as consent, purpose limitation, security safeguards and breach handling for personal data. We design pipelines to minimise and mask data and to run in the bank's chosen environment."
+    },
+    {
+      "name": "RBI directions on IT governance and IT outsourcing (2023)",
+      "note": "RBI's Master Directions on IT governance, risk and controls and on outsourcing of IT services expect banks to manage risk, audit rights and data location when they use third-party technology, including AI vendors."
+    },
+    {
+      "name": "RBI FREE-AI framework (2025)",
+      "note": "A framework of recommendations for responsible and ethical AI in the financial sector, covering board-approved AI policy, AI inventories, testing and consumer protection. Our governance work helps banks evidence progress against it."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can these systems run inside our own environment?",
+      "a": "Yes. We can deploy in your data centre, your private cloud tenancy or an India region of a major cloud provider, and use models that do not retain or train on your data. Masking, logging and access controls follow your information security policy."
+    },
+    {
+      "q": "Will AI make KYC, clearing or credit decisions?",
+      "a": "No. Our systems prepare checked drafts, flag exceptions and show the evidence. Officers make KYC sign-off, cheque pass or return, complaint closure and every credit decision."
+    },
+    {
+      "q": "How do you work with our core banking system?",
+      "a": "Through integration patterns your IT team already approves: APIs, middleware, SFTP drops or staging tables. We avoid writing directly into core banking and agree every field mapping during the pilot."
+    },
+    {
+      "q": "What does a first engagement look like?",
+      "a": "A three to four week pilot on one narrow process, run on de-identified or consented data in parallel with your current process. You get a working system, a measured comparison against your officers' own work and a production plan with cost."
+    }
+  ],
+  "related_industries": [
+    "nbfc-lending",
+    "fintech-payments",
+    "insurance"
+  ],
+  "cta": {
+    "headline": "Pick one banking process and test it with evidence",
+    "text": "Book a discovery call to choose a narrow pilot, from KYC file checks to voice-agent red-teaming, and see measured results on your own documents before any wider roll-out."
+  },
+  "url": "/industries/banking/"
+}

@@ -1,0 +1,225 @@
+{
+  "slug": "private-markets-fund-document-extraction",
+  "industry": "capital-markets-wealth",
+  "title": "Private Markets Fund Document Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read capital calls, distribution notices, capital account statements and LPAs from many GPs into structured records, with roll-forward checks and wire-instruction change alerts.",
+  "seo": {
+    "title": "Private Markets Fund Document Extraction AI | VipraTech",
+    "description": "AI for LPs, family offices and fund administrators that extracts capital calls, distributions, capital accounts and LPA terms, with checks and alerts.",
+    "keywords": [
+      "capital call extraction",
+      "private equity document automation",
+      "LP fund document processing",
+      "capital account statement extraction",
+      "AIF drawdown notice automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Investment Operations",
+    "Private Markets Analyst",
+    "Fund Accountant",
+    "Family Office CFO"
+  ],
+  "problem": {
+    "intro": "An LP with commitments across private equity, venture, credit and real estate funds receives a steady stream of documents from each GP: capital call and drawdown notices, distribution notices, quarterly capital account statements, quarterly reports and audited financials. Every GP uses its own format and portal, and operations teams key the figures into spreadsheets or the accounting system.",
+    "pain_points": [
+      {
+        "title": "Formats differ by GP",
+        "detail": "Each GP and administrator lays out notices and statements differently, so template-based tools need constant maintenance."
+      },
+      {
+        "title": "Cash deadlines are tight",
+        "detail": "Capital calls carry due dates, and a notice missed in a portal or inbox becomes a late payment."
+      },
+      {
+        "title": "Wire instruction changes are a fraud risk",
+        "detail": "A changed bank account on a capital call notice may be legitimate or a payment fraud attempt, and it must be caught every time."
+      },
+      {
+        "title": "Roll-forwards that do not tie",
+        "detail": "Capital account statements must roll from opening to closing balance through contributions, distributions, fees and gains, and breaks are found late."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a fund document pipeline for LPs, family offices and fund administrators. It collects documents from GP portals and inboxes, classifies them and extracts what operations and accounting need: call amounts, due dates and purpose, distribution components, capital account movements, NAV and fees. Every capital account statement is checked for arithmetic and tied to your commitment register, and bank details on each notice are compared with your verified instruction master. Breaks go to an analyst; any change in wire instructions is blocked and sent for callback verification by treasury. Clean records post to your accounting or portfolio monitoring system, and LPA and side-letter terms go into a searchable register.",
+    "capabilities": [
+      "Classifies capital calls, distribution notices, capital account statements, quarterly reports, LPAs, side letters and PPMs",
+      "Extracts call amounts, due dates and purpose, and splits distributions into return of capital, gains, income and withholding",
+      "Checks capital account roll-forwards and ties them to your commitment register and unfunded balance",
+      "Compares bank details on every notice with your verified instruction master and blocks changes",
+      "Builds a register of key LPA and side-letter terms such as fees, hurdle, key person and most-favoured-nation provisions",
+      "Posts validated records to your accounting or portfolio monitoring system and cash forecast"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect documents",
+      "detail": "Notices and statements are gathered from GP portals and inboxes and tagged by fund and investing entity."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document type has its own schema for amounts, dates, components and balances."
+    },
+    {
+      "step": 3,
+      "title": "Validate",
+      "detail": "Roll-forwards, commitment balances and bank details are checked against your records."
+    },
+    {
+      "step": 4,
+      "title": "Handle exceptions",
+      "detail": "Breaks go to an operations analyst; wire instruction changes are blocked for treasury callback verification."
+    },
+    {
+      "step": 5,
+      "title": "Post and forecast",
+      "detail": "Validated records post to accounting and update the cash forecast and unfunded commitments."
+    },
+    {
+      "step": 6,
+      "title": "Maintain the terms register",
+      "detail": "LPA and side-letter terms are extracted for legal review and kept in a searchable register."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Notices and statements from GPs\"] --> B[\"Classify by document type\"]\n  B --> C[\"Extract amounts, dates and balances\"]\n  C --> D{\"Ties out and bank details match?\"}\n  D -->|\"no\"| E(\"Analyst review or treasury callback\")\n  D -->|\"yes\"| F[\"Post to accounting system\"]\n  E --> F\n  F --> G[\"Update cash forecast and unfunded\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Collection",
+        "components": [
+          "GP portal download automation",
+          "Inbox connector",
+          "Fund and entity tagging"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Document classifier",
+          "LLM extractor with schemas per document type",
+          "Table parser for capital account statements"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Roll-forward arithmetic checks",
+          "Commitment register reconciliation",
+          "Bank instruction comparison and block"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Operations exception queue",
+          "Treasury callback task",
+          "Legal review of the terms register"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "Investment accounting or portfolio monitoring adapter",
+          "Cash forecast update",
+          "Audit trail"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Collection\"]\n    C1[\"GP portal downloads\"]\n    C2[\"Inbox connector\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"Document classifier\"]\n    E2[\"Schema-based extractor\"]\n    E3[\"Capital account table parser\"]\n  end\n  subgraph S3[\"Validation\"]\n    V1[\"Roll-forward checks\"]\n    V2[\"Commitment reconciliation\"]\n    V3[\"Bank instruction comparison\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Operations exception queue\")\n    R2(\"Treasury callback\")\n    R3[\"Accounting adapter\"]\n    R4[\"Audit trail\"]\n  end\n  C1 --> E1\n  C2 --> E1\n  E1 --> E2\n  E1 --> E3\n  E2 --> V2\n  E2 --> V3\n  E3 --> V1\n  V1 --> R1\n  V2 --> R1\n  V3 --> R2\n  R1 --> R3\n  V2 --> R3\n  R3 --> R4"
+  },
+  "inputs": [
+    "Capital call and drawdown notices",
+    "Distribution notices",
+    "Quarterly capital account and NAV statements",
+    "Quarterly reports and audited fund financials",
+    "LPAs, side letters and PPMs",
+    "Commitment register and verified bank instruction master"
+  ],
+  "outputs": [
+    "Structured capital call and distribution records with due dates",
+    "Capital account roll-forward and NAV by fund and entity",
+    "Commitment and unfunded balance tracker",
+    "Wire instruction change alerts",
+    "Register of key LPA and side-letter terms"
+  ],
+  "human_in_the_loop": "Operations analysts approve every cash movement record and resolve breaks. Any change in bank details is blocked until treasury completes an out-of-band callback, and legal reviews extracted side-letter terms before anyone relies on them.",
+  "integrations": [
+    "GP investor portals and data rooms",
+    "Shared inboxes",
+    "Investment accounting or portfolio monitoring platform",
+    "Treasury and payments system",
+    "Data warehouse and BI tools"
+  ],
+  "guardrails": [
+    "The system never initiates or approves payments",
+    "Bank detail changes always blocked pending callback verification",
+    "Arithmetic checks on every capital account statement",
+    "Every value linked to its source page",
+    "Access restricted by fund and investing entity"
+  ],
+  "compliance_notes": [
+    "Investor personal data in subscription and KYC documents is handled under the DPDP Act 2023 or GDPR, as applicable.",
+    "Payment fraud controls such as callback verification stay with your treasury team; the system only raises and records the alert."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One quarter of notices and statements for a subset of funds across several GPs, processed alongside your operations team.",
+    "deliverables": [
+      "Document schemas agreed with operations and accounting",
+      "Working pipeline on the pilot document set",
+      "Exception and callback workflow",
+      "Accuracy and break report",
+      "Production plan covering all funds"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field accuracy on calls and distributions",
+        "how": "Compared with the records your operations team booked for the same documents."
+      },
+      {
+        "metric": "Roll-forward breaks detected",
+        "how": "Breaks raised by the pipeline and confirmed by analysts or GPs."
+      },
+      {
+        "metric": "Time from receipt to booking",
+        "how": "Timestamps from document arrival to posting, compared with the current process."
+      },
+      {
+        "metric": "Wire change alerts",
+        "how": "Each alert reviewed by treasury and classified as legitimate change, error or suspicious."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How do you cope with so many GP formats?",
+      "a": "The extractor reads documents in context rather than relying on fixed templates, so new layouts work without set-up. The first documents from any new GP are reviewed by an analyst to confirm the mapping."
+    },
+    {
+      "q": "Does it work for Indian AIF documents?",
+      "a": "Yes. Drawdown notices, NAV statements and unitholder statements from Indian AIFs use the same approach, with schemas that reflect their terminology."
+    },
+    {
+      "q": "Can it pull documents from GP portals automatically?",
+      "a": "Where portals allow it, we automate downloads with credentials held in your secrets store. Where they do not, documents can be forwarded or dropped into a watched folder."
+    },
+    {
+      "q": "How are wire instructions protected?",
+      "a": "The system compares bank details on every notice with your verified master and blocks any change. Verification happens by callback through your treasury process, outside the AI."
+    }
+  ],
+  "related": [
+    "client-statement-and-portfolio-extraction",
+    "research-report-summarisation",
+    "due-diligence-data-room-review",
+    "contract-clause-extraction-and-risk-flags"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/private-markets-fund-document-extraction/"
+}

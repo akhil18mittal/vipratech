@@ -1,0 +1,223 @@
+{
+  "slug": "tower-site-inspection",
+  "industry": "telecom-contact-centers",
+  "title": "Tower and Site Inspection from Drone and Field Photos",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Review drone and field-engineer photos of towers and sites for antenna loading, corrosion, missing safety items and incomplete maintenance, and turn them into a defect list engineers verify.",
+  "seo": {
+    "title": "Tower Site Inspection from Drone Photos | VipraTech",
+    "description": "Computer vision for telecom towers: antenna and RRU counts against tenancy, defect detection, PM photo validation and engineer-verified work orders.",
+    "keywords": [
+      "telecom tower inspection AI",
+      "drone tower inspection",
+      "antenna tenancy audit",
+      "preventive maintenance photo audit",
+      "tower defect detection"
+    ]
+  },
+  "designed_for": [
+    "Head of Network O&M",
+    "Tower Asset Audit Manager",
+    "Field Operations Manager",
+    "Infrastructure Sharing and Tenancy Manager"
+  ],
+  "problem": {
+    "intro": "Tower companies and operators inspect large site estates through preventive maintenance visits, tenancy audits and periodic drone surveys. Field engineers upload dozens of photos per visit, and someone at the NOC or audit desk has to look at each one to confirm antenna loading, spot corrosion and missing earthing or lightning arresters, and check that the photos really come from this site and this visit.",
+    "pain_points": [
+      {
+        "title": "Photo review backlog",
+        "detail": "Photos are uploaded to close a visit, but few are examined closely, so defects and gaps sit unnoticed."
+      },
+      {
+        "title": "Tenancy and loading disputes",
+        "detail": "Antennas, RRUs and microwave dishes added without matching billing records are found only through slow manual counts."
+      },
+      {
+        "title": "Reused and off-site photos",
+        "detail": "Images from earlier visits or other sites are submitted to close preventive maintenance tickets that were never done."
+      },
+      {
+        "title": "Safety defects missed",
+        "detail": "Corrosion, loose or missing bolts, failed aviation lamps and damaged fencing are easy to overlook in a long photo set."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inspection pipeline that takes photos from field-engineer apps and imagery from drone surveys, checks they belong to the right site and visit, and analyses them against your inspection checklist. Models detect and count antennas, RRUs and microwave dishes by mount position, and the counts are compared with tenancy records. Defect detectors flag corrosion, missing or damaged earthing strips, lightning arresters and aviation lamps, cable management problems, and site items such as fencing, DG sets and battery banks. Metadata and image similarity checks catch photos reused from earlier visits or taken elsewhere. Every finding comes with the annotated photo for an O&M engineer to confirm before any work order or tenancy query.",
+    "capabilities": [
+      "Photo validity checks on GPS and timestamp against the site and visit, plus near-duplicate detection across visits",
+      "Detection and counting of antennas, RRUs and microwave dishes by mount position",
+      "Comparison of observed equipment with tenancy and billing records",
+      "Defect detection for corrosion, missing earthing or lightning arresters, aviation lamp faults and cable issues",
+      "Checklist completion scoring for preventive maintenance visits",
+      "Annotated findings with severity for engineer confirmation and work order creation"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect photos and imagery",
+      "detail": "Field-engineer photo sets and drone survey images are linked to the site and visit."
+    },
+    {
+      "step": 2,
+      "title": "Validate the photos",
+      "detail": "Location, timestamp and uniqueness are checked; invalid sets are flagged for re-inspection."
+    },
+    {
+      "step": 3,
+      "title": "Detect and count equipment",
+      "detail": "Antennas, RRUs and dishes are detected and counted by mount position."
+    },
+    {
+      "step": 4,
+      "title": "Detect defects and score the checklist",
+      "detail": "Defects are flagged with severity and the preventive maintenance checklist is scored."
+    },
+    {
+      "step": 5,
+      "title": "Compare with tenancy records",
+      "detail": "Observed equipment is compared with what each tenant is billed for."
+    },
+    {
+      "step": 6,
+      "title": "Engineer review and action",
+      "detail": "Engineers confirm high-severity and low-confidence findings individually, the O&M lead signs off the rest, and work orders or tenancy queries are raised."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Field and drone photos per site\"] --> B{\"Location, time and uniqueness valid?\"}\n  B -->|\"no\"| C[\"Flag visit for re-inspection\"]\n  B -->|\"yes\"| D[\"Detect and count antennas and RRUs\"]\n  D --> E[\"Detect defects and score checklist\"]\n  E --> F[\"Compare equipment with tenancy\"]\n  F --> G{\"High severity or low confidence?\"}\n  G -->|\"yes\"| H(\"Engineer reviews annotated photos\")\n  G -->|\"no\"| I(\"O and M lead signs off batch\")\n  H --> J[\"Work orders and tenancy queries\"]\n  I --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Field engineer app uploads",
+          "Drone survey imagery",
+          "Site master with coordinates and tower type"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "GPS and timestamp checks",
+          "Near-duplicate image index across visits"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Equipment detector and counter",
+          "Defect detectors",
+          "Checklist scorer"
+        ]
+      },
+      {
+        "name": "Rules and review",
+        "components": [
+          "Tenancy record comparison",
+          "Severity rules",
+          "Engineer review screen"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "Work order creation in the O&M system",
+          "Asset register update",
+          "Site health dashboards"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Field engineer app uploads\"]\n    C2[\"Drone survey imagery\"]\n    C3[\"Site master with coordinates\"]\n  end\n  subgraph S2[\"Validation\"]\n    V1[\"GPS and timestamp checks\"]\n    V2[\"Near-duplicate image index\"]\n  end\n  subgraph S3[\"Vision models\"]\n    M1[\"Equipment detector and counter\"]\n    M2[\"Defect detectors\"]\n    M3[\"Checklist scorer\"]\n  end\n  subgraph S4[\"Rules and review\"]\n    R1[\"Tenancy record comparison\"]\n    R2[\"Severity rules\"]\n    R3(\"Engineer review screen\")\n  end\n  subgraph S5[\"Integration\"]\n    G1[\"Work order creation\"]\n    G2[\"Asset register update\"]\n  end\n  C1 --> V1\n  C2 --> V1\n  C3 --> V1\n  V1 --> V2\n  V2 --> M1\n  V2 --> M2\n  M2 --> M3\n  M1 --> R1\n  M2 --> R2\n  M3 --> R2\n  R1 --> R3\n  R2 --> R3\n  R3 --> G1\n  R3 --> G2"
+  },
+  "inputs": [
+    "Field-engineer photo sets per visit",
+    "Drone imagery, as stills or video frames",
+    "Site master with coordinates, tower type and height",
+    "Tenancy and billing records of equipment per tenant",
+    "Inspection and preventive maintenance checklists",
+    "Photos from earlier visits"
+  ],
+  "outputs": [
+    "Photo validity report per visit",
+    "Equipment counts per mount and tenant",
+    "Defect list with severity and annotated photos",
+    "Preventive maintenance checklist score",
+    "Draft work orders and tenancy discrepancy list"
+  ],
+  "human_in_the_loop": "Engineers review every high-severity or low-confidence finding on the annotated photo, and the O&M lead signs off lower-severity findings in batches before work orders are raised. Tenancy discrepancies go to the commercial team for verification before any billing query reaches a tenant.",
+  "integrations": [
+    "Field force or O&M mobile app",
+    "Asset management or ERP such as SAP PM or IBM Maximo",
+    "Drone survey platforms and image storage",
+    "Ticketing or work order system",
+    "GIS for site locations"
+  ],
+  "guardrails": [
+    "No work order closed and no billing changed automatically",
+    "Confidence thresholds set per defect type and reviewed with engineers",
+    "Models evaluated on a held-out set of your own site photos before each update",
+    "People in photos blurred before storage",
+    "Every finding linked to the original, unedited image"
+  ],
+  "compliance_notes": [
+    "Drone surveys must follow India's Drone Rules, 2021 for airspace zones and permissions; the pipeline only processes imagery you capture.",
+    "Site photos can capture people nearby; blurring and retention limits are designed to support DPDP Act 2023 data minimisation."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One cluster of sites with recent preventive maintenance photos and a sample of drone surveys, compared with engineer audit outcomes.",
+    "deliverables": [
+      "Labelled sample from your sites for training and testing",
+      "Validation, detection and defect pipeline for the pilot cluster",
+      "Engineer review screen with annotated findings",
+      "Accuracy report against engineer audits",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Equipment count accuracy",
+        "how": "Detected counts per mount compared with engineer counts on the same sites."
+      },
+      {
+        "metric": "Defect precision",
+        "how": "Share of flagged defects that engineers confirmed."
+      },
+      {
+        "metric": "Invalid photo detection",
+        "how": "Reused or off-site photos caught, compared with audit findings."
+      },
+      {
+        "metric": "Review time per site",
+        "how": "Engineer time to review a site's findings, compared with full manual photo review."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it measure antenna azimuth and tilt?",
+      "a": "It can estimate orientation from drone imagery and flag visible deviations from the planned configuration, but it is not a substitute for instrument measurement. Flagged sites go to field teams for verification."
+    },
+    {
+      "q": "Do we need drones to use it?",
+      "a": "No. Field-engineer photos taken to a consistent checklist support most checks. Drone imagery adds coverage for tall towers and items not visible from the ground."
+    },
+    {
+      "q": "How are the models trained for our equipment?",
+      "a": "We start with general detection models and fine-tune them on a labelled sample of your own site photos, covering your tower types, mount styles and equipment. The labelled sample also becomes the test set for each model update."
+    },
+    {
+      "q": "Can it run in our environment?",
+      "a": "Yes. It can run in your cloud account or on on-premise servers with GPUs, and photos never need to leave your environment."
+    }
+  ],
+  "related": [
+    "solar-panel-drone-inspection",
+    "field-technician-voice-reporting",
+    "construction-site-safety-compliance"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/tower-site-inspection/"
+}

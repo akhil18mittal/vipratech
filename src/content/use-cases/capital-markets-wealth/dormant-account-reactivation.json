@@ -1,0 +1,217 @@
+{
+  "slug": "dormant-account-reactivation",
+  "industry": "capital-markets-wealth",
+  "title": "Dormant Trading Account Re-Activation Campaigns",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Find out why trading accounts went dormant, fix KYC and access blockers first, and run consent-based, compliance-approved journeys that bring clients back without tips or inducements.",
+  "seo": {
+    "title": "Dormant Trading Account Reactivation | VipraTech",
+    "description": "Automation for brokers to segment dormant accounts by reason, clear KYC and access blockers, and run compliant re-engagement journeys with holdout testing.",
+    "keywords": [
+      "dormant trading account reactivation",
+      "broker reactivation campaigns",
+      "inactive demat account engagement",
+      "broking customer lifecycle automation",
+      "KYC on hold reactivation"
+    ]
+  },
+  "designed_for": [
+    "Head of Growth, Broking",
+    "CRM and Retention Marketing Manager",
+    "Compliance Officer",
+    "Head of Customer Experience"
+  ],
+  "problem": {
+    "intro": "Brokers carry many accounts that were opened during an IPO rush or a market rally and then went quiet. Some clients lost interest, but many are blocked: their KYC is on hold at the KRA, a nomination or declaration is pending, two-factor login is locked or the bank account was never verified.",
+    "pain_points": [
+      {
+        "title": "Blanket campaigns miss the real reason",
+        "detail": "A generic 'come back and trade' message does nothing for a client whose account is blocked by a KYC issue."
+      },
+      {
+        "title": "Exchange inactivity rules add steps",
+        "detail": "Accounts flagged as inactive under exchange norms may need verification before they can trade again, and clients often do not know this."
+      },
+      {
+        "title": "Conduct risk in growth messaging",
+        "detail": "Messages that hint at easy profits or push derivatives to inexperienced clients create regulatory and reputational risk."
+      },
+      {
+        "title": "No proof of what worked",
+        "detail": "Without control groups, teams cannot tell whether a campaign brought clients back or simply reached those who would have returned anyway."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reactivation system on top of your back office, KYC data and marketing tools. It segments dormant accounts by likely reason: KYC or KRA status on hold, pending nomination or declarations, locked login, never funded, traded once then stopped, or long-term investor with no recent activity. Blocked accounts get a service-first journey with a re-KYC or update link and help to clear the issue. Others receive approved educational and product-feature content through WhatsApp, email or SMS, with frequency caps and opt-outs. High-value clients and anyone who replies are routed to an RM or support. Every journey runs against a holdout group, so you can see what actually changed.",
+    "capabilities": [
+      "Segments dormant accounts by reason using KYC status, nominee status, login, funding and trade history",
+      "Runs service-first journeys for re-KYC, nominee and declaration updates and login recovery",
+      "Sends compliance-approved educational and feature content through WhatsApp, email and SMS",
+      "Applies consent checks, frequency caps and exclusions for vulnerable segments",
+      "Routes high-value clients and replies to RMs or support with context",
+      "Measures each journey against a randomly assigned holdout group"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Build the dormant list",
+      "detail": "Dormant accounts are pulled with KYC, nominee, login, funding and consent status."
+    },
+    {
+      "step": 2,
+      "title": "Classify the dormancy reason",
+      "detail": "Each account is assigned a likely reason using rules and a simple scoring model."
+    },
+    {
+      "step": 3,
+      "title": "Clear blockers first",
+      "detail": "Accounts blocked by KYC or declarations get a service journey with update links and help."
+    },
+    {
+      "step": 4,
+      "title": "Send approved content",
+      "detail": "Other segments receive compliance-approved content within consent and frequency limits."
+    },
+    {
+      "step": 5,
+      "title": "Route replies and high-value clients",
+      "detail": "Replies and high-value accounts go to an RM or support agent with context."
+    },
+    {
+      "step": 6,
+      "title": "Measure against holdout",
+      "detail": "Reactivation steps are compared with a holdout group for each journey."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Dormant accounts with consent status\"] --> B[\"Classify dormancy reason\"]\n  B --> C{\"Blocked by KYC or declarations?\"}\n  C -->|\"yes\"| D[\"Service journey with update links\"]\n  C -->|\"no\"| E[\"Approved re-engagement content\"]\n  D --> F{\"Reply or high-value client?\"}\n  E --> F\n  F -->|\"yes\"| G(\"RM or support follows up\")\n  F -->|\"no\"| H[\"Measure against holdout group\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data",
+        "components": [
+          "Back-office activity and funding data",
+          "KYC, KRA and nominee status",
+          "Consent and preference records"
+        ]
+      },
+      {
+        "name": "Segmentation",
+        "components": [
+          "Dormancy reason rules",
+          "Value and engagement scoring",
+          "Holdout group assignment"
+        ]
+      },
+      {
+        "name": "Journeys and follow-up",
+        "components": [
+          "Journey orchestrator",
+          "Approved content library",
+          "WhatsApp, email and DLT-registered SMS channels",
+          "RM and support task queue"
+        ]
+      },
+      {
+        "name": "Measurement",
+        "components": [
+          "Reactivation funnel versus holdout",
+          "Opt-out and complaint monitoring"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data\"]\n    D1[\"Activity and funding data\"]\n    D2[\"KYC and nominee status\"]\n    D3[\"Consent records\"]\n  end\n  subgraph S2[\"Segmentation\"]\n    G1[\"Dormancy reason rules\"]\n    G2[\"Holdout assignment\"]\n  end\n  subgraph S3[\"Journeys and follow-up\"]\n    J1[\"Journey orchestrator\"]\n    J2[\"Approved content library\"]\n    J3[\"WhatsApp, email and SMS\"]\n    J4(\"RM and support queue\")\n  end\n  subgraph S4[\"Measurement\"]\n    M1[\"Funnel versus holdout\"]\n    M2[\"Opt-out and complaint monitor\"]\n  end\n  D1 --> G1\n  D2 --> G1\n  D3 --> J1\n  G1 --> G2\n  G2 --> J1\n  J2 --> J1\n  J1 --> J3\n  J3 --> J4\n  J3 --> M1\n  J3 --> M2"
+  },
+  "inputs": [
+    "Account activity, last trade and funding history",
+    "KYC and KRA status, nominee and declaration status",
+    "Login and two-factor lock data",
+    "Consent, DND and channel preferences",
+    "Compliance-approved content library",
+    "Client value and segment data"
+  ],
+  "outputs": [
+    "Dormancy reason segments",
+    "Journey assignments and message schedules",
+    "RM and support task lists with context",
+    "Reactivation funnel report against holdout",
+    "Opt-out and complaint log"
+  ],
+  "human_in_the_loop": "Compliance approves every template and content item before use, and RMs or support agents handle every reply and high-value conversation. Marketing owners decide which journeys to scale based on holdout results.",
+  "integrations": [
+    "Broking back-office and KYC systems",
+    "Marketing automation or customer data platform",
+    "WhatsApp Business API, email and DLT-registered SMS gateway",
+    "CRM and support ticketing",
+    "Analytics warehouse"
+  ],
+  "guardrails": [
+    "No stock tips, return promises or derivatives inducements in any content",
+    "Only compliance-approved templates can be sent",
+    "Consent checked before every send, and opt-outs honoured immediately",
+    "Frequency caps per client and channel",
+    "Segments with recent heavy derivatives losses excluded from trading-oriented messages"
+  ],
+  "compliance_notes": [
+    "Content stays informational and avoids investment advice and inducements, in line with SEBI and exchange expectations on communication with investors.",
+    "Messages follow TRAI commercial-communication rules through DLT-registered templates and preference checks, and data use follows the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One dormant segment, for example accounts blocked by KYC status plus accounts that were funded but never traded, each with a holdout group.",
+    "deliverables": [
+      "Dormancy reason model and segment report",
+      "Approved journeys and templates",
+      "Orchestration set up in your marketing tools",
+      "RM and support task routing",
+      "Holdout-based results report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Blocker resolution",
+        "how": "KYC, nominee and login issues cleared in the journey group compared with the holdout."
+      },
+      {
+        "metric": "Reactivation steps",
+        "how": "Logins, funding and first transactions in the journey group compared with the holdout."
+      },
+      {
+        "metric": "Opt-outs and complaints",
+        "how": "Counts per journey and channel, reviewed weekly."
+      },
+      {
+        "metric": "RM follow-up outcomes",
+        "how": "Dispositions recorded by RMs and support for routed accounts."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will this push clients into derivatives trading?",
+      "a": "No. Journeys focus on clearing account blockers and sharing approved educational and feature content. Trading-oriented messages exclude vulnerable segments, and no content offers tips or promises returns."
+    },
+    {
+      "q": "Which channels does it use?",
+      "a": "WhatsApp, email and SMS by default, with optional calls by your team or a voice agent for service-blocked accounts. Each channel checks consent and preferences before sending."
+    },
+    {
+      "q": "How do we know the campaigns worked?",
+      "a": "Every journey has a randomly assigned holdout group. Results compare the two, so you see the effect of the journey rather than clients who would have returned anyway."
+    },
+    {
+      "q": "Can it handle accounts flagged inactive by the exchange?",
+      "a": "Yes. It identifies those accounts and guides clients through the verification or update steps your process requires before they can trade again."
+    }
+  ],
+  "related": [
+    "trading-support-voice-agent",
+    "broker-kyc-onboarding-verification",
+    "rm-meeting-notes-and-crm-agent",
+    "churn-risk-outreach-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/dormant-account-reactivation/"
+}

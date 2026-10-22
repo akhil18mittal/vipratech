@@ -1,0 +1,224 @@
+{
+  "slug": "mine-safety-monitoring",
+  "industry": "energy-mining-utilities",
+  "title": "Mine Safety Monitoring (PPE and Zone Intrusion)",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Computer vision on mine CCTV that flags missing PPE, people on foot in HEMM zones and entry into blast danger zones, so shift supervisors can act while it still matters.",
+  "seo": {
+    "title": "Mine Safety Monitoring with AI: PPE and Zones | VipraTech",
+    "description": "AI on existing mine CCTV that detects missing PPE, people near HEMM and blast-zone intrusion, and alerts control rooms and shift in-charges.",
+    "keywords": [
+      "mine safety computer vision",
+      "PPE detection mining",
+      "zone intrusion detection",
+      "HEMM proximity monitoring CCTV",
+      "opencast mine safety AI"
+    ]
+  },
+  "designed_for": [
+    "Mine Manager",
+    "Safety Officer",
+    "Control Room Shift In-charge",
+    "Head of Health, Safety and Environment"
+  ],
+  "problem": {
+    "intro": "Opencast and underground mines already have cameras at haul road junctions, crushers, workshops and conveyor transfer points, but nobody can watch them all through a night shift. Unsafe acts such as a person walking into a dumper's blind spot or a worker without a helmet near the feeder are usually seen only during an incident review.",
+    "pain_points": [
+      {
+        "title": "Footage is recorded, rarely watched",
+        "detail": "Control room staff juggle radio traffic, dispatch and many camera feeds, so coverage mostly serves post-incident investigation."
+      },
+      {
+        "title": "Zones move as the mine advances",
+        "detail": "HEMM operating areas, bench edges and blast danger zones shift from week to week, so fixed rules in a video management system go stale quickly."
+      },
+      {
+        "title": "Dust, glare and night shifts",
+        "detail": "Generic PPE detectors trained on factory images struggle with haul-road dust, cap lamps, headlight glare and rain on lenses."
+      },
+      {
+        "title": "Near misses go unreported",
+        "detail": "A person crossing in front of a reversing dumper rarely reaches the near-miss register unless someone chooses to report it."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a vision layer that runs on your existing CCTV, adding cameras only where coverage is missing and the installation is approved for that location. Models on an edge server at site detect people, vehicles and PPE items such as helmets, high-visibility vests and safety boots. Your safety officer draws zones per camera, including HEMM operating areas, crusher and feeder surroundings and blast danger zones that switch on with the blasting schedule. An event is raised only when a violation persists across frames, and a control room operator checks the clip before the shift in-charge is alerted. Every confirmed event lands in a shift-wise near-miss log.",
+    "capabilities": [
+      "PPE checks per zone for helmets, high-visibility vests and other items your site rules require",
+      "Detection of people on foot inside HEMM operating areas, haul road crossings and dump yards",
+      "Blast danger zone mode that activates for the warning period set in your blasting procedure",
+      "Zone polygons per camera that the safety officer updates as benches and faces advance",
+      "Persistence filtering and de-duplication so one unsafe act produces one alert",
+      "Camera health checks that report blocked, dusty or offline cameras as blind spots"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map cameras and zones",
+      "detail": "The safety officer marks HEMM areas, crusher surroundings, conveyor walkways and blast zones on each camera view and sets PPE rules per zone."
+    },
+    {
+      "step": 2,
+      "title": "Detect at the edge",
+      "detail": "An edge server at site runs person, vehicle and PPE models on the camera streams, so detection continues when the WAN link is weak."
+    },
+    {
+      "step": 3,
+      "title": "Apply zone and shift rules",
+      "detail": "Detections are checked against zone polygons, the shift roster and the blasting schedule, and short-lived detections are filtered out."
+    },
+    {
+      "step": 4,
+      "title": "Operator verifies the clip",
+      "detail": "A control room operator views a short clip of each candidate event and confirms or dismisses it."
+    },
+    {
+      "step": 5,
+      "title": "Alert the shift in-charge",
+      "detail": "Confirmed events reach the shift in-charge or overman by app, SMS or the control room display, with the snapshot and location."
+    },
+    {
+      "step": 6,
+      "title": "Log and review",
+      "detail": "Events, dismissals and actions taken feed a shift-wise near-miss log and a weekly review with the safety committee."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"CCTV streams to site edge server\"] --> B[\"Detect people, PPE and vehicles\"]\n  B --> C[\"Check zone, shift and blast rules\"]\n  C --> D{\"Violation persists across frames?\"}\n  D -->|\"no\"| E[\"Discard and keep monitoring\"]\n  D -->|\"yes\"| F(\"Control room operator checks clip\")\n  F --> G{\"Genuine unsafe act?\"}\n  G -->|\"no\"| H[\"Mark false alarm for retraining\"]\n  G -->|\"yes\"| I[\"Alert shift in-charge with snapshot\"]\n  I --> J[\"Near-miss log and shift report\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Camera and edge",
+        "components": [
+          "Existing CCTV and NVR streams over RTSP or ONVIF",
+          "Edge GPU server at site",
+          "Local event buffer for weak network links"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Person and vehicle detector tuned on site footage",
+          "PPE classifier",
+          "Zone and line-crossing logic"
+        ]
+      },
+      {
+        "name": "Rules and alerting",
+        "components": [
+          "Zone, shift and blasting calendar rules",
+          "Persistence and de-duplication filter",
+          "Alert router to app, SMS and control room"
+        ]
+      },
+      {
+        "name": "Review and records",
+        "components": [
+          "Control room review console",
+          "Near-miss and violation log",
+          "Shift and weekly safety reports"
+        ]
+      },
+      {
+        "name": "Governance",
+        "components": [
+          "Role-based access to clips",
+          "Retention and face-blurring policy for stored evidence",
+          "Camera health monitoring"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Camera and edge\"]\n    C1[\"CCTV and NVR streams\"]\n    C2[\"Edge GPU server at site\"]\n  end\n  subgraph S2[\"Vision models\"]\n    M1[\"Person and vehicle detector\"]\n    M2[\"PPE classifier\"]\n    M3[\"Zone and line-crossing logic\"]\n  end\n  subgraph S3[\"Rules and alerting\"]\n    R1[\"Shift and blasting calendar\"]\n    R2[\"Persistence filter\"]\n    R3[\"Alert router\"]\n  end\n  subgraph S4[\"Review and records\"]\n    V1(\"Control room review console\")\n    V2[\"Near-miss log\"]\n    V3[\"Shift safety report\"]\n  end\n  C1 --> C2\n  C2 --> M1\n  M1 --> M2\n  M1 --> M3\n  M2 --> R2\n  M3 --> R2\n  R1 --> R2\n  R2 --> V1\n  V1 --> R3\n  V1 --> V2\n  V2 --> V3"
+  },
+  "inputs": [
+    "RTSP streams from existing CCTV and NVRs",
+    "Site plan with HEMM areas, crusher, conveyor walkways and blast danger zones",
+    "Blasting schedule and shift roster",
+    "PPE rules per zone from your safety management plan",
+    "Sample footage from day, night and dusty conditions for tuning"
+  ],
+  "outputs": [
+    "Verified alerts with snapshot, clip and camera location",
+    "Shift-wise near-miss and violation log by zone",
+    "Daily summary for the mine manager and safety officer",
+    "Camera blind-spot and downtime report",
+    "Labelled false alarms used to retrain the models"
+  ],
+  "human_in_the_loop": "A control room operator verifies every candidate event before anyone is alerted, and the shift in-charge decides the response on the ground. Logs inform safety talks and planning; they are not used on their own for disciplinary action.",
+  "integrations": [
+    "Video management system or NVR (RTSP or ONVIF)",
+    "Mine control room display and dispatch tools",
+    "SMS gateway, push app or WhatsApp Business API for shift in-charges",
+    "HSE incident and near-miss reporting system",
+    "Fleet management system for HEMM position context, where available"
+  ],
+  "guardrails": [
+    "Positioned as a supervisor aid; proximity warning devices, gas monitoring, blasting procedures and statutory inspections stay in place",
+    "Per-zone confidence and persistence thresholds agreed with the safety officer",
+    "Blind cameras are reported as blind, never treated as an empty zone",
+    "Stored snapshots access-controlled by role, with faces blurred where your policy requires",
+    "No automated disciplinary action from alerts"
+  ],
+  "compliance_notes": [
+    "Designed to support, not replace, the supervision, inspection and record-keeping duties set by mine safety law and enforced by DGMS.",
+    "Worker video is personal data; notice, retention and access are set with your HR and legal teams in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One haul road junction, the crusher feeder area and the HEMM workshop, using existing cameras where possible, run alongside current control room practice.",
+    "deliverables": [
+      "Zone map and PPE rule set agreed with the safety officer",
+      "Edge deployment on the pilot cameras",
+      "Control room review console and alert flow",
+      "Alert quality report with confirmed and dismissed events",
+      "Roll-out plan for remaining cameras with a hardware estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Alert precision",
+        "how": "Share of candidate events confirmed as genuine by control room operators."
+      },
+      {
+        "metric": "Missed events",
+        "how": "Manual review of a sample of recorded footage, compared with the events the system raised."
+      },
+      {
+        "metric": "Time to acknowledgement",
+        "how": "Time from detection to acknowledgement by the shift in-charge, taken from alert logs."
+      },
+      {
+        "metric": "Camera blind time",
+        "how": "Hours per camera flagged as blocked, dusty or offline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does this replace proximity warning systems or our safety staff?",
+      "a": "No. It gives supervisors and the control room another set of eyes on existing cameras. Collision avoidance devices, interlocks, blasting procedures and statutory inspections remain the primary controls, and people decide every response."
+    },
+    {
+      "q": "How does it cope with dust, rain and night shifts?",
+      "a": "We tune the models on footage from your own site across day, night, dust and rain, and we report accuracy separately for each condition. Where a camera's view is too degraded to judge, the system flags it as a blind spot instead of guessing."
+    },
+    {
+      "q": "Can it run underground?",
+      "a": "Where approved camera installations and network links already exist underground, such as at pit bottom, inclines or conveyor drives, the same models can run on their feeds. Any new equipment underground must meet the approvals required for that mine, which your team and the equipment supplier handle."
+    },
+    {
+      "q": "How will workers and unions view this?",
+      "a": "We recommend telling the workforce what is monitored, why and how footage is used before go-live. Stored evidence can blur faces, access is limited by role, and alerts are framed as near-miss learning rather than surveillance."
+    }
+  ],
+  "related": [
+    "conveyor-and-equipment-anomaly-detection",
+    "field-technician-voice-reporting",
+    "ppe-and-safety-zone-compliance",
+    "construction-site-safety-compliance"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/mine-safety-monitoring/"
+}

@@ -1,0 +1,215 @@
+{
+  "slug": "logistics-ai-agent-security-testing",
+  "industry": "logistics-supply-chain",
+  "title": "Security Testing for Customer-Facing Logistics AI Agents",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Adversarial testing of tracking chatbots, WhatsApp bots and voice agents for shipment data leakage, tracking-number enumeration, prompt injection and unsafe actions such as unauthorised redirects.",
+  "seo": {
+    "title": "Logistics Chatbot and Voice AI Security Testing | VipraTech",
+    "description": "Red-team testing of logistics chatbots and voice agents for data leakage, tracking enumeration, prompt injection and unauthorised address or COD changes.",
+    "keywords": [
+      "logistics chatbot security testing",
+      "AI agent red teaming",
+      "voice agent security testing",
+      "prompt injection testing",
+      "shipment data leakage"
+    ]
+  },
+  "designed_for": [
+    "Chief Information Security Officer",
+    "Head of Digital Product",
+    "Head of Customer Experience",
+    "Data Protection Officer"
+  ],
+  "problem": {
+    "intro": "Carriers, 3PLs and e-commerce logistics teams are putting LLM-based chat and voice agents in front of customers, riders and shippers. These agents look up shipments, change delivery details, reschedule and sometimes touch COD or refund flows, which makes them attractive targets for fraud and data harvesting.",
+    "pain_points": [
+      {
+        "title": "Shipment data exposure",
+        "detail": "A poorly guarded agent may reveal consignee names, phone numbers or addresses to anyone who supplies or guesses a tracking number."
+      },
+      {
+        "title": "Redirect and parcel fraud",
+        "detail": "Social engineering through the agent can change a delivery address, release a held parcel or reroute a high-value shipment."
+      },
+      {
+        "title": "Prompt injection through inputs",
+        "detail": "Instructions hidden in a message, an address field or an uploaded document can steer the agent to ignore rules or reveal its system prompt and tools."
+      },
+      {
+        "title": "Voice-specific risks",
+        "detail": "Voice agents face impersonation, switching between Hindi and English to slip past filters, and pressure tactics that text-only testing misses."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run structured adversarial testing against your chat, WhatsApp and voice agents before launch and after major changes. We map what the agent can see and do, then attack it: tracking-number enumeration, identity bypass, address-change and reroute fraud, COD and refund manipulation, prompt injection through messages and form fields, disclosure of system prompts and tools, and off-topic misuse. Voice agents are tested with multi-turn calls in Hindi, English and Hinglish. Every attempt is logged with transcript or recording, classed as pass, risk or fail, mapped to the OWASP Top 10 for LLM Applications, and paired with a concrete fix.",
+    "capabilities": [
+      "Maps the agent's data access, tools and actions into a threat model",
+      "Tests tracking-number enumeration, identity verification bypass and data leakage",
+      "Attempts address-change, reroute, COD and refund manipulation through conversation",
+      "Runs prompt injection through messages, address fields and uploaded documents",
+      "Tests voice agents with multi-turn Hindi, English and Hinglish adversarial scripts",
+      "Delivers pass, risk or fail evidence with fixes and a re-runnable regression pack"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scope and threat model",
+      "detail": "We agree in-scope agents, environments and rules of engagement, and map data access and actions."
+    },
+    {
+      "step": 2,
+      "title": "Write attack playbooks",
+      "detail": "Playbooks are written for your flows: tracking, reschedule, address change, COD and B2B portals."
+    },
+    {
+      "step": 3,
+      "title": "Execute tests",
+      "detail": "Automated and manual attacks run across chat, WhatsApp and voice, with every attempt recorded."
+    },
+    {
+      "step": 4,
+      "title": "Classify results",
+      "detail": "Each attempt is classed as pass, risk or fail with evidence and mapped to recognised frameworks."
+    },
+    {
+      "step": 5,
+      "title": "Review with your team",
+      "detail": "Findings are walked through with security, product and CX teams, who decide fixes and accepted risks."
+    },
+    {
+      "step": 6,
+      "title": "Retest and hand over",
+      "detail": "Fixes are retested, and a regression pack is handed over for future releases."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope agents and threat model\"] --> B[\"Write attack playbooks\"]\n  B --> C[\"Run chat, WhatsApp and voice attacks\"]\n  C --> D{\"Attack succeeded?\"}\n  D -->|\"yes\"| E[\"Log fail with evidence and fix\"]\n  D -->|\"partly\"| F[\"Log risk with evidence\"]\n  D -->|\"no\"| G[\"Log pass\"]\n  E --> H(\"Security and product teams review\")\n  F --> H\n  G --> H\n  H --> I[\"Retest fixes and hand over pack\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scope",
+        "components": [
+          "Agent inventory and data access map",
+          "Rules of engagement and test accounts"
+        ]
+      },
+      {
+        "name": "Attack library",
+        "components": [
+          "Logistics fraud playbooks",
+          "Prompt injection and jailbreak corpus",
+          "Hindi, English and Hinglish voice scripts"
+        ]
+      },
+      {
+        "name": "Execution",
+        "components": [
+          "Chat and WhatsApp test driver",
+          "Voice call automation with recording",
+          "Attempt logger"
+        ]
+      },
+      {
+        "name": "Evidence and reporting",
+        "components": [
+          "Pass, risk or fail classification with human review",
+          "Mapping to OWASP LLM Top 10 and NIST AI RMF",
+          "Regression pack"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scope\"]\n    P1[\"Agent and data access map\"]\n    P2[\"Rules of engagement\"]\n  end\n  subgraph S2[\"Attack library\"]\n    A1[\"Logistics fraud playbooks\"]\n    A2[\"Prompt injection corpus\"]\n    A3[\"Multilingual voice scripts\"]\n  end\n  subgraph S3[\"Execution\"]\n    T1[\"Chat and WhatsApp driver\"]\n    T2[\"Voice call automation\"]\n    T3[\"Attempt logger\"]\n  end\n  subgraph S4[\"Evidence and reporting\"]\n    R1(\"Reviewer classifies results\")\n    R2[\"Framework mapping\"]\n    R3[\"Regression pack\"]\n  end\n  P1 --> A1\n  P2 --> A1\n  A1 --> T1\n  A2 --> T1\n  A3 --> T2\n  T1 --> T3\n  T2 --> T3\n  T3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Agent endpoints for chat, WhatsApp and voice in a test environment",
+    "Description of the tools, APIs and actions the agent can use",
+    "Verification and policy rules for address changes, COD and refunds",
+    "Test accounts and synthetic shipments",
+    "Known fraud patterns, if you choose to share them"
+  ],
+  "outputs": [
+    "Threat model of the agent's data and actions",
+    "Findings with transcripts or recordings and severity",
+    "Pass, risk or fail results mapped to recognised frameworks",
+    "Fix guidance for prompts, tools, verification and APIs",
+    "Regression pack for future releases"
+  ],
+  "human_in_the_loop": "Our testers review every automated result before it is reported, and your security, product and CX owners decide which fixes to make and which risks to accept. Testing runs only within the agreed scope and under written authorisation.",
+  "integrations": [
+    "Chat and WhatsApp agent endpoints",
+    "Voice agent numbers or SIP endpoints in test",
+    "Staging TMS and tracking APIs with synthetic shipments",
+    "Issue tracker such as Jira for findings",
+    "CI pipeline for regression runs"
+  ],
+  "guardrails": [
+    "Written authorisation and agreed scope before any test",
+    "Synthetic shipments and test accounts only; no real consignee data",
+    "Agreed rate limits to avoid disrupting shared services",
+    "Findings shared only with named contacts",
+    "Every reported finding reproducible from saved evidence"
+  ],
+  "compliance_notes": [
+    "Findings are mapped to the OWASP Top 10 for LLM Applications and the NIST AI RMF to support your security governance.",
+    "Helps you evidence reasonable security safeguards for personal data under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One customer-facing agent, such as the WhatsApp tracking bot or the delivery status voice agent, tested in staging with synthetic shipments.",
+    "deliverables": [
+      "Threat model and test plan",
+      "Executed playbooks with full evidence",
+      "Findings report with severity and fixes",
+      "Retest of fixed issues",
+      "Regression pack"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Findings by severity",
+        "how": "Successful attacks classed on an agreed severity scale."
+      },
+      {
+        "metric": "Coverage of agent actions",
+        "how": "Agent tools and actions exercised by at least one attack, out of all mapped actions."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Findings retested and confirmed closed after changes."
+      },
+      {
+        "metric": "Language coverage",
+        "how": "Attack playbooks executed per language for voice and chat."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you test production systems?",
+      "a": "We prefer staging with synthetic shipments. If production testing is required, it runs under written authorisation, with agreed rate limits and test accounts only."
+    },
+    {
+      "q": "How is this different from a normal penetration test?",
+      "a": "A web or API penetration test looks at the application and infrastructure. We focus on how the AI agent can be manipulated through conversation, prompts and tools, and add API checks where the agent's actions depend on them."
+    },
+    {
+      "q": "Can you test voice agents in Hindi?",
+      "a": "Yes. Voice playbooks run as real multi-turn calls in Hindi, English and Hinglish, including code-switching, impersonation and pressure tactics. Recordings are kept as evidence."
+    },
+    {
+      "q": "How often should we retest?",
+      "a": "After any change to prompts, models, tools or verification rules, and before peak seasons. The regression pack makes retesting a routine release step."
+    }
+  ],
+  "related": [
+    "delivery-status-voice-and-whatsapp-agent",
+    "rider-and-driver-support-voice-agent",
+    "voice-agent-jailbreak-testing",
+    "ai-agent-permission-and-tool-use-review"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/logistics-ai-agent-security-testing/"
+}

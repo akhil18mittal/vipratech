@@ -1,0 +1,219 @@
+{
+  "slug": "used-car-inspection-and-damage-detection",
+  "industry": "automotive-mobility",
+  "title": "Used Car Inspection and Damage Detection",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Guided photo capture and damage detection for used-car evaluations, with panel-wise damage maps, odometer and chassis checks and draft refurbishment items for evaluators to confirm.",
+  "seo": {
+    "title": "Used Car Inspection and Damage Detection AI | VipraTech",
+    "description": "AI for used-car evaluation: guided photos, panel-wise damage detection, odometer and chassis checks against the RC, and draft refurbishment estimates.",
+    "keywords": [
+      "used car inspection AI",
+      "car damage detection from photos",
+      "pre-owned car evaluation app",
+      "vehicle inspection computer vision",
+      "refurbishment estimate automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Pre-Owned Business",
+    "Procurement and Evaluation Manager",
+    "Certified Pre-Owned Programme Lead",
+    "Refurbishment Manager"
+  ],
+  "problem": {
+    "intro": "Dealers, used-car platforms and auction houses evaluate cars at customers' homes, exchange desks and procurement yards, usually with a checklist and phone photos. The quality of that evaluation decides the purchase price, the refurbishment bill and whether the next buyer trusts the listing.",
+    "pain_points": [
+      {
+        "title": "Grading varies by evaluator",
+        "detail": "Experienced and new evaluators grade the same scratch or dent differently, which shows up in procurement prices and listing quality."
+      },
+      {
+        "title": "Damage found after purchase",
+        "detail": "A repainted panel or cracked bumper bracket missed at evaluation becomes an unplanned refurbishment cost."
+      },
+      {
+        "title": "Disputes over pre-existing damage",
+        "detail": "Without a clear photo record, sellers, buyers and logistics partners argue over when a dent appeared."
+      },
+      {
+        "title": "Wrong car, reused photos",
+        "detail": "Photos of a different vehicle, or reused from an earlier listing, slip through when nobody checks the chassis number on the image."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a guided inspection flow for your evaluation app. It walks the evaluator or seller through a fixed set of angles and close-ups, checking blur, glare and framing before each photo is accepted. Vision models then segment the car into panels and detect scratches, dents, cracks, rust, misaligned panels and colour or gloss differences that suggest repaint. The odometer and the chassis number are read from photos and compared with the RC details. Each finding is marked on the image with a severity grade and mapped to refurbishment line items from your parts and labour rate card. The evaluator confirms or corrects findings before the report reaches pricing.",
+    "capabilities": [
+      "Guided capture with live checks for blur, glare, distance and framing",
+      "Panel-level detection of scratches, dents, cracks, rust and misaligned panels",
+      "Colour and gloss mismatch cues that suggest repaint, for confirmation with a paint thickness gauge",
+      "Odometer and chassis number reading compared with RC details",
+      "Duplicate and reused photo detection across past inspections",
+      "Draft refurbishment line items priced from your parts and labour rate card"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Guided capture",
+      "detail": "The app guides the evaluator through the required exterior, interior, odometer and chassis number photos."
+    },
+    {
+      "step": 2,
+      "title": "Quality check",
+      "detail": "Each photo is checked for blur, glare and framing, and failed shots are retaken on the spot."
+    },
+    {
+      "step": 3,
+      "title": "Detect and grade damage",
+      "detail": "Models detect damage by panel and grade severity on your grading scale."
+    },
+    {
+      "step": 4,
+      "title": "Check identity",
+      "detail": "Odometer and chassis number are read from photos and compared with the RC, and photos are checked for reuse."
+    },
+    {
+      "step": 5,
+      "title": "Evaluator review",
+      "detail": "Low-confidence findings and any RC mismatch go to the evaluator, who confirms or corrects them."
+    },
+    {
+      "step": 6,
+      "title": "Report and estimate",
+      "detail": "The inspection report and draft refurbishment estimate go to the pricing team and the DMS."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Guided photo capture in app\"] --> B{\"Image quality acceptable?\"}\n  B -->|\"no\"| C[\"Prompt to retake the angle\"]\n  C --> A\n  B -->|\"yes\"| D[\"Detect and grade damage by panel\"]\n  D --> E[\"Read odometer and chassis number\"]\n  E --> F{\"Low confidence or RC mismatch?\"}\n  F -->|\"yes\"| G(\"Evaluator confirms or corrects\")\n  F -->|\"no\"| H[\"Draft inspection report\"]\n  G --> H\n  H --> I[\"Refurbishment estimate to pricing\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Mobile capture app with angle guide",
+          "On-device image quality checks",
+          "Upload API"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Panel segmentation",
+          "Damage detector and severity classifier",
+          "Odometer and chassis number reader",
+          "Duplicate image matcher"
+        ]
+      },
+      {
+        "name": "Business rules",
+        "components": [
+          "RC data comparison",
+          "Grading scale rules",
+          "Parts and labour rate card mapping"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Evaluator review screen",
+          "Inspection report generator",
+          "DMS, pricing tool or auction platform API"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Capture app with angle guide\"]\n    C2[\"Image quality checks\"]\n  end\n  subgraph S2[\"Vision models\"]\n    V1[\"Panel segmentation\"]\n    V2[\"Damage detector and grader\"]\n    V3[\"Odometer and chassis reader\"]\n    V4[\"Duplicate image matcher\"]\n  end\n  subgraph S3[\"Business rules\"]\n    B1[\"RC data comparison\"]\n    B2[\"Rate card mapping\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Evaluator review screen\")\n    R2[\"Inspection report\"]\n    R3[\"DMS or pricing tool\"]\n  end\n  C1 --> C2\n  C2 --> V1\n  V1 --> V2\n  C2 --> V3\n  C2 --> V4\n  V3 --> B1\n  V2 --> B2\n  B1 --> R1\n  V4 --> R1\n  B2 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Guided exterior, interior, odometer and chassis number photos",
+    "Optional walk-around video",
+    "RC details from the document or an authorised vehicle data provider",
+    "Paint thickness gauge readings entered by the evaluator",
+    "Your grading scale and parts and labour rate card"
+  ],
+  "outputs": [
+    "Panel-wise damage map with marked images",
+    "Inspection report in your format",
+    "Draft refurbishment line items",
+    "Odometer, chassis and duplicate-photo flags",
+    "Image archive linked to the vehicle record"
+  ],
+  "human_in_the_loop": "The evaluator confirms damage grades and every identity mismatch before the report is final. Purchase price and offers are set by your pricing team, and structural, flood and engine checks remain physical inspections.",
+  "integrations": [
+    "Dealer management system",
+    "Used-car pricing tool or auction platform",
+    "Authorised VAHAN-based vehicle data provider",
+    "CRM for seller and buyer records",
+    "Cloud storage for the image archive"
+  ],
+  "guardrails": [
+    "Does not set prices or certify roadworthiness",
+    "Asks for a retake rather than grading a poor photo",
+    "Every finding marked on the source image",
+    "Structural, flood and engine condition left to physical checks",
+    "Seller details on RC images access-controlled and masked in logs"
+  ],
+  "compliance_notes": [
+    "Owner details from RC images are personal data and are handled under the DPDP Act 2023.",
+    "Vehicle registration lookups are made only through authorised channels for VAHAN-based data."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One procurement hub or dealer exchange desk, running the guided flow alongside the current evaluation for hatchbacks, sedans and compact SUVs.",
+    "deliverables": [
+      "Capture guide and grading scale agreed with senior evaluators",
+      "Pilot app flow with damage detection",
+      "Evaluator review screen",
+      "Agreement report against senior evaluator grades",
+      "Roll-out and integration plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Damage detection agreement",
+        "how": "System findings compared with a senior evaluator's grading of the same cars."
+      },
+      {
+        "metric": "Damage missed at evaluation",
+        "how": "Damage found at refurbishment that was not recorded at evaluation, split by what the system and the evaluator each caught."
+      },
+      {
+        "metric": "Retake rate",
+        "how": "Share of photos rejected by quality checks, by evaluator."
+      },
+      {
+        "metric": "Inspection time",
+        "how": "Time per evaluation with and without the guided flow."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it detect accident history or flood damage?",
+      "a": "Only visible cues such as panel gaps, repaint signs or rust patterns. Structural damage, flood exposure and engine condition need a physical inspection, and the report says so."
+    },
+    {
+      "q": "Does it work outdoors and in poor light?",
+      "a": "The guided flow checks every photo and asks for a retake when glare, shadow or darkness hides the panel. We tune on photos from your evaluators across different lighting during the pilot."
+    },
+    {
+      "q": "Can sellers use it for self-inspection?",
+      "a": "Yes. The same guided capture can run in a seller-facing app, with an evaluator reviewing findings remotely before any physical visit."
+    },
+    {
+      "q": "Can it plug into our existing evaluation app?",
+      "a": "Yes. The capture guide and models can be added as an SDK or called through an API from your current app, so evaluators keep their familiar tool."
+    }
+  ],
+  "related": [
+    "rc-insurance-puc-document-extraction",
+    "service-centre-plate-and-document-capture",
+    "motor-claim-damage-assessment",
+    "vehicle-asset-inspection-for-auto-loans"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/used-car-inspection-and-damage-detection/"
+}

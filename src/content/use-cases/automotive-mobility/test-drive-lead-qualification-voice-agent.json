@@ -1,0 +1,219 @@
+{
+  "slug": "test-drive-lead-qualification-voice-agent",
+  "industry": "automotive-mobility",
+  "title": "Test-Drive Lead Qualification Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Call new car enquiries quickly, capture model, budget, exchange and finance needs, book showroom or home test drives and pass ready buyers to a sales consultant.",
+  "seo": {
+    "title": "Test-Drive Lead Qualification Voice Agent | VipraTech",
+    "description": "Voice agent that calls car enquiries, qualifies model, budget, exchange and finance needs, books test drives and transfers ready buyers to sales staff.",
+    "keywords": [
+      "test drive booking voice agent",
+      "car dealer lead qualification",
+      "automotive lead calling AI",
+      "showroom enquiry follow-up",
+      "Hindi voice agent car sales"
+    ]
+  },
+  "designed_for": [
+    "General Manager, Sales",
+    "Dealer Principal",
+    "OEM Digital Sales and Lead Management Lead",
+    "Tele-calling Team Lead"
+  ],
+  "problem": {
+    "intro": "New car enquiries arrive from the OEM website, car classifieds, social media forms and walk-in registers at all hours. Buyers compare several brands at once, so the dealer that calls first, understands what they want and books a convenient test drive has an advantage.",
+    "pain_points": [
+      {
+        "title": "Slow first contact",
+        "detail": "Leads that arrive in the evening or on a busy Sunday wait until the next working day for a call."
+      },
+      {
+        "title": "Inconsistent qualification",
+        "detail": "Tele-callers capture model, budget and timeline unevenly, so consultants start each conversation from scratch."
+      },
+      {
+        "title": "Test-drive no-shows",
+        "detail": "Bookings without confirmation and reminders leave demo cars and consultants idle."
+      },
+      {
+        "title": "Exchange and finance surface late",
+        "detail": "Whether the buyer has a car to exchange or needs a loan comes up late, delaying evaluation and finance approval."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that calls each new lead soon after it arrives, within calling hours and consent rules. It confirms interest and captures the model and variant, fuel and transmission preference, budget, cash or finance, any car to exchange and the purchase timeline. It answers from your approved model and price sheet, and any request for a discount or special offer goes to a sales consultant. The agent books a showroom or home test drive against demo car and consultant availability, sends the booking and showroom location on WhatsApp with a reminder, and transfers buyers who are ready to talk numbers to a consultant during the call.",
+    "capabilities": [
+      "Calls new leads in Hindi, English and regional languages soon after they arrive",
+      "Captures model, variant, fuel, transmission, budget, finance and exchange details",
+      "Books showroom or home test drives against demo car and consultant calendars",
+      "Sends booking details, brochure and location on WhatsApp, with reminders",
+      "Transfers ready buyers to a sales consultant during the call",
+      "Answers only from the approved model and price sheet, passing discount requests to sales staff"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the lead",
+      "detail": "A new lead lands in the CRM from a portal, website or social form, and consent and calling-window checks run."
+    },
+    {
+      "step": 2,
+      "title": "Call and confirm interest",
+      "detail": "The agent calls, introduces itself as an automated assistant and confirms the enquiry."
+    },
+    {
+      "step": 3,
+      "title": "Qualify",
+      "detail": "It captures model, budget, finance, exchange and timeline in a natural conversation."
+    },
+    {
+      "step": 4,
+      "title": "Decide the next step",
+      "detail": "Buyers ready to discuss price or asking for offers are transferred live to a consultant."
+    },
+    {
+      "step": 5,
+      "title": "Book the test drive",
+      "detail": "Other buyers are offered a test-drive slot, confirmed on WhatsApp with a reminder."
+    },
+    {
+      "step": 6,
+      "title": "Update the CRM",
+      "detail": "The lead record, score and call summary are updated and assigned to a consultant."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"New lead from portal or website\"] --> B[\"Call and confirm interest\"]\n  B --> C[\"Capture budget, exchange and finance\"]\n  C --> D{\"Ready to buy or asking for offers?\"}\n  D -->|\"yes\"| E(\"Live transfer to sales consultant\")\n  D -->|\"no\"| F[\"Book test drive slot\"]\n  F --> G[\"WhatsApp confirmation and reminder\"]\n  G --> H[\"Update CRM with lead score\"]\n  E --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Lead intake",
+        "components": [
+          "OEM portal, website and classifieds connectors",
+          "CRM or DMS lead API",
+          "Consent and DND check"
+        ]
+      },
+      {
+        "name": "Voice agent",
+        "components": [
+          "Dialer and telephony",
+          "Speech recognition and text-to-speech",
+          "Qualification dialogue with approved answers"
+        ]
+      },
+      {
+        "name": "Scheduling",
+        "components": [
+          "Demo car calendar",
+          "Consultant availability",
+          "Home test-drive area rules"
+        ]
+      },
+      {
+        "name": "Follow-up and analytics",
+        "components": [
+          "Live transfer to consultants",
+          "WhatsApp templates",
+          "Lead scoring and CRM update"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Lead intake\"]\n    L1[\"Portal and website leads\"]\n    L2[\"Consent and DND check\"]\n  end\n  subgraph S2[\"Voice agent\"]\n    V1[\"Dialer and telephony\"]\n    V2[\"Qualification dialogue\"]\n    V3[\"Approved price sheet\"]\n  end\n  subgraph S3[\"Scheduling\"]\n    C1[\"Demo car calendar\"]\n    C2[\"Consultant availability\"]\n  end\n  subgraph S4[\"Follow-up and analytics\"]\n    F1(\"Sales consultant transfer\")\n    F2[\"WhatsApp confirmations\"]\n    F3[\"CRM update and scoring\"]\n  end\n  L1 --> L2\n  L2 --> V1\n  V1 --> V2\n  V3 --> V2\n  V2 --> C1\n  V2 --> C2\n  V2 --> F1\n  C1 --> F2\n  F2 --> F3\n  F1 --> F3"
+  },
+  "inputs": [
+    "New leads from the OEM portal, website, classifieds and social forms",
+    "Approved model, variant and price sheet",
+    "Demo car calendar and consultant roster",
+    "Home test-drive service area",
+    "Consent and DND records"
+  ],
+  "outputs": [
+    "Qualified lead records with model, budget, finance and exchange details",
+    "Test-drive bookings with WhatsApp confirmations",
+    "Live transfers of ready buyers",
+    "Call summaries for consultants",
+    "Lead quality reports by source"
+  ],
+  "human_in_the_loop": "Price negotiation, discounts, exchange valuation and finance approval are handled by people. The sales manager reviews a sample of calls each week and adjusts scripts and approved answers.",
+  "integrations": [
+    "CRM or DMS lead module, such as Salesforce, Zoho or the OEM lead system",
+    "Portal and social lead feeds",
+    "Telephony or cloud dialer",
+    "WhatsApp Business API",
+    "Demo car and consultant calendars"
+  ],
+  "guardrails": [
+    "Answers from the approved price sheet only, with no discount or delivery commitments",
+    "States that it is an automated assistant",
+    "Consent, DND and calling-hour checks before every call",
+    "Transfers to a person whenever the buyer asks",
+    "Scripts reviewed for false urgency and pressure tactics"
+  ],
+  "compliance_notes": [
+    "Calls and messages follow TRAI commercial communication rules on consent, DND and registered templates.",
+    "Scripts avoid false urgency and other practices covered by the CCPA guidelines on dark patterns.",
+    "Lead data handled under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One showroom, with leads from two sources such as the OEM website and one classifieds portal, in Hindi and English.",
+    "deliverables": [
+      "Qualification script and approved answer set",
+      "Agent connected to the CRM and calendars in test",
+      "WhatsApp booking templates",
+      "Live pilot with a QA dashboard",
+      "Pilot report and roll-out estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to first call",
+        "how": "Minutes from lead creation to first call attempt, compared with the current team."
+      },
+      {
+        "metric": "Qualification completeness",
+        "how": "Share of leads with model, budget, finance and exchange captured."
+      },
+      {
+        "metric": "Test-drive show-up",
+        "how": "Share of agent-booked test drives that took place."
+      },
+      {
+        "metric": "Consultant feedback",
+        "how": "Consultant rating of lead quality and call summaries."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it sound robotic to buyers?",
+      "a": "We use natural voices in Hindi, English and regional languages and test them with your sales team before launch. The agent keeps calls short and transfers to a person as soon as the buyer wants detail it should not give."
+    },
+    {
+      "q": "What does it say about prices and offers?",
+      "a": "It reads ex-showroom prices and standard information from your approved sheet. Discounts, exchange bonuses and finance offers are always passed to a consultant."
+    },
+    {
+      "q": "Our group sells several brands. Can one agent handle them?",
+      "a": "Yes. Each brand gets its own approved content and routing, and the agent introduces itself on behalf of the right showroom."
+    },
+    {
+      "q": "How do leads reach our consultants?",
+      "a": "Through your CRM or DMS, with the summary and booking attached, plus a WhatsApp or app notification to the assigned consultant."
+    }
+  ],
+  "related": [
+    "dealer-lead-routing-and-follow-up",
+    "service-booking-and-reminder-voice-agent",
+    "dealer-chatbot-guardrail-testing",
+    "property-lead-qualification-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/test-drive-lead-qualification-voice-agent/"
+}

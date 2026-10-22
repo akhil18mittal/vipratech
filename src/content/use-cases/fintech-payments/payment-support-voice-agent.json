@@ -1,0 +1,222 @@
+{
+  "slug": "payment-support-voice-agent",
+  "industry": "fintech-payments",
+  "title": "Support Voice Agent for Failed Payments and Refunds",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A Hindi, English and Hinglish voice agent that finds debited-but-failed UPI and card payments, explains reversal and refund status from live data, and raises or escalates tickets.",
+  "seo": {
+    "title": "Failed Payment and Refund Support Voice Agent | VipraTech",
+    "description": "Hindi, English and Hinglish voice agent that looks up failed UPI and card payments, explains reversal and refund status and hands over to staff.",
+    "keywords": [
+      "UPI failed transaction voice agent",
+      "payment support voice bot",
+      "refund status voice agent",
+      "Hindi Hinglish voice AI fintech",
+      "payments contact centre automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Support",
+    "Contact Centre Operations Manager",
+    "Payments Product Manager",
+    "Principal Nodal Officer for grievance redressal"
+  ],
+  "problem": {
+    "intro": "When a UPI or card payment fails but the customer's account is debited, the first thing they do is call. Most of these calls ask the same question, where is my money, and the answer sits in the transaction status and the reversal timeline. Call peaks follow bank or switch downtime, exactly when human agents are most stretched.",
+    "pain_points": [
+      {
+        "title": "Spikes after downtime",
+        "detail": "A partner bank or switch incident produces a wave of near-identical calls within hours, and wait times climb."
+      },
+      {
+        "title": "Lookup takes longer than the answer",
+        "detail": "Agents ask for a UTR or RRN, search several consoles and then read out a standard reversal message."
+      },
+      {
+        "title": "Language mix",
+        "detail": "Callers switch between Hindi, English and a regional language, and many do not know what a UTR is or where to find it."
+      },
+      {
+        "title": "Social engineering risk",
+        "detail": "Fraudsters pose as support staff, so a genuine support line must never ask for a UPI PIN, OTP or CVV, and must say so clearly."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound voice agent that answers payment support calls in Hindi, English and Hinglish, with other Indian languages added as needed. It identifies the caller from the registered mobile number, helps them find the transaction by amount, date, merchant or UTR, and reads the live status from your systems. It explains what happens next in plain language: auto-reversal in progress, refund initiated with its reference, or payment successful at the merchant. It raises a complaint ticket when needed and transfers to a human agent with a summary when the caller is upset, the case is unusual or they ask for a person. It never asks for a PIN, OTP or CVV.",
+    "capabilities": [
+      "Speech recognition tuned for payment terms, merchant names, amounts and reference numbers in Hindi, English and Hinglish",
+      "Transaction lookup by registered mobile number, amount, date, merchant, UTR or RRN",
+      "Status explanations for pending, failed with reversal, refunded and successful payments",
+      "Ticket creation with a reference number read back and sent by SMS or WhatsApp",
+      "Warm transfer to a human agent with the call summary on screen",
+      "Built-in refusal to collect PINs, OTPs, CVVs or card numbers, with a fraud-awareness line"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer and identify",
+      "detail": "The agent greets the caller in their chosen language and matches the calling number to a registered customer or merchant."
+    },
+    {
+      "step": 2,
+      "title": "Find the transaction",
+      "detail": "It asks for amount, date and merchant, or the UTR if the caller has it, and confirms the right transaction."
+    },
+    {
+      "step": 3,
+      "title": "Read live status",
+      "detail": "It fetches status, reversal or refund state and reference numbers from your payment and refund systems."
+    },
+    {
+      "step": 4,
+      "title": "Explain next steps",
+      "detail": "It explains what happens next, quoting timelines only from your approved policy text."
+    },
+    {
+      "step": 5,
+      "title": "Ticket or escalate",
+      "detail": "Out-of-policy, disputed or emotional cases get a ticket or a warm transfer to a human with a summary."
+    },
+    {
+      "step": 6,
+      "title": "Confirm and log",
+      "detail": "The reference number is read back and sent by SMS or WhatsApp, and the transcript is stored for quality review."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound call, language choice\"] --> B[\"Identify caller by mobile number\"]\n  B --> C[\"Find transaction by amount or UTR\"]\n  C --> D[\"Fetch live status and refund state\"]\n  D --> E{\"Standard case within policy?\"}\n  E -->|\"yes\"| F[\"Explain status and timeline\"]\n  E -->|\"no\"| G(\"Warm transfer to support agent\")\n  F --> H{\"Caller satisfied?\"}\n  H -->|\"no\"| G\n  H -->|\"yes\"| I[\"Send reference by SMS or WhatsApp\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Cloud telephony or SIP trunk",
+          "IVR handoff and call recording"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Streaming speech-to-text for Hindi, English and Hinglish",
+          "Text-to-speech with natural Indian voices"
+        ]
+      },
+      {
+        "name": "Dialogue and tools",
+        "components": [
+          "LLM dialogue manager with approved policy text",
+          "Read-only transaction lookup tool",
+          "Ticketing tool"
+        ]
+      },
+      {
+        "name": "Safety",
+        "components": [
+          "Sensitive-data filter blocking PIN, OTP and CVV capture",
+          "Escalation rules",
+          "Prompt-injection and abuse detection"
+        ]
+      },
+      {
+        "name": "Operations",
+        "components": [
+          "Agent desktop with call summary",
+          "QA dashboard and transcript store"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Cloud telephony and SIP\"]\n    T2[\"Call recording\"]\n  end\n  subgraph S2[\"Speech\"]\n    P1[\"Streaming speech to text\"]\n    P2[\"Text to speech\"]\n  end\n  subgraph S3[\"Dialogue, tools and safety\"]\n    L1[\"LLM dialogue manager\"]\n    L2[\"Read-only transaction lookup\"]\n    L3[\"Ticketing tool\"]\n    L4[\"Sensitive data filter\"]\n  end\n  subgraph S4[\"Operations\"]\n    Q1(\"Human agent desktop\")\n    Q2[\"QA dashboard\"]\n  end\n  T1 --> P1 --> L4 --> L1\n  L1 --> L2\n  L1 --> L3\n  L1 --> P2 --> T1\n  L1 --> Q1\n  T1 --> T2 --> Q2"
+  },
+  "inputs": [
+    "Caller audio from your telephony provider",
+    "Customer and merchant records keyed by mobile number",
+    "Transaction, reversal and refund status from payment systems",
+    "Approved refund and reversal timeline text",
+    "Escalation and complaint-handling policy"
+  ],
+  "outputs": [
+    "Resolved calls with status explained",
+    "Complaint tickets with reference numbers",
+    "Warm transfers with call summaries",
+    "Transcripts and recordings for QA",
+    "Daily report of call reasons and failure clusters"
+  ],
+  "human_in_the_loop": "Human agents take every escalated, disputed or emotionally charged call, and supervisors review a daily sample of automated calls. The agent cannot initiate refunds or reversals; it only reads status and raises tickets.",
+  "integrations": [
+    "Cloud telephony such as Exotel, Knowlarity or Twilio, or your existing contact centre platform",
+    "Payment switch or gateway status APIs",
+    "Refund and reversal systems",
+    "Freshdesk, Zendesk or Salesforce Service Cloud",
+    "WhatsApp Business API and SMS gateway"
+  ],
+  "guardrails": [
+    "Read-only access to transaction systems; no money movement from the voice channel",
+    "Hard block on collecting PIN, OTP, CVV or card numbers",
+    "Timelines quoted only from approved policy text, never generated freely",
+    "Immediate transfer when the caller mentions fraud or asks for a person",
+    "Call recording disclosure at the start of every call"
+  ],
+  "compliance_notes": [
+    "Explanations follow RBI's framework on turnaround time and customer compensation for failed transactions, as your approved policy text applies it.",
+    "Recordings and transcripts are personal data under the DPDP Act 2023, with retention set by your policy.",
+    "Escalation paths can be aligned with your grievance redressal process and the RBI Integrated Ombudsman Scheme."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Inbound calls about failed UPI payments in Hindi and English during defined hours, with an instant route to a human agent.",
+    "deliverables": [
+      "Call flows and approved status scripts",
+      "Voice agent connected to read-only status APIs",
+      "Escalation and transfer setup",
+      "QA dashboard with transcripts",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Resolution without repeat calls",
+        "how": "Calls fully handled by the agent where the caller did not call back on the same issue during the pilot."
+      },
+      {
+        "metric": "Recognition accuracy on payment terms",
+        "how": "Errors on amounts, merchant names and reference numbers in a reviewed sample of transcripts."
+      },
+      {
+        "metric": "Escalation quality",
+        "how": "Supervisor review of whether transfers happened at the right moment with a useful summary."
+      },
+      {
+        "metric": "Policy adherence",
+        "how": "QA check that every quoted timeline and statement matched approved text."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi, English and Hinglish to start. Tamil, Telugu, Marathi, Bengali and other languages can be added, and we test recognition quality for each one before turning it on."
+    },
+    {
+      "q": "Can the agent issue refunds?",
+      "a": "No. It reads status and raises tickets. Refunds and reversals stay in your existing systems and processes."
+    },
+    {
+      "q": "How do you stop it being used for fraud?",
+      "a": "It never asks for PINs, OTPs or CVVs, says so on the call, and is tested against social-engineering and prompt-injection attempts before launch. Any call that mentions fraud goes straight to a person."
+    },
+    {
+      "q": "What happens during a bank outage?",
+      "a": "Your team can switch on an incident message that the agent plays on relevant calls, explaining the known issue and timelines from approved text. It handles the spike without inventing details."
+    }
+  ],
+  "related": [
+    "chargeback-dispute-evidence-pack",
+    "multilingual-banking-voice-agent",
+    "voice-agent-jailbreak-testing",
+    "call-qa-and-compliance-auditing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/payment-support-voice-agent/"
+}

@@ -1,0 +1,125 @@
+{
+  "slug": "telecom-contact-centers",
+  "name": "Telecom & Contact Centres",
+  "seo": {
+    "title": "AI for Telecom, BPOs and Contact Centres | VipraTech",
+    "description": "Voice agents in Hindi and regional languages, QA on every call, agent assist, consent-checked outbound, voice red-teaming, KYC and tower inspection.",
+    "keywords": [
+      "AI voice agent for telecom",
+      "Hindi voice bot for customer support",
+      "AI call quality monitoring",
+      "real-time agent assist",
+      "TRAI compliant AI calling",
+      "voice agent red teaming",
+      "telecom tower inspection AI"
+    ]
+  },
+  "hero": {
+    "headline": "Voice AI, call QA and compliance evidence for Hindi, Hinglish and regional-language calls",
+    "subheadline": "We build voice agents, agent assist and QA systems for operators, ISPs and BPOs, with consent checks and red-team testing designed in from the first call."
+  },
+  "intro": "Telecom operators, broadband providers and BPOs handle large call volumes in Hindi, Hinglish and regional languages, and much of the surrounding work is repetitive: plan and balance queries, failed recharges, outage status, call QA, KYC checks and photo reviews of tower sites. AI now handles these well enough to be useful, provided it is scoped tightly and connected to your real systems. It is weaker with angry or vulnerable callers, complex disputes and noisy, code-mixed audio, so every system we build hands over to a person with full context. Outbound automation adds regulatory risk under TRAI rules and the DPDP Act, which is why consent checks, disclosures and test evidence are part of the build rather than an afterthought.",
+  "challenges": [
+    {
+      "title": "Languages and code-switching",
+      "detail": "Callers move between Hindi, English and regional languages mid-sentence on noisy lines, which defeats menu IVRs and keyword-based speech analytics."
+    },
+    {
+      "title": "QA sees a sliver of calls",
+      "detail": "Manual QA scores a small sample per agent, so compliance breaches and coaching opportunities on unsampled calls go unnoticed until a complaint arrives."
+    },
+    {
+      "title": "Attrition and ramp time",
+      "detail": "Agents leave, and new joiners take months to handle billing and network queries confidently, leaning on team leaders and long holds in the meantime."
+    },
+    {
+      "title": "Regulatory exposure in calling",
+      "detail": "Outbound and AI calling must respect TRAI customer preference and consent rules, and BPO clients and auditors increasingly ask for evidence of how AI agents behave."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "voice-ai",
+      "summary": "Inbound L1 voice agents, outbound calling with pre-dial consent checks, real-time agent assist and QA on every recorded call, in Hindi, Hinglish, English and regional languages."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Adversarial phone-call testing of voice agents for verification bypass, data leakage and prompt injection, plus compliance evidence for AI calling under TRAI rules and the DPDP Act."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Digital KYC checks for new mobile connections, and triage of emails, web complaints and tickets together with their screenshots and attachments."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Analysis of field-engineer and drone photos for antenna loading, structural and safety defects, and incomplete preventive maintenance at tower sites."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Churn-risk scoring with reasons, and consented retention outreach across WhatsApp, SMS, voice agents and human retention teams."
+    }
+  ],
+  "featured_use_cases": [
+    "call-qa-and-compliance-auditing",
+    "multilingual-l1-support-voice-agent",
+    "ai-calling-compliance-evidence"
+  ],
+  "use_cases": [
+    "multilingual-l1-support-voice-agent",
+    "call-qa-and-compliance-auditing",
+    "real-time-agent-assist",
+    "outbound-sales-voice-agent-with-consent-checks",
+    "voice-agent-jailbreak-testing",
+    "ai-calling-compliance-evidence",
+    "sim-onboarding-kyc-verification",
+    "ticket-and-email-triage",
+    "tower-site-inspection",
+    "churn-risk-outreach-automation"
+  ],
+  "regulatory_context": [
+    {
+      "name": "TRAI Telecom Commercial Communications Customer Preference Regulations, 2018 (TCCCPR)",
+      "note": "Govern unsolicited commercial communication, customer preferences (DND) and consent, with headers, templates and consents registered on DLT platforms. TRAI has tightened these rules through later amendments, so calling systems need checks that can be updated."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Call recordings, transcripts, KYC images and usage data are personal data. Notice, consent, purpose limitation, security safeguards and retention obligations apply to AI systems that process them."
+    },
+    {
+      "name": "DoT customer verification instructions",
+      "note": "Department of Telecommunications instructions govern KYC for mobile connections, including Aadhaar-based e-KYC, digital KYC and registration of point-of-sale agents. Aadhaar data must be handled per UIDAI rules."
+    },
+    {
+      "name": "GDPR and EU AI Act",
+      "note": "For BPOs serving European clients, GDPR governs the processing of call data, and the EU AI Act includes transparency duties such as telling people when they are interacting with an AI system."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can a voice agent really handle Hinglish and regional languages?",
+      "a": "For a defined set of intents, yes. We test speech recognition on your own call recordings for each language before go-live and report accuracy separately for each one. Where recognition is weak or the caller asks for a person, the call goes to an agent with the transcript."
+    },
+    {
+      "q": "Will this replace our agents?",
+      "a": "It takes on routine L1 calls, QA scoring and after-call work. Complex, sensitive and escalated calls stay with people, and agent assist is designed to make new agents productive sooner rather than to remove them."
+    },
+    {
+      "q": "How do you keep AI calling within TRAI rules?",
+      "a": "Pre-dial checks for DND preferences, consent, opt-outs and calling windows sit inside the dialling path, and every call writes a consent and outcome log. Your registrations and regulatory obligations remain yours; we build the controls and the evidence."
+    },
+    {
+      "q": "Which telephony platforms do you integrate with?",
+      "a": "Common CCaaS and dialler platforms such as Genesys, Amazon Connect, Avaya, Exotel and Ozonetel, or your SIP trunks directly. We agree the integration route, whether SIP, a media streaming API or recording export, during discovery."
+    }
+  ],
+  "related_industries": [
+    "banking",
+    "nbfc-lending",
+    "saas-ai-companies"
+  ],
+  "cta": {
+    "headline": "Start with one queue or one campaign",
+    "text": "Bring a sample of recordings or one call flow. We will scope a pilot on your own calls, in your languages, and measure it against your current process."
+  },
+  "url": "/industries/telecom-contact-centers/"
+}

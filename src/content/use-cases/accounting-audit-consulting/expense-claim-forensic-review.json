@@ -1,0 +1,216 @@
+{
+  "slug": "expense-claim-forensic-review",
+  "industry": "accounting-audit-consulting",
+  "title": "Forensic Review of Expense Claims",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Review every expense claim, not a sample: read the receipts, check them against travel, leave and policy data, and rank suspicious patterns for forensic investigators.",
+  "seo": {
+    "title": "AI Forensic Review of Expense Claims | VipraTech",
+    "description": "AI that reads every receipt, finds duplicate and altered bills, checks claims against leave, travel and policy data, and ranks cases for investigators.",
+    "keywords": [
+      "expense claim fraud detection",
+      "forensic expense review",
+      "duplicate receipt detection",
+      "T&E audit automation",
+      "internal audit analytics"
+    ]
+  },
+  "designed_for": [
+    "Forensic Services Partner",
+    "Head of Internal Audit",
+    "Chief Financial Officer",
+    "Ethics and Compliance Officer"
+  ],
+  "problem": {
+    "intro": "Travel and expense fraud rarely shows up in a single claim. It shows up as the same hotel bill submitted by two employees, restaurant bills produced from online templates, claims split to stay under an approval limit, or fuel bills on days the employee was on leave. Forensic and internal audit teams usually test a sample, because opening every receipt across a year of claims is not practical by hand.",
+    "pain_points": [
+      {
+        "title": "Sampling misses patterns",
+        "detail": "The signal often lies in relationships across claims and employees, which a sample of individual claims cannot reveal."
+      },
+      {
+        "title": "The system holds what was typed",
+        "detail": "Expense tools store the amounts and dates employees entered, not what the receipt actually says."
+      },
+      {
+        "title": "Fabricated and altered receipts",
+        "detail": "Template-generated bills, edited dates and amounts, and the same image reused across months look normal one at a time."
+      },
+      {
+        "title": "Findings must stand up",
+        "detail": "Every indicator raised against an employee needs clear evidence, careful wording and a trail that survives challenge."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a forensic review pipeline that ingests a period's expense claims from the expense or ERP system together with the receipt images and PDFs. It reads each receipt independently of what the employee typed, then runs tests across the full population: duplicate and near-duplicate receipts across employees, signs of edited amounts or dates, vendor invoice numbers out of sequence, invalid GSTINs, claims on leave days or outside travel dates, splits below approval limits, and policy breaches by grade and city. Each claim gets a list of triggered tests with the evidence behind them. Investigators work a ranked queue, and the system never labels anyone as having committed fraud.",
+    "capabilities": [
+      "Reads receipts, hotel folios, cab and fuel bills, and compares them with the claimed values",
+      "Near-duplicate detection using image similarity and extracted fields across employees and periods",
+      "Alteration indicators such as inconsistent totals, edited dates and repeated bill templates",
+      "Cross-checks with travel bookings, leave and attendance records, and policy limits by grade and city",
+      "Pattern tests for split claims under approval limits, round-sum amounts and holiday claims",
+      "Ranked case queue with an evidence pack for each flagged claim"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Extract claims and receipts",
+      "detail": "Claims, line items and receipt files for the review period are exported from the expense or ERP system."
+    },
+    {
+      "step": 2,
+      "title": "Read receipts independently",
+      "detail": "OCR and an LLM read each receipt so its values can be compared with what was claimed."
+    },
+    {
+      "step": 3,
+      "title": "Join reference data",
+      "detail": "Leave, attendance, travel bookings, corporate card data and policy limits are linked to each claim."
+    },
+    {
+      "step": 4,
+      "title": "Run forensic tests",
+      "detail": "Duplicate, alteration, policy and pattern tests run across the whole population."
+    },
+    {
+      "step": 5,
+      "title": "Investigate ranked cases",
+      "detail": "Claims above the risk threshold go to investigators, who decide what to examine and what any finding is."
+    },
+    {
+      "step": 6,
+      "title": "Assemble evidence",
+      "detail": "Confirmed findings get an evidence pack for the investigation report; cleared claims keep their test results."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Expense claims and receipt images\"] --> B[\"Read receipts independently\"]\n  B --> C[\"Join leave, travel and policy data\"]\n  C --> D[\"Run duplicate and alteration tests\"]\n  D --> E{\"Risk above threshold?\"}\n  E -->|\"no\"| F[\"Logged as cleared with results\"]\n  E -->|\"yes\"| G(\"Investigator examines case\")\n  G --> H{\"Finding confirmed?\"}\n  H -->|\"yes\"| I[\"Evidence pack for findings report\"]\n  H -->|\"no\"| F",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data intake",
+        "components": [
+          "Expense system export",
+          "Receipt image store",
+          "HRMS leave and attendance data",
+          "Travel desk and corporate card data"
+        ]
+      },
+      {
+        "name": "Receipt understanding",
+        "components": [
+          "OCR and receipt field extractor",
+          "Image similarity index"
+        ]
+      },
+      {
+        "name": "Forensic tests",
+        "components": [
+          "Duplicate and near-duplicate detector",
+          "Alteration indicator checks",
+          "Policy and pattern rule engine"
+        ]
+      },
+      {
+        "name": "Case management",
+        "components": [
+          "Risk ranking",
+          "Investigator workbench",
+          "Evidence pack generator"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data intake\"]\n    E1[\"Expense system export\"]\n    E2[\"Receipt image store\"]\n    E3[\"HRMS and travel desk data\"]\n  end\n  subgraph S2[\"Receipt understanding\"]\n    U1[\"OCR and receipt extractor\"]\n    U2[\"Image similarity index\"]\n  end\n  subgraph S3[\"Forensic tests\"]\n    T1[\"Duplicate and alteration checks\"]\n    T2[\"Policy and pattern rules\"]\n    T3[\"Risk ranking\"]\n  end\n  subgraph S4[\"Case management\"]\n    C1(\"Investigator workbench\")\n    C2[\"Evidence pack generator\"]\n  end\n  E2 --> U1\n  E2 --> U2\n  U1 --> T1\n  U2 --> T1\n  U1 --> T2\n  E1 --> T2\n  E3 --> T2\n  T1 --> T3\n  T2 --> T3\n  T3 --> C1 --> C2"
+  },
+  "inputs": [
+    "Expense claim export with line items",
+    "Receipt images and PDFs",
+    "Travel policy and approval matrix",
+    "HRMS leave and attendance records",
+    "Travel desk bookings and corporate card transactions",
+    "Vendor master"
+  ],
+  "outputs": [
+    "Ranked case list",
+    "Triggered tests and evidence for each flagged claim",
+    "Duplicate clusters across employees and periods",
+    "Policy breach summary by department and grade",
+    "Evidence packs for the investigation report"
+  ],
+  "human_in_the_loop": "Investigators decide which cases to pursue and what any finding is. Employee interviews, conclusions and any disciplinary step remain with the forensic team, HR and management; system outputs are leads, not findings.",
+  "integrations": [
+    "SAP Concur, Zoho Expense or ERP travel and expense modules",
+    "HRMS such as SAP SuccessFactors, Darwinbox or Keka",
+    "Corporate card and travel desk data feeds",
+    "Case management tool or the firm's investigation workbooks"
+  ],
+  "guardrails": [
+    "Outputs describe indicators, never fraud or guilt",
+    "Access limited to named investigators on a need-to-know basis",
+    "Every test result reproducible from stored inputs",
+    "Only the fields needed for the tests are processed",
+    "No automatic action against any employee"
+  ],
+  "compliance_notes": [
+    "Employee personal data is processed for a defined investigation purpose, designed to support DPDP Act 2023 obligations on purpose limitation and security safeguards.",
+    "Evidence handling follows the firm's chain-of-custody approach for forensic engagements."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One quarter of claims for one business unit, run alongside or after a manual review so the results can be compared.",
+    "deliverables": [
+      "Test library configured to the client's policy",
+      "Ranked case list for the pilot period",
+      "Investigator workbench with evidence packs",
+      "Comparison with the manual review",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Receipt extraction accuracy",
+        "how": "Extracted values compared with a manually verified sample of receipts."
+      },
+      {
+        "metric": "Investigator agreement",
+        "how": "Share of flagged cases investigators judged worth examining."
+      },
+      {
+        "metric": "Patterns missed by sampling",
+        "how": "Confirmed issues found outside the manual review sample."
+      },
+      {
+        "metric": "Investigator time per case",
+        "how": "Time from opening a case to a decision, with the evidence pack compared with manual assembly."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the system accuse employees of fraud?",
+      "a": "No. It reports indicators, such as a duplicate receipt or a claim on a leave day, with the evidence behind each one. Investigators decide what to examine and what any finding is, and many indicators turn out to have innocent explanations."
+    },
+    {
+      "q": "Can it detect receipts made with online bill generators?",
+      "a": "It looks for signs associated with them, such as repeated templates, inconsistent tax details or invalid GSTINs, and flags them for review. These are indicators, not proof, and the investigator confirms them with the vendor or other evidence."
+    },
+    {
+      "q": "Which expense systems does it work with?",
+      "a": "Exports from SAP Concur, Zoho Expense, ERP travel and expense modules or in-house tools, plus the receipt images they store. HR and travel desk data is joined through exports agreed with the client."
+    },
+    {
+      "q": "How is confidentiality maintained during an investigation?",
+      "a": "Processing runs in an isolated environment for the engagement, access is limited to named investigators, and every action is logged. Data is retained or deleted according to the engagement terms."
+    }
+  ],
+  "related": [
+    "audit-sampling-and-vouching",
+    "tampered-document-detection",
+    "gst-return-reconciliation",
+    "bank-and-ledger-reconciliation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/expense-claim-forensic-review/"
+}

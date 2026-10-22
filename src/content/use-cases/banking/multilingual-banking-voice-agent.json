@@ -1,0 +1,224 @@
+{
+  "slug": "multilingual-banking-voice-agent",
+  "industry": "banking",
+  "title": "Multilingual Voice Agent for Banking Service Requests",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "An inbound voice agent that authenticates callers and handles card blocking, statements, cheque books and status queries in Hindi, Hinglish and regional languages, with clean handover.",
+  "seo": {
+    "title": "Multilingual Banking Voice Agent in Hindi | VipraTech",
+    "description": "Voice AI for bank contact centres: authenticated service requests in Hindi, Hinglish and regional languages, with guardrails and handover to agents.",
+    "keywords": [
+      "banking voice agent Hindi",
+      "multilingual IVR replacement bank",
+      "voice AI for bank contact centre",
+      "conversational IVR banking India",
+      "Hinglish voice bot bank"
+    ]
+  },
+  "designed_for": [
+    "Head of Contact Centre",
+    "Head of Digital Channels",
+    "Chief Information Security Officer",
+    "Customer Experience Head"
+  ],
+  "problem": {
+    "intro": "Most calls to a bank contact centre are routine: block a card, request a statement, order a cheque book or check a pending UPI dispute. Menu-driven IVRs handle these poorly for callers who think in Hindi, Marathi or Tamil, so they wait for an agent or visit the branch, and agents spend their day on requests that follow a script.",
+    "pain_points": [
+      {
+        "title": "IVR menus that callers abandon",
+        "detail": "Deep keypad menus in two languages do not match how customers describe their problem, and many press zero for an agent at the first chance."
+      },
+      {
+        "title": "Language coverage limited by staffing",
+        "detail": "Regional-language desks are small, so callers outside the main languages face the longest waits."
+      },
+      {
+        "title": "Inconsistent caller authentication",
+        "detail": "Agents verify callers in different ways, and social engineers exploit that variation to attempt account takeover."
+      },
+      {
+        "title": "Context lost at handover",
+        "detail": "When a call moves to an agent, the customer repeats everything because the IVR captured nothing useful."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that answers on your existing telephony and speaks with callers in Hindi, Hinglish, English and the regional languages you choose. It identifies the caller from the registered mobile number and completes authentication through your existing methods, such as a T-PIN or OTP entered on the keypad and checked by your authentication service. Once the caller is authenticated, it handles approved service intents through your bank's APIs: hotlisting a card, sending a statement to the registered email, ordering a cheque book or reading out the status of a complaint. Anything outside the approved list, and any sign of distress or fraud, goes to a human agent with a summary on screen.",
+    "capabilities": [
+      "Speech recognition and replies in Hindi, Hinglish, English and selected regional languages, with mid-call language switching",
+      "Caller identification and step-up authentication through the bank's existing T-PIN or OTP services",
+      "Approved service intents executed through bank APIs, such as card hotlisting, statements and cheque book requests",
+      "Status read-outs for complaints, UPI disputes and service requests from the CRM",
+      "Fraud and distress cues trigger immediate transfer to a human agent",
+      "Warm handover with transcript summary and authentication status on the agent desktop"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer and detect language",
+      "detail": "The agent greets the caller, detects the preferred language and lets the caller switch at any point."
+    },
+    {
+      "step": 2,
+      "title": "Identify and authenticate",
+      "detail": "The registered mobile number identifies the customer, and a keypad T-PIN or OTP checked by bank systems completes authentication."
+    },
+    {
+      "step": 3,
+      "title": "Understand the request",
+      "detail": "The caller's words are mapped to the approved intent list, and an unclear request gets one clarifying question."
+    },
+    {
+      "step": 4,
+      "title": "Check whether it can act",
+      "detail": "If the intent is approved and the authentication level is sufficient, the agent proceeds; otherwise it transfers."
+    },
+    {
+      "step": 5,
+      "title": "Execute through bank APIs",
+      "detail": "The agent calls the relevant service API, confirms the action with the caller and sends an SMS confirmation."
+    },
+    {
+      "step": 6,
+      "title": "Hand over or close",
+      "detail": "Transfers carry a summary to the human agent, and every call is logged with transcript and outcome."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound call on bank telephony\"] --> B[\"Detect language and greet\"]\n  B --> C[\"Identify and authenticate caller\"]\n  C --> D[\"Map request to approved intent\"]\n  D --> E{\"Approved intent and authenticated?\"}\n  E -->|\"yes\"| F[\"Execute via bank service API\"]\n  E -->|\"no\"| G(\"Human agent with summary\")\n  F --> H[\"Confirm by voice and SMS\"]\n  H --> J[\"Log transcript and outcome\"]\n  G --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "SIP trunk or contact-centre platform integration",
+          "Keypad capture for T-PIN and OTP entry",
+          "Call recording per bank policy"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Streaming speech recognition for Indian languages",
+          "Text-to-speech voices per language",
+          "Language and code-mix detection"
+        ]
+      },
+      {
+        "name": "Dialogue and policy",
+        "components": [
+          "Intent classifier with approved intent list",
+          "LLM dialogue manager with scripted confirmations",
+          "Policy guard for authentication level and topic limits"
+        ]
+      },
+      {
+        "name": "Bank integration",
+        "components": [
+          "Authentication service adapter",
+          "Card, statement and cheque book service APIs",
+          "CRM status lookup"
+        ]
+      },
+      {
+        "name": "Operations",
+        "components": [
+          "Agent desktop handover summary",
+          "Transcript store with PII masking",
+          "Call quality dashboard"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Contact-centre platform\"]\n    T2[\"Keypad capture\"]\n  end\n  subgraph S2[\"Speech\"]\n    P1[\"Speech recognition\"]\n    P2[\"Text to speech\"]\n  end\n  subgraph S3[\"Dialogue and policy\"]\n    D1[\"Intent classifier\"]\n    D2[\"Dialogue manager\"]\n    D3[\"Policy guard\"]\n  end\n  subgraph S4[\"Bank integration\"]\n    B1[\"Authentication adapter\"]\n    B2[\"Service APIs\"]\n    B3[\"CRM lookup\"]\n  end\n  subgraph S5[\"Operations\"]\n    Q1(\"Agent desktop handover\")\n    Q2[\"Masked transcript store\"]\n  end\n  T1 --> P1 --> D1 --> D2\n  T2 --> B1\n  D2 --> D3\n  D3 --> B1\n  D3 --> B2\n  D3 --> B3\n  D2 --> P2 --> T1\n  D3 --> Q1\n  D2 --> Q2"
+  },
+  "inputs": [
+    "Inbound calls through the bank's telephony or contact-centre platform",
+    "Registered mobile number and customer profile from the CRM",
+    "Approved intent list and call scripts per language",
+    "Bank service APIs for cards, statements, cheque books and requests",
+    "Complaint and service request status from the CRM"
+  ],
+  "outputs": [
+    "Completed service requests with SMS confirmations",
+    "Call transcripts with PII masked",
+    "Handover summaries for human agents",
+    "Intent, completion and transfer reports by language",
+    "Calls flagged for possible fraud or distress cues"
+  ],
+  "human_in_the_loop": "Human agents take every call outside the approved intents, every caller who asks for a person and every call with fraud or distress cues. Contact-centre supervisors review sampled transcripts each week and approve any change to intents or scripts.",
+  "integrations": [
+    "Contact-centre platform or SIP telephony, such as Genesys, Avaya or Ameyo",
+    "Bank authentication service for T-PIN or OTP",
+    "Card management and core banking service APIs",
+    "CRM for service requests and complaints",
+    "SMS gateway for confirmations"
+  ],
+  "guardrails": [
+    "Never asks callers to speak an OTP, PIN or CVV aloud; keypad entries pass straight to bank authentication",
+    "Account actions allowed only at the authentication level defined for each intent",
+    "Topic limits: service requests only, with no advice on investments, loans or tax",
+    "Immediate transfer on fraud cues, distress or repeated misunderstanding",
+    "PII masked in transcripts and logs, with retention set by bank policy"
+  ],
+  "compliance_notes": [
+    "Designed to support DPDP Act 2023 obligations through notice at call start, purpose-limited processing and masked transcripts.",
+    "Call recording, retention and vendor controls follow the bank's policies under RBI directions on IT governance and outsourcing."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Three to five high-volume service intents, such as card hotlisting, statement requests and cheque book orders, in Hindi and one regional language, on a test number before a small share of live traffic.",
+    "deliverables": [
+      "Intent list, scripts and authentication rules agreed with contact-centre and security teams",
+      "Working voice agent on your telephony in a test environment",
+      "Agent desktop handover summary",
+      "Transcript review and quality report",
+      "Production plan with language roll-out and cost per call"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Task completion for approved intents",
+        "how": "Calls where the requested action completed correctly, verified against bank system logs."
+      },
+      {
+        "metric": "Speech recognition quality by language",
+        "how": "Transcript accuracy checked by native speakers on a sample of calls."
+      },
+      {
+        "metric": "Transfer reasons",
+        "how": "Each transfer tagged by cause, such as out-of-scope request, authentication failure or misunderstanding."
+      },
+      {
+        "metric": "Caller effort",
+        "how": "Turns per completed request, and post-call survey responses where your bank runs them."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which languages are supported?",
+      "a": "Hindi, Hinglish and English as standard, with Marathi, Tamil, Telugu, Kannada, Bengali, Gujarati and others added based on your customer base. Each language is tested with native speakers before going live."
+    },
+    {
+      "q": "How is caller authentication handled?",
+      "a": "Through your existing methods. The agent identifies the caller from the registered number and uses your T-PIN or OTP service through keypad entry, so secrets never pass through speech recognition."
+    },
+    {
+      "q": "Can it work alongside our current IVR?",
+      "a": "Yes. It can sit behind an IVR menu option, replace the menu on selected numbers or take overflow traffic. We connect through your contact-centre platform's standard interfaces."
+    },
+    {
+      "q": "What happens when it gets something wrong?",
+      "a": "It confirms every action before executing it, and if it fails to understand twice it transfers to an agent. Misunderstandings are tagged in transcripts and reviewed weekly to improve the intents."
+    }
+  ],
+  "related": [
+    "customer-complaint-triage-and-routing",
+    "bank-chatbot-and-voice-agent-red-teaming",
+    "retail-banking-cross-sell-outreach",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/multilingual-banking-voice-agent/"
+}

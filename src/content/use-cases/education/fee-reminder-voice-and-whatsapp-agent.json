@@ -1,0 +1,223 @@
+{
+  "slug": "fee-reminder-voice-and-whatsapp-agent",
+  "industry": "education",
+  "title": "Fee Reminder Agent (Voice + WhatsApp)",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Remind parents of upcoming and overdue fee instalments on WhatsApp and by voice in their language, share a UPI link, confirm payments and route hardship requests to the accounts office.",
+  "seo": {
+    "title": "Fee Reminder Agent on WhatsApp and Voice | VipraTech",
+    "description": "Polite fee instalment reminders for schools and coaching institutes on WhatsApp and voice, with UPI links, payment checks and escalation to accounts.",
+    "keywords": [
+      "fee reminder WhatsApp automation",
+      "school fee reminder calls",
+      "coaching fee instalment reminders",
+      "UPI fee collection link",
+      "Hindi voice fee reminder"
+    ]
+  },
+  "designed_for": [
+    "Accounts Head",
+    "School Administrator",
+    "Finance Controller (Coaching)",
+    "Parent Relations Manager"
+  ],
+  "problem": {
+    "intro": "Schools collect fees monthly or quarterly, and coaching institutes split a programme fee into instalments tied to dates or phases. The accounts office ends up sending manual WhatsApp messages and making awkward calls, while some parents have already paid through another channel and others need an extension they hesitate to ask for.",
+    "pain_points": [
+      {
+        "title": "Manual chasing",
+        "detail": "Accounts staff export due lists from the ERP and message or call parents one by one, every cycle."
+      },
+      {
+        "title": "Paid but still reminded",
+        "detail": "Payments by UPI, bank transfer or at the counter take time to reconcile, so parents who have paid still get reminders and complain."
+      },
+      {
+        "title": "Tone problems",
+        "detail": "Reminders that sound like recovery calls damage the relationship, and messages that reach the student instead of the parent cause distress."
+      },
+      {
+        "title": "Hardship goes unspoken",
+        "detail": "Families facing a genuine problem rarely call the office, so a late payment turns into a dropout without anyone offering a plan."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reminder agent that reads due and overdue instalments from your ERP and contacts the parent or guardian, not the student. WhatsApp comes first, with an approved template, the amount, due date and a UPI payment link. If the instalment stays unpaid, a short, polite voice call follows in Hindi, English or the family's preferred language. Parents can say they have already paid, ask for a receipt, request more time or ask to speak to accounts. Payments are confirmed against the gateway before any further reminder, and requests for extensions or concessions go to the accounts office, which decides.",
+    "capabilities": [
+      "Due-list sync from the ERP with instalment, concession and sibling details",
+      "WhatsApp reminders with approved templates and UPI payment links or QR codes",
+      "Polite voice calls in Hindi, English and regional languages for unpaid instalments",
+      "Payment confirmation against the gateway before any follow-up",
+      "Captures already-paid claims, receipt requests and extension requests for accounts",
+      "Calling windows, frequency caps and opt-outs enforced for each family"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Sync the due list",
+      "detail": "Upcoming, due and overdue instalments are pulled from the ERP each morning, with guardian contact details."
+    },
+    {
+      "step": 2,
+      "title": "Send a WhatsApp reminder",
+      "detail": "The guardian receives an approved template with the amount, due date and a UPI link or QR code."
+    },
+    {
+      "step": 3,
+      "title": "Check payment status",
+      "detail": "Gateway and bank feeds are checked so paid instalments drop out before the next step."
+    },
+    {
+      "step": 4,
+      "title": "Voice follow-up",
+      "detail": "Instalments still unpaid at the agreed point get a short, polite call in the guardian's language."
+    },
+    {
+      "step": 5,
+      "title": "Handle responses",
+      "detail": "Claims of payment, receipt requests and extension requests are captured and routed to the accounts office."
+    },
+    {
+      "step": 6,
+      "title": "Confirm and update",
+      "detail": "Receipts are sent on WhatsApp and the ERP is updated with payments and promised dates."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Due list from ERP\"] --> B[\"WhatsApp reminder with UPI link\"]\n  B --> C{\"Paid by due date?\"}\n  C -->|\"yes\"| H[\"Send receipt and update ERP\"]\n  C -->|\"no\"| D[\"Polite voice call to guardian\"]\n  D --> E{\"Extension or dispute raised?\"}\n  E -->|\"yes\"| F(\"Accounts office decides\")\n  E -->|\"no\"| G[\"Resend link and note promised date\"]\n  F --> H\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data sync",
+        "components": [
+          "ERP due-list connector",
+          "Payment gateway and bank feed reader",
+          "Guardian contacts and language preferences"
+        ]
+      },
+      {
+        "name": "Messaging and voice",
+        "components": [
+          "WhatsApp Business API with approved templates",
+          "Voice agent with Hindi and English speech",
+          "UPI link and QR generation"
+        ]
+      },
+      {
+        "name": "Policy engine",
+        "components": [
+          "Reminder schedule and frequency caps",
+          "Calling-hour rules and opt-outs",
+          "Escalation rules for hardship and disputes"
+        ]
+      },
+      {
+        "name": "Accounts workspace",
+        "components": [
+          "Request queue for extensions and disputes",
+          "Decision log with promised dates"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Collection status dashboard",
+          "Message and call audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data sync\"]\n    D1[\"ERP due list\"]\n    D2[\"Gateway and bank feeds\"]\n  end\n  subgraph S2[\"Policy engine\"]\n    P1[\"Schedules and frequency caps\"]\n    P2[\"Calling hours and opt-outs\"]\n  end\n  subgraph S3[\"Messaging and voice\"]\n    M1[\"WhatsApp templates\"]\n    M2[\"UPI link and QR\"]\n    M3[\"Voice agent\"]\n  end\n  subgraph S4[\"Accounts and reporting\"]\n    A1(\"Accounts request queue\")\n    A2[\"ERP update and receipts\"]\n    A3[\"Collection dashboard\"]\n  end\n  D1 --> P1\n  D2 --> P1\n  P1 --> P2\n  P2 --> M1\n  P2 --> M3\n  M2 --> M1\n  M3 --> A1\n  M1 --> A2\n  A1 --> A2\n  A2 --> A3"
+  },
+  "inputs": [
+    "Instalment schedule and due list from the ERP",
+    "Guardian names, numbers and preferred language",
+    "Payment gateway and bank transaction feeds",
+    "Approved WhatsApp templates and call scripts",
+    "Concession, scholarship and sibling discount records"
+  ],
+  "outputs": [
+    "WhatsApp reminders and receipts sent",
+    "Call outcomes with promised payment dates",
+    "Extension and dispute requests for accounts",
+    "Updated payment status in the ERP",
+    "Collection status report by class, batch or centre"
+  ],
+  "human_in_the_loop": "The accounts office decides every extension, concession, waiver and disputed payment. The agent never threatens consequences for the student, such as withholding results or admit cards; any such policy is communicated only by the school or institute itself.",
+  "integrations": [
+    "School or coaching ERP",
+    "Payment gateway with UPI",
+    "WhatsApp Business API",
+    "Cloud telephony",
+    "Accounting software such as Tally or Zoho Books"
+  ],
+  "guardrails": [
+    "Contacts guardians only, never the student, for minors",
+    "Payment status checked immediately before every message or call",
+    "Calling windows, frequency caps and opt-outs enforced automatically",
+    "No threatening, shaming or coercive language; scripts approved by management",
+    "Hardship cues routed to a person rather than repeated reminders"
+  ],
+  "compliance_notes": [
+    "Voice and SMS reminders must follow TRAI commercial communication rules, including registered templates and customer preferences.",
+    "Guardian and student details are personal data under the DPDP Act 2023; designed to support purpose limitation and retention limits."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One fee cycle for selected classes or batches, with reminders sent by the agent and accounts handling every escalation.",
+    "deliverables": [
+      "Reminder schedule and templates approved by management",
+      "WhatsApp and voice flows connected to your ERP and gateway",
+      "Accounts request queue",
+      "Pilot report on outcomes and parent feedback",
+      "Roll-out plan and messaging cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Paid within the cycle",
+        "how": "Instalments paid by the due date and within the cycle, compared with a similar previous cycle."
+      },
+      {
+        "metric": "Incorrect reminders",
+        "how": "Reminders sent to guardians who had already paid, from complaints and reconciliation."
+      },
+      {
+        "metric": "Requests routed to accounts",
+        "how": "Extension, dispute and receipt requests captured, and time to an accounts decision."
+      },
+      {
+        "metric": "Parent sentiment",
+        "how": "Opt-outs, complaints and a short feedback question after payment."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the agent call students?",
+      "a": "No. For minors it contacts only the registered guardian numbers, and student numbers are excluded from the contact list."
+    },
+    {
+      "q": "How do you avoid reminding parents who have paid?",
+      "a": "The agent checks the payment gateway and bank feed immediately before every message or call. Counter payments need to be entered in the ERP, and the pilot measures any reminders that still reach paid families."
+    },
+    {
+      "q": "Can it offer instalment extensions?",
+      "a": "It captures the request and the reason, but only your accounts office approves extensions or concessions. The parent is told when to expect a decision."
+    },
+    {
+      "q": "Which languages are supported?",
+      "a": "Hindi and English by default, with regional languages added for your parent base. WhatsApp templates are approved per language."
+    }
+  ],
+  "related": [
+    "parent-progress-update-automation",
+    "admission-enquiry-voice-agent",
+    "emi-reminder-voice-and-whatsapp-agent"
+  ],
+  "proof_ref": "whatsapp-hotel-booking",
+  "content_type": "use-case",
+  "url": "/use-cases/education/fee-reminder-voice-and-whatsapp-agent/"
+}

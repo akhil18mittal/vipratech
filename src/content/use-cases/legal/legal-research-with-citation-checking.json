@@ -1,0 +1,222 @@
+{
+  "slug": "legal-research-with-citation-checking",
+  "industry": "legal",
+  "title": "Legal Research Assistant with Citation Checking",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "A research assistant that answers only from retrieved judgments and statutes, quotes the passage it relies on, and checks each citation for existence, accuracy and later treatment.",
+  "seo": {
+    "title": "Legal Research Assistant with Citation Checking | VipraTech",
+    "description": "A legal research assistant that grounds answers in retrieved judgments, verifies every citation and quote, and checks drafts for fabricated case law.",
+    "keywords": [
+      "legal research AI India",
+      "citation checking tool",
+      "AI hallucinated case law check",
+      "case law verification",
+      "IPC to BNS mapping research"
+    ]
+  },
+  "designed_for": [
+    "Litigation Associate",
+    "Knowledge Management Lawyer",
+    "In-House Counsel",
+    "Law Firm Partner"
+  ],
+  "problem": {
+    "intro": "General-purpose chatbots produce fluent legal answers with citations that may not exist, misquote a judgment or ignore that it was later overruled. Courts in several jurisdictions have criticised filings that relied on such citations. Lawyers still need faster research, but only in a form they can verify before it goes into an opinion or a written submission.",
+    "pain_points": [
+      {
+        "title": "Fabricated or garbled citations",
+        "detail": "Party names, years, reporters and paragraph numbers can be invented or mixed up by unconstrained models."
+      },
+      {
+        "title": "Good law or not",
+        "detail": "A judgment may have been overruled, distinguished or referred to a larger bench, and research notes rarely say so."
+      },
+      {
+        "title": "New criminal laws",
+        "detail": "References to the IPC, CrPC and Evidence Act now need mapping to the Bharatiya Nyaya Sanhita, BNSS and Bharatiya Sakshya Adhiniyam, in force since July 2024."
+      },
+      {
+        "title": "Drafts from many hands",
+        "detail": "Written submissions combine research from associates, interns and outside tools, and nobody checks every citation end to end."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a research assistant that retrieves from sources you are licensed to use and from your firm's own opinions and briefs, and answers only with propositions it can support from retrieved text. Each proposition carries its citation and the quoted paragraph. A separate citation checker then verifies that each case exists in the source, that the citation and paragraph number match, and that quoted text appears verbatim, and it flags available signals of later treatment and bench strength for the lawyer to check. The same checker runs on any draft, so citations from any source are verified before filing.",
+    "capabilities": [
+      "Retrieval over licensed case-law databases and your internal knowledge bank",
+      "Answers built only from retrieved passages, with a quoted paragraph for each proposition",
+      "Citation existence, format and paragraph checks across law reports and neutral citations",
+      "Verbatim quote verification against the judgment text",
+      "Flags signals of later treatment and bench strength for lawyer review",
+      "Draft checker that verifies every citation in a brief, opinion or written submission"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Pose the question",
+      "detail": "The lawyer enters a research question with jurisdiction, forum and any key facts, or uploads a draft to check."
+    },
+    {
+      "step": 2,
+      "title": "Retrieve sources",
+      "detail": "Relevant judgments, statutes and internal opinions are retrieved from licensed and internal sources."
+    },
+    {
+      "step": 3,
+      "title": "Draft a grounded answer",
+      "detail": "A draft answer is built only from retrieved passages, each proposition with its citation and quote."
+    },
+    {
+      "step": 4,
+      "title": "Verify citations",
+      "detail": "Each citation is checked for existence, accuracy, quote match and treatment signals."
+    },
+    {
+      "step": 5,
+      "title": "Handle failures",
+      "detail": "Citations that fail any check are removed or clearly marked, never left silently in the answer."
+    },
+    {
+      "step": 6,
+      "title": "Lawyer review",
+      "detail": "The lawyer reads the cited paragraphs, checks treatment and decides what to rely on."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Research question or draft brief\"] --> B[\"Retrieve judgments and statutes\"]\n  B --> C[\"Draft answer from retrieved text\"]\n  C --> D[\"Check citations and quotes\"]\n  D --> E{\"Any citation unverified?\"}\n  E -->|\"yes\"| F[\"Remove or mark citation\"]\n  E -->|\"no\"| G[\"Attach treatment signals\"]\n  F --> G\n  G --> H(\"Lawyer reads sources and decides\")\n  H --> I[\"Research note in knowledge bank\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Sources",
+        "components": [
+          "Licensed case-law databases, accessed within licence terms",
+          "Bare acts, rules and notifications",
+          "Internal opinions, briefs and research notes"
+        ]
+      },
+      {
+        "name": "Retrieval",
+        "components": [
+          "Legal search with jurisdiction and court filters",
+          "Passage ranking",
+          "Old-to-new criminal law mapping table"
+        ]
+      },
+      {
+        "name": "Drafting",
+        "components": [
+          "Grounded answer generator restricted to retrieved passages",
+          "Proposition and quote linker"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "Citation existence and format checker",
+          "Verbatim quote matcher",
+          "Treatment and bench-strength signal lookup"
+        ]
+      },
+      {
+        "name": "Review and knowledge",
+        "components": [
+          "Lawyer review view with source paragraphs",
+          "Approved research notes in the knowledge bank",
+          "Usage and correction log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Sources\"]\n    K1[\"Licensed case-law databases\"]\n    K2[\"Internal opinions and briefs\"]\n  end\n  subgraph S2[\"Retrieval and drafting\"]\n    R1[\"Filtered legal search\"]\n    R2[\"Passage ranking\"]\n    R3[\"Grounded answer generator\"]\n  end\n  subgraph S3[\"Verification\"]\n    V1[\"Citation existence check\"]\n    V2[\"Verbatim quote matcher\"]\n    V3[\"Treatment signal lookup\"]\n  end\n  subgraph S4[\"Review and knowledge\"]\n    L1(\"Lawyer review view\")\n    L2[\"Knowledge bank\"]\n  end\n  K1 --> R1\n  K2 --> R1\n  R1 --> R2\n  R2 --> R3\n  R3 --> V1\n  V1 --> V2\n  V2 --> V3\n  V3 --> L1\n  L1 --> L2\n  L2 --> K2"
+  },
+  "inputs": [
+    "Research questions with jurisdiction and forum",
+    "Access to licensed case-law databases",
+    "Bare acts, rules and notifications",
+    "Internal opinions, briefs and research notes",
+    "Draft briefs or submissions for citation checking"
+  ],
+  "outputs": [
+    "Grounded research answers with quoted paragraphs",
+    "Citation verification report for each answer or draft",
+    "List of removed or unverified citations",
+    "Treatment and bench-strength flags for lawyer review",
+    "Approved research notes in the knowledge bank"
+  ],
+  "human_in_the_loop": "Lawyers read the cited paragraphs and decide what to rely on; the assistant never presents an answer as advice. Treatment signals are prompts to check, and the lawyer confirms whether a judgment is still good law.",
+  "integrations": [
+    "Licensed legal research databases (via API or permitted access)",
+    "Document management system and knowledge bank",
+    "Microsoft Word add-in for draft checking",
+    "Single sign-on and matter permissions",
+    "Internal search portal"
+  ],
+  "guardrails": [
+    "No citation appears in an answer unless the judgment was retrieved from a source",
+    "Every quote verified verbatim against the judgment text",
+    "Unverified citations removed or visibly marked, never silently kept",
+    "Answers labelled as a research aid, not legal advice",
+    "Use of licensed content stays within licence terms"
+  ],
+  "compliance_notes": [
+    "Research queries can reveal client matters, so queries and logs stay within your environment under access control.",
+    "Use of licensed databases follows each publisher's licence terms."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One practice area, such as arbitration or cheque dishonour matters, with the draft checker run on recent submissions and the assistant used on live research questions.",
+    "deliverables": [
+      "Source connections and retrieval tuned for the practice area",
+      "Research assistant and citation checker",
+      "Word add-in or upload checker for drafts",
+      "Verification report on recent drafts",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Citation verification accuracy",
+        "how": "Checker results compared with manual verification by associates on a sample."
+      },
+      {
+        "metric": "Unsupported propositions",
+        "how": "Propositions whose quoted paragraph did not support the statement, from lawyer review."
+      },
+      {
+        "metric": "Errors caught in drafts",
+        "how": "Incorrect citations, misquotes or unchecked treatment found by the checker in recent drafts."
+      },
+      {
+        "metric": "Research time",
+        "how": "Lawyer-reported time on comparable questions with and without the assistant."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How is this different from a general chatbot?",
+      "a": "It answers only from judgments and statutes it has actually retrieved, quotes the paragraph it relies on and runs a separate check on every citation. If a citation cannot be verified, it is removed or marked rather than presented as fact."
+    },
+    {
+      "q": "Can it tell us whether a case is still good law?",
+      "a": "It flags signals of later treatment and bench strength from the sources available. The lawyer must check those signals and confirm the position before relying on the judgment."
+    },
+    {
+      "q": "Does it handle the new criminal laws?",
+      "a": "Yes. It maps IPC, CrPC and Evidence Act references to the Bharatiya Nyaya Sanhita, BNSS and Bharatiya Sakshya Adhiniyam where a mapping exists, and flags where provisions differ."
+    },
+    {
+      "q": "Can it check drafts prepared outside the tool?",
+      "a": "Yes. Upload a draft or use the Word add-in, and every citation and quotation is checked against the sources, whoever or whatever produced it."
+    }
+  ],
+  "related": [
+    "case-file-summarisation-and-chronology",
+    "legal-ai-confidentiality-testing",
+    "contract-clause-extraction-and-risk-flags"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/legal/legal-research-with-citation-checking/"
+}

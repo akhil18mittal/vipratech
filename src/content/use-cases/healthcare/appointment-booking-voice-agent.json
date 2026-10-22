@@ -1,0 +1,221 @@
+{
+  "slug": "appointment-booking-voice-agent",
+  "industry": "healthcare",
+  "title": "Appointment Booking and Reminder Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A Hindi, English and regional-language voice agent that books, reschedules and cancels OPD appointments against live doctor schedules and calls patients with reminders.",
+  "seo": {
+    "title": "Hospital Appointment Booking Voice Agent | VipraTech",
+    "description": "Voice agent that books OPD appointments against live HIS slots in Hindi, English and regional languages, sends reminders and hands urgent calls to staff.",
+    "keywords": [
+      "hospital appointment voice agent",
+      "OPD booking automation",
+      "patient reminder calls",
+      "Hindi voice AI healthcare",
+      "clinic call centre automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Patient Services and Front Office",
+    "Hospital Call Centre Manager",
+    "Hospital Operations Director",
+    "Clinic Chain Operations Lead"
+  ],
+  "problem": {
+    "intro": "Hospital phone lines are busiest in the morning, when callers want a slot with a particular doctor and the front desk is also registering walk-in patients. Missed calls become lost appointments, and booked patients forget or arrive on the wrong day when a doctor's OPD changes.",
+    "pain_points": [
+      {
+        "title": "Missed and abandoned calls",
+        "detail": "Peak-hour calls go unanswered, and patients book elsewhere or turn up as walk-ins."
+      },
+      {
+        "title": "Complex schedules",
+        "detail": "Doctors run OPD on different days, with separate slots for new and follow-up patients, procedures and teleconsultations."
+      },
+      {
+        "title": "No-shows and late cancellations",
+        "detail": "Without reminders, slots go unused while other patients wait days for an appointment."
+      },
+      {
+        "title": "Doctor leave and OPD changes",
+        "detail": "When a consultant cancels OPD, staff must phone every booked patient by hand."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that answers appointment calls in Hindi, English and the regional languages your patients speak. It reads live slots from your HIS scheduling module, understands requests such as the next available slot with a cardiologist on Saturday, and books, reschedules or cancels appointments. Existing patients are found by mobile number or UHID, and new patients are registered with the minimum details your process needs. The agent sends a WhatsApp or SMS confirmation, calls with a reminder before the visit and phones booked patients when a doctor's OPD is cancelled. It gives no medical advice; callers who describe urgent symptoms are directed to emergency care and transferred to staff.",
+    "capabilities": [
+      "Speech recognition tuned for doctor names, departments and dates and times in Indian languages",
+      "Live slot lookup and booking against the HIS scheduling module",
+      "Existing-patient lookup by mobile number or UHID and minimal new-patient registration",
+      "Reminder calls and WhatsApp confirmations with reschedule options",
+      "Bulk rescheduling calls when a doctor's OPD changes",
+      "Emergency phrase detection that directs callers to emergency care and transfers to staff"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer and understand",
+      "detail": "The agent answers in the caller's language and identifies the request: book, reschedule, cancel or query."
+    },
+    {
+      "step": 2,
+      "title": "Screen for urgency",
+      "detail": "If the caller describes urgent symptoms, it gives scripted emergency guidance and transfers to staff at once."
+    },
+    {
+      "step": 3,
+      "title": "Identify the patient",
+      "detail": "Existing patients are found by mobile number or UHID; new patients are registered with minimal details."
+    },
+    {
+      "step": 4,
+      "title": "Offer and confirm a slot",
+      "detail": "It reads live availability, offers the nearest options, writes the booking to the HIS and confirms by WhatsApp or SMS."
+    },
+    {
+      "step": 5,
+      "title": "Remind and reschedule",
+      "detail": "Before the visit it calls with a reminder and handles changes, and it calls patients when an OPD is cancelled."
+    },
+    {
+      "step": 6,
+      "title": "Hand over when needed",
+      "detail": "Complaints and complex requests go to front-office staff with a call summary."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound call in caller language\"] --> B{\"Urgent symptoms mentioned?\"}\n  B -->|\"yes\"| C(\"Emergency guidance and staff transfer\")\n  B -->|\"no\"| D[\"Find or register patient\"]\n  D --> E[\"Read live doctor slots from HIS\"]\n  E --> F[\"Book and confirm on WhatsApp\"]\n  F --> G[\"Reminder call before visit\"]\n  G --> H{\"Patient needs to reschedule?\"}\n  H -->|\"yes\"| E\n  H -->|\"no\"| I[\"Visit confirmed in HIS\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Cloud telephony or hospital PBX via SIP",
+          "Outbound dialler with permitted call windows"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Multilingual speech-to-text",
+          "Text-to-speech in Hindi, English and regional languages"
+        ]
+      },
+      {
+        "name": "Dialogue and safety",
+        "components": [
+          "LLM dialogue manager with booking policies",
+          "Emergency phrase detector",
+          "No-medical-advice guard"
+        ]
+      },
+      {
+        "name": "Hospital systems",
+        "components": [
+          "HIS scheduling API",
+          "Patient registry lookup and registration",
+          "WhatsApp and SMS confirmations"
+        ]
+      },
+      {
+        "name": "Operations",
+        "components": [
+          "Front-office handover screen",
+          "Call analytics and transcripts"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony and speech\"]\n    T1[\"SIP or cloud telephony\"]\n    T2[\"Speech to text\"]\n    T3[\"Text to speech\"]\n  end\n  subgraph S2[\"Dialogue and safety\"]\n    L1[\"LLM dialogue manager\"]\n    L2[\"Emergency phrase detector\"]\n  end\n  subgraph S3[\"Hospital systems\"]\n    H1[\"HIS scheduling API\"]\n    H2[\"Patient registry lookup\"]\n    H3[\"WhatsApp and SMS\"]\n  end\n  subgraph S4[\"Operations\"]\n    Q1(\"Front office handover\")\n    Q2[\"Call analytics\"]\n  end\n  T1 --> T2 --> L2 --> L1\n  L1 --> H1\n  L1 --> H2\n  L1 --> H3\n  L1 --> T3 --> T1\n  L2 --> Q1\n  L1 --> Q2"
+  },
+  "inputs": [
+    "Caller audio from telephony",
+    "Doctor schedules and slot rules from the HIS",
+    "Patient registry with mobile numbers and UHIDs",
+    "Consultation fees and visit instructions",
+    "Emergency phrase list and scripted guidance approved by clinicians"
+  ],
+  "outputs": [
+    "Booked, rescheduled and cancelled appointments in the HIS",
+    "WhatsApp or SMS confirmations",
+    "Reminder and OPD-change call outcomes",
+    "Handover summaries for front-office staff",
+    "Call transcripts and call-reason reports"
+  ],
+  "human_in_the_loop": "Front-office staff take escalated calls and complaints, and clinicians approve the emergency phrase list and scripted guidance. The agent never advises on symptoms or treatment; it books, reminds and hands over.",
+  "integrations": [
+    "HIS appointment and registration modules",
+    "Cloud telephony such as Exotel, Ozonetel or Twilio",
+    "WhatsApp Business API",
+    "DLT-registered SMS gateway",
+    "CRM or helpdesk for complaints"
+  ],
+  "guardrails": [
+    "No medical advice; scripted response and transfer whenever symptoms are described",
+    "Emergency phrases trigger immediate direction to emergency care and a staff transfer",
+    "Patient identity confirmed before any appointment is read or changed",
+    "Outbound calls only within permitted hours and to patients who booked or consented",
+    "Recordings and transcripts kept per hospital policy with restricted access"
+  ],
+  "compliance_notes": [
+    "Reminder calls and messages are service communications; any promotional content needs separate consent and TRAI-compliant channels.",
+    "Patient contact and appointment data handled under the DPDP Act 2023, with a recording notice at the start of each call."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Inbound booking calls and reminders for three to five OPD departments during set hours, with an instant route to front-office staff.",
+    "deliverables": [
+      "Call flows and scripts approved by front office and clinicians",
+      "Voice agent integrated with HIS scheduling, first in test and then live",
+      "WhatsApp confirmations and reminder calls",
+      "Handover screen for staff",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Calls completed without transfer",
+        "how": "Bookings, reschedules and cancellations handled end to end by the agent."
+      },
+      {
+        "metric": "Booking accuracy",
+        "how": "Audit of agent-made bookings for the right patient, doctor, date and slot."
+      },
+      {
+        "metric": "No-shows among reminded patients",
+        "how": "Compared with similar appointments booked before the pilot."
+      },
+      {
+        "metric": "Caller experience",
+        "how": "Short post-call feedback and supervisor review of transferred calls."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What if a caller describes an emergency?",
+      "a": "The agent recognises emergency phrases from a list your clinicians approve, tells the caller to seek emergency care and transfers to staff immediately. It does not assess symptoms."
+    },
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi, English and Hinglish by default, with regional languages such as Gujarati, Marathi, Tamil or Bengali added to match your patient mix. We test recognition of doctor names and dates in each language before go-live."
+    },
+    {
+      "q": "Does it work with our HIS?",
+      "a": "It needs read and write access to appointment slots and patient registration, usually through an API or database integration. If your HIS has no API, we work through an integration layer agreed with your vendor."
+    },
+    {
+      "q": "Can it collect consultation fees?",
+      "a": "It can send a payment link by WhatsApp or SMS for prepaid slots if your process uses them. It never takes card or UPI details over the call."
+    }
+  ],
+  "related": [
+    "post-discharge-follow-up-calls",
+    "patient-enquiry-follow-up-automation",
+    "healthcare-chatbot-safety-testing",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/appointment-booking-voice-agent/"
+}

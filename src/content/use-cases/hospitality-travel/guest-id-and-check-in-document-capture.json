@@ -1,0 +1,218 @@
+{
+  "slug": "guest-id-and-check-in-document-capture",
+  "industry": "hospitality-travel",
+  "title": "Guest ID and Check-In Document Capture",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "computer-vision"
+  ],
+  "summary": "Capture guest IDs and passports at check-in or before arrival, fill the guest register and prepare Form C data for foreign nationals, with masked Aadhaar and front desk verification.",
+  "seo": {
+    "title": "Guest ID Capture and Hotel Check-In AI | VipraTech",
+    "description": "AI that reads guest IDs and passports at check-in, fills the guest register, prepares Form C data for foreign nationals and masks Aadhaar numbers.",
+    "keywords": [
+      "hotel guest ID capture",
+      "Form C preparation for hotels",
+      "digital guest register India",
+      "passport and visa scan for hotels",
+      "contactless hotel check-in"
+    ]
+  },
+  "designed_for": [
+    "Front Office Manager",
+    "Front Desk Associate",
+    "Hotel General Manager",
+    "Security and Compliance Manager"
+  ],
+  "problem": {
+    "intro": "Every adult guest needs an identity document recorded at check-in, and foreign nationals' passport and visa details must be reported through Form C. At a busy front desk this means photocopies, handwritten registers and typing passport details into the Form C portal, often late at night after a group arrives.",
+    "pain_points": [
+      {
+        "title": "Queues at check-in",
+        "detail": "Collecting and copying IDs for every adult in a family or group slows check-in exactly when guests are tired."
+      },
+      {
+        "title": "Incomplete registers",
+        "detail": "Some adults are missed, numbers are mis-copied and addresses left blank, which becomes a problem when the police or an auditor asks for the register."
+      },
+      {
+        "title": "Form C typed by hand",
+        "detail": "Passport, visa, arrival and previous stay details are re-typed from photocopies into the Form C system, with errors in names and dates."
+      },
+      {
+        "title": "IDs stored insecurely",
+        "detail": "Photocopies and phone photos of Aadhaar cards and passports sit in drawers and personal WhatsApp chats long after checkout."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a check-in capture flow that works at the desk on a tablet or phone, and before arrival through a secure link sent on WhatsApp. Guests or staff photograph each adult's ID: masked Aadhaar, passport, driving licence or voter ID. The system checks image quality, reads name, date of birth, address and document details, and matches names to the booking. For foreign nationals it reads the passport and visa and prepares the Form C fields so staff can review and submit them on the official portal. A digital guest register is maintained, Aadhaar numbers are stored masked and images are kept encrypted for your agreed retention period.",
+    "capabilities": [
+      "Capture at the desk or through a pre-arrival WhatsApp link, with one record per adult guest",
+      "Image quality checks for glare, blur and cropped edges before upload",
+      "Field extraction from masked Aadhaar, passports, visas, driving licences and voter IDs",
+      "Name matching with the booking and checks for missing adults or expired documents",
+      "Form C field preparation for foreign nationals, including visa type and validity against the stay",
+      "Digital guest register with search and exports for police or audit requests"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect IDs",
+      "detail": "Guests upload IDs through a pre-arrival link, or staff photograph them at the desk, for each adult."
+    },
+    {
+      "step": 2,
+      "title": "Check quality",
+      "detail": "Blurred, cropped or glare-affected images are rejected immediately with a prompt to retake."
+    },
+    {
+      "step": 3,
+      "title": "Extract and mask",
+      "detail": "Fields are extracted, Aadhaar numbers are masked and the document type and expiry are recorded."
+    },
+    {
+      "step": 4,
+      "title": "Validate against the booking",
+      "detail": "Names and guest counts are matched with the booking, and foreign guests' visa validity is checked against the stay dates."
+    },
+    {
+      "step": 5,
+      "title": "Front desk verification",
+      "detail": "The associate compares each guest with their document in person and confirms or corrects flagged fields."
+    },
+    {
+      "step": 6,
+      "title": "Register and Form C",
+      "detail": "The guest register updates, and Form C data is ready for staff to submit on the official portal."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Pre-arrival link or desk capture\"] --> B{\"Image quality acceptable?\"}\n  B -->|\"no\"| C[\"Prompt to retake photo\"]\n  C --> A\n  B -->|\"yes\"| D[\"Extract fields and mask Aadhaar\"]\n  D --> E[\"Match booking and check visa dates\"]\n  E --> F(\"Front desk verifies guest in person\")\n  F --> G[\"Update digital guest register\"]\n  F --> H[\"Prepare Form C data for staff\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Pre-arrival WhatsApp link with secure upload",
+          "Front desk tablet capture app"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Image quality checker",
+          "ID and passport classifier",
+          "OCR and MRZ reader with field extraction"
+        ]
+      },
+      {
+        "name": "Validation",
+        "components": [
+          "Aadhaar masking",
+          "Booking and guest count match",
+          "Visa validity and document expiry checks"
+        ]
+      },
+      {
+        "name": "Front desk and records",
+        "components": [
+          "Verification screen for associates",
+          "Encrypted guest register with retention rules",
+          "Form C data export for staff submission"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n  P1[\"Pre-arrival link\"]\n  P2[\"Desk tablet capture\"]\n  end\n  subgraph S2[\"Document understanding\"]\n  U1[\"Image quality checker\"]\n  U2[\"ID classifier\"]\n  U3[\"OCR and MRZ reader\"]\n  end\n  subgraph S3[\"Validation\"]\n  V1[\"Aadhaar masking\"]\n  V2[\"Booking and visa checks\"]\n  end\n  subgraph S4[\"Front desk and records\"]\n  R1(\"Front desk verification\")\n  R2[\"Encrypted guest register\"]\n  R3[\"Form C data export\"]\n  end\n  P1 --> U1\n  P2 --> U1\n  U1 --> U2\n  U2 --> U3\n  U3 --> V1\n  V1 --> V2\n  V2 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Photos of guest IDs: masked Aadhaar, passport, driving licence, voter ID",
+    "Passport and visa pages for foreign nationals",
+    "Booking details from the PMS",
+    "Arrival and departure dates",
+    "The property's ID and register policy"
+  ],
+  "outputs": [
+    "Digital guest register entry per adult",
+    "Masked ID records with document type and expiry",
+    "Form C data ready for staff review and submission",
+    "Flags for missing adults, expired documents or visa date issues",
+    "Register exports for police or audit requests"
+  ],
+  "human_in_the_loop": "Front desk associates verify every guest against their document in person and correct any flagged field. Staff submit Form C on the official portal; the system prepares the data but does not file it.",
+  "integrations": [
+    "Hotel PMS such as eZee, Hotelogix, IDS or Opera",
+    "WhatsApp Business API for pre-arrival links",
+    "Front desk tablets or phones",
+    "Secure cloud storage in an India region",
+    "Official Form C portal, used by staff"
+  ],
+  "guardrails": [
+    "Aadhaar shown and stored only in masked form, handled per UIDAI rules",
+    "Images encrypted at rest and deleted automatically after the agreed retention period",
+    "Access limited to front office and authorised managers, with an access log",
+    "No facial recognition and no identity decisions by the system",
+    "Low-quality images rejected at capture instead of stored"
+  ],
+  "compliance_notes": [
+    "Designed to support the Form C reporting obligation for foreign guests; submission stays with the hotel.",
+    "Built for purpose limitation, security safeguards and retention limits under the DPDP Act 2023.",
+    "Aadhaar is never stored in full; masked copies follow UIDAI guidance."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "Front desk capture at one property for all check-ins, plus pre-arrival links for a subset of direct bookings, with Form C data prepared for foreign guests.",
+    "deliverables": [
+      "Capture app and pre-arrival link flow",
+      "Extraction for common Indian IDs and passports",
+      "Digital register and Form C data screen",
+      "Retention and access policy configuration",
+      "Pilot accuracy and check-in time report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Extracted values compared with front desk corrections, by document type."
+      },
+      {
+        "metric": "Check-in handling time",
+        "how": "Time from arrival at the desk to key handover, timed on samples before and during the pilot."
+      },
+      {
+        "metric": "Register completeness",
+        "how": "Adults recorded versus guests per booking, checked at night audit."
+      },
+      {
+        "metric": "Form C preparation time",
+        "how": "Staff time per foreign guest from passport capture to submission."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is it acceptable to store guest IDs digitally?",
+      "a": "Hotels are expected to keep guest records, and digital storage with controlled access, encryption and retention is usually safer than photocopies in a drawer. Aadhaar must be masked. Your legal adviser should confirm the local police requirements for your city."
+    },
+    {
+      "q": "Does it file Form C automatically?",
+      "a": "No. It prepares the Form C fields from the passport and visa so staff can review and submit them on the official portal. A person stays responsible for the filing."
+    },
+    {
+      "q": "Can it tell whether an ID is genuine?",
+      "a": "It checks image quality, document format, expiry and the consistency of the passport's machine-readable zone, and flags anything unusual. Confirming that the guest matches the document is done by the front desk in person."
+    },
+    {
+      "q": "What about guests who do not want to share ID on WhatsApp?",
+      "a": "The pre-arrival link is optional and opens a secure upload page rather than sending images in the chat. Guests can always present their ID at the desk instead."
+    }
+  ],
+  "related": [
+    "hotel-whatsapp-booking-assistant",
+    "travel-itinerary-and-visa-document-checker",
+    "hotel-vendor-invoice-processing",
+    "account-opening-document-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/guest-id-and-check-in-document-capture/"
+}

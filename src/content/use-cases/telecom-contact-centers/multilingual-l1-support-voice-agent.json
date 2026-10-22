@@ -1,0 +1,216 @@
+{
+  "slug": "multilingual-l1-support-voice-agent",
+  "industry": "telecom-contact-centers",
+  "title": "Multilingual Inbound Voice Agent for L1 Support",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A voice agent that answers routine L1 calls in Hindi, Hinglish and regional languages, resolves what it safely can through your systems and hands the rest to an agent with full context.",
+  "seo": {
+    "title": "Hindi and Regional-Language L1 Voice Agent | VipraTech",
+    "description": "Inbound voice agent for telecom and BPO L1 support in Hindi, Hinglish and regional languages, with live system lookups and context-rich handover.",
+    "keywords": [
+      "Hindi voice bot customer support",
+      "multilingual voice agent telecom",
+      "conversational IVR India",
+      "L1 support automation",
+      "Hinglish voice AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Care",
+    "Contact Centre Operations Director",
+    "IVR and CX Technology Manager",
+    "BPO Delivery Head"
+  ],
+  "problem": {
+    "intro": "Inbound queues at telecom operators, broadband providers and BPO programmes carry many repeat L1 queries: balance and plan details, failed recharges, data not working, bill explanations and outage status. Callers speak Hindi, Hinglish or a regional language, often switch mid-sentence, and a menu-driven IVR sends them round in loops until they press zero for an agent.",
+    "pain_points": [
+      {
+        "title": "IVR menus frustrate callers",
+        "detail": "Deep DTMF trees with English-first prompts push callers to zero out, so the IVR deflects little and annoys many."
+      },
+      {
+        "title": "Language staffing gaps",
+        "detail": "Agents for Tamil, Telugu, Bengali or Marathi are scarce at night and during peaks, so callers wait or settle for a language they are less comfortable in."
+      },
+      {
+        "title": "Skilled agents on repeat queries",
+        "detail": "Experienced agents spend their shifts reading out balances and outage times instead of handling disputes and technical faults."
+      },
+      {
+        "title": "Poor handovers",
+        "detail": "After a transfer the caller repeats their number, problem and verification, which lengthens the call and the frustration."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound voice agent that sits behind your IVR number or ACD and handles a defined set of L1 intents end to end. It understands Hindi, Hinglish and the regional languages agreed for the pilot, verifies the caller using methods your security policy allows, and calls your BSS, CRM and network status APIs to answer: current plan and balance, last recharge status, outage in the caller's area, bill breakdown, or a new complaint docket. Sensitive actions such as SIM replacement, ownership change or porting stay with human agents. When the caller is unhappy, the intent is out of scope or speech confidence drops, the call transfers to the right skill queue with the transcript and verified details.",
+    "capabilities": [
+      "Speech recognition and replies in Hindi, Hinglish and agreed regional languages, including mid-call switching",
+      "Caller verification by OTP, registered number match or other factors your policy allows",
+      "Live lookups in BSS, CRM, billing and network outage systems through APIs",
+      "Complaint and service request creation, with the docket number read back to the caller",
+      "Transfer to the right ACD skill queue with transcript and verified context",
+      "Barge-in, silence and noisy-line handling, with DTMF fallback where speech fails"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer the call",
+      "detail": "The call reaches the voice agent from the IVR or ACD, and the agent announces that it is an automated assistant."
+    },
+    {
+      "step": 2,
+      "title": "Detect language and intent",
+      "detail": "The caller's language and the reason for the call are identified from their first utterances."
+    },
+    {
+      "step": 3,
+      "title": "Verify the caller",
+      "detail": "Verification runs only where the intent needs account access, using the factors your policy allows."
+    },
+    {
+      "step": 4,
+      "title": "Resolve through your systems",
+      "detail": "For in-scope intents, the agent looks up BSS, CRM or outage data and answers or raises a docket."
+    },
+    {
+      "step": 5,
+      "title": "Hand over when needed",
+      "detail": "Out-of-scope intents, low speech confidence or an unhappy caller trigger a transfer with full context."
+    },
+    {
+      "step": 6,
+      "title": "Close and log",
+      "detail": "The disposition, transcript and any docket are written to the CRM for reporting and QA."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound call on support number\"] --> B[\"Detect language and intent\"]\n  B --> C[\"Verify caller per policy\"]\n  C --> D{\"Intent in scope and confident?\"}\n  D -->|\"yes\"| E[\"Look up BSS, CRM or outage status\"]\n  D -->|\"no\"| F(\"Human agent with full context\")\n  E --> G{\"Caller satisfied?\"}\n  G -->|\"yes\"| H[\"Close call and log disposition\"]\n  G -->|\"no\"| F\n  F --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "SIP trunk or CCaaS bot connector",
+          "IVR and ACD routing",
+          "Call recording"
+        ]
+      },
+      {
+        "name": "Speech and language",
+        "components": [
+          "Streaming speech recognition for Hindi, Hinglish and regional languages",
+          "Language identification",
+          "Text-to-speech voices per language"
+        ]
+      },
+      {
+        "name": "Dialogue and actions",
+        "components": [
+          "LLM dialogue manager limited to approved intents",
+          "Caller verification module",
+          "Tool layer for BSS, CRM and outage APIs"
+        ]
+      },
+      {
+        "name": "Handover and analytics",
+        "components": [
+          "Context transfer to the agent desktop",
+          "Transcript and disposition store",
+          "Intent and transfer dashboards"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    P1[\"SIP trunk or CCaaS connector\"]\n    P2[\"IVR and ACD routing\"]\n  end\n  subgraph S2[\"Speech and language\"]\n    A1[\"Language identification\"]\n    A2[\"Streaming ASR, Hindi and regional\"]\n    A3[\"TTS voices per language\"]\n  end\n  subgraph S3[\"Dialogue and actions\"]\n    D1[\"LLM dialogue manager with scope\"]\n    D2[\"Caller verification module\"]\n    D3[\"BSS, CRM and outage API tools\"]\n  end\n  subgraph S4[\"Handover and analytics\"]\n    H1(\"Agent desktop context transfer\")\n    H2[\"Transcript and disposition store\"]\n    H3[\"Intent and transfer dashboards\"]\n  end\n  P1 --> P2 --> A1 --> A2\n  A2 --> D1\n  D1 --> D2\n  D1 --> D3\n  D1 --> A3\n  A3 --> P1\n  D1 --> H1\n  D1 --> H2 --> H3"
+  },
+  "inputs": [
+    "Inbound calls from the IVR or ACD",
+    "Customer, plan and balance data from BSS and CRM",
+    "Network outage feed by area",
+    "Approved knowledge base and tariff information",
+    "Verification policy and list of in-scope intents"
+  ],
+  "outputs": [
+    "Resolved calls with dispositions",
+    "Complaint dockets and service requests",
+    "Transcripts and recordings",
+    "Handover packets on the agent desktop",
+    "Intent, containment and transfer reports"
+  ],
+  "human_in_the_loop": "Human agents take every call the voice agent transfers and all sensitive requests such as SIM replacement, ownership transfer and porting. Operations leads review transcripts of transferred and low-rated calls each week to adjust intents and prompts.",
+  "integrations": [
+    "CCaaS or IVR platforms such as Genesys, Avaya, Amazon Connect, Ozonetel or Exotel",
+    "BSS, OSS and billing systems",
+    "CRM such as Salesforce or an in-house CRM",
+    "Ticketing system for complaint dockets",
+    "Network monitoring or outage feed"
+  ],
+  "guardrails": [
+    "Automated-assistant disclosure at the start of every call",
+    "No account information disclosed before verification",
+    "Sensitive actions such as SIM replacement and porting excluded from scope",
+    "Transfer to a human on request at any point",
+    "Tariffs and offers quoted only from the approved knowledge base"
+  ],
+  "compliance_notes": [
+    "Call recordings and transcripts are personal data under the DPDP Act 2023; retention and access are configured to your policy.",
+    "Complaint dockets are raised through your existing system, so handling continues under the complaint redressal process you run under TRAI regulations."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Two or three high-volume intents in Hindi and Hinglish, such as balance and recharge status, on a slice of live traffic behind the existing IVR.",
+    "deliverables": [
+      "Intent and verification design approved by your security team",
+      "Working voice agent on the pilot intents",
+      "Integration with BSS or CRM lookups and the ACD",
+      "Weekly transcript reviews and tuning",
+      "Pilot report with roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Containment for in-scope intents",
+        "how": "Share of pilot calls resolved without transfer, from call logs."
+      },
+      {
+        "metric": "Recognition accuracy by language",
+        "how": "Word error rate on sampled transcripts, checked by native speakers."
+      },
+      {
+        "metric": "Handover quality",
+        "how": "Agent ratings of the context received on transferred calls."
+      },
+      {
+        "metric": "Caller outcome",
+        "how": "Post-call survey responses and repeat calls on the same issue within an agreed window."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which languages can the agent handle?",
+      "a": "We start with Hindi, Hinglish and English and add regional languages such as Tamil, Telugu, Marathi, Bengali or Kannada based on your call mix. Before go-live we measure recognition accuracy on your own recordings for each language, and a language goes live only when it meets the bar you set."
+    },
+    {
+      "q": "What happens when a caller wants a human?",
+      "a": "They get one. Asking for an agent, pressing zero or showing frustration triggers a transfer to the right skill queue, and the agent receives the transcript and verified details on screen."
+    },
+    {
+      "q": "Can it make account changes such as SIM swaps or plan changes?",
+      "a": "Not in the default design. SIM replacement, ownership transfer and porting carry fraud risk and stay with verified human agents. Low-risk actions, such as raising a complaint docket or sending a bill copy, can be automated once your security team approves them."
+    },
+    {
+      "q": "How does it connect to our IVR and systems?",
+      "a": "Through a SIP trunk or your CCaaS platform's bot integration, and through APIs or middleware for BSS, CRM and outage data. Where an API does not exist, we start with read-only lookups from a replicated data source."
+    }
+  ],
+  "related": [
+    "real-time-agent-assist",
+    "call-qa-and-compliance-auditing",
+    "voice-agent-jailbreak-testing",
+    "ticket-and-email-triage"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/multilingual-l1-support-voice-agent/"
+}

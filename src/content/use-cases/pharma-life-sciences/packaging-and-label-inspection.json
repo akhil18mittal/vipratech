@@ -1,0 +1,217 @@
+{
+  "slug": "packaging-and-label-inspection",
+  "industry": "pharma-life-sciences",
+  "title": "Packaging and Label Inspection",
+  "capability": "computer-vision",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Camera checks on cartons, labels and blister foils that verify batch, expiry, MRP and codes, compare print against approved artwork, and reject mismatches with image evidence.",
+  "seo": {
+    "title": "AI Pharma Packaging and Label Inspection | VipraTech",
+    "description": "Vision system that verifies batch, expiry, MRP and codes on pharma cartons and labels, compares print with approved artwork and logs evidence.",
+    "keywords": [
+      "pharma label inspection",
+      "packaging line vision system",
+      "OCR OCV batch expiry",
+      "artwork verification pharma",
+      "carton print inspection"
+    ]
+  },
+  "designed_for": [
+    "Packaging Manager",
+    "Head of Quality Assurance",
+    "Plant Engineering Manager",
+    "Artwork and Labelling Lead"
+  ],
+  "problem": {
+    "intro": "Labelling and packaging errors are a common reason for product recalls. Every carton, label and foil carries variable data printed on the line, such as batch number, manufacturing and expiry dates, MRP and often a QR code or barcode, and operators check samples by eye. Artwork changes add a second risk upstream.",
+    "pain_points": [
+      {
+        "title": "Variable data printed wrong",
+        "detail": "Smudged, missing or wrong batch and expiry overprint, often after a changeover, can pass a periodic visual check."
+      },
+      {
+        "title": "Artwork version errors",
+        "detail": "An outdated carton or leaflet version reaching the line, or a text change missed in proofreading, affects the whole batch."
+      },
+      {
+        "title": "Unreadable or wrong codes",
+        "detail": "QR codes and barcodes needed for track-and-trace or Indian labelling rules must scan correctly and must encode the right data."
+      },
+      {
+        "title": "Thin evidence of checks",
+        "detail": "Manual line checks leave little beyond a signed checklist when an auditor or customer asks how a defect escaped."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build vision inspection for carton, label and foil lines. Cameras capture each unit; the system reads the overprinted batch, dates and MRP, checks them against the batch details set at line clearance, decodes and grades the QR code or barcode, and compares the printed layout with the approved artwork. A separate proofing tool compares a new artwork PDF with the previous approved version and highlights every text, colour and layout change for the labelling team. Units that fail trigger the line's reject mechanism, and each rejection is stored with its image and reason.",
+    "capabilities": [
+      "Reads batch number, manufacturing and expiry dates and MRP on cartons, labels and blister foils",
+      "Verifies printed data against the batch details set at line clearance",
+      "Decodes and grades QR codes, Data Matrix and linear barcodes, and checks their content",
+      "Compares each printed unit with the approved artwork to catch wrong or mixed components",
+      "Proofs new artwork PDFs against the previous approved version and lists every change",
+      "Stores an image and reason for every rejected unit, linked to the batch"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Set up the batch",
+      "detail": "At line clearance the operator scans the batch order, and the station loads expected batch data and the approved artwork reference."
+    },
+    {
+      "step": 2,
+      "title": "Capture each unit",
+      "detail": "Cameras triggered by the line sensor capture every carton, label or foil at line speed."
+    },
+    {
+      "step": 3,
+      "title": "Read and verify",
+      "detail": "Variable data is read, codes are decoded and graded, and the layout is compared with the reference."
+    },
+    {
+      "step": 4,
+      "title": "Accept or reject",
+      "detail": "Units that fail any check are rejected by the line mechanism; uncertain reads are rejected too and counted separately."
+    },
+    {
+      "step": 5,
+      "title": "Operator and QA review",
+      "detail": "The operator reviews reject images, and repeated failures stop the line for QA investigation."
+    },
+    {
+      "step": 6,
+      "title": "Batch inspection report",
+      "detail": "At batch end, counts, reject reasons and sample images are compiled for the batch packaging record."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Batch order scanned at line clearance\"] --> B[\"Load expected data and artwork\"]\n  B --> C[\"Camera captures each unit\"]\n  C --> D[\"Read print, codes and layout\"]\n  D --> E{\"All checks pass?\"}\n  E -->|\"yes\"| F[\"Unit continues on line\"]\n  E -->|\"no\"| G[\"Reject unit and store image\"]\n  G --> H(\"Operator reviews rejects\")\n  H --> I[\"Batch inspection report\"]\n  F --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Line hardware",
+        "components": [
+          "Industrial cameras and lighting",
+          "Line sensor trigger and reject mechanism",
+          "Edge PC at the line"
+        ]
+      },
+      {
+        "name": "Batch context",
+        "components": [
+          "Batch order from ERP or MES",
+          "Approved artwork library"
+        ]
+      },
+      {
+        "name": "Vision models",
+        "components": [
+          "Variable data reading and verification",
+          "Code decoder and grader",
+          "Artwork comparison model"
+        ]
+      },
+      {
+        "name": "Review and records",
+        "components": [
+          "Operator reject review screen",
+          "Batch inspection report",
+          "Image archive with audit trail"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Line hardware\"]\n    H1[\"Cameras and lighting\"]\n    H2[\"Reject mechanism\"]\n  end\n  subgraph S2[\"Batch context\"]\n    B1[\"Batch order from ERP\"]\n    B2[\"Approved artwork library\"]\n  end\n  subgraph S3[\"Vision models on edge PC\"]\n    V1[\"Variable data reader\"]\n    V2[\"Code grader\"]\n    V3[\"Artwork comparison\"]\n  end\n  subgraph S4[\"Review and records\"]\n    R1(\"Operator reject review\")\n    R2[\"Batch inspection report\"]\n    R3[\"Image archive\"]\n  end\n  H1 --> V1\n  H1 --> V2\n  H1 --> V3\n  B1 --> V1\n  B2 --> V3\n  V1 --> H2\n  V2 --> H2\n  V3 --> H2\n  H2 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Batch order with batch number, dates and MRP",
+    "Approved artwork PDFs for cartons, labels, foils and leaflets",
+    "Camera images from the packaging line",
+    "Line sensor and encoder signals",
+    "Rules for expected QR code or barcode content"
+  ],
+  "outputs": [
+    "Accept or reject decision per unit",
+    "Reject images with reason codes",
+    "Code grading results",
+    "Artwork change report for new versions",
+    "Batch-level inspection summary for the BPR"
+  ],
+  "human_in_the_loop": "Operators review rejected units, and QA investigates repeated failures before the line restarts. The labelling team approves every artwork change the proofing tool highlights, and QA approves any change to inspection recipes.",
+  "integrations": [
+    "ERP or MES for batch orders",
+    "Artwork management system",
+    "Line PLC for triggers and rejects",
+    "Serialisation or track-and-trace system where in use",
+    "QMS for deviations raised from inspection failures"
+  ],
+  "guardrails": [
+    "Uncertain reads treated as rejects, never as passes",
+    "Challenge test with known defective samples at batch start and end",
+    "Inspection recipes locked and changed only through change control",
+    "Every reject image retained with batch and timestamp",
+    "Line stop after repeated consecutive rejects for investigation"
+  ],
+  "compliance_notes": [
+    "Supports labelling controls under GMP, including India's revised Schedule M, and the QR code or barcode requirements in Indian labelling rules for APIs and specified brands.",
+    "Inspection software and recipes are validated as a GMP computerised system, with audit trails aligned to 21 CFR Part 11 and EU GMP Annex 11."
+  ],
+  "pilot": {
+    "duration": "6 weeks",
+    "scope": "One carton or label line for one product family, starting with offline images from earlier runs and moving to an in-line station that logs rejects without actuating them.",
+    "deliverables": [
+      "Camera and lighting specification for the line",
+      "Verification and artwork models set up for the pilot SKUs",
+      "Challenge test set with known defects",
+      "Inspection report comparing system results with manual checks",
+      "Validation and installation plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Detection of seeded defects",
+        "how": "Known defective samples, such as wrong batch or missing expiry, run through the station in challenge tests."
+      },
+      {
+        "metric": "False rejects",
+        "how": "Rejected units that operator review finds acceptable, counted per batch."
+      },
+      {
+        "metric": "Variable data read accuracy",
+        "how": "Printed values read by the system compared with the batch order for every unit captured."
+      },
+      {
+        "metric": "Artwork change detection",
+        "how": "Known differences between artwork versions checked against what the proofing tool reports."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "We already have OCR and OCV cameras. What is different?",
+      "a": "Many lines have vendor OCR for one or two fields. We add artwork comparison, code content checks and a batch-level evidence trail, and can work alongside existing cameras where their images are accessible."
+    },
+    {
+      "q": "Can it keep up with our line speed?",
+      "a": "Models run on an edge PC next to the line, and the pilot measures processing time per unit at your actual speed. Camera and trigger choice depends on line speed and is specified during the pilot."
+    },
+    {
+      "q": "How do you add new SKUs?",
+      "a": "Each new SKU needs its approved artwork and variable-data layout loaded, followed by a short challenge test. This runs under your change control procedure."
+    },
+    {
+      "q": "Does it check package leaflets?",
+      "a": "The proofing tool compares leaflet artwork PDFs version to version. In-line leaflet inspection depends on how the leaflet is presented on your line, which we assess during the pilot."
+    }
+  ],
+  "related": [
+    "tablet-and-vial-defect-detection",
+    "batch-manufacturing-record-review",
+    "coa-extraction-and-spec-matching",
+    "visual-quality-inspection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/packaging-and-label-inspection/"
+}

@@ -1,0 +1,222 @@
+{
+  "slug": "cod-confirmation-calls",
+  "industry": "retail-ecommerce",
+  "title": "COD Order Confirmation Calls",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Call every cash-on-delivery order soon after it is placed, in the customer's language, to confirm items, amount and address, offer a UPI prepaid option and tag the order before it ships.",
+  "seo": {
+    "title": "COD Order Confirmation Voice Calls | VipraTech",
+    "description": "Voice agent that calls cash-on-delivery customers to confirm orders and addresses, offers UPI prepaid conversion and flags risky orders before dispatch.",
+    "keywords": [
+      "COD confirmation calls",
+      "COD order verification",
+      "reduce RTO for D2C",
+      "address verification voice bot",
+      "COD to prepaid conversion"
+    ]
+  },
+  "designed_for": [
+    "D2C Founder or COO",
+    "Head of E-commerce Operations",
+    "Logistics and RTO Manager",
+    "Head of Customer Experience"
+  ],
+  "problem": {
+    "intro": "Cash on delivery remains a large share of orders for many Indian D2C brands, and every refused or undeliverable COD parcel comes back as RTO, paid for in both directions. Calling each order to confirm it is the obvious fix, but calling teams cannot reach every order quickly, especially at night and on sale days.",
+    "pain_points": [
+      {
+        "title": "RTO costs both ways",
+        "detail": "Refused and undeliverable COD orders incur forward and return shipping, plus inventory stuck in transit."
+      },
+      {
+        "title": "Calling teams cannot keep up",
+        "detail": "Manual teams call a fraction of orders, late, and miss night-time and sale-day peaks."
+      },
+      {
+        "title": "Incomplete addresses",
+        "detail": "Missing landmarks, wrong pincodes and incomplete house numbers lead to failed delivery attempts."
+      },
+      {
+        "title": "Fake and impulse orders",
+        "detail": "Prank orders, duplicate orders and serial refusers are caught only after the parcel has shipped."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an outbound voice agent that calls each new COD order shortly after it is placed, in Hindi, English or the customer's regional language. It confirms the items and amount, checks the address, asks for a landmark or corrected pincode where needed, and offers a UPI payment link if you run a prepaid option. Answers update the order in Shopify or your OMS as confirmed, cancelled, address updated or unreachable, with scheduled retries and a WhatsApp fallback. Orders with risk signals, such as a number with past refusals, are flagged for your operations team to decide.",
+    "capabilities": [
+      "Calls new COD orders within your chosen window, with retry schedules and calling-hour limits",
+      "Confirms items, quantity and amount, and records cancellation reasons in the customer's words",
+      "Checks address completeness and pincode serviceability and collects landmarks or corrections",
+      "Sends a UPI payment link through your gateway when the customer chooses to prepay",
+      "Tags orders in the OMS as confirmed, cancelled, address updated or unreachable",
+      "Flags risk signals such as past refusals, duplicate orders and mismatched pincodes for operations"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "New COD order",
+      "detail": "The OMS sends each new COD order to the calling queue with items, amount and address."
+    },
+    {
+      "step": 2,
+      "title": "Call the customer",
+      "detail": "The agent calls within the agreed window, names the brand and states that the call is recorded."
+    },
+    {
+      "step": 3,
+      "title": "Confirm order and address",
+      "detail": "Items, amount and address are confirmed, and missing landmarks or pincode errors are corrected."
+    },
+    {
+      "step": 4,
+      "title": "Offer prepaid option",
+      "detail": "If you run a prepaid option, the agent offers a UPI link and sends it on WhatsApp or SMS."
+    },
+    {
+      "step": 5,
+      "title": "Check risk and outcome",
+      "detail": "Confirmed, cancelled, unreachable and risky outcomes are tagged; risky orders go to operations."
+    },
+    {
+      "step": 6,
+      "title": "Update and dispatch",
+      "detail": "The OMS is updated, and only confirmed or approved orders move to dispatch."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"New COD order in OMS\"] --> B[\"Outbound call in customer language\"]\n  B --> C[\"Confirm items, amount and address\"]\n  C --> D[\"Offer UPI prepaid link\"]\n  D --> E{\"Confirmed and no risk flags?\"}\n  E -->|\"yes\"| F[\"Tag confirmed, release to ship\"]\n  E -->|\"no answer\"| G[\"Retry, then WhatsApp fallback\"]\n  E -->|\"risk or cancel\"| H(\"Operations reviews order\")\n  G --> E\n  H --> I[\"Update order status in OMS\"]\n  F --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Order trigger",
+        "components": [
+          "OMS or Shopify webhook for new COD orders",
+          "Calling queue with time windows and retry rules"
+        ]
+      },
+      {
+        "name": "Voice agent",
+        "components": [
+          "Outbound telephony with recording disclosure",
+          "Multilingual speech-to-text and text-to-speech",
+          "LLM dialogue manager with order confirmation schema"
+        ]
+      },
+      {
+        "name": "Checks",
+        "components": [
+          "Pincode serviceability and address completeness",
+          "Risk signals from order and RTO history"
+        ]
+      },
+      {
+        "name": "Actions",
+        "components": [
+          "UPI payment link through your gateway",
+          "WhatsApp or SMS fallback",
+          "OMS order tags and notes"
+        ]
+      },
+      {
+        "name": "Operations",
+        "components": [
+          "Review queue for risky and cancelled orders",
+          "Dashboard of call outcomes and delivery results"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Order trigger\"]\n    T1[\"New COD order webhook\"]\n    T2[\"Calling queue and retries\"]\n  end\n  subgraph S2[\"Voice agent\"]\n    V1[\"Outbound telephony\"]\n    V2[\"Multilingual dialogue manager\"]\n  end\n  subgraph S3[\"Checks\"]\n    C1[\"Pincode and address checks\"]\n    C2[\"RTO history risk signals\"]\n  end\n  subgraph S4[\"Actions\"]\n    A1[\"UPI payment link\"]\n    A2[\"WhatsApp fallback\"]\n    A3[\"OMS order tags\"]\n  end\n  subgraph S5[\"Operations\"]\n    P1(\"Ops review queue\")\n    P2[\"Outcome dashboard\"]\n  end\n  T1 --> T2 --> V1 --> V2\n  V2 --> C1\n  V2 --> C2\n  V2 --> A1\n  T2 --> A2\n  C1 --> A3\n  C2 --> P1\n  P1 --> A3\n  A3 --> P2"
+  },
+  "inputs": [
+    "New COD orders with items, amount, address and phone number",
+    "Pincode serviceability from your courier partners",
+    "RTO and refusal history by phone number and pincode",
+    "Prepaid offer rules, if any",
+    "Calling hours and retry policy"
+  ],
+  "outputs": [
+    "Order tags: confirmed, cancelled, address updated, unreachable or flagged",
+    "Corrected addresses and landmarks",
+    "UPI payment links sent and prepaid conversions",
+    "Cancellation reasons in structured form",
+    "Daily report linking call outcomes to delivery results"
+  ],
+  "human_in_the_loop": "Operations decides on orders flagged for risk, high-value orders and any decision to block a repeat refuser. Address changes are confirmed by the customer on the call or over WhatsApp before the order ships.",
+  "integrations": [
+    "Shopify, WooCommerce or your OMS",
+    "Courier aggregator for serviceability and delivery outcomes",
+    "Payment gateway for UPI links",
+    "WhatsApp Business API and SMS gateway",
+    "Cloud telephony provider"
+  ],
+  "guardrails": [
+    "Calls only within allowed hours, with a capped number of retries",
+    "Clear identification of the brand and recording disclosure at the start",
+    "No pressure tactics or false urgency when offering prepaid",
+    "Payment links only through your official gateway, never card details by voice",
+    "Customers can opt out of further calls"
+  ],
+  "compliance_notes": [
+    "Order confirmation calls are service calls about the customer's own purchase; promotional content is kept out of them so they stay within TRAI commercial-communication rules.",
+    "The prepaid offer avoids false urgency and similar dark patterns covered by the CCPA guidelines.",
+    "Phone numbers, addresses and recordings are handled as personal data under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "COD orders for one brand in Hindi and English, with a randomly selected holdout group handled by your current process for comparison.",
+    "deliverables": [
+      "Call script and outcome tags agreed with operations",
+      "Working outbound agent connected to your OMS",
+      "UPI link and WhatsApp fallback flows",
+      "Pilot report comparing called and holdout orders",
+      "Roll-out plan with languages and running cost"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Reach within the window",
+        "how": "Share of COD orders reached within the agreed time after the order was placed."
+      },
+      {
+        "metric": "Delivery outcome against holdout",
+        "how": "Delivered, refused and RTO outcomes for called orders compared with the holdout group."
+      },
+      {
+        "metric": "Address corrections",
+        "how": "Orders where the address or pincode was corrected, and their delivery outcomes."
+      },
+      {
+        "metric": "Prepaid conversions",
+        "how": "Orders converted to prepaid through the UPI link."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How soon after the order does the call happen?",
+      "a": "Within the window you choose, usually shortly after the order is placed, while the purchase is fresh in the customer's mind. Orders placed late at night are queued for the next allowed calling hour."
+    },
+    {
+      "q": "Which languages are supported?",
+      "a": "Hindi, English and Hinglish as standard, with regional languages chosen to match your customer mix. The agent can switch language if the customer prefers."
+    },
+    {
+      "q": "Will a sales pitch put customers off?",
+      "a": "The call is short and about their order. A prepaid offer, if you run one, is mentioned once and plainly, without pressure."
+    },
+    {
+      "q": "How do we know it reduces RTO?",
+      "a": "We keep a random holdout group of COD orders that are not called and compare delivery outcomes for both groups. The pilot report shows the comparison, not a projection."
+    }
+  ],
+  "related": [
+    "order-status-and-returns-voice-agent",
+    "abandoned-cart-and-win-back-automation",
+    "delivery-status-voice-and-whatsapp-agent",
+    "emi-reminder-voice-and-whatsapp-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/cod-confirmation-calls/"
+}

@@ -1,0 +1,218 @@
+{
+  "slug": "utility-customer-service-voice-agent",
+  "industry": "energy-mining-utilities",
+  "title": "Utility Customer Service Voice Agent (Outages and Billing)",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A voice agent for power and water utilities that logs no-supply complaints, shares known outage status and answers billing queries in Hindi and regional languages.",
+  "seo": {
+    "title": "Utility Customer Service Voice Agent | VipraTech",
+    "description": "Multilingual voice agent for DISCOMs and water utilities: no-supply complaints, outage status, bill and payment queries, with safety calls escalated.",
+    "keywords": [
+      "utility voice agent",
+      "DISCOM call centre automation",
+      "electricity complaint voice bot Hindi",
+      "outage call handling AI",
+      "billing query voice agent"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Care, DISCOM",
+    "Call Centre Operations Manager",
+    "Chief Information Officer",
+    "Commercial Director"
+  ],
+  "problem": {
+    "intro": "When a feeder trips or a storm hits, a utility's complaint lines fill within minutes with callers asking the same question in several languages. Between outages, the same agents handle bill amounts, due dates, payment confirmations and new connection status, while genuine safety calls such as a snapped conductor wait in the same queue.",
+    "pain_points": [
+      {
+        "title": "Outage spikes overwhelm the lines",
+        "detail": "Callers hear busy tones exactly when they most need to know whether the fault is known and being fixed."
+      },
+      {
+        "title": "Repetitive billing questions",
+        "detail": "Bill amount, due date, last payment and duplicate bill requests take up much of agent time between outages."
+      },
+      {
+        "title": "Language coverage gaps",
+        "detail": "Callers speak Hindi, Hinglish and regional languages and dialects that the night shift may not cover."
+      },
+      {
+        "title": "Safety calls stuck in the queue",
+        "detail": "Reports of fallen wires, sparking poles or water on a meter board need immediate human attention, not a place in line."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that answers on your helpline or IVR, recognises Hindi, Hinglish and the regional languages of your area, and identifies the consumer by account number or registered mobile. It checks the outage management system for known faults on the consumer's feeder or transformer and shares status, quoting a restoration time only when the control room has published one. For new faults it registers a complaint and sends the docket number by SMS or WhatsApp. For billing it reads amount, due date and payment status and can send a UPI payment link. Any mention of a safety hazard transfers the caller to a person at once.",
+    "capabilities": [
+      "Identifies consumers by account number or registered mobile, with a verification step before account details",
+      "Checks known outages by feeder, transformer or area and shares only published status",
+      "Registers no-supply, low-voltage and meter complaints and returns a docket number",
+      "Reads bill amount, due date and payment status and sends a UPI payment link",
+      "Transfers immediately to a person on safety keywords such as wire down, sparking or shock",
+      "Speaks Hindi, Hinglish and the regional languages chosen for your service area"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Answer and identify",
+      "detail": "The agent detects the caller's language and identifies the consumer by account number or registered mobile."
+    },
+    {
+      "step": 2,
+      "title": "Screen for safety",
+      "detail": "Any mention of a fallen wire, sparking, fire or shock transfers the call to a live agent and alerts the control room."
+    },
+    {
+      "step": 3,
+      "title": "Understand the request",
+      "detail": "The agent classifies the intent: no supply, voltage problem, bill query, payment or new connection status."
+    },
+    {
+      "step": 4,
+      "title": "Look up systems",
+      "detail": "It reads outage status from the OMS or billing details from the CIS through APIs."
+    },
+    {
+      "step": 5,
+      "title": "Resolve or hand over",
+      "detail": "Within scope, it registers the complaint or sends the payment link; otherwise it hands over to an agent with a summary."
+    },
+    {
+      "step": 6,
+      "title": "Log the call",
+      "detail": "Transcript, intent, docket number and outcome are written to the CRM for reporting."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Consumer calls the helpline\"] --> B[\"Detect language, identify consumer\"]\n  B --> C{\"Safety hazard reported?\"}\n  C -->|\"yes\"| D(\"Live agent and control room alerted\")\n  C -->|\"no\"| E[\"Classify outage or billing intent\"]\n  E --> F[\"Look up OMS or billing system\"]\n  F --> G{\"Resolved within agent scope?\"}\n  G -->|\"yes\"| H[\"Docket or payment link by SMS\"]\n  G -->|\"no\"| I(\"Handover to agent with summary\")\n  H --> J[\"Log call in CRM\"]\n  I --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "SIP trunk or IVR integration",
+          "Call recording",
+          "SMS and WhatsApp gateway"
+        ]
+      },
+      {
+        "name": "Speech and dialogue",
+        "components": [
+          "Streaming speech recognition for Hindi and regional languages",
+          "Text-to-speech voices",
+          "Intent handling with safety escalation rules"
+        ]
+      },
+      {
+        "name": "Utility systems",
+        "components": [
+          "Outage management system or feeder outage feed",
+          "Billing or CIS API",
+          "Complaint management or CRM API"
+        ]
+      },
+      {
+        "name": "People and monitoring",
+        "components": [
+          "Live agent desk with call summary",
+          "Transcript QA dashboard",
+          "Escalation and handover reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"IVR and SIP trunk\"]\n    T2[\"SMS and WhatsApp gateway\"]\n  end\n  subgraph S2[\"Speech and dialogue\"]\n    P1[\"Speech recognition\"]\n    P2[\"Dialogue and intent handling\"]\n    P3[\"Safety escalation rules\"]\n    P4[\"Text to speech\"]\n  end\n  subgraph S3[\"Utility systems\"]\n    U1[\"Outage management system\"]\n    U2[\"Billing and CIS\"]\n    U3[\"Complaint CRM\"]\n  end\n  subgraph S4[\"People and monitoring\"]\n    H1(\"Live agent desk\")\n    H2[\"Transcript QA dashboard\"]\n  end\n  T1 --> P1\n  P1 --> P2\n  P2 --> P3\n  P3 --> H1\n  P2 --> U1\n  P2 --> U2\n  P2 --> U3\n  P2 --> P4\n  P4 --> T1\n  U3 --> T2\n  P2 --> H2"
+  },
+  "inputs": [
+    "Live inbound calls from the helpline or IVR",
+    "Consumer master with account numbers and registered mobiles",
+    "Outage and restoration data from the OMS or control room",
+    "Billing and payment data from the CIS",
+    "Complaint categories and escalation SOPs",
+    "Approved answers on tariffs and billing rules"
+  ],
+  "outputs": [
+    "Registered complaints with docket numbers",
+    "Payment links sent by SMS or WhatsApp",
+    "Transcripts and call summaries",
+    "Handover notes for live agents",
+    "Reports of call reasons by area and feeder"
+  ],
+  "human_in_the_loop": "Every safety call goes straight to a person and the control room. Callers can ask for a human at any point, and disputes about bills, assessments or disconnections are always handed over. Supervisors review a sample of transcripts each week.",
+  "integrations": [
+    "Contact centre telephony or IVR over SIP",
+    "Customer information and billing system, SAP IS-U or in-house",
+    "Outage management system or control room outage feed",
+    "Complaint management or CRM system",
+    "SMS gateway and WhatsApp Business API",
+    "UPI-enabled payment gateway"
+  ],
+  "guardrails": [
+    "Restoration times are quoted only when the OMS or control room has published one",
+    "Safety keywords trigger immediate transfer in every supported language",
+    "Account details disclosed only after identity verification",
+    "Callers can reach a human at any time",
+    "Recordings and transcripts masked and retained per your policy"
+  ],
+  "compliance_notes": [
+    "Call recordings and consumer data handled with notice and purpose limitation under the DPDP Act 2023.",
+    "Supports the complaint registration and docket records expected under state supply codes and the Electricity (Rights of Consumers) Rules, 2020."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One circle or division, on an overflow line, covering no-supply complaint registration and bill enquiries in Hindi and one regional language.",
+    "deliverables": [
+      "Call flows and escalation rules agreed with customer care",
+      "Agent connected to OMS, billing and complaint systems in test",
+      "Language recognition test report on your call recordings",
+      "Live pilot on the overflow line with a QA dashboard",
+      "Roll-out plan and running-cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Calls resolved without handover",
+        "how": "Share of pilot calls completed by the agent, reviewed for correctness."
+      },
+      {
+        "metric": "Intent and category accuracy",
+        "how": "QA review of a sample of transcripts against the complaint category recorded."
+      },
+      {
+        "metric": "Safety escalation correctness",
+        "how": "Scripted test calls plus review of live calls that mentioned hazards."
+      },
+      {
+        "metric": "Caller satisfaction",
+        "how": "Short post-call survey by SMS or keypad."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which languages and dialects can it handle?",
+      "a": "Hindi and Hinglish, plus the regional languages of your service area. We test recognition on recordings of your own callers, including local place names and terms like feeder and transformer, before the pilot goes live."
+    },
+    {
+      "q": "What if the outage system has no information about a fault?",
+      "a": "The agent registers a complaint, gives the docket number and says the fault has been reported. It never invents a cause or a restoration time."
+    },
+    {
+      "q": "Can it handle a storm-day surge?",
+      "a": "Yes. Capacity scales with concurrent call channels rather than staff on shift. When many calls come from one feeder, the agent can share the known status first and record new complaints only where the fault is not yet logged."
+    },
+    {
+      "q": "Does it replace our existing IVR?",
+      "a": "No. It plugs into your IVR or telephony as a menu option or overflow route, so the existing menu, agent desks and reporting continue."
+    }
+  ],
+  "related": [
+    "meter-reading-from-photos",
+    "field-technician-voice-reporting",
+    "multilingual-l1-support-voice-agent",
+    "ot-it-ai-assistant-security-review"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/utility-customer-service-voice-agent/"
+}

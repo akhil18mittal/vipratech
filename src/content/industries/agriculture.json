@@ -1,0 +1,125 @@
+{
+  "slug": "agriculture",
+  "name": "Agriculture & Agritech",
+  "seo": {
+    "title": "AI for Agriculture: Crop Photos, Voice, KCC | VipraTech",
+    "description": "Computer vision, voice and document AI for Indian agritech, FPOs, agri lenders and crop insurers, with agronomists and credit officers kept in charge.",
+    "keywords": [
+      "AI for agriculture India",
+      "agritech AI solutions",
+      "crop disease detection AI",
+      "farmer voice helpline AI",
+      "KCC loan document automation",
+      "crop insurance photo verification",
+      "FPO digitisation"
+    ]
+  },
+  "hero": {
+    "headline": "AI that reads crop photos, speaks the farmer's language and checks agri paperwork",
+    "subheadline": "We build computer vision, voice and document AI for agritech companies, FPOs, agri lenders and crop insurers, with agronomists, surveyors and credit officers kept in charge of the decisions that matter."
+  },
+  "intro": "Indian agriculture runs on phone photos, voice calls and paper. Farmers share a picture of a yellowing leaf on WhatsApp, ask about mandi rates in Hindi or Marathi, and bring a Khatauni or 7/12 extract to the bank for a Kisan Credit Card. AI genuinely helps here: reading crop photos, answering routine questions in regional languages, and turning land records, warehouse receipts and KYC papers into checked data. It does not replace an agronomist choosing a pesticide dose, a surveyor assessing crop loss or a credit officer sanctioning a loan. We build systems that do the repetitive reading and talking, show their confidence, and pass anything uncertain or high-stakes to the right person.",
+  "challenges": [
+    {
+      "title": "Messy real-world inputs",
+      "detail": "Photos are taken in harsh sunlight, from odd angles, on entry-level phones, and land records arrive as faded photocopies with local-language handwriting."
+    },
+    {
+      "title": "Language and literacy",
+      "detail": "Farmers speak Hindi, Marathi, Telugu, Kannada, Bhojpuri and many dialects, often mixed with English crop and brand names, and many prefer voice to text."
+    },
+    {
+      "title": "High cost of wrong advice",
+      "detail": "A wrong disease call or an off-label pesticide dose can damage a crop and a farmer's health in one season, and erode trust in the whole programme."
+    },
+    {
+      "title": "Fragmented records",
+      "detail": "Land records, KCC files, crop insurance surveys, warehouse receipts and mandi prices sit in different state portals and formats, so every check involves manual matching."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "computer-vision",
+      "summary": "Disease and pest suggestions from farmer photos, produce and grain grading at collection centres, and checks on geotagged crop insurance survey photos."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Inbound advisory helplines and outbound mandi price and procurement calls in Hindi and regional languages, with handover to agronomists and procurement staff."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Extraction and cross-checking of land records, KCC loan files, warehouse receipts, quality certificates and farmer KYC documents."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "WhatsApp and voice order capture for agri-input dealers, linked to credit limits, seasonal schemes and collection follow-ups."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Safety testing for farm advisory chatbots so they do not recommend unregistered chemicals, invent doses or mislead farmers about schemes."
+    }
+  ],
+  "featured_use_cases": [
+    "crop-disease-detection-from-photos",
+    "farmer-advisory-voice-helpline",
+    "crop-insurance-field-photo-verification"
+  ],
+  "use_cases": [
+    "crop-disease-detection-from-photos",
+    "produce-grading-and-sorting",
+    "crop-insurance-field-photo-verification",
+    "farmer-advisory-voice-helpline",
+    "mandi-price-and-procurement-voice-updates",
+    "land-record-and-kcc-document-extraction",
+    "warehouse-receipt-and-quality-certificate-extraction",
+    "farmer-onboarding-kyc",
+    "agri-input-dealer-order-automation",
+    "farm-advisory-chatbot-safety-testing"
+  ],
+  "regulatory_context": [
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Farmer phone numbers, locations, land and bank details are personal data, so systems need clear consent notices, purpose limitation and controlled retention, ideally explained in the farmer's language."
+    },
+    {
+      "name": "Insecticides Act 1968 and CIB&RC registration",
+      "note": "Pesticides are registered for specific crops and uses. Advisory systems should stay within registered label claims and leave dosage decisions to qualified agronomists."
+    },
+    {
+      "name": "PMFBY operational guidelines",
+      "note": "Pradhan Mantri Fasal Bima Yojana guidelines set out how crop cutting experiments, loss surveys and claims are run, including the use of technology such as geotagged photos. AI checks support, and do not replace, surveyor assessment."
+    },
+    {
+      "name": "RBI directions on Kisan Credit Card and digital lending",
+      "note": "Lenders follow RBI's KCC scheme directions and, where loans are sourced digitally, RBI's digital lending guidelines. Document AI must keep an audit trail and leave credit decisions with the regulated entity."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Do your systems work for farmers who do not read or type?",
+      "a": "Yes. Most of what we build works through phone calls, WhatsApp voice notes and photos, in Hindi and the regional languages your farmers use. We test each language on real recordings before roll-out, because accents and dialects vary even within a district."
+    },
+    {
+      "q": "Will the AI recommend pesticides and doses?",
+      "a": "Not on its own. Crop advice comes from content your agronomists approve, and any chemical recommendation or dose is either taken from that approved content or referred to an agronomist. Safety testing checks that the system holds this line."
+    },
+    {
+      "q": "Can it work with poor rural connectivity?",
+      "a": "Photo and voice flows are designed for low bandwidth: compressed uploads, retries, and WhatsApp or ordinary phone calls rather than heavy apps. Field capture apps can queue data offline and sync when the network returns."
+    },
+    {
+      "q": "How do pilots usually start?",
+      "a": "With one narrow workflow, one crop or document type, and one region or language, run alongside your current process for a few weeks. You get a working system on your own data and a measured view of where it helps and where people still need to step in."
+    }
+  ],
+  "related_industries": [
+    "nbfc-lending",
+    "insurance",
+    "logistics-supply-chain"
+  ],
+  "cta": {
+    "headline": "Start with one crop, one district or one document type",
+    "text": "Tell us the workflow that costs your field, agronomy or credit team the most time. We will scope a short pilot on your own photos, calls or files."
+  },
+  "url": "/industries/agriculture/"
+}

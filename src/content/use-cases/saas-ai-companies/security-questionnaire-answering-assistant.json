@@ -1,0 +1,223 @@
+{
+  "slug": "security-questionnaire-answering-assistant",
+  "industry": "saas-ai-companies",
+  "title": "Security Questionnaire Answering Assistant",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Draft answers to security and AI due-diligence questionnaires from your own policies, reports and past answers, with citations, confidence and owner approval before anything goes to a customer.",
+  "seo": {
+    "title": "Security Questionnaire Answering Assistant | VipraTech",
+    "description": "AI that drafts SIG, CAIQ and custom security questionnaire answers from your policies and past responses, with citations and security team approval.",
+    "keywords": [
+      "security questionnaire automation",
+      "vendor security assessment AI",
+      "CAIQ and SIG response assistant",
+      "RFP security answers",
+      "AI due diligence questionnaire"
+    ]
+  },
+  "designed_for": [
+    "Head of Security or GRC Lead",
+    "Sales Engineer",
+    "Head of Sales Operations",
+    "Trust and Compliance Manager"
+  ],
+  "problem": {
+    "intro": "Every enterprise deal brings a security questionnaire: a SIG Lite, a CAIQ, a custom spreadsheet of hundreds of rows, and now an AI-specific section. Security engineers answer the same questions again and again in slightly different words, and deals wait while they do.",
+    "pain_points": [
+      {
+        "title": "Repeated work across deals",
+        "detail": "Most questions have been answered before, but finding the last good answer and adapting it still takes time."
+      },
+      {
+        "title": "Inconsistent answers",
+        "detail": "Different people answer the same question differently, creating contradictions that customers notice."
+      },
+      {
+        "title": "Outdated evidence",
+        "detail": "Answers refer to old policies, expired reports or architecture that has since changed."
+      },
+      {
+        "title": "New AI questions",
+        "detail": "Customers now ask about model providers, data retention, prompt injection testing and AI governance, and there is no approved answer yet."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an assistant that drafts questionnaire answers from your own approved sources. It reads incoming questionnaires as spreadsheets, documents or portal exports, splits them into questions, and searches an answer library built from your policies, security reports, architecture notes, trust centre content and past approved responses. Each draft answer cites the source passages it used, carries a confidence score, and flags questions with no supporting evidence instead of inventing an answer. The security owner reviews, edits and approves in one screen, and approved answers flow back into the library. The assistant also warns when a cited source is past its review date.",
+    "capabilities": [
+      "Reads questionnaires in Excel, Word, PDF and common portal export formats",
+      "Retrieves from policies, reports, architecture notes and past approved answers",
+      "Drafts answers with citations to the source passage",
+      "Flags questions with no evidence rather than inventing answers",
+      "Review and approval screen for security owners",
+      "Stale-source warnings and an answer library that grows with each approval"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Import the questionnaire",
+      "detail": "The questionnaire file or portal export is imported and split into individual questions."
+    },
+    {
+      "step": 2,
+      "title": "Retrieve evidence",
+      "detail": "For each question, the assistant searches policies, reports and past approved answers."
+    },
+    {
+      "step": 3,
+      "title": "Draft with citations",
+      "detail": "It drafts an answer that cites its sources and scores its confidence."
+    },
+    {
+      "step": 4,
+      "title": "Flag gaps",
+      "detail": "Questions with weak or no evidence are flagged for an owner instead of being answered."
+    },
+    {
+      "step": 5,
+      "title": "Owner review",
+      "detail": "The security or GRC owner edits and approves answers, and assigns gaps."
+    },
+    {
+      "step": 6,
+      "title": "Export and learn",
+      "detail": "Approved answers are exported in the customer's format and saved to the answer library."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Import questionnaire file\"] --> B[\"Split into questions\"]\n  B --> C[\"Retrieve policies and past answers\"]\n  C --> D[\"Draft answer with citations\"]\n  D --> E{\"Evidence strong enough?\"}\n  E -->|\"no\"| F[\"Flag gap for owner\"]\n  E -->|\"yes\"| G(\"Security owner reviews and approves\")\n  F --> G\n  G --> H[\"Export in customer format\"]\n  H --> I[\"Save to answer library\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Spreadsheet, document and portal export parsers",
+          "Question splitter and de-duplicator"
+        ]
+      },
+      {
+        "name": "Knowledge",
+        "components": [
+          "Policy and report index",
+          "Approved answer library",
+          "Source review-date tracker"
+        ]
+      },
+      {
+        "name": "Drafting",
+        "components": [
+          "Retrieval with re-ranking",
+          "Answer drafter with citation enforcement",
+          "Confidence scoring"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Owner review and approval screen",
+          "Gap assignment"
+        ]
+      },
+      {
+        "name": "Output",
+        "components": [
+          "Export to original format",
+          "Library update and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"File and portal parsers\"]\n    I2[\"Question splitter\"]\n  end\n  subgraph S2[\"Knowledge\"]\n    K1[\"Policy and report index\"]\n    K2[\"Approved answer library\"]\n  end\n  subgraph S3[\"Drafting\"]\n    D1[\"Retrieval and re-ranking\"]\n    D2[\"Cited answer drafter\"]\n    D3[\"Confidence scoring\"]\n  end\n  subgraph S4[\"Review and output\"]\n    R1(\"Owner approval\")\n    R2[\"Export to customer format\"]\n    R3[\"Audit log\"]\n  end\n  I1 --> I2 --> D1\n  K1 --> D1\n  K2 --> D1\n  D1 --> D2 --> D3\n  D3 --> R1 --> R2\n  R1 --> K2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Incoming questionnaires in Excel, Word, PDF or portal export form",
+    "Security policies and procedures",
+    "SOC 2 report, ISO/IEC 27001 statement of applicability and pentest summaries",
+    "Architecture and data flow notes",
+    "Past approved questionnaire answers"
+  ],
+  "outputs": [
+    "Draft answers with citations and confidence",
+    "List of evidence gaps with owners",
+    "Completed questionnaire in the customer's format",
+    "Updated answer library",
+    "Audit log of who approved each answer"
+  ],
+  "human_in_the_loop": "A security or GRC owner approves every answer before it leaves the company. The assistant never sends answers directly to a customer, and gap questions are always answered by a person.",
+  "integrations": [
+    "Document storage such as Google Drive, SharePoint, Confluence or Notion",
+    "CRM such as Salesforce or HubSpot for deal context",
+    "GRC or trust centre tools",
+    "Slack or Microsoft Teams for owner notifications",
+    "Customer portals via export and import"
+  ],
+  "guardrails": [
+    "Every answer must cite a source; uncited drafts are blocked",
+    "No claims of certifications or controls that are not in the sources",
+    "Confidential reports visible only to approved roles",
+    "Stale sources flagged before use",
+    "Full audit trail of edits and approvals"
+  ],
+  "compliance_notes": [
+    "Keeps answers traceable to approved documents, which supports consistent representations to customers.",
+    "Source documents stay in your environment, and models are configured not to retain or train on them."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "An answer library built from your current policies and the last few completed questionnaires, then tested on two or three new questionnaires.",
+    "deliverables": [
+      "Indexed policy and answer library",
+      "Working drafting and review screen",
+      "Export for your common formats",
+      "Accuracy report against security owner edits",
+      "Roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Draft acceptance",
+        "how": "Share of drafts approved with no or minor edits by the security owner."
+      },
+      {
+        "metric": "Citation correctness",
+        "how": "Sampled answers checked for whether the cited passage supports the answer."
+      },
+      {
+        "metric": "Time per questionnaire",
+        "how": "Owner time to complete a questionnaire with and without the assistant."
+      },
+      {
+        "metric": "Gaps surfaced",
+        "how": "Questions flagged as lacking evidence, and how many led to new approved content."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it make up answers about our security?",
+      "a": "It is built not to. Every answer must cite one of your approved sources, and questions without evidence are flagged for a person to answer. The security owner approves everything before it is sent."
+    },
+    {
+      "q": "Can it handle AI-specific questionnaires?",
+      "a": "Yes. Questions about model providers, data retention, testing and oversight are answered from your AI policies and test records. Where those do not exist yet, the gap list shows what needs writing."
+    },
+    {
+      "q": "Where are our confidential reports stored?",
+      "a": "In your environment or a dedicated cloud tenant, with role-based access. Models are configured not to retain or train on your documents."
+    },
+    {
+      "q": "Does it work with customer portals?",
+      "a": "Most portals allow questions to be exported and imported. The assistant works with those files, and approved answers are imported back."
+    }
+  ],
+  "related": [
+    "eu-ai-act-iso-42001-evidence-pack",
+    "document-extraction-module-for-saas",
+    "outbound-sdr-research-agent",
+    "engagement-proposal-drafting"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/security-questionnaire-answering-assistant/"
+}

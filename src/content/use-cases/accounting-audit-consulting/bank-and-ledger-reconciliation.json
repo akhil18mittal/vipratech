@@ -1,0 +1,221 @@
+{
+  "slug": "bank-and-ledger-reconciliation",
+  "industry": "accounting-audit-consulting",
+  "title": "Bank and Ledger Reconciliation",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Match bank statements in any format against the cash book or ledger, explain unmatched items and produce a BRS the reviewer can tick through, with ambiguous matches held for a person.",
+  "seo": {
+    "title": "AI Bank Reconciliation for CA Firms | VipraTech",
+    "description": "AI that reads bank statements in any format, matches them to the ledger, explains unmatched items and prepares a BRS for accountant review.",
+    "keywords": [
+      "AI bank reconciliation",
+      "bank statement to ledger matching",
+      "BRS automation",
+      "Tally bank reconciliation",
+      "outsourced accounting automation"
+    ]
+  },
+  "designed_for": [
+    "Partner, Outsourced Accounting Practice",
+    "Accounts Manager",
+    "Finance Controller",
+    "Audit Senior"
+  ],
+  "problem": {
+    "intro": "Firms that keep books for clients reconcile bank accounts every month, and audit teams test those reconciliations at year end. Statements arrive as password-protected PDFs, scans and CSVs in every bank's layout, and narrations such as NEFT or UPI references rarely carry the invoice number the ledger needs.",
+    "pain_points": [
+      {
+        "title": "Every bank prints differently",
+        "detail": "Each bank, and sometimes each branch or download channel, uses its own layout, so templates and macros break whenever a client changes banks."
+      },
+      {
+        "title": "Grouped and partial receipts",
+        "detail": "One credit settles three invoices, arrives net of TDS or bank charges, or comes as a bulk UPI settlement, and simple amount matching fails."
+      },
+      {
+        "title": "Stale unreconciled items",
+        "detail": "Uncleared cheques and unidentified receipts sit in suspense for months because no one has time to trace them."
+      },
+      {
+        "title": "Reviewers cannot see the logic",
+        "detail": "A BRS built in Excel with manual ticks shows the result but not why each line was matched."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reconciliation workflow that reads bank statements in PDF, scanned or CSV form, normalises them into one transaction table and matches them against the cash book or bank ledger exported from Tally, Zoho Books, Busy or SAP. Matching runs in passes: exact amount and date, UTR and cheque references, party names found in narrations, then grouped matches where one credit settles several invoices or arrives net of TDS or charges. Each proposed match carries a reason and a confidence score. Low-confidence matches and unmatched items go to an exception queue with suggested explanations, and the final BRS is generated with the trail behind every line.",
+    "capabilities": [
+      "Parses statement PDFs, including password-protected and scanned copies, plus bank CSV and Excel exports",
+      "Extracts UTR, cheque number, UPI reference and counterparty from narrations",
+      "Rule-based and fuzzy matching, including one-to-many and many-to-one groupings",
+      "Recognises net-of-TDS receipts, bank charges, interest and reversals, and proposes journals for approval",
+      "Ageing of unreconciled items with suggested follow-up actions",
+      "BRS output in the firm's format with the match reason on each line"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect statements and ledger",
+      "detail": "Statements arrive by upload or email and the bank ledger is exported from the client's accounting software."
+    },
+    {
+      "step": 2,
+      "title": "Parse and normalise",
+      "detail": "Transactions are extracted, opening and closing balances are checked, and narrations are split into references and party names."
+    },
+    {
+      "step": 3,
+      "title": "Match in passes",
+      "detail": "Exact, reference, party and grouped matching runs in order, each match tagged with its reason and confidence."
+    },
+    {
+      "step": 4,
+      "title": "Review uncertain matches",
+      "detail": "The accountant confirms or rejects low-confidence and grouped matches and investigates unmatched items."
+    },
+    {
+      "step": 5,
+      "title": "Approve adjustment entries",
+      "detail": "Proposed journals for charges, interest or TDS are approved by the accountant before they are posted."
+    },
+    {
+      "step": 6,
+      "title": "Generate the BRS",
+      "detail": "The reconciliation statement and the carry-forward list of unreconciled items are produced for review."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Bank statement and ledger export\"] --> B[\"Parse and normalise transactions\"]\n  B --> C[\"Match by amount, reference and party\"]\n  C --> D{\"Match confidence high?\"}\n  D -->|\"yes\"| E[\"Auto-matched pairs\"]\n  D -->|\"no\"| F(\"Accountant reviews suggestions\")\n  F --> G{\"Adjustment entry needed?\"}\n  G -->|\"yes\"| H(\"Accountant approves journal\")\n  G -->|\"no\"| I[\"Bank reconciliation statement\"]\n  E --> I\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Statement upload and email drop",
+          "Ledger export import from Tally, Zoho Books, Busy or SAP"
+        ]
+      },
+      {
+        "name": "Parsing",
+        "components": [
+          "PDF and scanned table parser",
+          "Password handling in memory",
+          "Narration normaliser for UTR, cheque and UPI references"
+        ]
+      },
+      {
+        "name": "Matching engine",
+        "components": [
+          "Exact and reference passes",
+          "Fuzzy party matching",
+          "Grouping solver for one-to-many matches",
+          "Confidence scoring"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception queue with suggested explanations",
+          "Journal proposal and approval"
+        ]
+      },
+      {
+        "name": "Output and audit",
+        "components": [
+          "BRS generator",
+          "Audit log of matches and approvals"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    B1[\"Statement upload and email drop\"]\n    B2[\"Ledger export import\"]\n  end\n  subgraph S2[\"Parsing\"]\n    P1[\"PDF and scan table parser\"]\n    P2[\"Narration normaliser for UTR and UPI\"]\n  end\n  subgraph S3[\"Matching\"]\n    M1[\"Exact and reference passes\"]\n    M2[\"Fuzzy party and grouped matches\"]\n    M3[\"Confidence scoring\"]\n  end\n  subgraph S4[\"Review and output\"]\n    R1(\"Accountant exception queue\")\n    R2(\"Journal approval\")\n    R3[\"BRS generator and audit log\"]\n  end\n  B1 --> P1 --> P2\n  P2 --> M1\n  B2 --> M1\n  M1 --> M2 --> M3\n  M3 --> R1\n  M3 --> R3\n  R1 --> R2 --> R3\n  R1 --> R3"
+  },
+  "inputs": [
+    "Bank statements (PDF, scanned, CSV or Excel)",
+    "Cash book or bank ledger export",
+    "Customer and vendor masters",
+    "Open invoice and bill lists",
+    "Prior-period BRS and carry-forward items"
+  ],
+  "outputs": [
+    "Matched transaction pairs with match reasons",
+    "Bank reconciliation statement in the firm's format",
+    "Unreconciled items with ageing",
+    "Proposed journal entries awaiting approval",
+    "Audit log of every match and approval"
+  ],
+  "human_in_the_loop": "Accountants confirm every low-confidence or grouped match and approve any proposed journal before it is posted. The reviewer signs off the BRS, and unexplained items stay open until a person resolves them.",
+  "integrations": [
+    "Tally Prime, Zoho Books, Busy or SAP (export or API)",
+    "Bank statement downloads and email inboxes",
+    "Google Drive, OneDrive or SharePoint client folders",
+    "Practice management or task tracking software"
+  ],
+  "guardrails": [
+    "Opening and closing balances checked after parsing to catch extraction errors",
+    "No journal posted without accountant approval",
+    "Match reason and confidence recorded on every line",
+    "Statement passwords used in memory and never stored",
+    "Access restricted by client and engagement"
+  ],
+  "compliance_notes": [
+    "Proposed entries are posted by the accountant in the client's books, so the audit trail (edit log) that Companies Act rules require in accounting software stays intact.",
+    "Bank statements contain counterparties' personal data; processing is designed to support DPDP Act 2023 purpose limitation and retention."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Three months of statements for a handful of client bank accounts across two or three banks, reconciled in parallel with your current process.",
+    "deliverables": [
+      "Parsers for the pilot banks' statement formats",
+      "Matching rules configured for the pilot clients",
+      "Exception review screen and BRS template",
+      "Comparison report against the team's existing BRS",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Parsing accuracy",
+        "how": "Transactions extracted compared with statement totals and a manual check of sampled pages."
+      },
+      {
+        "metric": "Match precision",
+        "how": "Share of automatic matches the reviewing accountant accepts on a sample."
+      },
+      {
+        "metric": "Auto-match coverage",
+        "how": "Share of transactions matched without manual intervention, tracked per bank and client."
+      },
+      {
+        "metric": "Time to close the BRS",
+        "how": "Elapsed and hands-on time per account per month, compared with the previous process."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which banks and statement formats does it handle?",
+      "a": "Any bank statement in PDF, scanned, CSV or Excel form. Layouts are learned from samples rather than hard-coded templates, and every parsed statement is checked against its opening and closing balances so a parsing error is caught before matching starts."
+    },
+    {
+      "q": "Can it handle one receipt against several invoices?",
+      "a": "Yes. Grouped matching looks for combinations of open invoices that explain a receipt, including receipts net of TDS or bank charges. These matches are always shown to the accountant with the reasoning before they are accepted."
+    },
+    {
+      "q": "Will it post entries into Tally or Zoho Books?",
+      "a": "It proposes journal entries for bank charges, interest or TDS, and an accountant approves them. Posting is done by your team or through an approved import, so the client's software records who entered what."
+    },
+    {
+      "q": "How are statement passwords and bank data protected?",
+      "a": "Passwords are used in memory to open the file and are not stored. Statements and ledgers stay in your environment, segregated by client, with access limited to the assigned team."
+    }
+  ],
+  "related": [
+    "gst-return-reconciliation",
+    "audit-sampling-and-vouching",
+    "settlement-reconciliation",
+    "client-document-collection-agent"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/bank-and-ledger-reconciliation/"
+}

@@ -1,0 +1,227 @@
+{
+  "slug": "policy-renewal-voice-agent",
+  "industry": "insurance",
+  "title": "Policy Renewal Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "A multilingual voice agent that calls policyholders before renewal, explains premium and cover from approved content, sends a UPI payment link and hands complex requests to licensed staff.",
+  "seo": {
+    "title": "Policy Renewal Voice Agent for Insurers | VipraTech",
+    "description": "Hindi, English and regional-language voice agent for insurance renewals: reminders, approved answers, UPI payment links and hand-off to licensed staff.",
+    "keywords": [
+      "insurance renewal voice agent",
+      "policy renewal reminder calls",
+      "AI voice agent Hindi insurance",
+      "persistency calling automation",
+      "renewal payment link"
+    ]
+  },
+  "designed_for": [
+    "Head of Renewals and Retention",
+    "Contact Centre Head",
+    "Persistency Manager",
+    "Compliance Officer"
+  ],
+  "problem": {
+    "intro": "Renewal teams work through long due lists every month: motor policies about to lapse, health policies near the end of cover and life premiums falling due. Most calls are routine, such as confirming the premium, explaining the no-claim bonus or resending the payment link, yet they compete with complex conversations for the same telecallers.",
+    "pain_points": [
+      {
+        "title": "Routine calls crowd out real conversations",
+        "detail": "Telecallers spend much of their shift on reminders and payment links, leaving little time for customers who want to change cover or are thinking of leaving."
+      },
+      {
+        "title": "Language coverage is uneven",
+        "detail": "Customers prefer Hindi, Tamil, Marathi or Bengali, but the team available at a given hour may not speak them."
+      },
+      {
+        "title": "Scripts drift on the floor",
+        "detail": "Under target pressure, callers improvise about benefits or premiums, which creates complaint and mis-selling risk."
+      },
+      {
+        "title": "Follow-ups fall through",
+        "detail": "Callback requests and 'pay later' promises are noted inconsistently, so the next call starts from scratch."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that works through your renewal due list or answers inbound renewal calls. It introduces itself as an automated assistant, verifies the policyholder and explains renewal details pulled from your policy system: due date, premium, sum insured and no-claim bonus. It answers common questions only from content your compliance team has approved, sends a UPI payment link by WhatsApp or SMS and records callbacks. Requests to change cover, port the policy or cancel, and any complaint, go to a licensed renewal executive with a summary of the call. Every call is recorded, transcribed and dispositioned in your CRM.",
+    "capabilities": [
+      "Outbound and inbound calling in Hindi, English, Hinglish and selected regional languages",
+      "Caller verification before any policy detail is shared",
+      "Reads due date, premium, sum insured and no-claim bonus from the policy system in real time",
+      "Answers common renewal questions only from an approved knowledge base",
+      "Sends UPI payment links by WhatsApp or SMS and tracks payment status",
+      "Warm transfer to licensed staff for cover changes, porting, cancellation or complaints, with a call summary"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Prepare the call list",
+      "detail": "The due list is filtered for consent, preference status and recent contact, and call windows are set."
+    },
+    {
+      "step": 2,
+      "title": "Open and verify",
+      "detail": "The agent discloses that it is automated, confirms it is speaking to the policyholder and verifies identity."
+    },
+    {
+      "step": 3,
+      "title": "Explain renewal details",
+      "detail": "Premium, due date, cover and no-claim bonus are explained, and approved FAQs are answered."
+    },
+    {
+      "step": 4,
+      "title": "Route out-of-scope requests",
+      "detail": "Cover changes, porting, cancellations and complaints are transferred to a licensed executive with context."
+    },
+    {
+      "step": 5,
+      "title": "Send the payment link",
+      "detail": "A UPI payment link goes out by WhatsApp or SMS, and the agent confirms the customer has received it."
+    },
+    {
+      "step": 6,
+      "title": "Log and follow up",
+      "detail": "Disposition, recording and next action are written to the CRM, and callbacks are scheduled."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Due list filtered for consent\"] --> B[\"Disclose AI and verify policyholder\"]\n  B --> C[\"Explain premium and cover\"]\n  C --> D{\"Request within approved scope?\"}\n  D -->|\"no\"| E(\"Licensed executive takes transfer\")\n  D -->|\"yes\"| F[\"Send UPI link by WhatsApp or SMS\"]\n  F --> G[\"Log disposition in CRM\"]\n  E --> G\n  G --> H[\"Schedule callback or close\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data and consent",
+        "components": [
+          "Policy system renewal feed",
+          "Consent and preference registry",
+          "Call frequency rules"
+        ]
+      },
+      {
+        "name": "Voice stack",
+        "components": [
+          "Telephony or dialler integration",
+          "Speech recognition tuned for Indian languages",
+          "Text-to-speech voices per language"
+        ]
+      },
+      {
+        "name": "Conversation control",
+        "components": [
+          "Dialogue manager with verification flow",
+          "Approved FAQ retrieval",
+          "Prohibited statement filter"
+        ]
+      },
+      {
+        "name": "Actions and hand-off",
+        "components": [
+          "Payment link service",
+          "WhatsApp and SMS gateway",
+          "Warm transfer to licensed executives"
+        ]
+      },
+      {
+        "name": "Records and QA",
+        "components": [
+          "Call recording and transcript store",
+          "CRM disposition writer",
+          "Compliance QA sampling dashboard"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data and consent\"]\n    D1[\"Renewal due feed\"]\n    D2[\"Consent and preference check\"]\n  end\n  subgraph S2[\"Voice and conversation\"]\n    V1[\"Telephony and speech engine\"]\n    V2[\"Dialogue manager\"]\n    V3[\"Approved FAQ retrieval\"]\n  end\n  subgraph S3[\"Actions and hand-off\"]\n    A1[\"UPI payment link service\"]\n    A2[\"WhatsApp and SMS gateway\"]\n    A3(\"Licensed executive transfer\")\n  end\n  subgraph S4[\"Records and QA\"]\n    R1[\"Recordings and transcripts\"]\n    R2[\"CRM disposition\"]\n    R3(\"Compliance QA sampling\")\n  end\n  D1 --> D2\n  D2 --> V1\n  V1 --> V2\n  V2 --> V3\n  V2 --> A1\n  A1 --> A2\n  V2 --> A3\n  V1 --> R1\n  V2 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Renewal due list with premium, sum insured and no-claim bonus",
+    "Consent, DND and channel preference status",
+    "Approved scripts, FAQs and prohibited statements list",
+    "Payment gateway for UPI link generation",
+    "Previous call history and open service requests"
+  ],
+  "outputs": [
+    "Call recordings and transcripts",
+    "Disposition codes such as paid, callback, wants change, porting or complaint",
+    "Payment links sent, with status",
+    "Warm transfers with call summaries",
+    "Daily renewal call report by segment and language"
+  ],
+  "human_in_the_loop": "Licensed renewal executives handle every request to change cover, port, cancel or complain, and compliance reviews a sample of calls each week. The agent does not recommend products or alter policy terms.",
+  "integrations": [
+    "Policy administration system",
+    "CRM such as Salesforce, Zoho or LeadSquared",
+    "Cloud telephony or contact-centre dialler",
+    "WhatsApp Business API and DLT-registered SMS gateway",
+    "Payment gateway with UPI links"
+  ],
+  "guardrails": [
+    "The agent states that it is an automated assistant at the start of each call",
+    "Policy details shared only after verification",
+    "Responses limited to approved content, with no quotes for changed cover",
+    "Immediate transfer on complaint, distress or a request for a person",
+    "Per-customer call frequency caps and preference checks before dialling"
+  ],
+  "compliance_notes": [
+    "Calls and messages are designed to follow TRAI commercial-communication rules, including DLT-registered templates and customer preference checks.",
+    "Recordings and approved scripts are retained for compliance review, aligned with IRDAI expectations on distance marketing and fair disclosure.",
+    "Personal data is processed for the renewal purpose only, supporting DPDP Act 2023 obligations."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Motor or retail health renewals for one customer segment, in Hindi and English, with a comparable segment handled by your telecallers as a control.",
+    "deliverables": [
+      "Approved call flow and knowledge base",
+      "Working voice agent connected to a test copy of the renewal feed",
+      "Payment link and WhatsApp integration",
+      "Weekly QA review of sampled calls",
+      "Pilot report and production plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Reach and completion",
+        "how": "Share of dialled customers who heard the full renewal details, compared with the control segment."
+      },
+      {
+        "metric": "Payments after the call",
+        "how": "Renewals paid through links sent by the agent, tracked by link ID."
+      },
+      {
+        "metric": "Transfers and reasons",
+        "how": "Count and categories of calls handed to licensed executives."
+      },
+      {
+        "metric": "Compliance QA outcome",
+        "how": "Compliance reviewers score a weekly sample of calls against the approved script."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi, English and Hinglish in a typical first phase, with regional languages such as Tamil, Telugu, Marathi, Bengali or Kannada added based on your customer mix. Each language is tested with your own call recordings before go-live."
+    },
+    {
+      "q": "Will customers know they are speaking to an AI?",
+      "a": "Yes. The agent says so at the start of every call, and customers can ask for a person at any point."
+    },
+    {
+      "q": "What happens if a customer wants to increase cover or add a rider?",
+      "a": "The agent does not quote or change cover. It transfers the call to a licensed executive with a short summary, so the customer does not have to repeat themselves."
+    },
+    {
+      "q": "Does it work with our existing dialler?",
+      "a": "Usually yes, through SIP or the dialler's API. We confirm the integration path with your telephony team in the first week of the pilot."
+    }
+  ],
+  "related": [
+    "claim-status-voice-helpline",
+    "agent-and-posp-lead-nurturing",
+    "insurance-bot-mis-selling-and-disclosure-testing",
+    "outbound-sales-voice-agent-with-consent-checks"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/policy-renewal-voice-agent/"
+}

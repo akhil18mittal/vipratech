@@ -1,0 +1,215 @@
+{
+  "slug": "rider-and-driver-support-voice-agent",
+  "industry": "logistics-supply-chain",
+  "title": "Rider and Driver Support Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "A Hindi and regional-language voice agent for delivery riders and truck drivers that handles address help, trip, payout and COD queries, and captures incidents for immediate control tower handover.",
+  "seo": {
+    "title": "Rider and Driver Support Voice Agent | VipraTech",
+    "description": "Voice agent for riders and truck drivers in Hindi and regional languages: address help, payouts, COD and incidents, with control tower handover.",
+    "keywords": [
+      "rider support voice agent",
+      "driver helpline automation",
+      "delivery partner support in Hindi",
+      "control tower voice bot",
+      "last-mile rider helpdesk"
+    ]
+  },
+  "designed_for": [
+    "Head of Fleet and Rider Operations",
+    "Control Tower Manager",
+    "Last-Mile Operations Manager",
+    "Driver Partner Experience Lead"
+  ],
+  "problem": {
+    "intro": "Last-mile riders and line-haul drivers call hubs, team leads and control towers all day: the address cannot be found, the customer is not answering, the app shows the wrong payout, the vehicle has broken down. Callers are on the road, often prefer Hindi or a regional language, and need answers fast, while control tower staff juggle the same questions across many phones.",
+    "pain_points": [
+      {
+        "title": "Repetitive queries clog the helpline",
+        "detail": "Payout, incentive, COD deposit and app login questions take up agent time needed for real incidents."
+      },
+      {
+        "title": "Long waits on the road",
+        "detail": "Riders waiting for help at a customer's door, or drivers stuck at a checkpost, lose time and deliveries."
+      },
+      {
+        "title": "Incidents reported inconsistently",
+        "detail": "Accidents, breakdowns, thefts and detentions are reported by phone, and details are lost before they reach the right team."
+      },
+      {
+        "title": "Language and literacy gaps",
+        "detail": "Text-based in-app support does not suit riders and drivers who are more comfortable speaking in their own language."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent that riders and drivers reach from a helpline number or a button in their app. It identifies the caller by phone number, loads their current trip or route, and handles common questions directly: consignee contact attempts and address landmarks, payout and incentive breakdowns, COD deposit status and app troubleshooting. For breakdowns, accidents, theft or detentions it collects location and key details in a fixed sequence and transfers to a control tower agent at once with a summary. It speaks Hindi, Hinglish and the regional languages you need, and never changes payouts or trip assignments itself.",
+    "capabilities": [
+      "Identifies the rider or driver and loads their active trip, route and recent payouts",
+      "Answers payout, incentive, COD deposit and app login questions from your systems",
+      "Helps with address issues using landmarks, consignee contact attempts and hub guidance",
+      "Collects structured incident reports for breakdowns, accidents, theft and detentions",
+      "Transfers urgent and safety-related calls to a control tower agent with a summary",
+      "Works in Hindi, Hinglish and configured regional languages on noisy roadside audio"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Rider or driver calls",
+      "detail": "The caller uses the helpline number or app button and is identified by phone number."
+    },
+    {
+      "step": 2,
+      "title": "Classify the issue",
+      "detail": "The agent asks what is wrong and classifies it as a query, address help or an incident."
+    },
+    {
+      "step": 3,
+      "title": "Answer from systems",
+      "detail": "For queries, it fetches trip, payout or COD data from your systems and explains it."
+    },
+    {
+      "step": 4,
+      "title": "Capture incidents",
+      "detail": "For incidents, it captures location, vehicle, shipment and injury information in a fixed sequence."
+    },
+    {
+      "step": 5,
+      "title": "Hand over when needed",
+      "detail": "Safety issues, disputes and unresolved queries go to a control tower agent with the summary."
+    },
+    {
+      "step": 6,
+      "title": "Log and follow up",
+      "detail": "Each call is logged with its outcome, and tickets are created for teams such as payouts or claims."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Rider or driver calls helpline\"] --> B[\"Identify caller and load trip\"]\n  B --> C[\"Classify the issue\"]\n  C --> D{\"Safety incident or dispute?\"}\n  D -->|\"yes\"| E[\"Capture location and details\"]\n  E --> F(\"Control tower agent takes over\")\n  D -->|\"no\"| G[\"Answer from trip and payout data\"]\n  G --> H{\"Resolved?\"}\n  H -->|\"no\"| F\n  H -->|\"yes\"| I[\"Log call and create ticket\"]\n  F --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Helpline numbers and in-app call button",
+          "Call routing and recording"
+        ]
+      },
+      {
+        "name": "Voice understanding",
+        "components": [
+          "Speech-to-text for Hindi and regional languages",
+          "Intent and incident classifier",
+          "Text-to-speech in the caller's language"
+        ]
+      },
+      {
+        "name": "Operational data",
+        "components": [
+          "Trip and route API from the TMS or rider app",
+          "Payout and incentive ledger",
+          "COD deposit records"
+        ]
+      },
+      {
+        "name": "Handover and tickets",
+        "components": [
+          "Control tower console with call summary",
+          "Ticketing system",
+          "Call log and QA sampling"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Helpline and app button\"]\n    T2[\"Call routing\"]\n  end\n  subgraph S2[\"Voice understanding\"]\n    V1[\"Speech to text\"]\n    V2[\"Intent and incident classifier\"]\n    V3[\"Text to speech\"]\n  end\n  subgraph S3[\"Operational data\"]\n    D1[\"Trip and route API\"]\n    D2[\"Payout ledger\"]\n    D3[\"COD records\"]\n  end\n  subgraph S4[\"Handover and tickets\"]\n    H1(\"Control tower console\")\n    H2[\"Ticketing system\"]\n    H3[\"Call log\"]\n  end\n  T1 --> T2 --> V1 --> V2\n  V2 --> D1\n  V2 --> D2\n  V2 --> D3\n  D2 --> V3\n  V2 --> H1\n  H1 --> H2\n  V2 --> H3"
+  },
+  "inputs": [
+    "Rider and driver master with phone numbers and preferred languages",
+    "Active trips, routes and consignment details",
+    "Payout, incentive and deduction records",
+    "COD collection and deposit records",
+    "Incident categories and escalation matrix"
+  ],
+  "outputs": [
+    "Resolved queries with call summaries",
+    "Structured incident reports with location",
+    "Warm transfers to the control tower with context",
+    "Tickets for payouts, claims or fleet teams",
+    "Call reason analytics by hub and language"
+  ],
+  "human_in_the_loop": "Control tower staff take over every safety incident, dispute and unresolved call, with the agent's summary on screen. Payout corrections, trip reassignments and claims decisions are made by your teams.",
+  "integrations": [
+    "TMS or rider app backend",
+    "Payout and incentive system",
+    "Cloud telephony or contact-centre platform",
+    "Ticketing system such as Freshdesk or Zendesk",
+    "WhatsApp Business API for follow-up messages"
+  ],
+  "guardrails": [
+    "Safety-related phrases trigger an immediate human transfer",
+    "No changes to payouts, trips or COD records by the agent",
+    "Callers can ask for a person at any point",
+    "Personal data shared only with the verified caller",
+    "Weekly sampled call reviews for answer quality"
+  ],
+  "compliance_notes": [
+    "Call recordings and rider or driver data are processed in line with the DPDP Act 2023, with notice at the start of the call.",
+    "Incident records support your duty-of-care and insurance processes; they do not replace statutory accident reporting."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One city or region and its rider helpline, starting with payout and COD queries plus incident capture with immediate handover.",
+    "deliverables": [
+      "Call flows for the agreed intents in Hindi and one regional language",
+      "Integration with trip and payout data",
+      "Control tower handover console",
+      "Pilot report on resolution and handover quality",
+      "Roll-out plan by language and region"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Resolution of in-scope queries",
+        "how": "Calls resolved without transfer, verified through sampled call reviews."
+      },
+      {
+        "metric": "Handover quality",
+        "how": "Control tower agents rate whether each summary was complete and correct."
+      },
+      {
+        "metric": "Speech recognition accuracy",
+        "how": "Transcripts of sampled calls compared with human transcription, per language."
+      },
+      {
+        "metric": "Time to reach help for incidents",
+        "how": "Time from call start to control tower pickup on incident calls."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will riders actually use a voice agent?",
+      "a": "Riders and drivers already call for help; the agent answers at once in their language and transfers when needed. The pilot measures repeat usage and transfer requests so you can judge acceptance."
+    },
+    {
+      "q": "How does it cope with traffic noise?",
+      "a": "Speech recognition is tested on real roadside and highway audio during the pilot. If the agent still cannot understand after a retry, it transfers to a person rather than guessing."
+    },
+    {
+      "q": "Can it reassign a delivery or change an address?",
+      "a": "It can pass address landmarks or reattempt requests to the hub, but it does not change assignments or records itself. Those actions stay with hub staff or your existing rules."
+    },
+    {
+      "q": "Which languages can you support?",
+      "a": "We start with Hindi and Hinglish and add regional languages such as Marathi, Tamil, Telugu, Kannada or Bengali based on your fleet. Each language is tested on real audio before go-live."
+    }
+  ],
+  "related": [
+    "delivery-status-voice-and-whatsapp-agent",
+    "proof-of-delivery-verification",
+    "logistics-ai-agent-security-testing",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/rider-and-driver-support-voice-agent/"
+}

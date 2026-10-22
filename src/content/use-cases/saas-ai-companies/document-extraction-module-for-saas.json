@@ -1,0 +1,222 @@
+{
+  "slug": "document-extraction-module-for-saas",
+  "industry": "saas-ai-companies",
+  "title": "Document Extraction Module for Your SaaS Product",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "An embeddable extraction service for your SaaS product: schemas per document type, per-tenant fields, confidence and source boxes, a review component and webhooks, running in your cloud.",
+  "seo": {
+    "title": "Document Extraction Module for SaaS Products | VipraTech",
+    "description": "Embeddable OCR and LLM extraction for SaaS products: per-tenant schemas, confidence scores, source highlights, review UI and webhooks, in your cloud.",
+    "keywords": [
+      "document extraction API for SaaS",
+      "embedded OCR and LLM extraction",
+      "intelligent document processing module",
+      "multi-tenant document AI",
+      "invoice and form extraction API"
+    ]
+  },
+  "designed_for": [
+    "CTO or VP Engineering",
+    "Product Manager",
+    "Head of Platform",
+    "Founder of a vertical SaaS"
+  ],
+  "problem": {
+    "intro": "Many SaaS products ask users to upload documents: invoices in AP software, payslips in HR and lending tools, bills of lading in logistics platforms, contracts in procurement suites. Users then type the same data into forms. Building reliable extraction in-house means handling OCR, layouts, model choice, confidence, review and multi-tenancy, which pulls engineers away from the core product.",
+    "pain_points": [
+      {
+        "title": "Users still re-type data",
+        "detail": "Without extraction, uploads are just attachments and users fill forms by hand, which slows activation and creates errors."
+      },
+      {
+        "title": "Templates that break",
+        "detail": "Template-based OCR fails whenever a new supplier, bank or carrier changes its layout."
+      },
+      {
+        "title": "Customers want their own fields",
+        "detail": "Each tenant needs a few custom fields or rules, and hard-coded schemas cannot keep up."
+      },
+      {
+        "title": "Cost and data concerns",
+        "detail": "Sending every page to the largest model is expensive, and enterprise customers ask where their documents go."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a document extraction service that your product calls through an API. Each document type has a versioned JSON schema, and tenants can add custom fields within limits you set. The pipeline runs OCR with layout detection, classifies the document and extracts fields with a language model, returning each value with a confidence score and a bounding box on the source page. Model routing sends easy pages to cheaper models and hard pages to stronger ones. An embeddable review component lets your users confirm low-confidence fields, and their corrections feed back into evaluation. Results go out by webhook. It runs in your cloud account, with tenant isolation and no training on customer documents.",
+    "capabilities": [
+      "API service with versioned schemas per document type",
+      "Per-tenant custom fields and validation rules",
+      "Values returned with confidence scores and source bounding boxes",
+      "Model routing by page difficulty to control cost",
+      "Embeddable review component for low-confidence fields",
+      "Evaluation suite tracking accuracy per document type and model version"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the upload",
+      "detail": "Your product sends the document and tenant ID to the extraction API."
+    },
+    {
+      "step": 2,
+      "title": "Classify and read",
+      "detail": "OCR and layout detection run, and the document type is identified."
+    },
+    {
+      "step": 3,
+      "title": "Extract to schema",
+      "detail": "Fields are extracted to the tenant's schema with confidence scores and bounding boxes."
+    },
+    {
+      "step": 4,
+      "title": "Validate",
+      "detail": "Format checks and tenant rules run, such as totals adding up or dates falling in range."
+    },
+    {
+      "step": 5,
+      "title": "Review if needed",
+      "detail": "Low-confidence or failed fields appear in the embedded review component for the user to confirm."
+    },
+    {
+      "step": 6,
+      "title": "Deliver and learn",
+      "detail": "Results are sent by webhook, and user corrections are stored for evaluation."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Product uploads document via API\"] --> B[\"OCR, layout and classification\"]\n  B --> C[\"Route to suitable model\"]\n  C --> D[\"Extract fields to tenant schema\"]\n  D --> E{\"Confident and rules pass?\"}\n  E -->|\"yes\"| G[\"Send result by webhook\"]\n  E -->|\"no\"| F(\"User confirms in review component\")\n  F --> G\n  G --> H[\"Store corrections for evaluation\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "API and tenancy",
+        "components": [
+          "Extraction API with authentication",
+          "Tenant registry and schema store",
+          "Usage metering"
+        ]
+      },
+      {
+        "name": "Document processing",
+        "components": [
+          "OCR with layout detection",
+          "Document classifier",
+          "Model router"
+        ]
+      },
+      {
+        "name": "Extraction and validation",
+        "components": [
+          "LLM extractor with JSON schema enforcement",
+          "Validation rules per tenant",
+          "Confidence scoring"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Embeddable review component",
+          "Correction capture"
+        ]
+      },
+      {
+        "name": "Delivery and evaluation",
+        "components": [
+          "Webhook delivery with retries",
+          "Evaluation suite and accuracy dashboard"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"API and tenancy\"]\n    A1[\"Extraction API\"]\n    A2[\"Tenant schema store\"]\n  end\n  subgraph S2[\"Processing and extraction\"]\n    P1[\"OCR and layout\"]\n    P2[\"Classifier and model router\"]\n    P3[\"Schema-bound extractor\"]\n    P4[\"Validation rules\"]\n  end\n  subgraph S3[\"Review\"]\n    R1(\"Embedded review component\")\n  end\n  subgraph S4[\"Delivery and evaluation\"]\n    D1[\"Webhook delivery\"]\n    D2[\"Evaluation suite\"]\n  end\n  A1 --> P1 --> P2 --> P3 --> P4\n  A2 --> P3\n  P4 --> R1\n  P4 --> D1\n  R1 --> D1\n  R1 --> D2"
+  },
+  "inputs": [
+    "Documents uploaded by your users: PDFs, scans and phone photos",
+    "Document types and field definitions you want supported",
+    "Tenant-specific custom fields and rules",
+    "Labelled sample documents for evaluation",
+    "Your cloud account and deployment standards"
+  ],
+  "outputs": [
+    "Structured JSON per document with confidence and bounding boxes",
+    "Review tasks in the embedded component",
+    "Webhook events for downstream workflows",
+    "Accuracy and cost dashboard by document type",
+    "Deployment in your cloud with infrastructure as code"
+  ],
+  "human_in_the_loop": "Your users confirm low-confidence fields in the review component inside your product, and your team approves schema changes and model upgrades after checking evaluation results.",
+  "integrations": [
+    "Your product backend via REST API and webhooks",
+    "Cloud object storage such as S3, Azure Blob Storage or Google Cloud Storage",
+    "Hosted model providers or self-hosted models",
+    "Your frontend framework for the review component",
+    "Observability stack for metrics and logs"
+  ],
+  "guardrails": [
+    "Tenant isolation in storage, processing and logs",
+    "No training on customer documents, with provider retention disabled where available",
+    "Schema and model changes released only after evaluation passes",
+    "Personal data masked in logs",
+    "Per-tenant rate limits and usage metering"
+  ],
+  "compliance_notes": [
+    "Deployment in your cloud and region supports data residency commitments under GDPR and the DPDP Act 2023.",
+    "Audit logs of extraction and user corrections help evidence data handling in customer security reviews."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One or two document types that matter most to your users, integrated with a staging version of your product.",
+    "deliverables": [
+      "Schemas for the chosen document types",
+      "Extraction API deployed in your cloud",
+      "Embeddable review component",
+      "Evaluation report on your labelled samples",
+      "Integration guide and production plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field-level accuracy",
+        "how": "Extracted values compared with labelled ground truth per document type."
+      },
+      {
+        "metric": "Share of fields sent to review",
+        "how": "Count of fields below confidence or failing rules per document."
+      },
+      {
+        "metric": "Cost per document",
+        "how": "Model and compute cost per processed document, logged by the service."
+      },
+      {
+        "metric": "Latency",
+        "how": "Time from upload to webhook, measured in staging."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can we white-label the review component?",
+      "a": "Yes. It is built to sit inside your product with your styling, so users never leave your app."
+    },
+    {
+      "q": "Which models does it use?",
+      "a": "We choose per document type based on evaluation results and cost, using hosted providers or self-hosted models. The router lets you change models without changing your API."
+    },
+    {
+      "q": "How do you handle enterprise customers' data concerns?",
+      "a": "The service runs in your cloud account and region, isolates tenants, masks personal data in logs and does not train on customer documents."
+    },
+    {
+      "q": "Who owns the code?",
+      "a": "Ownership is agreed in the contract, and the usual arrangement is that you own what we build for you. We hand over the service, infrastructure code, schemas and evaluation suite, and can support it after launch."
+    }
+  ],
+  "related": [
+    "security-questionnaire-answering-assistant",
+    "invoice-and-gst-data-extraction",
+    "loan-application-document-extraction",
+    "freight-invoice-audit"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/document-extraction-module-for-saas/"
+}

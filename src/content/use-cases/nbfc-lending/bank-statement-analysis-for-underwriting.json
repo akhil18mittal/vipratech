@@ -1,0 +1,224 @@
+{
+  "slug": "bank-statement-analysis-for-underwriting",
+  "industry": "nbfc-lending",
+  "title": "Bank Statement Analysis for Underwriting",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Analyse bank statements from PDFs, scans and Account Aggregator data to surface income, obligations, bounces and red flags, with every figure traceable to transactions.",
+  "seo": {
+    "title": "Bank Statement Analysis for Loan Underwriting | VipraTech",
+    "description": "AI that analyses bank statements and Account Aggregator data for income, EMIs, bounces, cash patterns and tampering, with transaction-level evidence.",
+    "keywords": [
+      "bank statement analysis underwriting",
+      "account aggregator statement analysis",
+      "bank statement analyser NBFC",
+      "EMI and bounce detection",
+      "statement tamper detection"
+    ]
+  },
+  "designed_for": [
+    "Chief Credit Officer",
+    "Underwriting Team Lead",
+    "Head of Risk Analytics",
+    "Fraud Control Unit Manager"
+  ],
+  "problem": {
+    "intro": "For self-employed and thin-file borrowers, the bank statement is often the most honest picture of cash flow. Underwriters read months of transactions to estimate income, spot other EMIs, count cheque and NACH bounces and judge whether balances are genuine, while fraudsters edit PDFs or route funds in circles to inflate turnover.",
+    "pain_points": [
+      {
+        "title": "Formats that vary by bank",
+        "detail": "Statements from different banks, password-protected PDFs, scans and Account Aggregator data each need separate handling before analysis can begin."
+      },
+      {
+        "title": "Income hard to separate from noise",
+        "detail": "Salary, business receipts, transfers between own accounts, loan disbursals and cash deposits look similar in narration text."
+      },
+      {
+        "title": "Hidden obligations",
+        "detail": "EMIs to other lenders, informal loans and recurring payments are spread across narrations that differ by bank and channel."
+      },
+      {
+        "title": "Edited statements and circular flows",
+        "detail": "Altered PDFs, recalculated balances and round-tripping between related accounts are hard to catch by eye."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a statement analysis service that accepts e-statement PDFs, scanned copies and Account Aggregator data. It parses transactions, recomputes running balances and checks PDF integrity, then categorises each transaction using rules and a language model that reads narrations in context, including UPI, NEFT, NACH and cheque patterns. The service computes the metrics your credit policy uses, such as average balances on set dates, monthly credits net of own-account transfers, existing EMIs and bounce counts, and highlights red flags like sudden credit spikes, circular transfers or cash-heavy months. Every figure links to its underlying transactions, so the underwriter can verify it before using it in the credit memo.",
+    "capabilities": [
+      "Parses statements from major Indian banks, scanned copies and Account Aggregator FI data",
+      "Running-balance recomputation and PDF metadata checks to flag possible tampering",
+      "Transaction categorisation for salary, business receipts, transfers, EMIs, bounces and cash",
+      "Credit-policy metrics such as average bank balance, net monthly credits and existing obligations",
+      "Red-flag detection for circular transfers, related-party flows, credit spikes and window dressing",
+      "Underwriter view with every metric drilled down to its transactions"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive statements",
+      "detail": "Statements arrive as uploaded PDFs, scans or consented Account Aggregator data linked to the application."
+    },
+    {
+      "step": 2,
+      "title": "Parse and verify",
+      "detail": "Transactions are parsed, balances recomputed and document integrity checked, with failures flagged."
+    },
+    {
+      "step": 3,
+      "title": "Categorise transactions",
+      "detail": "Rules and a language model categorise each transaction and identify counterparties and recurring patterns."
+    },
+    {
+      "step": 4,
+      "title": "Compute policy metrics",
+      "detail": "Metrics defined in your credit policy are computed per account and across accounts, net of own-account transfers."
+    },
+    {
+      "step": 5,
+      "title": "Flag risks",
+      "detail": "Tamper signals, bounces, undeclared EMIs and unusual flows are listed with linked transactions."
+    },
+    {
+      "step": 6,
+      "title": "Underwriter review",
+      "detail": "The underwriter reviews metrics and flags, corrects categories where needed and uses the output in the credit memo."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"PDF, scan or AA data\"] --> B[\"Parse transactions\"]\n  B --> C{\"Balances and integrity verified?\"}\n  C -->|\"no\"| D(\"Fraud control review\")\n  C -->|\"yes\"| E[\"Categorise transactions\"]\n  E --> F[\"Compute credit-policy metrics\"]\n  F --> G[\"Flag bounces, EMIs and red flags\"]\n  G --> H(\"Underwriter reviews and corrects\")\n  D --> H\n  H --> J[\"Metrics into credit memo and LOS\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "PDF and scan upload with password handling",
+          "Account Aggregator FIU data receiver",
+          "Application linking"
+        ]
+      },
+      {
+        "name": "Parsing and integrity",
+        "components": [
+          "Bank-specific and generic table parsers",
+          "OCR for scanned statements",
+          "Balance recomputation and PDF metadata checks"
+        ]
+      },
+      {
+        "name": "Categorisation",
+        "components": [
+          "Narration rules for UPI, NEFT, NACH and cheques",
+          "LLM categoriser for ambiguous narrations",
+          "Counterparty and recurrence detection"
+        ]
+      },
+      {
+        "name": "Analytics",
+        "components": [
+          "Credit-policy metric engine",
+          "Red-flag rules",
+          "Cross-account netting"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Underwriter workbench with drill-down",
+          "LOS and credit memo adapter",
+          "Category correction feedback"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"PDF and scan upload\"]\n    I2[\"Account Aggregator data\"]\n  end\n  subgraph S2[\"Parsing and integrity\"]\n    P1[\"Statement parsers and OCR\"]\n    P2[\"Balance and metadata checks\"]\n  end\n  subgraph S3[\"Categorisation and analytics\"]\n    C1[\"Narration rules\"]\n    C2[\"LLM categoriser\"]\n    C3[\"Metric engine\"]\n    C4[\"Red-flag rules\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Underwriter workbench\")\n    R2[\"LOS adapter\"]\n  end\n  I1 --> P1\n  I2 --> C1\n  P1 --> P2 --> C1\n  C1 --> C2 --> C3\n  C2 --> C4\n  C3 --> R1\n  C4 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "E-statement PDFs, including password-protected files",
+    "Scanned or photographed statements",
+    "Account Aggregator FI data shared with consent",
+    "Credit policy metric definitions",
+    "Applicant's declared income and existing obligations"
+  ],
+  "outputs": [
+    "Categorised transaction ledger per account",
+    "Credit-policy metrics with transaction drill-down",
+    "Bounce, EMI and obligation summary",
+    "Tamper and red-flag report",
+    "Underwriter corrections captured for model improvement"
+  ],
+  "human_in_the_loop": "Underwriters review every metric and flag before it enters the credit memo, and the fraud control unit reviews integrity failures. The service never sets eligibility or limits; it provides verified evidence.",
+  "integrations": [
+    "Loan origination system",
+    "Account Aggregator ecosystem through the lender's FIU integration",
+    "Credit bureau data for obligation cross-checks",
+    "Fraud or risk case management system",
+    "Document management system"
+  ],
+  "guardrails": [
+    "Metrics computed by deterministic code; the language model only categorises narrations",
+    "Integrity failures always routed to fraud control, never auto-rejected",
+    "Account Aggregator data used only for the consented purpose and duration",
+    "Statement data masked in logs and retained per policy",
+    "Category corrections reviewed before retraining"
+  ],
+  "compliance_notes": [
+    "Account Aggregator data is processed within the consent artefact's purpose and retention terms under RBI's NBFC-AA framework.",
+    "Supports data minimisation under the DPDP Act 2023 and need-based data collection under RBI digital lending rules."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Statements from historical self-employed loan files across five or six common banks, compared with underwriter workings, plus a set of known tampered statements.",
+    "deliverables": [
+      "Metric definitions encoded from your credit policy",
+      "Working analysis service on historical statements",
+      "Underwriter workbench",
+      "Accuracy report against underwriter workings",
+      "Tamper detection results on known cases"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Parsing completeness",
+        "how": "Parsed transactions and closing balances reconciled with statement totals for each file."
+      },
+      {
+        "metric": "Metric agreement with underwriters",
+        "how": "Computed metrics compared with underwriter workings for the same files, with differences explained."
+      },
+      {
+        "metric": "Categorisation accuracy",
+        "how": "Categories checked by underwriters on a sample of transactions per file."
+      },
+      {
+        "metric": "Tamper detection on known cases",
+        "how": "Known altered statements flagged or missed, and genuine statements falsely flagged."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you support Account Aggregator data?",
+      "a": "Yes. AA data arrives as structured FI data, so parsing errors disappear and the same categorisation and metrics apply. PDFs remain supported for borrowers who do not use AA."
+    },
+    {
+      "q": "Can it detect edited statements?",
+      "a": "It checks PDF metadata, fonts, layout consistency and running balances, and flags statements that fail. These are signals for fraud control rather than proof, so every flag is reviewed by a person."
+    },
+    {
+      "q": "Can we use our own credit policy definitions?",
+      "a": "Yes. Metrics such as average balance dates, income netting rules and bounce definitions are configured from your policy and versioned when it changes."
+    },
+    {
+      "q": "Does it replace our underwriters?",
+      "a": "No. It removes manual parsing and counting so underwriters spend their time on judgement. Every figure is traceable, and they can correct categories when context calls for it."
+    }
+  ],
+  "related": [
+    "loan-application-document-extraction",
+    "co-lending-portfolio-file-audit",
+    "property-title-document-summarisation",
+    "financial-statement-spreading"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/bank-statement-analysis-for-underwriting/"
+}

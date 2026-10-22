@@ -1,0 +1,223 @@
+{
+  "slug": "maintenance-log-and-sop-assistant",
+  "industry": "manufacturing",
+  "title": "Maintenance Log and SOP Assistant",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "A shop-floor assistant that answers technicians' questions from breakdown history, OEM manuals and SOPs, in Hindi or English, with the source page or work order behind every answer.",
+  "seo": {
+    "title": "Maintenance Log and SOP Assistant with AI | VipraTech",
+    "description": "AI for maintenance teams: digitises breakdown logs and answers questions from OEM manuals, SOPs and work orders in Hindi or English, with sources.",
+    "keywords": [
+      "maintenance knowledge assistant",
+      "SOP chatbot manufacturing",
+      "breakdown log digitisation",
+      "OEM manual search AI",
+      "TPM maintenance AI"
+    ]
+  },
+  "designed_for": [
+    "Maintenance Head",
+    "TPM Coordinator",
+    "Shift Maintenance Engineer",
+    "Plant Head"
+  ],
+  "problem": {
+    "intro": "When a press loses hydraulic pressure in the middle of the night shift, the technician on duty needs to know what fixed it last time. That answer usually sits in a handwritten breakdown register, a free-text SAP PM notification or a senior colleague's memory.",
+    "pain_points": [
+      {
+        "title": "History locked in registers",
+        "detail": "Breakdown logs, PM checklists and why-why analyses are handwritten or typed as free text, so nobody can search them by machine or symptom."
+      },
+      {
+        "title": "Manuals nobody reads at the machine",
+        "detail": "OEM manuals for CNCs, presses, compressors and moulding machines are long, in English, and kept in a cupboard or a shared drive."
+      },
+      {
+        "title": "Knowledge leaving with people",
+        "detail": "Senior technicians who know each machine's quirks retire or move on, and their experience is not written down."
+      },
+      {
+        "title": "Repeat breakdowns",
+        "detail": "Without quick access to past root causes, the same fault gets a temporary fix again and again and MTTR stays high."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We digitise your maintenance history and build an assistant on top of it. Handwritten registers and free-text work orders become structured records of machine, symptom, alarm code, root cause, action and spares used. OEM manuals, SOPs and one-point lessons are indexed by machine. A technician asks by typing or speaking, in Hindi, Hinglish or English, on a phone or shop-floor tablet. The assistant answers only from your approved documents and history, cites the page or work order behind each statement, and says clearly when it finds nothing. Safety steps are quoted word for word from the approved SOP.",
+    "capabilities": [
+      "Digitises handwritten breakdown registers and PM checklists into structured records",
+      "Indexes OEM manuals, SOPs, one-point lessons and alarm-code tables by machine",
+      "Answers in Hindi, Hinglish or English by text or voice, citing the source page or work order",
+      "Finds similar past breakdowns by machine, symptom and alarm code, with root cause and spares used",
+      "Quotes lockout-tagout and other safety steps verbatim from the current SOP revision",
+      "Drafts work order closure notes and one-point lessons for engineer approval"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Digitise history",
+      "detail": "Breakdown registers, PM sheets and CMMS exports are read and converted into structured records."
+    },
+    {
+      "step": 2,
+      "title": "Index documents",
+      "detail": "Manuals, SOPs and OPLs are split into sections, tagged by machine and revision, and indexed."
+    },
+    {
+      "step": 3,
+      "title": "Technician asks",
+      "detail": "A technician asks by voice or text, naming the machine or scanning its QR tag."
+    },
+    {
+      "step": 4,
+      "title": "Retrieve and check sources",
+      "detail": "The assistant retrieves matching history and document sections and checks whether they answer the question."
+    },
+    {
+      "step": 5,
+      "title": "Answer or say not found",
+      "detail": "It answers with citations, or states that the sources do not cover the question and suggests whom to call."
+    },
+    {
+      "step": 6,
+      "title": "Engineer approves new knowledge",
+      "detail": "Closure notes and OPLs drafted from the fix go to the maintenance engineer for approval before indexing."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Technician asks by voice or text\"] --> B[\"Identify machine and symptom\"]\n  B --> C[\"Search history, manuals and SOPs\"]\n  C --> D{\"Sources cover the question?\"}\n  D -->|\"yes\"| E[\"Answer with cited sources\"]\n  D -->|\"no\"| F[\"Say not found, suggest expert\"]\n  E --> G[\"Technician fixes and logs action\"]\n  F --> G\n  G --> H(\"Engineer approves log or OPL\")\n  H --> I[\"Added to indexed knowledge base\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Knowledge capture",
+        "components": [
+          "Handwritten register and PM sheet digitiser",
+          "CMMS or SAP PM notification export",
+          "Manual, SOP and OPL loader with revision tags"
+        ]
+      },
+      {
+        "name": "Index and retrieval",
+        "components": [
+          "Machine-tagged document index",
+          "Similar-breakdown search by symptom and alarm code"
+        ]
+      },
+      {
+        "name": "Assistant",
+        "components": [
+          "LLM answer generator restricted to retrieved sources",
+          "Speech-to-text and text-to-speech for Hindi and English",
+          "Not-found and safety-quote rules"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Engineer approval queue for logs and OPLs",
+          "Answer feedback from technicians"
+        ]
+      },
+      {
+        "name": "Access and audit",
+        "components": [
+          "Role-based access by plant and department",
+          "Question and answer log for review"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Knowledge capture\"]\n    K1[\"Register digitiser\"]\n    K2[\"CMMS export\"]\n    K3[\"Manuals and SOPs\"]\n  end\n  subgraph S2[\"Index and retrieval\"]\n    N1[\"Machine-tagged index\"]\n    N2[\"Similar breakdown search\"]\n  end\n  subgraph S3[\"Assistant\"]\n    A1[\"Voice and text interface\"]\n    A2[\"LLM answers from sources\"]\n  end\n  subgraph S4[\"Review, access and audit\"]\n    R1(\"Engineer approval queue\")\n    R2[\"Question and answer log\"]\n  end\n  K1 --> N1\n  K2 --> N1\n  K3 --> N1\n  N1 --> N2\n  A1 --> A2\n  N2 --> A2\n  A2 --> R2\n  A2 --> R1\n  R1 --> N1"
+  },
+  "inputs": [
+    "Handwritten breakdown registers and PM checklists",
+    "CMMS or SAP PM notifications and work orders",
+    "OEM manuals, alarm-code lists and spare-part catalogues",
+    "SOPs, one-point lessons and why-why analyses",
+    "Machine list with tags and locations"
+  ],
+  "outputs": [
+    "Structured breakdown history by machine, symptom and root cause",
+    "Cited answers to technicians' questions",
+    "Similar-incident lists with actions taken and spares used",
+    "Draft closure notes and one-point lessons for approval",
+    "Log of unanswered questions that shows documentation gaps"
+  ],
+  "human_in_the_loop": "Technicians decide what to do at the machine; the assistant only points to what the documents and history say. Maintenance engineers approve digitised records, closure notes and new OPLs before they enter the knowledge base.",
+  "integrations": [
+    "SAP PM, Maximo or another CMMS",
+    "Shared drives or DMS holding manuals and SOPs",
+    "Shop-floor tablets or Android phones",
+    "Microsoft Teams or WhatsApp for access",
+    "Single sign-on for role-based access"
+  ],
+  "guardrails": [
+    "Answers only from indexed, approved sources, with citations",
+    "Explicit not-found response instead of a guess",
+    "Safety and lockout-tagout steps quoted verbatim from the current SOP",
+    "Superseded SOP revisions excluded from answers",
+    "Question logs reviewed for wrong or unsafe answers"
+  ],
+  "compliance_notes": [
+    "Answering only from the current approved revision of each SOP supports document control expectations under ISO 9001.",
+    "The assistant does not replace your lockout-tagout procedure or permit-to-work system."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One machine group, such as the CNC cell or the press shop, with twelve months of breakdown history and the manuals and SOPs for those machines.",
+    "deliverables": [
+      "Digitised breakdown history for the pilot machines",
+      "Indexed manuals, SOPs and OPLs",
+      "Assistant on tablet or phone in Hindi and English",
+      "Evaluation on a question set written by senior technicians",
+      "Roll-out plan for other machine groups"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Answer accuracy",
+        "how": "Senior technicians grade answers to a prepared question set and to real questions from the floor."
+      },
+      {
+        "metric": "Citation correctness",
+        "how": "Share of answers whose cited page or work order actually supports the statement."
+      },
+      {
+        "metric": "Digitisation field accuracy",
+        "how": "Structured records checked against the original registers on a sample."
+      },
+      {
+        "metric": "Not-found rate",
+        "how": "Share of questions the sources could not answer, used to find documentation gaps."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our logbooks are handwritten in a mix of Hindi and English. Can you read them?",
+      "a": "Yes, for most legible handwriting. Entries the system cannot read with confidence are flagged for a maintenance engineer to confirm, and the pilot report shows accuracy on your actual registers."
+    },
+    {
+      "q": "What stops it from inventing a fix?",
+      "a": "It answers only from retrieved documents and history, cites each source, and is designed to say it does not know when the sources do not cover the question. Technicians grade answers during the pilot, and the logs are reviewed."
+    },
+    {
+      "q": "Can technicians use it in a noisy shop?",
+      "a": "Voice works with a headset or a phone held close, and a machine QR tag opens the right context in one tap. In very noisy areas short typed queries are often more reliable, so we test both on the floor."
+    },
+    {
+      "q": "Does it connect to SAP PM?",
+      "a": "It can read notifications and work orders from SAP PM or another CMMS through an export or API, and draft closure notes for engineers to post. It does not create or close work orders on its own."
+    }
+  ],
+  "related": [
+    "engineering-drawing-and-spec-extraction",
+    "plant-copilot-security-review",
+    "visual-quality-inspection",
+    "inspection-and-maintenance-report-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/maintenance-log-and-sop-assistant/"
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "batch-manufacturing-record-review",
+  "industry": "pharma-life-sciences",
+  "title": "Batch Manufacturing Record Review",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Pre-review of executed batch manufacturing and packaging records that flags blank fields, out-of-limit values, signature gaps and unlinked deviations, with page references, before QA starts.",
+  "seo": {
+    "title": "AI Batch Manufacturing Record (BMR) Review | VipraTech",
+    "description": "AI pre-review of executed BMRs and BPRs that flags blank fields, out-of-limit values, missing signatures and open deviations for QA reviewers.",
+    "keywords": [
+      "batch manufacturing record review",
+      "BMR review automation",
+      "BPR review AI",
+      "review by exception pharma",
+      "batch release documentation"
+    ]
+  },
+  "designed_for": [
+    "Head of Quality Assurance",
+    "QA Batch Release Manager",
+    "Qualified Person",
+    "Production Manager"
+  ],
+  "problem": {
+    "intro": "Executed batch manufacturing records (BMRs) and batch packaging records (BPRs) are still hand-filled on many sites, with in-process checks, equipment logs, line clearance and printouts attached. QA reads every page before release, and the record is often the slowest step between packing and dispatch.",
+    "pain_points": [
+      {
+        "title": "Every page read, every time",
+        "detail": "Reviewers check dispensing weights, process parameters, yield calculations and signatures page by page, even when most of the record is in order."
+      },
+      {
+        "title": "Small errors found late",
+        "detail": "A missing second-person verification, an unrecorded time or a wrong yield calculation often surfaces at release and sends the record back to the floor."
+      },
+      {
+        "title": "Deviations not linked",
+        "detail": "A parameter excursion noted in the margin may have no deviation number, or the deviation may still be open when the batch is presented for release."
+      },
+      {
+        "title": "Good documentation practice slips",
+        "detail": "Overwriting, corrections without date and initials, and blank fields left unstruck are common audit observations that are tedious to catch by hand."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a review assistant that reads scanned or electronic batch records against the master record for that product. It extracts every entry, checks recorded values against the limits in the master BMR, recalculates yields and reconciliations, and confirms each step carries the required signatures and dates. It looks for good documentation practice issues such as blank fields and corrections without initials, and checks deviation and change control numbers against your QMS. The output is a findings sheet with each item linked to the page image, so QA reviews by exception and still signs off the whole record.",
+    "capabilities": [
+      "Maps each executed page to its step in the master BMR or BPR",
+      "Reads handwritten entries, stamps and attached printouts such as weighing slips and HMI reports",
+      "Checks recorded parameters against master record limits and recalculates yield and reconciliation",
+      "Detects missing signatures, dates, second-person checks and unstruck blank fields",
+      "Matches deviation, OOS and change control references against the QMS and flags open items",
+      "Produces a findings sheet linked to page images for QA review and sign-off"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scan or export the executed record",
+      "detail": "The completed BMR or BPR is scanned on the shop floor or exported from the MES and tagged with product and batch number."
+    },
+    {
+      "step": 2,
+      "title": "Align to the master record",
+      "detail": "Each page is matched to its master BMR step, so the expected fields, limits and signatories are known."
+    },
+    {
+      "step": 3,
+      "title": "Extract entries",
+      "detail": "Handwritten and printed values, signatures, dates and attachments are extracted with a confidence score per field."
+    },
+    {
+      "step": 4,
+      "title": "Confirm unclear reads",
+      "detail": "Fields the system cannot read confidently are shown to a reviewer to confirm instead of being guessed."
+    },
+    {
+      "step": 5,
+      "title": "Run checks",
+      "detail": "Values are compared with limits, calculations are repeated, GDP rules are applied and deviation references are matched to the QMS."
+    },
+    {
+      "step": 6,
+      "title": "QA reviews findings",
+      "detail": "The QA reviewer works through the findings sheet, returns corrections to production and completes the formal review."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Executed BMR scanned or exported\"] --> B[\"Align pages to master BMR\"]\n  B --> C[\"Extract entries and signatures\"]\n  C --> D{\"All fields read confidently?\"}\n  D -->|\"no\"| E(\"Reviewer confirms unclear entries\")\n  D -->|\"yes\"| F[\"Limit, calculation and GDP checks\"]\n  E --> F\n  F --> G[\"Match deviations against QMS\"]\n  G --> H[\"Findings sheet with page links\"]\n  H --> I(\"QA reviewer completes review\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Shop-floor scanning station with batch barcode",
+          "MES or eBMR export connector",
+          "Master BMR and BPR library"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Handwriting-capable OCR",
+          "Page-to-step alignment model",
+          "Signature and stamp detection"
+        ]
+      },
+      {
+        "name": "Checks",
+        "components": [
+          "Limit rules from the master record",
+          "Yield and reconciliation calculator",
+          "GDP rule set",
+          "QMS lookup for deviations and change controls"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Findings sheet with page image viewer",
+          "Reviewer confirmation queue"
+        ]
+      },
+      {
+        "name": "Audit",
+        "components": [
+          "Log of extractions, checks and reviewer actions",
+          "Batch-level review report export"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Scanning station\"]\n    C2[\"MES or eBMR export\"]\n    C3[\"Master BMR library\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"Handwriting OCR\"]\n    E2[\"Page to step alignment\"]\n    E3[\"Signature detection\"]\n  end\n  subgraph S3[\"Checks\"]\n    K1[\"Limit and GDP rules\"]\n    K2[\"Yield calculator\"]\n    K3[\"QMS deviation lookup\"]\n  end\n  subgraph S4[\"Review and audit\"]\n    R1(\"QA findings viewer\")\n    R2[\"Audit log\"]\n  end\n  C1 --> E1\n  C2 --> E2\n  C3 --> E2\n  E1 --> E2\n  E2 --> E3\n  E3 --> K1\n  E3 --> K2\n  K1 --> K3\n  K2 --> R1\n  K3 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Executed BMR and BPR scans or eBMR exports",
+    "Approved master BMR and BPR for the product",
+    "Attached printouts such as weighing slips, HMI reports and line clearance checklists",
+    "Deviation, OOS and change control register from the QMS",
+    "Authorised signatory list per step"
+  ],
+  "outputs": [
+    "Findings sheet grouped by severity with page references",
+    "Recalculated yields and reconciliation figures",
+    "List of open or unlinked deviations",
+    "Extracted batch data for trending in your annual product quality review",
+    "Audit log of all checks and reviewer decisions"
+  ],
+  "human_in_the_loop": "Reviewers confirm any entry the system could not read confidently, and QA decides whether each finding is a genuine issue. Batch disposition stays with the Qualified Person or authorised QA; the assistant only prepares the review.",
+  "integrations": [
+    "MES or eBMR system (export or API)",
+    "QMS such as TrackWise, MasterControl or an in-house system",
+    "Document management system holding master records",
+    "ERP batch status in SAP or similar",
+    "Shop-floor scanners and network folders"
+  ],
+  "guardrails": [
+    "No automatic batch disposition; release stays with authorised QA",
+    "Per-field confidence threshold, with unclear handwriting sent for confirmation",
+    "Check rules derived from the approved master record and version-controlled",
+    "Every finding linked to the source page image",
+    "Periodic full manual review of sampled batches to measure what the system missed"
+  ],
+  "compliance_notes": [
+    "Treated as a computerised system supporting GMP review and validated for that intended use, with audit trails aligned to 21 CFR Part 11 and EU GMP Annex 11.",
+    "Supports good documentation practice and ALCOA+ data integrity expectations, including under India's revised Schedule M."
+  ],
+  "pilot": {
+    "duration": "5 weeks",
+    "scope": "One product and one record type, such as the granulation-to-compression BMR, using previously reviewed batches plus live batches in parallel.",
+    "deliverables": [
+      "Check list derived from the master BMR and agreed with QA",
+      "Working pre-review pipeline on historical and live batches",
+      "Findings viewer for QA reviewers",
+      "Comparison report against findings from your manual review",
+      "Validation plan and production estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Finding recall",
+        "how": "Findings from your completed manual reviews compared with what the assistant flagged on the same batches."
+      },
+      {
+        "metric": "False flags",
+        "how": "Findings the QA reviewer marks as not an issue, counted per batch."
+      },
+      {
+        "metric": "Handwriting read accuracy",
+        "how": "Sampled extracted entries compared with the page image by a reviewer."
+      },
+      {
+        "metric": "Review time per batch",
+        "how": "Timed QA review of comparable batches with and without the findings sheet."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our BMRs are handwritten. Will this work?",
+      "a": "Yes, that is the usual case. Extraction handles handwritten entries and stamps, and anything below the confidence threshold is shown to a reviewer rather than guessed. The pilot reports read accuracy separately for handwritten and printed fields."
+    },
+    {
+      "q": "Does it replace QA review?",
+      "a": "No. It moves QA from reading every page to working through a findings sheet, but QA still reviews and signs the record. We also recommend periodic full manual review of sampled batches as a control."
+    },
+    {
+      "q": "We already run an eBMR. Is this still useful?",
+      "a": "An eBMR enforces many entry checks at the point of entry. The assistant then focuses on cross-record checks: deviations, attachments, calculations and consistency with the QMS and LIMS."
+    },
+    {
+      "q": "How long does it take to add a new product?",
+      "a": "Each product needs its master record mapped into checks. The pilot shows how long that takes for your record format, and later products reuse the same rule types."
+    }
+  ],
+  "related": [
+    "coa-extraction-and-spec-matching",
+    "regulatory-dossier-and-sop-assistant",
+    "tablet-and-vial-defect-detection",
+    "gxp-ai-tool-validation-and-security"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/batch-manufacturing-record-review/"
+}

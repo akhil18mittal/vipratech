@@ -1,0 +1,224 @@
+{
+  "slug": "discharge-summary-and-record-structuring",
+  "industry": "healthcare",
+  "title": "Discharge Summary and Medical Record Structuring",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Draft discharge summaries from the inpatient file and turn past records into structured diagnoses, procedures, medicines and allergies, each linked to its source for the doctor to verify.",
+  "seo": {
+    "title": "AI Discharge Summary and Record Structuring | VipraTech",
+    "description": "AI that drafts discharge summaries from inpatient notes, drug charts and reports, and structures past records for doctors to verify and sign.",
+    "keywords": [
+      "discharge summary AI",
+      "medical record structuring",
+      "hospital documentation automation",
+      "ICD-10 coding assistance",
+      "inpatient file summarisation"
+    ]
+  },
+  "designed_for": [
+    "Medical Superintendent",
+    "Head of Medical Records (MRD)",
+    "Consultants and resident doctors",
+    "Chief Information Officer"
+  ],
+  "problem": {
+    "intro": "A discharge summary should bring together the admission diagnosis, course in hospital, procedures, key investigations, medicines on discharge and follow-up advice. In practice a resident assembles it from handwritten progress notes, OT notes, the drug chart and lab printouts, often late in the day while the patient waits to leave. Old discharge summaries and referral letters that patients bring in stay as scanned images nobody can search.",
+    "pain_points": [
+      {
+        "title": "Discharge delays",
+        "detail": "Summaries written at the end of a busy shift hold up discharge, bed turnover and the insurance final bill."
+      },
+      {
+        "title": "Inconsistent content",
+        "detail": "Different doctors include different sections, and medicines on discharge sometimes differ from the final drug chart."
+      },
+      {
+        "title": "Unsearchable history",
+        "detail": "Scanned previous records sit as images in the HIS, so allergies and prior procedures are missed or asked again."
+      },
+      {
+        "title": "Coding backlog",
+        "detail": "Medical records teams code diagnoses and procedures from free text, which is slow and varies between coders."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a record structuring service that reads the inpatient file and incoming past records. For discharge, it assembles a draft summary in your hospital's template: diagnosis, history, course in hospital, procedures with dates, key investigation results, condition at discharge, medicines on discharge checked against the final drug chart, and follow-up advice as the team wrote it. Each sentence links to the note or report it came from. The treating doctor edits and signs, and nothing is released unsigned. For past records, it extracts diagnoses, procedures, medicines and allergies into structured fields and suggests ICD-10 codes for the medical records team to confirm.",
+    "capabilities": [
+      "Reads typed and handwritten progress notes, OT notes, drug charts and investigation reports",
+      "Drafts the discharge summary in your template with a source link on every sentence",
+      "Compares medicines on discharge with the final drug chart and flags differences for the doctor",
+      "Extracts diagnoses, procedures, medicines and allergies from past discharge summaries and referral letters",
+      "Suggests ICD-10 codes for medical records coders to confirm or change",
+      "Exports structured data to your HIS, and to FHIR-based formats where ABDM integration is in place"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect the inpatient file",
+      "detail": "When discharge is planned, notes, OT records, the drug chart and reports are pulled from the HIS or scanned from the paper file."
+    },
+    {
+      "step": 2,
+      "title": "Extract and organise",
+      "detail": "Each document is classified and its clinical facts extracted with dates and source references."
+    },
+    {
+      "step": 3,
+      "title": "Draft the summary",
+      "detail": "A draft is assembled in the hospital template using only facts found in the record."
+    },
+    {
+      "step": 4,
+      "title": "Check consistency",
+      "detail": "Medicines, procedure dates and diagnoses are cross-checked across documents, and mismatches and gaps are highlighted."
+    },
+    {
+      "step": 5,
+      "title": "Doctor review and sign-off",
+      "detail": "The treating doctor edits the draft, resolves each flag and signs the summary in the HIS."
+    },
+    {
+      "step": 6,
+      "title": "Code and store",
+      "detail": "Coders confirm suggested ICD-10 codes, and the structured record is saved for future visits."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inpatient file from HIS or scan\"] --> B[\"Classify notes, OT, drug chart\"]\n  B --> C[\"Extract facts with dates and sources\"]\n  C --> D[\"Draft summary in hospital template\"]\n  D --> E{\"Medicines and dates consistent?\"}\n  E -->|\"no\"| F[\"Highlight mismatch for doctor\"]\n  E -->|\"yes\"| G(\"Treating doctor edits and signs\")\n  F --> G\n  G --> H(\"MRD coder confirms ICD-10\")\n  H --> I[\"Structured record saved to HIS\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "HIS or EMR connector",
+          "Scanner and paper file upload",
+          "Patient episode grouping by UHID and IP number"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Handwriting-capable OCR",
+          "Clinical document classifier",
+          "LLM fact extractor with source spans"
+        ]
+      },
+      {
+        "name": "Drafting and checks",
+        "components": [
+          "Template-based summary composer",
+          "Medication cross-check against drug chart",
+          "ICD-10 code suggester"
+        ]
+      },
+      {
+        "name": "Clinical review",
+        "components": [
+          "Doctor review and e-sign screen",
+          "MRD coding queue"
+        ]
+      },
+      {
+        "name": "Storage and audit",
+        "components": [
+          "HIS write-back and FHIR export",
+          "Audit log of drafts, edits and signatures"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"HIS or EMR connector\"]\n    I2[\"Paper file scanning\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Handwriting-capable OCR\"]\n    U2[\"Clinical document classifier\"]\n    U3[\"LLM fact extractor with sources\"]\n  end\n  subgraph S3[\"Drafting and checks\"]\n    K1[\"Summary composer\"]\n    K2[\"Medication cross-check\"]\n    K3[\"ICD-10 suggester\"]\n  end\n  subgraph S4[\"Review and storage\"]\n    R1(\"Doctor review and e-sign\")\n    R2(\"MRD coding queue\")\n    R3[\"HIS write-back and audit log\"]\n  end\n  I1 --> U2\n  I2 --> U1 --> U2\n  U2 --> U3\n  U3 --> K1\n  U3 --> K2\n  U3 --> K3\n  K1 --> R1\n  K2 --> R1\n  K3 --> R2\n  R1 --> R3\n  R2 --> R3"
+  },
+  "inputs": [
+    "Admission notes and case sheet",
+    "Progress notes and OT or procedure notes",
+    "Drug chart and medication administration record",
+    "Investigation and imaging reports",
+    "Previous discharge summaries and referral letters",
+    "Hospital discharge summary template"
+  ],
+  "outputs": [
+    "Draft discharge summary with source links",
+    "Medication and date mismatch flags",
+    "Structured diagnoses, procedures, medicines and allergies",
+    "Suggested ICD-10 codes for coder confirmation",
+    "Signed summary and audit trail in the HIS"
+  ],
+  "human_in_the_loop": "The treating doctor reviews, edits and signs every discharge summary; no draft reaches the patient, insurer or record unsigned. Medical records coders confirm every suggested code.",
+  "integrations": [
+    "Hospital information system or EMR (HL7, FHIR, API or database views)",
+    "Document scanners and DMS",
+    "ABDM-integrated health record systems where applicable",
+    "Insurance desk and billing module",
+    "Single sign-on for clinician access"
+  ],
+  "guardrails": [
+    "Drafts use only facts present in the record, with no inferred diagnoses or advice",
+    "Every sentence carries a link to its source document and page",
+    "Unsigned drafts are watermarked and cannot be printed or shared",
+    "Role-based access aligned with HIS permissions, with patient data masked in logs",
+    "Regular MRD audit of signed summaries against source records"
+  ],
+  "compliance_notes": [
+    "Health data handled with consent, purpose limitation and security safeguards under the DPDP Act 2023.",
+    "Designed as a documentation aid; clinical content remains the responsibility of the treating doctor.",
+    "For US deployments, built to operate under HIPAA safeguards and a business associate agreement."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Discharge summaries for one department, such as general surgery or internal medicine, drafted in parallel with the current process on de-identified or consented records.",
+    "deliverables": [
+      "Template and section rules agreed with the department",
+      "Working drafting pipeline on past inpatient files",
+      "Doctor review screen",
+      "Accuracy and edit report",
+      "Plan for HIS integration and roll-out"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Doctor edit effort",
+        "how": "Extent of changes between the draft and the signed summary, measured on every pilot case."
+      },
+      {
+        "metric": "Source accuracy",
+        "how": "Clinician review of a sample of statements against their linked sources."
+      },
+      {
+        "metric": "Medication mismatch detection",
+        "how": "Flags raised compared with discrepancies found by pharmacist or doctor review."
+      },
+      {
+        "metric": "Time to signed summary",
+        "how": "Time from discharge order to signed summary, compared with recent cases in the same department."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the AI write clinical opinions?",
+      "a": "No. It assembles facts already in the record into your template. Clinical judgement, advice and final wording belong to the treating doctor, who signs the summary."
+    },
+    {
+      "q": "Can it read doctors' handwriting?",
+      "a": "It handles legible handwriting in progress notes and drug charts and marks anything uncertain for the doctor instead of guessing. The pilot reports accuracy separately for handwritten and typed notes."
+    },
+    {
+      "q": "Does it work with our HIS?",
+      "a": "We connect through HL7, FHIR, APIs, database views or scanned exports, depending on what your HIS vendor supports. We agree the approach with your IT team early in the pilot."
+    },
+    {
+      "q": "Where is patient data processed?",
+      "a": "Within your infrastructure or your cloud account in an India region, using models that do not retain or train on your data. Access follows your HIS roles and is fully logged."
+    }
+  ],
+  "related": [
+    "clinical-documentation-from-dictation",
+    "lab-report-digitisation",
+    "hospital-insurance-claim-file-preparation",
+    "health-claim-document-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/healthcare/discharge-summary-and-record-structuring/"
+}

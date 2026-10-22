@@ -1,0 +1,222 @@
+{
+  "slug": "continuous-ai-security-regression-in-ci",
+  "industry": "saas-ai-companies",
+  "title": "Continuous AI Security Regression in CI",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Run versioned prompt-injection, jailbreak and data-leakage suites in CI on every prompt, model, tool or index change, and block releases that regress past agreed severity thresholds.",
+  "seo": {
+    "title": "Continuous AI Security Regression in CI | VipraTech",
+    "description": "Jailbreak, prompt injection and leakage regression suites in GitHub Actions or GitLab CI, run on every prompt, model or tool change, with release gates.",
+    "keywords": [
+      "AI security regression testing",
+      "jailbreak regression suite",
+      "prompt injection CI testing",
+      "LLM evaluation pipeline security",
+      "LLMOps security gates"
+    ]
+  },
+  "designed_for": [
+    "VP Engineering",
+    "ML Platform or LLMOps Lead",
+    "Application Security Lead",
+    "QA Engineering Manager"
+  ],
+  "problem": {
+    "intro": "LLM features change constantly: prompts are edited, providers upgrade models, tools are added and documents are re-indexed. Each change can quietly undo a fix from the last pentest. Without automated security tests in the pipeline, the first sign of a regression is often a customer report.",
+    "pain_points": [
+      {
+        "title": "Fixes that silently regress",
+        "detail": "A prompt tweak for tone or a new tool can reopen a prompt injection or leakage issue that was fixed months ago."
+      },
+      {
+        "title": "Provider model updates",
+        "detail": "Model versions change behaviour, and teams rarely rerun security tests when a provider alias moves to a new snapshot."
+      },
+      {
+        "title": "Non-deterministic results",
+        "detail": "A single passing run proves little when the same input can produce different outputs."
+      },
+      {
+        "title": "No release criteria for AI behaviour",
+        "detail": "Unit tests gate code, but nothing gates a prompt or model change on security behaviour."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a security regression suite that runs in your CI pipeline whenever prompts, model versions, tool definitions or retrieval indexes change. The suite starts from your pentest and red-team findings and from probe sets for each relevant OWASP LLM category, written as versioned test cases with expected safe behaviour. Each case runs several times to account for non-determinism. Scoring combines deterministic checks, such as canary detection and forbidden tool calls, with an evaluator model calibrated against human-labelled examples. Results are compared with the last release, and new failures above an agreed severity block the merge. Borderline results go to a reviewer. Dashboards show trends by category and model version.",
+    "capabilities": [
+      "Versioned test cases built from your past findings and OWASP LLM probe sets",
+      "Triggers on prompt, model, tool, index or configuration changes",
+      "Repeated sampling per case to handle non-determinism",
+      "Deterministic checks plus an evaluator model calibrated on human labels",
+      "Release gates on new failures above agreed severity",
+      "Trend dashboards by category, model version and release"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Build the baseline suite",
+      "detail": "Past findings and probe sets are turned into versioned test cases with expected safe behaviour."
+    },
+    {
+      "step": 2,
+      "title": "Trigger on change",
+      "detail": "CI runs the suite when prompts, models, tools, indexes or AI configuration files change."
+    },
+    {
+      "step": 3,
+      "title": "Run with repeats",
+      "detail": "Each case runs several times against a staging deployment of the feature."
+    },
+    {
+      "step": 4,
+      "title": "Score and compare",
+      "detail": "Deterministic checks and the evaluator score each run, and results are compared with the last release."
+    },
+    {
+      "step": 5,
+      "title": "Gate or review",
+      "detail": "New high-severity failures block the merge; borderline results go to a reviewer."
+    },
+    {
+      "step": 6,
+      "title": "Track and extend",
+      "detail": "Results feed dashboards, and new findings are added to the suite."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Prompt, model or tool change\"] --> B[\"CI triggers security suite\"]\n  B --> C[\"Run cases with repeats in staging\"]\n  C --> D[\"Score with checks and evaluator\"]\n  D --> E{\"New failure above threshold?\"}\n  E -->|\"yes\"| F[\"Block merge and open ticket\"]\n  E -->|\"borderline\"| G(\"Reviewer decides\")\n  E -->|\"no\"| H[\"Allow merge\"]\n  G --> H\n  G --> F\n  F --> I[\"Fix and add case to suite\"]\n  H --> J[\"Update trend dashboard\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Test suite",
+        "components": [
+          "Versioned test case repository",
+          "OWASP LLM probe sets",
+          "Cases from past pentest and red-team findings"
+        ]
+      },
+      {
+        "name": "CI integration",
+        "components": [
+          "GitHub Actions or GitLab CI job",
+          "Change detection for prompts, models, tools and indexes",
+          "Staging deployment target"
+        ]
+      },
+      {
+        "name": "Execution and scoring",
+        "components": [
+          "Parallel runner with repeated sampling",
+          "Deterministic checks for canaries and forbidden tool calls",
+          "Evaluator model with calibrated rubric"
+        ]
+      },
+      {
+        "name": "Gating and review",
+        "components": [
+          "Severity thresholds and baseline comparison",
+          "Reviewer queue for borderline results"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Trend dashboard",
+          "Ticket creation in your issue tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Test suite\"]\n    T1[\"Versioned test cases\"]\n    T2[\"Findings-derived cases\"]\n  end\n  subgraph S2[\"CI integration\"]\n    C1[\"CI job\"]\n    C2[\"Change detection\"]\n  end\n  subgraph S3[\"Execution and scoring\"]\n    E1[\"Runner with repeats\"]\n    E2[\"Deterministic checks\"]\n    E3[\"Evaluator model\"]\n  end\n  subgraph S4[\"Gating and reporting\"]\n    G1[\"Threshold and baseline check\"]\n    G2(\"Reviewer queue\")\n    G3[\"Dashboard and tickets\"]\n  end\n  C2 --> C1\n  T1 --> E1\n  T2 --> E1\n  C1 --> E1\n  E1 --> E2\n  E1 --> E3\n  E2 --> G1\n  E3 --> G1\n  G1 --> G2\n  G1 --> G3"
+  },
+  "inputs": [
+    "Past pentest and red-team findings",
+    "Staging endpoint for the LLM feature",
+    "Prompt, model and tool configuration in version control",
+    "Severity thresholds agreed with security",
+    "Human-labelled examples to calibrate the evaluator"
+  ],
+  "outputs": [
+    "Versioned security regression suite",
+    "CI job with pass, block and review outcomes",
+    "Tickets for new failures",
+    "Trend dashboard by category and model version",
+    "Evaluator calibration report"
+  ],
+  "human_in_the_loop": "Reviewers decide borderline results and confirm new failures before tickets are raised, and the security lead owns the severity thresholds. The evaluator model is recalibrated against human labels on a regular schedule.",
+  "integrations": [
+    "GitHub Actions, GitLab CI or Jenkins",
+    "LLM gateway or provider APIs",
+    "Issue tracker such as Jira or Linear",
+    "Observability tools",
+    "Slack or Microsoft Teams for alerts"
+  ],
+  "guardrails": [
+    "Suite runs against staging, never production users",
+    "Evaluator agreement with human labels checked before gating is switched on",
+    "Test secrets held in the CI secrets manager",
+    "Cost and rate limits on each run",
+    "Gate thresholds versioned and changed only by the security owner"
+  ],
+  "compliance_notes": [
+    "Continuous testing records help evidence ongoing monitoring under NIST AI RMF and ISO/IEC 42001.",
+    "Test categories map to the OWASP Top 10 for LLM Applications."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "A suite for one LLM feature running in your CI against a staging deployment, built from your last pentest findings and the core OWASP LLM categories.",
+    "deliverables": [
+      "Baseline regression suite",
+      "CI job with gating rules",
+      "Evaluator calibration report",
+      "Dashboard",
+      "Runbook for adding new cases"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Evaluator agreement with humans",
+        "how": "Evaluator scores compared with human labels on a held-out set."
+      },
+      {
+        "metric": "Regressions caught before release",
+        "how": "Count of new failures blocked or sent for review in CI during the pilot."
+      },
+      {
+        "metric": "Run time and cost per pipeline",
+        "how": "Duration and model cost per suite run, logged by CI."
+      },
+      {
+        "metric": "Suite coverage",
+        "how": "Past findings and OWASP LLM categories represented in the suite."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will this slow our pipeline down?",
+      "a": "The full suite can run on merges to main or nightly, with a smaller fast suite on every pull request. We tune the split to your release pace and budget."
+    },
+    {
+      "q": "How do you handle different outputs on each run?",
+      "a": "Each case runs several times and is judged on its worst and typical outcomes, not a single sample. Gates are based on new failures compared with the last release, which reduces noise."
+    },
+    {
+      "q": "Can we trust an LLM to grade security tests?",
+      "a": "Only after checking it against human labels. Deterministic checks handle what they can, the evaluator handles the rest, and borderline cases go to a person."
+    },
+    {
+      "q": "Does it help when the provider changes the model?",
+      "a": "Yes. Pin model versions where you can, and schedule a run when a provider announces a new snapshot. The dashboard shows behaviour by model version."
+    }
+  ],
+  "related": [
+    "llm-application-penetration-test",
+    "ai-agent-red-teaming",
+    "rag-data-leakage-and-access-control-testing",
+    "eu-ai-act-iso-42001-evidence-pack"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/saas-ai-companies/continuous-ai-security-regression-in-ci/"
+}

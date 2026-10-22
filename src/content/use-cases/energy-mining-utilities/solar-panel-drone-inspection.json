@@ -1,0 +1,217 @@
+{
+  "slug": "solar-panel-drone-inspection",
+  "industry": "energy-mining-utilities",
+  "title": "Solar Panel Inspection from Drone Images",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Turn drone thermal and RGB surveys of solar plants into a checked defect register mapped to block, inverter, string and module, ready for O&M work orders and warranty evidence.",
+  "seo": {
+    "title": "Solar Panel Drone Inspection with AI | VipraTech",
+    "description": "AI that analyses drone thermography of solar plants, classifies hotspots and module defects, maps them to strings and produces O&M-ready reports.",
+    "keywords": [
+      "solar drone inspection AI",
+      "PV thermography analysis",
+      "solar hotspot detection",
+      "solar module defect detection",
+      "drone thermal inspection report"
+    ]
+  },
+  "designed_for": [
+    "Head of Solar O&M",
+    "Asset Manager, Renewables",
+    "Plant In-charge",
+    "Drone Inspection Service Provider"
+  ],
+  "problem": {
+    "intro": "Utility-scale solar plants commission drone thermography to find hotspots, failed bypass diodes, disconnected strings and broken glass. The flight itself is quick; turning the resulting stack of radiometric images into a defect list a technician can find on the ground is the slow part.",
+    "pain_points": [
+      {
+        "title": "Manual tagging of every frame",
+        "detail": "Analysts scroll through thermal frames one by one, so reports lag the flight and defects keep costing generation in the meantime."
+      },
+      {
+        "title": "Defects not tied to the layout",
+        "detail": "A hotspot marked on an image is of little use if the technician cannot locate the table, string and module position in the field."
+      },
+      {
+        "title": "Inconsistent severity grading",
+        "detail": "Different vendors and analysts grade the same anomaly differently, which makes year-on-year comparison and contractor performance hard to judge."
+      },
+      {
+        "title": "Weak evidence for warranty claims",
+        "detail": "Module suppliers and EPC contractors ask for clear thermal and visual evidence per module, which is slow to assemble by hand."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an analysis pipeline for drone surveys of ground-mounted and large rooftop plants. It takes radiometric thermal and RGB images with flight logs, rejects frames captured outside valid conditions and georeferences the rest onto your plant layout. Models detect and classify anomalies such as single-cell hotspots, bypass diode and substring patterns, whole-module heating, string outages, cracked glass, soiling and shading. Temperature differences are computed against neighbouring modules from the radiometric data. Each anomaly is mapped to block, inverter, string and module position, graded with your severity rules and reviewed by a thermographer where confidence is low. The output is a defect register, an evidence report and work orders.",
+    "capabilities": [
+      "Detects hotspots, bypass diode and substring patterns, module heating and string outages",
+      "Flags cracked or broken glass, soiling, bird droppings and vegetation shading from RGB images",
+      "Computes temperature difference against neighbouring modules from radiometric data",
+      "Maps every anomaly to block, inverter, string, table and module position",
+      "Compares surveys over time to show new, persisting and repaired defects",
+      "Cross-checks string outages against string current data from the monitoring system"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Upload the survey",
+      "detail": "The drone team uploads thermal and RGB images with flight logs, and irradiance and ambient readings come from the plant weather station."
+    },
+    {
+      "step": 2,
+      "title": "Check capture conditions",
+      "detail": "Frames taken at low irradiance, steep angles or with motion blur are flagged for re-flight instead of being analysed."
+    },
+    {
+      "step": 3,
+      "title": "Detect and classify anomalies",
+      "detail": "Models find and classify anomalies and compute temperature differences from the radiometric data."
+    },
+    {
+      "step": 4,
+      "title": "Map to the plant layout",
+      "detail": "Georeferencing places each anomaly on the block, inverter, string and module layout from your as-built drawings."
+    },
+    {
+      "step": 5,
+      "title": "Thermographer review",
+      "detail": "Low-confidence classifications and high-severity findings are reviewed by a qualified thermographer or O&M engineer."
+    },
+    {
+      "step": 6,
+      "title": "Issue register and work orders",
+      "detail": "The approved defect register, evidence report and work orders go to the O&M team and the CMMS."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Drone thermal and RGB upload\"] --> B{\"Capture conditions valid?\"}\n  B -->|\"no\"| C[\"Flag frames for re-flight\"]\n  B -->|\"yes\"| D[\"Detect and classify anomalies\"]\n  D --> E[\"Map to block, string and module\"]\n  E --> F{\"Confident classification?\"}\n  F -->|\"no\"| G(\"Thermographer reviews anomaly\")\n  F -->|\"yes\"| H[\"Defect register with severity\"]\n  G --> H\n  H --> I[\"Report and maintenance work orders\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion and processing",
+        "components": [
+          "Survey upload portal or cloud bucket",
+          "Weather station irradiance feed",
+          "Capture condition checks",
+          "Orthomosaic and georeferencing"
+        ]
+      },
+      {
+        "name": "Detection",
+        "components": [
+          "Anomaly detector",
+          "Defect classifier",
+          "Temperature difference calculator"
+        ]
+      },
+      {
+        "name": "Plant model",
+        "components": [
+          "As-built layout with string and table mapping",
+          "Survey history store"
+        ]
+      },
+      {
+        "name": "Review and reporting",
+        "components": [
+          "Thermographer review screen",
+          "Defect register and PDF report",
+          "CMMS and monitoring system connectors"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion and processing\"]\n    I1[\"Survey upload\"]\n    I2[\"Irradiance feed\"]\n    I3[\"Capture condition checks\"]\n    I4[\"Georeferencing\"]\n  end\n  subgraph S2[\"Detection\"]\n    D1[\"Anomaly detector\"]\n    D2[\"Defect classifier\"]\n    D3[\"Temperature difference\"]\n  end\n  subgraph S3[\"Plant model\"]\n    P1[\"String and module layout\"]\n    P2[\"Survey history\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    R1(\"Thermographer review\")\n    R2[\"Defect register and report\"]\n    R3[\"CMMS work orders\"]\n  end\n  I1 --> I3\n  I2 --> I3\n  I3 --> I4\n  P1 --> I4\n  I4 --> D1\n  D1 --> D2\n  D1 --> D3\n  D2 --> R1\n  D3 --> R1\n  R1 --> R2\n  P2 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Radiometric thermal images from the drone survey",
+    "RGB images of the same blocks",
+    "Flight logs and GPS data",
+    "Irradiance and ambient temperature from the plant weather station",
+    "As-built layout with string and module mapping",
+    "Previous survey defect registers"
+  ],
+  "outputs": [
+    "Defect register by block, inverter, string and module",
+    "Annotated thermal and RGB evidence per defect",
+    "Survey report for O&M and asset management",
+    "Work orders in the CMMS",
+    "Survey-over-survey comparison of new and repaired defects"
+  ],
+  "human_in_the_loop": "A qualified thermographer or O&M engineer reviews low-confidence and high-severity anomalies and signs off the report. Decisions on module replacement, cleaning and warranty claims stay with your team.",
+  "integrations": [
+    "Drone data platform or cloud storage used by your survey vendor",
+    "SCADA or plant monitoring portal for string currents",
+    "CMMS for work orders",
+    "GIS or CAD exports of the plant layout",
+    "Evidence export for module supplier and EPC warranty claims"
+  ],
+  "guardrails": [
+    "Frames outside valid capture conditions are rejected, not reported as defects",
+    "Every defect links to its source images and coordinates",
+    "Severity rules are versioned and agreed with the O&M team",
+    "Reports are signed off by a named engineer",
+    "Plant layout and generation data kept in your cloud account"
+  ],
+  "compliance_notes": [
+    "Report structure can follow the PV thermography practice your O&M or EPC contract specifies, such as IEC TS 62446-3.",
+    "Flights are planned and flown by your licensed drone operator under applicable drone rules; we work only with the resulting data."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One block of an operating plant, using an existing survey dataset plus one new flight flown to agreed capture parameters.",
+    "deliverables": [
+      "Capture specification for your drone vendor",
+      "Processed defect register for the pilot block",
+      "Thermographer review screen",
+      "Agreement report against expert annotations",
+      "Plan and cost for plant-wide and repeat surveys"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Detection agreement",
+        "how": "Comparison of system findings with a thermographer's independent annotations of the same images."
+      },
+      {
+        "metric": "Location accuracy",
+        "how": "Field check of a sample of defects to confirm the mapped string and module position."
+      },
+      {
+        "metric": "Review load",
+        "how": "Share of anomalies routed to the thermographer for review."
+      },
+      {
+        "metric": "Report turnaround",
+        "how": "Time from data upload to signed-off report, compared with the current process."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you fly the drones?",
+      "a": "No. We work with data from your in-house team or survey vendor, and we provide a capture specification covering altitude, overlap, time of day and minimum irradiance so the images are usable for analysis."
+    },
+    {
+      "q": "Which cameras and file formats do you support?",
+      "a": "Radiometric thermal formats from common drone payloads, such as radiometric JPEG or TIFF, plus standard RGB images and flight logs. We confirm compatibility with a sample from your vendor before the pilot."
+    },
+    {
+      "q": "Can the output support warranty claims?",
+      "a": "It assembles the evidence suppliers usually ask for: thermal and RGB images per module, temperature difference, location and survey date. Whether a claim is valid under the warranty terms is decided by your team and the supplier."
+    },
+    {
+      "q": "Does it work for rooftop and C&I plants?",
+      "a": "Yes, where the drone can capture usable angles and layout drawings exist. Rooftop surveys often need more manual layout mapping, which we scope during the pilot."
+    }
+  ],
+  "related": [
+    "inspection-and-maintenance-report-extraction",
+    "field-technician-voice-reporting",
+    "permit-and-compliance-document-tracking",
+    "tower-site-inspection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/solar-panel-drone-inspection/"
+}

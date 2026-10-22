@@ -1,0 +1,222 @@
+{
+  "slug": "question-bank-tagging-and-generation",
+  "industry": "education",
+  "title": "Question Bank Tagging and Generation",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Turn years of DPPs, module books and past papers into a clean, syllabus-tagged question bank, remove duplicates and draft new variants that faculty check before any student sees them.",
+  "seo": {
+    "title": "Question Bank Tagging and Generation with AI | VipraTech",
+    "description": "AI that extracts questions from Word, PDF and scans, tags them by syllabus, type and difficulty, removes duplicates and drafts variants for faculty review.",
+    "keywords": [
+      "question bank tagging AI",
+      "JEE NEET question bank software",
+      "AI question generation for teachers",
+      "syllabus tagging of questions",
+      "duplicate question detection"
+    ]
+  },
+  "designed_for": [
+    "Academic Head",
+    "Head of Content (Edtech)",
+    "Subject Faculty Lead",
+    "Test Paper Setter"
+  ],
+  "problem": {
+    "intro": "Most coaching institutes and edtech companies own a large question collection that is hard to use: daily practice problems in Word files, module books as PDFs, scanned previous-year papers and solutions typed by different faculty over many years. Building a balanced test means searching folders from memory, and the same question reappears under different numbering.",
+    "pain_points": [
+      {
+        "title": "Untagged content",
+        "detail": "Questions lack consistent chapter, topic, difficulty and question-type tags, so test setters cannot filter by syllabus or balance a paper."
+      },
+      {
+        "title": "Equations and diagrams break on import",
+        "detail": "MathType objects, scanned figures and chemical structures do not survive copying into the test platform."
+      },
+      {
+        "title": "Hidden duplicates",
+        "detail": "The same question sits in several modules with small edits, so students see repeats and analytics double count."
+      },
+      {
+        "title": "New questions take faculty time",
+        "detail": "Writing fresh numericals and variants for every test series competes with teaching hours."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a content pipeline that ingests Word files, PDFs and scans, splits them into question, options, answer key and solution, and converts equations to LaTeX or MathML with figures kept as images. Each question is tagged against your syllabus tree, for example the published JEE Main or NEET-UG syllabus, with question type, a difficulty estimate and source. Near-duplicates are clustered for a faculty member to merge. For generation, faculty pick a question and ask for variants; the system changes values or context, re-derives the answer with a solver where possible and queues every draft for review. Nothing reaches students without faculty approval.",
+    "capabilities": [
+      "Splits mixed documents into question, options, answer key and worked solution",
+      "Converts equations to LaTeX or MathML and keeps diagrams as linked images",
+      "Tags syllabus chapter, topic, question type, difficulty estimate and source",
+      "Clusters near-duplicate questions across modules and years for faculty to merge",
+      "Drafts numerical and conceptual variants, with answers re-derived by a solver where possible",
+      "Exports to your test platform in its import format, such as Excel, QTI or API"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Ingest content",
+      "detail": "Word files, PDFs, scanned papers and existing platform exports are loaded subject by subject."
+    },
+    {
+      "step": 2,
+      "title": "Split and convert",
+      "detail": "Each item is separated into its parts, and equations and figures are converted into a format the test platform can render."
+    },
+    {
+      "step": 3,
+      "title": "Tag and de-duplicate",
+      "detail": "Questions are tagged against your syllabus tree and near-duplicates are clustered."
+    },
+    {
+      "step": 4,
+      "title": "Verify answers and tags",
+      "detail": "Low-confidence tags, missing keys and answers the solver disagrees with are queued for faculty."
+    },
+    {
+      "step": 5,
+      "title": "Faculty review",
+      "detail": "Subject faculty correct tags, merge duplicates and approve or reject generated variants."
+    },
+    {
+      "step": 6,
+      "title": "Publish to the bank",
+      "detail": "Approved questions are pushed to the test platform with full metadata and source history."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Word, PDF and scanned papers\"] --> B[\"Split into question, options, key\"]\n  B --> C[\"Convert equations and figures\"]\n  C --> D[\"Tag syllabus, type and difficulty\"]\n  D --> E[\"Cluster duplicates and check answers\"]\n  E --> F{\"Tag or answer uncertain?\"}\n  F -->|\"yes\"| G(\"Subject faculty review\")\n  F -->|\"no\"| H[\"Approved question bank\"]\n  J[\"Variants drafted on faculty request\"] --> G\n  G --> H\n  H --> I[\"Export to test platform\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Word and PDF parsers with MathType handling",
+          "OCR for scanned papers",
+          "Reader for existing test-platform exports"
+        ]
+      },
+      {
+        "name": "Structuring",
+        "components": [
+          "Question, option, key and solution splitter",
+          "Equation to LaTeX or MathML converter",
+          "Figure extraction and linking"
+        ]
+      },
+      {
+        "name": "Tagging and quality",
+        "components": [
+          "Syllabus-tree tagger",
+          "Difficulty and question-type classifier",
+          "Near-duplicate clustering",
+          "Answer verification with a symbolic solver"
+        ]
+      },
+      {
+        "name": "Generation",
+        "components": [
+          "Variant drafting from approved seed questions",
+          "Solver re-derivation of answers",
+          "Faculty approval queue"
+        ]
+      },
+      {
+        "name": "Publishing",
+        "components": [
+          "Test platform export in Excel, QTI or API format",
+          "Version history and source tracking"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Word and PDF parsers\"]\n    I2[\"OCR for scanned papers\"]\n  end\n  subgraph S2[\"Structuring and tagging\"]\n    T1[\"Question splitter\"]\n    T2[\"Equation and figure converter\"]\n    T3[\"Syllabus tagger\"]\n    T4[\"Duplicate clustering\"]\n  end\n  subgraph S3[\"Generation and verification\"]\n    G1[\"Variant drafting\"]\n    G2[\"Solver answer check\"]\n    G3(\"Faculty approval queue\")\n  end\n  subgraph S4[\"Publishing\"]\n    P1[\"Versioned question bank\"]\n    P2[\"Test platform export\"]\n  end\n  I1 --> T1\n  I2 --> T1\n  T1 --> T2\n  T2 --> T3\n  T3 --> T4\n  T4 --> G2\n  G1 --> G2\n  G2 --> G3\n  G3 --> P1\n  P1 --> G1\n  P1 --> P2"
+  },
+  "inputs": [
+    "DPPs, assignments and module books in Word or PDF",
+    "Scanned previous-year papers and solutions",
+    "Your syllabus tree and tagging conventions",
+    "Existing question exports from the test platform",
+    "Seed questions chosen by faculty for variant generation"
+  ],
+  "outputs": [
+    "Structured question bank with LaTeX or MathML and figures",
+    "Syllabus, type, difficulty and source tags",
+    "Duplicate clusters with merge decisions",
+    "Faculty-approved variants with worked answers",
+    "Import files or API pushes for your test platform"
+  ],
+  "human_in_the_loop": "Subject faculty approve tag corrections, duplicate merges and every generated question before it enters the live bank. Difficulty tags start as estimates and are updated from real student attempt data once tests run.",
+  "integrations": [
+    "Online test or assessment platform",
+    "LMS or content management system",
+    "Shared drives holding faculty Word files",
+    "Equation editors and LaTeX rendering",
+    "Analytics warehouse for attempt data"
+  ],
+  "guardrails": [
+    "Generated questions remain drafts until a named faculty member approves them",
+    "Answers rechecked with a solver; disagreements go to faculty",
+    "Source recorded for every question so third-party copyrighted material can be identified and excluded",
+    "No student data used for generation",
+    "Version history kept so any change can be traced and reversed"
+  ],
+  "compliance_notes": [
+    "Questions drawn from published books or other institutes' material may be protected by copyright; the source tag helps your team decide what can be reused."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One subject for one exam, for example JEE Main physics, using one module series and its matching previous-year papers.",
+    "deliverables": [
+      "Syllabus tree and tagging rules agreed with faculty",
+      "Structured, tagged bank for the pilot subject",
+      "Duplicate cluster report",
+      "Set of generated variants with faculty review outcomes",
+      "Import into your test platform and a roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Tag accuracy",
+        "how": "Faculty review of a random sample of tagged questions per chapter."
+      },
+      {
+        "metric": "Duplicates found",
+        "how": "Clusters confirmed by faculty as true duplicates or near-duplicates."
+      },
+      {
+        "metric": "Variant acceptance",
+        "how": "Generated variants approved, edited or rejected by faculty, with reasons."
+      },
+      {
+        "metric": "Rendering errors on import",
+        "how": "Questions that display incorrectly in the test platform after import."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will generated questions be accurate?",
+      "a": "Not always, which is why none are published without faculty review. Numerical answers are re-derived with a solver where possible, and any disagreement is flagged. The pilot reports how many drafts faculty accepted, edited or rejected."
+    },
+    {
+      "q": "Can it handle chemistry structures and physics diagrams?",
+      "a": "Diagrams and structures are extracted as images linked to the question, and equations become LaTeX or MathML. Complex figures can be redrawn later, but nothing is lost in conversion."
+    },
+    {
+      "q": "Do we keep ownership of our content?",
+      "a": "Yes. The bank, tags and generated questions belong to you and are stored in your environment. We use models that do not train on your data."
+    },
+    {
+      "q": "Can we use our own syllabus structure?",
+      "a": "Yes. We map to your chapter and topic tree, whether that follows the JEE or NEET syllabus, a state board or your own module order."
+    }
+  ],
+  "related": [
+    "handwritten-answer-digitisation",
+    "student-ai-tutor-safety-testing",
+    "answer-sheet-and-omr-evaluation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/question-bank-tagging-and-generation/"
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "consumer-durables-service-booking-voice-agent",
+  "industry": "manufacturing",
+  "title": "Service Booking Voice Agent for Consumer Durables",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "A multilingual voice agent that books installation and repair visits for ACs, refrigerators, washing machines and purifiers, captures model and serial correctly and checks warranty.",
+  "seo": {
+    "title": "Consumer Durables Service Booking Voice Agent | VipraTech",
+    "description": "Voice agent that books installation and repair visits for appliances in Hindi and regional languages, captures model and serial, and checks warranty.",
+    "keywords": [
+      "service booking voice agent",
+      "consumer durables customer service AI",
+      "appliance repair call automation",
+      "multilingual voice bot for service",
+      "warranty check automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Customer Service",
+    "Service Operations Manager",
+    "Call Centre Manager",
+    "Head of Service Network"
+  ],
+  "problem": {
+    "intro": "Consumer durables brands get most service demand by phone: installation and demo after purchase, repairs, AMC renewals and status checks. Calls spike with the season, such as air conditioners in summer, and the details captured on the first call decide whether the technician fixes the problem on the first visit.",
+    "pain_points": [
+      {
+        "title": "Seasonal call peaks",
+        "detail": "Summer for ACs and coolers, and festive sales for TVs and appliances, push queues beyond what the call centre can staff for."
+      },
+      {
+        "title": "Wrong model and serial captured",
+        "detail": "Customers read model numbers off a sticker or guess, so technicians carry the wrong part and a second visit follows."
+      },
+      {
+        "title": "Warranty checks need paperwork",
+        "detail": "Warranty status depends on purchase date and invoice, which agents ask customers to send separately and then chase."
+      },
+      {
+        "title": "Repeat status calls",
+        "detail": "Customers call again and again to ask when the technician will come, adding load without new information."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a voice agent for your service line that handles installation requests, repair bookings, AMC renewals and status calls in Hindi, English and regional languages. It captures product, model, serial, pincode and symptom, and can send a WhatsApp link so the customer photographs the rating plate and invoice; document extraction reads model, serial and purchase date from those photos. It checks warranty, books a slot from the authorised service centre's capacity and creates the ticket in your service CRM. Status calls are answered from live ticket data. Safety complaints and disputes go straight to a human agent.",
+    "capabilities": [
+      "Handles installation, demo, repair, AMC renewal and status calls in Hindi, English and regional languages",
+      "Captures symptoms and error codes in the customer's own words and maps them to your complaint codes",
+      "Reads model, serial and purchase date from rating-plate and invoice photos shared over WhatsApp",
+      "Checks warranty and AMC status against your service CRM",
+      "Books slots from service centre capacity by pincode and sends the ticket and visit window by SMS or WhatsApp",
+      "Escalates safety complaints such as burning smell, sparking or gas leaks to a human agent at once"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Understand the request",
+      "detail": "The caller is identified by phone number and the agent asks whether it is an installation, repair, AMC or status call."
+    },
+    {
+      "step": 2,
+      "title": "Capture product and symptom",
+      "detail": "The agent collects product, model, pincode and symptom, and sends a WhatsApp link for rating plate and invoice photos."
+    },
+    {
+      "step": 3,
+      "title": "Read photos and check warranty",
+      "detail": "Model, serial and purchase date are extracted from the photos and warranty status is checked."
+    },
+    {
+      "step": 4,
+      "title": "Check for escalation",
+      "detail": "Safety issues, disputes and repeat complaints are handed to a human agent with a summary."
+    },
+    {
+      "step": 5,
+      "title": "Book the visit",
+      "detail": "A slot is booked from service centre capacity and the ticket is created in the service CRM."
+    },
+    {
+      "step": 6,
+      "title": "Confirm and update",
+      "detail": "The customer gets the ticket number and visit window, and later status calls are answered from live ticket data."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Customer calls service line\"] --> B[\"Identify request type\"]\n  B --> C[\"Capture model, pincode and symptom\"]\n  C --> D[\"Read rating plate and invoice photos\"]\n  D --> E{\"Safety issue, dispute or unclear?\"}\n  E -->|\"yes\"| F(\"Human agent takes over\")\n  E -->|\"no\"| G[\"Check warranty and book slot\"]\n  G --> H[\"Create ticket in service CRM\"]\n  F --> H\n  H --> I[\"Send ticket and visit window\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channels",
+        "components": [
+          "Toll-free number via cloud telephony",
+          "WhatsApp Business API for photos and updates"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Multilingual speech-to-text and text-to-speech",
+          "LLM dialogue manager with service schemas",
+          "Safety and escalation rules"
+        ]
+      },
+      {
+        "name": "Document reading",
+        "components": [
+          "Rating plate and invoice photo extraction",
+          "Model and serial validation against the product master"
+        ]
+      },
+      {
+        "name": "Service systems",
+        "components": [
+          "Service CRM ticket adapter",
+          "Warranty and AMC lookup",
+          "Service centre slot and capacity API"
+        ]
+      },
+      {
+        "name": "Oversight",
+        "components": [
+          "Live agent handover with call summary",
+          "Recordings, transcripts and QA sampling"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Channels\"]\n    C1[\"Toll-free number\"]\n    C2[\"WhatsApp photo link\"]\n  end\n  subgraph S2[\"Conversation\"]\n    V1[\"Speech to text and voice\"]\n    V2[\"LLM dialogue manager\"]\n    V3[\"Safety and escalation rules\"]\n  end\n  subgraph S3[\"Document reading\"]\n    D1[\"Rating plate and invoice reader\"]\n  end\n  subgraph S4[\"Service systems\"]\n    Y1[\"Warranty and AMC lookup\"]\n    Y2[\"Slot capacity by pincode\"]\n    Y3[\"Service CRM ticket\"]\n  end\n  subgraph S5[\"Oversight\"]\n    H1(\"Live agent handover\")\n    H2[\"Recordings and QA\"]\n  end\n  C1 --> V1 --> V2\n  V2 --> V3\n  C2 --> D1 --> Y1\n  V2 --> Y1\n  Y1 --> Y2 --> Y3\n  V3 --> H1\n  H1 --> Y3\n  V2 --> H2"
+  },
+  "inputs": [
+    "Customer calls and WhatsApp photos of the rating plate and invoice",
+    "Product master with models, serial formats and warranty terms",
+    "Complaint and symptom code list",
+    "Service centre capacity and pincode coverage",
+    "Existing tickets and AMC records from the service CRM"
+  ],
+  "outputs": [
+    "Service tickets with validated model, serial, pincode and symptom code",
+    "Booked visit slots and customer confirmations",
+    "Warranty and AMC status on each ticket",
+    "Escalation queue with call summaries",
+    "Daily report on call types, languages and handover reasons"
+  ],
+  "human_in_the_loop": "Safety complaints, disputes, repeat failures and warranty exceptions go to a human agent with a call summary. Goodwill repairs and out-of-warranty concessions are decided only by the service manager under your policy.",
+  "integrations": [
+    "Service CRM such as Salesforce Service Cloud, ServiceNow or an in-house system",
+    "Cloud telephony or contact centre platform",
+    "WhatsApp Business API and SMS gateway",
+    "Service centre scheduling or partner portal",
+    "Product and warranty database"
+  ],
+  "guardrails": [
+    "Safety keywords trigger immediate human handover with a standard safety script",
+    "No promises of free repair outside warranty or AMC terms",
+    "No payment details taken by voice; payment links sent only through your gateway",
+    "Recording disclosure at the start of each call",
+    "Ticket details read back before booking"
+  ],
+  "compliance_notes": [
+    "Warranty and service statements follow your published terms, in line with Consumer Protection Act 2019 expectations on fair representation to consumers.",
+    "Customer recordings and photos are personal data under the DPDP Act 2023; retention is limited and access is logged."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One product category, such as air conditioners, in one region and two languages, handling repair and status calls alongside your current agents.",
+    "deliverables": [
+      "Call flows and symptom mapping agreed with service operations",
+      "Working agent on a pilot number or overflow queue",
+      "Rating plate and invoice photo extraction",
+      "Ticket quality report against technician job sheets",
+      "Roll-out plan for peak season and other categories"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Ticket field accuracy",
+        "how": "Model, serial, pincode and symptom on agent-created tickets compared with technician job sheets."
+      },
+      {
+        "metric": "Calls resolved without handover",
+        "how": "Share of calls completed by the agent, with handover reasons logged."
+      },
+      {
+        "metric": "Repeat visits linked to intake errors",
+        "how": "Second visits caused by a wrong model, part or symptom, taken from job sheet closure codes."
+      },
+      {
+        "metric": "Customer satisfaction",
+        "how": "Short post-call survey compared with calls handled by human agents in the same period."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it handle our summer peak?",
+      "a": "Capacity scales with telephony lines rather than staff, so the agent can take overflow calls during peaks. The real constraint is service centre capacity, so slot booking reads live availability instead of promising visits that cannot happen."
+    },
+    {
+      "q": "What if the customer cannot find the model number?",
+      "a": "The agent sends a WhatsApp link to photograph the rating plate or invoice and reads the details from the photo. If neither is available, it books the visit with what it has and flags the ticket for the technician to confirm."
+    },
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi, English and Hinglish as standard, with Tamil, Telugu, Kannada, Marathi, Bengali and others added based on your call mix. We test with recorded calls from your regions during the pilot."
+    },
+    {
+      "q": "How does it connect to our service CRM?",
+      "a": "Through the CRM's API to create and update tickets and read status. If your service centres use a partner portal, slot booking connects to it or to a capacity sheet maintained by your service team."
+    }
+  ],
+  "related": [
+    "dealer-order-taking-voice-agent",
+    "dealer-reorder-automation",
+    "service-booking-and-reminder-voice-agent",
+    "warranty-claim-document-processing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/consumer-durables-service-booking-voice-agent/"
+}

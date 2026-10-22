@@ -1,0 +1,217 @@
+{
+  "slug": "outbound-sales-voice-agent-with-consent-checks",
+  "industry": "telecom-contact-centers",
+  "title": "Outbound Sales Voice Agent with DND and Consent Checks",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "An outbound voice agent that dials only numbers cleared against DND preferences, consent records and your opt-out list, pitches within approved scripts and logs every consent outcome.",
+  "seo": {
+    "title": "Outbound Voice Agent with DND and Consent Checks | VipraTech",
+    "description": "Outbound AI calling for telecom and BPO campaigns with pre-dial DND, consent and calling-window checks, approved scripts and per-call consent logs.",
+    "keywords": [
+      "outbound voice agent India",
+      "DND scrubbing AI calling",
+      "TRAI compliant telemarketing",
+      "consent-based outbound calling",
+      "AI telesales Hindi"
+    ]
+  },
+  "designed_for": [
+    "Head of Telesales",
+    "Compliance Officer",
+    "BPO Outbound Campaign Manager",
+    "Marketing Head, Telecom"
+  ],
+  "problem": {
+    "intro": "Outbound campaigns for plan upgrades, postpaid migration, broadband and add-ons run on lead lists of uneven quality. Calling someone who has registered a DND preference or withdrawn consent, calling outside permitted hours, or overstating an offer creates complaints and regulatory exposure, and a voice agent that dials at scale multiplies the problem if the checks are not built in.",
+    "pain_points": [
+      {
+        "title": "Scrubbing is a separate step",
+        "detail": "Lists reach the dialler unscrubbed or with stale results because preference checks sit outside the dialling path."
+      },
+      {
+        "title": "Consent records are scattered",
+        "detail": "Consent captured on web forms, apps and in stores lives in different systems, so proving it for a given call is hard."
+      },
+      {
+        "title": "Scripts drift",
+        "detail": "Human and automated callers improvise offers and benefits that marketing and compliance never approved."
+      },
+      {
+        "title": "Capacity wasted on poor contacts",
+        "detail": "Wrong numbers, repeat attempts and uninterested contacts consume dialler time and annoy customers."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an outbound voice agent with the compliance checks inside the dialling path rather than beside it. Before each call, the number is checked against DND preference data available through your DLT or telemarketer arrangement, your consent records, your internal opt-out list and the permitted calling window. Only cleared numbers are dialled. The agent introduces itself and the brand, says it is an automated assistant, pitches only offers from the approved catalogue in Hindi, Hinglish or English, and handles common objections. Opt-outs are recorded and suppressed across campaigns immediately. Interested customers are booked for a human callback or sent an activation link, and every call writes a consent and outcome log.",
+    "capabilities": [
+      "Pre-dial checks against DND preference data, consent records, the internal opt-out list and permitted calling hours",
+      "Approved script and offer catalogue enforced at runtime, with no invented pricing or benefits",
+      "Brand identification, automated-assistant disclosure and opt-out handling on every call",
+      "Objection handling and qualification in Hindi, Hinglish and English",
+      "Warm transfer or callback booking with a human sales agent for interested customers",
+      "Per-call consent, disclosure and outcome log for compliance review"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the campaign list",
+      "detail": "Leads and eligibility data for the approved campaign are loaded with their consent references."
+    },
+    {
+      "step": 2,
+      "title": "Run pre-dial checks",
+      "detail": "Each number is checked for DND preference, consent, opt-out and calling window; failures are suppressed with a reason."
+    },
+    {
+      "step": 3,
+      "title": "Dial and disclose",
+      "detail": "Cleared numbers are called, and the agent identifies the brand and states that it is automated."
+    },
+    {
+      "step": 4,
+      "title": "Pitch and qualify",
+      "detail": "The agent presents approved offers, answers from approved information and handles objections."
+    },
+    {
+      "step": 5,
+      "title": "Act on the response",
+      "detail": "Opt-outs are suppressed at once, and interested customers go to a human sales agent or receive an activation link."
+    },
+    {
+      "step": 6,
+      "title": "Log the outcome",
+      "detail": "Consent status, disclosures made and the call outcome are written to the log and the CRM."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Campaign lead list\"] --> B[\"Check DND, consent, opt-out, hours\"]\n  B --> C{\"Number cleared to call?\"}\n  C -->|\"no\"| D[\"Suppressed with reason logged\"]\n  C -->|\"yes\"| E[\"Dial, identify brand, disclose AI\"]\n  E --> F[\"Pitch approved offer and qualify\"]\n  F --> G{\"Customer response\"}\n  G -->|\"opt out\"| D\n  G -->|\"interested\"| H(\"Human sales agent callback\")\n  G -->|\"not now\"| I[\"Log outcome and consent record\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Campaign and compliance",
+        "components": [
+          "Lead list ingestion",
+          "Pre-dial compliance service",
+          "Suppression and consent store"
+        ]
+      },
+      {
+        "name": "Telephony",
+        "components": [
+          "Outbound dialler or SIP trunk with registered numbers",
+          "Call recording"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "Speech recognition and TTS for Hindi, Hinglish and English",
+          "Dialogue manager bound to the approved script",
+          "Offer catalogue lookup"
+        ]
+      },
+      {
+        "name": "Handover and records",
+        "components": [
+          "Human sales callback scheduler",
+          "CRM lead update",
+          "Consent and outcome log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Campaign and compliance\"]\n    L1[\"Lead list ingestion\"]\n    L2[\"Pre-dial compliance service\"]\n    L3[\"Suppression and consent store\"]\n  end\n  subgraph S2[\"Telephony\"]\n    T1[\"Dialler with registered numbers\"]\n    T2[\"Call recording\"]\n  end\n  subgraph S3[\"Conversation\"]\n    V1[\"ASR and TTS for Hindi and English\"]\n    V2[\"Dialogue bound to approved script\"]\n    V3[\"Offer catalogue lookup\"]\n  end\n  subgraph S4[\"Handover and records\"]\n    H1(\"Human sales callback\")\n    H2[\"CRM lead update\"]\n    H3[\"Consent and outcome log\"]\n  end\n  L1 --> L2\n  L3 --> L2\n  L2 --> T1\n  T1 --> V1 --> V2\n  V3 --> V2\n  T1 --> T2\n  V2 --> H1\n  V2 --> H2\n  V2 --> H3\n  T2 --> H3\n  H3 --> L3"
+  },
+  "inputs": [
+    "Campaign lead lists with eligibility data",
+    "DND preference and consent data through your DLT or telemarketer arrangement",
+    "Internal opt-out and suppression list",
+    "Approved scripts and offer catalogue per language",
+    "Calling window and attempt rules"
+  ],
+  "outputs": [
+    "Pre-dial suppression report with reasons",
+    "Call outcomes and qualified leads",
+    "Opt-out records propagated across campaigns",
+    "Consent and disclosure log per call",
+    "Recordings and transcripts"
+  ],
+  "human_in_the_loop": "Compliance approves the script, disclosures, offer catalogue and calling windows before a campaign starts. Qualified customers go to human sales agents for closure where your process requires it, and compliance reviews a sample of calls and every complaint.",
+  "integrations": [
+    "DLT platform and telemarketer arrangement",
+    "Dialler or CCaaS such as Exotel, Ozonetel, Genesys or Amazon Connect",
+    "CRM such as Salesforce, LeadSquared or Zoho CRM",
+    "Payment or activation link service, including UPI payment links",
+    "WhatsApp Business API for follow-up messages"
+  ],
+  "guardrails": [
+    "No dial unless every pre-dial check passes",
+    "Opt-outs suppressed immediately across all campaigns",
+    "Offers limited to the approved catalogue",
+    "Calling windows and attempt caps enforced per number",
+    "Every call recorded and logged with its consent reference"
+  ],
+  "compliance_notes": [
+    "Designed to support TRAI's commercial-communication rules (TCCCPR 2018 and amendments), including customer preference and consent checks; your telemarketer registration and DLT obligations remain with you.",
+    "Lead lists and recordings are handled per the DPDP Act 2023, with consent and purpose limitation applied to each campaign."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One campaign, such as broadband upgrades for existing customers with recorded consent, on a limited list with compliance sign-off.",
+    "deliverables": [
+      "Pre-dial compliance service connected to your consent and preference data",
+      "Approved scripts in the pilot languages",
+      "Working outbound agent with human callback flow",
+      "Consent and outcome log with pilot report",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Pre-dial check accuracy",
+        "how": "Audit of dialled and suppressed numbers against consent, preference and opt-out records."
+      },
+      {
+        "metric": "Script adherence",
+        "how": "QA review of sampled calls against the approved script and offer catalogue."
+      },
+      {
+        "metric": "Opt-out handling",
+        "how": "Test calls and logs confirming opt-outs were suppressed across campaigns."
+      },
+      {
+        "metric": "Qualified lead conversion",
+        "how": "Conversion of agent-qualified leads by the human sales team, compared with the current process."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How does DND scrubbing work with the DLT system?",
+      "a": "Under TRAI's framework, preference and consent data is managed through DLT platforms run by access providers, and your telemarketer arrangement determines how scrubbing results reach you. We combine those results with your own consent records and opt-out list, and the agent will not dial a number that fails any check."
+    },
+    {
+      "q": "Will customers know they are talking to an AI?",
+      "a": "Yes. The agent states the brand and that it is an automated assistant at the start of each call, and offers a human callback or an opt-out whenever asked."
+    },
+    {
+      "q": "Which languages does it support?",
+      "a": "Hindi, Hinglish and English at the start, with regional languages added after testing on your recordings. Scripts are approved per language rather than translated on the fly."
+    },
+    {
+      "q": "What if a customer asks something outside the script?",
+      "a": "The agent answers only from approved product information and offers. Anything else, such as a complaint, a billing dispute or a detailed technical question, is logged and passed to a human team for a callback."
+    }
+  ],
+  "related": [
+    "ai-calling-compliance-evidence",
+    "churn-risk-outreach-automation",
+    "voice-agent-jailbreak-testing",
+    "call-qa-and-compliance-auditing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/outbound-sales-voice-agent-with-consent-checks/"
+}

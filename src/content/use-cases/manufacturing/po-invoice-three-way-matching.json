@@ -1,0 +1,224 @@
+{
+  "slug": "po-invoice-three-way-matching",
+  "industry": "manufacturing",
+  "title": "Purchase Order, GRN and Invoice Three-Way Matching",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read supplier invoices, match every line to POs and GRNs in SAP or Tally, check GST details and tolerances, propose debit notes and send only real exceptions to accounts payable.",
+  "seo": {
+    "title": "PO, GRN and Invoice Three-Way Matching with AI | VipraTech",
+    "description": "AI reads supplier invoices, matches lines to POs and GRNs in SAP or Tally, checks GST and tolerances, and routes only real exceptions to accounts payable.",
+    "keywords": [
+      "three-way matching automation",
+      "invoice PO GRN matching",
+      "accounts payable automation manufacturing",
+      "supplier invoice extraction",
+      "SAP invoice verification AI",
+      "GST invoice matching"
+    ]
+  },
+  "designed_for": [
+    "CFO or Finance Controller",
+    "Accounts Payable Manager",
+    "Purchase Head",
+    "Stores and Inward Manager"
+  ],
+  "problem": {
+    "intro": "A plant receives supplier invoices as PDFs, scans and email attachments, often before or after the material is received and inspected. Accounts payable has to tie each invoice line to the PO and to the GRN quantity that quality accepted, then sort out short supply, rejections and price differences before anything is posted.",
+    "pain_points": [
+      {
+        "title": "Many formats, many lines",
+        "detail": "Each supplier's invoice layout differs, and one invoice can carry dozens of lines with HSN codes, tax splits, freight and packing charges."
+      },
+      {
+        "title": "Partial deliveries and split GRNs",
+        "detail": "One invoice may cover several GRNs, or one GRN several invoices, which makes line-level matching slow and error-prone."
+      },
+      {
+        "title": "Variances found late",
+        "detail": "Price or quantity differences and QC rejections surface after posting, leading to debit notes, disputes and strained supplier relations."
+      },
+      {
+        "title": "GST credit at risk",
+        "detail": "Invoices with a wrong GSTIN or tax rate, a missing IRN, or no entry in GSTR-2B put input tax credit at risk if they are not caught early."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a matching pipeline that reads each supplier invoice, extracts header and line items, and matches them to open PO lines and accepted GRN quantities pulled from SAP or Tally. It handles partial deliveries, several GRNs per invoice and unit-of-measure conversions. Rules check price and quantity against your tolerances, compare GST details with the supplier master and e-invoice data, and flag possible duplicates. Clean invoices are prepared as parked documents or draft vouchers for AP to post. Exceptions go to a queue with a reason code, plus a proposed debit note where quantity was short or rejected.",
+    "capabilities": [
+      "Extracts invoice header, line items, HSN codes, tax splits, freight and TDS-relevant fields",
+      "Matches many-to-many across invoice lines, PO lines and GRNs, including unit conversions",
+      "Applies price and quantity tolerances per supplier or material group",
+      "Checks GSTIN, tax rate and place of supply, and reads the e-invoice QR code where present",
+      "Detects duplicate invoices by supplier, number, date and amount, including re-sent scans",
+      "Proposes debit notes for short supply, QC rejections and price differences with evidence attached"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture invoices",
+      "detail": "Invoices arrive from the AP mailbox, a supplier portal or scans at the inward gate and are grouped by supplier."
+    },
+    {
+      "step": 2,
+      "title": "Extract and validate",
+      "detail": "OCR and an LLM extract header and line data, each field with a confidence score and page reference."
+    },
+    {
+      "step": 3,
+      "title": "Match to PO and GRN",
+      "detail": "Lines are matched to open PO lines and accepted GRN quantities from SAP or Tally."
+    },
+    {
+      "step": 4,
+      "title": "Apply tolerance and GST checks",
+      "detail": "Price, quantity, tax and duplicate rules run, and each failure gets a reason code."
+    },
+    {
+      "step": 5,
+      "title": "AP review of exceptions",
+      "detail": "AP sees the invoice, PO and GRN side by side and resolves the exception or escalates it to purchase."
+    },
+    {
+      "step": 6,
+      "title": "Prepare for posting",
+      "detail": "Matched invoices are created as parked documents or draft vouchers, with debit note proposals where needed."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Supplier invoice by email or scan\"] --> B[\"Extract header and line items\"]\n  B --> C[\"Match lines to PO and GRN\"]\n  C --> D[\"Tolerance, GST and duplicate checks\"]\n  D --> E{\"Within tolerance and confident?\"}\n  E -->|\"yes\"| F[\"Park invoice in SAP or Tally\"]\n  E -->|\"no\"| G(\"AP executive reviews exception\")\n  G --> H[\"Debit note or buyer query\"]\n  G --> F\n  F --> I[\"AP posts, audit log updated\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "AP mailbox and supplier portal connectors",
+          "Scan upload from the inward gate",
+          "Supplier identification from GSTIN"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with table detection",
+          "LLM extractor with invoice schema",
+          "E-invoice QR decoder"
+        ]
+      },
+      {
+        "name": "Matching and rules",
+        "components": [
+          "PO and GRN fetch from SAP or Tally",
+          "Many-to-many line matcher",
+          "Tolerance, GST and duplicate rules"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "AP exception queue with side-by-side view",
+          "Debit note proposal generator"
+        ]
+      },
+      {
+        "name": "Posting and audit",
+        "components": [
+          "SAP BAPI or IDoc adapter, or Tally XML import",
+          "Audit log of every match and reviewer change"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"AP mailbox and portal\"]\n    I2[\"Inward gate scans\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"OCR and table detection\"]\n    E2[\"LLM invoice extractor\"]\n  end\n  subgraph S3[\"Matching and rules\"]\n    M1[\"PO and GRN from ERP\"]\n    M2[\"Line matcher\"]\n    M3[\"Tolerance, GST and duplicate rules\"]\n  end\n  subgraph S4[\"Review\"]\n    R1(\"AP exception queue\")\n    R2[\"Debit note proposals\"]\n  end\n  subgraph S5[\"Posting and audit\"]\n    P1[\"SAP or Tally adapter\"]\n    P2[\"Audit log\"]\n  end\n  I1 --> E1\n  I2 --> E1\n  E1 --> E2 --> M2\n  M1 --> M2 --> M3\n  M3 --> R1\n  M3 --> P1\n  R1 --> R2\n  R1 --> P1\n  P1 --> P2"
+  },
+  "inputs": [
+    "Supplier invoices as PDF, scan or e-invoice",
+    "Open purchase orders and schedule lines from SAP or Tally",
+    "GRN and QC acceptance data, including rejected quantities",
+    "Supplier master with GSTIN and bank details",
+    "Tolerance rules by supplier or material group",
+    "GSTR-2B data from your GST tool"
+  ],
+  "outputs": [
+    "Line-level match result for each invoice",
+    "Parked invoices or draft purchase vouchers ready for AP posting",
+    "Exception queue with reason codes and evidence",
+    "Proposed debit notes for short supply, rejections and price differences",
+    "Audit trail of matches, overrides and approvals"
+  ],
+  "human_in_the_loop": "AP executives resolve every exception and post every invoice; the system prepares documents and never posts or releases payment. Buyers decide price variances, and stores or quality confirm disputed quantities before a debit note is raised.",
+  "integrations": [
+    "SAP S/4HANA or ECC (MM and FI) via BAPI, IDoc or API",
+    "Tally Prime via XML or ODBC",
+    "GST compliance tool or GSTN data for GSTR-2B and e-invoice details",
+    "AP mailbox and supplier portal",
+    "Document management system for the invoice archive"
+  ],
+  "guardrails": [
+    "No auto-posting or payment release; AP approves every document",
+    "Uncertain fields and lines flagged, never silently passed",
+    "Bank detail changes printed on an invoice are flagged, not accepted",
+    "Duplicate checks across suppliers and periods",
+    "Every value linked to its source page and every override logged"
+  ],
+  "compliance_notes": [
+    "Checks support GST input tax credit conditions by comparing invoice data with GSTR-2B and e-invoice details; ITC decisions stay with your tax team.",
+    "The audit trail helps evidence internal financial controls over purchase-to-pay for statutory audit."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Invoices from the top suppliers of one plant for one month, matched against SAP or Tally data and compared with how AP actually processed them.",
+    "deliverables": [
+      "Extraction schema and tolerance rules agreed with AP and purchase",
+      "Working pipeline on real invoices from your mailbox",
+      "AP exception queue",
+      "Match accuracy report against AP's actual postings",
+      "Integration design and cost estimate for roll-out"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Line-match accuracy",
+        "how": "Match results compared with how AP matched the same invoices."
+      },
+      {
+        "metric": "Share of invoices needing review",
+        "how": "Invoices routed to the exception queue, broken down by reason code."
+      },
+      {
+        "metric": "Exception reason accuracy",
+        "how": "AP feedback on whether each flagged reason was correct."
+      },
+      {
+        "metric": "AP handling time per invoice",
+        "how": "Timed on a sample processed with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "We use SAP in one plant and Tally in another. Does that matter?",
+      "a": "No. The matching logic is the same; only the adapters differ. We read POs and GRNs from each system and write back parked documents or draft vouchers in the format that system expects."
+    },
+    {
+      "q": "What about invoices with handwritten corrections or poor scans?",
+      "a": "They are read like any other invoice, but low-confidence fields are flagged for AP to confirm. The pilot report shows how many invoices needed field confirmation and why."
+    },
+    {
+      "q": "Can it handle service invoices and job-work charges without a GRN?",
+      "a": "Yes, as two-way matches against the PO or a service entry sheet, with their own rules. We usually start with material invoices and add service invoices once the core flow is stable."
+    },
+    {
+      "q": "Will our supplier and pricing data leave our environment?",
+      "a": "It does not have to. The pipeline can run in your cloud tenancy or on-premise, and we use model endpoints that do not retain or train on your data."
+    }
+  ],
+  "related": [
+    "supplier-quality-certificate-verification",
+    "vendor-invoice-and-credit-note-reconciliation",
+    "gst-return-reconciliation",
+    "freight-invoice-audit"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/po-invoice-three-way-matching/"
+}

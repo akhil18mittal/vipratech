@@ -1,0 +1,226 @@
+{
+  "slug": "agri-input-dealer-order-automation",
+  "industry": "agriculture",
+  "title": "Agri-Input Dealer Order and Credit Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Take seed, fertiliser and crop-protection orders from dealers over WhatsApp and voice in Hinglish, check credit limits, schemes and stock, and route exceptions to sales and credit teams.",
+  "seo": {
+    "title": "Agri-Input Dealer Order and Credit Automation | VipraTech",
+    "description": "WhatsApp and voice ordering for agri-input dealers, with SKU matching, credit and scheme checks, collection reminders and approvals by sales staff.",
+    "keywords": [
+      "agri input dealer ordering",
+      "fertiliser dealer WhatsApp orders",
+      "seed and pesticide distribution automation",
+      "dealer credit limit automation",
+      "agri distribution sales AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales, Agri-Input Company",
+    "Regional Sales Manager",
+    "Credit Controller, Distribution",
+    "Distributor Owner"
+  ],
+  "problem": {
+    "intro": "Agri-input sales are seasonal and credit-heavy. In the weeks before kharif and rabi sowing, dealers send orders by WhatsApp message, voice note and phone call, often in Hinglish with local brand names, and expect stock and credit decisions the same day. Sales officers spend the season relaying orders, checking balances and chasing collections.",
+    "pain_points": [
+      {
+        "title": "Unstructured orders",
+        "detail": "Orders arrive as voice notes, photos of handwritten lists and messages using local product names, which staff must translate into SKUs."
+      },
+      {
+        "title": "Credit checks slow everything",
+        "detail": "Every order needs a look at outstanding balance, overdue days and limit in Tally or SAP, and dealers wait while someone checks."
+      },
+      {
+        "title": "Schemes applied inconsistently",
+        "detail": "Seasonal schemes, early-order discounts and quantity slabs are applied from memory, which causes disputes at settlement."
+      },
+      {
+        "title": "Collections after the season",
+        "detail": "Payments due after harvest are chased by individual sales officers, with no consistent reminders or record."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an ordering assistant for your dealer network on WhatsApp and voice. Dealers send orders the way they already do: a typed message, a voice note in Hinglish or a photo of a handwritten list. The assistant converts it into SKUs and pack sizes using your product master and local name aliases, reads the order back, and checks stock at the serving depot. It looks up the dealer's outstanding balance, overdue days and credit limit in your ERP, and applies the active seasonal scheme. Orders within limits go to the ERP as drafts; anything over limit, overdue or ambiguous goes to the sales officer or credit controller. After the season, it sends collection reminders with UPI payment links.",
+    "capabilities": [
+      "Order capture from WhatsApp text, Hinglish voice notes and photos of handwritten lists",
+      "SKU and pack-size matching with local brand name aliases",
+      "Live credit limit, outstanding and overdue checks from the ERP",
+      "Seasonal scheme and slab application from an approved scheme table",
+      "Approval routing to sales officers and credit controllers",
+      "Collection reminders with UPI payment links and payment status updates"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Dealer sends the order",
+      "detail": "The dealer sends a message, voice note or photo of the order on WhatsApp, or calls the order line."
+    },
+    {
+      "step": 2,
+      "title": "Convert to SKUs",
+      "detail": "The assistant matches products and pack sizes from the product master and reads the order back to the dealer."
+    },
+    {
+      "step": 3,
+      "title": "Check stock and credit",
+      "detail": "Depot stock, credit limit, outstanding balance and overdue days are checked in the ERP."
+    },
+    {
+      "step": 4,
+      "title": "Apply the scheme",
+      "detail": "The active seasonal scheme is applied from the approved scheme table and shown to the dealer."
+    },
+    {
+      "step": 5,
+      "title": "Approve exceptions",
+      "detail": "Over-limit, overdue or unclear orders go to the sales officer or credit controller for a decision."
+    },
+    {
+      "step": 6,
+      "title": "Create the order and follow up",
+      "detail": "Approved orders are created in the ERP, and the dealer receives confirmation, dispatch updates and later collection reminders."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Dealer message, voice note or photo\"] --> B[\"Match SKUs and read back order\"]\n  B --> C[\"Check depot stock and credit\"]\n  C --> D[\"Apply seasonal scheme\"]\n  D --> E{\"Within limit and unambiguous?\"}\n  E -->|\"yes\"| G[\"Create draft order in ERP\"]\n  E -->|\"no\"| F(\"Sales officer or credit approval\")\n  F --> G\n  G --> H[\"Dispatch updates and reminders\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channels",
+        "components": [
+          "WhatsApp Business API",
+          "Voice order line",
+          "Image intake for handwritten lists"
+        ]
+      },
+      {
+        "name": "Understanding",
+        "components": [
+          "Speech recognition for Hinglish",
+          "Order parser with product alias dictionary",
+          "Handwritten list OCR"
+        ]
+      },
+      {
+        "name": "Business rules",
+        "components": [
+          "Credit limit and overdue checks",
+          "Scheme and slab engine",
+          "Depot stock lookup",
+          "Dealer licence validity check"
+        ]
+      },
+      {
+        "name": "Approvals",
+        "components": [
+          "Sales officer and credit controller approval queue",
+          "Approval reason log"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "ERP adapter for Tally or SAP",
+          "UPI payment link service",
+          "Order and collection log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Channels\"]\n    C1[\"WhatsApp\"]\n    C2[\"Voice order line\"]\n  end\n  subgraph S2[\"Understanding\"]\n    U1[\"Hinglish speech recognition\"]\n    U2[\"Order parser and aliases\"]\n    U3[\"Handwritten list OCR\"]\n  end\n  subgraph S3[\"Rules and approvals\"]\n    B1[\"Credit and overdue checks\"]\n    B2[\"Scheme engine\"]\n    B3(\"Approval queue\")\n  end\n  subgraph S4[\"Integration\"]\n    G1[\"ERP adapter\"]\n    G2[\"UPI payment links\"]\n  end\n  C1 --> U2\n  C1 --> U3\n  C2 --> U1 --> U2\n  U3 --> U2\n  U2 --> B1 --> B2\n  B2 --> G1\n  B2 --> B3\n  B3 --> G1\n  G1 --> G2"
+  },
+  "inputs": [
+    "Dealer orders as WhatsApp text, voice notes or photos",
+    "Product master with local name aliases",
+    "Dealer credit limits, outstanding balances and overdue days from the ERP",
+    "Approved seasonal scheme table",
+    "Depot stock levels and dealer licence records"
+  ],
+  "outputs": [
+    "Draft sales orders in the ERP",
+    "Order confirmations and dispatch updates to dealers",
+    "Approval tasks for sales and credit staff",
+    "Collection reminders with UPI links",
+    "Order and collection log by dealer and territory"
+  ],
+  "human_in_the_loop": "Sales officers and credit controllers approve every order that is over limit, overdue or ambiguous, and every scheme exception. The assistant never extends credit or changes a scheme on its own.",
+  "integrations": [
+    "ERP such as Tally or SAP",
+    "WhatsApp Business API",
+    "Cloud telephony for the voice order line",
+    "Payment gateway for UPI links",
+    "Sales force automation or distributor management system"
+  ],
+  "guardrails": [
+    "Order read back to the dealer for confirmation before creation",
+    "Credit and scheme rules applied only from approved tables",
+    "Product information limited to catalogue facts; agronomy questions referred to your field team",
+    "Dealer licence validity checked before regulated products are ordered",
+    "All approvals logged with user and reason"
+  ],
+  "compliance_notes": [
+    "Dealer licences for fertiliser, seed and pesticide sales can be tracked against expiry before orders are accepted, in line with the relevant control orders and the Insecticides Act 1968.",
+    "Dealer and payment data is processed with purpose limits under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One territory's dealers during one season window, with orders captured on WhatsApp and created as ERP drafts that the sales officer reviews.",
+    "deliverables": [
+      "Product alias dictionary built from your order history",
+      "WhatsApp and voice ordering flows",
+      "Credit and scheme checks connected to your ERP",
+      "Approval queue for sales and credit",
+      "Pilot report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Order capture accuracy",
+        "how": "Assistant-created orders compared with what the dealer confirmed and what was dispatched."
+      },
+      {
+        "metric": "Share of orders needing approval",
+        "how": "Count of orders routed to sales or credit, by reason."
+      },
+      {
+        "metric": "Order-to-confirmation time",
+        "how": "Time from dealer message to confirmed order, compared with the current process."
+      },
+      {
+        "metric": "Collections follow-up",
+        "how": "Reminders sent and payments received against due dates in the pilot territory."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it understand our dealers' local product names?",
+      "a": "Yes. We build an alias dictionary from your past orders and dealer messages, so local brand names and pack descriptions map to the right SKU. Unclear items are confirmed with the dealer or the sales officer."
+    },
+    {
+      "q": "Does it give crop advice to dealers?",
+      "a": "No. It handles orders, schemes, stock and payments. Agronomy questions are passed to your field team."
+    },
+    {
+      "q": "Which ERPs does it work with?",
+      "a": "Tally and SAP are common, and we can work with others through APIs or a staging database. Orders are created as drafts until your team is comfortable with the accuracy."
+    },
+    {
+      "q": "Who decides on extra credit for a dealer?",
+      "a": "Your credit controller or sales manager. The assistant shows the dealer's position and routes the request; it never raises a limit itself."
+    }
+  ],
+  "related": [
+    "mandi-price-and-procurement-voice-updates",
+    "farmer-onboarding-kyc",
+    "dealer-reorder-automation",
+    "stockist-order-taking-voice-agent"
+  ],
+  "proof_ref": "whatsapp-hotel-booking",
+  "content_type": "use-case",
+  "url": "/use-cases/agriculture/agri-input-dealer-order-automation/"
+}

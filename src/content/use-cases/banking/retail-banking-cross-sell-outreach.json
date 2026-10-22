@@ -1,0 +1,222 @@
+{
+  "slug": "retail-banking-cross-sell-outreach",
+  "industry": "banking",
+  "title": "Cross-Sell Lead Scoring and Personalised Outreach",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Score existing customers for products they are likely to need from consented banking data, and draft compliant, personalised outreach that relationship managers review before sending.",
+  "seo": {
+    "title": "Bank Cross-Sell Lead Scoring and Outreach AI | VipraTech",
+    "description": "AI that scores retail banking customers for cross-sell, checks consent and DND, and drafts personalised outreach for relationship managers to approve.",
+    "keywords": [
+      "bank cross-sell lead scoring",
+      "retail banking personalised outreach",
+      "next best offer banking AI",
+      "relationship manager lead prioritisation",
+      "consent-based banking marketing"
+    ]
+  },
+  "designed_for": [
+    "Head of Retail Liabilities",
+    "Head of Customer Analytics",
+    "Branch Relationship Manager",
+    "Head of Marketing"
+  ],
+  "problem": {
+    "intro": "Banks hold clear signals about customer needs, such as salary credits, maturing deposits, rent payments and foreign card spends, yet cross-sell often runs on broad campaigns and product targets. Customers receive offers that do not fit them, relationship managers chase cold lists, and every untargeted message adds consent and mis-selling risk.",
+    "pain_points": [
+      {
+        "title": "Lists built on product targets",
+        "detail": "Campaigns pick customers by simple filters, so a recent home loan borrower receives another home loan offer."
+      },
+      {
+        "title": "Relationship managers without context",
+        "detail": "RMs call customers with no clear reason why a product fits, and results depend on individual skill."
+      },
+      {
+        "title": "Consent and DND checked too late",
+        "detail": "Opt-outs, DND preferences and the purpose of consent are checked at sending time, if at all, rather than when the list is built."
+      },
+      {
+        "title": "Suitability of third-party products",
+        "detail": "Insurance and investment products sold through the bank carry suitability and mis-selling risk that generic scripts ignore."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a lead scoring and outreach service on your existing data warehouse. Propensity models score customers for selected products using consented transaction and relationship data, and every score comes with plain-language reasons, such as a fixed deposit maturing next month or regular rent debits. Eligibility, consent, DND and exclusion rules are applied before a customer enters any list. A language model drafts personalised messages for WhatsApp, email or an RM call script in the customer's preferred language, using approved product facts only. RMs see prioritised leads with reasons and drafts, approve or edit each message, and record outcomes that feed model retraining.",
+    "capabilities": [
+      "Product propensity scoring with plain-language reasons per customer",
+      "Eligibility, consent, DND and exclusion rules applied before any outreach list is built",
+      "Drafts for WhatsApp, email and RM call scripts in English, Hindi and regional languages",
+      "Content restricted to approved product facts, rates and disclosures",
+      "RM worklist with priority, reasons, drafts and one-click outcome capture",
+      "Campaign and outcome analytics feeding scheduled model retraining"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Prepare signals",
+      "detail": "Consented transaction, product holding and relationship data from the warehouse become customer-level signals."
+    },
+    {
+      "step": 2,
+      "title": "Score and explain",
+      "detail": "Propensity models score each customer for each product, and reason codes explain every score."
+    },
+    {
+      "step": 3,
+      "title": "Apply eligibility and consent",
+      "detail": "Customers failing eligibility, consent, DND or exclusion rules are removed before any list is built."
+    },
+    {
+      "step": 4,
+      "title": "Draft outreach",
+      "detail": "The language model drafts channel-specific messages from approved product content in the customer's preferred language."
+    },
+    {
+      "step": 5,
+      "title": "RM review and send",
+      "detail": "RMs approve, edit or drop each lead and message, and sending goes through approved channels and templates."
+    },
+    {
+      "step": 6,
+      "title": "Learn from outcomes",
+      "detail": "Responses, conversions, opt-outs and complaints feed back into scoring and content reviews."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Consented warehouse data\"] --> B[\"Build customer signals\"]\n  B --> C[\"Score propensity with reasons\"]\n  C --> D{\"Eligible, consented and not DND?\"}\n  D -->|\"no\"| E[\"Exclude from outreach\"]\n  D -->|\"yes\"| F[\"Draft message from approved content\"]\n  F --> G(\"RM approves or edits\")\n  G --> H[\"Send via approved channel\"]\n  H --> J[\"Capture outcome for retraining\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data",
+        "components": [
+          "Data warehouse feature pipelines",
+          "Consent and preference store",
+          "Product eligibility rules"
+        ]
+      },
+      {
+        "name": "Scoring",
+        "components": [
+          "Product propensity models",
+          "Reason-code generator",
+          "Drift and fairness monitoring"
+        ]
+      },
+      {
+        "name": "Content",
+        "components": [
+          "Approved product content library",
+          "LLM message drafter per channel and language",
+          "Content compliance checks"
+        ]
+      },
+      {
+        "name": "Engagement",
+        "components": [
+          "RM worklist in the CRM",
+          "WhatsApp, email and SMS sending through approved templates"
+        ]
+      },
+      {
+        "name": "Feedback",
+        "components": [
+          "Outcome capture",
+          "Campaign analytics and retraining pipeline"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data\"]\n    D1[\"Warehouse features\"]\n    D2[\"Consent and DND store\"]\n  end\n  subgraph S2[\"Scoring\"]\n    M1[\"Propensity models\"]\n    M2[\"Reason codes\"]\n    M3[\"Eligibility rules\"]\n  end\n  subgraph S3[\"Content\"]\n    C1[\"Approved content library\"]\n    C2[\"LLM message drafter\"]\n  end\n  subgraph S4[\"Engagement and feedback\"]\n    E1(\"RM worklist in CRM\")\n    E2[\"Approved channel sending\"]\n    E3[\"Outcome analytics\"]\n  end\n  D1 --> M1 --> M2\n  M2 --> M3\n  D2 --> M3\n  M3 --> C2\n  C1 --> C2\n  C2 --> E1 --> E2 --> E3\n  E3 --> M1"
+  },
+  "inputs": [
+    "Consented transaction and product holding data from the warehouse",
+    "Customer consent, DND and channel preferences",
+    "Product eligibility rules and exclusion lists",
+    "Approved product content, rates and disclosures",
+    "Historical campaign outcomes and RM feedback"
+  ],
+  "outputs": [
+    "Prioritised lead lists with reason codes",
+    "Personalised message drafts per channel and language",
+    "RM worklists with outcome capture",
+    "Exclusion log showing why customers were removed",
+    "Campaign performance and complaint reports"
+  ],
+  "human_in_the_loop": "Relationship managers approve or edit every message before it goes out, and product and compliance teams approve the content library. Leads for third-party products such as insurance and mutual funds go only to staff qualified to discuss them.",
+  "integrations": [
+    "Enterprise data warehouse or lakehouse",
+    "CRM such as Salesforce, Microsoft Dynamics or an in-house RM tool",
+    "WhatsApp Business API through an approved provider",
+    "Email and SMS gateways with DLT-registered templates",
+    "Consent management platform"
+  ],
+  "guardrails": [
+    "Consent, DND and exclusion rules applied before results reach any list",
+    "Messages use approved content only, with no invented rates, offers or eligibility",
+    "Frequency caps per customer across all channels",
+    "Sensitive attributes excluded from models, with fairness checks each cycle",
+    "No promise of loan approval or investment returns in any draft"
+  ],
+  "compliance_notes": [
+    "Designed to support DPDP Act 2023 consent and purpose limitation, and TRAI commercial communication rules on DLT registration and customer preferences.",
+    "Supports RBI fair-practice expectations on suitability and mis-selling; insurance and investment products also follow their IRDAI and SEBI distribution rules."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One product, such as fixed deposit renewal or a pre-approved credit card, for customers of a group of branches, with RM-approved outreach compared against the current campaign approach.",
+    "deliverables": [
+      "Propensity model with reason codes for the pilot product",
+      "Consent and eligibility rule set",
+      "RM worklist with message drafts",
+      "Pilot results compared with a held-out control group",
+      "Plan for further products and channels"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Response and conversion against control",
+        "how": "Outcomes for scored customers compared with a randomly held-out control group over the same period."
+      },
+      {
+        "metric": "RM acceptance of leads and drafts",
+        "how": "Leads RMs pursued, and drafts sent as written, edited or rejected."
+      },
+      {
+        "metric": "Opt-outs and complaints",
+        "how": "Opt-outs and complaints per message, compared with the current campaign baseline."
+      },
+      {
+        "metric": "Score calibration",
+        "how": "Predicted propensity bands compared with observed responses."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What data do the models use?",
+      "a": "Only data covered by the customer's consent and your privacy notice, typically product holdings, transaction categories and relationship history. Sensitive attributes such as religion or caste are excluded, and we review likely proxies during model development."
+    },
+    {
+      "q": "Can the AI send messages on its own?",
+      "a": "Not in our default design. RMs approve each message, or for routine service reminders marketing approves a template that the system fills. All sending goes through your existing DLT-registered and WhatsApp-approved templates."
+    },
+    {
+      "q": "Which languages can drafts be written in?",
+      "a": "English, Hindi and regional languages, based on the customer's stated preference. Product facts and disclosures come from the approved library in each language, reviewed by your team."
+    },
+    {
+      "q": "How do we know the scoring works?",
+      "a": "The pilot holds back a random control group, so results compare scored outreach with your current approach on the same population and period."
+    }
+  ],
+  "related": [
+    "multilingual-banking-voice-agent",
+    "customer-complaint-triage-and-routing",
+    "loan-lead-qualification-agent",
+    "dormant-account-reactivation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/banking/retail-banking-cross-sell-outreach/"
+}

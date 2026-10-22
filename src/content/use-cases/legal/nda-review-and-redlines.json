@@ -1,0 +1,221 @@
+{
+  "slug": "nda-review-and-redlines",
+  "industry": "legal",
+  "title": "NDA Review and Redline Suggestions",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Review incoming NDAs against your playbook, produce tracked-change redlines with comments in Word, and send only the non-standard ones for full lawyer review, so routine NDAs stop queuing.",
+  "seo": {
+    "title": "NDA Review and Redline Suggestions with AI | VipraTech",
+    "description": "AI that reviews NDAs against your playbook, drafts tracked-change redlines in Word with comments and escalates non-standard terms to a lawyer.",
+    "keywords": [
+      "NDA review AI",
+      "automated NDA redlines",
+      "NDA playbook automation",
+      "tracked changes contract AI",
+      "legal ops NDA triage"
+    ]
+  },
+  "designed_for": [
+    "Head of Legal Operations",
+    "In-House Counsel",
+    "Legal Manager (Commercial)",
+    "Law Firm Associate"
+  ],
+  "problem": {
+    "intro": "NDAs are the agreement most legal teams see most often: before every vendor evaluation, partnership discussion or senior hire. Most are close to standard, but each still needs a careful read for an over-broad definition, a hidden non-solicit or a one-way obligation, and the queue holds up the business.",
+    "pain_points": [
+      {
+        "title": "Routine work, constant volume",
+        "detail": "Lawyers redline the same clauses again and again while sales and procurement wait to start conversations."
+      },
+      {
+        "title": "Traps in short documents",
+        "detail": "Residuals clauses, non-solicitation, perpetual terms and broad injunctive relief hide in otherwise ordinary NDAs."
+      },
+      {
+        "title": "Counterparty paper varies",
+        "detail": "Every counterparty uses its own template, structure and numbering, so a checklist alone does not help."
+      },
+      {
+        "title": "No negotiation memory",
+        "detail": "Positions agreed with a counterparty last year are not visible to the lawyer reviewing the next NDA with them."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an NDA assistant that takes the counterparty's Word or PDF draft, identifies whether it is mutual or one-way and who the parties are, and checks each clause against your playbook: definition of confidential information, exclusions, permitted and compelled disclosure, term and survival, return or destruction, residuals, non-solicitation, remedies, governing law and jurisdiction. It produces a Word document with tracked changes and margin comments explaining each edit in your house style. NDAs within playbook fallbacks are marked standard for a quick lawyer sign-off; anything outside goes to a lawyer with the issues listed. Past positions agreed with the same counterparty are shown alongside.",
+    "capabilities": [
+      "Identifies NDA type, parties, purpose and governing law from any template",
+      "Clause-by-clause comparison with your standard and fallback positions",
+      "Tracked-change redlines and margin comments in native Word format",
+      "Detects residuals, non-solicitation, perpetual terms and other non-standard provisions",
+      "Shows positions previously agreed with the same counterparty",
+      "Triage into standard, edits within fallback, or escalate to a lawyer"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the draft",
+      "detail": "The business submits the counterparty NDA through an intake form or a shared mailbox."
+    },
+    {
+      "step": 2,
+      "title": "Identify structure",
+      "detail": "Parties, type, purpose and clause structure are identified whatever the template."
+    },
+    {
+      "step": 3,
+      "title": "Check against the playbook",
+      "detail": "Each clause is compared with your positions and fallbacks, and missing protections are noted."
+    },
+    {
+      "step": 4,
+      "title": "Draft redlines",
+      "detail": "Tracked changes and explanatory comments are generated in the counterparty's own document."
+    },
+    {
+      "step": 5,
+      "title": "Triage and review",
+      "detail": "Standard NDAs go to a lawyer for quick sign-off; non-standard ones go with an issue list."
+    },
+    {
+      "step": 6,
+      "title": "Send and record",
+      "detail": "The approved redline goes to the counterparty, and final positions are saved for next time."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Counterparty NDA via intake\"] --> B[\"Identify type, parties and clauses\"]\n  B --> C[\"Compare clauses with playbook\"]\n  C --> D[\"Draft tracked changes and comments\"]\n  D --> E{\"Within playbook fallbacks?\"}\n  E -->|\"yes\"| F(\"Lawyer quick sign-off\")\n  E -->|\"no\"| G(\"Lawyer reviews issue list\")\n  F --> H[\"Send redline to counterparty\"]\n  G --> H\n  H --> I[\"Store final positions\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Intake form and shared mailbox",
+          "Word and PDF conversion",
+          "Matter and requester tagging"
+        ]
+      },
+      {
+        "name": "Analysis",
+        "components": [
+          "Clause classifier for NDA provisions",
+          "Playbook comparison engine",
+          "Counterparty position history lookup"
+        ]
+      },
+      {
+        "name": "Drafting",
+        "components": [
+          "Tracked-change generator for Word",
+          "Comment writer in house style",
+          "Library of approved clause language"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Triage queue for lawyers",
+          "Approve, edit or reject actions"
+        ]
+      },
+      {
+        "name": "Records",
+        "components": [
+          "Signed NDA repository",
+          "Negotiated position log per counterparty"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Intake form and mailbox\"]\n    I2[\"Word and PDF conversion\"]\n  end\n  subgraph S2[\"Analysis\"]\n    A1[\"NDA clause classifier\"]\n    A2[\"Playbook comparison\"]\n    A3[\"Counterparty history\"]\n  end\n  subgraph S3[\"Drafting and review\"]\n    D1[\"Tracked-change generator\"]\n    D2[\"Approved clause library\"]\n    D3(\"Lawyer triage queue\")\n  end\n  subgraph S4[\"Records\"]\n    R1[\"NDA repository\"]\n    R2[\"Position log\"]\n  end\n  I1 --> I2\n  I2 --> A1\n  A1 --> A2\n  A3 --> A2\n  A2 --> D1\n  D2 --> D1\n  D1 --> D3\n  D3 --> R1\n  D3 --> R2\n  R2 --> A3"
+  },
+  "inputs": [
+    "Counterparty NDA drafts in Word or PDF",
+    "Your NDA playbook with standard and fallback positions",
+    "Approved clause library",
+    "Previously negotiated NDAs with the same counterparty",
+    "Request details: purpose, business owner and urgency"
+  ],
+  "outputs": [
+    "Word document with tracked changes and comments",
+    "Issue list for non-standard NDAs",
+    "Triage category for each NDA",
+    "Record of agreed positions per counterparty",
+    "Turnaround and volume reports for legal operations"
+  ],
+  "human_in_the_loop": "A lawyer signs off every NDA before it is sent, including those marked standard. Non-standard provisions and anything outside the playbook are decided by a lawyer, who can edit or discard any suggested redline.",
+  "integrations": [
+    "Microsoft Word and Outlook",
+    "Contract lifecycle management system",
+    "Document management system",
+    "Legal intake or ticketing tool",
+    "E-signature platform"
+  ],
+  "guardrails": [
+    "Redlines use only approved clause language from your library",
+    "Every suggested change carries a comment giving the playbook reason",
+    "No NDA sent without lawyer sign-off",
+    "Counterparty drafts processed in your environment and not used for training",
+    "Playbook changes versioned and approved by the legal team"
+  ],
+  "compliance_notes": [
+    "Supports review by your lawyers; it does not provide legal advice.",
+    "NDA records include personal data of signatories; designed to support DPDP Act 2023 safeguards."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Inbound NDAs from one business unit, with every redline reviewed by a lawyer and compared with what they would have drafted.",
+    "deliverables": [
+      "NDA playbook encoded with your legal team",
+      "Working redline generator in Word",
+      "Triage queue",
+      "Comparison report of suggested and final redlines",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Redline acceptance",
+        "how": "Suggested changes kept, edited or removed by the reviewing lawyer."
+      },
+      {
+        "metric": "Missed issues",
+        "how": "Non-standard provisions found by lawyers but not flagged."
+      },
+      {
+        "metric": "Turnaround time",
+        "how": "Time from intake to redline sent, compared with recent NDAs."
+      },
+      {
+        "metric": "Triage agreement",
+        "how": "How often the lawyer agreed with the standard or escalate classification."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will the redlines look like our own?",
+      "a": "Yes. Edits come from your approved clause library and comments follow your house style, so the counterparty sees your usual positions."
+    },
+    {
+      "q": "Can it handle NDAs in different formats?",
+      "a": "Yes. It identifies clauses by meaning rather than numbering, so it works across counterparty templates, converted PDFs and mutual or one-way structures."
+    },
+    {
+      "q": "Do lawyers still need to read every NDA?",
+      "a": "Yes, but standard NDAs arrive with the redline and checks done, so sign-off is quick. Non-standard ones arrive with a clear issue list."
+    },
+    {
+      "q": "How long does it take to set up?",
+      "a": "A typical pilot runs for three weeks, most of it spent encoding your playbook and testing on recent NDAs. Production timing depends on your CLM and intake tools."
+    }
+  ],
+  "related": [
+    "contract-clause-extraction-and-risk-flags",
+    "due-diligence-data-room-review",
+    "legal-ai-confidentiality-testing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/legal/nda-review-and-redlines/"
+}

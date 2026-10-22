@@ -1,0 +1,222 @@
+{
+  "slug": "sale-agreement-and-title-review",
+  "industry": "real-estate-construction",
+  "title": "Sale Agreement and Title Document Review",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check each agreement for sale against the booking form, cost sheet and RERA record, and build a title chain from land documents with gaps flagged for your advocate.",
+  "seo": {
+    "title": "Sale Agreement and Title Document Review AI | VipraTech",
+    "description": "AI that checks agreements for sale against booking data and the prescribed format, and builds title chains from deeds and land records for legal review.",
+    "keywords": [
+      "agreement for sale review AI",
+      "title chain document review",
+      "land title document extraction",
+      "RERA agreement for sale check",
+      "real estate legal document AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Legal at a developer",
+    "Land Acquisition Manager",
+    "Customer Relations and Documentation Manager",
+    "External Real Estate Counsel"
+  ],
+  "problem": {
+    "intro": "Two kinds of document review slow developers down. Every booked unit needs an agreement for sale that matches the booking form, cost sheet and RERA registration exactly. Every land parcel needs a title chain pieced together from sale deeds, mutation entries, encumbrance certificates and revenue records, often decades old and in Hindi or a regional language.",
+    "pain_points": [
+      {
+        "title": "Unit data typed into templates",
+        "detail": "Carpet area, unit number, parking, payment plan and possession date are re-keyed into each agreement, and one wrong digit becomes a dispute at possession."
+      },
+      {
+        "title": "Drift from the prescribed format",
+        "detail": "State rules prescribe an agreement-for-sale format, and clauses edited for one buyer quietly carry into other agreements."
+      },
+      {
+        "title": "Title chains spread across decades",
+        "detail": "Link deeds, inheritance documents, partition deeds and land-use conversion orders sit in different bundles, so a missing link or an unregistered power of attorney is found late."
+      },
+      {
+        "title": "Names and survey numbers that do not line up",
+        "detail": "Spelling variations in owners' names, khasra or survey numbers changed after consolidation and area differences between deeds and revenue records are easy to overlook."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build two linked review flows. For agreements, the system reads each draft, extracts unit, price, payment plan, carpet area, possession date and key clauses, and compares them with the booking form, cost sheet, RERA registration details and your approved clause library. For land, it reads deeds, mutation entries, encumbrance certificates and revenue extracts, including Hindi and regional-language scans, and builds a dated chain of title showing who held which survey number and when. Gaps, mismatches and encumbrances are listed with page references. Your documentation team and advocate review the flags; the system never issues a title opinion.",
+    "capabilities": [
+      "Field-level comparison of agreements for sale with booking forms, cost sheets and RERA project details",
+      "Clause comparison against your approved template, highlighting additions, deletions and edited wording",
+      "OCR and extraction for sale, gift and partition deeds, mutation entries and encumbrance certificates in English, Hindi and regional languages",
+      "Chronological title chain per survey or khasra number with parties, dates, areas and registration details",
+      "Flags for missing links, name and area mismatches, live mortgages or charges and pending mutations",
+      "Review report with every flag linked to its source page"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Upload the document set",
+      "detail": "The documentation team uploads an agreement batch with booking data, or the legal team uploads a land bundle for a parcel."
+    },
+    {
+      "step": 2,
+      "title": "Classify and read",
+      "detail": "Each document is classified and read with OCR suited to scanned stamp paper, handwriting and regional scripts."
+    },
+    {
+      "step": 3,
+      "title": "Extract parties, property and terms",
+      "detail": "Parties, survey numbers, areas, consideration, dates, registration numbers and key clauses are extracted with confidence scores."
+    },
+    {
+      "step": 4,
+      "title": "Compare and build the chain",
+      "detail": "Agreements are compared with booking data and the template; land documents are ordered into a title chain per parcel."
+    },
+    {
+      "step": 5,
+      "title": "Flag gaps and mismatches",
+      "detail": "Missing links, mismatched names or areas, encumbrances and clause deviations are listed, and uncertain readings are marked for checking."
+    },
+    {
+      "step": 6,
+      "title": "Legal review",
+      "detail": "The documentation team or advocate reviews each flag against the source page and records a decision."
+    },
+    {
+      "step": 7,
+      "title": "Issue the review pack",
+      "detail": "The review report and corrected data go back to the drafting team or into the title search report prepared by counsel."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Upload agreements or land bundle\"] --> B[\"Classify and OCR documents\"]\n  B --> C[\"Extract parties, areas and terms\"]\n  C --> D[\"Compare with booking and template\"]\n  C --> E[\"Build title chain per parcel\"]\n  D --> F{\"Mismatch, gap or low confidence?\"}\n  E --> F\n  F -->|\"yes\"| G(\"Advocate or documentation review\")\n  F -->|\"no\"| H[\"Mark as checked\"]\n  G --> I[\"Issue review report\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Upload portal for agreement batches and land bundles",
+          "Booking and cost sheet import from the CRM",
+          "Document grouping by unit or parcel"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR for scanned stamp paper and regional scripts",
+          "Document type classifier",
+          "LLM extractor for parties, property and clauses"
+        ]
+      },
+      {
+        "name": "Analysis",
+        "components": [
+          "Agreement-to-booking comparator",
+          "Clause diff against the approved template",
+          "Title chain builder and gap rules"
+        ]
+      },
+      {
+        "name": "Review and output",
+        "components": [
+          "Legal review screen with source pages",
+          "Review report export",
+          "Decision and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n  I1[\"Agreement and land bundle upload\"]\n  I2[\"CRM booking and cost sheet import\"]\n  end\n  subgraph S2[\"Document understanding\"]\n  U1[\"OCR for scans and regional scripts\"]\n  U2[\"Document classifier\"]\n  U3[\"LLM party and clause extractor\"]\n  end\n  subgraph S3[\"Analysis\"]\n  A1[\"Agreement comparator\"]\n  A2[\"Clause diff engine\"]\n  A3[\"Title chain builder\"]\n  end\n  subgraph S4[\"Review and output\"]\n  R1(\"Legal review screen\")\n  R2[\"Review report\"]\n  R3[\"Audit log\"]\n  end\n  I1 --> U1\n  U1 --> U2\n  U2 --> U3\n  I2 --> A1\n  U3 --> A1\n  U3 --> A2\n  U3 --> A3\n  A1 --> R1\n  A2 --> R1\n  A3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Draft agreements for sale",
+    "Booking forms, allotment letters and cost sheets",
+    "RERA registration details and the approved agreement template",
+    "Sale, gift, partition and relinquishment deeds",
+    "Mutation entries, revenue record extracts and encumbrance certificates",
+    "Land-use conversion orders and approvals"
+  ],
+  "outputs": [
+    "Agreement check report with field mismatches and clause deviations",
+    "Chronological title chain per survey or khasra number",
+    "Gap and encumbrance list with source page references",
+    "Extracted table of parties, areas and registration details",
+    "Reviewer decision log"
+  ],
+  "human_in_the_loop": "The documentation team approves every agreement correction, and the advocate reviews every title flag and writes the title opinion. The system prepares the chain and the flags; it does not judge whether title is clear and marketable.",
+  "integrations": [
+    "Real estate CRM or ERP holding bookings and cost sheets",
+    "Document management system or shared drive",
+    "Agreement drafting templates in Word",
+    "Email for review hand-offs",
+    "Copies of records retrieved from state registration and land record portals"
+  ],
+  "guardrails": [
+    "No legal opinion or title certification is generated",
+    "Every extracted party, area and date links to its source page",
+    "Low-confidence readings of handwritten or regional-language text are marked, not guessed",
+    "Documents stay in your storage with role-based access for legal staff",
+    "Template changes are versioned so comparisons always use the approved clause set"
+  ],
+  "compliance_notes": [
+    "Agreements are checked against the format prescribed under your state's RERA rules, as configured with your legal team.",
+    "Buyer identity documents are handled with masked Aadhaar and retention limits under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One ongoing project: a batch of draft or executed agreements checked against booking data, plus title chains for one or two land parcels your counsel has already reviewed.",
+    "deliverables": [
+      "Field and clause comparison rules agreed with your legal team",
+      "Agreement check reports for the pilot batch",
+      "Title chain and gap list for the pilot parcels",
+      "Comparison with your counsel's existing findings",
+      "Production plan and estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Mismatches detected versus known issues",
+        "how": "Flags compared with errors your team had already found or corrected in the pilot batch."
+      },
+      {
+        "metric": "Title chain completeness",
+        "how": "Links and encumbrances in the generated chain compared with your counsel's title search report."
+      },
+      {
+        "metric": "False flags",
+        "how": "Flags the reviewer marks as not an issue, counted per agreement and per parcel."
+      },
+      {
+        "metric": "Review time per agreement or parcel",
+        "how": "Reviewer time with the report versus without it, on a sample."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read old Hindi or regional-language deeds?",
+      "a": "It handles typed and clearly scanned Hindi, Marathi, Gujarati and other common scripts, and many handwritten entries in revenue records. Faded or heavily handwritten pages are marked low confidence for a person to read. The pilot reports accuracy separately for these pages."
+    },
+    {
+      "q": "Does it replace our advocate's title search?",
+      "a": "No. It organises documents into a chain and lists gaps and encumbrances so the advocate starts from a structured file. The title opinion and any search at the sub-registrar's office stay with counsel."
+    },
+    {
+      "q": "How does it know our agreement format?",
+      "a": "We load your approved template and the format prescribed under your state's RERA rules, as your legal team confirms them. Comparisons run against that versioned clause set, and you can approve variations per project."
+    },
+    {
+      "q": "Is buyer data kept safe?",
+      "a": "Documents stay in your cloud account or an India region, access is limited to named legal and documentation staff, and identity numbers are masked in logs. We use models that do not train on your data."
+    }
+  ],
+  "related": [
+    "rera-project-data-extraction",
+    "customer-demand-and-receipt-reconciliation",
+    "property-title-document-summarisation",
+    "contract-clause-extraction-and-risk-flags"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/sale-agreement-and-title-review/"
+}

@@ -1,0 +1,216 @@
+{
+  "slug": "tablet-and-vial-defect-detection",
+  "industry": "pharma-life-sciences",
+  "title": "Tablet and Vial Visual Defect Detection",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Vision models that flag chipped, cracked, spotted or broken tablets and cap, crimp, glass or particle defects in vials, sending uncertain units to manual inspection and storing every reject image.",
+  "seo": {
+    "title": "Tablet and Vial Defect Detection with AI Vision | VipraTech",
+    "description": "AI vision for tablet and vial inspection: chips, cracks, spots, cap and crimp faults and visible particles, with reject images and inspector review.",
+    "keywords": [
+      "tablet defect detection",
+      "vial visual inspection AI",
+      "parenteral particle inspection",
+      "pharma machine vision",
+      "AQL inspection support"
+    ]
+  },
+  "designed_for": [
+    "Production Manager, Solid Orals or Injectables",
+    "Head of Quality Assurance",
+    "Visual Inspection Supervisor",
+    "Plant Engineering Manager"
+  ],
+  "problem": {
+    "intro": "Tablets are inspected after compression and coating, and injectable vials and ampoules are inspected for particles and container defects before packing. Much of this is still done by trained inspectors at booths or sorting belts, followed by AQL sampling, and fatigue makes results vary across a shift.",
+    "pain_points": [
+      {
+        "title": "Fatigue and variability",
+        "detail": "Manual inspection depends on concentration, and detection of small chips or particles varies between inspectors and over long shifts."
+      },
+      {
+        "title": "Fixed-threshold systems reject good units",
+        "detail": "Older automated inspection uses fixed rules that reject good units for embossing shadows or glass reflections and need constant retuning."
+      },
+      {
+        "title": "Defect data goes unused",
+        "detail": "Reject counts are recorded, but images and defect types are rarely kept, so recurring tooling or coating problems surface late."
+      },
+      {
+        "title": "Qualification effort",
+        "detail": "Every change to an inspection system needs defect libraries and requalification, which teams struggle to keep current."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build defect detection models trained on images of your own products. For tablets, the model classifies chips, cracks, capping, black spots, embossing faults and coating defects on a sorting belt or inspection drum. For vials and ampoules, it checks cap and crimp, fill level, glass cracks and visible particles from images captured on your inspection machine or a dedicated camera station. Each unit gets a defect class and a confidence score. Clear rejects are removed, uncertain units go to a manual inspection lane, and every reject image is stored with its class for trending.",
+    "capabilities": [
+      "Classifies tablet defects such as chips, cracks, capping, spots, embossing faults and coating defects",
+      "Inspects vials and ampoules for cap and crimp faults, fill level, glass cracks and visible particles",
+      "Sends low-confidence units to a manual inspection lane instead of forcing a decision",
+      "Builds a labelled defect library from your rejects for qualification and retraining",
+      "Trends defect types by batch, machine, punch set or filling line",
+      "Works with images from existing inspection machines where they can be exported"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Build the defect library",
+      "detail": "Inspectors label images of good units and known defects from your products to create training and challenge sets."
+    },
+    {
+      "step": 2,
+      "title": "Train and challenge test",
+      "detail": "The model is trained and tested against a fixed challenge set before it sees live production."
+    },
+    {
+      "step": 3,
+      "title": "Capture and classify",
+      "detail": "Cameras capture each tablet or container, and the model assigns a defect class and confidence score."
+    },
+    {
+      "step": 4,
+      "title": "Route by confidence",
+      "detail": "Clear passes continue, clear rejects are removed, and uncertain units go to the manual lane."
+    },
+    {
+      "step": 5,
+      "title": "Inspector decision",
+      "detail": "A trained inspector checks uncertain units, and the decision is added to the labelled library."
+    },
+    {
+      "step": 6,
+      "title": "Trend and report",
+      "detail": "Defect counts and images per batch go to production and QA for investigation and product quality review."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Defect library labelled by inspectors\"] --> B[\"Train and challenge test model\"]\n  B --> C[\"Capture images of each unit\"]\n  C --> D[\"Classify defect and confidence\"]\n  D --> E{\"Confident decision?\"}\n  E -->|\"pass\"| F[\"Unit continues\"]\n  E -->|\"reject\"| G[\"Remove unit and store image\"]\n  E -->|\"uncertain\"| H(\"Manual inspection lane\")\n  H --> I[\"Defect trends by batch and machine\"]\n  G --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Image capture",
+        "components": [
+          "Area or line-scan cameras with controlled lighting",
+          "Spin-and-stop presentation for vials",
+          "Encoder-based triggering"
+        ]
+      },
+      {
+        "name": "Inference at the line",
+        "components": [
+          "Edge GPU",
+          "Defect classification model",
+          "Confidence-based routing"
+        ]
+      },
+      {
+        "name": "Model management",
+        "components": [
+          "Labelled defect library",
+          "Training and challenge test pipeline",
+          "Model version registry"
+        ]
+      },
+      {
+        "name": "Review and quality data",
+        "components": [
+          "Manual inspection lane interface",
+          "Reject image archive",
+          "Defect trend dashboard"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Image capture\"]\n    C1[\"Cameras and lighting\"]\n    C2[\"Trigger and presentation\"]\n  end\n  subgraph S2[\"Inference at the line\"]\n    I1[\"Edge GPU\"]\n    I2[\"Defect classifier\"]\n    I3[\"Confidence routing\"]\n  end\n  subgraph S3[\"Model management\"]\n    M1[\"Defect library\"]\n    M2[\"Challenge test pipeline\"]\n    M3[\"Model registry\"]\n  end\n  subgraph S4[\"Review and quality data\"]\n    R1(\"Manual inspection lane\")\n    R2[\"Reject image archive\"]\n    R3[\"Defect trend dashboard\"]\n  end\n  C2 --> C1\n  C1 --> I1\n  I1 --> I2 --> I3\n  M1 --> M2 --> M3\n  M3 --> I2\n  I3 --> R1\n  I3 --> R2\n  R1 --> M1\n  R2 --> R3"
+  },
+  "inputs": [
+    "Images of good and defective units from your products",
+    "Defect catalogue with definitions and criticality",
+    "Line images from cameras or existing inspection machines",
+    "Batch and machine identifiers",
+    "Manual inspection and AQL results"
+  ],
+  "outputs": [
+    "Pass, reject or uncertain decision per unit",
+    "Defect class and confidence with image",
+    "Batch-level defect summary",
+    "Trend reports by machine, tooling or filling line",
+    "A growing labelled defect library"
+  ],
+  "human_in_the_loop": "Trained inspectors decide every uncertain unit and confirm the labels used for retraining. QA approves each new model version after challenge testing, and AQL sampling continues as your batch-level check.",
+  "integrations": [
+    "Inspection machines or sorting systems with image export",
+    "Line PLC for reject actuation",
+    "MES or ERP for batch and machine data",
+    "QMS for deviations and CAPA",
+    "Data platform for product quality review trending"
+  ],
+  "guardrails": [
+    "Challenge sets with known critical defects run at start-up and after any change",
+    "Model updates only through change control with documented test results",
+    "Uncertain units always go to manual inspection",
+    "No retraining on labels an inspector has not reviewed",
+    "Critical defect classes tuned to avoid misses, accepting more manual checks"
+  ],
+  "compliance_notes": [
+    "Supports pharmacopoeial expectations for visible particles in injections, such as USP chapters 790 and 1790 and Ph. Eur. 2.9.20, alongside your AQL programme.",
+    "Models and inspection recipes are validated as part of a GMP computerised system, with versioning and audit trails aligned to EU GMP Annex 11 and 21 CFR Part 11."
+  ],
+  "pilot": {
+    "duration": "6 weeks",
+    "scope": "One tablet product on a sorting belt, or one vial size on an existing inspection machine, using offline images first and then a shadow run alongside manual inspection.",
+    "deliverables": [
+      "Labelled defect library for the pilot product",
+      "Trained model with challenge test results",
+      "Shadow-run comparison with manual inspection",
+      "Camera and edge hardware recommendation",
+      "Qualification and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Detection of known defects",
+        "how": "Challenge sets with seeded critical and major defects run through the model."
+      },
+      {
+        "metric": "False rejects",
+        "how": "Good units rejected by the model, confirmed by inspector review."
+      },
+      {
+        "metric": "Agreement with manual inspection",
+        "how": "Model decisions compared with inspector decisions on the same units during the shadow run."
+      },
+      {
+        "metric": "Units sent to the manual lane",
+        "how": "Count of uncertain units per batch."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How many defect images do we need?",
+      "a": "It depends on the defect type and how rare it is. We start with your existing reject samples and images, and create seeded defects where real examples are scarce. The pilot report states how many examples each class had."
+    },
+    {
+      "q": "Will this replace our inspectors?",
+      "a": "It changes their work rather than removing it. Inspectors handle uncertain units, label new defect types and run challenge tests, and AQL sampling continues."
+    },
+    {
+      "q": "Can it work with our existing inspection machine?",
+      "a": "Often, if the machine can export images. Otherwise we specify a separate camera station. We confirm this in the first week of the pilot."
+    },
+    {
+      "q": "How is the model validated?",
+      "a": "Against a fixed challenge set of known defects, documented in a test report and re-run after any model or hardware change. We provide the documents your validation team needs to qualify it."
+    }
+  ],
+  "related": [
+    "packaging-and-label-inspection",
+    "batch-manufacturing-record-review",
+    "visual-quality-inspection",
+    "gxp-ai-tool-validation-and-security"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/tablet-and-vial-defect-detection/"
+}

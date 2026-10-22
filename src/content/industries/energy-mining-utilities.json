@@ -1,0 +1,121 @@
+{
+  "slug": "energy-mining-utilities",
+  "name": "Energy, Mining & Utilities",
+  "seo": {
+    "title": "AI for Energy, Mining & Utilities: Safety & Ops | VipraTech",
+    "description": "AI for mines, power plants and utilities: safety vision on CCTV, drone inspection, report extraction, permit tracking and multilingual voice agents.",
+    "keywords": [
+      "AI for mining safety",
+      "solar drone inspection AI",
+      "utility customer service voice agent",
+      "meter reading OCR",
+      "inspection report extraction",
+      "OT AI security review",
+      "computer vision for mines"
+    ]
+  },
+  "hero": {
+    "headline": "Spot unsafe acts, find defects sooner and answer outage calls in every local language",
+    "subheadline": "We build computer vision, document, voice and AI security systems for mining, power, renewables and utility operators. They assist your people and sit beside your existing safety, SCADA, CMMS and billing systems."
+  },
+  "intro": "Energy, mining and utility operators run large, spread-out assets with small supervisory teams, and much of their operating knowledge sits in camera feeds, drone images, scanned test reports and phone calls. That is where applied AI helps today: watching existing CCTV for unsafe acts near haul roads and conveyors, turning thermography and meter photos into checked records, extracting readings from inspection reports, and answering outage and billing calls in Hindi and regional languages. It does not replace statutory safety systems, protection relays, gas monitoring or the judgement of a mine manager or shift engineer, and it should never write to control systems. We build assistive systems that sit beside your SCADA, CMMS and billing platforms, with people approving every consequential action.",
+  "challenges": [
+    {
+      "title": "Too few eyes on large sites",
+      "detail": "Opencast benches, haul roads, conveyor galleries and solar blocks stretch over kilometres, and control rooms cannot watch every camera feed in every shift."
+    },
+    {
+      "title": "Inspection data trapped in images and PDFs",
+      "detail": "Drone thermography, transformer test reports and maintenance job cards arrive in vendor formats, so trends and repeat defects are hard to see across sites and years."
+    },
+    {
+      "title": "Call spikes during outages",
+      "detail": "A feeder trip or storm brings a surge of no-supply calls in several languages at once, and safety calls such as a snapped conductor must not wait in the same queue."
+    },
+    {
+      "title": "AI arriving close to operational technology",
+      "detail": "Copilots that read historian data, manuals and work orders sit near the IT/OT boundary, which raises new risks around prompt injection, data leakage and tool permissions."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "computer-vision",
+      "summary": "Detects PPE gaps and zone intrusions on mine CCTV, visual conveyor faults, solar module anomalies in drone thermography and meter register values in field photos, with supervisors confirming alerts."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Extracts readings and recommendations from inspection and test reports, tracks permit and consent conditions, and answers engineers' questions from technical archives with page-level citations."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Handles outage and billing calls in Hindi and regional languages, and lets linemen and fitters file structured job reports by speaking instead of typing."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Tests maintenance and control-room AI assistants for prompt injection, unsafe procedural advice, data leakage and excessive tool access before they reach plant users."
+    }
+  ],
+  "featured_use_cases": [
+    "mine-safety-monitoring",
+    "solar-panel-drone-inspection",
+    "utility-customer-service-voice-agent"
+  ],
+  "use_cases": [
+    "mine-safety-monitoring",
+    "conveyor-and-equipment-anomaly-detection",
+    "solar-panel-drone-inspection",
+    "meter-reading-from-photos",
+    "inspection-and-maintenance-report-extraction",
+    "technical-report-search-assistant",
+    "permit-and-compliance-document-tracking",
+    "utility-customer-service-voice-agent",
+    "field-technician-voice-reporting",
+    "ot-it-ai-assistant-security-review"
+  ],
+  "regulatory_context": [
+    {
+      "name": "Mine safety law and DGMS (India)",
+      "note": "Mine safety in India is governed by central mine safety legislation and regulations enforced by the Directorate General of Mines Safety. AI monitoring can support supervision and safety records, but it does not replace statutory duties, inspections or safety systems."
+    },
+    {
+      "name": "Electricity Act 2003, CEA regulations and consumer rights rules",
+      "note": "Distribution utilities operate under the Electricity Act 2003, Central Electricity Authority safety regulations and state supply codes, and the Electricity (Rights of Consumers) Rules, 2020 set expectations on complaint handling, metering and billing. Obligations stay with the licensee."
+    },
+    {
+      "name": "CEA cyber security guidelines and IEC 62443",
+      "note": "Power-sector entities follow CEA cyber security guidelines and CERT-In directions, and IEC 62443 is the widely used standard family for industrial control system security. AI that touches OT data should respect these zone and access boundaries."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Consumer records, call recordings, worker video and geotagged meter photos are personal data, so notice, purpose limitation, retention limits and security safeguards apply."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can computer vision replace our statutory safety systems or supervisors?",
+      "a": "No. Vision alerts help supervisors and control rooms notice unsafe acts sooner, but they sit alongside proximity warning devices, gas monitoring, interlocks, blasting procedures and statutory inspections. Every alert goes to a person who decides what to do."
+    },
+    {
+      "q": "Will this work at remote sites with weak connectivity?",
+      "a": "Yes, if it is designed for it. Video models run on edge hardware at site and store events locally when the link drops, and voice reporting apps queue recordings offline. Only events, summaries and approved records need to travel to central systems."
+    },
+    {
+      "q": "Do your systems connect to SCADA or DCS?",
+      "a": "Only in read-only mode, usually through a historian or a DMZ replica, and only where your OT security team agrees. Our systems do not send control commands, and integrations respect zone and conduit boundaries of the kind IEC 62443 describes."
+    },
+    {
+      "q": "Which languages can the voice agents handle?",
+      "a": "Hindi and Hinglish, plus regional languages chosen for your service area, such as Marathi, Gujarati, Bengali, Tamil, Telugu or Kannada. We test recognition on recordings from your own callers and field staff during the pilot, including technical terms and local place names."
+    }
+  ],
+  "related_industries": [
+    "manufacturing",
+    "logistics-supply-chain",
+    "telecom-contact-centers"
+  ],
+  "cta": {
+    "headline": "Start with one site, one camera cluster or one call queue",
+    "text": "Book a discovery call to choose a narrow pilot on your own footage, reports or call recordings. We agree the measures with your team before any build starts."
+  },
+  "url": "/industries/energy-mining-utilities/"
+}

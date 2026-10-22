@@ -1,0 +1,223 @@
+{
+  "slug": "co-lending-portfolio-file-audit",
+  "industry": "nbfc-lending",
+  "title": "Co-Lending and Portfolio File Audit",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check every loan file in a co-lending tranche, assignment pool or portfolio buyout against eligibility criteria and the loan system, listing missing documents and mismatches before money moves.",
+  "seo": {
+    "title": "Co-Lending and Portfolio Loan File Audit with AI | VipraTech",
+    "description": "AI that audits co-lending and portfolio loan files against eligibility criteria, LMS data and checklists, and lists missing documents and mismatches.",
+    "keywords": [
+      "co-lending file audit",
+      "loan portfolio due diligence AI",
+      "direct assignment pool audit",
+      "loan file completeness check",
+      "securitisation pool review"
+    ]
+  },
+  "designed_for": [
+    "Head of Co-Lending and Partnerships",
+    "Treasury and Securitisation Head",
+    "Head of Internal Audit",
+    "Credit Risk Manager at a partner bank"
+  ],
+  "problem": {
+    "intro": "When a bank takes its share of co-lent loans, buys a pool through direct assignment or invests in a securitised pool, someone has to check that each loan file matches the agreed criteria and the data tape. Sampling a few files leaves the rest unchecked, while reviewing every file by hand takes weeks that the transaction timeline rarely allows.",
+    "pain_points": [
+      {
+        "title": "Data tape and files disagree",
+        "detail": "Loan amount, tenure, rate, borrower details or sanction date in the tape do not always match the sanction letter, loan agreement or LMS."
+      },
+      {
+        "title": "Missing or defective documents",
+        "detail": "Unsigned agreements, missing Key Fact Statements, absent NACH mandates or outdated KYC appear in some files and are found late."
+      },
+      {
+        "title": "Eligibility criteria applied by hand",
+        "detail": "Each partnership agreement sets its own criteria on bureau score, LTV, FOIR, geography and product, which reviewers check file by file."
+      },
+      {
+        "title": "Evidence partners can rely on",
+        "detail": "Partner banks and investors increasingly want a file-level record of what was checked, not a summary certificate."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a file audit pipeline for co-lending and portfolio transactions. It ingests the data tape, the LMS extract and the scanned loan files, classifies each document and extracts the fields that matter: borrower identity, sanction terms, agreement terms, KFS details, mandate, insurance and collateral. It then reconciles three ways, tape against LMS against documents, applies the eligibility criteria in the partnership or assignment agreement, and runs your file completeness checklist. Each loan receives a status with exceptions that cite the document and page. Uncertain extractions and borderline criteria go to a reviewer, and the result is a pool-level exception report plus a file-level evidence trail.",
+    "capabilities": [
+      "Ingests data tapes, LMS extracts and scanned loan files at pool scale",
+      "Extracts sanction, agreement, KFS, mandate, insurance and collateral details",
+      "Three-way reconciliation of tape, loan system and documents with tolerance rules",
+      "Eligibility criteria from co-lending or assignment agreements encoded as reviewable rules",
+      "File completeness checks for KYC, signatures, dates and mandatory disclosures",
+      "Pool-level exception report and per-loan evidence trail for partners and auditors"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the pool",
+      "detail": "The data tape, LMS extract and loan files for the pool are loaded and matched by loan account number."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each file's documents are classified and key terms extracted with confidence and page references."
+    },
+    {
+      "step": 3,
+      "title": "Reconcile three ways",
+      "detail": "Tape, LMS and document values are compared field by field within agreed tolerances."
+    },
+    {
+      "step": 4,
+      "title": "Apply criteria and checklist",
+      "detail": "Eligibility rules and the completeness checklist run on each loan, producing pass, fail or review."
+    },
+    {
+      "step": 5,
+      "title": "Reviewer decisions",
+      "detail": "Reviewers clear uncertain items and confirm exceptions, which the originator can then cure or exclude."
+    },
+    {
+      "step": 6,
+      "title": "Report the pool",
+      "detail": "A pool-level exception report and per-loan evidence pack go to the partner, investor or audit committee."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Data tape, LMS extract, loan files\"] --> B[\"Match files to loan accounts\"]\n  B --> C[\"Classify and extract terms\"]\n  C --> D[\"Reconcile tape, LMS and documents\"]\n  D --> E[\"Eligibility and completeness rules\"]\n  E --> F{\"Exception or low confidence?\"}\n  F -->|\"yes\"| G(\"Reviewer confirms or clears\")\n  F -->|\"no\"| H[\"Mark loan as clean\"]\n  G --> J[\"Pool exception report and evidence\"]\n  H --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Data tape and LMS extract loaders",
+          "Bulk loan file ingestion from DMS or SFTP",
+          "Loan account matching"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR and document classifier",
+          "LLM term extractor with loan file schemas"
+        ]
+      },
+      {
+        "name": "Reconciliation and rules",
+        "components": [
+          "Three-way reconciliation engine with tolerances",
+          "Eligibility rule set per agreement",
+          "File completeness checklist"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception review queue",
+          "Cure tracking with the originator"
+        ]
+      },
+      {
+        "name": "Reporting and audit",
+        "components": [
+          "Pool exception report",
+          "Per-loan evidence pack",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Data tape and LMS loaders\"]\n    I2[\"Bulk loan file ingestion\"]\n    I3[\"Loan account matcher\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and classifier\"]\n    U2[\"LLM term extractor\"]\n  end\n  subgraph S3[\"Reconciliation and rules\"]\n    C1[\"Three-way reconciliation\"]\n    C2[\"Eligibility rules\"]\n    C3[\"Completeness checklist\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    R1(\"Exception review queue\")\n    R2[\"Pool exception report\"]\n    R3[\"Per-loan evidence pack\"]\n  end\n  I1 --> I3\n  I2 --> I3\n  I3 --> U1 --> U2\n  U2 --> C1\n  I1 --> C1\n  C1 --> C2 --> C3\n  C3 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Pool data tape",
+    "LMS extract for the loans in scope",
+    "Scanned loan files: application, KYC, sanction letter, loan agreement, KFS",
+    "NACH or e-mandate registrations and insurance documents",
+    "Collateral documents where applicable",
+    "Co-lending or assignment agreement with eligibility criteria"
+  ],
+  "outputs": [
+    "Per-loan status with exceptions and source references",
+    "Three-way reconciliation differences",
+    "Eligibility and checklist results per loan",
+    "Pool-level exception summary",
+    "Evidence pack for partner, investor or auditor review"
+  ],
+  "human_in_the_loop": "Reviewers confirm every exception and clear uncertain items, and the originator and partner agree cures or exclusions. Final acceptance of loans into a pool remains a credit and treasury decision.",
+  "integrations": [
+    "Loan management system (via extract or API)",
+    "Document management system or SFTP for loan files",
+    "Co-lending platform or partner bank interface",
+    "Treasury or securitisation workflow tools",
+    "Audit and GRC tools"
+  ],
+  "guardrails": [
+    "Every exception cites the document, page and rule that produced it",
+    "Eligibility rules version-controlled and approved by both partners",
+    "Tolerances for amounts and dates agreed in advance",
+    "Borrower data processed in the agreed environment with access logs",
+    "No loan marked clean while any mandatory document is unreadable"
+  ],
+  "compliance_notes": [
+    "Supports the due diligence each partner must perform under RBI's co-lending framework and its directions on transfer of loan exposures.",
+    "Helps evidence that Key Fact Statements and disclosures are present on digital loans, as RBI's digital lending rules expect."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One recent co-lending tranche or assignment pool of manageable size, audited in full and compared with the sample-based review that was actually performed.",
+    "deliverables": [
+      "Eligibility rules and checklist encoded for the pilot pool",
+      "Full-pool audit run with per-loan results",
+      "Exception review screen",
+      "Comparison with the original sample review",
+      "Plan for running audits before each future tranche"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Extraction accuracy on key terms",
+        "how": "Sanction and agreement terms compared with reviewer-verified values on a sample."
+      },
+      {
+        "metric": "Exceptions confirmed by reviewers",
+        "how": "Raised exceptions that reviewers confirmed as genuine, by exception type."
+      },
+      {
+        "metric": "Coverage beyond the sample review",
+        "how": "Issues found in the full-pool audit that the original sample review did not cover."
+      },
+      {
+        "metric": "Audit turnaround",
+        "how": "Elapsed time from pool receipt to exception report, compared with the current process."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Who uses this, the NBFC or the bank?",
+      "a": "Either. Originators use it to clean pools before offering them, and partner banks or investors use it for their own due diligence. Both sides can share the same evidence pack if they agree to."
+    },
+    {
+      "q": "Can it handle pools of thousands of loans?",
+      "a": "Yes. Processing scales with infrastructure, so full-pool review is practical where manual review would rely on sampling. The pilot measures throughput on your actual files."
+    },
+    {
+      "q": "How are our agreement's criteria encoded?",
+      "a": "We translate each criterion into a rule, review the rule set with your credit and legal teams and version it. Criteria that need judgement go to reviewers rather than being forced into a rule."
+    },
+    {
+      "q": "What if documents are poor-quality scans?",
+      "a": "Unreadable or low-confidence documents are listed as exceptions and never assumed to be fine. The report shows which files need rescanning."
+    }
+  ],
+  "related": [
+    "loan-application-document-extraction",
+    "bank-statement-analysis-for-underwriting",
+    "collections-voice-agent-conduct-testing",
+    "audit-sampling-and-vouching"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/co-lending-portfolio-file-audit/"
+}

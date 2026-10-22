@@ -1,0 +1,225 @@
+{
+  "slug": "client-statement-and-portfolio-extraction",
+  "industry": "capital-markets-wealth",
+  "title": "Client Statement and Portfolio Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read CAS, mutual fund, broker, PMS and AIF statements into one consolidated, reconciled portfolio, with every holding linked to its source page and exceptions sent to operations.",
+  "seo": {
+    "title": "CAS and Portfolio Statement Extraction AI | VipraTech",
+    "description": "AI that reads CAS, mutual fund, broker, PMS and AIF statements, maps holdings to ISINs, reconciles totals and builds a consolidated client portfolio.",
+    "keywords": [
+      "CAS statement extraction",
+      "portfolio statement parsing",
+      "wealth management document AI",
+      "mutual fund statement extraction",
+      "PMS statement automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Wealth Operations",
+    "Relationship Manager",
+    "SEBI-Registered Investment Adviser",
+    "Family Office Operations Lead"
+  ],
+  "problem": {
+    "intro": "A new wealth client rarely arrives with one tidy statement. They bring a depository CAS, mutual fund statements from the registrars, a PMS quarterly report, an AIF capital account statement, bank deposit receipts and perhaps an overseas brokerage statement, and the RM's team rebuilds the portfolio by hand before any review can begin.",
+    "pain_points": [
+      {
+        "title": "Manual portfolio rebuilding",
+        "detail": "Operations staff copy holdings into spreadsheets, often for several family members and entities at once, and the work repeats at every review."
+      },
+      {
+        "title": "Inconsistent names and identifiers",
+        "detail": "The same scheme or bond appears under different names across statements, and missing ISINs or plan variants cause wrong mappings."
+      },
+      {
+        "title": "Double counting",
+        "detail": "Mutual fund units held in demat form can appear in both the depository CAS and a registrar statement, inflating the portfolio if nobody notices."
+      },
+      {
+        "title": "Password-protected and scanned files",
+        "detail": "Statements arrive password-protected, scanned or as phone photos, which slows teams down and tempts staff to keep passwords insecurely."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a statement pipeline that accepts client statements by secure upload, email or, where your setup supports it, Account Aggregator data. It opens password-protected files in memory using the password the client provides, identifies the statement type and extracts holdings, transactions, valuations and statement dates. Each security is mapped to its ISIN or scheme code against your security master, and holdings that appear in more than one statement are de-duplicated. The pipeline reconciles extracted totals to each statement's own summary and sends unmapped securities or breaks to an operations analyst. The result is a consolidated portfolio in your wealth platform, ready for the adviser's review.",
+    "capabilities": [
+      "Classifies statement types: depository CAS, registrar statements, broker holdings, PMS, AIF, deposits and overseas brokerage",
+      "Extracts holdings, transactions, units, NAV or price, valuation date and cost where shown",
+      "Maps securities to ISINs and scheme codes, including plan and option variants",
+      "De-duplicates holdings that appear in more than one statement",
+      "Reconciles extracted totals to each statement's own summary and flags breaks",
+      "Exports a consolidated portfolio by client, family member and asset class to your wealth platform"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect statements with consent",
+      "detail": "Clients share statements through a secure upload, email or Account Aggregator consent, and the consent is recorded."
+    },
+    {
+      "step": 2,
+      "title": "Open and classify",
+      "detail": "Password-protected files are opened in memory, and each statement is classified by type and source."
+    },
+    {
+      "step": 3,
+      "title": "Extract holdings and transactions",
+      "detail": "Holdings, transactions and valuations are extracted with page references."
+    },
+    {
+      "step": 4,
+      "title": "Map and de-duplicate",
+      "detail": "Securities are mapped to ISINs or scheme codes, and duplicate holdings across statements are merged."
+    },
+    {
+      "step": 5,
+      "title": "Reconcile and review",
+      "detail": "Totals are reconciled to statement summaries; breaks and unmapped items go to an operations analyst."
+    },
+    {
+      "step": 6,
+      "title": "Publish the portfolio",
+      "detail": "The consolidated portfolio is pushed to the wealth platform for the adviser's review."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Statements shared with consent\"] --> B[\"Open and classify each statement\"]\n  B --> C[\"Extract holdings and transactions\"]\n  C --> D[\"Map to ISIN and remove duplicates\"]\n  D --> E{\"Totals reconcile and all mapped?\"}\n  E -->|\"no\"| F(\"Operations analyst resolves breaks\")\n  E -->|\"yes\"| G[\"Consolidated portfolio published\"]\n  F --> G\n  G --> H(\"Adviser reviews portfolio\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Collection and consent",
+        "components": [
+          "Secure client upload portal",
+          "Email intake",
+          "Account Aggregator data feed where available",
+          "Consent log"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "In-memory password handling",
+          "Statement type classifier",
+          "Table and text extractor for holdings and transactions"
+        ]
+      },
+      {
+        "name": "Reference mapping",
+        "components": [
+          "Security master with ISINs and scheme codes",
+          "Fuzzy name matching for schemes and bonds",
+          "Cross-statement de-duplication"
+        ]
+      },
+      {
+        "name": "Reconciliation and review",
+        "components": [
+          "Statement total reconciliation",
+          "Exception queue for operations"
+        ]
+      },
+      {
+        "name": "Delivery",
+        "components": [
+          "Wealth platform adapter",
+          "Excel export",
+          "Audit trail"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Collection and consent\"]\n    C1[\"Secure upload and email\"]\n    C2[\"Account Aggregator feed\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"In-memory file opening\"]\n    U2[\"Statement classifier\"]\n    U3[\"Holdings and transaction extractor\"]\n  end\n  subgraph S3[\"Mapping and reconciliation\"]\n    M1[\"Security master mapping\"]\n    M2[\"Cross-statement de-duplication\"]\n    M3[\"Total reconciliation\"]\n    M4(\"Operations exception queue\")\n  end\n  subgraph S4[\"Delivery\"]\n    D1[\"Wealth platform adapter\"]\n    D2[\"Audit trail\"]\n  end\n  C1 --> U1\n  C2 --> M1\n  U1 --> U2\n  U2 --> U3\n  U3 --> M1\n  M1 --> M2\n  M2 --> M3\n  M3 --> M4\n  M3 --> D1\n  M4 --> D1\n  D1 --> D2"
+  },
+  "inputs": [
+    "NSDL or CDSL consolidated account statements",
+    "Registrar mutual fund statements from CAMS or KFintech",
+    "Broker holding statements and contract notes",
+    "PMS and AIF statements",
+    "Bank deposit and bond holding statements",
+    "Security master with ISINs and scheme codes"
+  ],
+  "outputs": [
+    "Consolidated holdings by client, family member and asset class",
+    "Transaction history with cost where the statement provides it",
+    "Mapping exceptions for unknown or ambiguous securities",
+    "Reconciliation report against statement totals",
+    "Export to the wealth platform or Excel"
+  ],
+  "human_in_the_loop": "Operations analysts resolve every unmapped security and reconciliation break before a portfolio is published. Advisers review the consolidated portfolio before any client discussion, and the system never suggests what to buy, sell or switch.",
+  "integrations": [
+    "Wealth management or portfolio management platform",
+    "CRM",
+    "Account Aggregator ecosystem, where you are onboarded as a financial information user",
+    "Security master data provider",
+    "Secure client upload portal and email"
+  ],
+  "guardrails": [
+    "Statement passwords used in memory only and never stored",
+    "PAN and account numbers masked in logs",
+    "Reconciliation to statement totals required before publishing",
+    "Every holding linked to its source page",
+    "No recommendations or advice generated from the data"
+  ],
+  "compliance_notes": [
+    "Client consent is recorded before statements are processed, supporting DPDP Act 2023 requirements on consent and purpose.",
+    "Outputs are analytical inputs for SEBI-registered advisers or distributors; the system does not generate investment advice."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "A set of de-identified client statement bundles covering depository CAS, registrar statements and PMS reports, processed in parallel with your operations team.",
+    "deliverables": [
+      "Statement type coverage list and output schema",
+      "Working pipeline with security master mapping",
+      "Operations exception queue",
+      "Accuracy and reconciliation report",
+      "Production plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Holding-level accuracy",
+        "how": "Extracted holdings compared with portfolios your operations team built for the same clients."
+      },
+      {
+        "metric": "Auto-mapping coverage",
+        "how": "Share of holdings mapped to an ISIN or scheme code without analyst help."
+      },
+      {
+        "metric": "Reconciliation breaks found",
+        "how": "Breaks raised by the pipeline and confirmed by analysts as genuine."
+      },
+      {
+        "metric": "Operations time per client bundle",
+        "how": "Timed with and without the pipeline on a sample of bundles."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read password-protected CAS files?",
+      "a": "Yes, using the password the client provides for that upload. The password is used in memory to open the file and is never stored."
+    },
+    {
+      "q": "Does it handle overseas brokerage and custody statements?",
+      "a": "Yes, with a schema per statement format. New formats can be added without templates, and the first statements from any new source are reviewed by an analyst."
+    },
+    {
+      "q": "Will it suggest rebalancing or switches?",
+      "a": "No. It produces a clean, reconciled portfolio. Analysis and recommendations remain with your registered advisers."
+    },
+    {
+      "q": "Can it calculate capital gains?",
+      "a": "It extracts transactions and cost where statements provide them, which your tax or portfolio tools can use. Where cost data is missing, it flags the gap rather than estimating."
+    }
+  ],
+  "related": [
+    "broker-kyc-onboarding-verification",
+    "rm-meeting-notes-and-crm-agent",
+    "private-markets-fund-document-extraction",
+    "bank-statement-analysis-for-underwriting"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/capital-markets-wealth/client-statement-and-portfolio-extraction/"
+}

@@ -1,0 +1,100 @@
+{
+  "slug": "sales-marketing-automation",
+  "name": "AI Sales & Marketing Automation",
+  "seo": {
+    "title": "AI Sales and Marketing Automation | VipraTech",
+    "description": "AI agents that qualify leads, follow up on WhatsApp and email, update your CRM and personalise outreach, built around your sales process.",
+    "keywords": [
+      "AI sales automation",
+      "AI lead qualification",
+      "WhatsApp marketing automation",
+      "CRM automation AI",
+      "AI SDR agent"
+    ]
+  },
+  "hero": {
+    "headline": "Follow up on every lead, in minutes, without adding headcount",
+    "subheadline": "We build agents that qualify leads, follow up across WhatsApp, voice and email, and keep your CRM current, within the consent and messaging rules you operate under."
+  },
+  "intro": "Most lost deals are lost to slow or inconsistent follow-up, not to price. We automate the repetitive parts of your funnel, research, first response, qualification, reminders and CRM updates, and route warm conversations to your team with context. Messaging respects opt-ins and platform rules.",
+  "what_we_build": [
+    "Lead qualification and routing",
+    "WhatsApp and email nurture journeys",
+    "Abandoned cart and win-back flows",
+    "Account research and personalised outreach drafts",
+    "Meeting notes to CRM updates",
+    "Review and feedback analysis"
+  ],
+  "how_we_work": [
+    "Map your funnel and where leads stall",
+    "Connect CRM, WhatsApp and telephony",
+    "Launch on one segment with A/B comparison",
+    "Expand once the numbers hold"
+  ],
+  "proof_refs": [
+    "whatsapp-hotel-booking"
+  ],
+  "faqs": [
+    {
+      "q": "Which CRMs do you work with?",
+      "a": "Common ones include Salesforce, HubSpot, Zoho and LeadSquared, plus custom CRMs through their APIs."
+    },
+    {
+      "q": "Will automated messages annoy customers?",
+      "a": "We use opt-ins, frequency caps and stop words, and hand conversations to people as soon as there is real interest or a complaint."
+    },
+    {
+      "q": "How do we know it works?",
+      "a": "Each launch runs against a control group, so you can compare response, conversion and time to first contact."
+    }
+  ],
+  "url": "/solutions/sales-marketing-automation/",
+  "use_cases": [
+    "retail-banking-cross-sell-outreach",
+    "loan-lead-qualification-agent",
+    "agent-and-posp-lead-nurturing",
+    "rm-meeting-notes-and-crm-agent",
+    "dormant-account-reactivation",
+    "merchant-activation-and-upsell-automation",
+    "patient-enquiry-follow-up-automation",
+    "doctor-engagement-automation",
+    "shipper-lead-qualification-and-quotes",
+    "dealer-reorder-automation",
+    "abandoned-cart-and-win-back-automation",
+    "review-and-ugc-insights",
+    "channel-partner-lead-automation",
+    "buyer-nurture-campaigns",
+    "hotel-whatsapp-booking-assistant",
+    "wedding-and-banquet-enquiry-qualification",
+    "review-response-and-reputation-automation",
+    "travel-quote-generation-automation",
+    "counselling-funnel-lead-nurture",
+    "parent-progress-update-automation",
+    "client-document-collection-agent",
+    "engagement-proposal-drafting",
+    "churn-risk-outreach-automation",
+    "dealer-lead-routing-and-follow-up",
+    "agri-input-dealer-order-automation",
+    "outbound-sdr-research-agent"
+  ],
+  "industries": [
+    "accounting-audit-consulting",
+    "agriculture",
+    "automotive-mobility",
+    "banking",
+    "capital-markets-wealth",
+    "education",
+    "fintech-payments",
+    "healthcare",
+    "hospitality-travel",
+    "insurance",
+    "logistics-supply-chain",
+    "manufacturing",
+    "nbfc-lending",
+    "pharma-life-sciences",
+    "real-estate-construction",
+    "retail-ecommerce",
+    "saas-ai-companies",
+    "telecom-contact-centers"
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "slug": "permit-and-compliance-document-tracking",
+  "industry": "energy-mining-utilities",
+  "title": "Permit and Compliance Document Tracking",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Turn environmental clearances, consents, explosives and petroleum licences and grid approvals into an obligation register with owners, due dates, reminders and linked evidence.",
+  "seo": {
+    "title": "Permit and Compliance Document Tracking with AI | VipraTech",
+    "description": "AI that extracts conditions, validity dates and reporting duties from permits and consents, builds an obligation register and tracks evidence.",
+    "keywords": [
+      "permit tracking software AI",
+      "environmental clearance compliance tracking",
+      "consent to operate conditions",
+      "mining licence compliance",
+      "obligation register automation"
+    ]
+  },
+  "designed_for": [
+    "Head of Environment and Compliance",
+    "Mine Manager or Plant Head",
+    "Regulatory Affairs Manager",
+    "Project Development Lead, Renewables"
+  ],
+  "problem": {
+    "intro": "A single mine, power plant or solar park operates under a stack of approvals: environmental clearance, consent to establish and consent to operate, forest clearance, explosives and petroleum storage licences, mine plan approvals, grid connectivity and electrical inspector approvals. Each carries its own validity, conditions and reporting duties, often spread across long letters in different formats.",
+    "pain_points": [
+      {
+        "title": "Conditions buried in approval letters",
+        "detail": "Specific and general conditions run across pages, and recurring duties such as monitoring and periodic compliance reports are easy to lose."
+      },
+      {
+        "title": "Renewals tracked in spreadsheets",
+        "detail": "Expiry dates live in personal trackers, so a change of staff can leave a licence renewal unnoticed."
+      },
+      {
+        "title": "Evidence scattered across teams",
+        "detail": "Monitoring results, plantation records and fee receipts sit with different departments when the compliance report falls due."
+      },
+      {
+        "title": "Portfolios with varied formats",
+        "detail": "Multi-site operators deal with approvals from several states and authorities, each with its own layout and language."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an obligation tracker fed by your permits and licences. Documents are uploaded or pulled from your document system, read by OCR and a language model, and split into structured records: permit type, issuing authority, reference number, validity, and each condition with any recurring duty it creates. A compliance officer corrects flagged fields and approves the condition list before anything enters the register. Each obligation then gets an owner, a due date and reminders by email, Teams or WhatsApp, with escalation to the site head if evidence is missing. Evidence such as monitoring reports and photos is linked to the condition it supports, and the tracker drafts compliance status tables for sign-off.",
+    "capabilities": [
+      "Extracts permit type, issuing authority, reference number and validity from licences and consents",
+      "Splits approval letters into individual conditions and identifies recurring duties",
+      "Builds an obligation calendar with owners, due dates and escalation rules",
+      "Sends reminders by email, Microsoft Teams or WhatsApp to site owners",
+      "Links evidence such as monitoring reports, photos and receipts to each condition",
+      "Drafts compliance status tables in the structure your reports follow, for review"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the permit set",
+      "detail": "Permits, licences and approval letters are uploaded or synced, including scanned and regional-language documents."
+    },
+    {
+      "step": 2,
+      "title": "Extract dates and conditions",
+      "detail": "OCR and an LLM capture metadata and split each document into conditions, keeping the original wording of every condition."
+    },
+    {
+      "step": 3,
+      "title": "Verify and approve",
+      "detail": "The compliance officer corrects any low-confidence fields and approves each permit's condition list."
+    },
+    {
+      "step": 4,
+      "title": "Assign owners and due dates",
+      "detail": "Every obligation gets an owner, a due date and an escalation path."
+    },
+    {
+      "step": 5,
+      "title": "Remind and collect evidence",
+      "detail": "Owners receive reminders and upload evidence; missing evidence near the due date escalates to the site head."
+    },
+    {
+      "step": 6,
+      "title": "Draft the status report",
+      "detail": "The tracker drafts a compliance status table for review and sign-off before anything is submitted."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Permits, consents and licences\"] --> B[\"Extract dates, authority, conditions\"]\n  B --> C{\"All fields confident?\"}\n  C -->|\"no\"| D(\"Officer corrects flagged fields\")\n  C -->|\"yes\"| E(\"Officer approves condition list\")\n  D --> E\n  E --> F[\"Obligation register with owners\"]\n  F --> G[\"Reminders and evidence requests\"]\n  G --> H{\"Evidence in before due date?\"}\n  H -->|\"no\"| I(\"Escalate to site head\")\n  I --> G\n  H -->|\"yes\"| J[\"Draft compliance status report\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Upload portal and email intake",
+          "Document management system sync",
+          "Site and entity master data"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with multilingual support",
+          "Permit type classifier",
+          "LLM condition splitter with schemas"
+        ]
+      },
+      {
+        "name": "Obligation management",
+        "components": [
+          "Obligation register",
+          "Calendar and reminder engine",
+          "Evidence store linked to conditions"
+        ]
+      },
+      {
+        "name": "Review and reporting",
+        "components": [
+          "Compliance officer review screen",
+          "Status report drafts",
+          "Change history and audit trail"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    T1[\"Upload and email intake\"]\n    T2[\"Document system sync\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"Multilingual OCR\"]\n    E2[\"Permit classifier\"]\n    E3[\"Condition splitter\"]\n  end\n  subgraph S3[\"Obligation management\"]\n    B1[\"Obligation register\"]\n    B2[\"Reminder engine\"]\n    B3[\"Evidence store\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    R1(\"Compliance officer review\")\n    R2[\"Status report drafts\"]\n    R3[\"Audit trail\"]\n  end\n  T1 --> E1\n  T2 --> E1\n  E1 --> E2\n  E2 --> E3\n  E3 --> R1\n  R1 --> B1\n  B1 --> B2\n  B2 --> B3\n  B3 --> R2\n  B1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Environmental clearance letters and their conditions",
+    "Consent to establish and consent to operate orders",
+    "Explosives, petroleum storage and other licences",
+    "Mining lease, mine plan and forest clearance approvals",
+    "Grid connectivity, electrical inspector and other plant approvals",
+    "Monitoring reports, photos and receipts used as evidence"
+  ],
+  "outputs": [
+    "Verified obligation register with owners and due dates",
+    "Renewal and reporting calendar across sites",
+    "Condition-wise status with linked evidence",
+    "Draft compliance status tables for sign-off",
+    "Audit trail of changes and approvals"
+  ],
+  "human_in_the_loop": "The compliance officer corrects flagged fields and approves each permit's condition list before it enters the register. Interpretation of conditions, legal positions and all submissions to authorities stay with your team.",
+  "integrations": [
+    "SharePoint or a document management system",
+    "Email and Microsoft Teams",
+    "WhatsApp Business API for site reminders",
+    "ERP or project management tools for owner and site data",
+    "Environmental monitoring data portals or CEMS exports, where used"
+  ],
+  "guardrails": [
+    "Conditions are always shown in their original wording beside any summary",
+    "Validity and due dates checked against the source and confirmed by a person",
+    "Nothing is submitted to any authority automatically",
+    "Not positioned or used as legal advice",
+    "Every change to the register is versioned and attributable"
+  ],
+  "compliance_notes": [
+    "Helps permit holders track conditions of environmental clearances and of consents issued under India's Air and Water Acts; responsibility for compliance stays with the permit holder.",
+    "Not legal advice; your compliance and legal teams interpret obligations."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "The complete permit set for one site, including recurring reporting duties, loaded and verified with the site's compliance officer.",
+    "deliverables": [
+      "Obligation schema agreed with your compliance team",
+      "Verified register for the pilot site",
+      "Reminder and escalation flow",
+      "Draft status table for one upcoming compliance report",
+      "Multi-site roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Condition capture completeness",
+        "how": "Extracted conditions compared with the compliance officer's own list for the same permits."
+      },
+      {
+        "metric": "Date accuracy",
+        "how": "Validity and due dates checked against the source documents."
+      },
+      {
+        "metric": "Reviewer corrections",
+        "how": "Number and type of edits the compliance officer makes per permit."
+      },
+      {
+        "metric": "Report preparation effort",
+        "how": "Time to assemble a compliance status table with and without the tracker."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read permits in Hindi or regional languages?",
+      "a": "Yes. Multilingual OCR and the language model handle Hindi and common regional-language documents, and the original wording is kept beside the English summary so reviewers can check the meaning."
+    },
+    {
+      "q": "Is this legal advice?",
+      "a": "No. The tracker organises what the documents say, who owns each duty and when it falls due. Interpretation and any position taken with an authority stay with your compliance and legal teams."
+    },
+    {
+      "q": "We run sites in several states. Does it cope with different formats?",
+      "a": "Yes. Extraction works from the content rather than fixed templates, so different authorities' layouts are handled. We test samples from each state during the pilot."
+    },
+    {
+      "q": "Can it work alongside our existing compliance software?",
+      "a": "Yes. It can act as the extraction and evidence layer and push verified obligations into the tool you already use, through an API or a structured export."
+    }
+  ],
+  "related": [
+    "technical-report-search-assistant",
+    "inspection-and-maintenance-report-extraction",
+    "contract-clause-extraction-and-risk-flags",
+    "rera-project-data-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/energy-mining-utilities/permit-and-compliance-document-tracking/"
+}

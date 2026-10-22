@@ -1,0 +1,220 @@
+{
+  "slug": "call-qa-and-compliance-auditing",
+  "industry": "telecom-contact-centers",
+  "title": "Call QA and Compliance Auditing on Every Call",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Score every recorded call against your QA form and compliance script, in Hindi, Hinglish and English, so QA analysts spend their time on the calls that need a human ear.",
+  "seo": {
+    "title": "AI Call QA and Compliance Auditing | VipraTech",
+    "description": "AI that transcribes every call in Hindi, Hinglish and English, scores it against your QA form and compliance script, and routes breaches to QA analysts.",
+    "keywords": [
+      "AI call quality monitoring",
+      "automated call QA",
+      "contact centre compliance auditing",
+      "Hindi speech analytics",
+      "BPO quality assurance AI"
+    ]
+  },
+  "designed_for": [
+    "Head of Quality",
+    "Contact Centre Compliance Manager",
+    "Operations Manager",
+    "BPO Client Delivery Head"
+  ],
+  "problem": {
+    "intro": "QA teams typically listen to a small, fixed sample of calls per agent each month and score them on a form covering opening, verification, hold etiquette, mandatory disclosures, resolution and closing. Breaches on unsampled calls, such as a skipped disclosure, a misleading promise or a rude exchange, surface only when a customer complains or a client audits the programme.",
+    "pain_points": [
+      {
+        "title": "Small sample coverage",
+        "detail": "A handful of calls per agent cannot show whether a disclosure is skipped routinely or only once."
+      },
+      {
+        "title": "Inconsistent scoring",
+        "detail": "Two analysts score the same call differently, and calibration sessions take time away from listening."
+      },
+      {
+        "title": "Code-mixed audio defeats keyword spotting",
+        "detail": "Legacy speech analytics built for English keywords misses Hinglish phrasing of the same disclosure or promise."
+      },
+      {
+        "title": "Feedback arrives too late",
+        "detail": "Agents receive coaching weeks after the call, when they no longer remember it, and disputes are hard to settle without evidence."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a call QA pipeline that picks up recordings from your dialler or recording platform after each call, transcribes them with speaker separation and evaluates the conversation against your own QA form and compliance checklist. Each parameter is scored with the transcript excerpt that justifies it: whether the agent verified identity before discussing the account, read the mandatory disclosure, avoided prohibited promises, followed hold procedure and closed correctly. Compliance-critical failures and low-confidence scores go to QA analysts, who confirm or overturn them, and their decisions are used to calibrate the evaluator. Team leaders get agent-level trends and coaching clips instead of a monthly spreadsheet.",
+    "capabilities": [
+      "Transcription with agent and customer separation for Hindi, Hinglish, English and agreed regional languages",
+      "Scoring against your QA form, parameter by parameter, with the quoted evidence behind each score",
+      "Compliance checks for mandatory disclosures, verification steps, prohibited phrases and promises",
+      "Detection of abusive language, escalation requests and dissatisfaction signals",
+      "Analyst review queue for critical failures and uncertain scores, with calibration tracking",
+      "Agent and team dashboards with coaching clips linked to the exact moment in the call"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Ingest recordings",
+      "detail": "Recordings and call metadata such as agent, campaign and disposition are collected after each call."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe and separate speakers",
+      "detail": "Audio is transcribed with agent and customer labelled, and card numbers or OTPs are redacted."
+    },
+    {
+      "step": 3,
+      "title": "Score against the QA form",
+      "detail": "Each parameter is scored with the excerpt that supports it, and compliance rules are checked."
+    },
+    {
+      "step": 4,
+      "title": "Review critical results",
+      "detail": "Compliance-critical failures and low-confidence scores go to a QA analyst to confirm or overturn."
+    },
+    {
+      "step": 5,
+      "title": "Log decisions for calibration",
+      "detail": "Analyst decisions are recorded and used to tune the evaluator and track agreement."
+    },
+    {
+      "step": 6,
+      "title": "Publish to team leaders",
+      "detail": "Scores, trends and coaching clips appear on agent and team dashboards."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Call recording and metadata\"] --> B[\"Transcribe with speaker separation\"]\n  B --> C[\"Score against QA form and checklist\"]\n  C --> D{\"Critical failure or low confidence?\"}\n  D -->|\"yes\"| E(\"QA analyst confirms or overturns\")\n  D -->|\"no\"| F[\"Score stored with evidence\"]\n  E --> G[\"Decision logged for calibration\"]\n  G --> F\n  F --> H[\"Agent dashboards and coaching clips\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Recording platform connector or SFTP pickup",
+          "Call metadata from dialler and CRM"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Speech recognition with speaker separation",
+          "Redaction of card numbers and OTPs"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "QA form configured as a scoring rubric",
+          "LLM evaluator that quotes evidence",
+          "Rule checks for mandatory phrases"
+        ]
+      },
+      {
+        "name": "Review and calibration",
+        "components": [
+          "QA analyst review queue",
+          "Dispute handling",
+          "Calibration and agreement metrics"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Agent and team dashboards",
+          "Coaching clip library",
+          "Exports to QA and WFM tools"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Recording platform connector\"]\n    I2[\"Dialler and CRM metadata\"]\n  end\n  subgraph S2[\"Speech\"]\n    A1[\"ASR with speaker separation\"]\n    A2[\"Card number and OTP redaction\"]\n  end\n  subgraph S3[\"Evaluation\"]\n    E1[\"QA form as scoring rubric\"]\n    E2[\"LLM evaluator with quoted evidence\"]\n    E3[\"Mandatory phrase rule checks\"]\n  end\n  subgraph S4[\"Review and reporting\"]\n    R1(\"QA analyst review queue\")\n    R2[\"Calibration and dispute log\"]\n    R3[\"Agent and team dashboards\"]\n  end\n  I1 --> A1 --> A2\n  A2 --> E2\n  A2 --> E3\n  I2 --> E2\n  E1 --> E2\n  E2 --> R1\n  E3 --> R1\n  R1 --> R2\n  E2 --> R3\n  R2 --> R3"
+  },
+  "inputs": [
+    "Call recordings, ideally stereo",
+    "Call metadata such as agent ID, campaign and disposition",
+    "QA form and scoring guide",
+    "Compliance scripts and prohibited phrase lists",
+    "Past QA scores for calibration"
+  ],
+  "outputs": [
+    "Per-call scorecard with quoted evidence",
+    "Compliance breach alerts",
+    "Analyst-reviewed results and dispute outcomes",
+    "Agent and team trends",
+    "Coaching clips"
+  ],
+  "human_in_the_loop": "QA analysts confirm every compliance-critical failure before it reaches an agent's scorecard or a client report, and they handle all agent disputes. Analyst decisions are tracked so the evaluator's agreement with humans stays visible.",
+  "integrations": [
+    "Recording and dialler platforms such as Genesys, Avaya, NICE, Ozonetel or Exotel",
+    "CRM for call metadata",
+    "QA and workforce management tools",
+    "BI tools such as Power BI"
+  ],
+  "guardrails": [
+    "No score without a quoted transcript excerpt",
+    "Compliance-critical failures confirmed by an analyst before they count",
+    "Card numbers and OTPs redacted from transcripts",
+    "Agent dispute path with recorded outcomes",
+    "Data separated by programme and client in multi-client BPOs"
+  ],
+  "compliance_notes": [
+    "Card details spoken on calls should be paused or redacted to support PCI DSS; the pipeline redacts card-like numbers from transcripts.",
+    "Recordings, transcripts and QA scores are personal data of customers and agents under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One programme or queue, using a few weeks of recordings, run in parallel with the existing manual QA.",
+    "deliverables": [
+      "QA form and compliance checklist configured as a rubric",
+      "Scored calls for the pilot period",
+      "Analyst review queue and dashboards",
+      "Agreement report against manual QA",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with QA analysts",
+        "how": "Parameter-level comparison with analyst scores on the same calls."
+      },
+      {
+        "metric": "Transcription accuracy",
+        "how": "Word error rate on sampled calls, by language and audio quality."
+      },
+      {
+        "metric": "Breaches outside the manual sample",
+        "how": "Compliance-critical failures on unsampled calls, as confirmed by analysts."
+      },
+      {
+        "metric": "Analyst time per reviewed call",
+        "how": "Time to confirm or overturn a flagged result, compared with full listening."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How accurate is automated scoring compared with our QA analysts?",
+      "a": "We measure it parameter by parameter against your analysts' scores on the same calls during the pilot. Objective parameters such as verification and disclosures are easier to score consistently than subjective ones such as empathy, which is why compliance-critical failures always go to an analyst before they count."
+    },
+    {
+      "q": "Our recordings are mono and noisy. Will it work?",
+      "a": "Stereo recordings with agent and customer on separate channels give the best results, but mono recordings work with speaker separation. The pilot reports transcription quality on your actual audio so you can see the effect before committing."
+    },
+    {
+      "q": "Can it handle regional languages?",
+      "a": "Hindi, Hinglish and English are the starting point. Regional languages are added based on your programmes and tested on your own recordings first."
+    },
+    {
+      "q": "Can agents see and dispute their scores?",
+      "a": "Yes. Agents and team leaders see each score with the transcript excerpt and audio clip behind it, and disputes go to a QA analyst whose decision is recorded."
+    }
+  ],
+  "related": [
+    "real-time-agent-assist",
+    "ai-calling-compliance-evidence",
+    "multilingual-l1-support-voice-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/call-qa-and-compliance-auditing/"
+}

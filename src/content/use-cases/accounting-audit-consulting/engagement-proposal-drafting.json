@@ -1,0 +1,217 @@
+{
+  "slug": "engagement-proposal-drafting",
+  "industry": "accounting-audit-consulting",
+  "title": "Engagement Proposal Drafting",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Draft proposals, RFP responses and engagement letters from discovery notes and your firm's past work, with scope, staffing and assumptions laid out for the partner to price and sign.",
+  "seo": {
+    "title": "AI Proposal and Engagement Letter Drafting | VipraTech",
+    "description": "AI that reads RFPs, builds compliance matrices and drafts proposals and engagement letters from your firm's approved material for partner review.",
+    "keywords": [
+      "proposal drafting AI",
+      "RFP response automation",
+      "engagement letter drafting",
+      "consulting proposal automation",
+      "audit tender response"
+    ]
+  },
+  "designed_for": [
+    "Managing Partner",
+    "Business Development Lead",
+    "Engagement Partner",
+    "Proposal Manager"
+  ],
+  "problem": {
+    "intro": "Audit and advisory firms win work through proposals, RFP responses for bank and PSU empanelment, and engagement letters that fix scope and responsibilities. Each one is assembled from old Word files, CVs and credential lists by a manager who would rather be billing, and loose scope language in an engagement letter becomes a dispute later.",
+    "pain_points": [
+      {
+        "title": "Copy-paste reuse",
+        "detail": "Old client names, outdated credentials and last year's team members survive into new documents."
+      },
+      {
+        "title": "Tender compliance is unforgiving",
+        "detail": "A missed eligibility document, annexure or format requirement can disqualify an otherwise strong bid."
+      },
+      {
+        "title": "Vague scope invites scope creep",
+        "detail": "Deliverables, exclusions and client responsibilities that differ between proposal and engagement letter cause fee disputes."
+      },
+      {
+        "title": "Partner time goes on drafting",
+        "detail": "The people best placed to shape the approach spend evenings formatting documents."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a proposal assistant grounded in your firm's own material: past proposals, engagement letter templates, methodology notes, team CVs and approved credential write-ups. For an RFP, it reads the tender document and corrigenda, extracts eligibility criteria, formats, annexures and evaluation parameters into a compliance matrix, and drafts responses section by section with references to the sources used. For a direct proposal, it works from discovery notes to draft the understanding of need, scope, approach, deliverables, timeline, team and assumptions. It then drafts the engagement letter in your template, consistent with the proposal. Fees and independence conclusions are left for the partner.",
+    "capabilities": [
+      "RFP reader that builds a compliance matrix of eligibility, formats, annexures and evaluation criteria",
+      "Retrieval over past proposals, methodologies, CVs and approved credentials, with a citation for each source",
+      "Section drafting for understanding, scope, approach, workplan, team and assumptions",
+      "Engagement letter drafting in your template, consistent with the proposal's scope and exclusions",
+      "Checks for leftover client names, outdated credentials and scope terms that conflict between documents",
+      "Fee and independence fields left for the partner and never filled by the model"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Upload the RFP or notes",
+      "detail": "The tender document and corrigenda, or notes from the discovery call, are added to a new opportunity."
+    },
+    {
+      "step": 2,
+      "title": "Extract requirements",
+      "detail": "Eligibility criteria, formats, annexures, evaluation parameters and client needs are listed in a compliance matrix."
+    },
+    {
+      "step": 3,
+      "title": "Retrieve past material",
+      "detail": "Relevant proposals, methodologies, CVs and credentials are found and cited."
+    },
+    {
+      "step": 4,
+      "title": "Draft proposal and letter",
+      "detail": "Proposal sections and a matching engagement letter are drafted in your templates."
+    },
+    {
+      "step": 5,
+      "title": "Resolve flagged items",
+      "detail": "Gaps against the matrix, conflicting scope terms and leftover names are flagged for the manager to fix."
+    },
+    {
+      "step": 6,
+      "title": "Partner approval",
+      "detail": "The partner sets fees, confirms independence and approves the final pack."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"RFP document or discovery notes\"] --> B[\"Extract requirements and criteria\"]\n  B --> C[\"Retrieve past proposals and CVs\"]\n  C --> D[\"Draft proposal and engagement letter\"]\n  D --> E{\"Gaps, conflicts or leftover names?\"}\n  E -->|\"yes\"| F(\"Manager resolves flagged items\")\n  E -->|\"no\"| G(\"Partner sets fees and approves\")\n  F --> G\n  G --> H[\"Final proposal pack\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Knowledge base",
+        "components": [
+          "Curated library of past proposals and letters",
+          "CVs and approved credentials",
+          "Templates and methodology notes"
+        ]
+      },
+      {
+        "name": "Understanding",
+        "components": [
+          "RFP and corrigendum parser",
+          "Requirement and criteria extractor",
+          "Discovery note summariser"
+        ]
+      },
+      {
+        "name": "Drafting",
+        "components": [
+          "Retrieval with citations",
+          "Section drafter",
+          "Engagement letter generator"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Consistency and leftover checker",
+          "Partner approval workflow",
+          "Version history"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Knowledge base\"]\n    L1[\"Past proposals and letters\"]\n    L2[\"CVs and approved credentials\"]\n    L3[\"Templates and methodology notes\"]\n  end\n  subgraph S2[\"Understanding\"]\n    Q1[\"RFP parser and compliance matrix\"]\n    Q2[\"Discovery note summariser\"]\n  end\n  subgraph S3[\"Drafting\"]\n    W1[\"Retrieval with citations\"]\n    W2[\"Section drafter\"]\n    W3[\"Engagement letter generator\"]\n  end\n  subgraph S4[\"Review\"]\n    V1[\"Consistency and leftover checker\"]\n    V2(\"Partner approval\")\n    V3[\"Version history\"]\n  end\n  Q1 --> W1\n  Q2 --> W1\n  L1 --> W1\n  L2 --> W1\n  L3 --> W2\n  W1 --> W2 --> W3\n  W2 --> V1\n  W3 --> V1\n  V1 --> V2 --> V3"
+  },
+  "inputs": [
+    "RFP or tender documents and corrigenda",
+    "Discovery call notes or recordings",
+    "Past proposals and engagement letters",
+    "Team CVs and approved credentials",
+    "Methodology documents and templates"
+  ],
+  "outputs": [
+    "Compliance matrix against the RFP",
+    "Draft proposal in the firm's format",
+    "Draft engagement letter consistent with the proposal",
+    "List of flagged gaps and conflicts",
+    "Source references for each drafted section"
+  ],
+  "human_in_the_loop": "The engagement partner decides scope, staffing, fees and independence and approves the final documents. The assistant drafts and checks; it does not price, accept the engagement or send anything to the client.",
+  "integrations": [
+    "SharePoint or Google Drive proposal library",
+    "Microsoft Word or Google Docs",
+    "CRM such as Zoho CRM, HubSpot or Salesforce",
+    "Tender downloads from e-procurement portals"
+  ],
+  "guardrails": [
+    "Only firm-approved credentials can be cited",
+    "Confidential detail from past engagements kept out of the reusable library unless redacted and approved",
+    "Fee fields never filled automatically",
+    "All output marked as draft until partner approval",
+    "Independence and conflict checks left to the firm's own process"
+  ],
+  "compliance_notes": [
+    "Audit engagement letters are drafted to reflect the terms ICAI's SA 210 expects to be agreed; the partner remains responsible for the final terms.",
+    "Independence and conflict checks follow the firm's own procedures and the ICAI Code of Ethics."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Build the library from approved past proposals and use it on two or three live or recent RFPs and direct proposals.",
+    "deliverables": [
+      "Curated, redacted proposal library",
+      "Working drafting assistant with compliance matrix",
+      "Engagement letter template integration",
+      "Pilot report with partner feedback",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to first draft",
+        "how": "Hours from receiving the RFP or notes to a reviewable draft, compared with recent proposals."
+      },
+      {
+        "metric": "Partner edits per section",
+        "how": "Count and type of edits made before approval."
+      },
+      {
+        "metric": "Compliance matrix completeness",
+        "how": "Requirements captured by the tool compared with a manual check of the tender."
+      },
+      {
+        "metric": "Issues caught before submission",
+        "how": "Leftover names, outdated credentials and scope conflicts flagged and confirmed."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Could details from one client's proposal leak into another's?",
+      "a": "The library is curated: only approved, redacted material is indexed for reuse, and a final check flags any client names or figures that should not appear. Confidential engagement detail stays out of the reusable library."
+    },
+    {
+      "q": "Can it handle bank and PSU tenders with strict formats?",
+      "a": "Yes. It extracts eligibility criteria, required annexures, formats and evaluation parameters into a compliance matrix and drafts against that structure. A person still checks the final submission against the tender, including any corrigenda."
+    },
+    {
+      "q": "Does it suggest fees?",
+      "a": "No. Fees, discounts and payment terms are left for the partner. The assistant can list the effort assumptions in the scope so the partner can price from them."
+    },
+    {
+      "q": "Where are our documents stored?",
+      "a": "In your own SharePoint, Google Drive or cloud account. The retrieval index runs in your environment, and model calls use endpoints that do not train on your data."
+    }
+  ],
+  "related": [
+    "meeting-minutes-drafting",
+    "client-document-collection-agent",
+    "ai-assurance-delivery-partner",
+    "financial-statement-spreading"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/engagement-proposal-drafting/"
+}

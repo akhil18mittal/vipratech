@@ -1,0 +1,217 @@
+{
+  "slug": "rc-insurance-puc-document-extraction",
+  "industry": "automotive-mobility",
+  "title": "RC, Insurance and PUC Document Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Extract and cross-check registration, chassis, owner, hypothecation and validity details from RC, insurance, PUC and fitness documents for used-car, fleet and onboarding teams.",
+  "seo": {
+    "title": "RC, Insurance and PUC Document Extraction | VipraTech",
+    "description": "AI that reads RC, motor insurance, PUC, fitness and permit documents, cross-checks chassis and owner details, and tracks expiry for fleets and dealers.",
+    "keywords": [
+      "RC document extraction",
+      "vehicle document OCR India",
+      "insurance and PUC expiry tracking",
+      "fleet vehicle onboarding automation",
+      "RC transfer document check"
+    ]
+  },
+  "designed_for": [
+    "Fleet Onboarding Manager",
+    "Used-Car RC Transfer Desk Lead",
+    "Dealer Insurance Desk Manager",
+    "Operations Head at a Mobility Platform"
+  ],
+  "problem": {
+    "intro": "Used-car buyers, fleet operators, rental and subscription companies and ride-hailing platforms check the same vehicle documents again and again: the registration certificate, the motor insurance policy, the PUC certificate and, for commercial vehicles, fitness and permit. Each arrives as a phone photo, a smart-card scan or a DigiLocker PDF, and every detail is re-typed.",
+    "pain_points": [
+      {
+        "title": "Manual keying of long identifiers",
+        "detail": "Chassis and engine numbers are long and easy to mistype, and one wrong character breaks every later check."
+      },
+      {
+        "title": "Many formats for the same document",
+        "detail": "Paper RCs, smart cards and digital RCs differ by state and era, and each insurer lays out its policy schedule differently."
+      },
+      {
+        "title": "Expiries that slip",
+        "detail": "Fleet teams lose track of insurance, PUC, fitness and permit renewals across a large and changing fleet."
+      },
+      {
+        "title": "Mismatches found late",
+        "detail": "A hypothecation entry, an owner name that differs from the seller or a chassis number that does not match the policy surfaces only at transfer or claim time."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a vehicle document pipeline that accepts uploads, WhatsApp photos and, with the owner's consent, DigiLocker documents. Each document is classified, then OCR and a language model extract registration number, chassis and engine numbers, owner name, ownership serial, hypothecation, registration and validity dates, insurer, policy number, cover type and PUC validity. Fields are cross-checked across documents and, where you choose, against registry data through an authorised provider. Mismatches and low-confidence fields go to an operations executive. Clean records flow into your DMS or fleet system, and an expiry calendar sends renewal reminders.",
+    "capabilities": [
+      "Classifies RC, insurance policy schedule, PUC, fitness certificate, permit and driving licence",
+      "Extracts registration, chassis, engine, owner, hypothecation and validity details",
+      "Cross-checks chassis and registration numbers and owner names across documents",
+      "Optional checks against registry data through an authorised VAHAN-based provider",
+      "Expiry calendar with renewal reminders for insurance, PUC, fitness and permits",
+      "Flags hypothecation, ownership changes and name mismatches for the transfer desk"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive documents",
+      "detail": "Documents arrive by app upload, WhatsApp or consented DigiLocker pull, grouped by vehicle."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Each document is classified and its fields extracted with confidence scores and links to the source image."
+    },
+    {
+      "step": 3,
+      "title": "Cross-check",
+      "detail": "Chassis, registration and owner details are compared across documents and, optionally, with registry data."
+    },
+    {
+      "step": 4,
+      "title": "Review exceptions",
+      "detail": "Mismatches and low-confidence fields go to an operations executive for resolution."
+    },
+    {
+      "step": 5,
+      "title": "Create the vehicle record",
+      "detail": "Verified data is written to the DMS, fleet or onboarding system."
+    },
+    {
+      "step": 6,
+      "title": "Track expiry",
+      "detail": "Validity dates feed a calendar that reminds owners and fleet managers before documents lapse."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"RC, insurance and PUC uploads\"] --> B[\"Classify document type\"]\n  B --> C[\"Extract registration and validity\"]\n  C --> D[\"Cross-check documents and registry\"]\n  D --> E{\"Mismatch or low confidence?\"}\n  E -->|\"yes\"| F(\"Operations executive reviews\")\n  E -->|\"no\"| G[\"Verified vehicle record\"]\n  F --> G\n  G --> H[\"Expiry calendar and reminders\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "App and web upload",
+          "WhatsApp document intake",
+          "DigiLocker pull with owner consent"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with layout detection",
+          "Document classifier",
+          "LLM field extractor with schemas"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "Cross-document rules",
+          "Registry check through an authorised provider",
+          "Expiry and validity rules"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Operations review queue",
+          "DMS or fleet system API",
+          "Reminder engine"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"App and WhatsApp intake\"]\n    I2[\"DigiLocker pull with consent\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"OCR and layout\"]\n    E2[\"Document classifier\"]\n    E3[\"LLM field extractor\"]\n  end\n  subgraph S3[\"Verification\"]\n    V1[\"Cross-document rules\"]\n    V2[\"Authorised registry check\"]\n    V3[\"Expiry rules\"]\n  end\n  subgraph S4[\"Review and integration\"]\n    R1(\"Operations review queue\")\n    R2[\"DMS or fleet system\"]\n    R3[\"Reminder engine\"]\n  end\n  I1 --> E1\n  I2 --> E2\n  E1 --> E2\n  E2 --> E3\n  E3 --> V1\n  V1 --> V2\n  V2 --> R1\n  V1 --> R2\n  R1 --> R2\n  E3 --> V3\n  V3 --> R3"
+  },
+  "inputs": [
+    "Registration certificates in paper, smart card or digital form",
+    "Motor insurance policy schedules",
+    "PUC certificates",
+    "Fitness certificates and permits for commercial vehicles",
+    "Driving licences for fleet drivers",
+    "Owner KYC documents, with Aadhaar masked where used"
+  ],
+  "outputs": [
+    "Verified vehicle record with registration, chassis, engine and owner details",
+    "Cross-document mismatch flags",
+    "Hypothecation and ownership-change alerts for transfers",
+    "Expiry calendar and reminder log",
+    "Source-image links for every field"
+  ],
+  "human_in_the_loop": "Operations executives resolve every mismatch and low-confidence field. Purchase, onboarding and transfer decisions stay with your team; the system never rejects a vehicle or driver on its own.",
+  "integrations": [
+    "Dealer management or fleet management system",
+    "DigiLocker, with the owner's consent",
+    "Authorised VAHAN-based vehicle data provider",
+    "WhatsApp Business API",
+    "CRM or onboarding platform"
+  ],
+  "guardrails": [
+    "Aadhaar numbers masked on capture and never stored in full",
+    "Registry checks only through authorised channels",
+    "No automatic rejection; exceptions go to people",
+    "Every field linked to its source image",
+    "Document images retained only for the period your policy sets"
+  ],
+  "compliance_notes": [
+    "Owner and driver details are personal data handled under the DPDP Act 2023; Aadhaar, where collected, is masked and handled per UIDAI rules.",
+    "Expiry reminders help owners keep insurance and PUC valid as the Motor Vehicles Act requires; responsibility stays with the vehicle owner."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One document flow, such as fleet vehicle onboarding or used-car procurement, using a historical sample plus live documents processed in parallel with the current desk.",
+    "deliverables": [
+      "Extraction schemas for RC, insurance and PUC",
+      "Working pipeline with review queue",
+      "Cross-check rule set agreed with operations",
+      "Accuracy report against manually verified records",
+      "Integration and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field-level accuracy",
+        "how": "Extracted fields compared with records verified by operations staff."
+      },
+      {
+        "metric": "Mismatch flag precision",
+        "how": "Share of flagged mismatches confirmed as genuine by reviewers."
+      },
+      {
+        "metric": "Handling time per vehicle",
+        "how": "Time to complete document checks with and without the pipeline."
+      },
+      {
+        "metric": "Expiry catches",
+        "how": "Documents identified as expired or near expiry that the current process had not flagged."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do state-wise RC formats cause problems?",
+      "a": "No. Extraction reads the content rather than relying on a fixed template, so old paper RCs, smart cards and digital RCs from different states are handled. Unusual formats are flagged for review and added to the test set."
+    },
+    {
+      "q": "Can it pull documents from DigiLocker?",
+      "a": "Yes, with the owner's consent through an approved DigiLocker integration. Issued documents from DigiLocker are cleaner than photos and need less review."
+    },
+    {
+      "q": "What about blurry phone photos?",
+      "a": "Fields the model cannot read with confidence are flagged, and the owner can be asked on WhatsApp to send a clearer photo of that specific document."
+    },
+    {
+      "q": "Can it check pending challans or blacklisting?",
+      "a": "Where you have access to such data through an authorised provider, the pipeline can call it as an extra check. We do not scrape government portals."
+    }
+  ],
+  "related": [
+    "used-car-inspection-and-damage-detection",
+    "service-centre-plate-and-document-capture",
+    "vehicle-asset-inspection-for-auto-loans",
+    "loan-application-document-extraction"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/rc-insurance-puc-document-extraction/"
+}

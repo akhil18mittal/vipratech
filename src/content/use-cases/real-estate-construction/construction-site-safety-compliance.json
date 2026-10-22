@@ -1,0 +1,215 @@
+{
+  "slug": "construction-site-safety-compliance",
+  "industry": "real-estate-construction",
+  "title": "Construction Site Safety Compliance",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Use site cameras and safety walk photos to spot missing helmets, unguarded edges, people in crane and hoist zones and poor housekeeping, with each observation verified by the safety officer.",
+  "seo": {
+    "title": "Construction Site Safety Compliance with AI | VipraTech",
+    "description": "Computer vision for construction sites: PPE checks, crane and edge zone alerts and housekeeping observations, reviewed by your safety officer.",
+    "keywords": [
+      "construction site safety AI",
+      "PPE detection construction",
+      "crane zone intrusion detection",
+      "construction safety CCTV analytics",
+      "site safety observation report"
+    ]
+  },
+  "designed_for": [
+    "EHS Manager",
+    "Site Safety Officer",
+    "Project Manager",
+    "Contractor Safety Supervisor"
+  ],
+  "problem": {
+    "intro": "A high-rise site changes every day: new slab edges, openings, crane lifts and subcontractor crews. Safety officers cannot be on every floor, and observations from safety walks are written up later, so many unsafe acts come to light only after an incident or an inspection.",
+    "pain_points": [
+      {
+        "title": "Too much site for too few eyes",
+        "detail": "One or two safety officers cover several towers, crane operations and night shifts, and rely on supervisors to report issues."
+      },
+      {
+        "title": "Edge and opening protection that comes and goes",
+        "detail": "Barricades, guardrails and shaft covers are removed for work and not replaced, especially on newly cast slabs."
+      },
+      {
+        "title": "PPE compliance that drops off",
+        "detail": "Helmets and high-visibility jackets are worn at the gate and taken off on upper floors or during breaks."
+      },
+      {
+        "title": "Observations that do not lead to action",
+        "detail": "Safety walk findings sit in notebooks or WhatsApp, so repeat issues by contractor or area are hard to track and close."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a safety monitoring system on your existing site cameras and safety walk photos. Vision models check for helmets and high-visibility jackets, people inside marked crane swing, hoist and excavation zones, missing edge protection at marked slab edges and openings, and blocked access routes or debris. Each detection becomes an observation with a snapshot, location and confidence. Urgent detections, such as a person under a suspended load, alert the safety officer immediately; the rest go into a review queue. Confirmed observations are assigned to the responsible contractor, tracked to closure and summarised daily by area and contractor.",
+    "capabilities": [
+      "Helmet and high-visibility jacket detection on CCTV and photos",
+      "Zone rules for crane swing areas, hoist landings and excavation edges",
+      "Checks for missing guardrails or covers at marked slab edges and openings",
+      "Housekeeping observations for debris, material blocking access and waterlogging",
+      "Observation tracking by contractor and area, with photo evidence through to closure",
+      "Daily and weekly safety summaries for toolbox talks and review meetings"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Map cameras and zones",
+      "detail": "We map existing cameras, mark crane, hoist, edge and excavation zones and agree observation types with the EHS team."
+    },
+    {
+      "step": 2,
+      "title": "Analyse feeds and photos",
+      "detail": "Camera frames and safety walk photos are analysed at agreed intervals for PPE, zone and housekeeping issues."
+    },
+    {
+      "step": 3,
+      "title": "Score severity",
+      "detail": "Each detection gets a severity and confidence score, and critical zone breaches trigger an immediate alert."
+    },
+    {
+      "step": 4,
+      "title": "Safety officer review",
+      "detail": "The safety officer confirms or dismisses observations from the queue using the snapshot and location."
+    },
+    {
+      "step": 5,
+      "title": "Assign and close",
+      "detail": "Confirmed observations go to the responsible contractor supervisor, who closes them with a photo."
+    },
+    {
+      "step": 6,
+      "title": "Report trends",
+      "detail": "Daily and weekly summaries show repeat issues by area, shift and contractor for toolbox talks and reviews."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  Z[\"Map cameras and danger zones\"] --> A[\"Site cameras and walk photos\"]\n  A --> B[\"Detect PPE, zone and edge issues\"]\n  B --> C{\"Critical zone breach?\"}\n  C -->|\"yes\"| D[\"Immediate alert to safety officer\"]\n  C -->|\"no\"| E(\"Safety officer review queue\")\n  D --> E\n  E --> F[\"Assign to contractor supervisor\"]\n  F --> G[\"Closure photo and sign-off\"]\n  G --> H[\"Daily trend report\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Existing site CCTV via RTSP or NVR",
+          "Mobile safety walk app"
+        ]
+      },
+      {
+        "name": "Vision analysis",
+        "components": [
+          "PPE detector",
+          "Zone intrusion rules per camera",
+          "Edge protection and housekeeping checks"
+        ]
+      },
+      {
+        "name": "Event handling",
+        "components": [
+          "Severity and confidence scoring",
+          "Immediate alert service",
+          "Observation queue"
+        ]
+      },
+      {
+        "name": "Action tracking",
+        "components": [
+          "Safety officer review screen",
+          "Contractor assignment and closure",
+          "Trend reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n  C1[\"Site CCTV and NVR\"]\n  C2[\"Safety walk photos\"]\n  end\n  subgraph S2[\"Vision analysis\"]\n  V1[\"PPE detector\"]\n  V2[\"Zone intrusion rules\"]\n  V3[\"Edge and housekeeping checks\"]\n  end\n  subgraph S3[\"Event handling\"]\n  E1[\"Severity scoring\"]\n  E2[\"Immediate alert service\"]\n  end\n  subgraph S4[\"Action tracking\"]\n  A1(\"Safety officer review\")\n  A2[\"Contractor closure tracking\"]\n  A3[\"Trend reports\"]\n  end\n  C1 --> V1\n  C1 --> V2\n  C2 --> V3\n  V1 --> E1\n  V2 --> E1\n  V3 --> E1\n  E1 --> E2\n  E1 --> A1\n  E2 --> A1\n  A1 --> A2\n  A2 --> A3"
+  },
+  "inputs": [
+    "Existing site CCTV feeds",
+    "Safety walk photos from phones",
+    "Site layout with crane, hoist and excavation zones",
+    "Contractor and area responsibility list",
+    "Your safety observation categories"
+  ],
+  "outputs": [
+    "Immediate alerts for critical zone breaches",
+    "Observation records with snapshot, location and severity",
+    "Contractor-wise open and closed observations",
+    "Daily and weekly safety summaries",
+    "Evidence log for safety audits"
+  ],
+  "human_in_the_loop": "The safety officer confirms every observation before it is assigned, and decides any penalty or stop-work action under your site rules. Immediate alerts prompt a person to check; they never stop work automatically.",
+  "integrations": [
+    "CCTV network video recorders over RTSP",
+    "WhatsApp or SMS for alerts to site teams",
+    "EHS or permit-to-work software",
+    "Project management dashboards",
+    "Email for daily summaries"
+  ],
+  "guardrails": [
+    "No face recognition; detections concern PPE and zones, not identity",
+    "Faces blurred in reports shared outside the safety team",
+    "Penalties and stop-work decisions stay with authorised staff",
+    "Zone maps reviewed weekly as the site layout changes",
+    "Alert thresholds tuned to avoid alarm fatigue"
+  ],
+  "compliance_notes": [
+    "Helps evidence site safety practices expected under the BOCW Act 1996 and the OSH Code 2020; it does not replace statutory inspections.",
+    "Worker images are handled with notice, restricted access and retention limits in line with the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One tower or work zone with three to six existing cameras plus daily safety walk photos, with detections reviewed by the site safety officer.",
+    "deliverables": [
+      "Camera and zone map for the pilot area",
+      "PPE, zone and housekeeping detection tuned on site footage",
+      "Review queue and alert flow",
+      "Pilot observation log and weekly summaries",
+      "Roll-out plan and estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Detection precision by observation type",
+        "how": "Share of detections the safety officer confirms as genuine."
+      },
+      {
+        "metric": "Missed issues",
+        "how": "Observations the safety officer records on walks in covered areas that the system did not flag."
+      },
+      {
+        "metric": "Time to close observations",
+        "how": "Time from confirmation to closure photo, compared with the existing observation register."
+      },
+      {
+        "metric": "Alert volume per day",
+        "how": "Count of alerts and dismissals, used to tune thresholds."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can we use our existing CCTV cameras?",
+      "a": "Usually yes, if they cover the areas that matter at reasonable resolution. During setup we review each camera's view and suggest where one should be moved or added, for example to cover a hoist landing or crane loading area."
+    },
+    {
+      "q": "Will workers be identified?",
+      "a": "No. The system detects PPE and zone breaches, not who the person is. Faces can be blurred in reports, and access to raw footage stays with your safety team."
+    },
+    {
+      "q": "Does it work at night?",
+      "a": "Where lighting and cameras support it. Night footage is noisier, so thresholds are set separately and more items go to review. Poorly lit work areas are themselves worth flagging."
+    },
+    {
+      "q": "Can it detect whether fall-arrest gear is being used?",
+      "a": "Safety belts and lanyards are hard to see reliably from fixed cameras, so we treat them as a review prompt rather than a dependable detection. Edge protection and zone rules usually give stronger signals."
+    }
+  ],
+  "related": [
+    "construction-progress-monitoring",
+    "contractor-bill-verification-against-boq",
+    "ppe-and-safety-zone-compliance",
+    "mine-safety-monitoring"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/construction-site-safety-compliance/"
+}

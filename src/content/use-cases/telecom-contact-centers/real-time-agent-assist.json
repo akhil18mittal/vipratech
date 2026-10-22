@@ -1,0 +1,215 @@
+{
+  "slug": "real-time-agent-assist",
+  "industry": "telecom-contact-centers",
+  "title": "Real-Time Agent Assist",
+  "capability": "voice-ai",
+  "secondary_capabilities": [],
+  "summary": "Live transcription and prompts on the agent's screen: the right knowledge-base answer, the next compliance step and a drafted call summary, so new agents handle complex calls with fewer holds.",
+  "seo": {
+    "title": "Real-Time Agent Assist for Contact Centres | VipraTech",
+    "description": "Live call transcription with knowledge suggestions, compliance checklists, eligible offers and drafted call summaries on the agent's screen.",
+    "keywords": [
+      "real-time agent assist",
+      "contact centre agent assist AI",
+      "live call transcription",
+      "after-call work automation",
+      "agent knowledge suggestions"
+    ]
+  },
+  "designed_for": [
+    "Contact Centre Operations Head",
+    "Training and Quality Manager",
+    "Team Leader",
+    "CX Technology Lead"
+  ],
+  "problem": {
+    "intro": "Agents juggle a CRM, billing screens, a knowledge base and a script while the customer talks. New joiners put callers on hold to ask a team leader, experienced agents skip steps under pressure, and after-call work, typing the summary and picking a disposition code, eats time between calls.",
+    "pain_points": [
+      {
+        "title": "Knowledge search mid-call",
+        "detail": "Searching a large knowledge portal with the customer waiting leads to long holds and inconsistent answers."
+      },
+      {
+        "title": "Missed mandatory steps",
+        "detail": "Verification, disclosures and confirmation statements get skipped on busy shifts and show up later in QA or complaints."
+      },
+      {
+        "title": "Long ramp for new joiners",
+        "detail": "With high attrition there are always new agents on the floor, and they lean on team leaders for every unusual query."
+      },
+      {
+        "title": "Inconsistent after-call work",
+        "detail": "Vague summaries and wrong disposition codes make the next interaction harder and distort MIS reports."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an agent assist panel that listens to the live call through your telephony stream, transcribes both sides in real time and shows the agent what they need next. When the customer describes an issue, it retrieves the matching answer from your approved knowledge base and tariff documents, with the source shown. A checklist tracks mandatory steps for the call type, such as verification and disclosures, and nudges the agent when one is pending. For retention or upgrade calls, it surfaces offers this customer is eligible for from your rules engine, never invented ones. When the call ends, it drafts the summary and suggests a disposition code for the agent to confirm.",
+    "capabilities": [
+      "Streaming transcription of both channels in Hindi, Hinglish, English and agreed regional languages",
+      "Knowledge suggestions from approved articles, SOPs and tariff sheets, each with its source",
+      "Live checklist of mandatory steps per call type, with nudges when a step is pending",
+      "Eligible offers and next actions pulled from your rules engine and CRM, not generated",
+      "Sentiment and escalation cues on the team leader's floor view",
+      "Drafted call summary and suggested disposition code for agent confirmation"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Fork the call audio",
+      "detail": "When the call connects, the audio stream is shared with the assist service through your telephony platform."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe in real time",
+      "detail": "Both sides are transcribed as the conversation happens."
+    },
+    {
+      "step": 3,
+      "title": "Detect the issue and stage",
+      "detail": "The service identifies what the customer needs and where the call is in its flow."
+    },
+    {
+      "step": 4,
+      "title": "Suggest answers and offers",
+      "detail": "Matching knowledge articles or eligible offers are retrieved, and only confident suggestions are shown."
+    },
+    {
+      "step": 5,
+      "title": "Draft the wrap-up",
+      "detail": "A summary and suggested disposition code are drafted as the call ends."
+    },
+    {
+      "step": 6,
+      "title": "Agent confirms",
+      "detail": "The agent edits and confirms the summary and code before they are saved to the CRM."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Live call audio stream\"] --> B[\"Real-time transcription\"]\n  B --> C[\"Detect issue and call stage\"]\n  C --> D[\"Retrieve KB answer or eligible offer\"]\n  D --> E{\"Suggestion confidence high?\"}\n  E -->|\"yes\"| F(\"Agent sees and chooses suggestion\")\n  E -->|\"no\"| G[\"Hold back, show checklist only\"]\n  F --> H[\"Draft summary and disposition\"]\n  G --> H\n  H --> I(\"Agent confirms and saves to CRM\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Audio capture",
+        "components": [
+          "Media fork or CCaaS streaming API",
+          "Agent desktop connector"
+        ]
+      },
+      {
+        "name": "Real-time speech",
+        "components": [
+          "Streaming speech recognition for both channels",
+          "Latency monitor"
+        ]
+      },
+      {
+        "name": "Assist intelligence",
+        "components": [
+          "Retrieval over approved knowledge with citations",
+          "Checklist state engine",
+          "Offer eligibility lookup",
+          "Call summariser"
+        ]
+      },
+      {
+        "name": "Agent and supervisor interface",
+        "components": [
+          "Agent assist panel",
+          "Team leader floor view",
+          "Feedback buttons for knowledge owners"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Audio capture\"]\n    C1[\"Media fork or streaming API\"]\n    C2[\"Agent desktop connector\"]\n  end\n  subgraph S2[\"Real-time speech\"]\n    A1[\"Streaming ASR both channels\"]\n    A2[\"Latency monitor\"]\n  end\n  subgraph S3[\"Assist intelligence\"]\n    K1[\"Retrieval over approved KB\"]\n    K2[\"Checklist state engine\"]\n    K3[\"Offer eligibility lookup\"]\n    K4[\"Call summariser\"]\n  end\n  subgraph S4[\"Agent and supervisor UI\"]\n    U1(\"Agent assist panel\")\n    U2[\"Team leader floor view\"]\n    U3[\"CRM disposition save\"]\n  end\n  C1 --> A1\n  A1 --> A2\n  A1 --> K1\n  A1 --> K2\n  A1 --> K4\n  C2 --> K3\n  K1 --> U1\n  K2 --> U1\n  K3 --> U1\n  K4 --> U1\n  K2 --> U2\n  U1 --> U3"
+  },
+  "inputs": [
+    "Live call audio",
+    "Customer profile and interaction history from the CRM",
+    "Approved knowledge articles, SOPs and tariff documents",
+    "Checklists per call type",
+    "Offer eligibility rules"
+  ],
+  "outputs": [
+    "Real-time suggestions with sources",
+    "Checklist status for each call",
+    "Drafted call summaries",
+    "Suggested disposition codes",
+    "Usage and feedback analytics for knowledge owners"
+  ],
+  "human_in_the_loop": "Agents decide what to say and which suggestion to use; the system never speaks to the customer. Summaries and disposition codes are saved only after the agent confirms them, and knowledge owners review every suggestion agents mark as wrong.",
+  "integrations": [
+    "CCaaS or telephony with media streaming, such as Genesys Cloud, Amazon Connect, Avaya or Ozonetel",
+    "CRM such as Salesforce, Microsoft Dynamics or an in-house system",
+    "Knowledge base in Confluence, SharePoint or an in-house KMS",
+    "Offer and rules engine",
+    "QA and workforce management tools"
+  ],
+  "guardrails": [
+    "Suggestions drawn only from approved content, with the source shown",
+    "Offers shown only when the rules engine confirms eligibility",
+    "Late suggestions dropped rather than shown out of context",
+    "Payment and personal details redacted from stored transcripts",
+    "Agent feedback reviewed by knowledge owners"
+  ],
+  "compliance_notes": [
+    "Live audio is processed for a defined purpose and transcripts are retained per your policy, designed to support DPDP Act 2023 obligations.",
+    "Assist content follows the same approval process as scripts, and agents remain responsible for what is said on the call."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One queue, such as billing queries, with a group of new and experienced agents, compared with a control group on the same queue.",
+    "deliverables": [
+      "Telephony integration for the pilot queue",
+      "Assist panel with knowledge, checklist and summary features",
+      "Knowledge gap report from pilot calls",
+      "Pilot report comparing assisted and control groups",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Handle time and hold time",
+        "how": "Compared between assisted and control agents using dialler data."
+      },
+      {
+        "metric": "After-call work time",
+        "how": "Wrap-up duration per call from the telephony platform."
+      },
+      {
+        "metric": "Suggestion acceptance",
+        "how": "Share of suggestions agents used, from panel interaction logs."
+      },
+      {
+        "metric": "Summary edits",
+        "how": "Extent of agent edits to drafted summaries before saving."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Is it fast enough to help during a live call?",
+      "a": "Latency is the first thing we measure in the pilot. Transcription runs on streaming audio, retrieval is limited to approved content, and suggestions that arrive too late for the moment are dropped rather than shown out of context."
+    },
+    {
+      "q": "Do we need a clean knowledge base first?",
+      "a": "It helps, but you do not need a perfect one. The pilot often exposes outdated or conflicting articles, and we give knowledge owners a list of the gaps and contradictions agents ran into."
+    },
+    {
+      "q": "Will agents be forced to follow suggestions?",
+      "a": "No. Agents choose what to use. Acceptance and feedback are tracked so team leaders can see which suggestions help and which need fixing."
+    },
+    {
+      "q": "Which telephony platforms does it support?",
+      "a": "Platforms that expose real-time media, such as Genesys Cloud, Amazon Connect and Avaya, or a SIP media fork from your session border controller. We confirm the route with your telephony team in the first week."
+    }
+  ],
+  "related": [
+    "call-qa-and-compliance-auditing",
+    "multilingual-l1-support-voice-agent",
+    "ticket-and-email-triage",
+    "churn-risk-outreach-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/real-time-agent-assist/"
+}

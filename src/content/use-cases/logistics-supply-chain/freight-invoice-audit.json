@@ -1,0 +1,222 @@
+{
+  "slug": "freight-invoice-audit",
+  "industry": "logistics-supply-chain",
+  "title": "Freight Invoice Audit Against Rate Contracts",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Audit every carrier or transporter freight bill against your rate contracts, shipment data and PODs, recalculate each charge and flag overbilling, duplicates and unsupported surcharges.",
+  "seo": {
+    "title": "AI Freight Invoice Audit Against Rate Contracts | VipraTech",
+    "description": "AI that reads freight bills, recalculates charges from rate contracts, checks weights, surcharges and duplicates, and queues variances for approval.",
+    "keywords": [
+      "freight invoice audit",
+      "freight bill audit automation",
+      "transporter bill verification",
+      "rate contract compliance",
+      "carrier invoice reconciliation"
+    ]
+  },
+  "designed_for": [
+    "Head of Logistics",
+    "Logistics Finance Controller",
+    "Accounts Payable Manager",
+    "Transport Procurement Manager"
+  ],
+  "problem": {
+    "intro": "Shippers and 3PLs pay many carriers and transporters, each billing in its own format: per-trip FTL bills, PTL and courier invoices with weight slabs, fuel surcharges, ODA, detention and loading charges. Rate contracts sit in spreadsheets, PDFs and email amendments, so most audit teams check a sample and pay the rest.",
+    "pain_points": [
+      {
+        "title": "Rates that drift from contract",
+        "detail": "Old rates, wrong lane slabs and fuel surcharges calculated on the wrong base slip into bills."
+      },
+      {
+        "title": "Weight and dimension disputes",
+        "detail": "Carriers bill on a volumetric or charged weight that differs from the shipped weight in your system."
+      },
+      {
+        "title": "Unsupported accessorial charges",
+        "detail": "Detention, multi-point delivery, ODA and handling charges are billed without supporting evidence or approval."
+      },
+      {
+        "title": "Duplicates across formats",
+        "detail": "The same trip billed twice, once on a consolidated invoice and again on a supplementary bill, is hard to spot by hand."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a freight audit pipeline that reads each carrier invoice and its annexure, whether PDF, Excel or scan, and extracts every shipment line. Each line is matched to the shipment in your TMS or ERP and to its POD, then recalculated from the applicable rate contract: lane, vehicle type, weight slab, fuel surcharge formula and agreed accessorials. Differences, missing approvals and possible duplicates are listed with the expected amount and the reason. Clean lines are approved for payment, and variance lines are queued for the logistics team to accept or dispute, with a draft debit note where needed.",
+    "capabilities": [
+      "Extracts shipment lines from PDF, Excel and scanned freight bills and annexures",
+      "Digitises rate contracts into lane, vehicle, slab, fuel and accessorial rules with effective dates",
+      "Recalculates each line and shows expected versus billed amount per charge",
+      "Checks charged weight against shipped weight and dimensions in your system",
+      "Flags detention, ODA and other accessorials without supporting evidence or approval",
+      "Detects duplicate billing across invoices and billing cycles"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive invoices",
+      "detail": "Carrier invoices and annexures arrive by email, portal or AP system and are grouped by carrier and billing period."
+    },
+    {
+      "step": 2,
+      "title": "Extract lines",
+      "detail": "Every shipment line is extracted with LR or AWB number, lane, weight and each charge component."
+    },
+    {
+      "step": 3,
+      "title": "Match shipments and PODs",
+      "detail": "Lines are matched to TMS shipments and PODs, and unmatched lines are flagged."
+    },
+    {
+      "step": 4,
+      "title": "Recalculate charges",
+      "detail": "The applicable contract rate is applied and the expected amount is computed per charge component."
+    },
+    {
+      "step": 5,
+      "title": "Review variances",
+      "detail": "Lines with variances, missing evidence or possible duplicates go to the logistics team to accept or dispute."
+    },
+    {
+      "step": 6,
+      "title": "Approve and post",
+      "detail": "Approved amounts and dispute notes are posted to the ERP for payment and carrier communication."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Carrier invoice and annexure\"] --> B[\"Extract shipment lines and charges\"]\n  B --> C[\"Match to TMS shipment and POD\"]\n  C --> D[\"Recalculate from rate contract\"]\n  D --> E{\"Billed equals expected?\"}\n  E -->|\"yes\"| F[\"Approve line for payment\"]\n  E -->|\"no\"| G(\"Logistics team reviews variance\")\n  G --> H[\"Dispute or debit note to carrier\"]\n  G --> F\n  F --> I[\"Post approved amount to ERP\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Email and carrier portal connectors",
+          "AP system invoice feed"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Table extraction for PDF and Excel annexures",
+          "OCR for scanned bills",
+          "LLM line normaliser"
+        ]
+      },
+      {
+        "name": "Contract and matching",
+        "components": [
+          "Rate contract rule store",
+          "TMS shipment and POD matcher",
+          "Duplicate detector"
+        ]
+      },
+      {
+        "name": "Calculation",
+        "components": [
+          "Charge recalculation engine",
+          "Fuel surcharge formula library"
+        ]
+      },
+      {
+        "name": "Review and posting",
+        "components": [
+          "Variance review queue",
+          "Debit note drafts",
+          "ERP posting adapter"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    N1[\"Email and carrier portal\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"Table and OCR extraction\"]\n    E2[\"Line normaliser\"]\n  end\n  subgraph S3[\"Contract and matching\"]\n    M1[\"Rate contract rules\"]\n    M2[\"TMS and POD matcher\"]\n    M3[\"Duplicate detector\"]\n  end\n  subgraph S4[\"Calculation\"]\n    K1[\"Recalculation engine\"]\n  end\n  subgraph S5[\"Review and posting\"]\n    R1(\"Variance review queue\")\n    R2[\"Debit note draft\"]\n    R3[\"ERP posting\"]\n  end\n  N1 --> E1 --> E2\n  E2 --> M2\n  M2 --> M3\n  M3 --> K1\n  M1 --> K1\n  K1 --> R1\n  K1 --> R3\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Carrier and transporter invoices with annexures",
+    "Rate contracts, tariff sheets and amendment letters",
+    "Shipment data from the TMS or ERP",
+    "PODs and detention or loading evidence",
+    "Fuel price reference used in surcharge clauses"
+  ],
+  "outputs": [
+    "Line-level audit result: approved, variance or unmatched",
+    "Expected versus billed amount per charge component",
+    "Duplicate billing alerts",
+    "Draft dispute notes or debit notes",
+    "Carrier-wise variance reports"
+  ],
+  "human_in_the_loop": "The logistics or finance team decides every variance, unmatched line and possible duplicate before payment. Procurement reviews the digitised rate rules when they are first set up and whenever a contract changes.",
+  "integrations": [
+    "ERP such as SAP, Oracle or Tally for accounts payable",
+    "TMS for shipment and weight data",
+    "POD repository or ePOD app",
+    "Carrier portals and email",
+    "Contract repository or spreadsheets holding rate cards"
+  ],
+  "guardrails": [
+    "Every recalculation shows the contract clause and rate applied",
+    "No automatic disputes; people decide what is raised with carriers",
+    "Rate rules versioned with effective dates",
+    "Unmatched lines never auto-approved",
+    "Sampling of auto-approved lines each billing cycle"
+  ],
+  "compliance_notes": [
+    "Supports GST input tax credit checks by matching carrier GSTIN and invoice details with your records; the GST treatment of freight under forward or reverse charge stays with your tax team.",
+    "Keeps an audit trail of every adjustment for statutory and internal audit."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Two or three carriers on one mode, such as FTL or courier, using closed billing cycles your team has already audited.",
+    "deliverables": [
+      "Digitised rate contracts for the pilot carriers",
+      "Working audit pipeline with TMS and POD matching",
+      "Variance review screen",
+      "Audit report compared with your team's own audit",
+      "Production plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Line extraction accuracy",
+        "how": "Extracted lines and charges reconciled with invoice totals and checked on a manual sample."
+      },
+      {
+        "metric": "Variances confirmed",
+        "how": "Variance lines your team agrees are genuine after review."
+      },
+      {
+        "metric": "Variances missed",
+        "how": "Known issues from your earlier audits checked against what the pipeline flagged."
+      },
+      {
+        "metric": "Audit effort per invoice",
+        "how": "Team time per invoice with and without the pipeline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our rate contracts are messy spreadsheets and emails. Is that a problem?",
+      "a": "It is the normal starting point. We digitise them into rules during the pilot and ask procurement to confirm each one. Amendments are added as new versions with effective dates."
+    },
+    {
+      "q": "Can it handle courier invoices with thousands of AWBs?",
+      "a": "Yes. Large Excel or CSV annexures are processed line by line, and scanned PDFs go through OCR first. Processing time per invoice is reported during the pilot."
+    },
+    {
+      "q": "Does it dispute invoices with carriers directly?",
+      "a": "No. It prepares the variance list and draft dispute notes, and your team decides what to send. Carrier-facing variance reports can be shared through a portal if you choose."
+    },
+    {
+      "q": "How is this different from our ERP's three-way match?",
+      "a": "An ERP match compares invoice totals with purchase orders or goods receipts. Freight audit recalculates each shipment from contract terms, weights and accessorial rules, which a standard ERP match does not do."
+    }
+  ],
+  "related": [
+    "proof-of-delivery-verification",
+    "e-way-bill-and-gst-document-validation",
+    "po-invoice-three-way-matching",
+    "vendor-invoice-and-credit-note-reconciliation"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/freight-invoice-audit/"
+}

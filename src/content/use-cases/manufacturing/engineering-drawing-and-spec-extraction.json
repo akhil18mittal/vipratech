@@ -1,0 +1,223 @@
+{
+  "slug": "engineering-drawing-and-spec-extraction",
+  "industry": "manufacturing",
+  "title": "Engineering Drawing and Spec Sheet Extraction",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "computer-vision"
+  ],
+  "summary": "Extract title blocks, dimensions, tolerances, GD&T, materials and notes from 2D drawings and spec sheets for faster RFQ review, ballooned inspection plans and revision checks.",
+  "seo": {
+    "title": "Engineering Drawing Data Extraction with AI | VipraTech",
+    "description": "AI reads 2D drawings and spec sheets, extracts title blocks, dimensions, tolerances and GD&T, builds balloon lists and flags revision changes.",
+    "keywords": [
+      "engineering drawing extraction",
+      "GD&T extraction AI",
+      "automatic drawing ballooning",
+      "RFQ drawing analysis",
+      "drawing revision comparison"
+    ]
+  },
+  "designed_for": [
+    "Head of Engineering or Design",
+    "Quality Engineer (PPAP and FAI)",
+    "Estimation and RFQ Manager",
+    "Manufacturing Engineering Lead"
+  ],
+  "problem": {
+    "intro": "Every RFQ, new part introduction and engineering change starts with someone reading a drawing line by line. Estimators hunt for material, finish and tight tolerances, quality engineers balloon every characteristic for first article inspection, and changes between revisions are found by eye.",
+    "pain_points": [
+      {
+        "title": "Slow RFQ turnaround",
+        "detail": "Estimators read each customer drawing to find material grade, heat treatment, surface finish and critical tolerances before they can cost the part."
+      },
+      {
+        "title": "Manual ballooning",
+        "detail": "Numbering every dimension and note for PPAP or first article inspection reports is slow, repetitive work in PDF tools."
+      },
+      {
+        "title": "Missed revision changes",
+        "detail": "A tolerance tightened between revision B and C is easy to miss, and the old value ends up in the control plan or the CNC program."
+      },
+      {
+        "title": "Unsearchable legacy drawings",
+        "detail": "Decades of scanned drawings sit in folders, so finding every part made from a given material or with a given thread is guesswork."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a drawing reader that locates the title block, views and notes on each sheet, then extracts dimensions with tolerances, GD&T feature control frames, surface finish symbols, threads, material and heat treatment notes. Each characteristic gets a balloon number and a link to its location on the drawing. The output can feed an RFQ checklist, an inspection plan template or an item master entry in your ERP. When a new revision arrives, the system compares it with the previous one and lists added, removed and changed characteristics. Engineers confirm the extraction before any of it is used.",
+    "capabilities": [
+      "Reads title block fields such as part number, drawing number, revision, material and general tolerance standard",
+      "Extracts linear and angular dimensions with tolerances, fits and thread callouts",
+      "Detects GD&T feature control frames, datums and surface finish symbols",
+      "Builds a ballooned characteristic list and fills your FAI or inspection report template",
+      "Compares revisions and lists added, removed and changed characteristics",
+      "Indexes legacy drawings so engineers can search by material, feature or note"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive drawings",
+      "detail": "Drawings arrive as PDFs, TIFF scans or exported sheets from the RFQ mailbox or PLM vault."
+    },
+    {
+      "step": 2,
+      "title": "Detect layout",
+      "detail": "A vision model finds the title block, views, tables and note areas on each sheet."
+    },
+    {
+      "step": 3,
+      "title": "Extract characteristics",
+      "detail": "OCR and an LLM read dimensions, tolerances, GD&T, threads and notes, each with a confidence score and location."
+    },
+    {
+      "step": 4,
+      "title": "Engineer verification",
+      "detail": "Low-confidence and critical characteristics are highlighted for the engineer to confirm on the drawing."
+    },
+    {
+      "step": 5,
+      "title": "Compare with previous revision",
+      "detail": "Where an earlier revision exists, changes are listed characteristic by characteristic."
+    },
+    {
+      "step": 6,
+      "title": "Publish outputs",
+      "detail": "The verified list feeds the RFQ checklist, ballooned drawing, inspection plan or ERP item master."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Drawing PDF or scan received\"] --> B[\"Detect title block, views and notes\"]\n  B --> C[\"Extract dimensions and tolerances\"]\n  C --> D{\"Critical or low confidence?\"}\n  D -->|\"yes\"| E(\"Engineer verifies on drawing\")\n  D -->|\"no\"| F[\"Build balloon list\"]\n  E --> F\n  F --> G{\"Earlier revision exists?\"}\n  G -->|\"yes\"| H[\"List changed characteristics\"]\n  G -->|\"no\"| I[\"Feed RFQ, FAI and ERP item\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "RFQ mailbox and PLM or PDM vault connector",
+          "PDF, TIFF and scanned sheet handling"
+        ]
+      },
+      {
+        "name": "Layout and symbol detection",
+        "components": [
+          "Sheet layout detector for title block, views and tables",
+          "Symbol detector for GD&T frames, finish and weld symbols"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR tuned for drawing fonts and rotated text",
+          "LLM parser for tolerances, threads and notes",
+          "Characteristic schema with balloon numbering"
+        ]
+      },
+      {
+        "name": "Verification",
+        "components": [
+          "Engineer review screen with drawing overlay",
+          "Revision comparison engine"
+        ]
+      },
+      {
+        "name": "Outputs",
+        "components": [
+          "FAI and inspection report templates",
+          "ERP item master and RFQ checklist export",
+          "Searchable drawing index"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"RFQ mailbox and PLM vault\"]\n  end\n  subgraph S2[\"Layout and symbols\"]\n    L1[\"Sheet layout detector\"]\n    L2[\"Tolerance symbol detector\"]\n  end\n  subgraph S3[\"Extraction\"]\n    E1[\"Drawing OCR\"]\n    E2[\"LLM tolerance and note parser\"]\n    E3[\"Characteristic schema\"]\n  end\n  subgraph S4[\"Verification\"]\n    V1(\"Engineer review overlay\")\n    V2[\"Revision comparison\"]\n  end\n  subgraph S5[\"Outputs\"]\n    P1[\"FAI report and balloons\"]\n    P2[\"ERP item and RFQ checklist\"]\n    P3[\"Drawing search index\"]\n  end\n  I1 --> L1 --> L2\n  L1 --> E1\n  L2 --> E2\n  E1 --> E2 --> E3\n  E3 --> V1\n  E3 --> V2\n  V1 --> P1\n  V1 --> P2\n  V2 --> P2\n  E3 --> P3"
+  },
+  "inputs": [
+    "2D drawings as PDF, TIFF or scanned sheets",
+    "Customer and internal material and finish spec sheets",
+    "Previous drawing revisions from the PLM vault or folders",
+    "Your FAI, PPAP or inspection report templates",
+    "RFQ emails and attachments"
+  ],
+  "outputs": [
+    "Structured title block and characteristic list per drawing",
+    "Ballooned drawing and a filled inspection report draft",
+    "Revision change list between drawing versions",
+    "RFQ checklist of material, finish, critical tolerances and special processes",
+    "Searchable index of legacy drawings"
+  ],
+  "human_in_the_loop": "A design or quality engineer verifies every characteristic flagged as critical or low-confidence on a drawing overlay before the list is used. Nothing extracted goes into a quote, control plan or CNC program without that sign-off.",
+  "integrations": [
+    "PLM or PDM vault such as Windchill, Teamcenter or SolidWorks PDM",
+    "SAP or Tally item master",
+    "Quality management or FAI software",
+    "RFQ mailbox and CRM",
+    "Network folders holding legacy scans"
+  ],
+  "guardrails": [
+    "Every value linked to its location on the drawing",
+    "Critical characteristics always shown for engineer confirmation",
+    "Drawings processed in your tenancy or on-premise to respect customer NDAs",
+    "Only the released revision is used for outputs",
+    "Unreadable regions reported, not guessed"
+  ],
+  "compliance_notes": [
+    "Customer drawings are often under NDA or export-control terms; processing can stay on-premise and specific programmes can be excluded.",
+    "Outputs can support PPAP and first article inspection records, including AS9102-style reports in aerospace, with engineers retaining sign-off."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One drawing family, such as machined or sheet-metal parts, using recent RFQ and production drawings from two or three customers.",
+    "deliverables": [
+      "Characteristic schema and output templates agreed with engineering",
+      "Working extraction on a set of your real drawings",
+      "Engineer review overlay",
+      "Accuracy report against engineer-ballooned drawings",
+      "Roll-out and integration plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Characteristic extraction accuracy",
+        "how": "Compared with characteristic lists engineers prepared for the same drawings."
+      },
+      {
+        "metric": "Title block field accuracy",
+        "how": "Part number, revision, material and tolerance standard checked against the PLM record."
+      },
+      {
+        "metric": "Engineer time per drawing",
+        "how": "Time to produce a verified balloon list or RFQ checklist, with and without the tool."
+      },
+      {
+        "metric": "Revision changes caught",
+        "how": "Changes found by the comparison engine against a manual comparison of sample revision pairs."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read old scanned drawings with poor line quality?",
+      "a": "Yes, within limits. Faded or skewed scans are cleaned up before reading, and any region the system cannot read with confidence is flagged rather than guessed. The pilot report separates accuracy for native PDFs and scans."
+    },
+    {
+      "q": "Does it understand GD&T, or just read the text?",
+      "a": "It detects feature control frames and reads the symbol, tolerance value, modifiers and datum references as structured fields. Interpreting what a callout means for your process stays with your engineers."
+    },
+    {
+      "q": "Can we work from CAD models instead of 2D drawings?",
+      "a": "Where you have native CAD with PMI, extracting from the model is often better, and we can discuss it. Most suppliers still receive 2D drawings with RFQs, which is where this system helps most."
+    },
+    {
+      "q": "Customer drawings are confidential. Where are they processed?",
+      "a": "In your cloud tenancy or on a server in your plant. We use model endpoints that do not retain data, and specific customers or programmes can be excluded entirely."
+    }
+  ],
+  "related": [
+    "visual-quality-inspection",
+    "supplier-quality-certificate-verification",
+    "maintenance-log-and-sop-assistant",
+    "technical-report-search-assistant"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/engineering-drawing-and-spec-extraction/"
+}

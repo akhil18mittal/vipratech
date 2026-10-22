@@ -1,0 +1,227 @@
+{
+  "slug": "tpa-pre-authorisation-triage",
+  "industry": "insurance",
+  "title": "Pre-Authorisation Request Triage for TPAs",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Read incoming cashless requests, check completeness, policy terms and tariffs, and put a prioritised, source-linked summary in front of the TPA medical officer.",
+  "seo": {
+    "title": "AI Pre-Authorisation Triage for TPAs | VipraTech",
+    "description": "AI that reads cashless pre-auth requests, checks documents, policy terms and tariffs, drafts hospital queries and prioritises the medical officer queue.",
+    "keywords": [
+      "pre-authorisation triage",
+      "cashless claim pre-auth AI",
+      "TPA automation India",
+      "cashless request processing",
+      "TPA medical officer workflow"
+    ]
+  },
+  "designed_for": [
+    "Head of Cashless Operations",
+    "TPA Medical Officer",
+    "TPA Operations Manager",
+    "Provider Network Manager"
+  ],
+  "problem": {
+    "intro": "Network hospitals send cashless requests at all hours: the pre-authorisation form, the treating doctor's notes, investigation reports and a cost estimate, sometimes as a fax turned into a PDF. The medical officer has to work out what is being asked, whether the file is complete and what the policy allows, against a clock that patients, hospitals and IRDAI all watch.",
+    "pain_points": [
+      {
+        "title": "Incomplete requests cause back-and-forth",
+        "detail": "Missing investigation reports, unsigned forms or an absent cost break-up trigger query letters, and every query keeps the patient waiting at the admission desk."
+      },
+      {
+        "title": "Policy terms checked from memory",
+        "detail": "Waiting periods, pre-existing disease declarations, room-rent eligibility and procedure sub-limits sit on different screens, so checks vary between medical officers."
+      },
+      {
+        "title": "Tariff and package mismatches",
+        "detail": "Estimates that exceed the hospital's agreed package or tariff are easy to miss when requests are read in a hurry."
+      },
+      {
+        "title": "Flat queues hide urgent cases",
+        "detail": "An emergency admission, an enhancement at discharge and a planned cataract surgery can sit in the same first-in, first-out queue."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a triage layer that sits between hospital requests and your medical officers. It reads each request, identifies whether it is an initial request, an enhancement or a final discharge approval, and extracts the clinical and cost details. It checks the file against a procedure-specific document checklist, looks up the member's policy terms and the hospital's agreed tariff or package, and builds a one-screen summary with every fact linked to its source page. Incomplete files get a drafted query for the desk team. Complete files are ranked by urgency for a medical officer, who makes the decision in your existing TPA system.",
+    "capabilities": [
+      "Recognises request type: initial authorisation, enhancement or final discharge approval",
+      "Extracts provisional diagnosis, proposed line of treatment, expected length of stay, room category and estimated cost",
+      "Checks completeness against document checklists configured per procedure or specialty",
+      "Looks up waiting periods, pre-existing disease declarations, sub-limits and room-rent eligibility from the policy record",
+      "Compares the estimate with the hospital's agreed tariff or package rate and highlights differences",
+      "Drafts query letters for missing items and ranks complete requests using urgency rules set by your medical team"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the request",
+      "detail": "Requests arrive from the hospital portal, a shared inbox or fax-to-email and are matched to the member and the hospital."
+    },
+    {
+      "step": 2,
+      "title": "Identify and extract",
+      "detail": "The request type is identified, and clinical, cost and member fields are extracted with source-page references."
+    },
+    {
+      "step": 3,
+      "title": "Check completeness",
+      "detail": "A procedure-specific checklist confirms the required documents; incomplete files go to the desk team with a drafted query."
+    },
+    {
+      "step": 4,
+      "title": "Look up policy and tariff",
+      "detail": "Policy terms and the hospital's agreed tariff or package are pulled and compared with the request."
+    },
+    {
+      "step": 5,
+      "title": "Prioritise and summarise",
+      "detail": "Complete requests are ranked by urgency rules and presented as a one-screen summary with flags."
+    },
+    {
+      "step": 6,
+      "title": "Medical officer decides",
+      "detail": "The medical officer approves, partially approves, queries or declines in the TPA system, and the decision and reasons are logged."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Cashless request from hospital\"] --> B[\"Identify request type and extract\"]\n  B --> C{\"Mandatory documents present?\"}\n  C -->|\"no\"| D(\"Desk team sends drafted query\")\n  D --> A\n  C -->|\"yes\"| E[\"Policy terms and tariff lookup\"]\n  E --> F[\"Urgency ranking and summary card\"]\n  F --> G(\"Medical officer decides\")\n  G --> H[\"Decision recorded in TPA system\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Hospital portal connector",
+          "Shared inbox and fax-to-email reader",
+          "Member and hospital matching"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "OCR with handwriting support",
+          "Request-type classifier",
+          "LLM extractor for clinical and cost fields"
+        ]
+      },
+      {
+        "name": "Policy and tariff context",
+        "components": [
+          "Policy terms lookup from the member master",
+          "Hospital tariff and package master",
+          "Diagnosis and procedure code suggestions for coder review"
+        ]
+      },
+      {
+        "name": "Triage and review",
+        "components": [
+          "Completeness checklist engine",
+          "Urgency ranking rules",
+          "Medical officer summary screen",
+          "Query letter drafts"
+        ]
+      },
+      {
+        "name": "Integration and audit",
+        "components": [
+          "TPA platform adapter",
+          "Decision and turnaround log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Hospital portal connector\"]\n    I2[\"Inbox and fax-to-email reader\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"OCR and request classifier\"]\n    U2[\"LLM clinical and cost extractor\"]\n  end\n  subgraph S3[\"Policy and tariff context\"]\n    P1[\"Policy terms lookup\"]\n    P2[\"Tariff and package master\"]\n  end\n  subgraph S4[\"Triage and review\"]\n    T1[\"Completeness checklist\"]\n    T2[\"Urgency ranking\"]\n    T3(\"Medical officer screen\")\n  end\n  subgraph S5[\"Integration and audit\"]\n    K1[\"TPA platform adapter\"]\n    K2[\"Turnaround and decision log\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2\n  U2 --> T1\n  U2 --> P1\n  P1 --> P2\n  P2 --> T2\n  T1 --> T2\n  T2 --> T3\n  T3 --> K1\n  K1 --> K2"
+  },
+  "inputs": [
+    "Cashless pre-authorisation request form",
+    "Treating doctor's notes and provisional diagnosis",
+    "Investigation reports supporting the admission",
+    "Hospital cost estimate and tariff or package reference",
+    "Member e-card, policy record and claim history",
+    "Enhancement requests and final bills at later stages"
+  ],
+  "outputs": [
+    "Structured pre-auth record with source-page links",
+    "Completeness status and list of missing documents",
+    "Drafted query letter for the hospital",
+    "Policy and tariff flags such as waiting period, sub-limit or package variance",
+    "Urgency rank and one-screen summary for the medical officer",
+    "Turnaround log from receipt to decision"
+  ],
+  "human_in_the_loop": "Medical officers make every approval, partial approval, query and denial, and desk staff review each drafted query before it is sent. The system never contacts the hospital with a decision on its own and never judges medical necessity.",
+  "integrations": [
+    "TPA or insurer cashless platform (via API or database staging)",
+    "Hospital and provider portals",
+    "Shared inboxes and fax-to-email gateway",
+    "Policy administration system or member master",
+    "Hospital tariff and package master",
+    "MIS and data warehouse for turnaround reporting"
+  ],
+  "guardrails": [
+    "No automatic approval or denial at any stage",
+    "Clinical fields shown only when found in the documents, with the source page; absent information is marked absent, not inferred",
+    "Urgency rules written and versioned by the medical team",
+    "Drafted queries reviewed by a person before sending",
+    "Health data masked in logs and kept in your chosen cloud region"
+  ],
+  "compliance_notes": [
+    "Helps TPAs and insurers work towards IRDAI expectations on time-bound cashless decisions while keeping clinical judgement with qualified medical officers.",
+    "Processes health data only for claim handling, supporting purpose limitation under India's DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Planned surgical admissions from a small group of high-volume network hospitals, run in shadow mode next to your current cashless desk.",
+    "deliverables": [
+      "Request-type and field schema agreed with your medical team",
+      "Procedure checklists for the pilot specialties",
+      "Working triage pipeline on de-identified historical and live requests",
+      "Medical officer summary screen",
+      "Pilot report and production plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Completeness check agreement",
+        "how": "Pipeline completeness verdicts compared with the desk team's own assessment of the same requests."
+      },
+      {
+        "metric": "Time from receipt to medical officer view",
+        "how": "Timestamps logged for each request in shadow mode and in the current process."
+      },
+      {
+        "metric": "Avoidable queries",
+        "how": "Queries raised by medical officers that the checklist had already identified at intake."
+      },
+      {
+        "metric": "Extraction accuracy for diagnosis and cost fields",
+        "how": "Compared with the values entered by the desk team for the same requests."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does it suggest ICD-10 or procedure codes?",
+      "a": "It can suggest codes from the provisional diagnosis and proposed treatment, clearly marked as suggestions. Your coders or medical officers confirm or change them, and those corrections improve later suggestions."
+    },
+    {
+      "q": "Can it handle enhancements and final discharge approvals?",
+      "a": "Yes. It recognises enhancement requests and final bills, compares them with the amount already authorised and highlights what has changed, so the medical officer can focus on the difference."
+    },
+    {
+      "q": "Will it decide whether a treatment is medically necessary?",
+      "a": "No. It organises the facts and flags gaps or policy issues. Medical necessity and every authorisation decision stay with your medical officers."
+    },
+    {
+      "q": "Where does tariff and package data come from?",
+      "a": "From your existing provider tariff and package master, through an export or API. If agreed rates live in PDFs or spreadsheets, we extract them into a structured table during the pilot."
+    }
+  ],
+  "related": [
+    "health-claim-document-extraction",
+    "hospital-insurance-claim-file-preparation",
+    "claim-status-voice-helpline",
+    "tampered-document-detection"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/tpa-pre-authorisation-triage/"
+}

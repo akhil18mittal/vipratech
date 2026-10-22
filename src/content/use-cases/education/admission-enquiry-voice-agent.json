@@ -1,0 +1,226 @@
+{
+  "slug": "admission-enquiry-voice-agent",
+  "industry": "education",
+  "title": "Admission Enquiry Voice Agent",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "sales-marketing-automation"
+  ],
+  "summary": "Answer admission calls in Hindi, Hinglish and English from your approved prospectus and fee data, book scholarship tests and campus visits, and hand families to a counsellor when it matters.",
+  "seo": {
+    "title": "Admission Enquiry Voice Agent in Hindi | VipraTech",
+    "description": "A voice agent that answers course, batch, fee and hostel questions for coaching institutes and schools, books visits and transfers to counsellors.",
+    "keywords": [
+      "admission enquiry voice agent",
+      "coaching institute call automation",
+      "Hindi voice bot for admissions",
+      "school admission helpline AI",
+      "scholarship test booking calls"
+    ]
+  },
+  "designed_for": [
+    "Admissions Head",
+    "Counselling Team Lead",
+    "Centre Director",
+    "Marketing Head"
+  ],
+  "problem": {
+    "intro": "After board results, entrance exam results and every scholarship test announcement, admission lines ring constantly. Parents from different states call with the same questions about batches, fees, scholarships and hostels, often in the evening, and counsellors spend most of their day repeating the prospectus while serious enquiries wait.",
+    "pain_points": [
+      {
+        "title": "Missed calls in peak weeks",
+        "detail": "Calls that go unanswered in the evening or on Sundays become enquiries that sign up elsewhere."
+      },
+      {
+        "title": "Repetitive questions crowd out counselling",
+        "detail": "Batch timings, fee instalments and hostel options take time that should go to families deciding between programmes."
+      },
+      {
+        "title": "Inconsistent answers",
+        "detail": "Different staff quote different fees, scholarship rules or start dates, which leads to disputes later."
+      },
+      {
+        "title": "Pressure to over-promise",
+        "detail": "Callers ask about selections and ranks, and an untrained answer can turn into a misleading claim."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an inbound voice agent that picks up admission calls, says it is an AI assistant and speaks in Hindi, Hinglish or English. It answers from a knowledge base you approve: programmes for each class and target exam, batch start dates, fee structure and instalments, scholarship test dates and criteria, centre addresses, and hostel and mess options. It can book a scholarship test slot or campus visit and sends the details on WhatsApp. When the caller wants advice on choosing a programme, raises a complaint or sounds distressed, it transfers to a counsellor with a short summary. Every call is logged in your CRM.",
+    "capabilities": [
+      "Hindi, Hinglish and English conversation, switching language mid-call",
+      "Answers only from an approved, versioned knowledge base of programmes, fees and dates",
+      "Books scholarship test slots, campus visits and counsellor call-backs",
+      "Sends WhatsApp follow-ups with the brochure, fee sheet and booking details",
+      "Warm transfer to a counsellor with a call summary when advice or empathy is needed",
+      "Logs caller details, intent and outcome to your CRM, with consent captured"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Greet and disclose",
+      "detail": "The agent answers, says it is an AI assistant, asks for consent to record and detects the caller's language."
+    },
+    {
+      "step": 2,
+      "title": "Understand the enquiry",
+      "detail": "It identifies whether the caller is asking about a programme, fees, the scholarship test, hostels or something else."
+    },
+    {
+      "step": 3,
+      "title": "Answer from approved content",
+      "detail": "Answers come only from the approved knowledge base; anything not covered becomes a counsellor call-back."
+    },
+    {
+      "step": 4,
+      "title": "Decide on hand-off",
+      "detail": "Requests for advice, complaints, fee negotiations or signs of distress trigger a transfer to a person."
+    },
+    {
+      "step": 5,
+      "title": "Book and follow up",
+      "detail": "The agent books test slots or visits and sends a WhatsApp summary."
+    },
+    {
+      "step": 6,
+      "title": "Log to CRM",
+      "detail": "Caller details, intent, a summary of the call and the next step are saved for the counselling team."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inbound admission call\"] --> B[\"Greet, disclose AI, detect language\"]\n  B --> C[\"Identify enquiry type\"]\n  C --> D[\"Answer from approved knowledge base\"]\n  D --> E{\"Advice, complaint or distress?\"}\n  E -->|\"yes\"| F(\"Warm transfer to counsellor\")\n  E -->|\"no\"| G[\"Book test slot or campus visit\"]\n  G --> H[\"Send WhatsApp summary\"]\n  F --> I[\"Log call and next step in CRM\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Telephony",
+        "components": [
+          "Cloud telephony number or SIP trunk",
+          "Call recording with consent prompt",
+          "Warm transfer to counsellor lines"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Speech-to-text tuned for Hindi and Hinglish",
+          "Text-to-speech with natural Indian voices",
+          "Barge-in and silence handling"
+        ]
+      },
+      {
+        "name": "Dialogue and knowledge",
+        "components": [
+          "Dialogue manager with intent detection",
+          "Retrieval over the approved prospectus and fee data",
+          "Escalation and safety rules"
+        ]
+      },
+      {
+        "name": "Actions",
+        "components": [
+          "Scholarship test and visit booking",
+          "WhatsApp Business API messages",
+          "CRM lead creation and updates"
+        ]
+      },
+      {
+        "name": "Monitoring",
+        "components": [
+          "Call transcripts and summaries",
+          "QA sampling dashboard",
+          "Knowledge base version log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Telephony\"]\n    T1[\"Cloud telephony or SIP\"]\n    T2(\"Counsellor transfer line\")\n  end\n  subgraph S2[\"Speech\"]\n    P1[\"Hindi and Hinglish speech to text\"]\n    P2[\"Text to speech\"]\n  end\n  subgraph S3[\"Dialogue and knowledge\"]\n    D1[\"Dialogue manager\"]\n    D2[\"Approved knowledge base\"]\n    D3[\"Escalation rules\"]\n  end\n  subgraph S4[\"Actions and monitoring\"]\n    A1[\"Booking service\"]\n    A2[\"WhatsApp messages\"]\n    A3[\"CRM update\"]\n    A4[\"QA dashboard\"]\n  end\n  T1 --> P1\n  P1 --> D1\n  D1 --> D2\n  D1 --> D3\n  D1 --> P2\n  P2 --> T1\n  D3 --> T2\n  D1 --> A1\n  A1 --> A2\n  D1 --> A3\n  A3 --> A4"
+  },
+  "inputs": [
+    "Approved prospectus, programme list and batch calendar",
+    "Fee structure, instalment plans and scholarship rules",
+    "Centre, hostel and transport information",
+    "Counsellor availability and transfer numbers",
+    "Caller phone number and consent"
+  ],
+  "outputs": [
+    "Answered enquiries with call summaries",
+    "Scholarship test and campus visit bookings",
+    "WhatsApp follow-ups with brochures and fee sheets",
+    "Warm transfers with context for counsellors",
+    "CRM records with intent and next step"
+  ],
+  "human_in_the_loop": "Counsellors take every call that needs advice on choosing a programme, a fee concession, a complaint or emotional support. The admissions head approves the knowledge base and reviews a sample of calls each week.",
+  "integrations": [
+    "Cloud telephony or existing IVR",
+    "CRM such as LeadSquared, Salesforce or Zoho",
+    "WhatsApp Business API",
+    "Scholarship test registration system",
+    "Institute ERP for batch and fee data"
+  ],
+  "guardrails": [
+    "Says it is an AI assistant at the start of every call",
+    "Never promises selections, ranks or results, and quotes only published result data",
+    "Fees and scholarship rules taken only from the approved version of the fee sheet",
+    "Callers who sound distressed or mention self-harm are transferred to a trained person at once, with helpline details shared per your policy",
+    "Call-backs only within permitted hours, with opt-outs honoured"
+  ],
+  "compliance_notes": [
+    "Outbound call-backs and promotional messages must follow TRAI commercial communication rules on registration and customer preferences.",
+    "Calls with students under 18 involve children's data under the DPDP Act 2023, so the agent asks for a parent's contact for any follow-up.",
+    "Scripts are written to align with the Ministry of Education's 2024 coaching-centre guidelines against misleading claims."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Overflow and after-hours admission calls for one centre or programme, with transfers to your existing counselling team.",
+    "deliverables": [
+      "Approved knowledge base and call flows in Hindi and English",
+      "Working voice agent on a pilot number",
+      "WhatsApp follow-up templates",
+      "Weekly call review with your admissions head",
+      "Roll-out plan and per-minute cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Calls handled end to end",
+        "how": "Calls resolved without transfer, from call logs, reviewed for correctness."
+      },
+      {
+        "metric": "Answer accuracy",
+        "how": "Weekly sample of transcripts checked against the approved knowledge base."
+      },
+      {
+        "metric": "Bookings made and attended",
+        "how": "Scholarship test slots and campus visits booked by the agent, and how many were attended."
+      },
+      {
+        "metric": "Transfer quality",
+        "how": "Counsellor rating of whether the summary and the reason for transfer were useful."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will parents know they are talking to an AI?",
+      "a": "Yes. The agent says so at the start of every call and offers a person whenever the caller asks."
+    },
+    {
+      "q": "Can it handle Hindi and regional accents?",
+      "a": "It is built for Hindi, Hinglish and English and tested with callers from the regions you recruit from. Regional languages such as Marathi or Bengali can be added based on your student mix."
+    },
+    {
+      "q": "What if it gives a wrong fee or date?",
+      "a": "It answers only from the approved, versioned knowledge base, and changes go through your admissions head. Weekly call reviews catch gaps, and anything outside the knowledge base becomes a counsellor call-back."
+    },
+    {
+      "q": "Does it replace our counsellors?",
+      "a": "No. It handles routine questions and bookings so counsellors can spend their time with families who are actually deciding."
+    }
+  ],
+  "related": [
+    "counselling-funnel-lead-nurture",
+    "fee-reminder-voice-and-whatsapp-agent",
+    "admission-document-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/admission-enquiry-voice-agent/"
+}

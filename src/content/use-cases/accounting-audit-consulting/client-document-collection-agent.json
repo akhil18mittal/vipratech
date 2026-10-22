@@ -1,0 +1,217 @@
+{
+  "slug": "client-document-collection-agent",
+  "industry": "accounting-audit-consulting",
+  "title": "Client Document Collection and Follow-Up Agent",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "document-intelligence",
+    "voice-ai"
+  ],
+  "summary": "A WhatsApp and email agent that sends each client their pending-document list, recognises what they upload, follows up on schedule and shows the team exactly what is still missing.",
+  "seo": {
+    "title": "Client Document Collection Agent for CA Firms | VipraTech",
+    "description": "WhatsApp and email agent for CA firms that requests PBC, GST and ITR documents, checks uploads, sends reminders and tracks what is still missing.",
+    "keywords": [
+      "client document collection automation",
+      "PBC list tracking",
+      "WhatsApp reminders for CA firms",
+      "audit document request automation",
+      "ITR document collection"
+    ]
+  },
+  "designed_for": [
+    "Practice Manager",
+    "Audit Manager",
+    "Client Service Lead, Outsourced Accounting",
+    "Partner, Tax Practice"
+  ],
+  "problem": {
+    "intro": "Many delays in a CA practice come from waiting for the client. PBC lists for audits, monthly purchase bills for GST, bank statements for bookkeeping and Form 16s for ITR are requested by email, then chased by phone and WhatsApp from staff members' personal numbers, with no single view of what has arrived.",
+    "pain_points": [
+      {
+        "title": "Chasing eats staff time",
+        "detail": "Seniors and articled assistants spend hours each week sending the same reminders and checking inboxes for replies."
+      },
+      {
+        "title": "Clients send the wrong thing",
+        "detail": "Wrong period, wrong entity, half-page photos and password-protected PDFs without the password all need another round."
+      },
+      {
+        "title": "No status view",
+        "detail": "Partners learn which client is blocking which engagement only when a deadline is close."
+      },
+      {
+        "title": "History on personal phones",
+        "detail": "When an article leaves, the client conversation and documents on their WhatsApp leave with them."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a collection agent that works from the checklist for each engagement, such as the audit PBC list, the monthly GST and bookkeeping set or the ITR document list, and runs follow-ups on the firm's WhatsApp Business number and email. Each client contact gets a short message listing exactly what is pending, in English or Hindi. When documents arrive, the agent classifies them, checks the basics, such as entity, period, legibility and password, and ticks them off or asks for a correction. Reminders follow a schedule the partner sets, escalating to the engagement manager as a deadline nears. The team sees one status board per engagement.",
+    "capabilities": [
+      "Engagement checklists for audit PBC, monthly GST and bookkeeping, TDS and ITR seasons",
+      "WhatsApp Business and email messaging from the firm's number, in English and Hindi",
+      "Document recognition and basic checks for type, entity, period, legibility and password",
+      "Scheduled reminders with quiet hours and escalation rules set by the partner",
+      "Optional reminder call by a voice agent for clients who do not respond to messages",
+      "Status board per client and engagement, with files saved to the right folder"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load the checklist",
+      "detail": "The engagement checklist, client contacts, preferred language and deadlines are set up."
+    },
+    {
+      "step": 2,
+      "title": "Send the pending list",
+      "detail": "Each contact receives an approved message listing exactly what is outstanding."
+    },
+    {
+      "step": 3,
+      "title": "Receive and check documents",
+      "detail": "Uploads are classified and checked for entity, period, legibility and password."
+    },
+    {
+      "step": 4,
+      "title": "Ask for corrections",
+      "detail": "Documents that fail a check trigger a specific request back to the client."
+    },
+    {
+      "step": 5,
+      "title": "Remind and escalate",
+      "detail": "Reminders continue on the partner's schedule, and items still pending near a deadline go to the engagement manager."
+    },
+    {
+      "step": 6,
+      "title": "Update the status board",
+      "detail": "Accepted documents are filed and the board shows what is complete and what is blocking work."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Engagement checklist and contacts\"] --> B[\"Send pending list by WhatsApp or email\"]\n  B --> C[\"Client uploads documents\"]\n  C --> D[\"Classify and check entity and period\"]\n  D --> E{\"Document valid and complete?\"}\n  E -->|\"no\"| F[\"Ask client for correction\"]\n  F --> C\n  E -->|\"yes\"| G[\"File and update status board\"]\n  G --> H{\"Deadline near with items pending?\"}\n  H -->|\"yes\"| I(\"Engagement manager follows up\")\n  H -->|\"no\"| B",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channels",
+        "components": [
+          "WhatsApp Business API",
+          "Email connector",
+          "Optional outbound reminder calls"
+        ]
+      },
+      {
+        "name": "Orchestration",
+        "components": [
+          "Checklist engine per engagement",
+          "Reminder scheduler with quiet hours",
+          "Escalation rules"
+        ]
+      },
+      {
+        "name": "Document checks",
+        "components": [
+          "Document classifier",
+          "Entity, period, legibility and password checks"
+        ]
+      },
+      {
+        "name": "Team workspace",
+        "components": [
+          "Status board per engagement",
+          "Filing to the firm's document store",
+          "Log of messages and receipts"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Orchestration\"]\n    W1[\"Engagement checklist engine\"]\n    W2[\"Reminder scheduler with quiet hours\"]\n    W3[\"Escalation rules\"]\n  end\n  subgraph S2[\"Channels\"]\n    H1[\"WhatsApp Business API\"]\n    H2[\"Email connector\"]\n    H3[\"Optional reminder calls\"]\n  end\n  subgraph S3[\"Document checks\"]\n    K1[\"Document classifier\"]\n    K2[\"Entity, period and legibility checks\"]\n  end\n  subgraph S4[\"Team workspace\"]\n    T1[\"Status board per engagement\"]\n    T2[\"Filing to document store\"]\n    T3(\"Engagement manager alerts\")\n  end\n  W1 --> W2\n  W2 --> H1\n  W2 --> H2\n  W2 --> H3\n  H1 --> K1\n  H2 --> K1\n  K1 --> K2\n  K2 --> T1\n  K2 --> T2\n  T1 --> W3 --> T3"
+  },
+  "inputs": [
+    "Engagement checklists such as PBC, GST and ITR lists",
+    "Client contacts and preferred language",
+    "Statutory and engagement deadlines",
+    "Documents uploaded by clients",
+    "Message templates approved by the partner"
+  ],
+  "outputs": [
+    "Pending list per client and engagement",
+    "Documents filed in the correct folders",
+    "Status board across engagements",
+    "Escalation alerts for the engagement manager",
+    "Log of messages sent and documents received"
+  ],
+  "human_in_the_loop": "Partners approve message templates, reminder frequency and escalation rules before anything is sent. Any client reply that is not a document, such as a question, a complaint or a fee discussion, is handed to the assigned staff member instead of being answered by the agent.",
+  "integrations": [
+    "WhatsApp Business API (Meta Cloud API)",
+    "Gmail or Outlook",
+    "Practice management software",
+    "Google Drive, OneDrive or the firm's document management system",
+    "Calendar for deadlines"
+  ],
+  "guardrails": [
+    "Only partner-approved templates for business-initiated messages",
+    "Opt-outs honoured immediately",
+    "Quiet hours and reminder caps per client",
+    "The agent never gives tax advice or discusses fees",
+    "Documents stored in firm storage, not on personal phones"
+  ],
+  "compliance_notes": [
+    "Business-initiated WhatsApp messages use approved templates and require the client's opt-in under Meta's platform policies.",
+    "Client documents contain personal data; storage and retention are designed to support DPDP Act 2023 obligations."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One engagement type, such as monthly GST document collection, for a group of willing clients on the firm's WhatsApp Business number.",
+    "deliverables": [
+      "Checklist and template set for the pilot engagement type",
+      "Working agent on WhatsApp and email",
+      "Status board for the pilot clients",
+      "Pilot report with client and staff feedback",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to a complete document set",
+        "how": "Days from first request to all items received, compared with recent periods."
+      },
+      {
+        "metric": "Reminders per complete set",
+        "how": "Messages sent before each client's set was complete."
+      },
+      {
+        "metric": "First-check rejections",
+        "how": "Uploads rejected at the first check, by reason, to tune instructions to clients."
+      },
+      {
+        "metric": "Staff time on follow-ups",
+        "how": "Time logged by staff on chasing, before and during the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will clients find automated reminders annoying?",
+      "a": "The partner sets the cadence, quiet hours and tone, and each message lists exactly what is pending rather than sending generic nudges. Clients can reply to reach a person at any time, and opt-outs are respected."
+    },
+    {
+      "q": "Can we use our existing WhatsApp number?",
+      "a": "A number used on the regular WhatsApp app has to be moved to the WhatsApp Business Platform, or you can register a new number for the firm. We help with the template approvals Meta requires."
+    },
+    {
+      "q": "Which languages does it use?",
+      "a": "English and Hindi by default, with templates in other languages if your clients prefer. Each template is approved by the partner before use."
+    },
+    {
+      "q": "What happens if a client asks a tax question?",
+      "a": "The agent does not answer it. Any message that is not a document upload is passed to the assigned staff member with the conversation history."
+    }
+  ],
+  "related": [
+    "tax-document-extraction",
+    "audit-sampling-and-vouching",
+    "gst-return-reconciliation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/client-document-collection-agent/"
+}

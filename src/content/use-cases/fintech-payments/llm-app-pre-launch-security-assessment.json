@@ -1,0 +1,222 @@
+{
+  "slug": "llm-app-pre-launch-security-assessment",
+  "industry": "fintech-payments",
+  "title": "Pre-Launch Security Assessment for LLM Features",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Test a new chatbot, copilot or LLM feature for prompt injection, cross-customer data leakage, off-policy answers and unsafe output handling before release, with evidence and a retest.",
+  "seo": {
+    "title": "Pre-Launch Security Testing for LLM Features | VipraTech",
+    "description": "Security assessment of fintech LLM features before launch: prompt injection, cross-account data leakage, jailbreaks and output handling, mapped to OWASP.",
+    "keywords": [
+      "LLM security assessment",
+      "OWASP Top 10 for LLM Applications",
+      "fintech chatbot security testing",
+      "prompt injection testing",
+      "AI feature pre-launch review"
+    ]
+  },
+  "designed_for": [
+    "CTO or VP Engineering",
+    "CISO or Head of Information Security",
+    "Product Manager for AI features",
+    "Application Security Lead"
+  ],
+  "problem": {
+    "intro": "Fintech teams are adding LLM assistants to apps and merchant dashboards: transaction search, spend summaries, support chat and dispute help. These features read customer data and sometimes call internal APIs, so a well-crafted prompt can become a data breach. Traditional penetration tests and scanners do not test how the model behaves.",
+    "pain_points": [
+      {
+        "title": "Cross-customer data exposure",
+        "detail": "A model with access to a transaction API may return another user's data if authorisation is enforced in the prompt instead of the tool layer."
+      },
+      {
+        "title": "Indirect prompt injection",
+        "detail": "Merchant names, UPI notes, uploaded documents and email content can carry instructions that the model follows."
+      },
+      {
+        "title": "Off-policy answers",
+        "detail": "Assistants drift into investment advice, invented fee waivers or confident wrong statements about refunds, creating conduct and complaint risk."
+      },
+      {
+        "title": "No evidence for launch approval",
+        "detail": "Risk committees and partner banks ask what was tested before launch, and teams have no structured answer."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a time-boxed security assessment of your LLM feature in a staging environment before it reaches customers. First we map the feature: model, system prompt, retrieval sources, tools and the data each can reach. Then we test it against the OWASP Top 10 for LLM Applications with automated attack libraries and manual, multi-turn attempts written for payments: injection through transaction notes and merchant names, attempts to read other accounts, system prompt extraction, jailbreaks towards financial advice and unsafe rendering of model output in your UI. Every finding comes with the exact prompts and responses, a severity rating and a practical fix. After you fix, we retest.",
+    "capabilities": [
+      "Architecture and data-flow review of prompts, retrieval sources, tools and permissions",
+      "Automated attack runs for prompt injection, jailbreaks and system prompt extraction",
+      "Manual multi-turn testing with payments-specific scenarios in English, Hindi and Hinglish",
+      "Authorisation testing of every tool and API the model can call, using paired test accounts",
+      "Output-handling checks for script injection, link injection and markdown rendering in your UI",
+      "Findings report mapped to OWASP Top 10 for LLM Applications, followed by a retest"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scope and threat model",
+      "detail": "We agree the feature, environment, test accounts and rules of engagement, and map what data and tools the model can reach."
+    },
+    {
+      "step": 2,
+      "title": "Automated attack runs",
+      "detail": "Attack libraries send large sets of injection, jailbreak and extraction prompts to the staging endpoint."
+    },
+    {
+      "step": 3,
+      "title": "Manual scenario testing",
+      "detail": "Testers run multi-turn, payments-specific attacks, including indirect injection through data fields the model reads."
+    },
+    {
+      "step": 4,
+      "title": "Validate and rate",
+      "detail": "Each suspected issue is reproduced, confirmed and rated by impact and likelihood."
+    },
+    {
+      "step": 5,
+      "title": "Report and brief",
+      "detail": "You receive findings with evidence and fixes, plus a briefing for engineering and risk."
+    },
+    {
+      "step": 6,
+      "title": "Retest",
+      "detail": "After fixes, we rerun the failed cases and record which issues are closed."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope, test accounts, threat model\"] --> B[\"Automated injection and jailbreaks\"]\n  A --> C[\"Manual payments scenarios\"]\n  B --> D{\"Issue reproducible?\"}\n  C --> D\n  D -->|\"no\"| E[\"Logged as not reproduced\"]\n  D -->|\"yes\"| F(\"Security tester rates severity\")\n  F --> G[\"Report with evidence and fixes\"]\n  G --> H[\"Engineering fixes in staging\"]\n  H --> I[\"Retest and closure record\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Attack engine",
+        "components": [
+          "Automated prompt attack library",
+          "Payments scenario playbooks",
+          "Seeded indirect-injection test data"
+        ]
+      },
+      {
+        "name": "Target in staging",
+        "components": [
+          "LLM feature endpoint",
+          "Tools and internal APIs the model calls",
+          "Paired test customer and merchant accounts"
+        ]
+      },
+      {
+        "name": "Observation",
+        "components": [
+          "Prompt and response capture",
+          "Tool-call audit logging",
+          "Detectors for leaked account identifiers"
+        ]
+      },
+      {
+        "name": "Analysis",
+        "components": [
+          "Finding reproduction and validation",
+          "Severity rating against OWASP LLM categories"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Evidence report with remediation guidance",
+          "Retest tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Attack engine\"]\n    A1[\"Automated attack library\"]\n    A2[\"Payments scenario playbooks\"]\n    A3[\"Seeded injection test data\"]\n  end\n  subgraph S2[\"Target in staging\"]\n    T1[\"LLM feature endpoint\"]\n    T2[\"Tools and internal APIs\"]\n    T3[\"Paired test accounts\"]\n  end\n  subgraph S3[\"Observation\"]\n    B1[\"Prompt and response capture\"]\n    B2[\"Tool call audit log\"]\n    B3[\"Leakage detectors\"]\n  end\n  subgraph S4[\"Analysis and reporting\"]\n    R1(\"Tester validation\")\n    R2[\"Findings report\"]\n    R3[\"Retest tracker\"]\n  end\n  A1 --> T1\n  A2 --> T1\n  A3 --> T3\n  T1 --> T2\n  T2 --> T3\n  T1 --> B1\n  T2 --> B2\n  B1 --> B3\n  B2 --> B3\n  B3 --> R1 --> R2 --> R3"
+  },
+  "inputs": [
+    "Staging access to the LLM feature",
+    "Architecture notes: model, prompts, retrieval sources and tools",
+    "Paired test customer and merchant accounts with synthetic data",
+    "Product policy on what the assistant may and may not say",
+    "Rules of engagement and testing window"
+  ],
+  "outputs": [
+    "Threat model and data-flow diagram of the feature",
+    "Findings with prompts, responses, severity and fixes",
+    "Mapping of findings to OWASP Top 10 for LLM Applications",
+    "Executive summary for the risk committee or partner bank",
+    "Retest report showing closed and open issues"
+  ],
+  "human_in_the_loop": "A human tester reproduces and rates every automated finding before it reaches the report. Your security and engineering leads decide which fixes ship and whether the feature launches.",
+  "integrations": [
+    "Staging environment of your app or merchant dashboard",
+    "LLM gateway or provider logs such as Azure OpenAI, OpenAI, Anthropic, Gemini or self-hosted models",
+    "Jira or Linear for findings",
+    "CI pipeline for optional regression tests",
+    "Secrets manager for test credentials"
+  ],
+  "guardrails": [
+    "Testing only in staging or an agreed environment, with synthetic customer data",
+    "Written rules of engagement covering scope, timing and stop conditions",
+    "No real customer data extracted or kept; any accidental exposure reported at once",
+    "Agreed rate limits to avoid cost spikes or provider throttling",
+    "Evidence stored encrypted and deleted after the agreed period"
+  ],
+  "compliance_notes": [
+    "Helps you evidence pre-deployment testing of AI systems, in line with the testing and governance recommendations of RBI's FREE-AI framework.",
+    "Findings map to the OWASP Top 10 for LLM Applications and can feed a NIST AI RMF or ISO/IEC 42001 risk register."
+  ],
+  "pilot": {
+    "duration": "2 weeks",
+    "scope": "One LLM feature, such as an in-app support assistant or a merchant dashboard copilot, tested in staging with one retest after fixes.",
+    "deliverables": [
+      "Threat model and test plan",
+      "Automated and manual test results",
+      "Findings report with evidence and remediation guidance",
+      "Briefing session for engineering and risk",
+      "Retest report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Findings by severity and category",
+        "how": "Validated findings grouped by OWASP LLM category and severity."
+      },
+      {
+        "metric": "Tool authorisation coverage",
+        "how": "Model-callable tools and APIs tested with cross-account attempts, out of all tools in scope."
+      },
+      {
+        "metric": "Policy adherence under attack",
+        "how": "Adversarial scenarios where the assistant stayed within your stated policy."
+      },
+      {
+        "metric": "Closure at retest",
+        "how": "Findings confirmed closed versus still open after remediation."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How is this different from our annual penetration test?",
+      "a": "A standard pentest checks the web app, APIs and infrastructure. This assessment tests how the model behaves: whether prompts can override instructions, leak data through tools or produce unsafe output. You need both."
+    },
+    {
+      "q": "Do you need access to production?",
+      "a": "No. We test in staging with synthetic accounts. If staging differs from production in prompts, models or tools, we record that as a limitation in the report."
+    },
+    {
+      "q": "Which models and providers do you cover?",
+      "a": "Any LLM behind an HTTP endpoint, including Azure OpenAI, OpenAI, Anthropic, Google Gemini and self-hosted open-weight models. The method depends on your feature's design, not the provider."
+    },
+    {
+      "q": "Can you test in Hindi and Hinglish?",
+      "a": "Yes. Guardrails are often weaker in Indian languages and code-mixed text, so our playbooks include Hindi and Hinglish attacks by default."
+    }
+  ],
+  "related": [
+    "ai-agent-permission-and-tool-use-review",
+    "dpdp-ai-data-handling-assessment",
+    "llm-application-penetration-test",
+    "bank-chatbot-and-voice-agent-red-teaming"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/llm-app-pre-launch-security-assessment/"
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "counselling-funnel-lead-nurture",
+  "industry": "education",
+  "title": "Lead Nurture for Counselling Funnels",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Score and route enquiries from ads, forms and scholarship-test registrations, send consented WhatsApp and email follow-ups to parents and adult learners, and give counsellors a briefed call list.",
+  "seo": {
+    "title": "Lead Nurture for Admission Counselling | VipraTech",
+    "description": "AI lead scoring and consented WhatsApp nurture for coaching and university admissions, with counsellor call lists and no targeting of children.",
+    "keywords": [
+      "admission lead nurturing",
+      "coaching institute lead management",
+      "counselling funnel automation",
+      "WhatsApp nurture for admissions",
+      "education CRM automation"
+    ]
+  },
+  "designed_for": [
+    "Marketing Head",
+    "Admissions and Counselling Head",
+    "Growth Manager (Edtech)",
+    "Centre Director"
+  ],
+  "problem": {
+    "intro": "Enquiries come from ads, website forms, seminars, school tie-ups and scholarship test registrations, and a family's decision can take weeks while they compare institutes and wait for board results. Counsellors call leads in the order they arrived, follow-ups depend on memory, and many registrants never sit the scholarship test they signed up for.",
+    "pain_points": [
+      {
+        "title": "Every lead treated the same",
+        "detail": "A parent who attended a seminar and asked about hostel fees gets the same call as a form filled in by mistake."
+      },
+      {
+        "title": "Follow-ups fall through",
+        "detail": "Reminders for scholarship tests, results and counselling slots are sent by hand and inconsistently."
+      },
+      {
+        "title": "Duplicate and messy records",
+        "detail": "The same family appears several times from different sources, with student and parent numbers mixed up."
+      },
+      {
+        "title": "Compliance blind spots",
+        "detail": "Messages go directly to students under 18 without consent records, and promotional claims are not reviewed."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a nurture layer on top of your CRM. It merges duplicate enquiries, separates parent and student contacts, records consent and identifies leads that relate to minors, so communication goes to the parent or guardian. Leads are scored on signals you agree, such as class, target exam, programme asked about, source and replies, without behavioural profiling of children. High-intent families go to counsellors with a short brief of their questions so far; others receive approved WhatsApp and email sequences around scholarship tests, results and counselling slots. Your marketing head approves the content, and frequency caps apply.",
+    "capabilities": [
+      "De-duplication and parent-student contact separation across lead sources",
+      "Consent capture and an age flag so under-18 communication goes to guardians",
+      "Transparent lead scoring on agreed signals that counsellors can see and override",
+      "Approved WhatsApp and email sequences for scholarship tests, results and counselling slots",
+      "Counsellor call lists with a brief of each family's questions and history",
+      "Outcome logging and source-level reporting for marketing spend decisions"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect leads",
+      "detail": "Enquiries arrive from ads, website forms, seminars, school tie-ups and test registrations."
+    },
+    {
+      "step": 2,
+      "title": "Clean and check consent",
+      "detail": "Duplicates are merged, parent and student contacts separated, and consent and age recorded."
+    },
+    {
+      "step": 3,
+      "title": "Score and segment",
+      "detail": "Each lead is scored on agreed signals and placed in a segment by class, exam and stage."
+    },
+    {
+      "step": 4,
+      "title": "Route by intent",
+      "detail": "High-intent leads become counsellor tasks with a brief; the rest join an approved nurture sequence."
+    },
+    {
+      "step": 5,
+      "title": "Nurture and remind",
+      "detail": "Guardians or adult learners receive scholarship test reminders, results and counselling slot invitations."
+    },
+    {
+      "step": 6,
+      "title": "Log outcomes",
+      "detail": "Counsellor calls, test attendance and admissions are written back to the CRM for reporting."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Leads from ads, forms and tests\"] --> B[\"Merge duplicates, record consent\"]\n  B --> C{\"Student under 18?\"}\n  C -->|\"yes\"| D[\"Route contact to guardian\"]\n  C -->|\"no\"| E[\"Contact adult learner\"]\n  D --> F[\"Score and segment lead\"]\n  E --> F\n  F --> G{\"High intent?\"}\n  G -->|\"yes\"| H(\"Counsellor call with brief\")\n  G -->|\"no\"| I[\"Approved nurture sequence\"]\n  H --> J[\"Log outcome in CRM\"]\n  I --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Lead intake",
+        "components": [
+          "Ad platform and website form connectors",
+          "Scholarship test registration feed",
+          "Seminar and walk-in capture"
+        ]
+      },
+      {
+        "name": "Data quality and consent",
+        "components": [
+          "De-duplication and contact separation",
+          "Consent and age flag store",
+          "Opt-out registry"
+        ]
+      },
+      {
+        "name": "Scoring and routing",
+        "components": [
+          "Rule-based and model scoring on agreed signals",
+          "Segment builder",
+          "Counsellor task router"
+        ]
+      },
+      {
+        "name": "Engagement",
+        "components": [
+          "WhatsApp Business API sequences",
+          "Email sequences",
+          "Counsellor brief generator"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Source and stage funnel reports",
+          "Message audit log and content approvals"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Lead intake\"]\n    L1[\"Ads and website forms\"]\n    L2[\"Test registrations and seminars\"]\n  end\n  subgraph S2[\"Data quality and consent\"]\n    Q1[\"Dedupe and contact separation\"]\n    Q2[\"Consent, age and opt-out store\"]\n  end\n  subgraph S3[\"Scoring and routing\"]\n    R1[\"Lead scoring\"]\n    R2[\"Counsellor task router\"]\n  end\n  subgraph S4[\"Engagement and reporting\"]\n    E1[\"WhatsApp and email sequences\"]\n    E2(\"Counsellor brief and call\")\n    E3[\"Funnel reports and audit log\"]\n  end\n  L1 --> Q1\n  L2 --> Q1\n  Q1 --> Q2\n  Q2 --> R1\n  R1 --> R2\n  R2 --> E2\n  R1 --> E1\n  E1 --> E3\n  E2 --> E3"
+  },
+  "inputs": [
+    "Enquiries from ad platforms, website forms and landing pages",
+    "Scholarship test registrations and attendance",
+    "Seminar and walk-in records",
+    "Consent records and opt-outs",
+    "Approved message content and programme details"
+  ],
+  "outputs": [
+    "De-duplicated lead records with consent and age flags",
+    "Lead scores with the signals behind them",
+    "Counsellor call lists with family briefs",
+    "Nurture messages sent and responses",
+    "Funnel and source reports"
+  ],
+  "human_in_the_loop": "Counsellors decide how to advise each family, and the marketing head approves every sequence and message template. Scoring rules are reviewed with the admissions team, and counsellors can override any score.",
+  "integrations": [
+    "CRM such as LeadSquared, Salesforce or Zoho",
+    "Meta and Google lead forms",
+    "WhatsApp Business API",
+    "Email service provider",
+    "Scholarship test platform"
+  ],
+  "guardrails": [
+    "No targeted advertising or behavioural profiling directed at children; under-18 leads handled through guardians",
+    "Consent recorded before any promotional message, and opt-outs honoured across channels",
+    "No claims about ranks, selections or results beyond verified, published data",
+    "Frequency caps per family and quiet hours",
+    "Every template approved before use and logged"
+  ],
+  "compliance_notes": [
+    "The DPDP Act 2023 restricts targeted advertising directed at children and requires verifiable parental consent to process their data.",
+    "Promotional SMS and calls must follow TRAI commercial communication rules, and WhatsApp templates must meet the platform's business messaging policies.",
+    "The Ministry of Education's 2024 coaching-centre guidelines discourage misleading claims about results."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Leads for one programme or one scholarship test cycle, with your counselling team working from the new call lists.",
+    "deliverables": [
+      "Lead data audit and de-duplication rules",
+      "Scoring rules agreed with the admissions team",
+      "Approved nurture sequences on WhatsApp and email",
+      "Counsellor call list with briefs",
+      "Pilot funnel report and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Scholarship test attendance",
+        "how": "Registrants who sat the test, compared with the previous comparable cycle."
+      },
+      {
+        "metric": "Counsellor response time",
+        "how": "High-intent leads contacted within the agreed time, from CRM timestamps."
+      },
+      {
+        "metric": "Lead-to-admission conversion by source",
+        "how": "Admissions traced back to lead source and segment."
+      },
+      {
+        "metric": "Opt-outs and complaints",
+        "how": "Opt-out and complaint counts per sequence."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can we message students directly?",
+      "a": "For learners under 18, communication goes to the parent or guardian, with consent. Adult learners, such as repeaters over 18, can be contacted directly once they have consented."
+    },
+    {
+      "q": "How is a lead scored?",
+      "a": "On signals you agree with us, such as class, target exam, programme asked about, source and replies to messages. Counsellors can see why a lead scored high and override it."
+    },
+    {
+      "q": "Will this replace our CRM?",
+      "a": "No. It works with your existing CRM, adding de-duplication, scoring, sequences and briefs, and writes outcomes back to it."
+    },
+    {
+      "q": "Who writes the messages?",
+      "a": "We draft them with your marketing team, and your marketing head approves each template. The system does not send unapproved content."
+    }
+  ],
+  "related": [
+    "admission-enquiry-voice-agent",
+    "parent-progress-update-automation",
+    "admission-document-verification"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/counselling-funnel-lead-nurture/"
+}

@@ -1,0 +1,216 @@
+{
+  "slug": "ai-assurance-delivery-partner",
+  "industry": "accounting-audit-consulting",
+  "title": "AI Assurance and Red-Teaming Delivery for Advisory Firms",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "A white-label technical partner for advisory firms: we run adversarial tests on clients' chatbots, voice agents and copilots and deliver framework-mapped evidence for your report.",
+  "seo": {
+    "title": "White-Label AI Red-Teaming for Advisory Firms | VipraTech",
+    "description": "White-label technical delivery for AI assurance: adversarial testing of client chatbots, voice agents and copilots with evidence mapped to AI frameworks.",
+    "keywords": [
+      "AI assurance delivery partner",
+      "white-label AI red teaming",
+      "AI governance testing",
+      "LLM security testing for consultancies",
+      "ISO 42001 readiness testing"
+    ]
+  },
+  "designed_for": [
+    "Partner, Risk Advisory",
+    "Director, Technology Risk and IT Audit",
+    "AI Governance Practice Lead",
+    "Cyber Security Consulting Manager"
+  ],
+  "problem": {
+    "intro": "Banks, insurers and product companies are asking their auditors and consultants for assurance over the AI systems they have shipped: chatbots, voice agents, internal copilots and agents that call tools. Advisory firms have the governance frameworks and the client relationships, but adversarial testing of an LLM application is specialised engineering work that few risk teams have staffed for.",
+    "pain_points": [
+      {
+        "title": "Demand outpaces skills",
+        "detail": "Governance reviewers can assess policies and controls but are not equipped to run prompt injection or multi-turn jailbreak campaigns."
+      },
+      {
+        "title": "Checklists do not test behaviour",
+        "detail": "A policy review shows that a control exists, not that the bot actually resists a determined user over a long conversation."
+      },
+      {
+        "title": "Evidence must map to frameworks",
+        "detail": "Clients expect findings tied to OWASP Top 10 for LLM Applications, NIST AI RMF, ISO/IEC 42001, the EU AI Act or RBI's FREE-AI framework."
+      },
+      {
+        "title": "Hiring for uncertain demand is risky",
+        "detail": "Building an in-house red team before the pipeline is steady leaves expensive specialists under-used."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We work as the technical delivery team behind your AI assurance engagements, under your brand and engagement terms. Your team scopes the work with the client and owns the conclusion; we run the testing. For each system in scope, whether a support chatbot, a Hindi or Hinglish voice agent, a RAG copilot or an agent with tool access, we build adversarial test plans covering prompt injection, jailbreaks, data leakage, unauthorised tool use, harmful advice and sector-specific conduct failures. Tests run as repeatable multi-turn playbooks, and each result is recorded as PASS, RISK or FAIL with transcripts, mapped to the frameworks your report uses, and handed over as a working-paper-ready evidence pack.",
+    "capabilities": [
+      "Test planning aligned to your engagement scope and the client's AI risk register",
+      "Multi-turn adversarial playbooks for chatbots, voice agents, RAG copilots and tool-using agents",
+      "Sector conduct tests such as mis-selling, collection conduct or unauthorised investment advice",
+      "PASS, RISK and FAIL results with full transcripts or call audio, reproducible on retest",
+      "Mapping to OWASP Top 10 for LLM Applications, MITRE ATLAS, NIST AI RMF, ISO/IEC 42001 and EU AI Act duties",
+      "Evidence packs and draft technical findings in your report template, plus retests after remediation"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scope with the advisory team",
+      "detail": "We agree systems, access, test windows and rules of engagement with your engagement manager and the client."
+    },
+    {
+      "step": 2,
+      "title": "Build the test plan",
+      "detail": "Adversarial playbooks are selected and adapted to the client's sector, languages and risk register."
+    },
+    {
+      "step": 3,
+      "title": "Run the tests",
+      "detail": "Playbooks run against the client's system in the agreed environment, with every turn recorded."
+    },
+    {
+      "step": 4,
+      "title": "Classify and verify results",
+      "detail": "Each result is scored PASS, RISK or FAIL, and borderline results are reviewed jointly with your manager."
+    },
+    {
+      "step": 5,
+      "title": "Map evidence",
+      "detail": "Verified results are mapped to the frameworks in your report and assembled into an evidence pack."
+    },
+    {
+      "step": 6,
+      "title": "Report and retest",
+      "detail": "Your firm issues the report, and we retest fixed issues after the client's remediation."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope agreed with advisory team\"] --> B[\"Test plan and adversarial playbooks\"]\n  B --> C[\"Run tests on client AI system\"]\n  C --> D[\"Score results PASS, RISK, FAIL\"]\n  D --> E{\"Result clear-cut?\"}\n  E -->|\"no\"| F(\"Joint review with engagement manager\")\n  E -->|\"yes\"| G[\"Map evidence to frameworks\"]\n  F --> G\n  G --> H(\"Advisory firm issues report\")\n  H --> I[\"Retest after client remediation\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Engagement set-up",
+        "components": [
+          "Scope and rules of engagement",
+          "Test environment access",
+          "Client risk register intake"
+        ]
+      },
+      {
+        "name": "Test execution",
+        "components": [
+          "Adversarial playbook library",
+          "Multi-turn attack runner for text and voice",
+          "API, web widget and SIP connectors"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "LLM-assisted judge with rule checks",
+          "Engineer verification of every RISK and FAIL",
+          "Transcript and audio capture"
+        ]
+      },
+      {
+        "name": "Evidence and reporting",
+        "components": [
+          "Framework mapping",
+          "Evidence pack in the advisory firm's template",
+          "Retest tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Engagement set-up\"]\n    E1[\"Scope and rules of engagement\"]\n    E2[\"Client risk register intake\"]\n  end\n  subgraph S2[\"Test execution\"]\n    X1[\"Playbook library\"]\n    X2[\"Multi-turn attack runner\"]\n    X3[\"API, web and SIP connectors\"]\n  end\n  subgraph S3[\"Evaluation\"]\n    J1[\"LLM judge with rule checks\"]\n    J2(\"Engineer verification\")\n    J3[\"PASS, RISK, FAIL scoring\"]\n  end\n  subgraph S4[\"Evidence and reporting\"]\n    R1[\"Framework mapping\"]\n    R2[\"Evidence pack in firm template\"]\n    R3[\"Retest tracker\"]\n  end\n  E1 --> X1\n  E2 --> X1\n  X1 --> X2 --> X3\n  X3 --> J1 --> J2 --> J3\n  J3 --> R1 --> R2\n  R2 --> R3\n  R3 --> X2"
+  },
+  "inputs": [
+    "Engagement scope and rules of engagement",
+    "Access to the system under test in a test or staging environment",
+    "System prompts, policies and tool definitions where the client shares them",
+    "Client AI risk register and applicable regulations",
+    "Your firm's report template and framework mapping"
+  ],
+  "outputs": [
+    "Test plan and coverage matrix",
+    "PASS, RISK and FAIL results log with transcripts and audio",
+    "Framework-mapped evidence pack",
+    "Draft technical findings with remediation suggestions",
+    "Retest results after remediation"
+  ],
+  "human_in_the_loop": "A VipraTech engineer verifies every RISK and FAIL result before it enters the evidence pack, and borderline results are reviewed jointly with your engagement manager. Your partners decide severity in the final report and issue the conclusion; we provide the technical evidence.",
+  "integrations": [
+    "Client chatbot APIs or web widgets",
+    "Telephony or SIP endpoints for voice agents",
+    "LLM platforms such as Azure OpenAI, AWS Bedrock or Google Vertex AI",
+    "Your working paper or GRC tool",
+    "Jira or similar for remediation tracking"
+  ],
+  "guardrails": [
+    "Written rules of engagement and test windows approved by the client",
+    "Synthetic test data only, never real customer personal data",
+    "Tool-using agents tested with sandboxed or non-destructive actions",
+    "White-label confidentiality under your NDA and engagement terms",
+    "Evidence stored in your environment or transferred encrypted to named contacts"
+  ],
+  "compliance_notes": [
+    "Evidence is mapped to frameworks such as NIST AI RMF, ISO/IEC 42001 and the OWASP Top 10 for LLM Applications to help your team evidence its conclusions; it is not a certification.",
+    "For Indian financial-sector clients, tests can reflect RBI's FREE-AI framework (2025) recommendations and DPDP Act 2023 obligations; EU AI Act duties are considered where the client serves the EU."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One client system, such as a customer-facing chatbot or voice agent, on a joint engagement with a fixed playbook set and one retest.",
+    "deliverables": [
+      "Joint delivery model and rules-of-engagement template",
+      "Test plan and coverage matrix for the pilot system",
+      "Verified results log and evidence pack in your template",
+      "Draft technical findings",
+      "Retest report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Coverage against scope",
+        "how": "Scenarios executed per agreed risk category, recorded in the coverage matrix."
+      },
+      {
+        "metric": "Verified findings",
+        "how": "RISK and FAIL results confirmed after engineer and joint review."
+      },
+      {
+        "metric": "Retest closure",
+        "how": "Findings shown as fixed when the same playbooks are re-run after remediation."
+      },
+      {
+        "metric": "Report integration effort",
+        "how": "Time your team spends adapting our evidence into the final report."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you work under our brand?",
+      "a": "Yes. We deliver as your technical team under your engagement terms and NDA, and reports go out under your name. We join client calls only if you want us there, and we do not contact your clients directly."
+    },
+    {
+      "q": "What kinds of AI systems can you test?",
+      "a": "Text chatbots, Hindi, Hinglish and English voice agents reached by phone or SIP, RAG copilots over internal documents, and agents that call tools or APIs. We agree the systems and access method during scoping."
+    },
+    {
+      "q": "Do you certify the client's AI system?",
+      "a": "No. We provide technical test evidence mapped to the frameworks you choose. Your firm forms the assurance conclusion, and neither of us presents the work as a certification."
+    },
+    {
+      "q": "How are engagements priced?",
+      "a": "Usually as a fixed fee per system tested, based on scope and the number of playbooks, with retests priced separately. A first joint engagement can run as a pilot to agree the working model."
+    }
+  ],
+  "related": [
+    "bank-chatbot-and-voice-agent-red-teaming",
+    "ai-model-governance-evidence-pack",
+    "llm-application-penetration-test",
+    "eu-ai-act-iso-42001-evidence-pack"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/ai-assurance-delivery-partner/"
+}

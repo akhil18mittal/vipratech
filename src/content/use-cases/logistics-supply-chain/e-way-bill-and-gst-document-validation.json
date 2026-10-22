@@ -1,0 +1,216 @@
+{
+  "slug": "e-way-bill-and-gst-document-validation",
+  "industry": "logistics-supply-chain",
+  "title": "E-Way Bill and GST Document Validation",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check that each consignment's tax invoice or delivery challan, e-way bill and vehicle details agree before dispatch, then track validity and Part B updates while goods are in transit.",
+  "seo": {
+    "title": "E-Way Bill and GST Document Validation with AI | VipraTech",
+    "description": "AI that checks tax invoices, delivery challans and e-way bills agree on GSTINs, HSN, values and vehicle details, and tracks validity in transit.",
+    "keywords": [
+      "e-way bill validation",
+      "GST document checking logistics",
+      "e-way bill expiry tracking",
+      "Part B vehicle update",
+      "transporter GST compliance"
+    ]
+  },
+  "designed_for": [
+    "Transport Manager",
+    "Dispatch and Warehouse Manager",
+    "Indirect Tax Manager",
+    "Branch Operations Head at a transporter"
+  ],
+  "problem": {
+    "intro": "Goods moving by road in India travel with a tax invoice or delivery challan and an e-way bill, often generated from an e-invoice. Dispatch teams and transporters handle these documents at speed, and a wrong vehicle number, an expired e-way bill or a GSTIN mismatch can lead to detention of goods and penalties at inspection.",
+    "pain_points": [
+      {
+        "title": "Mismatches between documents",
+        "detail": "Invoice value, HSN, quantity or consignee GSTIN on the e-way bill differ from the invoice after manual corrections."
+      },
+      {
+        "title": "Vehicle changes not updated",
+        "detail": "When goods are transhipped at a hub or a truck breaks down, Part B is not always updated before the new vehicle moves."
+      },
+      {
+        "title": "Validity running out",
+        "detail": "Delays at hubs or on the road push consignments past e-way bill validity without anyone extending it in time."
+      },
+      {
+        "title": "Paper from many consignors",
+        "detail": "Transporters receive invoices and e-way bills as printouts or photos from many consignors and cannot check each one at booking."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a validation layer for dispatch points and transport hubs. Invoices, delivery challans and e-way bills are read from PDFs, photos or your ERP and GST systems. The system checks that GSTINs, document numbers, dates, HSN codes, values and quantities agree, that the e-way bill is active, and that Part B matches the vehicle actually loading. In transit it tracks validity against the expected arrival, alerts the transport team before expiry, and flags consignments moved to a new vehicle without a Part B update. Where you have API access through a GST Suvidha Provider, status can be confirmed against the portal.",
+    "capabilities": [
+      "Reads tax invoices, delivery challans and e-way bills from PDFs, photos and system exports",
+      "Cross-checks GSTINs, document numbers, dates, HSN, values and quantities",
+      "Confirms the Part B vehicle number against the vehicle at the loading bay or hub",
+      "Tracks e-way bill validity against shipment ETA and alerts before expiry",
+      "Flags transhipments without a Part B update",
+      "Confirms e-way bill status through a GSP or e-way bill API where you have access"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture documents at booking",
+      "detail": "Invoice, challan and e-way bill are captured from the ERP, a scan or a photo when the consignment is booked."
+    },
+    {
+      "step": 2,
+      "title": "Extract and cross-check",
+      "detail": "Key fields are extracted and compared across documents and with the booking."
+    },
+    {
+      "step": 3,
+      "title": "Check status and vehicle",
+      "detail": "E-way bill status is confirmed where API access exists, and Part B is compared with the loading vehicle."
+    },
+    {
+      "step": 4,
+      "title": "Hold or release",
+      "detail": "Mismatches put the consignment on hold for the dispatch team to correct before the vehicle leaves."
+    },
+    {
+      "step": 5,
+      "title": "Monitor in transit",
+      "detail": "Validity and transhipment events are tracked, and the transport team is alerted before expiry or when Part B needs updating."
+    },
+    {
+      "step": 6,
+      "title": "Keep the record",
+      "detail": "Checked documents and actions are stored with the consignment for audit and inspection queries."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Invoice, challan and e-way bill\"] --> B[\"Extract and cross-check fields\"]\n  B --> C[\"Check status and vehicle number\"]\n  C --> D{\"All documents agree?\"}\n  D -->|\"no\"| E(\"Dispatch team corrects\")\n  E --> B\n  D -->|\"yes\"| F[\"Release vehicle\"]\n  F --> G[\"Track validity and transhipment\"]\n  G --> H{\"Expiry near or vehicle changed?\"}\n  H -->|\"yes\"| I(\"Transport team updates e-way bill\")\n  H -->|\"no\"| J[\"Close with delivery record\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Document capture",
+        "components": [
+          "ERP and e-invoice system export",
+          "Scan and photo capture at booking counters",
+          "Vehicle number capture at the gate"
+        ]
+      },
+      {
+        "name": "Extraction and checks",
+        "components": [
+          "OCR and LLM field extraction",
+          "Cross-document GST rules",
+          "Vehicle and Part B comparison"
+        ]
+      },
+      {
+        "name": "Status and tracking",
+        "components": [
+          "GSP or e-way bill API status check",
+          "Validity tracker linked to shipment ETA",
+          "Transhipment events from the TMS"
+        ]
+      },
+      {
+        "name": "Action and audit",
+        "components": [
+          "Hold and alert console",
+          "WhatsApp or SMS alerts to branch staff",
+          "Consignment document archive"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Document capture\"]\n    C1[\"ERP and e-invoice export\"]\n    C2[\"Booking counter scan\"]\n    C3[\"Gate vehicle capture\"]\n  end\n  subgraph S2[\"Extraction and checks\"]\n    E1[\"Field extraction\"]\n    E2[\"GST cross-checks\"]\n    E3[\"Part B comparison\"]\n  end\n  subgraph S3[\"Status and tracking\"]\n    T1[\"E-way bill API status\"]\n    T2[\"Validity tracker\"]\n  end\n  subgraph S4[\"Action and audit\"]\n    R1(\"Hold and alert console\")\n    R2[\"Branch alerts\"]\n    R3[\"Document archive\"]\n  end\n  C1 --> E1\n  C2 --> E1\n  E1 --> E2\n  C3 --> E3\n  E2 --> E3\n  E3 --> T1\n  T1 --> T2\n  E3 --> R1\n  T2 --> R2\n  R1 --> R3\n  T2 --> R3"
+  },
+  "inputs": [
+    "Tax invoices and e-invoice IRN details",
+    "Delivery challans for stock transfers and job work",
+    "E-way bills with Part A and Part B",
+    "Booking and vehicle data from the TMS",
+    "Vehicle numbers captured at the gate or loading bay"
+  ],
+  "outputs": [
+    "Consignment-level validation result",
+    "Mismatch list for correction before dispatch",
+    "Validity and Part B alerts in transit",
+    "Document archive linked to each consignment",
+    "Branch-wise exception reports"
+  ],
+  "human_in_the_loop": "Dispatch and branch teams correct every mismatch and decide whether a consignment can move. E-way bill generation, cancellation and extension are done by authorised staff on the portal or through your GST system, not by the AI.",
+  "integrations": [
+    "ERP and e-invoicing system",
+    "GST Suvidha Provider or e-way bill API access",
+    "TMS for bookings, vehicles and ETAs",
+    "Gate or yard management system",
+    "WhatsApp Business API or SMS for alerts"
+  ],
+  "guardrails": [
+    "No generation, cancellation or extension of e-way bills by the AI",
+    "Holds released only on human correction or confirmation",
+    "Rules version-controlled and updated when notifications change",
+    "Low-confidence reads of GSTIN or vehicle number always shown for confirmation",
+    "Document images retained with the consignment for inspection queries"
+  ],
+  "compliance_notes": [
+    "Designed to support e-way bill requirements under India's GST rules; thresholds, validity and exemptions are configured with your tax team and updated when notifications change.",
+    "Does not replace your GST compliance process or professional tax advice."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One dispatch location or transporter hub, checking outbound consignments in parallel with the existing process.",
+    "deliverables": [
+      "Validation rules agreed with your tax and transport teams",
+      "Working document checks at the pilot location",
+      "Hold and alert console",
+      "Exception report on pilot consignments",
+      "Roll-out plan for other branches"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Extracted GSTINs, numbers, values and vehicle details compared with source documents on a sample."
+      },
+      {
+        "metric": "Mismatches caught before dispatch",
+        "how": "Confirmed mismatches the system flagged, recorded by the dispatch team."
+      },
+      {
+        "metric": "Timeliness of validity alerts",
+        "how": "Alerts raised before expiry compared with consignments that crossed validity during the pilot."
+      },
+      {
+        "metric": "Check time per consignment",
+        "how": "Time to clear a consignment at the dispatch desk with and without the system."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it generate or extend e-way bills for us?",
+      "a": "We keep generation, cancellation and extension with authorised staff and your GST system. The AI checks documents, tracks validity and raises alerts; it does not take portal actions on its own."
+    },
+    {
+      "q": "We are a transporter. Can we get e-way bill status by API?",
+      "a": "Transporters can update Part B for e-way bills assigned to them, and API access may be available through a GST Suvidha Provider depending on your registration. Where it is not, the system works from documents and photos."
+    },
+    {
+      "q": "How do you keep up with GST rule changes?",
+      "a": "Rules such as validity periods and thresholds are configuration, not code. Your tax team approves changes, and we update and retest the rules when notifications change."
+    },
+    {
+      "q": "Will this work with handwritten delivery challans?",
+      "a": "Printed challans are the easier case. Handwritten ones are read with confidence scores, and uncertain fields are shown to staff for confirmation."
+    }
+  ],
+  "related": [
+    "customs-and-shipping-document-extraction",
+    "proof-of-delivery-verification",
+    "freight-invoice-audit",
+    "gst-return-reconciliation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/e-way-bill-and-gst-document-validation/"
+}

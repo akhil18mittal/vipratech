@@ -1,0 +1,217 @@
+{
+  "slug": "gxp-ai-tool-validation-and-security",
+  "industry": "pharma-life-sciences",
+  "title": "Validation and Security Testing of AI Tools in GxP Settings",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Risk-based testing of LLM and ML tools used in quality, manufacturing or pharmacovigilance: accuracy, prompt injection, data leakage and audit-trail checks, packaged as validation evidence.",
+  "seo": {
+    "title": "GxP AI Validation and Security Testing | VipraTech",
+    "description": "Risk-based validation and adversarial testing for AI tools used in GxP work: accuracy, consistency, prompt injection, data leakage and audit trails.",
+    "keywords": [
+      "GxP AI validation",
+      "computer software assurance for AI",
+      "LLM validation pharma",
+      "AI security testing pharma",
+      "21 CFR Part 11 AI tools"
+    ]
+  },
+  "designed_for": [
+    "Head of Computer System Validation",
+    "Head of Quality Assurance",
+    "Digital Quality Lead",
+    "Chief Information Security Officer"
+  ],
+  "problem": {
+    "intro": "Quality, manufacturing and safety teams are adopting AI tools: SOP assistants, deviation drafting, adverse event screening, vision inspection and AI features inside QMS or LIMS products. Traditional CSV scripts were written for deterministic software, and most teams have no method yet for testing an LLM's outputs or its exposure to prompt injection and data leakage.",
+    "pain_points": [
+      {
+        "title": "Non-deterministic outputs",
+        "detail": "The same question can produce different answers, so a single passed test script does not show the tool is fit for its intended use."
+      },
+      {
+        "title": "A new attack surface",
+        "detail": "Documents, emails and user prompts can carry instructions that steer an LLM to leak data or ignore rules, and classic validation does not test for this."
+      },
+      {
+        "title": "Vendor AI features arrive by update",
+        "detail": "QMS, LIMS and document platforms add AI features through releases, and QA must assess them without access to the vendor's model."
+      },
+      {
+        "title": "Audit questions without evidence",
+        "detail": "Inspectors and customer auditors ask how an AI tool was validated and is controlled, and teams lack a structured evidence pack."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a risk-based assessment of an AI tool against its intended use. First we agree the use, risk level and acceptance criteria with QA and CSV. Then we build a test set from your own de-identified records and run it repeatedly to measure accuracy, consistency and refusal behaviour. In parallel we attack the tool: prompt injection through documents and inputs, attempts to retrieve other users' or sites' data, bypass of business rules, and checks that audit trails, access controls and electronic signatures behave as required. Findings come with reproducible evidence and fix guidance, assembled into a pack your validation team can reference.",
+    "capabilities": [
+      "Intended-use and risk assessment aligned with your CSV or CSA procedure",
+      "Task-specific test sets from your de-identified records, run repeatedly to measure consistency",
+      "Prompt injection, jailbreak and data-leakage testing across documents, chat and API inputs",
+      "Access-control and site-segregation tests for retrieval-based assistants",
+      "Audit trail, electronic signature and change-control checks for the AI workflow",
+      "Re-runnable regression suite for model, prompt or vendor version changes"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Define intended use and risk",
+      "detail": "With QA and CSV we document what the tool is for, who relies on it and the GxP impact of a wrong output."
+    },
+    {
+      "step": 2,
+      "title": "Build test sets",
+      "detail": "We create functional cases from your records and adversarial cases from known LLM attack patterns."
+    },
+    {
+      "step": 3,
+      "title": "Run functional tests",
+      "detail": "Each case runs several times and is scored against the acceptance criteria agreed in step one."
+    },
+    {
+      "step": 4,
+      "title": "Run security tests",
+      "detail": "We attempt prompt injection, data leakage, privilege escalation and rule bypass, recording every attempt."
+    },
+    {
+      "step": 5,
+      "title": "Review findings",
+      "detail": "Results are reviewed with QA, CSV and IT, and each failure is classed as acceptable, mitigated or blocking."
+    },
+    {
+      "step": 6,
+      "title": "Deliver the evidence pack",
+      "detail": "A report, test logs and a regression suite are handed over for your validation file."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Agree intended use and risk\"] --> B[\"Build functional and attack tests\"]\n  B --> C[\"Run functional tests repeatedly\"]\n  B --> D[\"Run security attack tests\"]\n  C --> E{\"Meets acceptance criteria?\"}\n  D --> E\n  E -->|\"no\"| F[\"Fix guidance and retest\"]\n  F --> C\n  E -->|\"yes\"| G(\"QA and CSV review findings\")\n  G --> H[\"Evidence pack and regression suite\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scope and risk",
+        "components": [
+          "Intended-use statement",
+          "Risk assessment with GxP impact",
+          "Acceptance criteria"
+        ]
+      },
+      {
+        "name": "Test assets",
+        "components": [
+          "Functional test set from de-identified records",
+          "Adversarial prompt and document library",
+          "Test accounts per role and site"
+        ]
+      },
+      {
+        "name": "Test execution",
+        "components": [
+          "Automated test runner against UI or API",
+          "Repeat-run consistency scoring",
+          "Attack attempt logger"
+        ]
+      },
+      {
+        "name": "Evidence",
+        "components": [
+          "Findings with reproduction steps",
+          "Requirement-to-test traceability matrix",
+          "Regression suite for future changes"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scope and risk\"]\n    P1[\"Intended use statement\"]\n    P2[\"Risk and acceptance criteria\"]\n  end\n  subgraph S2[\"Test assets\"]\n    T1[\"Functional test set\"]\n    T2[\"Adversarial library\"]\n    T3[\"Role and site test accounts\"]\n  end\n  subgraph S3[\"Test execution\"]\n    E1[\"Automated test runner\"]\n    E2[\"Consistency scoring\"]\n    E3[\"Attack logger\"]\n  end\n  subgraph S4[\"Evidence\"]\n    V1(\"QA and CSV review\")\n    V2[\"Traceability matrix\"]\n    V3[\"Regression suite\"]\n  end\n  P1 --> P2\n  P2 --> T1\n  P2 --> T2\n  T1 --> E1\n  T2 --> E1\n  T3 --> E1\n  E1 --> E2\n  E1 --> E3\n  E2 --> V1\n  E3 --> V1\n  V1 --> V2\n  V1 --> V3"
+  },
+  "inputs": [
+    "Description of the AI tool, its users and intended use",
+    "Your CSV or CSA procedure and templates",
+    "De-identified sample records relevant to the use",
+    "Test environment access with role-based accounts",
+    "Vendor documentation for third-party AI features"
+  ],
+  "outputs": [
+    "Intended-use and risk assessment",
+    "Functional test results with repeat-run consistency",
+    "Security findings with severity, evidence and fix guidance",
+    "Requirement-to-test traceability matrix",
+    "Re-runnable regression suite"
+  ],
+  "human_in_the_loop": "QA and CSV approve the intended use, risk level and acceptance criteria before testing starts, and decide how each finding is dispositioned. We provide evidence and recommendations; the validation decision stays with your quality unit.",
+  "integrations": [
+    "The AI tool under test (web interface, API or vendor platform)",
+    "QMS for change control and CAPA records",
+    "Validation document management system",
+    "Identity provider for role-based test accounts",
+    "CI pipeline for regression runs, where available"
+  ],
+  "guardrails": [
+    "Testing only in agreed environments under written authorisation",
+    "De-identified or synthetic data in all test sets",
+    "No testing against production patient or batch data",
+    "Findings shared only with named stakeholders",
+    "Regression suite re-run after any model, prompt or version change"
+  ],
+  "compliance_notes": [
+    "Evidence is structured to support validation under 21 CFR Part 11 and EU GMP Annex 11, using risk-based approaches such as ISPE GAMP 5 and FDA's Computer Software Assurance guidance.",
+    "EU regulators consulted in 2025 on a draft GMP Annex 22 on artificial intelligence; the pack is organised so it can be mapped to the final text.",
+    "Security testing references the OWASP Top 10 for LLM Applications and the NIST AI RMF."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One AI tool with a defined GxP use, such as an SOP assistant or an adverse event screening model, tested in a non-production environment.",
+    "deliverables": [
+      "Intended-use and risk assessment document",
+      "Functional and adversarial test sets",
+      "Test execution logs and findings report",
+      "Traceability matrix",
+      "Regression suite with run instructions"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Accuracy against acceptance criteria",
+        "how": "Functional test cases scored by your subject matter experts or against reference answers."
+      },
+      {
+        "metric": "Output consistency",
+        "how": "Agreement of answers across repeated runs of the same test case."
+      },
+      {
+        "metric": "Security findings by severity",
+        "how": "Successful attack attempts classed on an agreed severity scale."
+      },
+      {
+        "metric": "Audit trail completeness",
+        "how": "Sampled user and system actions checked for a complete, attributable audit record."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Does this replace our CSV team?",
+      "a": "No. We bring AI-specific test methods and attack techniques, and your CSV team owns the validation approach and approvals. Deliverables are written to fit your existing templates."
+    },
+    {
+      "q": "Can you test a vendor's AI feature we cannot see inside?",
+      "a": "Yes, as a black-box test through the interface your users have. We test behaviour against your intended use and data, which is what your risk assessment needs."
+    },
+    {
+      "q": "How often should testing be repeated?",
+      "a": "After any change to the model, prompts, retrieval data or vendor version, and as part of periodic review. The regression suite makes repeat runs quick."
+    },
+    {
+      "q": "Will testing touch production data?",
+      "a": "No. We test in a non-production environment with de-identified or synthetic data, under written authorisation from your IT and QA teams."
+    }
+  ],
+  "related": [
+    "regulatory-dossier-and-sop-assistant",
+    "batch-manufacturing-record-review",
+    "rag-data-leakage-and-access-control-testing",
+    "eu-ai-act-iso-42001-evidence-pack"
+  ],
+  "proof_ref": "llm-endpoint-security-scanner",
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/gxp-ai-tool-validation-and-security/"
+}

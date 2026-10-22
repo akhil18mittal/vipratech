@@ -1,0 +1,216 @@
+{
+  "slug": "parcel-damage-and-dimension-detection",
+  "industry": "logistics-supply-chain",
+  "title": "Parcel Damage and Dimension Detection",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Camera stations at induction, sortation and dispatch measure each parcel for volumetric weight and flag visible damage, keeping time-stamped images as evidence for claims and billing.",
+  "seo": {
+    "title": "Parcel Damage and Dimension Detection with AI | VipraTech",
+    "description": "Vision system that measures parcel dimensions for volumetric weight and flags crushed, torn or wet packages at hubs, with image evidence for claims.",
+    "keywords": [
+      "parcel damage detection",
+      "dimensioning camera logistics",
+      "volumetric weight capture",
+      "hub damage evidence",
+      "parcel inspection computer vision"
+    ]
+  },
+  "designed_for": [
+    "Hub Operations Manager",
+    "Head of Network Operations",
+    "Claims and Loss Prevention Manager",
+    "Revenue Assurance Manager"
+  ],
+  "problem": {
+    "intro": "Parcels pass through first-mile pickup, origin hub, line-haul, destination hub and last mile, and damage can happen at any step. When a customer raises a claim, nobody can show where it occurred. At the same time, shipper-declared dimensions are often wrong, so volumetric weight goes under-billed.",
+    "pain_points": [
+      {
+        "title": "No evidence of where damage occurred",
+        "detail": "Without images at each handover, damage claims turn into disputes between hubs, line-haul vendors and the shipper."
+      },
+      {
+        "title": "Under-declared dimensions",
+        "detail": "Shippers declare smaller dimensions or weights than actual, and the revenue difference is lost unless parcels are measured."
+      },
+      {
+        "title": "Manual measurement does not scale",
+        "detail": "Tape measurement at induction is slow and inconsistent, and gets skipped during peaks."
+      },
+      {
+        "title": "Damaged parcels move forward",
+        "detail": "Crushed, torn or wet parcels continue to the customer and come back as refusals and returns that could have been handled at the hub."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build camera stations for induction points, sorters and dispatch docks. Each parcel is captured from several angles as it passes; a depth or stereo camera measures length, width and height, and the system computes volumetric weight using your formula. A damage model checks for crushed corners, tears, punctures, wet patches and broken tape. The AWB or barcode is read so every image links to the shipment. Dimension differences beyond your tolerance go to revenue assurance for review, and damaged parcels are diverted to an exceptions bay for a hub supervisor to inspect.",
+    "capabilities": [
+      "Measures length, width and height with depth or stereo cameras at conveyor speed",
+      "Computes volumetric weight with your formula and compares it with declared values",
+      "Detects visible damage such as crushed corners, tears, punctures, wet patches and broken tape",
+      "Reads AWB and barcodes so each image links to the shipment",
+      "Stores time-stamped images at each scan point as handover evidence",
+      "Feeds dimension variances to billing and damage events to claims"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Parcel reaches the station",
+      "detail": "A sensor triggers capture as the parcel passes on the conveyor or is placed on a scan table."
+    },
+    {
+      "step": 2,
+      "title": "Read barcode and capture",
+      "detail": "The AWB is read and images plus depth data are captured from several angles."
+    },
+    {
+      "step": 3,
+      "title": "Measure and assess",
+      "detail": "Dimensions and volumetric weight are computed, and the damage model scores each visible face."
+    },
+    {
+      "step": 4,
+      "title": "Route by result",
+      "detail": "Damaged parcels are diverted to an exceptions bay, and dimension variances go to revenue assurance."
+    },
+    {
+      "step": 5,
+      "title": "Human inspection",
+      "detail": "A hub supervisor inspects diverted parcels and decides to repack, hold or forward; revenue assurance reviews variances."
+    },
+    {
+      "step": 6,
+      "title": "Update systems",
+      "detail": "Results, images and decisions are written to the shipment record for billing and claims."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Parcel passes camera station\"] --> B[\"Read AWB and capture images\"]\n  B --> C[\"Measure dimensions and score damage\"]\n  C --> D{\"Damage or dimension variance?\"}\n  D -->|\"damage\"| E(\"Hub supervisor inspects\")\n  D -->|\"dimension variance\"| F(\"Revenue assurance review\")\n  D -->|\"none\"| G[\"Parcel continues\"]\n  E --> H[\"Update shipment record with images\"]\n  F --> H\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Station hardware",
+        "components": [
+          "Area and depth cameras with lighting",
+          "Conveyor sensor trigger",
+          "Barcode reader"
+        ]
+      },
+      {
+        "name": "Vision processing",
+        "components": [
+          "Dimension estimation from depth data",
+          "Damage detection model",
+          "Image quality check"
+        ]
+      },
+      {
+        "name": "Business rules",
+        "components": [
+          "Volumetric formula per customer or carrier",
+          "Variance and damage thresholds",
+          "Divert logic to the sorter"
+        ]
+      },
+      {
+        "name": "Records and review",
+        "components": [
+          "Shipment image archive",
+          "Supervisor inspection app",
+          "Billing and claims integration"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Station hardware\"]\n    H1[\"Cameras and depth sensor\"]\n    H2[\"Barcode reader\"]\n  end\n  subgraph S2[\"Vision processing\"]\n    V1[\"Dimension estimation\"]\n    V2[\"Damage detection\"]\n  end\n  subgraph S3[\"Business rules\"]\n    B1[\"Volumetric formula\"]\n    B2[\"Thresholds and divert logic\"]\n  end\n  subgraph S4[\"Records and review\"]\n    R1(\"Supervisor inspection app\")\n    R2[\"Image archive\"]\n    R3[\"Billing and claims update\"]\n  end\n  H1 --> V1\n  H1 --> V2\n  H2 --> R2\n  V1 --> B1\n  B1 --> B2\n  V2 --> B2\n  B2 --> R1\n  B2 --> R3\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Images and depth data from station cameras",
+    "AWB or barcode scans",
+    "Declared dimensions and weight from the booking",
+    "Customer-specific volumetric formulas and tolerances",
+    "Damage categories agreed with the claims team"
+  ],
+  "outputs": [
+    "Measured dimensions and volumetric weight per parcel",
+    "Variance records for revenue assurance review",
+    "Damage flags with images and severity",
+    "Handover evidence per scan point",
+    "Hub-wise damage trends"
+  ],
+  "human_in_the_loop": "Hub supervisors confirm damage on every diverted parcel and decide whether to repack, hold or forward it. Revenue assurance reviews dimension variances before any weight adjustment is raised with the shipper.",
+  "integrations": [
+    "Sorter and conveyor PLC",
+    "WMS or hub management system",
+    "TMS or shipment database",
+    "Billing system for weight adjustments",
+    "Claims management system"
+  ],
+  "guardrails": [
+    "Calibration checks with reference boxes at the start of each shift",
+    "Weight adjustments only after human review of variance and images",
+    "Damage flags never close a claim automatically",
+    "Image retention aligned with your claim windows",
+    "Camera fields of view set to avoid worker faces where possible"
+  ],
+  "compliance_notes": [
+    "Where measurements are used for billing, check whether the measuring setup needs approval or verification under India's Legal Metrology rules or local equivalents.",
+    "Workers captured incidentally in images are personal data under the DPDP Act 2023, so camera placement and retention are planned accordingly."
+  ],
+  "pilot": {
+    "duration": "6 weeks",
+    "scope": "One induction line at one hub, with results logged alongside manual measurement and inspection for comparison.",
+    "deliverables": [
+      "Camera station specification and installation on the pilot line",
+      "Dimension and damage models tuned to your parcel mix",
+      "Supervisor inspection app",
+      "Comparison report against manual measurement and inspection",
+      "Network roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Dimension accuracy",
+        "how": "System measurements compared with manual tape measurements on a sample of parcels."
+      },
+      {
+        "metric": "Damage detection agreement",
+        "how": "System damage flags compared with supervisor inspection of the same parcels."
+      },
+      {
+        "metric": "Capture rate",
+        "how": "Parcels with a successful barcode read and full image set, out of all parcels inducted."
+      },
+      {
+        "metric": "Variances confirmed",
+        "how": "Volumetric weight differences that revenue assurance confirms during the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it run at sorter speed?",
+      "a": "Capture and inference run on an edge device at the station, and cameras are chosen for your belt speed and parcel size range. The pilot measures capture rate at your actual throughput."
+    },
+    {
+      "q": "Does it work on polybags and irregular items?",
+      "a": "Polybags and irregular shapes are harder to measure than boxes. Each measurement carries a confidence score, and low-confidence items can be routed to manual measurement."
+    },
+    {
+      "q": "Can we use our existing CCTV?",
+      "a": "General CCTV angles and resolution are rarely enough for measurement, though they can sometimes support damage evidence. We assess your current cameras in the first week."
+    },
+    {
+      "q": "How does this help with damage claims?",
+      "a": "Each parcel has time-stamped images at every scan point. When a claim arrives, your team can see the parcel's condition at each handover and where damage first appeared."
+    }
+  ],
+  "related": [
+    "proof-of-delivery-verification",
+    "warehouse-safety-monitoring",
+    "freight-invoice-audit",
+    "dark-store-picking-and-packing-qc"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/logistics-supply-chain/parcel-damage-and-dimension-detection/"
+}

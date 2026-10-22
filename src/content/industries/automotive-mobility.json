@@ -1,0 +1,125 @@
+{
+  "slug": "automotive-mobility",
+  "name": "Automotive & Mobility",
+  "seo": {
+    "title": "AI for Automotive Dealers, OEMs & EV | VipraTech",
+    "description": "AI for dealers, OEMs, used-car and EV businesses: damage detection, RC and warranty document processing, service and test-drive voice agents.",
+    "keywords": [
+      "AI for car dealers",
+      "used car inspection AI",
+      "warranty claim automation",
+      "automotive voice agent",
+      "RC document extraction",
+      "EV charging support AI",
+      "dealer lead management automation"
+    ]
+  },
+  "hero": {
+    "headline": "Better-documented inspections, cleaner warranty files and faster lead follow-up",
+    "subheadline": "We build vision, document, voice and sales automation systems for dealers, OEMs, used-car platforms, fleets and EV charging operators, plus security testing for the chatbots that talk to your customers."
+  },
+  "intro": "Automotive retail and after-sales run on photos, documents and phone calls: evaluators photograph used cars, service advisors key in number plates, warranty desks assemble job cards for OEM portals, and tele-callers chase leads from many sources. Applied AI helps where that work is repetitive and checkable: grading visible damage, reading RC, insurance and PUC documents, pre-checking warranty claims, booking services and test drives by voice, and routing leads so they do not sit unanswered. It does not set prices, approve warranty or finance, or replace physical checks for structural, flood or engine condition. We build systems that work inside your DMS and CRM, keep people in charge of commitments to customers and leave an evidence trail.",
+  "challenges": [
+    {
+      "title": "Leads leak between systems",
+      "detail": "Enquiries arrive from OEM portals, websites, car classifieds, social forms and walk-ins, and many are duplicated, unassigned or followed up late."
+    },
+    {
+      "title": "Inspection quality varies",
+      "detail": "Two evaluators can grade the same used car differently, and damage missed at procurement shows up later as refurbishment cost or a customer dispute."
+    },
+    {
+      "title": "Document-heavy processes",
+      "detail": "RC transfers, insurance renewals and OEM warranty claims stall on missing, mismatched or expired documents."
+    },
+    {
+      "title": "Customer-facing AI can over-promise",
+      "detail": "Chatbots and voice bots that quote the wrong price, invent an offer or promise a delivery date create disputes and brand risk."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "computer-vision",
+      "summary": "Grades visible damage on used cars, reads number plates and dashboards at service reception, and matches spare parts from customer photos to your catalogue."
+    },
+    {
+      "capability": "document-intelligence",
+      "summary": "Extracts and cross-checks RC, insurance, PUC and fitness documents, and pre-checks warranty claim packs against OEM policy before submission."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Books services, qualifies test-drive leads and supports EV drivers at chargers in Hindi, English and regional languages, with clear handover to staff."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Deduplicates and routes leads from every source, tracks first-contact SLAs and runs approved WhatsApp follow-ups that sync back to the DMS and OEM portal."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Tests dealer and OEM chatbots for wrong prices, unapproved claims, booking data exposure and Hinglish jailbreaks, with evidence and retest."
+    }
+  ],
+  "featured_use_cases": [
+    "used-car-inspection-and-damage-detection",
+    "warranty-claim-document-processing",
+    "test-drive-lead-qualification-voice-agent"
+  ],
+  "use_cases": [
+    "used-car-inspection-and-damage-detection",
+    "service-centre-plate-and-document-capture",
+    "spare-parts-matching-from-photos",
+    "rc-insurance-puc-document-extraction",
+    "warranty-claim-document-processing",
+    "service-booking-and-reminder-voice-agent",
+    "test-drive-lead-qualification-voice-agent",
+    "ev-charging-support-voice-agent",
+    "dealer-lead-routing-and-follow-up",
+    "dealer-chatbot-guardrail-testing"
+  ],
+  "regulatory_context": [
+    {
+      "name": "Motor Vehicles Act 1988 and Central Motor Vehicles Rules (India)",
+      "note": "Registration, motor insurance with mandatory third-party cover and a valid PUC certificate are required under this framework, and registration data is held in the VAHAN system. Vehicle data lookups should go through authorised channels."
+    },
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "RC and licence details, phone numbers, call recordings and charging-session location data are personal data, so notice, purpose limitation, retention limits and security safeguards apply."
+    },
+    {
+      "name": "TRAI commercial communication rules (TCCCPR 2018)",
+      "note": "Sales and service calls and messages must respect consent and DND preferences and use registered headers and templates. AI voice agents follow the same rules as human callers."
+    },
+    {
+      "name": "Consumer Protection Act 2019 and CCPA guidelines",
+      "note": "CCPA guidelines on misleading advertisements and on dark patterns are relevant to how chatbots and agents describe prices, offers, range or mileage and urgency."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Do your systems work with our DMS?",
+      "a": "Yes, through the DMS's APIs, scheduled exports or a staging database, depending on what your DMS provider and OEM allow. We confirm the integration route in the first week of a pilot and keep the DMS as the system of record."
+    },
+    {
+      "q": "Can damage detection decide the price of a used car?",
+      "a": "No. It grades visible damage and drafts refurbishment items from your rate card. Pricing, offers and checks for structural, flood or engine issues stay with your evaluators and pricing team."
+    },
+    {
+      "q": "Which languages can the voice agents speak?",
+      "a": "Hindi, English and Hinglish as standard, plus regional languages such as Marathi, Tamil, Telugu, Kannada, Bengali or Gujarati for the markets you serve. We test on recordings of your own customers before going live."
+    },
+    {
+      "q": "How is customer data protected?",
+      "a": "Systems run in your cloud account or an India region, documents are access-controlled, Aadhaar is masked wherever it appears, and recordings follow your retention policy. We can use model endpoints that do not retain or train on your data."
+    }
+  ],
+  "related_industries": [
+    "insurance",
+    "nbfc-lending",
+    "manufacturing"
+  ],
+  "cta": {
+    "headline": "Pick one showroom, workshop or claim queue to start",
+    "text": "Book a discovery call and we will scope a short pilot on your own photos, documents or call recordings, with the measures agreed up front."
+  },
+  "url": "/industries/automotive-mobility/"
+}

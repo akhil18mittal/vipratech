@@ -1,0 +1,220 @@
+{
+  "slug": "churn-risk-outreach-automation",
+  "industry": "telecom-contact-centers",
+  "title": "Churn-Risk Outreach Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Spot customers showing churn signals, explain why for each one, and run consented retention outreach on WhatsApp, SMS, voice or a human call with offers from your eligibility rules.",
+  "seo": {
+    "title": "Churn-Risk Scoring and Retention Outreach | VipraTech",
+    "description": "Churn-risk scoring with reasons for telecom and broadband customers, plus consented retention outreach on WhatsApp, SMS, voice and human agents.",
+    "keywords": [
+      "telecom churn prediction",
+      "churn risk outreach automation",
+      "customer retention AI",
+      "broadband churn reduction",
+      "next best action telecom"
+    ]
+  },
+  "designed_for": [
+    "Head of Retention",
+    "Customer Value Management Manager",
+    "Marketing Analytics Lead",
+    "Broadband Business Head"
+  ],
+  "problem": {
+    "intro": "By the time a customer requests a porting code or stops recharging, the retention window is short. The signals were often visible earlier, such as repeated call drops or slow speeds at home, an unresolved billing complaint, falling usage, a lapsed recharge or a competitor's offer mentioned on a support call, but they sit in different systems and the retention team works from a generic list.",
+    "pain_points": [
+      {
+        "title": "Signals sit in silos",
+        "detail": "Network KPIs, complaints, usage, recharge history and call transcripts are owned by different teams and rarely combined."
+      },
+      {
+        "title": "Generic offers",
+        "detail": "The same discount goes to everyone, including customers who would have stayed anyway, while unhappy customers get an offer instead of a fix."
+      },
+      {
+        "title": "Scores without reasons",
+        "detail": "A risk score alone does not tell the retention agent what went wrong or how to open the conversation."
+      },
+      {
+        "title": "Consent and contact fatigue",
+        "detail": "Repeated outreach across campaigns annoys customers and risks breaching preference and consent rules."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a churn-risk and outreach workflow on top of your existing data. A scoring model combines usage trends, recharge and payment behaviour, network experience at the customer's usual locations, complaint history and signals extracted from support transcripts, and explains each score with its top reasons. Rules then decide the action: fix first for customers with an open network or billing issue, an offer from your eligibility engine for value at risk, or no contact for those likely to stay. Outreach goes through the customer's consented channel, whether WhatsApp, SMS, a voice agent or a human retention agent with a briefing card, after suppression and frequency checks. Holdout groups show whether outreach helped.",
+    "capabilities": [
+      "Churn-risk scoring from usage, recharge, payment, network experience and complaint data, with reasons per customer",
+      "Signals extracted from support call transcripts, chats and emails, such as competitor mentions",
+      "Next-best-action rules: fix the open issue, offer from the eligibility engine, or do not contact",
+      "Outreach across WhatsApp, SMS, voice agent and human retention agents with briefing cards",
+      "Consent, DND preference, suppression and contact-frequency checks before every message",
+      "Holdout groups and campaign reporting to measure the effect of outreach"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Build features",
+      "detail": "Usage, recharge, payment, network, complaint and transcript signals are combined per customer."
+    },
+    {
+      "step": 2,
+      "title": "Score risk with reasons",
+      "detail": "Each customer gets a churn-risk score and the top reasons behind it."
+    },
+    {
+      "step": 3,
+      "title": "Choose the next best action",
+      "detail": "Rules pick fix-first, an eligible offer or no contact, and assign a holdout group."
+    },
+    {
+      "step": 4,
+      "title": "Check consent and contact rules",
+      "detail": "Consent, DND preference, suppression and frequency caps are checked before any outreach."
+    },
+    {
+      "step": 5,
+      "title": "Reach out",
+      "detail": "High-value customers and those with open complaints go to retention agents; others receive WhatsApp, SMS or voice agent outreach."
+    },
+    {
+      "step": 6,
+      "title": "Measure and learn",
+      "detail": "Outcomes are compared with the holdout group and fed back into the model and rules."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Usage, network and complaint data\"] --> B[\"Churn-risk score with reasons\"]\n  B --> C[\"Choose next best action\"]\n  C --> D{\"Consent and contact rules pass?\"}\n  D -->|\"no\"| E[\"Suppress and log reason\"]\n  D -->|\"yes\"| F{\"High-value or open complaint?\"}\n  F -->|\"yes\"| G(\"Retention agent calls with brief\")\n  F -->|\"no\"| H[\"WhatsApp, SMS or voice agent outreach\"]\n  G --> I[\"Outcome versus holdout group\"]\n  H --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data",
+        "components": [
+          "Data warehouse or CDP feeds",
+          "Network KPIs mapped to customer locations",
+          "Ticket and transcript signals"
+        ]
+      },
+      {
+        "name": "Modelling",
+        "components": [
+          "Feature pipeline",
+          "Churn model with per-customer explanations",
+          "Signal extractor for transcripts and chats"
+        ]
+      },
+      {
+        "name": "Decisioning",
+        "components": [
+          "Next-best-action rules",
+          "Offer eligibility API",
+          "Consent and suppression service"
+        ]
+      },
+      {
+        "name": "Engagement and measurement",
+        "components": [
+          "WhatsApp, SMS and voice agent channels",
+          "Retention agent briefing in the CRM",
+          "Holdout and uplift analytics"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data\"]\n    D1[\"Warehouse and CDP feeds\"]\n    D2[\"Network KPIs by location\"]\n    D3[\"Ticket and transcript signals\"]\n  end\n  subgraph S2[\"Modelling\"]\n    M1[\"Feature pipeline\"]\n    M2[\"Churn model with reasons\"]\n  end\n  subgraph S3[\"Decisioning\"]\n    N1[\"Next-best-action rules\"]\n    N2[\"Offer eligibility API\"]\n    N3[\"Consent and suppression service\"]\n  end\n  subgraph S4[\"Engagement and measurement\"]\n    E1[\"WhatsApp, SMS and voice agent\"]\n    E2(\"Retention agent with brief\")\n    E3[\"Holdout and uplift analytics\"]\n  end\n  D1 --> M1\n  D2 --> M1\n  D3 --> M1\n  M1 --> M2 --> N1\n  N2 --> N1\n  N1 --> N3\n  N3 --> E1\n  N3 --> E2\n  E1 --> E3\n  E2 --> E3\n  E3 --> M1"
+  },
+  "inputs": [
+    "Usage, recharge and billing history",
+    "Network experience KPIs mapped to customer locations",
+    "Complaints, tickets and support transcripts",
+    "Offer eligibility rules",
+    "Consent, DND preference and opt-out data",
+    "Past retention campaign outcomes"
+  ],
+  "outputs": [
+    "Churn-risk scores with reasons",
+    "Next best action per customer",
+    "Outreach campaigns and messages",
+    "Retention agent briefing cards",
+    "Uplift reports against holdout groups"
+  ],
+  "human_in_the_loop": "Retention managers approve the action rules, offers and contact caps, and human retention agents handle high-value customers and anyone with an open complaint. Marketing and compliance review every message template before use.",
+  "integrations": [
+    "Data warehouse or CDP such as BigQuery or Snowflake",
+    "CRM and campaign management",
+    "Offer and eligibility engine",
+    "WhatsApp Business API and SMS gateway with DLT templates",
+    "Dialler for voice outreach"
+  ],
+  "guardrails": [
+    "No outreach without consent, preference and suppression checks",
+    "Offers only from the eligibility engine",
+    "Contact-frequency caps across all campaigns",
+    "Outreach never delays or discourages a porting request",
+    "Scores reviewed by segment and circle to catch skew"
+  ],
+  "compliance_notes": [
+    "Outreach respects TRAI commercial-communication rules, including customer preferences, registered headers and DLT templates for SMS.",
+    "Retention activity does not interfere with porting requests, which must be handled as TRAI's mobile number portability rules require.",
+    "Customer data use is designed to support DPDP Act 2023 purpose limitation and consent."
+  ],
+  "pilot": {
+    "duration": "6 weeks",
+    "scope": "One segment, such as broadband or postpaid customers in one circle, with a holdout group and one or two outreach channels.",
+    "deliverables": [
+      "Churn definition agreed for the pilot segment",
+      "Scoring model with reasons, backtested on historical data",
+      "Action rules and outreach set-up with consent checks",
+      "Pilot report with holdout comparison",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Ranking quality on history",
+        "how": "Backtest of how many actual churners fall in the highest-risk groups on past data."
+      },
+      {
+        "metric": "Retention against holdout",
+        "how": "Churn in the treated group compared with the holdout group over the pilot period."
+      },
+      {
+        "metric": "Contact compliance",
+        "how": "Messages blocked by pre-send checks, opt-out requests and complaints during the pilot."
+      },
+      {
+        "metric": "Offer cost per retained customer",
+        "how": "Offer spend divided by customers retained relative to the holdout."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What data do we need to start?",
+      "a": "Usage and recharge or billing history, complaint and ticket data, and past churn outcomes are the minimum. Network experience by location and transcript signals improve explanations and are added where available."
+    },
+    {
+      "q": "Does it work for prepaid customers?",
+      "a": "Yes. Prepaid churn often shows up as a recharge lapse rather than a formal disconnection, so we define churn with your team for each segment before modelling."
+    },
+    {
+      "q": "How do you make sure outreach is compliant?",
+      "a": "Every message passes consent, DND preference, suppression and frequency checks first, SMS uses registered DLT templates, and outreach never delays or discourages a porting request."
+    },
+    {
+      "q": "Can retention agents see why a customer was flagged?",
+      "a": "Yes. Each customer comes with the top reasons behind the score, such as repeated call drops at home or an unresolved billing complaint, so the agent can open with the fix rather than an offer."
+    }
+  ],
+  "related": [
+    "outbound-sales-voice-agent-with-consent-checks",
+    "real-time-agent-assist",
+    "call-qa-and-compliance-auditing",
+    "dormant-account-reactivation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/telecom-contact-centers/churn-risk-outreach-automation/"
+}

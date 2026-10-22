@@ -1,0 +1,125 @@
+{
+  "slug": "healthcare",
+  "name": "Healthcare & Hospitals",
+  "seo": {
+    "title": "AI for Hospitals: Records, Pre-Auth & Calls | VipraTech",
+    "description": "AI for hospitals and clinics: discharge summary drafting, TPA pre-auth files, lab report digitisation, patient voice agents and chatbot safety testing.",
+    "keywords": [
+      "AI for hospitals India",
+      "discharge summary AI",
+      "hospital TPA pre-authorisation automation",
+      "lab report digitisation",
+      "hospital appointment voice agent",
+      "healthcare chatbot safety testing",
+      "clinical documentation from dictation"
+    ]
+  },
+  "hero": {
+    "headline": "AI for hospital paperwork and patient calls, with clinicians making every decision",
+    "subheadline": "We build document, voice, vision and AI security systems for hospitals, clinic chains and diagnostic centres. They prepare records, claim files and calls; your clinicians and staff review, decide and sign."
+  },
+  "intro": "Hospitals carry a heavy administrative load around every patient: discharge summaries typed late in a shift, pre-authorisation files for TPAs and insurers, lab reports in a dozen formats and phone lines that ring all day. AI is useful here today because much of this work is reading, structuring, drafting and reminding, and every output can be checked by a person. It is not a clinician. We do not build systems that diagnose or recommend treatment. Anything the AI drafts that touches clinical content is reviewed and signed by a doctor, and when a patient-facing agent hears a warning sign it follows rules your clinicians define and hands over to staff. We also test patient-facing chatbots for unsafe advice and data leakage before launch.",
+  "challenges": [
+    {
+      "title": "Documentation load on doctors",
+      "detail": "Consultants and residents spend hours on discharge summaries, notes and forms that must be accurate and timely, often at the end of a long shift."
+    },
+    {
+      "title": "Insurance paperwork and queries",
+      "detail": "Pre-authorisation and claim files for TPAs, insurers and government schemes are queried for missing documents, which delays discharge and payment."
+    },
+    {
+      "title": "Unstructured patient history",
+      "detail": "Past reports arrive as PDFs, phone photos and paper, so prior results and trends are hard to find during a short consultation."
+    },
+    {
+      "title": "Stretched front desks and phone lines",
+      "detail": "Appointment calls, reminders and follow-ups compete with walk-in patients for the same staff."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Drafts discharge summaries, prepares TPA and scheme claim files and digitises external lab reports, with every line traceable to its source document."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Appointment, reminder and post-discharge calls in patients' languages, plus dictation-to-note for doctors; scripted, with clinical questions passed to staff."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Hand-hygiene and PPE trends for infection control, and expiry and crash cart checks for pharmacy, designed with privacy first."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Clinician-reviewed testing of patient-facing chatbots and voice bots for unsafe advice, missed escalation and patient-data leakage."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Multi-channel enquiry capture and WhatsApp follow-up for elective services and health check-ups, without medical advice or outcome promises."
+    }
+  ],
+  "featured_use_cases": [
+    "hospital-insurance-claim-file-preparation",
+    "discharge-summary-and-record-structuring",
+    "post-discharge-follow-up-calls"
+  ],
+  "use_cases": [
+    "discharge-summary-and-record-structuring",
+    "hospital-insurance-claim-file-preparation",
+    "lab-report-digitisation",
+    "appointment-booking-voice-agent",
+    "post-discharge-follow-up-calls",
+    "clinical-documentation-from-dictation",
+    "hand-hygiene-and-ppe-monitoring",
+    "pharmacy-shelf-and-expiry-monitoring",
+    "healthcare-chatbot-safety-testing",
+    "patient-enquiry-follow-up-automation"
+  ],
+  "regulatory_context": [
+    {
+      "name": "DPDP Act 2023 (India)",
+      "note": "Health data is personal data under the Act, so hospitals need a lawful basis such as consent, clear notices, reasonable security safeguards and a way to honour data principal rights. Our systems keep patient data minimised, access-controlled and logged."
+    },
+    {
+      "name": "Ayushman Bharat Digital Mission (ABDM)",
+      "note": "ABDM sets standards for ABHA health IDs, consent-based record sharing and health information exchange. Where a hospital is ABDM-integrated, our structured outputs can follow the FHIR-based formats ABDM uses."
+    },
+    {
+      "name": "Medical device regulation for software",
+      "note": "Software intended for diagnosis or treatment decisions can fall under medical device rules in India and abroad. Our systems are designed as documentation, communication and operations aids, with clinicians making clinical decisions."
+    },
+    {
+      "name": "HIPAA (for US buyers)",
+      "note": "US covered entities and their business associates must safeguard protected health information under HIPAA. For US projects we work under a business associate agreement with HIPAA-aligned controls."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Does your AI diagnose patients or recommend treatment?",
+      "a": "No. We build documentation, communication, operations and testing systems. Anything that touches clinical content is drafted for a clinician to review and sign, and patient-facing agents pass clinical questions to staff."
+    },
+    {
+      "q": "Where is patient data processed and stored?",
+      "a": "In your own data centre or your cloud account in an India region, with access that follows your HIS roles. We use model endpoints that do not retain or train on your data, and patient details are masked in logs."
+    },
+    {
+      "q": "Can you integrate with our HIS?",
+      "a": "Yes. We work with commercial and in-house HIS and EMR systems through HL7, FHIR, APIs, database views or scheduled exports, and agree the approach with your IT team and vendor early on."
+    },
+    {
+      "q": "Do you work with hospitals outside India?",
+      "a": "Yes. For US providers we work under a business associate agreement with HIPAA-aligned controls, and for European providers we design for GDPR. Languages and integrations are adapted to the market."
+    }
+  ],
+  "related_industries": [
+    "insurance",
+    "pharma-life-sciences",
+    "telecom-contact-centers"
+  ],
+  "cta": {
+    "headline": "Start with one department and one document type",
+    "text": "Book a discovery call. We will pick one workflow, such as discharge summaries in one department or pre-auth files for one TPA, and scope a short pilot with your team."
+  },
+  "url": "/industries/healthcare/"
+}

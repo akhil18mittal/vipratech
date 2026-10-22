@@ -1,0 +1,216 @@
+{
+  "slug": "meeting-minutes-drafting",
+  "industry": "accounting-audit-consulting",
+  "title": "Board and Client Meeting Minutes Drafting",
+  "capability": "voice-ai",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Turn recorded board, audit committee and client meetings, including Hinglish discussion, into draft minutes and action lists in your format for the company secretary or partner to finalise.",
+  "seo": {
+    "title": "AI Board Meeting Minutes Drafting | VipraTech",
+    "description": "AI that transcribes board, committee and client meetings in English, Hindi and Hinglish and drafts agenda-wise minutes and action lists for review.",
+    "keywords": [
+      "board meeting minutes AI",
+      "AI minutes drafting",
+      "Hindi Hinglish meeting transcription",
+      "company secretary automation",
+      "client meeting action items"
+    ]
+  },
+  "designed_for": [
+    "Company Secretary",
+    "Secretarial Practice Lead",
+    "Engagement Partner",
+    "Consulting Engagement Manager"
+  ],
+  "problem": {
+    "intro": "Minutes of board and committee meetings must record decisions, resolutions and dissent accurately, in a form that follows secretarial standards, yet they are usually drafted days later from handwritten notes. Advisory teams face the same problem with client workshops and audit closing meetings: the discussion moved between English and Hindi, and the action list depends on who remembers what.",
+    "pain_points": [
+      {
+        "title": "Drafting from notes is slow",
+        "detail": "The company secretary reconstructs the discussion from notes and memory, and drafts circulate late."
+      },
+      {
+        "title": "Resolutions need exact wording",
+        "detail": "Resolution text, abstentions by interested directors and any dissent must be recorded precisely, not paraphrased."
+      },
+      {
+        "title": "Mixed-language discussion",
+        "detail": "Generic transcription tools garble Hinglish, Indian names and figures, so their output needs a full rewrite."
+      },
+      {
+        "title": "Actions get lost",
+        "detail": "Commitments made in client meetings never reach the engagement tracker, and follow-ups slip."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a minutes assistant that takes the meeting recording from Zoom, Teams, Google Meet or a room recorder, together with the agenda and board papers. It transcribes the discussion with speaker labels in English, Hindi and Hinglish, and uses the names, entities and figures in the papers as vocabulary so they are spelt correctly. It then drafts minutes item by item against the agenda: discussion summary, resolution text in your house style, notes on interested directors and dissent, and an action list with owners and dates. Statements the model is unsure of are highlighted with a link to the exact moment in the recording. Nothing is circulated automatically.",
+    "capabilities": [
+      "Transcription with speaker labels for English, Hindi and Hinglish meetings",
+      "Custom vocabulary from the agenda, board papers and client names for correct spelling of entities and figures",
+      "Agenda-wise draft minutes in your house template, with resolution wording from your precedent library",
+      "Separate capture of decisions, dissent, abstentions by interested directors and deferred items",
+      "Action list with owners and due dates, exportable to the engagement or task tracker",
+      "Every sentence linked to its timestamp so the reviewer can check it against the recording"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Upload recording and papers",
+      "detail": "The recording, agenda, notice and board papers are added to the meeting record."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe with speakers",
+      "detail": "Speech is transcribed with speaker labels, using names and figures from the papers as vocabulary."
+    },
+    {
+      "step": 3,
+      "title": "Align to agenda items",
+      "detail": "The discussion is segmented and matched to each agenda item."
+    },
+    {
+      "step": 4,
+      "title": "Draft minutes and actions",
+      "detail": "Minutes, resolution text and an action list are drafted in your house template."
+    },
+    {
+      "step": 5,
+      "title": "Check flagged statements",
+      "detail": "The company secretary checks every low-confidence statement against the recording and edits the draft."
+    },
+    {
+      "step": 6,
+      "title": "Approve and export",
+      "detail": "The approved draft goes through your normal circulation and signing process, and actions go to the tracker."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Recording, agenda and board papers\"] --> B[\"Transcribe with speaker labels\"]\n  B --> C[\"Align discussion to agenda items\"]\n  C --> D[\"Draft minutes, resolutions, actions\"]\n  D --> E{\"Any low-confidence statements?\"}\n  E -->|\"yes\"| F(\"Company secretary checks recording\")\n  E -->|\"no\"| G(\"Chair or partner approves draft\")\n  F --> G\n  G --> H[\"Final minutes and action tracker\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Capture",
+        "components": [
+          "Meeting platform recording import",
+          "Room recorder upload",
+          "Agenda and board paper intake"
+        ]
+      },
+      {
+        "name": "Speech",
+        "components": [
+          "Speech recognition for English, Hindi and Hinglish",
+          "Speaker diarisation",
+          "Custom vocabulary from meeting papers"
+        ]
+      },
+      {
+        "name": "Drafting",
+        "components": [
+          "Agenda aligner",
+          "LLM minutes drafter with house template",
+          "Resolution precedent library"
+        ]
+      },
+      {
+        "name": "Review and output",
+        "components": [
+          "Editor with timestamp links",
+          "Action tracker export",
+          "Minute book storage with retention rules"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Capture\"]\n    C1[\"Meeting platform recording import\"]\n    C2[\"Agenda and board paper intake\"]\n  end\n  subgraph S2[\"Speech\"]\n    A1[\"ASR for English, Hindi, Hinglish\"]\n    A2[\"Speaker diarisation\"]\n    A3[\"Custom vocabulary from papers\"]\n  end\n  subgraph S3[\"Drafting\"]\n    D1[\"Agenda aligner\"]\n    D2[\"LLM minutes drafter\"]\n    D3[\"Resolution precedent library\"]\n  end\n  subgraph S4[\"Review and output\"]\n    R1(\"Editor with timestamp links\")\n    R2[\"Action tracker export\"]\n    R3[\"Minute book storage\"]\n  end\n  C1 --> A1 --> A2\n  C2 --> A3\n  A3 --> A1\n  C2 --> D1\n  A2 --> D1 --> D2\n  D3 --> D2\n  D2 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Meeting audio or video recording",
+    "Agenda and notice of meeting",
+    "Board papers or presentation decks",
+    "Previous minutes and resolution precedents",
+    "Attendance and interest disclosures"
+  ],
+  "outputs": [
+    "Draft minutes in your house format",
+    "Resolution text for each item",
+    "Action list with owners and dates",
+    "Searchable transcript with timestamps",
+    "Record of attendance and interested directors"
+  ],
+  "human_in_the_loop": "The company secretary or engagement lead verifies every highlighted statement against the recording and edits the draft. Minutes are finalised and signed through the company's normal process; the assistant never circulates or files anything.",
+  "integrations": [
+    "Zoom, Microsoft Teams or Google Meet",
+    "Board portal software",
+    "SharePoint or Google Drive",
+    "Task or engagement trackers such as Microsoft Planner or practice management software"
+  ],
+  "guardrails": [
+    "Recordings processed in your tenancy and deleted after approval where your policy requires",
+    "Resolution text drawn from approved precedents, never invented for an unidentified item",
+    "Low-confidence statements highlighted rather than smoothed over",
+    "Access restricted to the secretarial or engagement team, with access logs",
+    "No automatic circulation to directors or clients"
+  ],
+  "compliance_notes": [
+    "Drafts are structured to follow ICSI Secretarial Standards on board and general meetings (SS-1 and SS-2); the company secretary remains responsible for the final minutes.",
+    "For listed companies, board discussions may contain unpublished price sensitive information; access controls and logs are designed to support SEBI insider trading rules."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Recordings of a few past board, committee or client meetings, with drafts compared against the minutes that were finalised.",
+    "deliverables": [
+      "House template and precedent library set-up",
+      "Working pipeline on pilot recordings",
+      "Review editor with timestamp links",
+      "Comparison of drafts with finalised minutes",
+      "Roll-out plan and cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Transcription accuracy on names and figures",
+        "how": "Checked on a sample of passages against the recording."
+      },
+      {
+        "metric": "Reviewer edits per draft",
+        "how": "Count and type of edits the company secretary made before approval."
+      },
+      {
+        "metric": "Time from meeting to approved draft",
+        "how": "Elapsed time compared with recent meetings minuted manually."
+      },
+      {
+        "metric": "Action items captured",
+        "how": "Actions in the draft compared with those in the finalised minutes."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How well does it handle Hindi and Hinglish discussion?",
+      "a": "It transcribes mixed English, Hindi and Hinglish speech and drafts minutes in English or your preferred language. Names and figures from the agenda and papers are added as vocabulary, and any statement it is unsure about is highlighted with a link to the recording."
+    },
+    {
+      "q": "Where do board recordings go?",
+      "a": "They stay in your cloud tenancy or an India region, with access limited to the secretarial team, and are deleted after approval if your policy requires. We use model endpoints that do not train on your data."
+    },
+    {
+      "q": "Does it replace the company secretary?",
+      "a": "No. It produces a first draft and an action list. The company secretary decides what the minutes record and how, and the chairperson signs them through your normal process."
+    },
+    {
+      "q": "Do participants need to agree to recording?",
+      "a": "Yes. Participants should know the meeting is recorded and for what purpose. The assistant works only on recordings your team has made with that notice."
+    }
+  ],
+  "related": [
+    "hearing-transcription-and-minutes",
+    "engagement-proposal-drafting",
+    "client-document-collection-agent"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/accounting-audit-consulting/meeting-minutes-drafting/"
+}

@@ -1,0 +1,224 @@
+{
+  "slug": "collections-voice-agent-conduct-testing",
+  "industry": "nbfc-lending",
+  "title": "Conduct Testing for Collections Voice Agents",
+  "capability": "ai-security",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Test collections voice agents, in-house or vendor-built, for harassment, third-party disclosure, misrepresentation and vulnerable-borrower handling in Hindi and Hinglish, with audio evidence.",
+  "seo": {
+    "title": "Conduct Testing for Collections Voice Agents | VipraTech",
+    "description": "Adversarial conduct testing of collections voice bots in Hindi and Hinglish: harassment, disclosure, calling hours and vulnerable borrowers, with evidence.",
+    "keywords": [
+      "collections voice agent testing",
+      "AI voice bot conduct testing",
+      "recovery agent conduct RBI AI",
+      "Hinglish voice bot red teaming",
+      "fair practices code AI testing"
+    ]
+  },
+  "designed_for": [
+    "Chief Compliance Officer",
+    "Head of Collections",
+    "Chief Risk Officer",
+    "Head of Vendor and Outsourcing Risk"
+  ],
+  "problem": {
+    "intro": "Lenders are buying or building AI voice agents for reminders and collections, and RBI holds the lender responsible for the conduct of anyone collecting on its behalf. A voice agent can be pushed into saying things no trained collector would, by an angry borrower, a confused relative or a deliberate attempt at manipulation, and vendor demos rarely show those cases.",
+    "pain_points": [
+      {
+        "title": "Conduct failures under pressure",
+        "detail": "Borrowers who argue, plead or provoke can draw a model into threats, sarcasm, false urgency or claims about legal action."
+      },
+      {
+        "title": "Third parties on the line",
+        "detail": "Spouses, parents, employers or neighbours who answer may hear details of the debt if the agent handles identity poorly."
+      },
+      {
+        "title": "Vulnerable borrowers",
+        "detail": "Mentions of illness, bereavement, job loss or distress need recognition and a humane response, which scripted tests seldom cover."
+      },
+      {
+        "title": "No independent evidence",
+        "detail": "Compliance teams need repeatable evidence of how the agent behaves, not just the vendor's assurance and a handful of sample calls."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We run a conduct test of your collections voice agent in a test environment, using synthetic borrowers and accounts. Persona agents place realistic calls in Hindi, Hinglish, English and selected regional languages, playing angry, evasive, confused, vulnerable and manipulative borrowers, and third parties such as a parent or an employer. Multi-turn playbooks cover threat and harassment triggers, disclosure to third parties, misrepresentation as police or court, pressure to pay into other accounts, calls outside permitted hours, dispute and hardship handling, and prompt injection by speech. Each call is recorded, transcribed and judged against your conduct rules and RBI expectations, with a PASS, RISK or FAIL verdict and evidence.",
+    "capabilities": [
+      "Persona-driven test calls by voice in Hindi, Hinglish, English and selected regional languages",
+      "Playbooks for threats, shaming, false legal claims and misrepresentation",
+      "Third-party and right-party scenarios that test disclosure before identity confirmation",
+      "Vulnerable-borrower and hardship scenarios with expected escalation behaviour",
+      "Calling-window, frequency and opt-out checks against the agent's scheduler",
+      "PASS, RISK and FAIL verdicts with audio, transcripts and mapping to conduct rules"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Agree the conduct rulebook",
+      "detail": "We turn your collections policy, Fair Practices Code commitments and RBI expectations into testable rules."
+    },
+    {
+      "step": 2,
+      "title": "Set up the test environment",
+      "detail": "Synthetic borrowers, accounts and phone numbers are configured so no real customer is contacted."
+    },
+    {
+      "step": 3,
+      "title": "Run persona calls",
+      "detail": "Persona agents place multi-turn voice calls across scenarios and languages, recording every exchange."
+    },
+    {
+      "step": 4,
+      "title": "Judge each call",
+      "detail": "Automated judges score transcripts and audio against the rulebook, and human reviewers validate every RISK and FAIL."
+    },
+    {
+      "step": 5,
+      "title": "Report with evidence",
+      "detail": "Findings include audio clips, transcripts, the rule breached and remediation guidance for your team or vendor."
+    },
+    {
+      "step": 6,
+      "title": "Retest and regress",
+      "detail": "Fixed scenarios are rerun, and the suite becomes a regression test for future releases."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Collections policy and RBI guidance\"] --> B[\"Testable conduct rulebook\"]\n  B --> C[\"Synthetic borrowers and test numbers\"]\n  C --> D[\"Persona voice calls by scenario\"]\n  D --> E[\"Automated judges score each call\"]\n  E --> F{\"RISK or FAIL verdict?\"}\n  F -->|\"yes\"| G(\"Human reviewer validates evidence\")\n  F -->|\"no\"| H[\"Record PASS with transcript\"]\n  G --> J[\"Findings report and retest suite\"]\n  H --> J",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Rulebook and setup",
+        "components": [
+          "Conduct rulebook from policy and RBI expectations",
+          "Synthetic borrower and account data",
+          "Test phone numbers and environment"
+        ]
+      },
+      {
+        "name": "Persona generation",
+        "components": [
+          "Supervisor agent selecting scenarios",
+          "Persona agents for borrowers and third parties",
+          "Multilingual and code-mixed speech synthesis"
+        ]
+      },
+      {
+        "name": "Call execution",
+        "components": [
+          "Outbound or inbound test telephony",
+          "Call recording and transcription"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Automated conduct judges",
+          "Human validation of RISK and FAIL verdicts",
+          "Mapping to conduct rules and AI risk frameworks"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Evidence store with audio and transcripts",
+          "Findings report and regression suite"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Rulebook and setup\"]\n    A1[\"Conduct rulebook\"]\n    A2[\"Synthetic borrowers\"]\n  end\n  subgraph S2[\"Persona generation\"]\n    G1[\"Scenario supervisor\"]\n    G2[\"Persona agents\"]\n    G3[\"Speech synthesis\"]\n  end\n  subgraph S3[\"Call execution\"]\n    C1[\"Test telephony\"]\n    C2[\"Voice agent under test\"]\n    C3[\"Recording and transcription\"]\n  end\n  subgraph S4[\"Evaluation and reporting\"]\n    E1[\"Conduct judges\"]\n    E2(\"Human validation\")\n    E3[\"Evidence and findings report\"]\n  end\n  A1 --> G1\n  A2 --> G1\n  G1 --> G2 --> G3 --> C1\n  C1 --> C2 --> C3\n  C3 --> E1\n  A1 --> E1\n  E1 --> E2 --> E3"
+  },
+  "inputs": [
+    "Access to the voice agent in a test environment with test numbers",
+    "Collections policy, scripts and escalation rules",
+    "Fair Practices Code commitments and internal conduct standards",
+    "Synthetic borrower profiles and account data",
+    "Vendor documentation of guardrails, where available"
+  ],
+  "outputs": [
+    "Conduct rulebook used for testing",
+    "PASS, RISK or FAIL verdicts per scenario",
+    "Audio clips and transcripts for every finding",
+    "Remediation guidance for the lender or vendor",
+    "Regression suite for future releases"
+  ],
+  "human_in_the_loop": "Human reviewers validate every RISK and FAIL verdict before it is reported, and your compliance team approves the rulebook. Whether to launch, fix or withdraw the agent is the lender's decision.",
+  "integrations": [
+    "Voice agent test endpoint or test phone numbers",
+    "Vendor issue tracker",
+    "GRC or compliance testing records",
+    "CI pipeline for regression runs, if required",
+    "Call recording storage under the lender's policy"
+  ],
+  "guardrails": [
+    "Synthetic borrowers and test numbers only; no real customer is ever called",
+    "Recordings and transcripts stored encrypted with restricted access",
+    "Every RISK and FAIL verdict validated by a person",
+    "Rulebook versioned and approved by compliance before testing",
+    "Verdicts describe observed behaviour and do not certify compliance"
+  ],
+  "compliance_notes": [
+    "Helps lenders evidence oversight of AI agents collecting on their behalf, in line with RBI recovery-agent and outsourcing expectations.",
+    "Findings can be mapped to the OWASP Top 10 for LLM Applications, NIST AI RMF and RBI FREE-AI themes for governance reporting."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One collections or reminder voice agent tested in Hindi and Hinglish across a focused set of scenarios: third-party disclosure, threats, vulnerable borrowers and disputes.",
+    "deliverables": [
+      "Conduct rulebook approved by compliance",
+      "Executed persona calls with recordings",
+      "Findings report with verdicts and evidence",
+      "Remediation session with your team or vendor",
+      "Retest and regression suite"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Verdicts by scenario and language",
+        "how": "PASS, RISK and FAIL counts per scenario and language, each backed by evidence."
+      },
+      {
+        "metric": "Disclosure before identity confirmation",
+        "how": "Calls where the agent revealed account details before confirming the right party."
+      },
+      {
+        "metric": "Escalation behaviour",
+        "how": "Vulnerable-borrower and dispute scenarios where the agent transferred or offered a human callback as the rulebook requires."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Failed scenarios rerun after fixes, split into resolved and still reproducible."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can you test a vendor's voice agent?",
+      "a": "Yes, with access to a test number or endpoint and the vendor's cooperation on fixes. The lender receives independent evidence and the vendor receives reproducible cases."
+    },
+    {
+      "q": "Are real borrowers ever called?",
+      "a": "No. All calls go to and from test numbers with synthetic borrower data. If your agent can run only on production systems, we first agree an isolated configuration."
+    },
+    {
+      "q": "Which languages do you test in?",
+      "a": "Hindi, Hinglish and English as standard, with Marathi, Tamil, Telugu, Bengali and others added based on where your agent operates. Code-mixed speech is included because real calls are rarely in one language."
+    },
+    {
+      "q": "Is this a one-off test?",
+      "a": "It can be, but most value comes from rerunning the suite after every change to the model, prompts or scripts, so conduct does not regress unnoticed."
+    }
+  ],
+  "related": [
+    "collections-voice-agent-with-conduct-guardrails",
+    "emi-reminder-voice-and-whatsapp-agent",
+    "bank-chatbot-and-voice-agent-red-teaming",
+    "voice-agent-adversarial-testing"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/nbfc-lending/collections-voice-agent-conduct-testing/"
+}

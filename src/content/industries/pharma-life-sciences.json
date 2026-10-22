@@ -1,0 +1,125 @@
+{
+  "slug": "pharma-life-sciences",
+  "name": "Pharma & Life Sciences",
+  "seo": {
+    "title": "AI for Pharma: BMR Review, COA Checks and PV | VipraTech",
+    "description": "Applied AI for pharma plants, QA, pharmacovigilance and field teams: BMR and COA review, adverse event intake, visual inspection and MR voice tools.",
+    "keywords": [
+      "AI for pharmaceutical manufacturing",
+      "batch manufacturing record review AI",
+      "certificate of analysis extraction",
+      "pharmacovigilance case intake automation",
+      "GxP AI validation",
+      "pharma packaging inspection computer vision",
+      "medical representative call reporting"
+    ]
+  },
+  "hero": {
+    "headline": "AI that reads batch records, COAs and safety reports, while QA keeps every decision",
+    "subheadline": "We build document, vision and voice systems for pharma plants, quality units, pharmacovigilance desks and field forces in India and abroad. Every output is traceable, reviewable and designed to sit inside a validated process."
+  },
+  "intro": "Pharma runs on records that must be right the first time: batch manufacturing records, certificates of analysis, SOPs, deviation reports, stability data and safety case files. AI helps today where people spend hours reading, cross-checking and re-typing these records, and where repetitive visual inspection or field reporting slows work down. It is good at flagging gaps, extracting values, drafting case intake and answering SOP questions with citations. It does not replace the Qualified Person, the QA reviewer or the safety physician, and it should not make release, causality or regulatory decisions. Any tool that touches GxP data has to be validated for its intended use, with audit trails and access controls, and we design for that from the first sprint.",
+  "challenges": [
+    {
+      "title": "Review by exception is hard on paper",
+      "detail": "Executed batch records are long and often hand-filled, so QA reads every page to find the few entries that need attention."
+    },
+    {
+      "title": "Data integrity applies to AI too",
+      "detail": "ALCOA+ principles, audit trails and electronic signature controls apply to any system that creates or changes a GxP record, including AI tools."
+    },
+    {
+      "title": "Safety information arrives everywhere",
+      "detail": "Possible adverse events reach the company through MR visits, customer care calls, emails and complaints, and each must be captured within reporting timelines."
+    },
+    {
+      "title": "A large, dispersed field force",
+      "detail": "Medical representatives and stockists work across languages and towns, so call reports, orders and sample records are often late or incomplete."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "Extraction and cross-checking for BMRs, COAs, SOPs, CTD dossiers and adverse event reports, with every value linked to its source page."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Camera inspection of cartons, labels, blisters, tablets and vials on packaging and inspection lines, with an image kept for every rejection."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Hindi, English and regional-language voice agents for MR call reporting and stockist ordering, built to spot and route possible adverse events."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Validation support and adversarial testing for AI tools used in GxP processes, producing evidence your CSV and QA teams can review."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Consent-based doctor engagement and sample request workflows that keep the records expected under UCPMP 2024 and your MLR review."
+    }
+  ],
+  "featured_use_cases": [
+    "batch-manufacturing-record-review",
+    "adverse-event-intake",
+    "packaging-and-label-inspection"
+  ],
+  "use_cases": [
+    "regulatory-dossier-and-sop-assistant",
+    "batch-manufacturing-record-review",
+    "coa-extraction-and-spec-matching",
+    "adverse-event-intake",
+    "packaging-and-label-inspection",
+    "tablet-and-vial-defect-detection",
+    "mr-call-reporting-by-voice",
+    "stockist-order-taking-voice-agent",
+    "gxp-ai-tool-validation-and-security",
+    "doctor-engagement-automation"
+  ],
+  "regulatory_context": [
+    {
+      "name": "21 CFR Part 11 (US) and EU GMP Annex 11",
+      "note": "Set expectations for electronic records, electronic signatures and computerised systems in regulated activities, including validation, audit trails and access control. AI tools that create or change GxP records fall within their scope."
+    },
+    {
+      "name": "Revised Schedule M (India)",
+      "note": "The revised GMP requirements under the Drugs and Cosmetics Rules, notified in 2023, bring Indian manufacturing closer to WHO-GMP, with stronger expectations on the pharmaceutical quality system, quality risk management and documentation."
+    },
+    {
+      "name": "Pharmacovigilance obligations (CDSCO, PvPI, ICH E2B)",
+      "note": "Marketing authorisation holders in India are expected to run a pharmacovigilance system and report adverse drug reactions, with PvPI coordinating national reporting. ICH E2B(R3) defines the electronic format for individual case safety reports used by many regulators."
+    },
+    {
+      "name": "UCPMP 2024 and DPDP Act 2023 (India)",
+      "note": "The Uniform Code for Pharmaceutical Marketing Practices 2024 governs interactions with healthcare professionals, including samples and promotional material. The DPDP Act 2023 applies to doctor, patient and employee personal data."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can AI be used inside a GxP-regulated process?",
+      "a": "Yes, when it is validated for a defined intended use and controlled like any other computerised system. We work within your CSV or CSA approach: user requirements, risk assessment, test evidence and change control. In the systems we build, AI prepares and flags; trained people review and sign."
+    },
+    {
+      "q": "Will the system make batch release or causality decisions?",
+      "a": "No. Batch disposition stays with the Qualified Person or authorised QA, and seriousness and causality assessments stay with your pharmacovigilance team. The system prepares checked records and highlights exceptions so those decisions are easier to evidence."
+    },
+    {
+      "q": "Where is our data processed?",
+      "a": "In your own cloud account or on-premise, depending on your data policy. We can use model endpoints that do not retain or train on your data, and patient and doctor details are masked in logs."
+    },
+    {
+      "q": "How do we start?",
+      "a": "With a short pilot on one product, one record type or one line, run in parallel with your current process. The pilot produces an accuracy report against your own reviewers and a validation-ready plan for production."
+    }
+  ],
+  "related_industries": [
+    "healthcare",
+    "manufacturing",
+    "logistics-supply-chain"
+  ],
+  "cta": {
+    "headline": "Test one record type on your own batches",
+    "text": "Book a discovery call to choose a narrow pilot, such as BMR pre-review for one product or COA checks for one material group, and compare the results with your QA team's own review."
+  },
+  "url": "/industries/pharma-life-sciences/"
+}

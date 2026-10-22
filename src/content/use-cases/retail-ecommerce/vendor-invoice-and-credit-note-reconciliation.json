@@ -1,0 +1,222 @@
+{
+  "slug": "vendor-invoice-and-credit-note-reconciliation",
+  "industry": "retail-ecommerce",
+  "title": "Vendor Invoice and Credit Note Reconciliation",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Match vendor invoices, GRNs, RTVs and credit notes, recalculate what each vendor owes you from the agreements, and chase missing or short credit notes with evidence.",
+  "seo": {
+    "title": "Vendor Invoice and Credit Note Reconciliation | VipraTech",
+    "description": "AI reconciles vendor invoices, GRNs, returns to vendor and credit notes for retailers, recalculates amounts due and flags missing or short credit notes.",
+    "keywords": [
+      "vendor credit note reconciliation",
+      "vendor ledger reconciliation retail",
+      "RTV credit note tracking",
+      "accounts payable reconciliation AI",
+      "vendor statement reconciliation"
+    ]
+  },
+  "designed_for": [
+    "CFO or Finance Controller",
+    "Accounts Payable Manager",
+    "Vendor Accounts Lead",
+    "Category Finance Manager"
+  ],
+  "problem": {
+    "intro": "Retailers and quick-commerce operators deal with hundreds of vendors, each sending invoices, credit notes and statements in their own format. Credit notes for short supply, damages, returns to vendor, price drops and promotional support are agreed in one place and issued, or not, somewhere else.",
+    "pain_points": [
+      {
+        "title": "Credit notes that never arrive",
+        "detail": "Credit notes promised for RTVs, damages or price protection are missed, short or applied to the wrong invoice, and nobody tracks the balance."
+      },
+      {
+        "title": "Vendor statements that do not agree",
+        "detail": "Vendor statements of account and your ledger disagree, and finding the difference means going through months of transactions line by line."
+      },
+      {
+        "title": "Evidence scattered across systems",
+        "detail": "Short receipts sit in the WMS, RTV notes in store systems, promo agreements in email and credit notes in PDF attachments."
+      },
+      {
+        "title": "GST mismatches",
+        "detail": "Credit notes that do not reference the right invoice, or are missing from GSTR-2B, affect input tax credit and need follow-up."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a reconciliation engine that brings together vendor invoices, GRNs, short-receipt and damage reports, return-to-vendor notes, promotional and price-protection agreements, credit notes and vendor statements. OCR and an LLM read the PDFs and spreadsheets vendors send. For each trigger event, such as an RTV or a price drop, the system recalculates the credit you are owed from the agreement and source quantities, then matches it to credit notes received. Missing, short and duplicate credit notes are flagged with evidence. Finance approves adjustments, and the system drafts vendor dispute emails and an open-items ageing report.",
+    "capabilities": [
+      "Reads vendor invoices, credit notes, debit notes and statements in PDF, scan and spreadsheet form",
+      "Links each expected credit to its trigger: short GRN, damage report, RTV, price drop or promo agreement",
+      "Recalculates expected credit amounts from agreements and source quantities, not from vendor documents",
+      "Flags missing, short, duplicate and misapplied credit notes",
+      "Reconciles vendor statements of account against your ledger and lists differences with reasons",
+      "Drafts vendor dispute emails with the evidence attached and tracks responses"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Gather documents and events",
+      "detail": "Vendor documents come from email and portals; GRN, RTV and promo data come from the WMS, ERP and category teams."
+    },
+    {
+      "step": 2,
+      "title": "Extract and normalise",
+      "detail": "Invoices, credit notes and statements are read into a common structure with confidence scores."
+    },
+    {
+      "step": 3,
+      "title": "Recalculate expected credits",
+      "detail": "For each trigger event, the expected credit is calculated from agreements and source quantities."
+    },
+    {
+      "step": 4,
+      "title": "Match and flag",
+      "detail": "Expected credits are matched to credit notes received; gaps, shorts and duplicates are flagged."
+    },
+    {
+      "step": 5,
+      "title": "Finance review",
+      "detail": "Vendor accounts reviews exceptions, confirms adjustments and approves dispute emails."
+    },
+    {
+      "step": 6,
+      "title": "Post and track",
+      "detail": "Approved entries are posted to the ERP, and open items are aged and followed up."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Vendor invoices, CNs and statements\"] --> B[\"Extract and normalise lines\"]\n  C[\"GRN, RTV and promo events\"] --> D[\"Recalculate expected credits\"]\n  B --> E[\"Match credits to credit notes\"]\n  D --> E\n  E --> F{\"Matched within tolerance?\"}\n  F -->|\"yes\"| G[\"Post to ERP ledger\"]\n  F -->|\"no\"| H(\"Vendor accounts reviews exception\")\n  H --> I[\"Dispute email with evidence\"]\n  H --> G",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Ingestion",
+        "components": [
+          "Vendor email and portal connectors",
+          "WMS GRN and RTV exports",
+          "Promo and price-protection agreement register"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "OCR with table detection",
+          "LLM extractor for invoices, credit notes and statements"
+        ]
+      },
+      {
+        "name": "Reconciliation engine",
+        "components": [
+          "Expected-credit calculator from agreements",
+          "Many-to-many matcher with tolerances",
+          "Duplicate and misapplication checks"
+        ]
+      },
+      {
+        "name": "Review",
+        "components": [
+          "Exception queue with evidence panel",
+          "Dispute email drafts and response tracking"
+        ]
+      },
+      {
+        "name": "Posting and audit",
+        "components": [
+          "ERP adapter for adjustments",
+          "Open-items ageing and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Ingestion\"]\n    I1[\"Vendor email and portals\"]\n    I2[\"GRN and RTV exports\"]\n    I3[\"Promo agreement register\"]\n  end\n  subgraph S2[\"Extraction\"]\n    E1[\"OCR and LLM extractor\"]\n  end\n  subgraph S3[\"Reconciliation engine\"]\n    R1[\"Expected credit calculator\"]\n    R2[\"Matcher with tolerances\"]\n    R3[\"Duplicate checks\"]\n  end\n  subgraph S4[\"Review\"]\n    V1(\"Exception queue\")\n    V2[\"Dispute drafts\"]\n  end\n  subgraph S5[\"Posting and audit\"]\n    P1[\"ERP adapter\"]\n    P2[\"Ageing and audit log\"]\n  end\n  I1 --> E1 --> R2\n  I2 --> R1\n  I3 --> R1\n  R1 --> R2 --> R3\n  R3 --> V1\n  R3 --> P1\n  V1 --> V2\n  V1 --> P1\n  P1 --> P2"
+  },
+  "inputs": [
+    "Vendor invoices, credit notes and debit notes",
+    "Vendor statements of account",
+    "GRN, short-receipt and damage reports from the WMS",
+    "Return-to-vendor notes",
+    "Promotional support and price-protection agreements",
+    "Vendor ledger and GSTR-2B data"
+  ],
+  "outputs": [
+    "Line-level reconciliation per vendor",
+    "List of missing, short, duplicate and misapplied credit notes with evidence",
+    "Statement of account difference report",
+    "Draft vendor dispute emails",
+    "Open-items ageing and audit trail"
+  ],
+  "human_in_the_loop": "Vendor accounts approve every adjustment and every dispute sent to a vendor, and category managers confirm the terms of promotional and price-protection agreements. Uncertain lines are flagged for review rather than passed.",
+  "integrations": [
+    "ERP such as SAP, Oracle, Microsoft Dynamics or Tally",
+    "WMS and store systems for GRN and RTV data",
+    "Vendor portal or AP mailbox",
+    "GST compliance tool for GSTR-2B",
+    "Email for dispute follow-up"
+  ],
+  "guardrails": [
+    "Expected credits recalculated from agreements and source data, not copied from vendor documents",
+    "Uncertain lines flagged, never silently matched",
+    "Duplicate credit note detection across periods",
+    "No postings without finance approval",
+    "Full audit trail of matches, edits and approvals"
+  ],
+  "compliance_notes": [
+    "Credit notes are checked for references to the original invoice, which supports your tax team's GST and GSTR-2B reconciliation.",
+    "The audit trail supports statutory audit of vendor balances."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "The top vendors of one category for one quarter, using your finance team's completed reconciliation as the benchmark.",
+    "deliverables": [
+      "Agreed rules for each credit type",
+      "Working reconciliation for the pilot vendors",
+      "Exception queue and dispute drafts",
+      "Comparison report against finance's reconciliation",
+      "Roll-out plan and integration design"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with finance reconciliation",
+        "how": "Line-level results compared with your finance team's completed reconciliation for the same period."
+      },
+      {
+        "metric": "Open credits identified",
+        "how": "Missing or short credit notes found with evidence and confirmed by vendor accounts."
+      },
+      {
+        "metric": "Exception rate and reasons",
+        "how": "Lines routed to review per vendor, by reason."
+      },
+      {
+        "metric": "Reconciliation time per vendor",
+        "how": "Effort to close a vendor reconciliation, with and without the system."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Vendors send statements in every format. Will that work?",
+      "a": "Yes. Statements and credit notes are read in context, whether PDF, scan or spreadsheet, and mapped to a common structure. For your own system exports, such as GRN and RTV reports, we agree and freeze the formats before go-live."
+    },
+    {
+      "q": "Who decides whether a vendor owes us money?",
+      "a": "Your finance team. The system shows the recalculated amount, the agreement and the source quantities side by side, and finance approves any adjustment or dispute."
+    },
+    {
+      "q": "Can brands use this to reconcile deductions from retailers and quick-commerce platforms?",
+      "a": "Yes. The same engine works in reverse, matching debit notes and deductions raised by modern trade and quick-commerce accounts against your invoices, delivery proofs and agreed terms."
+    },
+    {
+      "q": "Does it post entries in our ERP?",
+      "a": "It prepares adjustment entries for your ERP through an API, import file or staging table, and posts only after finance approval."
+    }
+  ],
+  "related": [
+    "distributor-trade-claims-settlement",
+    "dark-store-picking-and-packing-qc",
+    "po-invoice-three-way-matching",
+    "gst-return-reconciliation"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/retail-ecommerce/vendor-invoice-and-credit-note-reconciliation/"
+}

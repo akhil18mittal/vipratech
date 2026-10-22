@@ -1,0 +1,216 @@
+{
+  "slug": "travel-quote-generation-automation",
+  "industry": "hospitality-travel",
+  "title": "Travel Agent Quote Generation Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Turn a holiday enquiry into a costed, day-wise itinerary and quote from your contracted rates, supplier sheets and margin rules, ready for the consultant to check and send on WhatsApp.",
+  "seo": {
+    "title": "Travel Agent Quote Generation with AI | VipraTech",
+    "description": "AI that builds day-wise itineraries and costed quotes from contracted hotel and DMC rates, transfers and margin rules, for consultants to check and send.",
+    "keywords": [
+      "travel quote automation",
+      "holiday package quote generator",
+      "travel agency itinerary builder AI",
+      "DMC rate sheet extraction",
+      "tour package costing tool"
+    ]
+  },
+  "designed_for": [
+    "Travel Agency Owner",
+    "Holiday Sales Consultant",
+    "Operations Executive at a tour operator or DMC",
+    "B2B Sales Manager"
+  ],
+  "problem": {
+    "intro": "A typical holiday enquiry, such as a family wanting five nights in Kerala over the Christmas holidays in mid-range hotels, can take a consultant hours to quote. They look up contracted hotel rates with seasonal supplements, transfer and sightseeing costs, flight options and margins across spreadsheets and PDFs, then format an itinerary. By the time it is sent, the customer has received quotes from other agents.",
+    "pain_points": [
+      {
+        "title": "Rates scattered across sheets",
+        "detail": "Hotel contracts, DMC rate sheets, transfer tariffs and sightseeing costs sit in different files, each with seasons, supplements and blackout dates."
+      },
+      {
+        "title": "Slow first quote",
+        "detail": "Customers ask several agents at once, and the first credible itinerary often wins the booking."
+      },
+      {
+        "title": "Costing mistakes",
+        "detail": "Missed child or extra-bed supplements, peak-date surcharges, or GST and TCS on overseas packages erode margin or force awkward revisions."
+      },
+      {
+        "title": "Inconsistent itineraries",
+        "detail": "Each consultant formats quotes differently, with varying detail on inclusions, exclusions and cancellation terms."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a quote engine that reads the enquiry from WhatsApp, email or a web form and asks for missing details: dates, travellers and ages, hotel category, budget and interests. It drafts a day-wise route from your preferred circuits and realistic travel times, selects hotels and services from your contracted rates, which we extract from hotel contracts and DMC sheets into a structured rate store, and calculates the cost with supplements, taxes and your margin rules. The consultant sees the itinerary and costing sheet side by side, edits as needed and sends a branded quote as a PDF or WhatsApp message. Revisions keep a version history.",
+    "capabilities": [
+      "Enquiry parsing from WhatsApp, email and web forms, with prompts for missing details",
+      "Rate store built from hotel contracts and DMC sheets, with seasons, supplements and blackout dates",
+      "Day-wise itinerary drafting from your preferred circuits and realistic travel times",
+      "Costing with child and extra-bed supplements, peak surcharges, configured taxes and margins",
+      "Consultant review screen with itinerary and costing side by side",
+      "Branded PDF and WhatsApp quotes with version history and follow-up reminders"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the enquiry",
+      "detail": "An enquiry arrives by WhatsApp, email or web form and is parsed into structured requirements."
+    },
+    {
+      "step": 2,
+      "title": "Fill gaps",
+      "detail": "Missing details such as children's ages, hotel category or date flexibility are requested before costing."
+    },
+    {
+      "step": 3,
+      "title": "Draft the itinerary",
+      "detail": "A day-wise route is drafted from your preferred circuits, with hotels and services chosen from contracted rates."
+    },
+    {
+      "step": 4,
+      "title": "Calculate the cost",
+      "detail": "The engine applies seasons, supplements, taxes and margin rules, and flags any missing or expired rate."
+    },
+    {
+      "step": 5,
+      "title": "Consultant review",
+      "detail": "The consultant checks the itinerary and costing, adjusts choices and approves the quote."
+    },
+    {
+      "step": 6,
+      "title": "Send and follow up",
+      "detail": "A branded quote goes out as a PDF or on WhatsApp, and follow-up reminders are scheduled."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Enquiry by WhatsApp, email or form\"] --> B[\"Parse requirements and fill gaps\"]\n  B --> C[\"Draft day-wise itinerary\"]\n  C --> D[\"Price from contracted rate store\"]\n  D --> E{\"All rates found and valid?\"}\n  E -->|\"no\"| F[\"Flag missing rate to operations\"]\n  F --> G(\"Consultant reviews and edits\")\n  E -->|\"yes\"| G\n  G --> H[\"Send branded quote\"]\n  H --> I[\"Schedule follow-up\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Rate ingestion",
+        "components": [
+          "Hotel contract and DMC sheet extraction",
+          "Structured rate store with seasons and supplements",
+          "Rate expiry alerts"
+        ]
+      },
+      {
+        "name": "Enquiry handling",
+        "components": [
+          "WhatsApp, email and form intake",
+          "LLM requirement parser"
+        ]
+      },
+      {
+        "name": "Itinerary and costing",
+        "components": [
+          "Itinerary drafter with preferred circuits",
+          "Costing engine with taxes and margin rules"
+        ]
+      },
+      {
+        "name": "Review and delivery",
+        "components": [
+          "Consultant review screen",
+          "Branded PDF and WhatsApp quote generator",
+          "CRM sync and follow-up reminders"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Rate ingestion\"]\n  R1[\"Contract and DMC sheet extraction\"]\n  R2[\"Structured rate store\"]\n  end\n  subgraph S2[\"Enquiry handling\"]\n  E1[\"WhatsApp, email and form intake\"]\n  E2[\"LLM requirement parser\"]\n  end\n  subgraph S3[\"Itinerary and costing\"]\n  C1[\"Itinerary drafter\"]\n  C2[\"Costing engine\"]\n  end\n  subgraph S4[\"Review and delivery\"]\n  V1(\"Consultant review\")\n  V2[\"Quote generator\"]\n  V3[\"CRM and follow-up\"]\n  end\n  R1 --> R2\n  R2 --> C2\n  E1 --> E2\n  E2 --> C1\n  C1 --> C2\n  C2 --> V1\n  V1 --> V2\n  V2 --> V3"
+  },
+  "inputs": [
+    "Customer enquiries from WhatsApp, email and web forms",
+    "Hotel contracts and DMC rate sheets in Excel or PDF",
+    "Transfer, sightseeing and activity tariffs",
+    "Preferred circuits and travel time rules",
+    "Margin rules and tax settings confirmed by your accountant"
+  ],
+  "outputs": [
+    "Day-wise itinerary",
+    "Costing sheet showing each component, supplement and tax",
+    "Branded PDF and WhatsApp quote",
+    "Missing or expired rate alerts for operations",
+    "Quote versions and follow-up tasks in the CRM"
+  ],
+  "human_in_the_loop": "The consultant reviews and approves every quote before it is sent, and operations confirms availability with hotels and suppliers before booking. Tax treatment and margins are set by the agency and its accountant, not by the model.",
+  "integrations": [
+    "Travel agency CRM or back-office system",
+    "WhatsApp Business API and email",
+    "Hotel and DMC contract files in Excel or PDF",
+    "Supplier or bedbank APIs where you use them",
+    "Accounting system for confirmed bookings"
+  ],
+  "guardrails": [
+    "Prices come only from the rate store and margin rules, never generated by the model",
+    "Expired or missing rates flagged, not estimated",
+    "Quotes marked subject to availability until operations confirms",
+    "Inclusions, exclusions and cancellation terms drawn from approved templates",
+    "Every quote versioned with the rates used"
+  ],
+  "compliance_notes": [
+    "GST, and TCS on overseas tour packages, are applied as configured by your accountant; the system does not determine tax treatment.",
+    "Customer details are processed for quoting and booking under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "Two or three domestic circuits your team sells most, using your current hotel and DMC contracts, with consultants comparing generated quotes with their own.",
+    "deliverables": [
+      "Rate store built from the pilot contracts",
+      "Itinerary and costing rules for the pilot circuits",
+      "Consultant review screen and quote template",
+      "Pilot comparison of generated and manual quotes",
+      "Roll-out plan for further destinations"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Time to first quote",
+        "how": "Time from enquiry to quote sent, compared with manual quotes in the same period."
+      },
+      {
+        "metric": "Costing accuracy",
+        "how": "Generated costs compared with consultant-checked costing for the same enquiries."
+      },
+      {
+        "metric": "Consultant edits per quote",
+        "how": "Count and type of changes made before sending."
+      },
+      {
+        "metric": "Quote-to-booking conversion",
+        "how": "Bookings from generated quotes, tracked in the CRM."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our rates come in many formats from hotels and DMCs. Can it read them?",
+      "a": "Yes. Contract PDFs and Excel sheets are extracted into the rate store, including seasons, room categories, meal plans, supplements and blackout dates. Operations reviews each extracted contract once before it is used for pricing."
+    },
+    {
+      "q": "Will it book hotels too?",
+      "a": "Not in the first phase. It produces quotes and itineraries, and booking stays with operations, who confirm availability with suppliers. Supplier API booking can be added later where you have access."
+    },
+    {
+      "q": "Can it handle international packages and flights?",
+      "a": "Yes, with your contracted rates and supplier feeds. Flight prices change quickly, so quotes show flights as indicative unless operations confirms a fare."
+    },
+    {
+      "q": "Does it handle GST and TCS?",
+      "a": "It applies the GST and TCS settings your accountant configures for each package type and shows them as separate lines. It does not decide tax treatment."
+    }
+  ],
+  "related": [
+    "travel-itinerary-and-visa-document-checker",
+    "hotel-whatsapp-booking-assistant",
+    "review-response-and-reputation-automation",
+    "shipper-lead-qualification-and-quotes"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/travel-quote-generation-automation/"
+}

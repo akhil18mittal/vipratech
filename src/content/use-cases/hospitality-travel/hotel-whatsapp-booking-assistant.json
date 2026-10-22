@@ -1,0 +1,216 @@
+{
+  "slug": "hotel-whatsapp-booking-assistant",
+  "industry": "hospitality-travel",
+  "title": "WhatsApp Booking Assistant for Hotels",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Answer availability and rate questions on WhatsApp, show rooms, take UPI advances and confirm bookings in your PMS, with staff stepping in for groups, negotiations and complaints.",
+  "seo": {
+    "title": "WhatsApp Booking Assistant for Hotels | VipraTech",
+    "description": "WhatsApp booking assistant for hotels: live availability and rates, room catalogue, UPI advance payment and instant confirmation, with staff handover.",
+    "keywords": [
+      "WhatsApp hotel booking",
+      "hotel WhatsApp chatbot India",
+      "direct hotel booking automation",
+      "UPI hotel advance payment",
+      "WhatsApp Cloud API for hotels"
+    ]
+  },
+  "designed_for": [
+    "Hotel Owner or General Manager",
+    "Front Office Manager",
+    "Revenue Manager",
+    "Reservations Executive"
+  ],
+  "problem": {
+    "intro": "For many Indian hotels, WhatsApp has become a main booking channel, fed by Google Business Profile, Instagram and repeat guests. But it is answered from the front desk phone between check-ins, so replies are slow, rates are quoted inconsistently and a guest who waited too long books the same hotel on an OTA.",
+    "pain_points": [
+      {
+        "title": "Slow replies during rush hours",
+        "detail": "The same person handles check-ins, calls and WhatsApp, so messages wait during the evening rush and late at night."
+      },
+      {
+        "title": "Back-and-forth before a booking",
+        "detail": "Dates, number of guests, extra bed, meal plan and room photos take many messages, and guests drop off midway."
+      },
+      {
+        "title": "Payment confusion",
+        "detail": "Advances are requested by sharing a UPI ID, guests send screenshots, and staff check the bank app later to match payments to bookings."
+      },
+      {
+        "title": "Bookings outside the PMS",
+        "detail": "Rooms promised on WhatsApp are noted on paper or in the chat, leading to overbooking when an OTA booking lands for the same room."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a WhatsApp booking assistant on the WhatsApp Cloud API that handles the conversation from first message to confirmed booking. It asks for dates, guests and preferences, checks live availability and rates from your PMS or channel manager, and shows room types with photos, inclusions and meal plans. When the guest chooses, it places a short hold on the inventory, sends a UPI payment link or QR code for the advance and confirms the booking only after the payment gateway reports success. The voucher goes to the guest and the booking appears in the PMS. Staff take over in the same chat for groups, special requests, negotiations and complaints.",
+    "capabilities": [
+      "Guided booking conversation in English, Hindi and Hinglish, with free-text understanding",
+      "Live availability and rates from the PMS or channel manager, plus direct-booking offers you set",
+      "Room catalogue with photos, inclusions, CP and MAP meal plans and policies",
+      "Timed inventory hold, UPI payment link or QR code and gateway-verified confirmation",
+      "Booking written to the PMS with a confirmation voucher sent on WhatsApp",
+      "Handover to staff in the same chat, with the conversation history visible"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Guest starts a chat",
+      "detail": "A guest messages from Google, Instagram, the website or a saved number, and the assistant greets them and asks for dates and guests."
+    },
+    {
+      "step": 2,
+      "title": "Check availability and rates",
+      "detail": "The assistant queries the PMS or channel manager and presents matching room types with rates and inclusions."
+    },
+    {
+      "step": 3,
+      "title": "Select and hold",
+      "detail": "The guest picks a room and meal plan, and the assistant places a timed hold on that inventory."
+    },
+    {
+      "step": 4,
+      "title": "Collect the advance",
+      "detail": "A UPI payment link or QR code is sent, and payment status comes from the gateway, not from screenshots."
+    },
+    {
+      "step": 5,
+      "title": "Confirm or hand over",
+      "detail": "On success the booking is created in the PMS and a voucher is sent; failed payments, groups and special requests go to staff."
+    },
+    {
+      "step": 6,
+      "title": "Pre-arrival messages",
+      "detail": "Before arrival the guest receives directions, check-in time and ID requirements, and can ask follow-up questions."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Guest messages on WhatsApp\"] --> B[\"Ask dates, guests and preferences\"]\n  B --> C[\"Check PMS availability and rates\"]\n  C --> D[\"Show rooms and hold inventory\"]\n  D --> E[\"Send UPI payment link or QR\"]\n  E --> F{\"Gateway confirms payment?\"}\n  F -->|\"yes\"| G[\"Create booking and send voucher\"]\n  F -->|\"no\"| H(\"Front desk follows up\")\n  G --> I[\"Pre-arrival directions and ID note\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Messaging",
+        "components": [
+          "WhatsApp Cloud API number",
+          "Message templates and session handling",
+          "Staff inbox for handover"
+        ]
+      },
+      {
+        "name": "Conversation",
+        "components": [
+          "LLM dialogue manager with booking flow",
+          "Hotel policy and FAQ knowledge base",
+          "Language detection"
+        ]
+      },
+      {
+        "name": "Inventory and payments",
+        "components": [
+          "PMS or channel manager connector",
+          "Timed inventory holds",
+          "Payment gateway with UPI links and QR",
+          "Webhook-based payment confirmation"
+        ]
+      },
+      {
+        "name": "Records and reporting",
+        "components": [
+          "Booking creation in the PMS",
+          "Conversation and conversion reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Messaging\"]\n  M1[\"WhatsApp Cloud API\"]\n  M2(\"Staff inbox\")\n  end\n  subgraph S2[\"Conversation\"]\n  C1[\"LLM booking dialogue\"]\n  C2[\"Policy and FAQ base\"]\n  end\n  subgraph S3[\"Inventory and payments\"]\n  I1[\"PMS or channel manager\"]\n  I2[\"Timed inventory hold\"]\n  P1[\"UPI payment gateway\"]\n  P2[\"Payment webhook\"]\n  end\n  subgraph S4[\"Records and reporting\"]\n  R1[\"Booking and voucher\"]\n  R2[\"Conversion reports\"]\n  end\n  M1 --> C1\n  C2 --> C1\n  C1 --> I1\n  I1 --> I2\n  I2 --> P1\n  P1 --> P2\n  P2 --> R1\n  R1 --> M1\n  C1 --> M2\n  R1 --> R2"
+  },
+  "inputs": [
+    "Guest WhatsApp messages, including voice notes",
+    "Live availability and rates from the PMS or channel manager",
+    "Room photos, inclusions, meal plans and policies",
+    "Direct-booking offers and rules set by the revenue manager",
+    "Payment gateway status callbacks"
+  ],
+  "outputs": [
+    "Confirmed bookings in the PMS",
+    "Confirmation vouchers on WhatsApp",
+    "Payment records linked to each booking",
+    "Handover conversations for staff",
+    "Enquiry-to-booking reports by source"
+  ],
+  "human_in_the_loop": "Front desk staff take over any conversation involving groups, special requests, negotiations, complaints or failed payments, and the revenue manager sets the rates and offers the assistant may quote.",
+  "integrations": [
+    "WhatsApp Cloud API",
+    "Hotel PMS such as eZee, Hotelogix, IDS or Opera",
+    "Channel manager such as STAAH, AxisRooms or SiteMinder",
+    "Payment gateway with UPI, such as Razorpay, Cashfree or PayU",
+    "Google Business Profile and Instagram links to WhatsApp"
+  ],
+  "guardrails": [
+    "Bookings confirmed only after a gateway payment callback, never on a screenshot",
+    "Timed holds released automatically if payment does not arrive",
+    "Quotes only rates and offers returned by the PMS or set by the revenue manager",
+    "Hands over to staff whenever the guest asks for a person",
+    "Guest data stored in your account, with access limited to front office staff"
+  ],
+  "compliance_notes": [
+    "Business-initiated WhatsApp messages use approved templates and opt-in, per Meta's WhatsApp Business policies.",
+    "Guest contact details and payment references are processed for the booking purpose, with retention limits, under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One property's WhatsApp number, covering standard room bookings with a UPI advance, run alongside the front desk so staff can step in at any point.",
+    "deliverables": [
+      "Booking flow and policies configured for your rooms",
+      "Integration with your PMS or availability sheet and payment gateway",
+      "Staff handover inbox",
+      "Pilot conversation review",
+      "Production plan and running cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Enquiry-to-booking conversion",
+        "how": "WhatsApp conversations that end in a paid booking, compared with the weeks before the pilot."
+      },
+      {
+        "metric": "First response time",
+        "how": "Time from the guest's first message to a useful reply, by hour of day."
+      },
+      {
+        "metric": "Handovers and reasons",
+        "how": "Conversations passed to staff, grouped by reason."
+      },
+      {
+        "metric": "Booking errors",
+        "how": "Bookings with wrong dates, room type or payment status found by the front desk."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What if we do not have a PMS with an API?",
+      "a": "We can start with a shared availability and rate sheet that the front desk updates, and the assistant reads it before quoting. It is less automatic than a live integration, so we keep holds short and have staff confirm bookings until a PMS connection is in place."
+    },
+    {
+      "q": "How do you stop fake payment screenshots?",
+      "a": "The assistant ignores screenshots for confirmation. It waits for the payment gateway's success callback, linked to the booking reference. If a guest says they have paid and no callback has arrived, the chat goes to staff to check."
+    },
+    {
+      "q": "Will it undercut our OTA rates?",
+      "a": "It quotes only what your PMS returns and the direct offers your revenue manager sets, so rate parity decisions stay with you. Some hotels prefer to offer a direct-booking benefit, such as breakfast or late check-out, rather than a lower rate."
+    },
+    {
+      "q": "Can it handle Hindi and Hinglish messages?",
+      "a": "Yes. It understands mixed Hindi and English text, including the spellings guests commonly use, and replies in the guest's style. Voice notes can be transcribed and handled the same way."
+    }
+  ],
+  "related": [
+    "after-hours-reservation-voice-agent",
+    "review-response-and-reputation-automation",
+    "guest-id-and-check-in-document-capture",
+    "wedding-and-banquet-enquiry-qualification"
+  ],
+  "proof_ref": "whatsapp-hotel-booking",
+  "content_type": "use-case",
+  "url": "/use-cases/hospitality-travel/hotel-whatsapp-booking-assistant/"
+}

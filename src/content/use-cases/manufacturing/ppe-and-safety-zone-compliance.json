@@ -1,0 +1,222 @@
+{
+  "slug": "ppe-and-safety-zone-compliance",
+  "industry": "manufacturing",
+  "title": "PPE and Safety-Zone Compliance",
+  "capability": "computer-vision",
+  "secondary_capabilities": [],
+  "summary": "Vision models on existing CCTV spot missing helmets, shoes, vests and gloves, and people entering robot cells, press areas or forklift aisles, with clip-backed alerts to supervisors.",
+  "seo": {
+    "title": "PPE and Safety-Zone Monitoring with AI | VipraTech",
+    "description": "AI on existing plant CCTV flags missing PPE and unsafe entry into robot cells, press shops and forklift aisles, with reviewed alerts and privacy controls.",
+    "keywords": [
+      "PPE detection AI",
+      "factory safety monitoring CCTV",
+      "safety zone intrusion detection",
+      "helmet and vest detection",
+      "EHS computer vision"
+    ]
+  },
+  "designed_for": [
+    "EHS Head",
+    "Plant Safety Officer",
+    "Plant Head",
+    "Shift In-charge"
+  ],
+  "problem": {
+    "intro": "Most plants already record CCTV around the clock, but footage is pulled only after an incident. Safety officers rely on rounds and audits, which cover a fraction of the shop floor and rarely the night shift.",
+    "pain_points": [
+      {
+        "title": "Rounds cannot cover every area",
+        "detail": "One safety officer cannot watch the press shop, paint shop, stores and loading bay across three shifts, so lapses go unseen."
+      },
+      {
+        "title": "Contract workers and new joiners",
+        "detail": "Compliance drops among contract labour, visitors and new joiners who are less familiar with zone rules and PPE requirements."
+      },
+      {
+        "title": "Footage used only after the fact",
+        "detail": "CCTV is reviewed after a near miss or injury, when the chance to correct behaviour has already passed."
+      },
+      {
+        "title": "Alert fatigue from motion detection",
+        "detail": "Basic NVR motion alerts fire on every forklift and shadow, so supervisors learn to ignore them."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a monitoring layer that reads your existing CCTV streams, detects people, PPE items and vehicles, and checks them against rules you set for each zone and shift. Helmets and safety shoes may be required everywhere, ear protection only in the press shop, and no entry to a robot cell while it runs in auto mode. A violation must persist for a few seconds before it counts, which removes noise from passing glimpses. Alerts carry a short clip with faces blurred and go to the shift in-charge. Uncertain detections go to a review queue, and EHS gets daily trends by zone.",
+    "capabilities": [
+      "Detects helmets, safety shoes, high-visibility vests, gloves, goggles and ear protection per zone rules",
+      "Virtual zones for robot cells, press areas, crane bays, chemical stores and forklift aisles",
+      "Person and forklift proximity alerts in shared aisles and loading bays",
+      "Persistence and confidence rules so a passing glimpse does not trigger an alert",
+      "Clip-backed alerts to supervisors on a dashboard or WhatsApp, with faces blurred",
+      "Camera health checks for blocked, moved or offline cameras"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Connect camera streams",
+      "detail": "The system reads RTSP streams from your NVR or VMS without changing the existing recording set-up."
+    },
+    {
+      "step": 2,
+      "title": "Define zones and rules",
+      "detail": "EHS marks zones on each camera view and sets PPE and access rules per zone and shift."
+    },
+    {
+      "step": 3,
+      "title": "Detect people, PPE and vehicles",
+      "detail": "Models detect people, PPE items and forklifts on an edge server inside the plant."
+    },
+    {
+      "step": 4,
+      "title": "Check persistence and confidence",
+      "detail": "A violation must persist and pass a confidence threshold before it is treated as real."
+    },
+    {
+      "step": 5,
+      "title": "Alert or queue for review",
+      "detail": "Confident violations alert the shift in-charge with a clip; uncertain ones go to the safety officer's queue."
+    },
+    {
+      "step": 6,
+      "title": "Report trends",
+      "detail": "EHS receives daily and weekly trends by zone, shift and violation type, with confirmed clips for toolbox talks."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"CCTV streams from NVR\"] --> B[\"Detect people, PPE and forklifts\"]\n  B --> C[\"Apply zone and shift rules\"]\n  C --> D{\"Violation persists and confident?\"}\n  D -->|\"yes\"| E[\"Alert shift in-charge with clip\"]\n  D -->|\"unsure\"| F(\"Safety officer review queue\")\n  D -->|\"no\"| G[\"No alert, counted in trends\"]\n  F -->|\"confirmed\"| E\n  E --> H[\"Daily EHS trend report\"]\n  G --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Video ingestion",
+        "components": [
+          "RTSP or ONVIF connector to NVR or VMS",
+          "Frame sampling per camera",
+          "Camera health monitor"
+        ]
+      },
+      {
+        "name": "Edge detection",
+        "components": [
+          "Person, PPE and vehicle detection models",
+          "Edge GPU server on the plant network"
+        ]
+      },
+      {
+        "name": "Rules engine",
+        "components": [
+          "Zone polygons per camera view",
+          "PPE and access rules per zone and shift",
+          "Persistence and confidence thresholds"
+        ]
+      },
+      {
+        "name": "Alerting and review",
+        "components": [
+          "Safety officer review queue",
+          "Supervisor alerts on dashboard or WhatsApp",
+          "Face-blurred clip store with retention limits"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Trends by zone, shift and violation type",
+          "Exports for the safety committee and audits"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Video ingestion\"]\n    V1[\"NVR or VMS streams\"]\n    V2[\"Camera health monitor\"]\n  end\n  subgraph S2[\"Edge detection\"]\n    D1[\"Edge GPU server\"]\n    D2[\"Person, PPE and vehicle models\"]\n  end\n  subgraph S3[\"Rules engine\"]\n    R1[\"Zone polygons per camera\"]\n    R2[\"PPE and access rules\"]\n    R3[\"Persistence thresholds\"]\n  end\n  subgraph S4[\"Alerting and review\"]\n    A1(\"Safety officer review\")\n    A2[\"Supervisor alerts\"]\n    A3[\"Blurred clip store\"]\n  end\n  subgraph S5[\"Reporting\"]\n    P1[\"EHS trend dashboard\"]\n  end\n  V1 --> D1 --> D2\n  V2 --> P1\n  D2 --> R1 --> R2 --> R3\n  R3 --> A2\n  R3 --> A1\n  A1 --> A2\n  A2 --> A3\n  A3 --> P1"
+  },
+  "inputs": [
+    "RTSP streams from existing CCTV cameras",
+    "Zone maps and the PPE matrix by area from EHS",
+    "Shift timings and robot cell status signals where available",
+    "Escalation contacts per zone and shift"
+  ],
+  "outputs": [
+    "Real-time alerts with short face-blurred clips",
+    "Review queue of uncertain detections",
+    "Daily and weekly trends by zone, shift and violation type",
+    "Camera health alerts for blocked or offline cameras",
+    "Confirmed clips for toolbox talks and safety committee reviews"
+  ],
+  "human_in_the_loop": "The safety officer reviews uncertain detections and every clip before it is used in a toolbox talk or a conversation with an individual. The system does not identify workers by name, and any disciplinary step stays with supervisors and HR under your existing policy.",
+  "integrations": [
+    "NVR or VMS over RTSP or ONVIF",
+    "WhatsApp Business API or Microsoft Teams for alerts",
+    "PLC or machine status signals for robot cells",
+    "EHS incident and near-miss register",
+    "Hooter or beacon relay for zone intrusion warnings"
+  ],
+  "guardrails": [
+    "Faces blurred in stored clips and alerts by default",
+    "Minimum persistence and confidence before any alert",
+    "Clip retention limited to the period agreed with HR and legal",
+    "No face recognition or individual tracking unless your policy explicitly allows it",
+    "Camera health checks so blind spots are visible"
+  ],
+  "compliance_notes": [
+    "Supports the safety duties set by the Factories Act 1948 and the OSH Code 2020 but does not replace physical guarding, interlocks or the safety officer's statutory role.",
+    "Worker footage is personal data under the DPDP Act 2023; the design covers notice, purpose limitation and retention limits.",
+    "For European plants, deployments are planned with GDPR and works-council consultation in mind."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Six to ten existing cameras in one shop, such as the press shop or loading bay, with two or three PPE rules and one restricted zone.",
+    "deliverables": [
+      "Zone and rule configuration agreed with EHS",
+      "Edge deployment on your plant network",
+      "Supervisor alert channel and review queue",
+      "Report of alerts, confirmations and missed events from sampled footage",
+      "Roll-out plan for remaining cameras with hardware sizing"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Alert precision",
+        "how": "Share of alerts the safety officer confirms as genuine violations."
+      },
+      {
+        "metric": "Missed violations",
+        "how": "Violations found in a manual review of sampled footage that the system did not flag."
+      },
+      {
+        "metric": "Alert load per shift",
+        "how": "Alerts per camera per shift, tracked so supervisors are not flooded."
+      },
+      {
+        "metric": "Time to acknowledgement",
+        "how": "Time between an alert and the shift in-charge acknowledging it."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will it work with our existing CCTV cameras?",
+      "a": "In most cases, if the camera gives a clear view of the area at a reasonable resolution and the NVR exposes RTSP streams. We assess each camera view in the first week and tell you which ones need repositioning or replacement."
+    },
+    {
+      "q": "Does it identify individual workers?",
+      "a": "Not by default. It detects that a person in a zone is missing PPE, not who they are. Face recognition is not part of the standard build, and clips are blurred."
+    },
+    {
+      "q": "How do you avoid flooding supervisors with alerts?",
+      "a": "Each rule has a persistence window and a confidence threshold, and uncertain cases go to a review queue first. We track alerts per camera per shift during the pilot and tune the rules with EHS."
+    },
+    {
+      "q": "Can it sound a hooter when someone enters a robot cell?",
+      "a": "It can send a signal to a hooter or beacon relay as an extra warning. It is not a safety-rated device and does not replace light curtains, interlocks or lockout-tagout."
+    }
+  ],
+  "related": [
+    "visual-quality-inspection",
+    "maintenance-log-and-sop-assistant",
+    "warehouse-safety-monitoring",
+    "construction-site-safety-compliance"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/manufacturing/ppe-and-safety-zone-compliance/"
+}

@@ -1,0 +1,226 @@
+{
+  "slug": "commercial-underwriting-submission-intake",
+  "industry": "insurance",
+  "title": "Commercial Underwriting Submission Intake",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Turn broker emails, proposal forms, schedules of values and loss histories into a structured, checked submission record, with gaps and appetite issues flagged for the underwriter.",
+  "seo": {
+    "title": "Commercial Underwriting Submission Intake AI | VipraTech",
+    "description": "AI that reads broker submissions, normalises schedules of values and loss histories, checks appetite and completeness, and prepares files for underwriters.",
+    "keywords": [
+      "underwriting submission intake",
+      "commercial insurance AI",
+      "schedule of values extraction",
+      "broker submission automation",
+      "loss run extraction"
+    ]
+  },
+  "designed_for": [
+    "Head of Commercial Underwriting",
+    "Underwriting Operations Manager",
+    "Property and Engineering Underwriter",
+    "Broker Relationship Manager"
+  ],
+  "problem": {
+    "intro": "Commercial submissions arrive by email from brokers in every shape: a placement slip, a proposal form, a location schedule in a spreadsheet with merged cells, a risk inspection report and several years of claims experience. Before an underwriter can think about the risk, someone has to key it in, chase what is missing and check whether another broker has already sent the same client.",
+    "pain_points": [
+      {
+        "title": "Keying before underwriting",
+        "detail": "Underwriting assistants re-enter insured details, sums insured by location and loss history into the workbench, which delays quotes in busy renewal months."
+      },
+      {
+        "title": "Messy schedules of values",
+        "detail": "Location schedules mix building, plant and stock values, use different occupancy terms and rarely add up to the sum insured on the proposal form."
+      },
+      {
+        "title": "Missing information found late",
+        "detail": "A missing fire NOC, inspection report or claims history is often discovered after the underwriter has started reviewing, so the broker query goes out late."
+      },
+      {
+        "title": "Clearance and appetite checks are manual",
+        "detail": "Duplicate submissions from competing brokers and risks outside appetite are spotted from memory, not through a consistent check."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an intake agent that watches your underwriting mailbox or broker portal. It reads each email and its attachments, identifies the line of business, the insured and the broker, and extracts the data your underwriting guidelines need. Schedules of values are normalised into a clean location table with occupancy, construction and values split by building, plant and stock, then reconciled to the proposal. Loss histories become a year-by-year summary. The agent checks completeness, clearance and appetite rules, drafts a broker query for gaps and gives the underwriter a summary with every figure linked to its source. Pricing and acceptance stay with the underwriter.",
+    "capabilities": [
+      "Classifies submissions by line of business, such as property, engineering, marine cargo, liability or group health",
+      "Extracts insured, broker, period, limits, deductibles and requested covers from slips and proposal forms",
+      "Normalises messy schedules of values into a clean location table and reconciles totals to the proposal",
+      "Summarises loss history by year, cause and amount, with large losses called out",
+      "Runs clearance against existing submissions and policies, and checks appetite and referral rules from your guidelines",
+      "Drafts a broker query for missing documents and gives the underwriter a source-linked summary"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture the submission",
+      "detail": "Emails and attachments from the underwriting mailbox or broker portal are grouped into one submission."
+    },
+    {
+      "step": 2,
+      "title": "Classify and extract",
+      "detail": "Line of business, insured, broker and requested cover are identified, and key fields are extracted from each document."
+    },
+    {
+      "step": 3,
+      "title": "Normalise schedules and losses",
+      "detail": "Location schedules and loss histories are converted into standard tables and reconciled to the proposal."
+    },
+    {
+      "step": 4,
+      "title": "Check clearance, appetite and completeness",
+      "detail": "Duplicates, out-of-appetite features and missing documents are flagged against your rules."
+    },
+    {
+      "step": 5,
+      "title": "Resolve gaps",
+      "detail": "An underwriting assistant reviews the flags and sends the drafted broker query where information is missing."
+    },
+    {
+      "step": 6,
+      "title": "Underwriter review",
+      "detail": "The underwriter receives a source-linked summary in the workbench and decides whether and how to quote."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Broker email and attachments\"] --> B[\"Classify line and documents\"]\n  B --> C[\"Extract slip and proposal fields\"]\n  C --> D[\"Normalise SOV and loss history\"]\n  D --> E{\"Complete, cleared and in appetite?\"}\n  E -->|\"no\"| F(\"Assistant reviews and queries broker\")\n  F --> D\n  E -->|\"yes\"| G[\"Source-linked submission summary\"]\n  G --> H(\"Underwriter decides on quote\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Underwriting mailbox connector",
+          "Broker portal upload",
+          "Submission grouping"
+        ]
+      },
+      {
+        "name": "Extraction",
+        "components": [
+          "Spreadsheet parser for merged cells and multi-tab schedules",
+          "OCR for scanned proposals and inspection reports",
+          "LLM field extractor with line-of-business schemas"
+        ]
+      },
+      {
+        "name": "Normalisation",
+        "components": [
+          "Location table builder with occupancy mapping",
+          "Sum insured reconciliation",
+          "Loss history summariser"
+        ]
+      },
+      {
+        "name": "Rules and review",
+        "components": [
+          "Clearance check against submissions and policies",
+          "Appetite and referral rules from guidelines",
+          "Assistant review queue with broker query drafts"
+        ]
+      },
+      {
+        "name": "Integration",
+        "components": [
+          "Underwriting workbench or policy admin adapter",
+          "Geocoding and natural hazard data service",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    A1[\"Mailbox connector\"]\n    A2[\"Broker portal upload\"]\n  end\n  subgraph S2[\"Extraction and normalisation\"]\n    B1[\"Spreadsheet and OCR parsing\"]\n    B2[\"LLM field extractor\"]\n    B3[\"Location table and reconciliation\"]\n    B4[\"Loss history summariser\"]\n  end\n  subgraph S3[\"Rules and review\"]\n    C1[\"Clearance check\"]\n    C2[\"Appetite and referral rules\"]\n    C3(\"Assistant review queue\")\n  end\n  subgraph S4[\"Integration\"]\n    D1[\"Underwriting workbench adapter\"]\n    D2[\"Hazard and geocoding service\"]\n    D3[\"Audit log\"]\n  end\n  A1 --> B1\n  A2 --> B1\n  B1 --> B2\n  B2 --> B3\n  B2 --> B4\n  B3 --> D2\n  D2 --> C2\n  B4 --> C2\n  B2 --> C1\n  C1 --> C3\n  C2 --> C3\n  C3 --> D1\n  D1 --> D3"
+  },
+  "inputs": [
+    "Broker email, placement slip or market reform contract",
+    "Proposal form and expiring policy schedule",
+    "Schedule of values or location list in Excel",
+    "Risk inspection or survey report",
+    "Loss history or claims experience statement",
+    "Employee census for group health submissions"
+  ],
+  "outputs": [
+    "Structured submission record in the underwriting workbench",
+    "Normalised location table with values reconciled to the proposal",
+    "Loss history summary by year and cause",
+    "Clearance, appetite and completeness flags",
+    "Drafted broker query for missing information",
+    "Underwriter summary with source-cell and page links"
+  ],
+  "human_in_the_loop": "Underwriting assistants review every flag and approve broker queries before they are sent. Underwriters make all decisions on acceptance, terms and price; the agent prepares the file and never quotes.",
+  "integrations": [
+    "Shared underwriting mailbox on Microsoft 365 or Google Workspace",
+    "Underwriting workbench or policy administration system",
+    "Broker portal",
+    "Geocoding and natural hazard data services",
+    "CRM for broker relationship tracking",
+    "Document management system"
+  ],
+  "guardrails": [
+    "No pricing, acceptance or declinature by the agent",
+    "Appetite and referral rules owned and versioned by underwriting, not inferred by the model",
+    "Every extracted figure linked to its source cell or page",
+    "Location totals reconciled to the proposal sum insured, with differences flagged",
+    "Submissions kept separate by broker so one broker's documents never appear in another broker's file"
+  ],
+  "compliance_notes": [
+    "Group health census data is personal data under the DPDP Act 2023, so it is masked in logs and access is limited to the underwriting team.",
+    "Keeps underwriting authority with authorised underwriters, consistent with the delegated authority structures insurers already maintain."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "Property and fire submissions from one regional underwriting mailbox, processed retrospectively and then in shadow mode for new submissions.",
+    "deliverables": [
+      "Field schema and appetite rules agreed with underwriting",
+      "Working intake pipeline on real, access-controlled submissions",
+      "Underwriter summary view",
+      "Extraction accuracy report",
+      "Production plan covering further lines of business"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Field and location extraction accuracy",
+        "how": "Compared with the values underwriting assistants keyed for the same submissions."
+      },
+      {
+        "metric": "Time from email receipt to underwriter-ready file",
+        "how": "Timestamps captured in shadow mode and compared with the current process."
+      },
+      {
+        "metric": "Gaps detected at intake",
+        "how": "Missing items flagged by the agent compared with queries the underwriter later raised."
+      },
+      {
+        "metric": "Underwriter usefulness rating",
+        "how": "Short structured feedback from underwriters on each summary they used."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it handle our brokers' messy spreadsheets?",
+      "a": "Yes. It reads multi-tab workbooks, merged cells and inconsistent headings, and maps columns to your location schema. Where a mapping is uncertain, it asks the assistant to confirm rather than guessing."
+    },
+    {
+      "q": "Does it work with London market or ACORD-style submissions?",
+      "a": "Yes. The extraction schemas are configurable, so market reform contracts, ACORD-style forms and Indian proposal formats can each map into one submission record."
+    },
+    {
+      "q": "Will it price risks or recommend terms?",
+      "a": "No. It prepares and checks information. Rating, terms and the decision to quote remain with your underwriters."
+    },
+    {
+      "q": "How is broker confidentiality protected?",
+      "a": "Submissions are stored and displayed per broker and per insured, with role-based access. Clearance checks compare identities without exposing one broker's documents to another."
+    }
+  ],
+  "related": [
+    "policy-wording-comparison-assistant",
+    "financial-statement-spreading",
+    "contract-clause-extraction-and-risk-flags"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/insurance/commercial-underwriting-submission-intake/"
+}

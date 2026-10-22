@@ -1,0 +1,217 @@
+{
+  "slug": "ai-agent-permission-and-tool-use-review",
+  "industry": "fintech-payments",
+  "title": "AI Agent Permission and Tool-Use Security Review",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Find out what your AI agents can actually do: which tools, credentials and money-moving actions they reach, where approvals sit, and whether injected text can make them misuse tools.",
+  "seo": {
+    "title": "AI Agent Permission and Tool-Use Review | VipraTech",
+    "description": "Security review of AI agents and MCP tools in payments: permission mapping, approval gates on refunds and payouts, and tool-misuse testing in staging.",
+    "keywords": [
+      "AI agent security review",
+      "excessive agency LLM",
+      "MCP server security",
+      "agent tool misuse testing",
+      "fintech AI agent permissions"
+    ]
+  },
+  "designed_for": [
+    "CISO",
+    "Head of Platform Engineering",
+    "Head of Payment Operations",
+    "AI and ML Engineering Lead"
+  ],
+  "problem": {
+    "intro": "Payment companies are giving agents real permissions: issuing refunds under a limit, updating merchant records, querying ledgers, triaging disputes, or acting through MCP servers wired to internal systems. The risk moves from what the model says to what it does. One over-scoped service account or missing approval step can turn a prompt injection into a payout.",
+    "pain_points": [
+      {
+        "title": "Over-scoped credentials",
+        "detail": "Agents often run on a shared service account with far more access than any single task needs."
+      },
+      {
+        "title": "Missing approval gates",
+        "detail": "Irreversible actions such as refunds, payout releases or changes to a merchant's settlement account run without a human or second check."
+      },
+      {
+        "title": "Injection reaching tools",
+        "detail": "Text in tickets, emails or merchant notes can steer an agent into calling tools in ways nobody intended."
+      },
+      {
+        "title": "Weak audit trail",
+        "detail": "Logs show that an API was called, but not which agent called it, on whose behalf, or why."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We review your agents the way an attacker and an auditor would. First we build an inventory: every agent, every tool and MCP server it can call, the credentials behind each tool and the actions those credentials allow, including any that move money or change payout details. We compare this with what each agent actually needs and mark the excess. Then we test in staging: planting instructions in tickets, emails and data fields, attempting cross-merchant actions, chaining tools and pushing past limits. You get a permission matrix, validated findings with tool-call traces, and concrete controls such as scoped tokens, transaction limits enforced outside the model, allowlists and human approval on high-impact actions.",
+    "capabilities": [
+      "Inventory of agents, tools, MCP servers, credentials and reachable actions",
+      "Least-privilege gap analysis per agent and per tool",
+      "Review of approval gates, limits and kill switches on money-moving and account-changing actions",
+      "Adversarial testing for goal hijack, tool misuse and indirect prompt injection in staging",
+      "Audit log review covering agent identity, on-behalf-of user, inputs and tool calls",
+      "Control recommendations with example policies and code-level fixes"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Inventory",
+      "detail": "We document each agent, its tools and MCP servers, the credentials used and the actions each credential allows."
+    },
+    {
+      "step": 2,
+      "title": "Mark high-impact actions",
+      "detail": "Refunds, payouts, settlement account changes, KYC status changes and bulk data exports are tagged as high-impact."
+    },
+    {
+      "step": 3,
+      "title": "Gap analysis",
+      "detail": "Granted permissions are compared with what each task needs, and missing approvals or limits are recorded."
+    },
+    {
+      "step": 4,
+      "title": "Adversarial testing",
+      "detail": "In staging, we attempt goal hijack, cross-merchant actions and injected instructions through realistic data channels."
+    },
+    {
+      "step": 5,
+      "title": "Validate findings",
+      "detail": "Each issue is reproduced and rated by impact, with the tool-call trace as evidence."
+    },
+    {
+      "step": 6,
+      "title": "Controls and retest",
+      "detail": "We recommend specific controls, review your fixes and retest the high-impact paths."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Inventory agents, tools, credentials\"] --> B[\"Mark money-moving actions\"]\n  B --> C[\"Least privilege gap analysis\"]\n  C --> D[\"Adversarial tests in staging\"]\n  D --> E{\"High-impact action reached?\"}\n  E -->|\"yes\"| F(\"Security lead validates and rates\")\n  E -->|\"no\"| G[\"Record control as effective\"]\n  F --> H[\"Permission matrix and fixes\"]\n  G --> H\n  H --> I[\"Retest high-impact paths\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Discovery",
+        "components": [
+          "Agent and MCP server inventory",
+          "Credential and scope export from IAM and secrets manager",
+          "Action catalogue per tool"
+        ]
+      },
+      {
+        "name": "Analysis",
+        "components": [
+          "Permission matrix builder",
+          "High-impact action map",
+          "Approval and limit checks"
+        ]
+      },
+      {
+        "name": "Adversarial testing",
+        "components": [
+          "Goal hijack and tool misuse playbooks",
+          "Injection seeding through tickets, emails and records",
+          "Staging sandbox with test merchants"
+        ]
+      },
+      {
+        "name": "Evidence and remediation",
+        "components": [
+          "Tool-call trace capture",
+          "Finding validation and severity rating",
+          "Control recommendations and retest tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Discovery\"]\n    D1[\"Agent and MCP inventory\"]\n    D2[\"IAM and secrets scope export\"]\n  end\n  subgraph S2[\"Analysis\"]\n    N1[\"Permission matrix\"]\n    N2[\"High-impact action map\"]\n    N3[\"Approval and limit checks\"]\n  end\n  subgraph S3[\"Adversarial testing\"]\n    T1[\"Goal hijack playbooks\"]\n    T2[\"Injection via tickets and emails\"]\n    T3[\"Staging sandbox\"]\n  end\n  subgraph S4[\"Evidence and remediation\"]\n    E1[\"Tool call traces\"]\n    E2(\"Reviewer validation\")\n    E3[\"Controls and retest\"]\n  end\n  D1 --> N1\n  D2 --> N1\n  N1 --> N2 --> N3\n  N3 --> T1\n  T1 --> T3\n  T2 --> T3\n  T3 --> E1 --> E2 --> E3"
+  },
+  "inputs": [
+    "List of agents and their intended tasks",
+    "Tool definitions, MCP server configurations and API specifications",
+    "IAM roles, service accounts and token scopes",
+    "Approval workflows and transaction limits",
+    "Staging environment with test merchants and customers",
+    "Agent and API logs"
+  ],
+  "outputs": [
+    "Permission matrix per agent, tool and credential",
+    "List of high-impact actions with their current controls",
+    "Validated findings with tool-call traces",
+    "Recommended controls with example policies",
+    "Retest report"
+  ],
+  "human_in_the_loop": "Our testers validate every finding before it is reported. Your security, engineering and payment operations leads decide which controls to apply, and we recommend human approval on any action that moves money or changes payout details.",
+  "integrations": [
+    "Agent frameworks such as LangGraph, OpenAI Agents SDK or custom orchestrators",
+    "MCP servers and internal tool APIs",
+    "Cloud IAM and secrets managers on AWS, Azure, GCP or Vault",
+    "Logging and SIEM such as Splunk, Elastic or Datadog",
+    "Jira for findings and remediation tracking"
+  ],
+  "guardrails": [
+    "Testing only in staging with test merchants and synthetic balances",
+    "No real refunds, payouts or account changes triggered at any point",
+    "Read-only access to IAM and configuration during discovery",
+    "Written stop conditions for any unexpected effect outside staging",
+    "Evidence encrypted and deleted at the end of the retention period"
+  ],
+  "compliance_notes": [
+    "Supports the accountability and human oversight practices recommended in RBI's FREE-AI framework.",
+    "Findings map to excessive agency and related risks in the OWASP Top 10 for LLM Applications."
+  ],
+  "pilot": {
+    "duration": "2 to 3 weeks",
+    "scope": "One agent with real tool access, such as a refund or dispute triage agent, reviewed end to end with one retest.",
+    "deliverables": [
+      "Agent and tool inventory",
+      "Permission matrix and gap analysis",
+      "Adversarial test results with traces",
+      "Control recommendations",
+      "Retest report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Excess permissions",
+        "how": "Granted actions not needed by the agent's defined tasks, counted per tool."
+      },
+      {
+        "metric": "High-impact actions without approval",
+        "how": "Money-moving or account-changing actions that run without a human or second check."
+      },
+      {
+        "metric": "Exploitable paths",
+        "how": "Validated paths from untrusted input to a high-impact tool call."
+      },
+      {
+        "metric": "Closure at retest",
+        "how": "Findings confirmed fixed versus still open after remediation."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "We use a vendor's agent platform. Can you still review it?",
+      "a": "Yes, as far as its configuration and permissions are visible to you. We review the tools, credentials and approval settings you control and test behaviour in your staging tenant."
+    },
+    {
+      "q": "Do you test MCP servers?",
+      "a": "Yes. MCP servers are tools with their own permissions and inputs, so we include them in the inventory and test whether an agent can be steered into misusing them."
+    },
+    {
+      "q": "Will testing touch real money?",
+      "a": "No. All testing runs in staging with test merchants and synthetic balances, under written rules of engagement."
+    },
+    {
+      "q": "What baseline controls do you recommend?",
+      "a": "Scoped, per-task credentials, hard transaction limits enforced outside the model, and human approval for refunds above a limit, payouts and payout-detail changes. The model should never be the only thing between an instruction and a money movement."
+    }
+  ],
+  "related": [
+    "llm-app-pre-launch-security-assessment",
+    "dpdp-ai-data-handling-assessment",
+    "ai-agent-red-teaming",
+    "ai-model-governance-evidence-pack"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/fintech-payments/ai-agent-permission-and-tool-use-review/"
+}

@@ -1,0 +1,218 @@
+{
+  "slug": "contractor-bill-verification-against-boq",
+  "industry": "real-estate-construction",
+  "title": "Contractor Bill Verification Against BOQ",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [],
+  "summary": "Check every RA bill line against the work order BOQ, measurement records, previous bills and recovery rules, so billing engineers certify from a verified sheet instead of re-adding.",
+  "seo": {
+    "title": "RA Bill Verification Against BOQ with AI | VipraTech",
+    "description": "AI that checks contractor RA bills against BOQ rates and quantities, measurement books, previous bills and recoveries, and flags exceptions for QS review.",
+    "keywords": [
+      "RA bill verification",
+      "contractor bill checking against BOQ",
+      "construction billing automation",
+      "measurement book reconciliation",
+      "quantity surveyor AI tool"
+    ]
+  },
+  "designed_for": [
+    "Quantity Surveyor",
+    "Billing Engineer",
+    "Project Manager or PMC Lead",
+    "Head of Contracts"
+  ],
+  "problem": {
+    "intro": "Contractors raise running account bills every month with an abstract, measurement sheets and claims for extra items. Billing engineers check each line against the BOQ, the measurement book and the previous bill before the project manager signs off. With several contractors per tower, this check is where rate errors, quantity overruns and missed recoveries slip through.",
+    "pain_points": [
+      {
+        "title": "Cumulative quantities that drift",
+        "detail": "Up-to-date quantities claimed against an item can exceed the BOQ or the measured quantity, and the arithmetic of previous plus current is rarely redone in full."
+      },
+      {
+        "title": "Rates and items outside the contract",
+        "detail": "Lines billed at a revised rate, or for items not in the BOQ, need an approved variation, but they look like any other line in a long abstract."
+      },
+      {
+        "title": "Deductions and recoveries missed",
+        "detail": "Mobilisation advance recovery, retention, TDS, GST and labour cess each follow their own rule, and an error in one bill carries into the next."
+      },
+      {
+        "title": "Free-issue material not reconciled",
+        "detail": "Cement and steel issued by the developer should reconcile with theoretical consumption, but the reconciliation is often skipped when payment is urgent."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a bill checking pipeline that reads the contractor's RA bill, abstract and measurement sheets, whether they arrive as Excel, PDF or scans, and matches each line to the work order BOQ. It recomputes cumulative quantities and amounts, compares rates with the contract, checks quantities against measurement book entries and BOQ limits, and applies your rules for advances, retention, material recovery, taxes and cess. Each line gets a status of matched, needs review or not in contract. The billing engineer works from this sheet, records decisions and certifies the bill in your usual system. The pipeline never certifies a bill or releases a payment.",
+    "capabilities": [
+      "Extraction of RA bill abstracts and measurement sheets from Excel, PDF and scans",
+      "Line matching to BOQ items by code and description, including items the contractor has renamed",
+      "Recalculation of previous, current and up-to-date quantities and amounts",
+      "Rate check against the work order and approved variations, with non-BOQ items flagged",
+      "Rule-based deductions for mobilisation advance, retention, free-issue material, TDS, GST and labour cess",
+      "Theoretical versus issued consumption check for cement and steel"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive the RA bill",
+      "detail": "The contractor's bill, abstract and measurement sheets arrive by email or upload and are linked to the work order."
+    },
+    {
+      "step": 2,
+      "title": "Extract bill lines",
+      "detail": "Each line's item, description, unit, rate and previous, current and cumulative quantities are extracted."
+    },
+    {
+      "step": 3,
+      "title": "Match to BOQ and measurements",
+      "detail": "Lines are matched to BOQ items and compared with measurement book entries and approved variations."
+    },
+    {
+      "step": 4,
+      "title": "Recalculate and apply rules",
+      "detail": "Arithmetic, BOQ limits, rates and deductions are recomputed, and mismatches and non-BOQ items are flagged."
+    },
+    {
+      "step": 5,
+      "title": "Billing engineer review",
+      "detail": "The engineer reviews flagged lines with their source pages, accepts or corrects them and adds remarks."
+    },
+    {
+      "step": 6,
+      "title": "Certify and record",
+      "detail": "The verified sheet supports certification in your ERP, and decisions are kept for the next bill and for audit."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"RA bill and measurement sheets\"] --> B[\"Extract bill lines\"]\n  B --> C[\"Match lines to BOQ items\"]\n  C --> D[\"Recalculate quantities and rates\"]\n  D --> E[\"Apply deduction and recovery rules\"]\n  E --> F{\"Line matched within limits?\"}\n  F -->|\"no\"| G(\"Billing engineer review\")\n  F -->|\"yes\"| H[\"Verified bill sheet\"]\n  G --> H\n  H --> I[\"Certification in ERP\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake and extraction",
+        "components": [
+          "Email and upload intake linked to work orders",
+          "OCR with table structure detection",
+          "LLM line extractor with a bill schema"
+        ]
+      },
+      {
+        "name": "Contract data",
+        "components": [
+          "Work order BOQ and rate store",
+          "Approved variations register",
+          "Measurement book entries"
+        ]
+      },
+      {
+        "name": "Verification engine",
+        "components": [
+          "BOQ line matcher",
+          "Quantity and arithmetic recalculation",
+          "Deduction and recovery rules",
+          "Material reconciliation"
+        ]
+      },
+      {
+        "name": "Review and integration",
+        "components": [
+          "Billing engineer review screen",
+          "ERP adapter",
+          "Audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake and extraction\"]\n  I1[\"Bill intake by email or upload\"]\n  I2[\"OCR and table detection\"]\n  I3[\"LLM bill line extractor\"]\n  end\n  subgraph S2[\"Contract data\"]\n  K1[\"BOQ and rate store\"]\n  K2[\"Variations register\"]\n  K3[\"Measurement book entries\"]\n  end\n  subgraph S3[\"Verification engine\"]\n  V1[\"BOQ line matcher\"]\n  V2[\"Recalculation and limits\"]\n  V3[\"Deduction rules\"]\n  end\n  subgraph S4[\"Review and integration\"]\n  R1(\"Billing engineer review\")\n  R2[\"ERP adapter\"]\n  R3[\"Audit log\"]\n  end\n  I1 --> I2\n  I2 --> I3\n  I3 --> V1\n  K1 --> V1\n  K2 --> V1\n  K3 --> V2\n  V1 --> V2\n  V2 --> V3\n  V3 --> R1\n  R1 --> R2\n  R2 --> R3"
+  },
+  "inputs": [
+    "Contractor RA bill, abstract and measurement sheets",
+    "Work order with BOQ, rates and terms",
+    "Measurement book entries or site measurement records",
+    "Approved variation and extra item orders",
+    "Material issue register for free-issue cement and steel",
+    "Previous certified bills"
+  ],
+  "outputs": [
+    "Line-by-line verification sheet with matched, review and not-in-contract status",
+    "Recalculated bill abstract with proposed corrections",
+    "Deduction and recovery schedule",
+    "Material reconciliation statement",
+    "Reviewer decision log for audit"
+  ],
+  "human_in_the_loop": "The billing engineer or quantity surveyor reviews every flagged line and certifies the bill, and the project manager approves it under your delegation of authority. The pipeline proposes corrections but cannot change a certified amount or release a payment.",
+  "integrations": [
+    "ERP or project accounting system such as SAP, Oracle or Farvision",
+    "Excel BOQ and bill formats used by your contractors",
+    "Email inbox used for bill submission",
+    "Document management system for work orders",
+    "Tally or your accounts system for payment processing"
+  ],
+  "guardrails": [
+    "No automatic certification or payment release",
+    "Every corrected figure shows the original value, the rule applied and the source",
+    "Rate and deduction rules versioned per work order",
+    "Non-BOQ items can only be accepted with a linked variation reference",
+    "QS team samples auto-matched lines every billing cycle"
+  ],
+  "compliance_notes": [
+    "Keeps an audit trail for contractor payments, including TDS and GST treatment as configured by your finance team.",
+    "Labour cess deductions follow the rules your finance team sets for each state and contract."
+  ],
+  "pilot": {
+    "duration": "3 to 4 weeks",
+    "scope": "One contractor and one work order, re-checking the last few certified RA bills and running the current bill in parallel with your billing engineer.",
+    "deliverables": [
+      "BOQ and rules configuration for the pilot work order",
+      "Verification sheets for past and current bills",
+      "Billing engineer review screen",
+      "Comparison with certified amounts and remarks on past bills",
+      "Roll-out plan and estimate for further contractors"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Line matching accuracy",
+        "how": "Auto-matched BOQ items checked by the billing engineer on every pilot bill."
+      },
+      {
+        "metric": "Issues found that were missed earlier",
+        "how": "Flags on past certified bills that the QS team confirms as genuine."
+      },
+      {
+        "metric": "False flags per bill",
+        "how": "Flags the engineer marks as not an issue."
+      },
+      {
+        "metric": "Checking time per bill",
+        "how": "Engineer time with the verification sheet versus the current method, on comparable bills."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our contractors all use different bill formats. Will it cope?",
+      "a": "Yes. The extractor reads the bill's content rather than a fixed template and maps renamed or reworded items to BOQ codes. New formats are added to the test set during the pilot, and any line it cannot map is flagged rather than guessed."
+    },
+    {
+      "q": "Can it check quantities against drawings?",
+      "a": "Not in the first phase. It checks claimed quantities against measurement book entries, BOQ limits and previous bills. Drawing-based quantity take-off is a separate piece of work we can scope later."
+    },
+    {
+      "q": "Will this create friction with contractors?",
+      "a": "The output is an internal verification sheet, and your team decides what to share. Line references often help billing engineers give contractors clearer reasons for each deduction."
+    },
+    {
+      "q": "How long before it works across all our sites?",
+      "a": "After a pilot on one work order, most of the effort is loading BOQs and rules for each new contract. We roll out contractor by contractor, checking each one against past bills before it goes live."
+    }
+  ],
+  "related": [
+    "construction-progress-monitoring",
+    "customer-demand-and-receipt-reconciliation",
+    "rera-project-data-extraction",
+    "po-invoice-three-way-matching"
+  ],
+  "proof_ref": "claims-reconciliation-platform",
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/contractor-bill-verification-against-boq/"
+}

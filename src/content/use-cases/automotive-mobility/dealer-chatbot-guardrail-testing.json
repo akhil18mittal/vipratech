@@ -1,0 +1,217 @@
+{
+  "slug": "dealer-chatbot-guardrail-testing",
+  "industry": "automotive-mobility",
+  "title": "Guardrail Testing for Dealer and OEM Chatbots",
+  "capability": "ai-security",
+  "secondary_capabilities": [],
+  "summary": "Adversarial testing of dealer and OEM chatbots and voice bots for wrong prices, unapproved claims, booking data exposure and Hinglish jailbreaks, with PASS, RISK and FAIL evidence.",
+  "seo": {
+    "title": "Guardrail Testing for Dealer and OEM Chatbots | VipraTech",
+    "description": "Red-team testing for automotive chatbots and voice bots: prices, offers, range and mileage claims, booking data exposure and Hinglish jailbreaks.",
+    "keywords": [
+      "chatbot guardrail testing",
+      "automotive chatbot red teaming",
+      "LLM chatbot security testing India",
+      "Hinglish jailbreak testing",
+      "dealer chatbot compliance"
+    ]
+  },
+  "designed_for": [
+    "OEM Head of Digital and D2C",
+    "Dealer Group IT Head",
+    "Chief Information Security Officer",
+    "Marketing Compliance or Legal Counsel"
+  ],
+  "problem": {
+    "intro": "OEMs and dealer groups now put chatbots and voice bots on websites, WhatsApp and call lines to answer model questions, quote prices, book test drives and look up orders. A bot that invents a discount, promises a delivery date or reveals another customer's booking creates disputes and brand damage at a scale no single salesperson could.",
+    "pain_points": [
+      {
+        "title": "Wrong prices and invented offers",
+        "detail": "A bot that quotes an outdated on-road price or agrees to a discount it was never given creates an expectation the dealer must then handle."
+      },
+      {
+        "title": "Claims beyond approved specs",
+        "detail": "Answers on range, mileage, safety ratings and features can drift beyond the figures and wording your product and legal teams approved."
+      },
+      {
+        "title": "Booking and lead data exposure",
+        "detail": "Order-lookup and booking tools can leak other customers' details when they accept a booking number without proper checks."
+      },
+      {
+        "title": "Hinglish and Hindi jailbreaks",
+        "detail": "Filters tuned for English often miss the same attack phrased in Hinglish or Hindi, in text or on a voice call."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We test your chatbot or voice bot the way a determined customer, competitor or attacker would. We start from your approved price lists, spec sheets, offer rules and policies, and from the tools the bot can call. From these we build automotive test playbooks covering pricing, offers, delivery promises, product claims, booking and lead API abuse, personal data handling, prompt injection and jailbreaks. Our test agents run multi-turn conversations in English, Hindi and Hinglish, by text and by synthesised voice, against a staging bot or rate-limited production with test accounts. Responses are graded PASS, RISK or FAIL against your approved sources, and analysts validate each finding before reporting.",
+    "capabilities": [
+      "Price, offer and delivery-promise tests against approved price lists and policies",
+      "Product claim tests on range, mileage, safety ratings and features against approved spec sheets",
+      "Booking and lead API abuse tests, such as lookups of other customers' bookings",
+      "Prompt injection and jailbreak tests in English, Hindi and Hinglish, by text and voice",
+      "PASS, RISK and FAIL evidence with transcripts, mapped to OWASP Top 10 for LLM Applications",
+      "Regression suite to rerun after model, prompt or content changes"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Scope and gather sources",
+      "detail": "We agree the bot, channels, tools and test accounts, and collect approved price, spec and policy documents."
+    },
+    {
+      "step": 2,
+      "title": "Build playbooks",
+      "detail": "Automotive attack and misuse playbooks are written for your bot's features and languages."
+    },
+    {
+      "step": 3,
+      "title": "Run conversations",
+      "detail": "Test agents run multi-turn text and voice conversations and record every response and tool call."
+    },
+    {
+      "step": 4,
+      "title": "Grade and validate",
+      "detail": "Responses are graded against your approved sources, and analysts validate every RISK and FAIL."
+    },
+    {
+      "step": 5,
+      "title": "Report with fixes",
+      "detail": "The report gives evidence, severity and fixes such as prompt, retrieval, content or API authorisation changes."
+    },
+    {
+      "step": 6,
+      "title": "Retest",
+      "detail": "After fixes, the relevant playbooks run again and the regression suite is handed over."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scope bot, channels and APIs\"] --> B[\"Build automotive test playbooks\"]\n  B --> C[\"Run multi-turn text and voice tests\"]\n  C --> D[\"Grade against price and spec sheets\"]\n  D --> E{\"RISK or FAIL result?\"}\n  E -->|\"no\"| F[\"Record PASS with transcript\"]\n  E -->|\"yes\"| G(\"Analyst validates finding\")\n  G --> H[\"Evidence report with fixes\"]\n  H --> I[\"Retest after fixes\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Scoping",
+        "components": [
+          "Approved price lists and spec sheets",
+          "Offer, disclosure and data policies",
+          "Tool and API inventory"
+        ]
+      },
+      {
+        "name": "Test framework",
+        "components": [
+          "Automotive playbook library",
+          "Multi-turn conversation agents",
+          "Voice synthesis for call tests"
+        ]
+      },
+      {
+        "name": "Evaluation",
+        "components": [
+          "Response graders against approved sources",
+          "Tool-call and API monitor",
+          "Analyst validation"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "components": [
+          "Findings register with evidence",
+          "Framework mapping",
+          "Regression suite"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Scoping\"]\n    C1[\"Price and spec sheets\"]\n    C2[\"Policies and API inventory\"]\n  end\n  subgraph S2[\"Test framework\"]\n    H1[\"Playbook library\"]\n    H2[\"Conversation agents\"]\n    H3[\"Voice synthesis\"]\n  end\n  subgraph S3[\"Evaluation\"]\n    E1[\"Response graders\"]\n    E2[\"API call monitor\"]\n    E3(\"Analyst validation\")\n  end\n  subgraph S4[\"Reporting\"]\n    R1[\"Findings register\"]\n    R2[\"Regression suite\"]\n  end\n  C2 --> H1\n  H1 --> H2\n  H2 --> H3\n  H2 --> E1\n  H3 --> E1\n  H2 --> E2\n  C1 --> E1\n  E1 --> E3\n  E2 --> E3\n  E3 --> R1\n  R1 --> R2"
+  },
+  "inputs": [
+    "Access to the chatbot or voice bot in staging, or production with test accounts",
+    "Approved price lists, spec sheets and offer rules",
+    "Disclosure, data and escalation policies",
+    "Tool and API documentation",
+    "Test customer accounts and synthetic bookings"
+  ],
+  "outputs": [
+    "Findings register graded PASS, RISK or FAIL",
+    "Transcripts and call recordings as evidence",
+    "Fix recommendations for prompts, content, retrieval and API authorisation",
+    "Regression test suite",
+    "Retest report"
+  ],
+  "human_in_the_loop": "Analysts validate every RISK and FAIL before it is reported. Your product, legal and security teams decide which fixes to make and which risks to accept, and testing stays within the agreed scope.",
+  "integrations": [
+    "Chatbot or voice bot platform",
+    "Booking, CRM and order APIs in staging",
+    "WhatsApp or web chat channel used by the bot",
+    "Jira or another tracker for findings",
+    "CI pipeline for the regression suite"
+  ],
+  "guardrails": [
+    "Test accounts and synthetic customer data only",
+    "No real customer bookings or records touched",
+    "Signed scope and rules of engagement",
+    "Rate limits agreed for any production testing",
+    "Evidence stored securely and shared only with named contacts"
+  ],
+  "compliance_notes": [
+    "Tests help find answers that may conflict with the Consumer Protection Act 2019 and CCPA guidelines on misleading advertisements and dark patterns.",
+    "Personal data exposure tests support your obligations under the DPDP Act 2023.",
+    "Findings are mapped to OWASP Top 10 for LLM Applications."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One website or WhatsApp chatbot in English and Hinglish, covering price, offer and booking-lookup scenarios.",
+    "deliverables": [
+      "Test plan and playbooks for your bot",
+      "Test campaign results with transcripts",
+      "Findings report with fixes",
+      "Retest of fixed findings",
+      "Regression suite handover"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Scenario coverage",
+        "how": "Playbook scenarios executed across languages and channels."
+      },
+      {
+        "metric": "Findings by severity",
+        "how": "Validated RISK and FAIL results, grouped by category."
+      },
+      {
+        "metric": "Fix verification",
+        "how": "Findings that pass on retest."
+      },
+      {
+        "metric": "Time to rerun",
+        "how": "Effort needed to rerun the regression suite after a change."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you test our live bot?",
+      "a": "We prefer a staging copy. Where only production exists, we test with test accounts, synthetic bookings and agreed rate limits, and we never touch real customer records."
+    },
+    {
+      "q": "Can you test voice bots as well as chat?",
+      "a": "Yes. Test agents speak to voice bots over a phone line using synthesised Hindi, English and Hinglish voices, including interruptions and code-switching."
+    },
+    {
+      "q": "Our bot was built by a vendor. Can you still test it?",
+      "a": "Yes, with your permission and with the vendor informed. Findings and fixes are shared with you and, where you choose, with the vendor's team."
+    },
+    {
+      "q": "How do we keep testing after launch?",
+      "a": "The playbooks become a regression suite that can run after every model, prompt or content update, including in your CI pipeline, so new releases face the same scenarios."
+    }
+  ],
+  "related": [
+    "test-drive-lead-qualification-voice-agent",
+    "dealer-lead-routing-and-follow-up",
+    "shopping-assistant-guardrail-testing",
+    "voice-agent-adversarial-testing"
+  ],
+  "proof_ref": "autosentinx-voice-red-team",
+  "content_type": "use-case",
+  "url": "/use-cases/automotive-mobility/dealer-chatbot-guardrail-testing/"
+}

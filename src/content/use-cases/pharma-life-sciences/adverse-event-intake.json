@@ -1,0 +1,219 @@
+{
+  "slug": "adverse-event-intake",
+  "industry": "pharma-life-sciences",
+  "title": "Adverse Event Intake from Emails and Calls",
+  "capability": "document-intelligence",
+  "secondary_capabilities": [
+    "voice-ai"
+  ],
+  "summary": "Spot possible adverse events in emails, call recordings and field reports, extract the minimum case criteria and draft an intake record for your pharmacovigilance team to verify.",
+  "seo": {
+    "title": "AI Adverse Event Intake for Pharmacovigilance | VipraTech",
+    "description": "AI that finds possible adverse events in emails, calls and field reports, extracts case details and drafts intake records for PV team review.",
+    "keywords": [
+      "adverse event intake automation",
+      "pharmacovigilance AI",
+      "ICSR case intake",
+      "adverse event detection in emails",
+      "PV case processing India"
+    ]
+  },
+  "designed_for": [
+    "Head of Pharmacovigilance",
+    "Drug Safety Associate",
+    "Medical Information Manager",
+    "Pharmacovigilance Officer In-Charge"
+  ],
+  "problem": {
+    "intro": "Possible adverse events reach a pharma company through many doors: the medical information inbox, customer care calls, product complaints, MR visit notes and distributor emails. Each one has to be recognised, captured with enough detail to form a valid case and passed to the safety database within reporting timelines.",
+    "pain_points": [
+      {
+        "title": "Events hidden in other conversations",
+        "detail": "A packaging complaint or a stock query may mention that a patient felt dizzy, and front-line staff do not always recognise it as safety information."
+      },
+      {
+        "title": "Incomplete first reports",
+        "detail": "Intake forms often miss reporter contact details, the suspect product batch or the event onset date, which triggers repeated follow-ups."
+      },
+      {
+        "title": "The clock starts at first receipt",
+        "detail": "Reporting timelines run from when any employee first receives the information, so a report sitting in a field rep's notes is already ageing."
+      },
+      {
+        "title": "Manual re-keying",
+        "detail": "Safety associates retype narratives and fields from emails into the safety database, which is slow and invites transcription errors."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an intake layer that watches the channels you choose, such as the medical information mailbox, customer care call recordings and MR call reports, and flags text that may describe an adverse event, special situation or product complaint. For each flagged item it extracts the four minimum criteria for a valid case, plus product, batch, dose, dates and outcome where present, and drafts an intake form and narrative with each field linked to its source sentence. Calls in Hindi and other Indian languages are transcribed first. Your PV team verifies, completes and submits; the system never assesses seriousness or causality.",
+    "capabilities": [
+      "Screens emails, call transcripts, MR reports and complaint records for possible adverse events and special situations",
+      "Extracts identifiable patient, reporter, suspect product and event: the minimum criteria for a valid case",
+      "Captures batch, dose, onset date, outcome and concomitant medicines when mentioned",
+      "Transcribes and translates calls in Hindi and regional languages, keeping the original text",
+      "Drafts an intake form and narrative with every field linked to its source",
+      "Records the first-receipt date and time for each report to support timeline tracking"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Monitor intake channels",
+      "detail": "Connectors pull new emails, call recordings, MR reports and complaint records from the agreed channels."
+    },
+    {
+      "step": 2,
+      "title": "Transcribe and screen",
+      "detail": "Calls are transcribed, and every item is screened for possible adverse events, special situations and complaints."
+    },
+    {
+      "step": 3,
+      "title": "Extract case details",
+      "detail": "For flagged items, the minimum criteria and other case details are extracted with links to the source text."
+    },
+    {
+      "step": 4,
+      "title": "Draft the intake",
+      "detail": "An intake form and narrative are drafted, with missing criteria listed as follow-up questions instead of being filled in."
+    },
+    {
+      "step": 5,
+      "title": "Safety associate verifies",
+      "detail": "A drug safety associate reviews the draft, corrects fields, decides whether it is a valid case and requests follow-up if needed."
+    },
+    {
+      "step": 6,
+      "title": "Hand over to the safety database",
+      "detail": "The verified intake goes into the safety database through an import or form, with the audit trail attached."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Emails, calls and MR reports\"] --> B[\"Transcribe calls and screen text\"]\n  B --> C{\"Possible adverse event?\"}\n  C -->|\"no\"| D[\"Log as screened, sampled by PV\"]\n  C -->|\"yes\"| E[\"Extract minimum case criteria\"]\n  E --> F[\"Draft intake form and narrative\"]\n  F --> G(\"Safety associate verifies\")\n  G --> H{\"Valid case?\"}\n  H -->|\"yes\"| I[\"Enter into safety database\"]\n  H -->|\"no\"| J[\"Request follow-up information\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Channel intake",
+        "components": [
+          "Medical information mailbox connector",
+          "Call recording feed from the contact centre",
+          "MR call report export from CRM",
+          "Complaint system feed"
+        ]
+      },
+      {
+        "name": "Speech and language",
+        "components": [
+          "Speech-to-text for Hindi, English and regional languages",
+          "Translation to English with the original retained"
+        ]
+      },
+      {
+        "name": "Screening and extraction",
+        "components": [
+          "Adverse event and special situation classifier",
+          "LLM extractor for case criteria and details",
+          "MedDRA term suggestions for the reviewer"
+        ]
+      },
+      {
+        "name": "Review and handover",
+        "components": [
+          "Safety associate review queue",
+          "Safety database import or form fill",
+          "Timeline and audit log"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Channel intake\"]\n    C1[\"Medical information mailbox\"]\n    C2[\"Call recordings\"]\n    C3[\"MR call reports\"]\n  end\n  subgraph S2[\"Speech and language\"]\n    L1[\"Speech to text\"]\n    L2[\"Translation, original kept\"]\n  end\n  subgraph S3[\"Screening and extraction\"]\n    P1[\"Adverse event classifier\"]\n    P2[\"Case detail extractor\"]\n  end\n  subgraph S4[\"Review and handover\"]\n    R1(\"Safety associate queue\")\n    R2[\"Safety database import\"]\n    R3[\"Timeline and audit log\"]\n  end\n  C2 --> L1 --> L2 --> P1\n  C1 --> P1\n  C3 --> P1\n  P1 --> P2 --> R1\n  R1 --> R2\n  R1 --> R3"
+  },
+  "inputs": [
+    "Medical information and customer care emails",
+    "Contact-centre call recordings",
+    "MR call reports and field notes",
+    "Product complaint records",
+    "Product master with brand and generic names"
+  ],
+  "outputs": [
+    "Screening result per item: possible adverse event, special situation, complaint or none",
+    "Draft intake form with minimum criteria and case details",
+    "Draft narrative linked to source sentences",
+    "First-receipt timestamp per report",
+    "Follow-up question list for missing information"
+  ],
+  "human_in_the_loop": "A trained drug safety associate verifies every flagged item and decides whether it is a valid case. Seriousness, expectedness, causality and MedDRA coding are confirmed by your PV team, and PV samples items screened as no event to check for misses.",
+  "integrations": [
+    "Safety database such as Oracle Argus, ArisGlobal LifeSphere or an in-house system",
+    "Email platform such as Microsoft 365 or Google Workspace",
+    "Contact-centre recording platform",
+    "Pharma CRM used by the field force",
+    "Complaint management system or QMS"
+  ],
+  "guardrails": [
+    "Screening tuned to favour catching events, with PV sampling of items screened as no event",
+    "No field is filled unless the source text supports it",
+    "Original-language text kept alongside every translation",
+    "Patient and reporter details masked in logs and restricted by role",
+    "Models and prompts under change control"
+  ],
+  "compliance_notes": [
+    "Supports the pharmacovigilance obligations of marketing authorisation holders, including adverse drug reaction reporting in India under CDSCO and PvPI guidance.",
+    "Output fields can be structured towards ICH E2B(R3) data elements for downstream case submission.",
+    "Patient and reporter data is handled in line with the DPDP Act 2023 and, where relevant, GDPR."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One intake channel, such as the medical information mailbox, using historical emails already triaged by your PV team, followed by a short live parallel run.",
+    "deliverables": [
+      "Screening and extraction configured for your product portfolio",
+      "Review queue for drug safety associates",
+      "Comparison report against your historical triage decisions",
+      "List of missed and false flags with root causes",
+      "Validation and roll-out plan"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Screening sensitivity",
+        "how": "Historical items your PV team classed as adverse events, checked for whether the system flagged them."
+      },
+      {
+        "metric": "False flag volume",
+        "how": "Flagged items the safety associate marks as not an adverse event."
+      },
+      {
+        "metric": "Field extraction accuracy",
+        "how": "Draft intake fields compared with the values in the final verified case."
+      },
+      {
+        "metric": "Time from receipt to intake",
+        "how": "Timestamps from first receipt to verified intake, with and without the system."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What if the system misses an adverse event?",
+      "a": "Screening is set to favour catching possible events over avoiding false flags, and PV reviews a sample of items marked as no event. The pilot measures misses against your own historical triage, so you can see the risk before going live."
+    },
+    {
+      "q": "Can it handle calls in Hindi or other Indian languages?",
+      "a": "Yes. Calls are transcribed in the original language and translated, and the reviewer sees both versions. The pilot reports accuracy for each language you include."
+    },
+    {
+      "q": "Does it submit reports to regulators?",
+      "a": "No. It prepares intake drafts. Case assessment, coding and regulatory submission remain with your PV team and safety database."
+    },
+    {
+      "q": "How is patient data protected?",
+      "a": "Data stays in your cloud tenancy or on-premise, access is role-based, and personal identifiers are masked in logs. We use model endpoints that do not retain or train on your data."
+    }
+  ],
+  "related": [
+    "mr-call-reporting-by-voice",
+    "doctor-engagement-automation",
+    "gxp-ai-tool-validation-and-security",
+    "healthcare-chatbot-safety-testing"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/adverse-event-intake/"
+}

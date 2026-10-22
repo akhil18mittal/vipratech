@@ -6,3 +6,6 @@ coverage/
 .env*
 .playwright-cli/
 output/
+content-pack/
+.astro/
+public/diagrams/

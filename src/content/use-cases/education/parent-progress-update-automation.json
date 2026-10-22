@@ -1,0 +1,223 @@
+{
+  "slug": "parent-progress-update-automation",
+  "industry": "education",
+  "title": "Parent Progress Update Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Send each parent a short WhatsApp update on attendance, test results and homework in their language, with mentor review for sharp drops or absences and replies routed to the right teacher.",
+  "seo": {
+    "title": "Parent Progress Updates on WhatsApp with AI | VipraTech",
+    "description": "AI-drafted weekly and post-test parent updates on WhatsApp in Hindi or English, built from ERP data, with mentor review for students who need attention.",
+    "keywords": [
+      "parent progress report WhatsApp",
+      "student progress updates automation",
+      "coaching parent communication",
+      "school parent engagement AI",
+      "Hindi parent updates"
+    ]
+  },
+  "designed_for": [
+    "Academic Head",
+    "Student Mentor Lead",
+    "School Principal",
+    "Parent Relations Manager"
+  ],
+  "problem": {
+    "intro": "Parents of students in coaching hostels or day schools want to know how their child is doing, especially when they live in another city. The data sits in attendance systems, test results and homework records, but turning it into a clear message for every family after each test is more than mentors can manage, so updates are generic, late or sent only when something has gone wrong.",
+    "pain_points": [
+      {
+        "title": "Data spread across systems",
+        "detail": "Attendance, test scores, homework completion and teacher remarks sit in different tools and spreadsheets."
+      },
+      {
+        "title": "Generic broadcasts",
+        "detail": "A batch-wide result PDF tells a parent little about their own child's progress or what to do next."
+      },
+      {
+        "title": "Problems noticed late",
+        "detail": "A run of absences or a sharp fall in scores often reaches parents only at the parent-teacher meeting."
+      },
+      {
+        "title": "Replies go nowhere",
+        "detail": "When parents reply with a question, it lands on a shared number that nobody owns."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an update engine that pulls attendance, test results, homework completion and teacher remarks from your ERP and test platform, and drafts a short message for each parent in Hindi, English or another chosen language. It explains the latest result in context, such as subject-wise strengths and chapters to revise, without shaming comparisons. Students with a sharp drop, a run of absences or a mentor note are held back from the automatic send; their mentor reviews the draft and usually calls instead. Messages go out as approved WhatsApp templates, and parent replies are routed to the right mentor or teacher.",
+    "capabilities": [
+      "Combines attendance, test, homework and remark data for each student",
+      "Drafts short updates in Hindi, English or regional languages from approved templates",
+      "Explains subject and chapter-level performance with next steps, not just ranks",
+      "Holds back flagged students for mentor review and a phone call",
+      "Routes parent replies to the assigned mentor or subject teacher",
+      "Schedules parent-teacher meetings and sends reminders"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect the week's data",
+      "detail": "Attendance, test scores, homework status and remarks are pulled after each test or at a fixed weekly time."
+    },
+    {
+      "step": 2,
+      "title": "Compute trends",
+      "detail": "Changes in attendance and subject-wise performance are calculated against the student's own history."
+    },
+    {
+      "step": 3,
+      "title": "Flag students who need attention",
+      "detail": "Sharp drops, absence streaks and mentor notes move a student onto the review list."
+    },
+    {
+      "step": 4,
+      "title": "Draft messages",
+      "detail": "Each parent gets a short draft in their language, built from approved templates and the student's data."
+    },
+    {
+      "step": 5,
+      "title": "Mentor review",
+      "detail": "Mentors edit or replace drafts for flagged students and call those families."
+    },
+    {
+      "step": 6,
+      "title": "Send and route replies",
+      "detail": "Messages go out on WhatsApp, and replies are assigned to the right mentor or teacher."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Attendance, tests and homework data\"] --> B[\"Compute trends per student\"]\n  B --> C{\"Needs attention?\"}\n  C -->|\"no\"| E[\"Draft update in parent language\"]\n  C -->|\"yes\"| D(\"Mentor edits draft and calls parent\")\n  E --> F[\"Send WhatsApp template\"]\n  D --> F\n  F --> G[\"Route parent replies to mentor\"]\n  G --> H[\"Log in ERP\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Data sources",
+        "components": [
+          "ERP attendance and fee status",
+          "Test platform results",
+          "Homework and DPP completion records",
+          "Mentor remarks"
+        ]
+      },
+      {
+        "name": "Analytics",
+        "components": [
+          "Per-student trend calculation",
+          "Attention rules agreed with academics"
+        ]
+      },
+      {
+        "name": "Message generation",
+        "components": [
+          "Template library per language",
+          "LLM drafting limited to the student's data",
+          "Tone and content checks"
+        ]
+      },
+      {
+        "name": "Delivery and replies",
+        "components": [
+          "WhatsApp Business API",
+          "Reply routing to mentors",
+          "Parent-teacher meeting scheduling"
+        ]
+      },
+      {
+        "name": "Oversight",
+        "components": [
+          "Mentor review queue",
+          "Message audit log",
+          "Parent opt-out handling"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Data sources\"]\n    D1[\"ERP attendance\"]\n    D2[\"Test results\"]\n    D3[\"Homework and remarks\"]\n  end\n  subgraph S2[\"Analytics and generation\"]\n    G1[\"Trend calculation\"]\n    G2[\"Attention rules\"]\n    G3[\"Template-bound drafting\"]\n  end\n  subgraph S3[\"Oversight\"]\n    O1(\"Mentor review queue\")\n    O2[\"Tone and content checks\"]\n  end\n  subgraph S4[\"Delivery\"]\n    W1[\"WhatsApp templates\"]\n    W2[\"Reply routing\"]\n    W3[\"Audit log\"]\n  end\n  D1 --> G1\n  D2 --> G1\n  D3 --> G1\n  G1 --> G2\n  G2 --> G3\n  G2 --> O1\n  G3 --> O2\n  O1 --> W1\n  O2 --> W1\n  W1 --> W2\n  W1 --> W3"
+  },
+  "inputs": [
+    "Attendance from biometric, RFID or manual registers",
+    "Test results with subject and chapter breakdown",
+    "Homework and practice sheet completion",
+    "Mentor and teacher remarks",
+    "Parent contact numbers and language preference"
+  ],
+  "outputs": [
+    "Personalised WhatsApp updates for each parent",
+    "Mentor review list of students needing attention",
+    "Routed parent questions with owners",
+    "Parent-teacher meeting schedule and reminders",
+    "Message and reply log in the ERP"
+  ],
+  "human_in_the_loop": "Mentors review and personalise every message for a flagged student, and usually call the family rather than rely on a message. Academic heads approve the templates and the rules that decide which students need attention.",
+  "integrations": [
+    "School or coaching ERP",
+    "Online test platform",
+    "Attendance devices or app",
+    "WhatsApp Business API",
+    "Mentor workspace or CRM"
+  ],
+  "guardrails": [
+    "No public ranks or comparisons with named classmates in parent messages",
+    "Drafts limited to the student's own data and approved templates",
+    "Students flagged for wellbeing or performance concerns never receive an automatic message",
+    "Parents can opt out or choose how often they hear from you",
+    "Messages sent only to registered guardian numbers"
+  ],
+  "compliance_notes": [
+    "Student performance and attendance are children's data under the DPDP Act 2023; the system uses them only to inform the parent, not for profiling or advertising.",
+    "WhatsApp templates must follow the platform's business messaging policies."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One class or batch across two test cycles, with mentors reviewing flagged students and all other updates sent automatically.",
+    "deliverables": [
+      "Templates and attention rules approved by academics",
+      "Data connections to the ERP and test platform",
+      "Mentor review queue",
+      "Parent feedback summary",
+      "Roll-out plan and messaging cost estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Parent read and reply rates",
+        "how": "WhatsApp delivery, read and reply data per message."
+      },
+      {
+        "metric": "Flagged students followed up",
+        "how": "Flagged students whose families a mentor reached within the agreed time."
+      },
+      {
+        "metric": "Mentor time per update cycle",
+        "how": "Time mentors spend on updates, from their logs, before and during the pilot."
+      },
+      {
+        "metric": "Parent satisfaction",
+        "how": "Short WhatsApp survey at the end of the pilot."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Will parents see their child's rank?",
+      "a": "Only if you choose. Many institutes prefer subject-wise strengths and chapters to revise over ranks, and messages never compare the student with named classmates."
+    },
+    {
+      "q": "What if the AI writes something inaccurate?",
+      "a": "Drafts are built only from the student's data and approved templates, and content checks block anything outside them. Flagged students always get mentor-reviewed messages."
+    },
+    {
+      "q": "Can parents reply?",
+      "a": "Yes. Replies are assigned to the student's mentor or subject teacher, and unanswered replies are escalated after a time you set."
+    },
+    {
+      "q": "Do you support Hindi and other languages?",
+      "a": "Yes. Templates are written and approved per language, and each parent receives updates in their chosen language."
+    }
+  ],
+  "related": [
+    "fee-reminder-voice-and-whatsapp-agent",
+    "answer-sheet-and-omr-evaluation",
+    "counselling-funnel-lead-nurture"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/education/parent-progress-update-automation/"
+}

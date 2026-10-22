@@ -1,0 +1,125 @@
+{
+  "slug": "logistics-supply-chain",
+  "name": "Logistics & Supply Chain",
+  "seo": {
+    "title": "AI for Logistics: PODs, Freight Audit & Voice | VipraTech",
+    "description": "Applied AI for 3PLs, carriers, forwarders and shippers: POD verification, freight invoice audit, customs documents, hub vision and voice agents.",
+    "keywords": [
+      "AI for logistics",
+      "proof of delivery verification AI",
+      "freight invoice audit automation",
+      "customs document extraction",
+      "e-way bill validation",
+      "warehouse safety computer vision",
+      "delivery status WhatsApp bot"
+    ]
+  },
+  "hero": {
+    "headline": "AI that checks every POD, freight bill and e-way bill, so your team handles the exceptions",
+    "subheadline": "We build document, vision and voice systems for 3PLs, express carriers, freight forwarders, transporters and shippers' logistics teams. Each one connects to your TMS, WMS or ERP and keeps a record your finance and operations teams can verify."
+  },
+  "intro": "Logistics runs on paper and phone calls that sit between systems: proofs of delivery, lorry receipts, freight bills, bills of lading, shipping bills, e-way bills, and a constant stream of calls and WhatsApp messages about where a shipment is. AI helps today where people read, match and answer the same things all day: verifying PODs, auditing freight invoices against contracts, extracting customs data, spotting damaged parcels and answering status queries in Hindi and regional languages. It does not fix poor master data, replace a TMS or decide a customs classification. The useful systems are narrow, tied to the platforms you already run, and send uncertain cases to a person.",
+  "challenges": [
+    {
+      "title": "Paper at every handover",
+      "detail": "PODs, lorry receipts and delivery challans are signed, stamped and photographed on the road, and their quality decides how fast you can bill and collect."
+    },
+    {
+      "title": "Leakage in freight bills",
+      "detail": "Freight bills carry fuel surcharges, detention, ODA and weight differences that are hard to check against rate contracts at volume."
+    },
+    {
+      "title": "Compliance on the move",
+      "detail": "E-way bills, GST invoices and customs declarations must agree with each other and with the goods, and mismatches lead to detentions, penalties and delays."
+    },
+    {
+      "title": "Constant calls and messages",
+      "detail": "Consignees, shippers, riders and drivers call hubs and control towers all day about status, addresses and payouts, often in regional languages."
+    }
+  ],
+  "capability_fit": [
+    {
+      "capability": "document-intelligence",
+      "summary": "POD verification, freight invoice audit, customs document extraction and e-way bill checks that match documents against your TMS, rate contracts and GST data."
+    },
+    {
+      "capability": "computer-vision",
+      "summary": "Camera checks for parcel damage and dimensions at hubs, and safety monitoring for forklifts, docks, exits and PPE in warehouses."
+    },
+    {
+      "capability": "voice-ai",
+      "summary": "Voice and WhatsApp agents for delivery status, NDR reattempts and rider or driver support in Hindi, English and regional languages."
+    },
+    {
+      "capability": "sales-marketing-automation",
+      "summary": "Qualification and quote drafting for inbound shipper enquiries, using your rate cards, lane coverage and approval rules."
+    },
+    {
+      "capability": "ai-security",
+      "summary": "Adversarial testing of customer-facing chat and voice agents for shipment data leakage, tracking-number enumeration and redirect fraud."
+    }
+  ],
+  "featured_use_cases": [
+    "freight-invoice-audit",
+    "proof-of-delivery-verification",
+    "delivery-status-voice-and-whatsapp-agent"
+  ],
+  "use_cases": [
+    "proof-of-delivery-verification",
+    "freight-invoice-audit",
+    "customs-and-shipping-document-extraction",
+    "e-way-bill-and-gst-document-validation",
+    "parcel-damage-and-dimension-detection",
+    "warehouse-safety-monitoring",
+    "rider-and-driver-support-voice-agent",
+    "delivery-status-voice-and-whatsapp-agent",
+    "shipper-lead-qualification-and-quotes",
+    "logistics-ai-agent-security-testing"
+  ],
+  "regulatory_context": [
+    {
+      "name": "GST, e-invoicing and e-way bill rules (India)",
+      "note": "Moving goods above the prescribed value needs a valid e-way bill from the government portal, and invoice, e-way bill and vehicle details must agree. E-invoicing through the Invoice Registration Portal applies to businesses above the notified turnover threshold."
+    },
+    {
+      "name": "Customs Act 1962 and ICEGATE (India)",
+      "note": "Bills of entry and shipping bills are filed electronically, and declared values, classification and party details are expected to match the commercial invoice, packing list and transport documents."
+    },
+    {
+      "name": "DPDP Act 2023 (India) and GDPR",
+      "note": "Consignee names, phone numbers, addresses, POD photos, CCTV footage and call recordings are personal data, so collection, retention and access need a defined purpose and safeguards."
+    },
+    {
+      "name": "Occupational Safety, Health and Working Conditions Code 2020 (India)",
+      "note": "Consolidates India's workplace safety law and sets employer duties on safe working conditions. Camera-based monitoring can support, but does not replace, a site safety management system."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Do we need to replace our TMS or WMS?",
+      "a": "No. We build around your existing systems and connect through APIs, database staging tables, SFTP or email. Your TMS, WMS and ERP stay the systems of record."
+    },
+    {
+      "q": "Can it handle poor-quality POD photos and handwritten documents?",
+      "a": "Within limits, yes. Skewed photos, stamps and handwritten remarks are normal inputs, and anything the system cannot read confidently goes to a person. The pilot reports accuracy by document quality."
+    },
+    {
+      "q": "Which languages do the voice agents support?",
+      "a": "We start with Hindi, English and Hinglish and add regional languages such as Marathi, Tamil, Telugu, Kannada, Bengali or Gujarati based on your delivery footprint. Each language is tested on real call audio during the pilot."
+    },
+    {
+      "q": "How do we start?",
+      "a": "With a narrow pilot, such as freight invoice audit for one carrier or POD verification for one region, run in parallel with your current process. You get an accuracy report against your own team's results and a cost estimate for production."
+    }
+  ],
+  "related_industries": [
+    "retail-ecommerce",
+    "manufacturing",
+    "pharma-life-sciences"
+  ],
+  "cta": {
+    "headline": "Start with one lane, one carrier or one hub",
+    "text": "Book a discovery call to pick a narrow pilot on your own PODs, freight bills or customer calls, and compare the results with your team's current process."
+  },
+  "url": "/industries/logistics-supply-chain/"
+}

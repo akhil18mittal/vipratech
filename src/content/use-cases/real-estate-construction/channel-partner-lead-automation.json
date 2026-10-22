@@ -1,0 +1,217 @@
+{
+  "slug": "channel-partner-lead-automation",
+  "industry": "real-estate-construction",
+  "title": "Broker and Channel Partner Lead Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [
+    "document-intelligence"
+  ],
+  "summary": "Register broker leads from WhatsApp and email, check them against the CRM for ownership, acknowledge partners instantly and track each lead through visit, booking and brokerage.",
+  "seo": {
+    "title": "Channel Partner Lead Automation for Developers | VipraTech",
+    "description": "Automate channel partner lead registration, duplicate and ownership checks, partner acknowledgements, visit tagging and brokerage tracking for developers.",
+    "keywords": [
+      "channel partner lead management",
+      "real estate broker lead registration",
+      "CP lead duplicate check",
+      "brokerage payout tracking",
+      "channel partner WhatsApp automation"
+    ]
+  },
+  "designed_for": [
+    "Channel Sales Head",
+    "Channel Partner Relationship Manager",
+    "Sales Operations Manager",
+    "Finance Manager for brokerage payouts"
+  ],
+  "problem": {
+    "intro": "For many developers, channel partners are a major source of bookings. They register buyers by WhatsApp message, email or spreadsheet, often while the same buyer is also calling the project directly. Lead ownership decides who earns brokerage, so slow or inconsistent registration turns into disputes and strained partner relationships.",
+    "pain_points": [
+      {
+        "title": "Free-text registrations",
+        "detail": "Partners send names and numbers in every format, in bulk messages, sometimes without the project or configuration, and someone types them into the CRM."
+      },
+      {
+        "title": "Ownership disputes",
+        "detail": "The same buyer may already be in the direct database or registered by another partner, and without a clear timestamped record the decision rests on memory."
+      },
+      {
+        "title": "Partners kept waiting",
+        "detail": "Without an instant acknowledgement and lead ID, partners call the channel team repeatedly or take their buyer elsewhere."
+      },
+      {
+        "title": "Brokerage tracked in spreadsheets",
+        "detail": "Eligibility depends on booking, agreement registration and payment milestones, and partners chase finance for status."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build a channel partner automation layer around your CRM. Partners register leads on WhatsApp, email or a simple portal, in any format, and the system extracts buyer name, phone, project, configuration and visit date and checks them against existing leads and partner registrations. Your ownership rules, such as validity windows and site visit tagging, are applied, and the partner receives an acknowledgement with a lead ID or a clear reason for rejection. Leads flow to the right sourcing manager. Partner onboarding documents are checked for RERA agent registration, PAN and GST, and brokerage eligibility is tracked through booking and agreement milestones so partners can see their status.",
+    "capabilities": [
+      "Lead extraction from free-text WhatsApp messages, emails and spreadsheets",
+      "Duplicate and ownership checks against CRM leads and other partners' registrations",
+      "Instant acknowledgement with lead ID, validity window or rejection reason",
+      "Site visit tagging to the registering partner and the sourcing manager",
+      "Partner onboarding checks for RERA agent registration, PAN, GST and bank details",
+      "Brokerage eligibility and status tracking linked to booking milestones"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Partner sends a registration",
+      "detail": "The partner shares buyer details by WhatsApp, email or portal, in their own format."
+    },
+    {
+      "step": 2,
+      "title": "Extract lead details",
+      "detail": "Buyer name, phone, project, configuration and proposed visit date are extracted and normalised."
+    },
+    {
+      "step": 3,
+      "title": "Check duplicates and ownership",
+      "detail": "The lead is matched with CRM records and other partners' registrations, and ownership rules are applied."
+    },
+    {
+      "step": 4,
+      "title": "Acknowledge or escalate",
+      "detail": "Clear cases are acknowledged with a lead ID, and conflicts go to the channel head with the evidence."
+    },
+    {
+      "step": 5,
+      "title": "Tag visits and bookings",
+      "detail": "Site visits and bookings are tagged to the registering partner and sourcing manager in the CRM."
+    },
+    {
+      "step": 6,
+      "title": "Track brokerage",
+      "detail": "Booking and agreement milestones update brokerage eligibility, and finance approves payouts."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Partner registers lead on WhatsApp\"] --> B[\"Extract buyer and project details\"]\n  B --> C{\"Duplicate or ownership conflict?\"}\n  C -->|\"no\"| D[\"Acknowledge with lead ID\"]\n  C -->|\"yes\"| E(\"Channel head decides\")\n  E --> D\n  D --> F[\"Tag visit and booking to partner\"]\n  F --> G[\"Track brokerage eligibility\"]\n  G --> H(\"Finance approves payout\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Partner channels",
+        "components": [
+          "WhatsApp Business API number for partners",
+          "Email parser",
+          "Partner portal or form"
+        ]
+      },
+      {
+        "name": "Extraction and matching",
+        "components": [
+          "LLM lead extractor",
+          "Phone and name normaliser",
+          "Duplicate and ownership rules engine"
+        ]
+      },
+      {
+        "name": "Partner records",
+        "components": [
+          "Partner onboarding and KYC checks",
+          "Registration ledger with timestamps"
+        ]
+      },
+      {
+        "name": "CRM and finance",
+        "components": [
+          "CRM lead and visit tagging",
+          "Brokerage milestone tracker",
+          "Channel head and finance review"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Partner channels\"]\n  P1[\"WhatsApp partner number\"]\n  P2[\"Email and portal intake\"]\n  end\n  subgraph S2[\"Extraction and matching\"]\n  X1[\"LLM lead extractor\"]\n  X2[\"Phone and name normaliser\"]\n  X3[\"Ownership rules engine\"]\n  end\n  subgraph S3[\"Partner records\"]\n  R1[\"Partner KYC checks\"]\n  R2[\"Timestamped registration ledger\"]\n  end\n  subgraph S4[\"CRM and finance\"]\n  C1[\"CRM tagging\"]\n  C2[\"Brokerage tracker\"]\n  C3(\"Channel head and finance review\")\n  end\n  P1 --> X1\n  P2 --> X1\n  X1 --> X2\n  X2 --> X3\n  X3 --> R2\n  R1 --> X3\n  X3 --> C1\n  X3 --> C3\n  C1 --> C2\n  C2 --> C3"
+  },
+  "inputs": [
+    "Partner lead registrations by WhatsApp, email or portal",
+    "CRM leads and existing partner registrations",
+    "Ownership and validity rules from your channel policy",
+    "Partner onboarding documents: RERA agent registration, PAN, GST",
+    "Booking and agreement milestones from the CRM"
+  ],
+  "outputs": [
+    "Acknowledgements with lead ID or rejection reason",
+    "Timestamped registration ledger",
+    "Conflict cases with evidence for the channel head",
+    "Partner-wise visit, booking and brokerage status",
+    "Brokerage eligibility list for finance"
+  ],
+  "human_in_the_loop": "The channel head decides every ownership conflict, and finance approves every brokerage payout. The system applies agreed rules and assembles evidence; it does not settle disputes on its own.",
+  "integrations": [
+    "Real estate CRM such as Salesforce, Sell.Do or LeadSquared",
+    "WhatsApp Business API",
+    "Shared email inbox for partner registrations",
+    "Accounts system for brokerage payouts",
+    "State RERA portal for agent registration lookup"
+  ],
+  "guardrails": [
+    "Ownership rules applied exactly as written in your channel policy, with versioning",
+    "Every registration timestamped and stored unchanged",
+    "Conflicts never auto-resolved in favour of any party",
+    "Partners see only their own leads and status",
+    "Buyer phone numbers masked in partner-facing views after registration"
+  ],
+  "compliance_notes": [
+    "Real estate agents generally need RERA registration in the state where they operate; onboarding records the number and certificate for your verification.",
+    "Buyer data shared by partners is processed for the registration purpose under the DPDP Act 2023."
+  ],
+  "pilot": {
+    "duration": "3 weeks",
+    "scope": "One project's partner registrations through a dedicated WhatsApp number and email, with ownership checks run alongside the channel team's current process.",
+    "deliverables": [
+      "Ownership rules configured from your channel policy",
+      "WhatsApp and email intake with acknowledgements",
+      "Conflict review screen",
+      "Partner status view",
+      "Roll-out plan and estimate"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Extraction accuracy",
+        "how": "Extracted buyer details compared with the channel team's manual entries."
+      },
+      {
+        "metric": "Time to acknowledge",
+        "how": "Minutes from partner message to acknowledgement, versus the current process."
+      },
+      {
+        "metric": "Conflicts detected",
+        "how": "Duplicate or ownership conflicts flagged and confirmed by the channel head."
+      },
+      {
+        "metric": "Partner status queries",
+        "how": "Count of partner calls and messages asking about lead or brokerage status."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What if two partners register the same buyer minutes apart?",
+      "a": "Both registrations are stored with exact timestamps and the rules in your channel policy are applied. Where the policy leaves room for judgement, such as a site visit tagged to the later partner, the case goes to the channel head with the full history."
+    },
+    {
+      "q": "Can partners keep using their own message format?",
+      "a": "Yes. The extractor reads free text, forwarded contacts and spreadsheets. If a registration is missing something, such as the project name, the system asks the partner for it before registering."
+    },
+    {
+      "q": "Does it calculate brokerage amounts?",
+      "a": "It tracks eligibility against your milestones and can compute the amount from the agreed slab, but finance approves every payout and handles partner invoices and tax."
+    },
+    {
+      "q": "Can it check a partner's RERA agent registration?",
+      "a": "It records the registration number and certificate, checks the format and expiry date shown on the document, and can look it up on the state RERA portal where the portal allows. Final verification stays with your team."
+    }
+  ],
+  "related": [
+    "property-lead-qualification-voice-agent",
+    "site-visit-booking-and-reminders",
+    "buyer-nurture-campaigns",
+    "dealer-lead-routing-and-follow-up"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/real-estate-construction/channel-partner-lead-automation/"
+}

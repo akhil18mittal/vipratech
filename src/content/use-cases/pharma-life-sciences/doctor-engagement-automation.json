@@ -1,0 +1,215 @@
+{
+  "slug": "doctor-engagement-automation",
+  "industry": "pharma-life-sciences",
+  "title": "Doctor Engagement and Sample Request Automation",
+  "capability": "sales-marketing-automation",
+  "secondary_capabilities": [],
+  "summary": "Consent-based WhatsApp and email journeys that send MLR-approved content to doctors, capture sample and literature requests, and route each one to the right MR or team with a full record.",
+  "seo": {
+    "title": "Doctor Engagement and Sample Request Automation | VipraTech",
+    "description": "Consent-based WhatsApp and email journeys for doctors: approved content, tracked sample and literature requests, and routing to MRs and medical teams.",
+    "keywords": [
+      "doctor engagement automation",
+      "HCP omnichannel engagement India",
+      "pharma WhatsApp doctor engagement",
+      "sample request management",
+      "remote detailing follow-up"
+    ]
+  },
+  "designed_for": [
+    "Head of Marketing",
+    "Brand Manager",
+    "Commercial Excellence Head",
+    "Medical Affairs Lead"
+  ],
+  "problem": {
+    "intro": "Doctors now expect to hear from pharma companies on WhatsApp and email between MR visits, but much of that contact is ad hoc forwards from reps' personal phones. Brand teams cannot see what was sent, medical review is bypassed, and sample or literature requests made in a chat get lost.",
+    "pain_points": [
+      {
+        "title": "Unapproved content in circulation",
+        "detail": "Reps forward PDFs and images from personal phones, and nobody can confirm the material passed medical, legal and regulatory review."
+      },
+      {
+        "title": "Requests lost in chats",
+        "detail": "A doctor's request for samples, a product monograph or a published paper sits in one MR's WhatsApp and is never tracked."
+      },
+      {
+        "title": "No consent record",
+        "detail": "Companies struggle to show that a doctor agreed to receive messages, or to honour an opt-out across every channel."
+      },
+      {
+        "title": "No view of engagement",
+        "detail": "Brand teams cannot tell which content doctors opened or which topics led to requests, so planning relies on anecdotes."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "We build an engagement layer on the WhatsApp Business API and email that sends only content approved in your medical, legal and regulatory (MLR) review, and only to doctors who have given consent. Journeys are triggered by MR visits, the campaign calendar or doctor requests. Doctors can ask for samples, literature or a rep visit from the chat; the system logs the request, checks it against sample policy and routes it to the territory MR with a due date. Clinical questions go to medical information, never to an AI answer. Possible adverse event mentions go to pharmacovigilance, and every message is recorded against the doctor.",
+    "capabilities": [
+      "Records and honours doctor consent and opt-outs across WhatsApp and email",
+      "Sends only content tagged as MLR-approved and unexpired",
+      "Captures sample, literature and visit requests from chat buttons or free text",
+      "Checks sample requests against policy and routes them to the territory MR",
+      "Routes clinical questions to medical information and possible adverse events to PV",
+      "Reports engagement by brand, content piece, specialty and territory"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Capture consent",
+      "detail": "Doctors opt in during an MR visit, through a QR code or on a web form, and consent is stored with time and channel."
+    },
+    {
+      "step": 2,
+      "title": "Plan the journey",
+      "detail": "The brand team selects approved content and sets triggers such as a post-visit follow-up or a new publication."
+    },
+    {
+      "step": 3,
+      "title": "Send and track",
+      "detail": "Messages go out on WhatsApp or email, and opens, clicks and replies are logged."
+    },
+    {
+      "step": 4,
+      "title": "Classify replies",
+      "detail": "Replies are classified as sample request, literature request, visit request, clinical question, safety mention or opt-out."
+    },
+    {
+      "step": 5,
+      "title": "Route requests",
+      "detail": "Requests are checked against policy and routed to the MR, medical information or PV, each with a due date."
+    },
+    {
+      "step": 6,
+      "title": "Close the loop",
+      "detail": "The MR or team confirms fulfilment, and the doctor gets an update in the same channel."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Doctor gives consent\"] --> B[\"Brand team picks approved content\"]\n  B --> C[\"Send via WhatsApp or email\"]\n  C --> D[\"Classify doctor reply\"]\n  D --> E{\"Type of reply?\"}\n  E -->|\"sample or visit\"| F(\"Territory MR fulfils request\")\n  E -->|\"clinical or safety\"| G(\"Medical information or PV team\")\n  E -->|\"opt-out\"| H[\"Stop all messages\"]\n  F --> I[\"Log outcome against doctor\"]\n  G --> I",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Consent and content",
+        "components": [
+          "Consent registry with channel and timestamp",
+          "Approved content library synced from MLR review",
+          "Journey builder for brand teams"
+        ]
+      },
+      {
+        "name": "Channels",
+        "components": [
+          "WhatsApp Business API with approved templates",
+          "Email delivery service"
+        ]
+      },
+      {
+        "name": "Reply understanding",
+        "components": [
+          "Reply classifier for requests, questions and safety mentions",
+          "Sample policy rules"
+        ]
+      },
+      {
+        "name": "Routing and records",
+        "components": [
+          "MR tasks via CRM",
+          "Medical information and PV queues",
+          "Engagement and request reports"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Consent and content\"]\n    K1[\"Consent registry\"]\n    K2[\"Approved content library\"]\n    K3[\"Journey builder\"]\n  end\n  subgraph S2[\"Channels\"]\n    H1[\"WhatsApp Business API\"]\n    H2[\"Email service\"]\n  end\n  subgraph S3[\"Reply understanding\"]\n    U1[\"Reply classifier\"]\n    U2[\"Sample policy rules\"]\n  end\n  subgraph S4[\"Routing and records\"]\n    R1(\"MR task in CRM\")\n    R2(\"Medical information and PV\")\n    R3[\"Engagement reports\"]\n  end\n  K1 --> K3\n  K2 --> K3\n  K3 --> H1\n  K3 --> H2\n  H1 --> U1\n  H2 --> U1\n  U1 --> U2\n  U2 --> R1\n  U1 --> R2\n  R1 --> R3\n  R2 --> R3"
+  },
+  "inputs": [
+    "Doctor master with specialty, territory and consent status",
+    "Approved content with MLR approval and expiry dates",
+    "MR visit records from the CRM",
+    "Sample policy and allocations by brand",
+    "Campaign calendar"
+  ],
+  "outputs": [
+    "Consent and opt-out records",
+    "Tracked sample, literature and visit requests",
+    "Routed clinical questions and safety mentions",
+    "Engagement reports by brand, content and territory",
+    "Doctor-level activity history for the MR"
+  ],
+  "human_in_the_loop": "MLR reviewers approve every content piece before it can be sent. MRs fulfil sample and visit requests, medical information answers clinical questions, and PV assesses any flagged safety mention; the system gives no medical answers.",
+  "integrations": [
+    "WhatsApp Business API provider",
+    "Pharma CRM such as Veeva CRM or Salesforce",
+    "Content approval system such as Veeva PromoMats or your MLR tool",
+    "Sample management system or ERP",
+    "Pharmacovigilance intake queue"
+  ],
+  "guardrails": [
+    "No message without recorded consent; opt-outs applied across channels at once",
+    "Only MLR-approved, unexpired content can be sent",
+    "No AI-generated medical claims or answers to clinical questions",
+    "Sample requests checked against policy before routing",
+    "Possible adverse events always routed to PV"
+  ],
+  "compliance_notes": [
+    "Designed to keep the records on promotional material, samples and HCP interactions expected under UCPMP 2024.",
+    "Doctor personal data and consent are handled in line with the DPDP Act 2023 and WhatsApp Business messaging policies.",
+    "Promotion rules differ by country, so content approval stays within your MLR process for each market."
+  ],
+  "pilot": {
+    "duration": "4 weeks",
+    "scope": "One brand and one specialty in a few territories, with consenting doctors and a small set of approved content pieces.",
+    "deliverables": [
+      "Consent capture flow and registry",
+      "Journey for the pilot brand with approved templates",
+      "Reply classification and routing to MRs, medical information and PV",
+      "Engagement and request dashboard",
+      "Roll-out plan for other brands"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Request capture and routing",
+        "how": "Requests made in chat compared with tasks created and fulfilled in the CRM."
+      },
+      {
+        "metric": "Reply classification accuracy",
+        "how": "Sampled replies reviewed by brand and medical teams for correct routing."
+      },
+      {
+        "metric": "Fulfilment time",
+        "how": "Time from doctor request to MR confirmation, from task logs."
+      },
+      {
+        "metric": "Opt-out handling",
+        "how": "Opt-out requests checked for an immediate stop across channels."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can the AI answer doctors' clinical questions?",
+      "a": "No. Clinical and product questions go to your medical information team, who answer from approved responses. The system only classifies and routes them."
+    },
+    {
+      "q": "How do you handle WhatsApp template approvals?",
+      "a": "Messages sent outside a doctor's reply window use WhatsApp-approved templates, which we prepare with your brand team. The content inside templates still goes through your MLR process."
+    },
+    {
+      "q": "Does this replace MRs?",
+      "a": "No. It gives MRs a tracked list of requests from their doctors and keeps contact going between visits. Visits and relationships stay with the field force."
+    },
+    {
+      "q": "Which CRM do you integrate with?",
+      "a": "We connect through your CRM's API, for example Veeva CRM, Salesforce or an Indian SFA product. If CRM integration needs more time, the pilot can start with a simple task list."
+    }
+  ],
+  "related": [
+    "mr-call-reporting-by-voice",
+    "adverse-event-intake",
+    "stockist-order-taking-voice-agent",
+    "patient-enquiry-follow-up-automation"
+  ],
+  "proof_ref": null,
+  "content_type": "use-case",
+  "url": "/use-cases/pharma-life-sciences/doctor-engagement-automation/"
+}
