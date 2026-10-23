@@ -3,6 +3,7 @@ import {createServer} from 'node:http';
 import type {AddressInfo} from 'node:net';
 import {extname, join} from 'node:path';
 import {setTimeout as sleep} from 'node:timers/promises';
+import type {Page} from 'puppeteer';
 import {launchChrome} from './chrome';
 import {DIST, fileFor, listPages} from './dist';
 
@@ -37,6 +38,37 @@ const TYPES: Record<string, string> = {
   '.woff2': 'font/woff2',
 };
 
+const findOverflow = (page: Page) =>
+  page.evaluate(() => {
+    const width = document.documentElement.clientWidth;
+    // The page shells (<main>, and the homepage's full-height wrapper) clip sideways overflow, so a too-wide element
+    // is cut off rather than scrolling the page. Smaller boxes that clip (the homepage ticker) or scroll (diagrams)
+    // do it on purpose, and so does the homepage's moving background, which ignores the pointer.
+    const clippedOnPurpose = (element: Element) => {
+      for (let parent = element.parentElement; parent && parent !== document.body; parent = parent.parentElement) {
+        const {overflowX} = getComputedStyle(parent);
+        if (overflowX === 'auto' || overflowX === 'scroll') return true;
+        const shell = parent.tagName === 'MAIN' || parent.getBoundingClientRect().height >= window.innerHeight;
+        if (overflowX !== 'visible' && !shell) return true;
+      }
+      return false;
+    };
+    const culprits = [...document.body.querySelectorAll('*')].filter((element) => {
+      const box = element.getBoundingClientRect();
+      const decorative = getComputedStyle(element).pointerEvents === 'none';
+      return box.width > 0 && box.right > width + 1 && !decorative && !clippedOnPurpose(element);
+    });
+    if (culprits.length === 0 && document.documentElement.scrollWidth <= width) return null;
+    return {
+      scrollWidth: document.documentElement.scrollWidth,
+      culprits: culprits.slice(0, 8).map((element) => {
+        const classes = typeof element.className === 'string' ? element.className.trim().split(/\s+/).slice(0, 4).join('.') : '';
+        const right = Math.round(element.getBoundingClientRect().right);
+        return `<${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${classes ? `.${classes}` : ''}> to ${right}px`;
+      }),
+    };
+  });
+
 async function main() {
   const pages = listPages();
   const errors: string[] = [];
@@ -70,35 +102,13 @@ async function main() {
       });
       // Gives the homepage's React app time to draw.
       await sleep(1_000);
-      const overflow = await page.evaluate(() => {
-        const width = document.documentElement.clientWidth;
-        // The page shells (<main>, and the homepage's full-height wrapper) clip sideways overflow, so a too-wide element
-        // is cut off rather than scrolling the page. Smaller boxes that clip (the homepage ticker) or scroll (diagrams)
-        // do it on purpose, and so does the homepage's moving background, which ignores the pointer.
-        const clippedOnPurpose = (element: Element) => {
-          for (let parent = element.parentElement; parent && parent !== document.body; parent = parent.parentElement) {
-            const {overflowX} = getComputedStyle(parent);
-            if (overflowX === 'auto' || overflowX === 'scroll') return true;
-            const shell = parent.tagName === 'MAIN' || parent.getBoundingClientRect().height >= window.innerHeight;
-            if (overflowX !== 'visible' && !shell) return true;
-          }
-          return false;
-        };
-        const culprits = [...document.body.querySelectorAll('*')].filter((element) => {
-          const box = element.getBoundingClientRect();
-          const decorative = getComputedStyle(element).pointerEvents === 'none';
-          return box.width > 0 && box.right > width + 1 && !decorative && !clippedOnPurpose(element);
-        });
-        if (culprits.length === 0 && document.documentElement.scrollWidth <= width) return null;
-        return {
-          scrollWidth: document.documentElement.scrollWidth,
-          culprits: culprits.slice(0, 8).map((element) => {
-            const classes = typeof element.className === 'string' ? element.className.trim().split(/\s+/).slice(0, 4).join('.') : '';
-            const right = Math.round(element.getBoundingClientRect().right);
-            return `<${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${classes ? `.${classes}` : ''}> to ${right}px`;
-          }),
-        };
-      });
+      // Its entrance animations slide content in from the side, so an overflow counts only if it is still there once
+      // they have had time to finish.
+      let overflow = await findOverflow(page);
+      for (let retry = 0; overflow && retry < 5; retry++) {
+        await sleep(1_000);
+        overflow = await findOverflow(page);
+      }
       if (overflow) {
         errors.push(`${name} (${path}) at ${WIDTH}px: page ${overflow.scrollWidth}px wide; past the edge: ${overflow.culprits.join(', ') || 'none found'}`);
       } else {
