@@ -4,11 +4,11 @@
 // scripts/validate-content.ts checks that each industry exists and appears in at most one batch.
 
 export const USE_CASE_BATCHES: readonly {releasedOn: string; industries: readonly string[]}[] = [
-  {releasedOn: '2026-10-22', industries: ['banking', 'nbfc-lending', 'insurance']},
-  {releasedOn: '2026-10-22', industries: ['capital-markets-wealth', 'fintech-payments', 'saas-ai-companies']},
-  {releasedOn: '2026-10-22', industries: ['healthcare', 'pharma-life-sciences', 'telecom-contact-centers']},
-  {releasedOn: '2026-10-22', industries: ['logistics-supply-chain', 'manufacturing', 'retail-ecommerce']},
-  {releasedOn: '2026-10-22', industries: ['legal', 'accounting-audit-consulting', 'real-estate-construction']},
-  {releasedOn: '2026-10-22', industries: ['hospitality-travel', 'education', 'automotive-mobility']},
-  {releasedOn: '2026-10-22', industries: ['energy-mining-utilities', 'agriculture']},
+  {releasedOn: '2026-10-23', industries: ['banking', 'nbfc-lending', 'insurance']},
+  {releasedOn: '2026-10-23', industries: ['capital-markets-wealth', 'fintech-payments', 'saas-ai-companies']},
+  {releasedOn: '2026-10-23', industries: ['healthcare', 'pharma-life-sciences', 'telecom-contact-centers']},
+  {releasedOn: '2026-10-23', industries: ['logistics-supply-chain', 'manufacturing', 'retail-ecommerce']},
+  {releasedOn: '2026-10-23', industries: ['legal', 'accounting-audit-consulting', 'real-estate-construction']},
+  {releasedOn: '2026-10-23', industries: ['hospitality-travel', 'education', 'automotive-mobility']},
+  {releasedOn: '2026-10-23', industries: ['energy-mining-utilities', 'agriculture']},
 ];

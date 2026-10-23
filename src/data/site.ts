@@ -3,7 +3,7 @@ import {COMPANY_INFO} from './companyData';
 
 // Contact links for the call-to-action buttons on every content page.
 
-/** Replace with the real 20-minute Calendly event. check:dist fails while any page still links to the placeholder. */
+/** Replace with the real 20-minute Calendly event. check:dist warns while any page still links to the placeholder. */
 export const CALENDLY_PLACEHOLDER = 'https://calendly.com/vipratech-placeholder/20min';
 const CALENDLY_URL: string = CALENDLY_PLACEHOLDER;
 

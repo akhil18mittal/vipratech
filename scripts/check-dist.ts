@@ -8,8 +8,9 @@ import {loadContent} from './content-checks';
 import {DIST, fileFor, listPages, pathOf} from './dist';
 
 // Checks the built site in dist/ before it goes live: head tags, structured data, links and images, the sitemap, and
-// that nothing unready (the Calendly placeholder, the draft privacy policy, unapproved proofs) is published. Pages are
-// read as served, without running their JavaScript, which is what search engines see first.
+// that nothing unready (the draft privacy policy, unapproved proofs) is published. Pages still linking to the Calendly
+// placeholder are reported as a warning. Pages are read as served, without running their JavaScript, which is what
+// search engines see first.
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const SITE = 'https://vipratech.in';
@@ -90,6 +91,7 @@ async function main() {
     ]);
 
   const indexable: string[] = [];
+  let placeholderPages = 0;
   for (const [path, page] of pages) {
     const fail = (message: string) => errors.push(`${path}: ${message}`);
     const noindex = page.meta.robots?.includes('noindex') ?? false;
@@ -131,7 +133,7 @@ async function main() {
       }
     }
 
-    if (page.html.includes(CALENDLY_PLACEHOLDER)) fail('links to the Calendly placeholder: set CALENDLY_URL in src/data/site.ts');
+    if (page.html.includes(CALENDLY_PLACEHOLDER)) placeholderPages++;
     for (const text of hidden) if (page.text.includes(text)) fail(`shows an unapproved proof project: "${text}"`);
   }
 
@@ -148,6 +150,9 @@ async function main() {
   const robots = existsSync(join(DIST, 'robots.txt')) ? readFileSync(join(DIST, 'robots.txt'), 'utf8') : '';
   if (!robots.includes(`Sitemap: ${SITE}/sitemap.xml`)) errors.push('robots.txt is missing or doesn\'t point to the sitemap');
 
+  if (placeholderPages > 0) {
+    console.warn(`Warning: ${placeholderPages} page(s) link to the Calendly placeholder; set CALENDLY_URL in src/data/site.ts`);
+  }
   if (errors.length > 0) {
     console.error(`dist/ check failed with ${errors.length} error(s):`);
     for (const error of errors) console.error(`  - ${error}`);

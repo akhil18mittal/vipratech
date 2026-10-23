@@ -31,7 +31,7 @@ bun run check:dist    # head tags, JSON-LD, links, images, sitemap, and nothing 
 bun run check:mobile  # nothing runs off the edge at 400px, one page per template
 ```
 
-`check:dist` fails while the Calendly placeholder is in use or the privacy policy is unapproved (`CALENDLY_URL` and `PRIVACY_POLICY_APPROVED_ON` in `src/data/site.ts`), so the site can't go live with either.
+`check:dist` fails while the privacy policy is unapproved (`PRIVACY_POLICY_APPROVED_ON` in `src/data/site.ts`), so the site can't go live with a draft policy. It warns while the booking buttons still link to the Calendly placeholder (`CALENDLY_URL`).
 
 To inspect the build locally:
 
