@@ -1,11 +1,11 @@
 ---
-import {CONSENT_SCRIPT_SRC, GA4_ID} from '../../data/site';
+import {GA4_ID} from '../../data/site';
 
-// Google Consent Mode v2, GA4 and the consent banner, in the order Google requires: consent defaults, then gtag.js,
-// then the banner. Visitors in the EEA, UK and Switzerland (by Google's IP lookup) start with everything denied until
-// they accept; everyone else starts granted and sees no banner. The banner script loads only for European time zones,
-// so it isn't shown or counted for visitors elsewhere; an EEA visitor outside those time zones simply stays denied.
-// Nothing here renders until GA4_ID is set.
+// Google Consent Mode v2 and GA4, in the order Google requires: consent defaults, then gtag.js. Visitors in the EEA,
+// UK and Switzerland (by Google's IP lookup) start with everything denied; everyone else starts granted. A choice made
+// in the cookie banner (CookieBanner.astro) is kept in a cookie and applied before gtag.js loads on later pages.
+// The banner and the footer's "Cookie settings" are shown only for European time zones, so visitors elsewhere never
+// see them; an EEA visitor outside those time zones simply stays denied. Nothing here renders until GA4_ID is set.
 
 const CONSENT_REGIONS = [
   ...['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU'],
@@ -19,36 +19,50 @@ const EUROPEAN_TIME_ZONES = [
   'Asia/Famagusta',
   'Asia/Nicosia',
 ];
+/** How long the banner's answer is kept before the banner asks again. */
+const CHOICE_MAX_AGE = 180 * 24 * 60 * 60;
 ---
 
 {
   GA4_ID && (
     <>
-      <script is:inline define:vars={{regions: CONSENT_REGIONS}}>
+      <script is:inline define:vars={{regions: CONSENT_REGIONS, zones: EUROPEAN_TIME_ZONES, maxAge: CHOICE_MAX_AGE}}>
         window.dataLayer = window.dataLayer || [];
         window.gtag = function () {
           window.dataLayer.push(arguments);
         };
-        const denied = {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied'};
-        const granted = {ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted'};
-        window.gtag('consent', 'default', {...denied, region: regions, wait_for_update: 500});
-        window.gtag('consent', 'default', granted);
+        const consent = (value) => ({ad_storage: value, ad_user_data: value, ad_personalization: value, analytics_storage: value});
+        const choice = document.cookie.match(/(?:^|; )vt_consent=(granted|denied)/)?.[1];
+        window.gtag('consent', 'default', {...consent('denied'), region: regions, wait_for_update: 500});
+        window.gtag('consent', 'default', consent('granted'));
+        if (choice) window.gtag('consent', 'update', consent(choice));
+
+        const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        if (zone.startsWith('Europe/') || zones.includes(zone)) {
+          document.documentElement.dataset.cookieBanner = '';
+          document.addEventListener('DOMContentLoaded', () => {
+            const banner = document.getElementById('cookie-banner');
+            if (!choice) banner.hidden = false;
+            document.addEventListener('click', (event) => {
+              const target = event.target.closest('[data-consent], [data-cookie-settings]');
+              if (!target) return;
+              const value = target.dataset.consent;
+              if (value) {
+                document.cookie = `vt_consent=${value}; max-age=${maxAge}; path=/; SameSite=Lax; Secure`;
+                window.gtag('consent', 'update', consent(value));
+                banner.hidden = true;
+              } else {
+                banner.hidden = false;
+              }
+            });
+          });
+        }
       </script>
       <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
       <script is:inline define:vars={{id: GA4_ID}}>
         window.gtag('js', new Date());
         window.gtag('config', id);
       </script>
-      {CONSENT_SCRIPT_SRC && (
-        <script is:inline define:vars={{src: CONSENT_SCRIPT_SRC, zones: EUROPEAN_TIME_ZONES}}>
-          const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-          if (zone.startsWith('Europe/') || zones.includes(zone)) {
-            const banner = document.createElement('script');
-            banner.src = src;
-            document.head.appendChild(banner);
-          }
-        </script>
-      )}
     </>
   )
 }

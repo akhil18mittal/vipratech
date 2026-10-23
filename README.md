@@ -1,6 +1,6 @@
 # VipraTech Applied-AI Engineering
 
-The public VipraTech website is a static site built with Astro; the homepage is a React application. Its fit diagnostic runs entirely in the browser and the contact handoff opens a prefilled email; the site has no backend, API keys, or lead database. Google Analytics 4 (with Google Consent Mode and a cookie banner for EEA, UK and Swiss visitors) is switched on by setting `GA4_ID` and `CONSENT_SCRIPT_SRC` in `src/data/site.ts`.
+The public VipraTech website is a static site built with Astro; the homepage is a React application. Its fit diagnostic runs entirely in the browser and the contact handoff opens a prefilled email; the site has no backend, API keys, or lead database. Google Analytics 4 (with Google Consent Mode and a cookie banner for EEA, UK and Swiss visitors) is switched on by setting `GA4_ID` in `src/data/site.ts`; the banner is part of the site, so no consent service is needed.
 
 ## Local development
 

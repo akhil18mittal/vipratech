@@ -1,6 +1,7 @@
 ---
 import '../index.css';
 import ConsentScripts from '../components/site/ConsentScripts.astro';
+import CookieBanner from '../components/site/CookieBanner.astro';
 import {Breadcrumbs} from '../components/site/Breadcrumbs';
 import {ContentFooter} from '../components/site/ContentFooter';
 import {SiteHeader} from '../components/site/SiteHeader';
@@ -91,6 +92,7 @@ const structuredData = [
         </>
       )
     }
+    <CookieBanner />
     <script>
       import '../scripts/nav';
       import {trackPage} from '../lib/analytics';

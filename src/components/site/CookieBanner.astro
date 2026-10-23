@@ -1,0 +1,30 @@
+---
+import {GA4_ID} from '../../data/site';
+
+// The cookie banner. ConsentScripts.astro decides who sees it and handles the buttons; it starts hidden, so visitors
+// outside Europe never see it. Accept and Reject look the same, as EU regulators expect.
+
+const button =
+  'flex-1 px-4 py-2.5 bg-zinc-950 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 rounded-xl text-xs font-semibold transition-all font-mono';
+---
+
+{
+  GA4_ID && (
+    <div
+      id="cookie-banner"
+      role="region"
+      aria-label="Cookie consent"
+      hidden
+      class="fixed z-50 bottom-4 inset-x-4 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl p-5 shadow-2xl"
+    >
+      <p class="text-sm text-zinc-300 leading-relaxed">
+        We use cookies to measure site traffic and ad performance.{' '}
+        <a href="/privacy/" class="text-lime-400 hover:text-lime-300 transition-colors">Privacy policy</a>
+      </p>
+      <div class="mt-4 flex gap-3">
+        <button type="button" data-consent="granted" class={button}>Accept</button>
+        <button type="button" data-consent="denied" class={button}>Reject</button>
+      </div>
+    </div>
+  )
+}

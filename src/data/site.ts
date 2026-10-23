@@ -32,17 +32,10 @@ export const contactLinks = (pagePath: string, pageTitle: string): ContactLinks 
 export const GA4_ID: string | null = null;
 
 /**
- * The consent banner script's src from the consent service's install snippet (CookieYes:
- * 'https://cdn-cookieyes.com/client_data/<key>/script.js'). It loads only for visitors whose time zone is in Europe;
- * Consent Mode's region defaults keep EEA/UK/CH visitors denied until they accept, banner or not.
- */
-export const CONSENT_SCRIPT_SRC: string | null = null;
-
-/**
  * The day you approved the privacy policy at /privacy/ (e.g. '2026-11-02'). check:dist fails while it is null, so the
  * site can't go live with the draft policy.
  */
-export const PRIVACY_POLICY_APPROVED_ON: string | null = null;
+export const PRIVACY_POLICY_APPROVED_ON: string | null = '2026-10-23';
 
 /** The default share image for social cards, 1200×630. */
 export const SHARE_IMAGE = '/og/default.png';

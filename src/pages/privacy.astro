@@ -5,8 +5,6 @@ import {COMPANY_INFO} from '../data/companyData';
 import {PRIVACY_POLICY_APPROVED_ON} from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// DRAFT for the owner to approve. check:dist fails until PRIVACY_POLICY_APPROVED_ON is set in src/data/site.ts.
-
 const paragraph = 'text-sm text-zinc-300 leading-relaxed max-w-3xl';
 const link = 'text-lime-400 hover:text-lime-300 transition-colors';
 ---
@@ -43,8 +41,8 @@ const link = 'text-lime-400 hover:text-lime-300 transition-colors';
     <p class={paragraph}>
       <strong class="text-white">Visitors in the EEA, UK and Switzerland.</strong> Analytics and advertising cookies
       stay off until you accept them in the cookie banner. Until then, Google may receive basic signals without
-      cookies, such as that a page was loaded. A cookie consent service shows the banner and stores your choice in a
-      cookie.
+      cookies, such as that a page was loaded. The banner stores your choice in a cookie for six months, and you can
+      change it at any time with "Cookie settings" at the bottom of every page.
     </p>
     <p class={paragraph}>
       <strong class="text-white">Visitors elsewhere.</strong> Analytics is on by default. You can block cookies in your

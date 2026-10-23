@@ -91,6 +91,11 @@ export function SiteFooter({ solutions, callToAction }: SiteFooterProps) {
               </a>
             </li>
           ))}
+          <li data-cookie-settings className="hidden in-data-cookie-banner:block">
+            <button type="button" className={linkClass}>
+              Cookie settings
+            </button>
+          </li>
         </ul>
       </nav>
     </footer>
