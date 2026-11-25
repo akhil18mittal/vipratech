@@ -1,1 +1,120 @@
 @import "tailwindcss";
+
+/* The VipraTech "signal grid" look: Matrix rain behind every page, a fading grid under page heroes, a lime ticker,
+   floating particles and a laser line sweeping the live review queue. Every moving part stops for visitors who ask
+   their system for reduced motion. */
+
+@keyframes vt-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes vt-float {
+  0% {
+    transform: translateY(0);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-220px);
+    opacity: 0.1;
+  }
+}
+
+@keyframes vt-sweep {
+  0%,
+  100% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+}
+
+@keyframes vt-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vt-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* A grid of fine lines that fades out from the top centre, behind a hero. */
+.vt-grid {
+  background-image:
+    linear-gradient(to right, #27272a 1px, transparent 1px),
+    linear-gradient(to bottom, #27272a 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 0%, #000 60%, transparent 100%);
+  opacity: 0.45;
+}
+
+/* A soft lime and emerald glow behind a hero headline. */
+.vt-glow {
+  background: radial-gradient(ellipse at center, rgba(163, 230, 53, 0.16) 0%, rgba(16, 185, 129, 0.07) 45%, transparent 70%);
+  filter: blur(8px);
+}
+
+.vt-ticker-track {
+  animation: vt-ticker 40s linear infinite;
+}
+
+.vt-particle {
+  animation: vt-float linear infinite;
+}
+
+.vt-sweep {
+  animation: vt-sweep 4s ease-in-out infinite;
+  box-shadow: 0 0 12px #a3e635;
+}
+
+.vt-row-in {
+  animation: vt-row-in 0.45s ease-out;
+}
+
+.vt-cursor {
+  animation: vt-blink 0.9s step-end infinite;
+}
+
+/* Characters the typing effect has not reached yet keep their space, so nothing moves while it types. */
+[data-typing] .vt-char {
+  opacity: 0;
+}
+
+[data-typing] .vt-char.vt-shown {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vt-ticker-track,
+  .vt-particle,
+  .vt-sweep,
+  .vt-row-in,
+  .vt-cursor {
+    animation: none;
+  }
+
+  .vt-particle,
+  .vt-sweep {
+    display: none;
+  }
+
+  #matrix-rain {
+    display: none;
+  }
+}

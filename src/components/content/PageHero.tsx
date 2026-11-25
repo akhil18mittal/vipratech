@@ -11,9 +11,12 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, subtitle, intro, contact }: PageHeroProps) {
   return (
-    <section className="pt-8 pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
+    <section className="relative pt-8 pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
+      <div aria-hidden="true" className="vt-grid absolute inset-x-0 -top-24 h-[28rem] -z-10 pointer-events-none" />
+      <div aria-hidden="true" className="vt-glow absolute left-0 top-0 w-[36rem] h-72 -z-10 pointer-events-none" />
       {eyebrow && (
         <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-400/10 border border-lime-400/40 text-lime-400 text-xs font-mono">
+          <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse" aria-hidden="true" />
           {eyebrow}
         </span>
       )}

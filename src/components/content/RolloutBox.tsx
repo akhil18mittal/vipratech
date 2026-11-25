@@ -20,8 +20,8 @@ export function RolloutBox({ rollout }: { rollout: UseCase["rollout"] }) {
         <dl className="space-y-4">
           {rollout.what_we_measure.map((item) => (
             <div key={item.metric} className="space-y-1">
-              <dt className="text-xs font-bold text-white">{item.metric}</dt>
-              <dd className="text-xs text-zinc-400 leading-relaxed">{item.how}</dd>
+              <dt className="text-sm font-bold text-white">{item.metric}</dt>
+              <dd className="text-sm text-zinc-400 leading-relaxed">{item.how}</dd>
             </div>
           ))}
         </dl>

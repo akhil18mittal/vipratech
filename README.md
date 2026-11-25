@@ -47,6 +47,7 @@ Use-case pages (one per workflow, in one of four categories, each with its app s
 
 - `src/pages/index.astro`: the homepage. Its problem and workflow sections come from the live claims use case.
 - `src/pages/free-claims-audit.astro`, `sample-audit-report.astro`, `security.astro`: the audit offer, a sample report with invented figures, and data-handling commitments.
+- `src/scripts/matrix-rain.ts` draws the Matrix rain behind every page; `src/scripts/home.ts` runs the homepage's typed headline, review queue and leakage calculator (content in `src/data/home.ts`). All of it stops for visitors who ask for reduced motion, and every page works with JavaScript off.
 - `src/data/site.ts`: contact links (audit, email, WhatsApp, Calendly), the GA4 and Clarity IDs, and the privacy policy approval date.
 - `src/data/order.ts`: display order of the industry pages.
 - `src/data/proofs.ts`: which proof projects the site may show.

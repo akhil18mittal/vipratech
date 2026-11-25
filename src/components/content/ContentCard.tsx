@@ -19,12 +19,12 @@ export function ContentCard({ item }: { item: CardItem }) {
         {item.title}
         {item.href && <ArrowUpRight className="w-4 h-4 text-lime-400 flex-shrink-0 mt-1" />}
       </h3>
-      <p className="text-xs text-zinc-400 leading-relaxed">{item.text}</p>
+      <p className="text-sm text-zinc-400 leading-relaxed">{item.text}</p>
     </>
   );
   const cardClass = "h-full p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl space-y-3 shadow-lg block";
   return item.href ? (
-    <a href={item.href} className={`${cardClass} hover:border-lime-500/40 transition-colors`}>
+    <a href={item.href} className={`${cardClass} hover:border-lime-500/50 hover:-translate-y-1 hover:shadow-lime-400/10 transition-all`}>
       {body}
     </a>
   ) : (
