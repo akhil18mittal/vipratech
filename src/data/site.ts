@@ -76,6 +76,9 @@ export const auditRequestLinks = (): ContactLinks => ({
 /** The GA4 Measurement ID of the "vipratech.in" property in the VipraTech Labs Analytics account. Set to null to turn analytics off. */
 export const GA4_ID: string | null = 'G-X6SC4FX6JN';
 
+/** Google Search Console ownership check for https://vipratech.in/ (HTML tag method). Keep it, or the property loses verification. */
+export const GOOGLE_SITE_VERIFICATION = '9qk8MPf7ymIgWqf34-4G5-T6iE4Va6sbf2Ry_ivYYTg';
+
 /** The Microsoft Clarity project ID ("VipraTech" project) for heatmaps and session recordings. Set to null to turn it off. */
 export const CLARITY_ID: string | null = 'zjacov77if';
 
