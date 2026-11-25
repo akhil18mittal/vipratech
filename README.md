@@ -31,7 +31,7 @@ bun run check:dist    # head tags, JSON-LD, links, images, sitemap, and nothing 
 bun run check:mobile  # nothing runs off the edge at 400px, one page per template
 ```
 
-`check:dist` fails while the privacy policy is unapproved (`PRIVACY_POLICY_APPROVED_ON` in `src/data/site.ts`), so the site can't go live with a draft policy, and fails if any page links to the Calendly placeholder. While `CALENDLY_URL` is still the placeholder, "Book a demo" opens a demo request email; set the real event URL to send it to Calendly instead.
+`check:dist` fails while the privacy policy is unapproved (`PRIVACY_POLICY_APPROVED_ON` in `src/data/site.ts`), so the site can't go live with a draft policy, and fails if any page links to the Calendly placeholder. "Book a demo" opens the Vipratech Demo event on Calendly (`CALENDLY_URL` in `src/data/site.ts`), tagged with the page the visitor came from.
 
 To inspect the build locally:
 

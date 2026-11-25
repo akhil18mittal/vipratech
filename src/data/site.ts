@@ -3,9 +3,10 @@ import {COMPANY_INFO} from './companyData';
 
 // Contact links for the call-to-action buttons on every page.
 
-/** Replace CALENDLY_URL with the real 20-minute Calendly event to show "Book a 20-minute call" buttons. */
+/** Kept so a misconfigured booking URL is caught: calendlyLink ignores it and scripts/check-dist.ts fails on it. */
 export const CALENDLY_PLACEHOLDER = 'https://calendly.com/vipratech-placeholder/20min';
-const CALENDLY_URL: string = CALENDLY_PLACEHOLDER;
+/** The "Vipratech Demo" event every "Book a demo" button opens. */
+const CALENDLY_URL: string = 'https://calendly.com/akhil18-mittal/vipratech-demo';
 
 /** The page that explains the free claims audit and how to ask for one. */
 export const AUDIT_PATH = '/free-claims-audit/';

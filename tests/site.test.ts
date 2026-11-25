@@ -1,13 +1,18 @@
 import {describe, expect, it} from 'vitest';
-import {AUDIT_PATH, auditEmailLink, auditRequestLinks, calendlyLink, contactLinks, demoEmailLink, whatsappLink} from '../src/data/site';
+import {AUDIT_PATH, CALENDLY_PLACEHOLDER, auditEmailLink, auditRequestLinks, calendlyLink, contactLinks, demoEmailLink, whatsappLink} from '../src/data/site';
 
 describe('contact links', () => {
-  it('asks for a demo by email while Calendly is still the placeholder', () => {
-    expect(calendlyLink('/')).toBeUndefined();
-    expect(contactLinks('/platform/', 'the VipraTech claims engine').demo).toEqual({
-      href: demoEmailLink('the VipraTech claims engine'),
-      cta: 'demo_email',
-    });
+  it('sends the demo button to the Calendly demo event, tagged with the page it came from', () => {
+    const demo = contactLinks('/platform/', 'the VipraTech claims engine').demo;
+    expect(demo.cta).toBe('calendly');
+    const url = new URL(demo.href);
+    expect(`${url.origin}${url.pathname}`).toBe('https://calendly.com/akhil18-mittal/vipratech-demo');
+    expect(url.searchParams.get('utm_content')).toBe('/platform/');
+  });
+
+  it('never links to the Calendly placeholder', () => {
+    expect(calendlyLink('/', CALENDLY_PLACEHOLDER)).toBeUndefined();
+    expect(new URL(demoEmailLink('Freight Bill Audit')).protocol).toBe('mailto:');
   });
 
   it('tags the booking link with the page it came from once Calendly is set up', () => {
