@@ -9,8 +9,11 @@ const texts = (min: number, max: number) => z.array(text).min(min).max(max);
 const titled = z.strictObject({title: text, detail: text});
 const faq = z.strictObject({q: text, a: text});
 
-/** `live`: running for a customer today. `early-access`: designed, and offered to a few brands as design partners. */
-const useCaseStatus = z.enum(['live', 'early-access']);
+/**
+ * `live`: running for a customer today. `pilot-ready`: runs on the same claims engine as a live use case and is
+ * configured to a brand's documents during a pilot. `early-access`: being built with a few brands as design partners.
+ */
+const useCaseStatus = z.enum(['live', 'pilot-ready', 'early-access']);
 
 export const useCaseSchema = z.strictObject({
   slug,
@@ -49,6 +52,24 @@ export const useCaseSchema = z.strictObject({
   url: text,
 });
 
+export const industrySchema = z.strictObject({
+  slug,
+  name: text,
+  seo: z.strictObject({
+    title: text.max(60),
+    description: text.max(155),
+    keywords: texts(4, 8),
+  }),
+  hero: z.strictObject({headline: text.max(90), subheadline: text}),
+  intro: text,
+  challenges: z.array(titled).length(4),
+  /** The use cases that apply in this industry, each with a note on how it works there. */
+  use_cases: z.array(z.strictObject({use_case: slug, note: text})).min(3).max(10),
+  documents: texts(4, 8),
+  faqs: z.array(faq).min(3).max(4),
+  url: text,
+});
+
 export const proofProjectSchema = z.strictObject({
   id: slug,
   title: text,
@@ -58,4 +79,5 @@ export const proofProjectSchema = z.strictObject({
 });
 
 export type UseCase = z.infer<typeof useCaseSchema>;
+export type Industry = z.infer<typeof industrySchema>;
 export type ProofProject = z.infer<typeof proofProjectSchema>;

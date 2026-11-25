@@ -14,7 +14,11 @@
       "FMCG distributor accounts"
     ]
   },
-  "designed_for": ["CFO or Head of Finance", "Accounts Receivable Lead", "Claims Settlement Team Lead"],
+  "designed_for": [
+    "CFO or Head of Finance",
+    "Accounts Receivable Lead",
+    "Claims Settlement Team Lead"
+  ],
   "problem": {
     "intro": "Once claims are approved, finance raises credit notes, distributors adjust them against invoices, and at the end of a quarter or year both sides confirm balances. Credit notes are raised in the ERP or Tally from spreadsheets, and distributors keep their own books, so the two drift apart and nobody sees why until the balance confirmation does not match.",
     "pain_points": [
@@ -84,19 +88,33 @@
     "layers": [
       {
         "name": "Intake",
-        "components": ["Approved claim sheets", "ERP or Tally credit notes", "Distributor ledger statements"]
+        "components": [
+          "Approved claim sheets",
+          "ERP or Tally credit notes",
+          "Distributor ledger statements"
+        ]
       },
       {
         "name": "Matching",
-        "components": ["Claim to credit note matcher", "Ledger statement reader", "Balance comparison"]
+        "components": [
+          "Claim to credit note matcher",
+          "Ledger statement reader",
+          "Balance comparison"
+        ]
       },
       {
         "name": "Review",
-        "components": ["Differences with reasons", "Finance review"]
+        "components": [
+          "Differences with reasons",
+          "Finance review"
+        ]
       },
       {
         "name": "Output",
-        "components": ["Distributor reconciliation statements", "Audit trail"]
+        "components": [
+          "Distributor reconciliation statements",
+          "Audit trail"
+        ]
       }
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Approved claim sheets\"]\n    I2[\"ERP or Tally credit notes\"]\n    I3[\"Distributor ledger statements\"]\n  end\n  subgraph S2[\"Matching\"]\n    M1[\"Claim to credit note matcher\"]\n    M2[\"Ledger statement reader\"]\n    M3[\"Balance comparison\"]\n  end\n  subgraph S3[\"Review\"]\n    R1[\"Differences with reasons\"]\n    R2(\"Finance review\")\n  end\n  subgraph S4[\"Output\"]\n    O1[\"Reconciliation statements\"]\n    O2[\"Audit trail\"]\n  end\n  I1 --> M1\n  I2 --> M1\n  I3 --> M2\n  M1 --> M3\n  M2 --> M3\n  M3 --> R1 --> R2\n  R2 --> O1\n  R2 --> O2"
@@ -171,7 +189,11 @@
       "a": "Distributor claims settlement is live today. Credit note and ledger reconciliation is in early access: we are building it with a small number of brands as design partners."
     }
   ],
-  "related": ["distributor-scheme-claims", "quick-commerce-deductions"],
+  "related": [
+    "distributor-scheme-claims",
+    "trade-spend-accruals",
+    "modern-trade-deductions"
+  ],
   "proof_ref": null,
   "url": "/use-cases/credit-note-reconciliation/"
 }

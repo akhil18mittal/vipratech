@@ -1,6 +1,6 @@
 # VipraTech: distributor claims reconciliation
 
-The public VipraTech website: one product (AI that checks distributor claims and deductions for finance teams at FMCG and D2C brands) and one next step (the free claims audit). It is a static site built with Astro. Pages are plain HTML with no client-side framework; React components render at build time. Audit requests go by email or WhatsApp, so the site has no backend, API keys, form or lead database. Google Analytics 4 (with Google Consent Mode and a cookie banner for EEA, UK and Swiss visitors) is switched on by setting `GA4_ID` in `src/data/site.ts`; the banner is part of the site, so no consent service is needed.
+The public VipraTech website: AI that checks claims, deductions and reconciliations for finance teams at brands that sell through distributors, dealers, retail chains and marketplaces, with one next step (the free claims audit). It is a static site built with Astro. Pages are plain HTML with no client-side framework; React components render at build time. Audit requests go by email or WhatsApp, so the site has no backend, API keys, form or lead database. Google Analytics 4 (with Google Consent Mode and a cookie banner for EEA, UK and Swiss visitors) is switched on by setting `GA4_ID` in `src/data/site.ts`; the banner is part of the site, so no consent service is needed.
 
 ## Local development
 
@@ -43,11 +43,12 @@ The scripts find a local Chrome or Chromium, or use the one in `PUPPETEER_EXECUT
 
 ## Content
 
-Use-case pages are JSON under `src/content/use-cases/`, in the shape described in `docs/content/SCHEMA.md`, each marked `live` or `early-access`. Edit them there and run `bun run validate`, which checks each file's shape, every cross-reference, each `url`, and the Mermaid diagrams.
+Use-case pages (one per workflow, marked `live`, `pilot-ready` or `early-access`) are JSON under `src/content/use-cases/`, and industry pages (which workflows apply in each industry, with industry-specific notes) are JSON under `src/content/industries/`, in the shapes described in `docs/content/SCHEMA.md`. Edit them there and run `bun run validate`, which checks each file's shape, every cross-reference, each `url`, the industry order, that every use case is listed by an industry, and the Mermaid diagrams.
 
 - `src/pages/index.astro`: the homepage. Its problem and workflow sections come from the live claims use case.
 - `src/pages/free-claims-audit.astro`, `sample-audit-report.astro`, `security.astro`: the audit offer, a sample report with invented figures, and data-handling commitments.
 - `src/data/site.ts`: contact links (audit, email, WhatsApp, Calendly), the GA4 ID and the privacy policy approval date.
+- `src/data/order.ts`: display order of the industry pages.
 - `src/data/proofs.ts`: which proof projects the site may show.
 - `astro.config.mjs`: redirects from retired pages of the old multi-industry site. Every other retired address gets the 404 page.
 

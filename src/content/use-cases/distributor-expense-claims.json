@@ -1,0 +1,200 @@
+{
+  "slug": "distributor-expense-claims",
+  "title": "Distributor Expense Reimbursement Claims",
+  "status": "pilot-ready",
+  "summary": "Check distributor claims for salesman salaries, transport, rent and other reimbursable costs against your policy, field activity and proofs before finance credits them.",
+  "seo": {
+    "title": "Distributor Expense Claims Verification | VipraTech",
+    "description": "Verify distributor claims for salesman salaries, transport and other reimbursements against policy, field app activity and proofs before credit.",
+    "keywords": [
+      "distributor expense claims",
+      "salesman salary reimbursement",
+      "DSR salary claims",
+      "transport reimbursement claims",
+      "distributor reimbursement audit"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales Finance",
+    "Claims Settlement Team Lead",
+    "Regional Sales Manager"
+  ],
+  "problem": {
+    "intro": "Many FMCG brands reimburse part of what distributors spend on running the brand's business: salaries of distributor salesmen who sell only the brand, delivery vehicles, warehouse rent and promoters. These claims arrive monthly with salary sheets, attendance, vehicle logs and bills, and are often settled on trust.",
+    "pain_points": [
+      {
+        "title": "Salesmen who did not work the beat",
+        "detail": "Salary claims cover salesmen with no orders, no visits or no attendance in the field app for the month."
+      },
+      {
+        "title": "Rates above policy",
+        "detail": "Reimbursement caps by role, town class and vehicle type are applied inconsistently."
+      },
+      {
+        "title": "Bills that do not prove the cost",
+        "detail": "Fuel, rent and vehicle bills are missing, round-figure or repeated month after month."
+      },
+      {
+        "title": "Claims that drift up quietly",
+        "detail": "Monthly amounts creep up without anyone comparing them with the distributor's sales or earlier months."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech checks each expense claim against your reimbursement policy and your own data. Salary claims are matched to salesmen in the field sales app, with their attendance, visits and orders for the month. Transport and rent claims are checked against caps by town class and vehicle type, and against bills. Claims are compared with the distributor's sales and earlier months to spot unusual jumps. Lines that pass go to the credit note sheet, and the rest go to sales finance with the reason.",
+    "capabilities": [
+      "Reimbursement policy as rules: caps by role, town class, vehicle and period",
+      "Matches salary claims to field app attendance, visits and orders",
+      "Reads salary sheets, vehicle logs and bills",
+      "Flags claims above caps, without proof or out of line with sales",
+      "Trend view of each distributor's claims against sales",
+      "Credit note sheet and audit trail"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive claims",
+      "detail": "Distributors send salary sheets, attendance, vehicle logs and bills."
+    },
+    {
+      "step": 2,
+      "title": "Read and normalise",
+      "detail": "Each claim is read into distributor, cost type, person or vehicle, period and amount."
+    },
+    {
+      "step": 3,
+      "title": "Match to field data",
+      "detail": "Salesmen are matched to field app attendance, visits and orders for the month."
+    },
+    {
+      "step": 4,
+      "title": "Apply policy",
+      "detail": "Caps and eligibility are applied, and the reimbursable amount is recalculated."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "Lines above caps, without proof or out of line with sales go to sales finance."
+    },
+    {
+      "step": 6,
+      "title": "Approve and credit",
+      "detail": "Finance approves the credit note sheet."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Expense claim and bills\"] --> B[\"Normalise claim lines\"]\n  C[\"Field app attendance\"] --> D[\"Match salesmen to activity\"]\n  B --> D\n  D --> E[\"Apply policy caps\"]\n  E --> F{\"Within policy, proven?\"}\n  F -->|\"yes\"| G[\"Credit note sheet\"]\n  F -->|\"no or unsure\"| H(\"Sales finance review\")\n  H --> G",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Salary sheets and attendance",
+          "Vehicle logs and bills",
+          "Reimbursement policy"
+        ]
+      },
+      {
+        "name": "Brand data",
+        "components": [
+          "Field sales app activity",
+          "Distributor sales history"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Activity matcher",
+          "Policy caps",
+          "Trend checks"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Review queue",
+          "Credit note sheet"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Salary sheets and attendance\"]\n    I2[\"Vehicle logs and bills\"]\n    I3[\"Reimbursement policy\"]\n  end\n  subgraph S2[\"Brand data\"]\n    B1[\"Field app activity\"]\n    B2[\"Distributor sales\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Activity matcher\"]\n    R2[\"Policy caps\"]\n    R3[\"Trend checks\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Sales finance review\")\n    V2[\"Credit note sheet\"]\n  end\n  I1 --> R1\n  B1 --> R1\n  I2 --> R2\n  I3 --> R2\n  R1 --> R2\n  B2 --> R3\n  R2 --> R3\n  R3 --> V1 --> V2"
+  },
+  "inputs": [
+    "Salary sheets and salesman attendance",
+    "Vehicle logs, fuel and rent bills",
+    "Reimbursement policy with caps",
+    "Field sales app activity",
+    "Distributor sales history"
+  ],
+  "outputs": [
+    "Reimbursable amount for every line",
+    "Flags for missing activity, missing proof or amounts above caps",
+    "Distributor claim trends against sales",
+    "Credit note sheet for finance approval"
+  ],
+  "human_in_the_loop": "Sales finance decides on flagged lines, with the regional sales manager where needed, and finance approves every credit. Field activity data is evidence for a person to weigh, not an automatic rejection.",
+  "integrations": [
+    "Field sales app or SFA",
+    "DMS for distributor sales",
+    "ERP such as SAP or Tally for credit notes",
+    "Claims mailbox or distributor portal"
+  ],
+  "guardrails": [
+    "No salary reimbursement without a matched salesman",
+    "Caps applied from the policy version for the period",
+    "Unusual month-on-month jumps flagged",
+    "Every credit linked to its bills and activity data"
+  ],
+  "compliance_notes": [
+    "The system keeps the supporting bills and activity with each reimbursed line, whichever way your finance team settles reimbursements."
+  ],
+  "pilot": {
+    "duration": "About 6 weeks",
+    "scope": "One month of expense claims for the distributors of one region, with finance-settled amounts as the benchmark.",
+    "deliverables": [
+      "Reimbursement policy as rules",
+      "Checked claims with exceptions",
+      "Credit note sheet in your format",
+      "Comparison with settled amounts"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Lines matched to field activity",
+        "how": "Share of salary lines matched to a salesman active in the field app."
+      },
+      {
+        "metric": "Amounts above policy caught",
+        "how": "Lines reduced or rejected under policy, confirmed by finance."
+      },
+      {
+        "metric": "Review time",
+        "how": "Time to review a month of expense claims, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What if our field app data is incomplete?",
+      "a": "The system shows the activity it found for each salesman. Gaps are flagged for review rather than treated as proof that the person did not work."
+    },
+    {
+      "q": "Can it handle different caps by town and role?",
+      "a": "Yes. Caps can vary by town class, role, vehicle type and period, and the version valid for each month is applied."
+    },
+    {
+      "q": "Will distributors see the reasons?",
+      "a": "Yes, if you choose. Each distributor can get a statement showing what was reimbursed and why lines were reduced."
+    },
+    {
+      "q": "Is this the same system as your distributor claims settlement?",
+      "a": "Yes. It runs on the same claims engine as our live distributor claims settlement, configured to your reimbursement policy during a pilot."
+    }
+  ],
+  "related": [
+    "distributor-scheme-claims",
+    "damage-and-expiry-claims",
+    "credit-note-reconciliation"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/distributor-expense-claims/"
+}

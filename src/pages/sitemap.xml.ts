@@ -6,11 +6,13 @@ import {absoluteUrl} from '../lib/seo';
 // Every built, indexable page. check:dist compares this list with the built pages.
 
 export const GET: APIRoute = async () => {
-  const {useCases} = await siteContent();
+  const {useCases, industries} = await siteContent();
   const paths = [
     '/',
     AUDIT_PATH,
     '/sample-audit-report/',
+    '/industries/',
+    ...industries.map((industry) => industry.url),
     '/use-cases/',
     ...useCases.map((useCase) => useCase.url),
     '/security/',

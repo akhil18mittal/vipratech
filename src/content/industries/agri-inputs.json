@@ -1,0 +1,83 @@
+{
+  "slug": "agri-inputs",
+  "name": "Agri Inputs: Seeds, Fertilisers and Crop Protection",
+  "seo": {
+    "title": "Claims Reconciliation for Agri-Input Companies | VipraTech",
+    "description": "Season-end returns, dealer schemes, cash discounts, retailer loyalty and rate differences, checked for seeds, fertiliser and crop protection companies.",
+    "keywords": [
+      "agri input dealer schemes",
+      "crop protection returns",
+      "seed company dealer claims",
+      "agrochemical expiry returns",
+      "agri distributor rebates"
+    ]
+  },
+  "hero": {
+    "headline": "Settle season-end returns and dealer schemes with every line checked",
+    "subheadline": "Season-end and expiry returns, dealer schemes and cash discounts, and retailer loyalty, checked against your policies and sales."
+  },
+  "intro": "Seed, fertiliser and crop protection companies sell through distributors and retailers in short, intense seasons, often on credit. At the end of each season come returns of unsold and expiring stock, scheme payouts tied to season targets and collections, and price changes on stock in the channel. All of it has to be settled quickly before the next season's credit opens.",
+  "challenges": [
+    {
+      "title": "Seasonal returns",
+      "detail": "Unsold and expiring stock comes back at season end, batch by batch, under return policies."
+    },
+    {
+      "title": "Targets and collections",
+      "detail": "Dealer schemes depend on season sales and on when dealers paid."
+    },
+    {
+      "title": "A credit-heavy channel",
+      "detail": "Long credit periods make cash discounts and collection-linked rebates central."
+    },
+    {
+      "title": "Retailer and farmer loyalty",
+      "detail": "Points for retailers and farmers are earned on scans and purchases."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "damage-and-expiry-claims",
+      "note": "Season-end and expiry returns traced to batches sold to each distributor, within your return policy."
+    },
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Season schemes, target rebates and cash discounts calculated from billing, returns and collections."
+    },
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Distributor and retailer scheme claims checked against circulars and invoices."
+    },
+    {
+      "use_case": "channel-loyalty-payouts",
+      "note": "Retailer and farmer loyalty points compared with sales by town and village."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price-change claims on channel stock capped at estimated stock on hand."
+    }
+  ],
+  "documents": [
+    "Season scheme circulars",
+    "Return claims with batch lists",
+    "Billing, returns and collection data",
+    "Loyalty scans and redemptions",
+    "Price revision circulars",
+    "Distributor ledgers and credit notes"
+  ],
+  "faqs": [
+    {
+      "q": "Our returns spike at season end. Can it keep up?",
+      "a": "Yes. Checks run on the whole return file at once, so a season's returns can be checked in days rather than weeks."
+    },
+    {
+      "q": "Can it handle batch-level expiry for crop protection products?",
+      "a": "Yes. Returns are traced to batches sold to each distributor, with expiry dates and return windows applied."
+    },
+    {
+      "q": "Where should we start?",
+      "a": "With a free claims audit on last season's returns or scheme claims."
+    }
+  ],
+  "url": "/industries/agri-inputs/"
+}

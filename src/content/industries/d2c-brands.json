@@ -1,0 +1,87 @@
+{
+  "slug": "d2c-brands",
+  "name": "D2C and Digital-First Brands",
+  "seo": {
+    "title": "Reconciliation for D2C Brands: Marketplaces, QC and COD",
+    "description": "Marketplace settlements, quick-commerce deductions, gateway and COD remittances, and distributor claims, reconciled for D2C finance teams.",
+    "keywords": [
+      "D2C brand reconciliation",
+      "marketplace settlement reconciliation",
+      "quick commerce reconciliation",
+      "COD remittance reconciliation",
+      "D2C general trade expansion"
+    ]
+  },
+  "hero": {
+    "headline": "Know where every rupee from every channel went",
+    "subheadline": "Marketplace settlements, quick-commerce deductions, gateway and COD remittances, and distributor claims as you enter general trade."
+  },
+  "intro": "D2C brands grow channel by channel: their own website, marketplaces, quick commerce, then modern trade and distributors. Each channel pays net of its own fees, returns and deductions, in its own reports. Finance teams end up reconciling five systems in spreadsheets, and the money lost to wrong fees, missing returns and unremitted COD is rarely found in time.",
+  "challenges": [
+    {
+      "title": "Every channel nets its own charges",
+      "detail": "Marketplaces, platforms and couriers each deduct fees and returns before paying."
+    },
+    {
+      "title": "Returns across channels",
+      "detail": "Customer returns, RTO and platform rejections are recorded in different places."
+    },
+    {
+      "title": "Entering general trade",
+      "detail": "Distributor schemes and claims arrive just as the finance team is already stretched."
+    },
+    {
+      "title": "Small teams",
+      "detail": "One or two people own reconciliation for every channel."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "marketplace-settlement-reconciliation",
+      "note": "Amazon and Flipkart settlements tied to orders, with fee overcharges and missing returns found before claim windows close."
+    },
+    {
+      "use_case": "quick-commerce-deductions",
+      "note": "Blinkit, Zepto and Swiggy Instamart payments tied to POs and dark-store receipts, with deductions checked against terms."
+    },
+    {
+      "use_case": "d2c-payment-and-cod-reconciliation",
+      "note": "Website orders matched to gateway settlements and courier COD remittances, with unremitted COD listed for chasing."
+    },
+    {
+      "use_case": "modern-trade-deductions",
+      "note": "Supermarket chain payments and debit notes checked against your listing terms as you enter modern trade."
+    },
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Distributor scheme claims checked line by line as you build general trade, on the engine that is live today."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Credit notes to distributors and platforms matched to what was approved."
+    }
+  ],
+  "documents": [
+    "Marketplace settlement, order and return reports",
+    "Quick-commerce POs, GRNs and payment advice",
+    "Payment gateway settlements",
+    "Courier and aggregator COD remittances",
+    "Store orders from Shopify or WooCommerce",
+    "Distributor claim sheets"
+  ],
+  "faqs": [
+    {
+      "q": "We are small. Is this only for large brands?",
+      "a": "No. D2C brands often feel channel leakage most because they have the smallest finance teams. A pilot can start with one channel."
+    },
+    {
+      "q": "Which channel should we start with?",
+      "a": "The one where you suspect the most money is lost. For many D2C brands that is quick-commerce deductions or marketplace returns."
+    },
+    {
+      "q": "What is live today?",
+      "a": "Distributor scheme claims settlement is live. The marketplace, quick-commerce and COD workflows are in early access with design partners."
+    }
+  ],
+  "url": "/industries/d2c-brands/"
+}

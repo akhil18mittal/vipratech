@@ -11,7 +11,7 @@ import {ContactButtons} from '../components/site/ContactButtons';
 import {AUDIT_PATH, contactLinks} from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {siteContent} from '../lib/collections';
-import {statusLabel} from '../lib/content';
+import {STATUS_NOTES, STATUS_ORDER, statusLabel} from '../lib/content';
 import {organizationJsonLd} from '../lib/seo';
 
 // The homepage: one product (distributor claims settlement) for one buyer (finance at FMCG and D2C brands), with the
@@ -19,7 +19,6 @@ import {organizationJsonLd} from '../lib/seo';
 
 const content = await siteContent();
 const claims = content.useCase('distributor-scheme-claims');
-const next = content.useCases.filter((useCase) => useCase.status === 'early-access');
 const contact = contactLinks('/', 'a free claims audit');
 
 const proofPoints = [
@@ -95,7 +94,8 @@ const faqs = [
   },
 ];
 
-const nextCards = next.map((useCase) => ({label: statusLabel(useCase.status), title: useCase.title, text: useCase.summary, href: useCase.url}));
+const industryCards = content.industries.map((industry) => ({title: industry.name, text: industry.hero.headline, href: industry.url}));
+const coverage = STATUS_ORDER.map((status) => ({status, useCases: content.useCases.filter((useCase) => useCase.status === status)}));
 ---
 
 <BaseLayout
@@ -183,8 +183,30 @@ const nextCards = next.map((useCase) => ({label: statusLabel(useCase.status), ti
     <WorkflowSteps steps={pricing} />
   </Section>
 
-  <Section title="Next, with design partners" intro="Distributor claims settlement is live today. These two build on it, and we are developing them with a small number of brands.">
-    <CardGrid items={nextCards} columns={2} />
+  <Section id="coverage" title="Every claim and deduction we check" intro="Distributor claims settlement is live today. The rest run on the same engine, or are being built with design partners.">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {
+        coverage.map((group) => (
+          <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
+            <h3 class="text-lg font-bold text-slate-900">{statusLabel(group.status)}</h3>
+            <p class="mt-1 text-sm text-slate-500 leading-relaxed">{STATUS_NOTES[group.status]}</p>
+            <ul class="mt-4 space-y-2">
+              {group.useCases.map((useCase) => (
+                <li>
+                  <a href={useCase.url} class="text-sm font-medium text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
+                    {useCase.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section id="industries" title="By industry" intro="How these checks work for brands that sell through distributors, dealers, retail chains and marketplaces.">
+    <CardGrid items={industryCards} columns={2} />
   </Section>
 
   <FounderBlock />

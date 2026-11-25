@@ -11,7 +11,11 @@ export default defineConfig({
   redirects: {
     '/use-cases/retail-ecommerce/distributor-trade-claims-settlement/': '/use-cases/distributor-scheme-claims/',
     '/use-cases/retail-ecommerce/vendor-invoice-and-credit-note-reconciliation/': '/use-cases/credit-note-reconciliation/',
-    '/industries/retail-ecommerce/': '/use-cases/',
+    '/industries/retail-ecommerce/': '/industries/d2c-brands/',
+    '/industries/pharma-life-sciences/': '/industries/pharma-healthcare/',
+    '/industries/automotive-mobility/': '/industries/auto-components-lubricants/',
+    '/industries/agriculture/': '/industries/agri-inputs/',
+    '/industries/manufacturing/': '/industries/',
     '/solutions/document-intelligence/': '/',
   },
   vite: {

@@ -1,11 +1,13 @@
 import {readdirSync, readFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {z} from 'astro/zod';
-import {proofProjectSchema, useCaseSchema, type ProofProject, type UseCase} from '../src/content/schema';
+import {industrySchema, proofProjectSchema, useCaseSchema, type Industry, type ProofProject, type UseCase} from '../src/content/schema';
+import {INDUSTRY_ORDER} from '../src/data/order';
 import {APPROVED_PROOFS} from '../src/data/proofs';
 
 export interface Content {
   useCases: UseCase[];
+  industries: Industry[];
   proofProjects: ProofProject[];
 }
 
@@ -29,14 +31,19 @@ export function loadContent(dir: string): {content: Content; errors: string[]} {
     return undefined;
   };
 
-  const useCases = jsonFiles(join(dir, 'use-cases')).flatMap((name) => {
-    const item = read(useCaseSchema, `use-cases/${name}`);
-    if (item && name !== `${item.slug}.json`) errors.push(`use-cases/${name}: file name should be ${item.slug}.json`);
-    return item ? [item] : [];
-  });
+  const readFolder = <T extends {slug: string}>(schema: z.ZodType<T>, folder: string) =>
+    jsonFiles(join(dir, folder)).flatMap((name) => {
+      const item = read(schema, `${folder}/${name}`);
+      if (item && name !== `${item.slug}.json`) errors.push(`${folder}/${name}: file name should be ${item.slug}.json`);
+      return item ? [item] : [];
+    });
 
   return {
-    content: {useCases, proofProjects: read(z.array(proofProjectSchema), 'proof-projects.json') ?? []},
+    content: {
+      useCases: readFolder(useCaseSchema, 'use-cases'),
+      industries: readFolder(industrySchema, 'industries'),
+      proofProjects: read(z.array(proofProjectSchema), 'proof-projects.json') ?? [],
+    },
     errors,
   };
 }
@@ -120,8 +127,8 @@ export function diagramErrors(source: string, direction: 'LR' | 'TB'): string[] 
   return errors;
 }
 
-/** Checks the rules that span files: references, URLs, step numbering and the diagrams. */
-export function findContentErrors({useCases, proofProjects}: Content): string[] {
+/** Checks the rules that span files: references, URLs, display order, step numbering and the diagrams. */
+export function findContentErrors({useCases, industries, proofProjects}: Content): string[] {
   const errors: string[] = [];
   const reporter = (subject: string) => (message: string) => errors.push(`${subject}: ${message}`);
 
@@ -136,6 +143,7 @@ export function findContentErrors({useCases, proofProjects}: Content): string[] 
 
   for (const [what, values] of [
     ['use case slug', useCases.map((useCase) => useCase.slug)],
+    ['industry slug', industries.map((industry) => industry.slug)],
     ['proof project id', proofProjects.map((proof) => proof.id)],
   ] as const) {
     for (const value of duplicates(values)) errors.push(`duplicate ${what}: ${value}`);
@@ -153,6 +161,23 @@ export function findContentErrors({useCases, proofProjects}: Content): string[] 
     });
     for (const error of diagramErrors(useCase.flow_diagram, 'LR')) fail(`flow_diagram ${error}`);
     for (const error of diagramErrors(useCase.architecture.diagram, 'TB')) fail(`architecture.diagram ${error}`);
+  }
+
+  const industrySlugs = new Set(industries.map((industry) => industry.slug));
+  const orderFail = reporter('src/data/order.ts INDUSTRY_ORDER');
+  for (const slug of duplicates(INDUSTRY_ORDER)) orderFail(`lists "${slug}" more than once`);
+  for (const slug of INDUSTRY_ORDER) if (!industrySlugs.has(slug)) orderFail(`lists "${slug}", which has no content file`);
+  for (const slug of industrySlugs) if (!(INDUSTRY_ORDER as readonly string[]).includes(slug)) orderFail(`is missing "${slug}"`);
+
+  for (const industry of industries) {
+    const fail = reporter(`industry ${industry.slug}`);
+    if (industry.url !== `/industries/${industry.slug}/`) fail(`url should be /industries/${industry.slug}/`);
+    checkRefs(fail, 'use_cases', industry.use_cases.map((entry) => entry.use_case), useCasesBySlug);
+  }
+
+  const covered = new Set(industries.flatMap((industry) => industry.use_cases.map((entry) => entry.use_case)));
+  for (const useCase of useCases) {
+    if (!covered.has(useCase.slug)) errors.push(`use case ${useCase.slug}: no industry lists it`);
   }
 
   checkRefs(reporter('src/data/proofs.ts'), 'APPROVED_PROOFS', APPROVED_PROOFS, proofIds);

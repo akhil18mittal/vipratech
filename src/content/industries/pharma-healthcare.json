@@ -1,0 +1,83 @@
+{
+  "slug": "pharma-healthcare",
+  "name": "Pharma and Healthcare Products",
+  "seo": {
+    "title": "Claims Reconciliation for Pharma Companies | VipraTech",
+    "description": "Expiry and breakage returns, institutional rate difference claims, trade schemes and stockist credit notes, checked for pharma and OTC finance teams.",
+    "keywords": [
+      "pharma expiry claims",
+      "breakage and expiry returns",
+      "stockist claims reconciliation",
+      "pharma rate difference claims",
+      "institutional chargeback pharma"
+    ]
+  },
+  "hero": {
+    "headline": "Check stockist expiry returns and rate difference claims line by line",
+    "subheadline": "Expiry and breakage returns traced to batches, institutional and price-revision rate differences checked against contracts and price lists, and credit notes matched to approvals."
+  },
+  "intro": "Pharma and OTC companies sell through C&F agents, stockists and retailers, and supply hospitals and institutions at contract rates. Expiry and breakage returns, rate differences on institutional supplies and price revisions, and trade schemes all come back as claims from stockists. Batch numbers and expiry dates make these claims checkable, but only if someone traces every line.",
+  "challenges": [
+    {
+      "title": "Expiry returns at scale",
+      "detail": "Near-expiry and expired stock comes back from thousands of chemists through stockists, batch by batch."
+    },
+    {
+      "title": "Institutional rates",
+      "detail": "Supplies to hospitals and government buyers at contract rates create rate difference claims that depend on contract terms."
+    },
+    {
+      "title": "Price revisions",
+      "detail": "Price changes create claims on stock held by stockists on the effective date."
+    },
+    {
+      "title": "Batch-level evidence",
+      "detail": "Every claim should trace to a batch sold to that stockist, but the data sits in several systems."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "damage-and-expiry-claims",
+      "note": "Expiry and breakage returns traced to batches sold to each stockist, within your return policy and with destruction proof."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Institutional and contract-rate claims checked against contracts, eligible customers and quantities; price-revision claims capped at estimated stock."
+    },
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Trade schemes to stockists and retailers checked against circulars and invoices."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Credit notes for returns and rate differences matched to approvals and stockist ledgers."
+    },
+    {
+      "use_case": "trade-spend-accruals",
+      "note": "Accruals for schemes and expected returns compared with claims at month-end close."
+    }
+  ],
+  "documents": [
+    "Stockist expiry and breakage return claims with batch lists",
+    "Destruction certificates",
+    "Institutional and tender rate contracts",
+    "Price lists with revision dates",
+    "Stockist invoices to hospitals and institutions",
+    "Credit notes and stockist ledgers"
+  ],
+  "faqs": [
+    {
+      "q": "Can it work at batch level?",
+      "a": "Yes. Returns are traced to the batches sold to each stockist, with expiry dates checked against the reason claimed."
+    },
+    {
+      "q": "Which schemes does it cover?",
+      "a": "Trade schemes and claims between your company, your stockists and retailers, checked against your circulars and invoices."
+    },
+    {
+      "q": "Where should we start?",
+      "a": "With a free claims audit on one quarter of expiry and breakage returns, which run on the same engine as our live claims settlement."
+    }
+  ],
+  "url": "/industries/pharma-healthcare/"
+}

@@ -1,0 +1,73 @@
+---
+import Section from '../../components/content/Section.astro';
+import {BulletList} from '../../components/content/BulletList';
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {DetailCards} from '../../components/content/DetailCards';
+import {FaqList} from '../../components/content/FaqList';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+import {STATUS_ORDER, statusLabel} from '../../lib/content';
+
+export async function getStaticPaths() {
+  const {industries} = await siteContent();
+  return industries.map((industry) => ({params: {slug: industry.slug}, props: {slug: industry.slug}}));
+}
+
+const content = await siteContent();
+const industry = content.industry(Astro.props.slug);
+const contact = contactLinks(industry.url, `claims reconciliation for ${industry.name}`);
+// Live first, then pilot-ready, then early access; within a status, in the order the industry lists them.
+const cards = industry.use_cases
+  .map((entry, index) => ({entry, index, useCase: content.useCase(entry.use_case)}))
+  .sort((a, b) => STATUS_ORDER.indexOf(a.useCase.status) - STATUS_ORDER.indexOf(b.useCase.status) || a.index - b.index)
+  .map(({entry, useCase}) => ({
+    label: statusLabel(useCase.status),
+    title: useCase.title,
+    text: entry.note,
+    href: useCase.url,
+    featured: useCase.status === 'live',
+  }));
+const paragraph = 'text-base text-slate-600 leading-relaxed max-w-3xl';
+---
+
+<BaseLayout
+  title={industry.seo.title}
+  description={industry.seo.description}
+  page={{type: 'industry', slug: industry.slug}}
+  crumbs={[
+    {name: 'Industries', path: '/industries/'},
+    {name: industry.name, path: industry.url},
+  ]}
+  faqs={industry.faqs}
+>
+  <PageHero eyebrow={industry.name} title={industry.hero.headline} subtitle={industry.hero.subheadline} contact={contact} />
+
+  <Section title="Where the money leaks">
+    <p class={paragraph}>{industry.intro}</p>
+    <DetailCards items={industry.challenges} />
+  </Section>
+
+  <Section title={`Use cases for ${industry.name}`}>
+    <CardGrid items={cards} />
+  </Section>
+
+  <Section title="Documents and systems we work with">
+    <BulletList items={industry.documents} />
+  </Section>
+
+  <Section title="FAQs">
+    <FaqList faqs={industry.faqs} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock
+    headline="Start with a free claims audit"
+    text="Send one recent quarter of claims. Get every finding, with the amount at risk, in 5 working days."
+    contact={contact}
+  />
+</BaseLayout>

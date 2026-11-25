@@ -15,7 +15,7 @@ import {WorkflowSteps} from '../../components/content/WorkflowSteps';
 import {contactLinks, earlyAccessLinks} from '../../data/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {siteContent} from '../../lib/collections';
-import {isProofApproved, statusLabel} from '../../lib/content';
+import {isProofApproved, STATUS_NOTES, statusLabel} from '../../lib/content';
 import {diagramFor} from '../../lib/diagrams';
 
 export async function getStaticPaths() {
@@ -25,8 +25,9 @@ export async function getStaticPaths() {
 
 const content = await siteContent();
 const useCase = content.useCase(Astro.props.slug);
-const live = useCase.status === 'live';
-const contact = live ? contactLinks(useCase.url, useCase.title) : earlyAccessLinks(useCase.url, useCase.title);
+const earlyAccess = useCase.status === 'early-access';
+const contact = earlyAccess ? earlyAccessLinks(useCase.url, useCase.title) : contactLinks(useCase.url, useCase.title);
+const industryCards = content.industriesFor(useCase.slug).map(({industry, note}) => ({title: industry.name, text: note, href: industry.url}));
 const proof = isProofApproved(useCase.proof_ref) ? content.proofProject(useCase.proof_ref!) : undefined;
 const relatedCards = useCase.related.map(content.useCase).map((related) => ({
   label: statusLabel(related.status),
@@ -51,11 +52,22 @@ const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold
   <PageHero eyebrow={statusLabel(useCase.status)} title={useCase.title} subtitle={useCase.summary} contact={contact} />
 
   {
-    !live && (
+    useCase.status === 'pilot-ready' && (
+      <div class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pb-10">
+        <p class="p-5 bg-teal-50 border border-teal-200 rounded-xl text-sm text-teal-900 leading-relaxed max-w-3xl">
+          <strong>Pilot-ready.</strong> {STATUS_NOTES['pilot-ready']} Start with a free claims audit on one recent quarter of
+          these claims.
+        </p>
+      </div>
+    )
+  }
+
+  {
+    earlyAccess && (
       <div class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pb-10">
         <p class="p-5 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-900 leading-relaxed max-w-3xl">
-          <strong>Early access.</strong> We are building this with a small number of brands as design partners.
-          Distributor claims settlement is live today, and design partners can start with a free claims audit.
+          <strong>Early access.</strong> {STATUS_NOTES['early-access']} Distributor claims settlement is live today, and
+          design partners can start with a free claims audit.
         </p>
       </div>
     )
@@ -63,6 +75,10 @@ const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold
 
   <Section title="Who it is for">
     <BulletList items={useCase.designed_for} />
+  </Section>
+
+  <Section title="By industry">
+    <CardGrid items={industryCards} />
   </Section>
 
   <Section title="The problem">
@@ -147,10 +163,10 @@ const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold
   <FounderBlock />
 
   <CtaBlock
-    headline={live ? 'Start with a free claims audit' : 'Become a design partner'}
-    text={live
-      ? "Send last quarter's claims. Get every finding, with the amount at risk, in 5 working days."
-      : 'Tell us how you handle this today. Design partners shape the product and start with a free claims audit.'}
+    headline={earlyAccess ? 'Become a design partner' : 'Start with a free claims audit'}
+    text={earlyAccess
+      ? 'Tell us how you handle this today. Design partners shape the product and start with a free claims audit.'
+      : "Send last quarter's claims. Get every finding, with the amount at risk, in 5 working days."}
     contact={contact}
   />
 </BaseLayout>

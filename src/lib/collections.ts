@@ -1,13 +1,20 @@
 import {getCollection} from 'astro:content';
-import type {ProofProject, UseCase} from '../content/schema';
+import type {Industry, ProofProject, UseCase} from '../content/schema';
+import {INDUSTRY_ORDER} from '../data/order';
+import {STATUS_ORDER} from './content';
 
 // Build-time access to the content collections, for pages. Plain scripts use scripts/content-checks.ts instead.
 
 interface SiteContent {
-  /** Live use cases first, then early access, each group in title order. */
+  /** Live use cases first, then pilot-ready, then early access, each group in title order. */
   useCases: UseCase[];
+  /** In INDUSTRY_ORDER. */
+  industries: Industry[];
   useCase: (slug: string) => UseCase;
+  industry: (slug: string) => Industry;
   proofProject: (id: string) => ProofProject;
+  /** The industries that list a use case, each with its note on how the use case works there. */
+  industriesFor: (useCaseSlug: string) => {industry: Industry; note: string}[];
 }
 
 const lookup = <T>(items: readonly T[], key: (item: T) => string, kind: string) => {
@@ -19,18 +26,34 @@ const lookup = <T>(items: readonly T[], key: (item: T) => string, kind: string) 
   };
 };
 
-const statusOrder = (useCase: UseCase) => (useCase.status === 'live' ? 0 : 1);
+const position = (order: readonly string[], value: string) => {
+  const index = order.indexOf(value);
+  return index === -1 ? order.length : index;
+};
 
 async function load(): Promise<SiteContent> {
-  const [useCaseEntries, proofEntries] = await Promise.all([getCollection('useCases'), getCollection('proofProjects')]);
+  const [useCaseEntries, industryEntries, proofEntries] = await Promise.all([
+    getCollection('useCases'),
+    getCollection('industries'),
+    getCollection('proofProjects'),
+  ]);
   const useCases = useCaseEntries
     .map((entry) => entry.data)
-    .sort((a, b) => statusOrder(a) - statusOrder(b) || a.title.localeCompare(b.title));
+    .sort((a, b) => position(STATUS_ORDER, a.status) - position(STATUS_ORDER, b.status) || a.title.localeCompare(b.title));
+  const industries = industryEntries
+    .map((entry) => entry.data)
+    .sort((a, b) => position(INDUSTRY_ORDER, a.slug) - position(INDUSTRY_ORDER, b.slug));
   const proofProjects = proofEntries.map((entry) => entry.data);
   return {
     useCases,
+    industries,
     useCase: lookup(useCases, (item) => item.slug, 'use case'),
+    industry: lookup(industries, (item) => item.slug, 'industry'),
     proofProject: lookup(proofProjects, (item) => item.id, 'proof project'),
+    industriesFor: (useCaseSlug) =>
+      industries.flatMap((industry) =>
+        industry.use_cases.filter((entry) => entry.use_case === useCaseSlug).map((entry) => ({industry, note: entry.note})),
+      ),
   };
 }
 

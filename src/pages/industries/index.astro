@@ -1,0 +1,37 @@
+---
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+
+const {industries} = await siteContent();
+const description =
+  'The claims, deductions and reconciliations VipraTech checks in each industry that sells through distributors, dealers, retail chains and marketplaces.';
+const contact = contactLinks('/industries/', 'VipraTech claims reconciliation');
+const cards = industries.map((industry) => ({
+  label: `${industry.use_cases.length} use cases`,
+  title: industry.name,
+  text: industry.hero.headline,
+  href: industry.url,
+}));
+---
+
+<BaseLayout
+  title="Industries | VipraTech"
+  description="Claims and deductions reconciliation for FMCG, D2C, pharma, durables, building materials, agri inputs, auto parts and apparel brands."
+  page={{type: 'industries'}}
+  crumbs={[{name: 'Industries', path: '/industries/'}]}
+>
+  <PageHero title="Industries" subtitle={description} contact={contact} />
+
+  <section class="pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <CardGrid items={cards} columns={2} />
+  </section>
+
+  <FounderBlock />
+
+  <CtaBlock headline="Start with a free claims audit" contact={contact} />
+</BaseLayout>

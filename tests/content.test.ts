@@ -14,20 +14,48 @@ const errorsAfter = (change: (copy: Content) => void) => {
 describe('content', () => {
   it('loads every file against its schema', () => {
     expect(errors).toEqual([]);
-    expect([content.useCases.length, content.proofProjects.length]).toEqual([3, 1]);
+    expect([content.useCases.length, content.industries.length, content.proofProjects.length]).toEqual([15, 8, 1]);
   });
 
   it('passes the cross-file checks', () => {
     expect(findContentErrors(content)).toEqual([]);
   });
 
-  it('has the claims settlement page live and the rest in early access', () => {
-    const status = Object.fromEntries(content.useCases.map((useCase) => [useCase.slug, useCase.status]));
-    expect(status).toEqual({
-      'credit-note-reconciliation': 'early-access',
-      'distributor-scheme-claims': 'live',
-      'quick-commerce-deductions': 'early-access',
-    });
+  it('has only distributor scheme claims live, the claims-engine workflows pilot-ready and the rest in early access', () => {
+    const byStatus = (status: string) =>
+      content.useCases
+        .filter((useCase) => useCase.status === status)
+        .map((useCase) => useCase.slug)
+        .sort();
+    expect(byStatus('live')).toEqual(['distributor-scheme-claims']);
+    expect(byStatus('pilot-ready')).toEqual([
+      'co-marketing-fund-claims',
+      'damage-and-expiry-claims',
+      'dealer-incentive-and-rebate-settlement',
+      'display-and-visibility-claims',
+      'distributor-expense-claims',
+      'rate-difference-claims',
+    ]);
+    expect(byStatus('early-access')).toHaveLength(8);
+  });
+
+  it('reports an industry that lists a missing use case', () => {
+    const [first] = content.industries;
+    expect(
+      errorsAfter((copy) => {
+        copy.industries[0].use_cases[0].use_case = 'no-such-use-case';
+      }),
+    ).toContain(`industry ${first.slug}: use_cases refers to unknown "no-such-use-case"`);
+  });
+
+  it('reports a use case that no industry lists', () => {
+    expect(
+      errorsAfter((copy) => {
+        for (const industry of copy.industries) {
+          industry.use_cases = industry.use_cases.filter((entry) => entry.use_case !== 'co-marketing-fund-claims');
+        }
+      }),
+    ).toContain('use case co-marketing-fund-claims: no industry lists it');
   });
 
   it('reports a reference to a missing use case', () => {
@@ -67,7 +95,7 @@ describe('isProofApproved', () => {
 
 describe('statusLabel', () => {
   it('names each status', () => {
-    expect([statusLabel('live'), statusLabel('early-access')]).toEqual(['Live', 'Early access']);
+    expect([statusLabel('live'), statusLabel('pilot-ready'), statusLabel('early-access')]).toEqual(['Live', 'Pilot-ready', 'Early access']);
   });
 });
 

@@ -1,0 +1,198 @@
+{
+  "slug": "display-and-visibility-claims",
+  "title": "Display and Visibility Claims",
+  "status": "pilot-ready",
+  "summary": "Check retailer display, shelf and branding claims against the agreed programme, outlet list and photo proof, and catch reused, mismatched or missing photos before finance pays.",
+  "seo": {
+    "title": "Display and Visibility Claims Verification | VipraTech",
+    "description": "Verify retailer display, visibility and shop-branding claims against programme terms, outlet lists and photo proof, and flag reused or missing photos.",
+    "keywords": [
+      "display claims verification",
+      "visibility claim audit",
+      "retailer display payment",
+      "shop branding claims",
+      "photo proof verification"
+    ]
+  },
+  "designed_for": [
+    "Trade Marketing Manager",
+    "Head of Sales Finance",
+    "Claims Settlement Team Lead"
+  ],
+  "problem": {
+    "intro": "Brands pay retailers, often through distributors, to display products in prime spots, run branded shelves and put up signage. Each month, claims arrive for a list of outlets, backed by photos from the field team or the retailer. Few teams can check thousands of photos against the programme.",
+    "pain_points": [
+      {
+        "title": "Photos reused across months and outlets",
+        "detail": "The same photo, or a near copy, is submitted for different outlets or periods."
+      },
+      {
+        "title": "Outlets outside the programme",
+        "detail": "Payments are claimed for outlets that were never enrolled, were dropped or exceed the programme's slots."
+      },
+      {
+        "title": "Rates and periods applied loosely",
+        "detail": "Display rates differ by outlet class, display type and period, and claims mix them up."
+      },
+      {
+        "title": "No time to look",
+        "detail": "With thousands of photos a month, teams check a sample and pay the rest."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech reads display claims with their outlet lists and photos, and checks each line against the programme: is the outlet enrolled for this display type and period, is the rate right for its class, and is there a photo. Every photo is checked for date and location data where available, and compared with earlier submissions to catch reused or near-duplicate images. Lines that pass go to the credit note sheet; the rest go to trade marketing or finance with the reason and the photo side by side. Judging whether a display met the agreed standard can be added later with shelf recognition.",
+    "capabilities": [
+      "Programme register with enrolled outlets, display types, rates and periods",
+      "Checks every claimed outlet and period against the programme",
+      "Detects reused and near-duplicate photos across outlets and months",
+      "Reads photo date and location data where the image has it",
+      "Review screen with the claim line and photo side by side",
+      "Credit note sheet and programme spend report by region and outlet class"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive claims and photos",
+      "detail": "Claims arrive with outlet lists and photos, by upload, email or from the field app."
+    },
+    {
+      "step": 2,
+      "title": "Match to the programme",
+      "detail": "Each outlet is matched to the enrolled list, display type, rate and period."
+    },
+    {
+      "step": 3,
+      "title": "Check the photos",
+      "detail": "Photos are checked for presence, date and location data, and reuse across outlets and months."
+    },
+    {
+      "step": 4,
+      "title": "Recalculate",
+      "detail": "The eligible amount is recalculated from the programme rate for each outlet."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "Trade marketing or finance reviews flagged lines with the photo and the reason."
+    },
+    {
+      "step": 6,
+      "title": "Approve and pay",
+      "detail": "Finance approves the credit note sheet, and spend is reported by region and outlet class."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Display claim and photos\"] --> B[\"Match outlet to programme\"]\n  B --> C[\"Check photo date and reuse\"]\n  C --> D[\"Recalculate at programme rate\"]\n  D --> E{\"Enrolled, rate right, photo ok?\"}\n  E -->|\"yes\"| F[\"Credit note sheet\"]\n  E -->|\"no or unsure\"| G(\"Trade marketing review\")\n  G --> F",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Claims and outlet lists",
+          "Photos from the field app or uploads",
+          "Display programme register"
+        ]
+      },
+      {
+        "name": "Image checks",
+        "components": [
+          "Photo metadata reader",
+          "Near-duplicate image detection"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Outlet and period matcher",
+          "Programme rate calculator"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Side-by-side review screen",
+          "Credit note sheet and spend report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Claims and outlet lists\"]\n    I2[\"Display photos\"]\n    I3[\"Programme register\"]\n  end\n  subgraph S2[\"Image checks\"]\n    P1[\"Photo metadata reader\"]\n    P2[\"Near duplicate detection\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Outlet and period matcher\"]\n    R2[\"Programme rate calculator\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Trade marketing review\")\n    V2[\"Credit note sheet\"]\n    V3[\"Spend report\"]\n  end\n  I2 --> P1\n  I2 --> P2\n  I1 --> R1\n  I3 --> R1\n  R1 --> R2\n  P1 --> V1\n  P2 --> V1\n  R2 --> V1\n  V1 --> V2\n  V2 --> V3"
+  },
+  "inputs": [
+    "Display claims with outlet lists",
+    "Photos from the field app, distributors or retailers",
+    "Display programme with enrolled outlets, rates and periods",
+    "Previous claims and photos"
+  ],
+  "outputs": [
+    "Claim lines checked against the programme",
+    "Reused and near-duplicate photos flagged",
+    "Credit note sheet for finance approval",
+    "Display spend by region, outlet class and display type"
+  ],
+  "human_in_the_loop": "Trade marketing decides on any photo or outlet the system flags, and finance approves every credit note sheet. The system flags doubtful photos; it does not reject them on its own.",
+  "integrations": [
+    "Field sales app or SFA photo exports",
+    "DMS outlet master",
+    "ERP such as SAP or Tally for credit notes",
+    "Shared drive for programme circulars"
+  ],
+  "guardrails": [
+    "No payment for outlets outside the enrolled programme",
+    "Possibly reused photos held until a person reviews them",
+    "Programme rates versioned by period",
+    "Every decision keeps the photo and the reason"
+  ],
+  "compliance_notes": [
+    "Display payments are often settled through distributors by credit note; the system keeps the link from programme to claim to credit note for audit."
+  ],
+  "pilot": {
+    "duration": "About 6 weeks",
+    "scope": "One display programme in one region, with one month of settled display claims as the benchmark.",
+    "deliverables": [
+      "Programme register for the pilot",
+      "Photo checks on one month of claims",
+      "Credit note sheet with exceptions",
+      "Comparison with settled claims"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Photos flagged and confirmed",
+        "how": "Reused or missing photos flagged, confirmed by trade marketing."
+      },
+      {
+        "metric": "Ineligible outlets caught",
+        "how": "Claims for outlets outside the programme, confirmed by finance."
+      },
+      {
+        "metric": "Review time",
+        "how": "Time spent reviewing a month of display claims, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it tell whether the display was actually set up well?",
+      "a": "Not in the first version. It checks the outlet, period, rate and whether the photo is genuine and new. Judging the display itself can be added with shelf recognition once there are enough labelled photos."
+    },
+    {
+      "q": "Our photos come through WhatsApp. Is that a problem?",
+      "a": "No. Photos can be collected from WhatsApp exports, uploads or the field app. Photos sent through WhatsApp often lose their date and location data, so the reuse check matters more."
+    },
+    {
+      "q": "How does it detect reused photos?",
+      "a": "Each photo is compared with earlier submissions using image fingerprints that survive cropping and resizing, and close matches are shown side by side."
+    },
+    {
+      "q": "Is this the same system as your distributor claims settlement?",
+      "a": "Yes. It runs on the same claims engine as our live distributor claims settlement, configured to your display programme during a pilot."
+    }
+  ],
+  "related": [
+    "distributor-scheme-claims",
+    "co-marketing-fund-claims",
+    "channel-loyalty-payouts"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/display-and-visibility-claims/"
+}

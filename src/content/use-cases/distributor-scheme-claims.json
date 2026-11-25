@@ -212,8 +212,9 @@
     }
   ],
   "related": [
-    "quick-commerce-deductions",
-    "credit-note-reconciliation"
+    "damage-and-expiry-claims",
+    "display-and-visibility-claims",
+    "distributor-expense-claims"
   ],
   "proof_ref": "claims-reconciliation-platform",
   "url": "/use-cases/distributor-scheme-claims/"

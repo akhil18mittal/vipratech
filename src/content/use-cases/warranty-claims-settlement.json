@@ -1,0 +1,198 @@
+{
+  "slug": "warranty-claims-settlement",
+  "title": "Dealer Warranty Claims Settlement",
+  "status": "early-access",
+  "summary": "Check warranty claims from dealers and service centres against warranty terms, serial numbers, sale dates, returned parts and labour rates before finance reimburses them.",
+  "seo": {
+    "title": "Warranty Claims Verification for Dealers | VipraTech",
+    "description": "Verify dealer and service-centre warranty claims against warranty terms, serial numbers, sale dates, returned parts and labour rates before reimbursement.",
+    "keywords": [
+      "warranty claim verification",
+      "dealer warranty claims",
+      "service centre claim audit",
+      "warranty fraud detection",
+      "warranty reimbursement"
+    ]
+  },
+  "designed_for": [
+    "Head of After-Sales or Service",
+    "Head of Sales Finance",
+    "Warranty Claims Manager"
+  ],
+  "problem": {
+    "intro": "Brands of durables, electronics, batteries, tyres and auto components reimburse dealers and service centres for repairs and replacements under warranty. Each claim carries a serial number, sale date, fault, parts and labour. Without checking those against sales records and warranty terms, claims for out-of-warranty products, repeated repairs and parts never returned get paid.",
+    "pain_points": [
+      {
+        "title": "Products outside warranty",
+        "detail": "Serial numbers sold long ago, sold in another region or never sold at all are claimed as in warranty."
+      },
+      {
+        "title": "Repeat and duplicate claims",
+        "detail": "The same serial number or job is claimed more than once, by one or several service centres."
+      },
+      {
+        "title": "Parts not returned",
+        "detail": "Replaced parts that should come back for inspection never do."
+      },
+      {
+        "title": "Labour and parts above rates",
+        "detail": "Labour hours and part prices exceed the agreed rate card."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech reads warranty claims with their job cards, invoices and photos, and checks each one against the serial number's sale record and the warranty terms for that product. It flags serial numbers out of warranty or with earlier claims, parts not received back, and labour or parts above the rate card. Claims that pass go to the reimbursement sheet, and the rest go to the service team with the reason.",
+    "capabilities": [
+      "Checks serial numbers against sale records and warranty terms",
+      "Finds repeat and duplicate claims across service centres",
+      "Tracks parts that should be returned",
+      "Recalculates labour and parts from the rate card",
+      "Fault and claim trends by product, region and service centre",
+      "Reimbursement sheet with audit trail"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive claims",
+      "detail": "Dealers and service centres submit claims with job cards, invoices and photos."
+    },
+    {
+      "step": 2,
+      "title": "Check the product",
+      "detail": "Each serial number is checked against its sale record and warranty terms."
+    },
+    {
+      "step": 3,
+      "title": "Check history",
+      "detail": "Earlier claims on the same serial number are found across service centres."
+    },
+    {
+      "step": 4,
+      "title": "Check amounts",
+      "detail": "Labour and parts are recalculated from the rate card, and returned parts are confirmed."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "The service team reviews flagged claims with the reason."
+    },
+    {
+      "step": 6,
+      "title": "Approve and reimburse",
+      "detail": "Finance approves the reimbursement sheet."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Warranty claim and job card\"] --> B[\"Check serial and sale date\"]\n  B --> C[\"Check claim history\"]\n  C --> D[\"Check rates and parts return\"]\n  D --> E{\"In warranty and correct?\"}\n  E -->|\"yes\"| F[\"Reimbursement sheet\"]\n  E -->|\"no or unsure\"| G(\"Service team review\")\n  G --> F",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Warranty claims and job cards",
+          "Sales and serial records",
+          "Warranty terms and rate cards"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Job card and invoice reader",
+          "Photo checks"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Warranty eligibility",
+          "Claim history and duplicates",
+          "Rate and parts return checks"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Service team review",
+          "Reimbursement sheet and trends"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Claims and job cards\"]\n    I2[\"Serial and sale records\"]\n    I3[\"Warranty terms and rates\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Job card reader\"]\n    U2[\"Photo checks\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Warranty eligibility\"]\n    R2[\"Claim history check\"]\n    R3[\"Rate and parts checks\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Service team review\")\n    V2[\"Reimbursement sheet\"]\n  end\n  I1 --> U1\n  I1 --> U2\n  U1 --> R1\n  I2 --> R1\n  R1 --> R2\n  I3 --> R3\n  R2 --> R3\n  U2 --> V1\n  R3 --> V1\n  V1 --> V2"
+  },
+  "inputs": [
+    "Warranty claims with job cards and invoices",
+    "Serial number sale and dispatch records",
+    "Warranty terms by product",
+    "Labour and parts rate cards",
+    "Returned parts records"
+  ],
+  "outputs": [
+    "Claims checked for warranty, history and rates",
+    "Repeat, out-of-warranty and overcharged claims flagged",
+    "Reimbursement sheet for finance approval",
+    "Claim trends by product, region and service centre"
+  ],
+  "human_in_the_loop": "The service team decides on flagged claims, especially technical judgements about the fault. Finance approves every reimbursement.",
+  "integrations": [
+    "Service or CRM system for job cards",
+    "ERP for sales, serial numbers and payouts",
+    "Warehouse records for returned parts",
+    "Dealer or service centre portal"
+  ],
+  "guardrails": [
+    "No reimbursement without a valid serial and sale record",
+    "Repeat claims held for review",
+    "Rates taken from the version valid on the repair date",
+    "Technical decisions left to the service team"
+  ],
+  "compliance_notes": [],
+  "pilot": {
+    "duration": "About 8 weeks",
+    "scope": "One product line, with three months of settled warranty claims as the benchmark.",
+    "deliverables": [
+      "Warranty terms and rate card as rules",
+      "Checked claims with exceptions",
+      "Reimbursement sheet format",
+      "Claim trend report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Ineligible claims found",
+        "how": "Out-of-warranty, repeat or overcharged claims confirmed by the service team."
+      },
+      {
+        "metric": "Parts return gaps",
+        "how": "Claims where parts were due back but not received."
+      },
+      {
+        "metric": "Review time",
+        "how": "Time to process a month of claims, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it judge whether the fault is genuine?",
+      "a": "No. Technical judgement stays with your service team. The system checks eligibility, history, rates and evidence, and shows trends that point to where to look."
+    },
+    {
+      "q": "Our serial numbers are not always recorded at sale. Does that matter?",
+      "a": "Where sale records are missing, dispatch dates and invoice copies can be used instead, and those claims are marked as having weaker evidence."
+    },
+    {
+      "q": "Can it handle replacement claims for batteries or tyres?",
+      "a": "Yes. Pro-rata and free-replacement terms are configured as rules for each product."
+    },
+    {
+      "q": "Is this available today?",
+      "a": "Distributor claims settlement is live today. Warranty claims settlement is in early access: we are building it with a small number of brands as design partners."
+    }
+  ],
+  "related": [
+    "dealer-incentive-and-rebate-settlement",
+    "co-marketing-fund-claims",
+    "rate-difference-claims"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/warranty-claims-settlement/"
+}

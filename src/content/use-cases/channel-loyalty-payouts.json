@@ -1,0 +1,198 @@
+{
+  "slug": "channel-loyalty-payouts",
+  "title": "Channel Loyalty Points Validation",
+  "status": "early-access",
+  "summary": "Check loyalty points earned by retailers, painters, plumbers, mechanics and farmers against real sales and scan data, and catch abnormal scanning before points are paid out.",
+  "seo": {
+    "title": "Channel Loyalty Points Validation | VipraTech",
+    "description": "Validate loyalty points for retailers, painters, plumbers, mechanics and farmers against sales and scan data, and flag abnormal scanning before payout.",
+    "keywords": [
+      "loyalty points validation",
+      "painter loyalty program audit",
+      "mechanic loyalty scan fraud",
+      "influencer loyalty payout",
+      "QR code scan fraud"
+    ]
+  },
+  "designed_for": [
+    "Loyalty Programme Manager",
+    "Head of Sales Finance",
+    "Channel Marketing Manager"
+  ],
+  "problem": {
+    "intro": "Paints, pipes, adhesives, lubricants, auto parts and agri-input brands run loyalty programmes for the people who choose their products: painters, plumbers, carpenters, mechanics, retailers and farmers. Points are earned by scanning codes on packs or by reported purchases, then redeemed for cash or gifts. Points paid for scans that do not reflect real sales are pure cost.",
+    "pain_points": [
+      {
+        "title": "Codes scanned in bulk",
+        "detail": "Codes collected from packs in warehouses or shops are scanned by a few accounts, far beyond what one person could use."
+      },
+      {
+        "title": "Scans that do not match sales",
+        "detail": "Points earned in a town exceed what the brand sold into that town."
+      },
+      {
+        "title": "Duplicate and shared accounts",
+        "detail": "One person runs several accounts, or several people share one, to cross slabs."
+      },
+      {
+        "title": "Redemptions paid without checks",
+        "detail": "Cash redemptions are paid weekly or monthly with little review."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech compares loyalty activity with your own sales and the programme's rules. Scans are checked against secondary sales into each town and retailer, and accounts with abnormal patterns, such as bulk scans, scans far from the member's location or accounts sharing devices or bank details, are flagged before redemption. Points that pass are released; the rest go to the programme team with the evidence.",
+    "capabilities": [
+      "Compares scans and points with secondary sales by town and retailer",
+      "Flags bulk, odd-hour and far-from-home scanning",
+      "Finds linked accounts sharing devices, phones or bank details",
+      "Applies programme rules and slabs before redemption",
+      "Review queue with each account's activity and evidence",
+      "Programme cost and leakage report by region"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load activity",
+      "detail": "Scans, points and redemption requests are taken from the loyalty platform."
+    },
+    {
+      "step": 2,
+      "title": "Load sales",
+      "detail": "Secondary sales by town and retailer are taken from the DMS."
+    },
+    {
+      "step": 3,
+      "title": "Check patterns",
+      "detail": "Accounts are checked for bulk scanning, location mismatches and linked accounts."
+    },
+    {
+      "step": 4,
+      "title": "Compare with sales",
+      "detail": "Points earned are compared with what was sold into each town and retailer."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "The programme team reviews flagged accounts with the evidence."
+    },
+    {
+      "step": 6,
+      "title": "Release",
+      "detail": "Redemptions that pass are released, and the rest are held or reversed."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scans and redemptions\"] --> C[\"Check scan patterns\"]\n  B[\"Secondary sales by town\"] --> D[\"Compare points with sales\"]\n  C --> D\n  D --> E{\"Activity looks genuine?\"}\n  E -->|\"yes\"| F[\"Release redemption\"]\n  E -->|\"no or unsure\"| G(\"Programme team review\")\n  G --> F",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Loyalty platform scans and redemptions",
+          "Member and device records",
+          "Secondary sales from the DMS"
+        ]
+      },
+      {
+        "name": "Pattern checks",
+        "components": [
+          "Scan pattern detection",
+          "Linked account detection"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Programme rules and slabs",
+          "Sales comparison"
+        ]
+      },
+      {
+        "name": "Review and release",
+        "components": [
+          "Programme team review",
+          "Redemption release and leakage report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Scans and redemptions\"]\n    I2[\"Member and device records\"]\n    I3[\"Secondary sales\"]\n  end\n  subgraph S2[\"Pattern checks\"]\n    P1[\"Scan pattern detection\"]\n    P2[\"Linked account detection\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Programme rules\"]\n    R2[\"Sales comparison\"]\n  end\n  subgraph S4[\"Review and release\"]\n    V1(\"Programme team review\")\n    V2[\"Redemption release\"]\n    V3[\"Leakage report\"]\n  end\n  I1 --> P1\n  I2 --> P2\n  I1 --> R1\n  I3 --> R2\n  P1 --> R2\n  R1 --> R2\n  R2 --> V1\n  P2 --> V1\n  V1 --> V2\n  V1 --> V3"
+  },
+  "inputs": [
+    "Scans, points and redemption requests",
+    "Member profiles, devices and bank details",
+    "Secondary sales by town and retailer",
+    "Programme rules and slabs"
+  ],
+  "outputs": [
+    "Accounts flagged for abnormal scanning or linking",
+    "Points compared with sales by town",
+    "Redemptions released or held, with reasons",
+    "Programme cost and leakage by region"
+  ],
+  "human_in_the_loop": "The programme team decides on every flagged account, and members can be asked for evidence before points are reversed. The system holds redemptions for review; it does not block members on its own.",
+  "integrations": [
+    "Loyalty platform exports or API",
+    "DMS for secondary sales",
+    "Payout or gift fulfilment partner",
+    "CRM for member records"
+  ],
+  "guardrails": [
+    "No member blocked without a person's review",
+    "Every flag shows the activity behind it",
+    "Programme rules versioned by period",
+    "Personal data used only for programme checks"
+  ],
+  "compliance_notes": [
+    "Member phone numbers and bank details are personal data under India's Digital Personal Data Protection Act; the checks use them only to run the programme, with access limited to the programme team."
+  ],
+  "pilot": {
+    "duration": "About 6 weeks",
+    "scope": "Three months of scans and redemptions for one region, compared with secondary sales for the same period.",
+    "deliverables": [
+      "Scan pattern and linked account checks",
+      "Points versus sales by town",
+      "Review queue for flagged accounts",
+      "Leakage report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Flagged accounts confirmed",
+        "how": "Accounts flagged and confirmed by the programme team."
+      },
+      {
+        "metric": "Points at risk",
+        "how": "Value of points held or reversed after review."
+      },
+      {
+        "metric": "Review time",
+        "how": "Time to review a redemption cycle, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our loyalty platform is run by a vendor. Can this work alongside it?",
+      "a": "Yes. It works from the vendor's exports or API and returns a list of redemptions to hold or release."
+    },
+    {
+      "q": "Will genuine members be blocked?",
+      "a": "No member is blocked automatically. Flagged accounts go to your team with the evidence, and you decide."
+    },
+    {
+      "q": "Does it need location data?",
+      "a": "It uses location where the scan records it. Without location, it relies on volumes, timing, linked accounts and the sales comparison."
+    },
+    {
+      "q": "Is this available today?",
+      "a": "Distributor claims settlement is live today. Channel loyalty points validation is in early access: we are building it with a small number of brands as design partners."
+    }
+  ],
+  "related": [
+    "dealer-incentive-and-rebate-settlement",
+    "display-and-visibility-claims",
+    "co-marketing-fund-claims"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/channel-loyalty-payouts/"
+}

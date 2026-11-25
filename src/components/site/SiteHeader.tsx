@@ -7,6 +7,7 @@ import type { NavLink } from "../../types";
 
 const NAV_LINKS: NavLink[] = [
   { name: "How it works", href: "/#how-it-works" },
+  { name: "Industries", href: "/industries/" },
   { name: "Use cases", href: "/use-cases/" },
   { name: "Sample report", href: "/sample-audit-report/" },
   { name: "Security", href: "/security/" },
@@ -33,7 +34,7 @@ export function SiteHeader() {
           <span>VipraTech</span>
         </a>
 
-        <nav aria-label="Main" className="hidden md:flex items-center gap-1">
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((link) => (
             <a key={link.href} href={link.href} className={linkClass}>
               {link.name}
@@ -44,7 +45,7 @@ export function SiteHeader() {
           </a>
         </nav>
 
-        <details className="group md:hidden" data-nav-menu>
+        <details className="group lg:hidden" data-nav-menu>
           <summary
             aria-label="Menu"
             className="list-none [&::-webkit-details-marker]:hidden p-2 rounded-lg border border-slate-300 text-slate-700 cursor-pointer"
