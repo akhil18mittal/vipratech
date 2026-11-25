@@ -5,7 +5,7 @@ import CookieBanner from '../components/site/CookieBanner.astro';
 import {Breadcrumbs} from '../components/site/Breadcrumbs';
 import {SiteFooter} from '../components/site/SiteFooter';
 import {SiteHeader} from '../components/site/SiteHeader';
-import {SHARE_IMAGE} from '../data/site';
+import {GOOGLE_SITE_VERIFICATION, SHARE_IMAGE} from '../data/site';
 import {absoluteUrl, breadcrumbJsonLd, faqJsonLd, jsonLdText, type Crumb, type Faq} from '../lib/seo';
 
 // Every page: head tags, structured data, header and footer.
@@ -41,6 +41,7 @@ const structuredData = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
     {noindex && <meta name="robots" content="noindex" />}
     {!noindex && <link rel="canonical" href={canonical} />}
     <link
