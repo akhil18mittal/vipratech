@@ -46,7 +46,7 @@ const structuredData = [
     {!noindex && <link rel="canonical" href={canonical} />}
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f766e'/%3E%3Cpath d='M14 16h10l8 28 8-28h10L38 52H26L14 16Z' fill='%23ffffff'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2309090b'/%3E%3Cpath d='M14 16h10l8 28 8-28h10L38 52H26L14 16Z' fill='%23a3e635'/%3E%3C/svg%3E"
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="VipraTech" />
@@ -64,8 +64,14 @@ const structuredData = [
     <ConsentScripts />
   </head>
   <body class="bg-zinc-950 text-zinc-100 font-sans selection:bg-lime-400 selection:text-black" data-page-type={page.type} data-slug={page.slug}>
+    <canvas
+      id="matrix-rain"
+      aria-hidden="true"
+      class="fixed inset-0 w-full h-full pointer-events-none z-0"
+      style={`opacity: ${page.type === 'home' ? 0.28 : 0.16}`}
+    ></canvas>
     <SiteHeader />
-    <main class="overflow-x-hidden">
+    <main class="relative z-10 overflow-x-hidden">
       {
         trail && (
           <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -75,10 +81,13 @@ const structuredData = [
       }
       <slot />
     </main>
-    <SiteFooter />
+    <div class="relative z-10">
+      <SiteFooter />
+    </div>
     <CookieBanner />
     <script>
       import '../scripts/nav';
+      import '../scripts/matrix-rain';
       import {trackPage} from '../lib/analytics';
       trackPage();
     </script>

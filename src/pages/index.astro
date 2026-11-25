@@ -1,13 +1,14 @@
 ---
 import Section from '../components/content/Section.astro';
-import {BulletList} from '../components/content/BulletList';
 import {CardGrid} from '../components/content/CardGrid';
 import {CtaBlock} from '../components/content/CtaBlock';
 import {DetailCards} from '../components/content/DetailCards';
 import {FaqList} from '../components/content/FaqList';
 import {FounderBlock} from '../components/content/FounderBlock';
 import {WorkflowSteps} from '../components/content/WorkflowSteps';
-import {ContactButtons} from '../components/site/ContactButtons';
+import HomeHero from '../components/home/HomeHero.astro';
+import LeakageCalculator from '../components/home/LeakageCalculator.astro';
+import {SecurityTiles, SystemChips, Timeline} from '../components/home/HomeBlocks';
 import {AUDIT_PATH, contactLinks} from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {siteContent} from '../lib/collections';
@@ -21,10 +22,33 @@ const content = await siteContent();
 const claims = content.useCase('distributor-scheme-claims');
 const contact = contactLinks('/', 'a free claims audit');
 
-const proofPoints = [
-  'In production every month at a packaged-food brand since mid-2026',
-  `${content.useCases.length} claim and deduction workflows across ${content.industries.length} industries, on one engine`,
-  'Finance approves every credit note. Nothing is paid automatically.',
+const metrics = [
+  {value: String(content.useCases.length), label: 'claim and deduction workflows'},
+  {value: String(content.industries.length), label: 'industries covered'},
+  {value: '5 days', label: 'to your free audit report'},
+];
+
+const timeline = [
+  {when: 'Day 0', title: 'NDA and files', detail: "Sign an NDA, then send one recent quarter of claims, the circulars and the invoices, in the formats you already have."},
+  {when: 'Day 5', title: 'Free audit report', detail: 'Every finding with the amount at risk, by distributor, scheme and reason, walked through with you in 30 minutes.'},
+  {when: 'Week 2', title: 'Rules and formats set', detail: 'Your schemes become versioned rules and every counterparty format is set up and tested before anything goes live.'},
+  {when: 'Week 8', title: 'Live, with finance approving', detail: 'Two monthly cycles run beside your current process; finance switches over once the results agree.'},
+];
+
+const security = [
+  {title: 'NDA first', detail: 'Signed before you share a single file.'},
+  {title: 'India region', detail: 'Runs in your cloud account or ours, in an India region.'},
+  {title: 'Never used for training', detail: 'Your documents are used only for your work, never to train AI models.'},
+  {title: 'Deleted after the audit', detail: 'Audit files are deleted within 30 days of the report, or sooner if you ask.'},
+  {title: 'Role-based access', detail: 'Access by role, with every login and decision logged.'},
+  {title: 'Full audit trail', detail: 'Every decision kept with the rule version, the evidence and who approved it.'},
+];
+
+const systems = [
+  {label: 'ERP and accounting', systems: ['SAP', 'Oracle', 'Tally', 'Zoho Books', 'Busy', 'Marg']},
+  {label: 'Sales and distribution', systems: ['DMS exports', 'Field sales apps', 'Scheme circulars', 'Claim sheets in any format']},
+  {label: 'Retail and quick commerce', systems: ['Blinkit', 'Zepto', 'Swiggy Instamart', 'Amazon', 'Flipkart', 'Retail chain portals']},
+  {label: 'Banks, logistics and government', systems: ['Bank statements', 'Payment gateways', 'LRs and PODs', 'Weighbridge slips', 'Fertiliser system reports']},
 ];
 
 const deliverables = [
@@ -52,13 +76,6 @@ const deliverables = [
     title: 'An audit trail',
     detail: 'Who approved what and when, with the circular, invoice and proof behind every decision.',
   },
-];
-
-const auditSteps = [
-  {title: 'Sign an NDA', detail: 'Yours or ours, before you share anything.'},
-  {title: "Send last quarter's claims", detail: 'Claim sheets, scheme circulars and the related invoices, in whatever format you have them.'},
-  {title: 'Get the report in 5 working days', detail: 'Duplicates, ineligible lines and over-claims, with the amount at risk by distributor, scheme and reason.'},
-  {title: 'Walk through it together', detail: 'A 30-minute call with the person who owns claims settlement.'},
 ];
 
 const pricing = [
@@ -115,35 +132,18 @@ const engine = [
   faqs={faqs}
   jsonLd={[organizationJsonLd()]}
 >
-  <section class="pt-14 sm:pt-20 pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
-    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-400/10 border border-lime-400/40 text-lime-400 text-xs font-mono">
-      For finance teams at brands, manufacturers and distributors
-    </span>
-    <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.05] text-white max-w-4xl">
-      Stop paying claims and deductions you don't owe.
-    </h1>
-    <p class="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-3xl">
-      VipraTech checks every distributor claim, retailer and platform deduction, subsidy and freight claim against your
-      schemes, invoices, receipts and contracts, flags what does not hold up, and gives finance a clean settlement sheet to
-      approve.
-    </p>
-    <div class="pt-2 space-y-4">
-      <ContactButtons links={contact} location="hero" />
-      <a href="/sample-audit-report/" class="inline-block text-sm font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
-        See a sample audit report →
-      </a>
-    </div>
-    <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
-      {
-        proofPoints.map((point) => (
-          <li class="p-4 bg-zinc-900/70 border border-zinc-800 rounded-xl text-xs text-zinc-300 leading-relaxed font-mono">{point}</li>
-        ))
-      }
-    </ul>
-  </section>
+  <HomeHero contact={contact} metrics={metrics} />
 
   <Section title="Claims settlement is a monthly leak" intro={claims.problem.intro}>
     <DetailCards items={claims.problem.pain_points} />
+  </Section>
+
+  <Section
+    id="calculator"
+    title="What is leaking from your P&L?"
+    intro="Put in your own numbers. The free audit then measures the real figure on one quarter of your claims."
+  >
+    <LeakageCalculator />
   </Section>
 
   <Section id="how-it-works" title="How it works" intro={claims.solution.overview}>
@@ -159,8 +159,8 @@ const engine = [
     <DetailCards items={deliverables} />
   </Section>
 
-  <Section id="free-audit" title="Start with a free claims audit" intro="See what the system finds on your own claims before you commit to anything.">
-    <WorkflowSteps steps={auditSteps} />
+  <Section id="free-audit" title="From first file to go-live" intro="Start with a free audit of your own claims. You commit to nothing until you have seen what it finds.">
+    <Timeline steps={timeline} />
     <div class="flex flex-wrap items-center gap-4 pt-2">
       <a
         href={AUDIT_PATH}
@@ -177,17 +177,14 @@ const engine = [
   </Section>
 
   <Section title="Your data stays under your control">
-    <BulletList
-      items={[
-        'NDA signed before you share any file',
-        'Files used only for your audit, and deleted afterwards',
-        'Your data is not used to train AI models',
-        'For live use, the system can run in your own cloud account',
-      ]}
-    />
+    <SecurityTiles items={security} />
     <p class="text-base">
       <a href="/security/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">How we handle your data →</a>
     </p>
+  </Section>
+
+  <Section title="Works with the systems you already run" intro="The engine reads exports, reports and documents from these, and gives back sheets your team posts in your ERP. Nothing to replace.">
+    <SystemChips groups={systems} />
   </Section>
 
   <Section title="How pricing works">
@@ -240,3 +237,7 @@ const engine = [
     contact={contact}
   />
 </BaseLayout>
+
+<script>
+  import '../scripts/home';
+</script>

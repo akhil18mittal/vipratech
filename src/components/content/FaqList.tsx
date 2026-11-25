@@ -18,7 +18,7 @@ export function FaqList({ faqs }: { faqs: readonly Faq[] }) {
             </span>
             <ChevronDown className="w-4 h-4 text-lime-400 transition-transform duration-300 flex-shrink-0 group-open:rotate-180" />
           </summary>
-          <div className="px-5 pb-6 sm:px-6 pt-0 text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans border-t border-zinc-800/80">
+          <div className="px-5 pb-6 sm:px-6 pt-0 text-sm text-zinc-300 leading-relaxed font-sans border-t border-zinc-800/80">
             <p className="pt-4">{faq.a}</p>
           </div>
         </details>

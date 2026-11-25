@@ -5,7 +5,7 @@ export function WorkflowSteps({ id, steps }: { id?: string; steps: readonly { ti
       {steps.map((step, index) => (
         <li
           key={step.detail}
-          className="p-3.5 bg-zinc-950/90 border border-zinc-800 rounded-xl text-xs text-zinc-200 flex items-start gap-3"
+          className="p-3.5 bg-zinc-950/90 border border-zinc-800 rounded-xl text-sm text-zinc-200 flex items-start gap-3 hover:border-lime-500/40 transition-colors"
         >
           <span className="w-6 h-6 rounded-md bg-lime-400/10 text-lime-400 font-mono text-xs flex items-center justify-center font-bold flex-shrink-0 border border-lime-400/20">
             {String(index + 1).padStart(2, "0")}
