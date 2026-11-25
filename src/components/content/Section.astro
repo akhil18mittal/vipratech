@@ -1,5 +1,5 @@
 ---
-// One page section: spacing, a top rule and the h2, at content-page width.
+// One page section: the original section spacing and h2 style, at content-page width.
 interface Props {
   title: string;
   id?: string;
@@ -9,9 +9,9 @@ interface Props {
 const {title, id, intro} = Astro.props;
 ---
 
-<section id={id} class="py-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-slate-200 scroll-mt-20">
-  <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{title}</h2>
-  {intro && <p class="mt-3 text-base text-slate-600 leading-relaxed max-w-3xl">{intro}</p>}
+<section id={id} class="py-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-zinc-800 scroll-mt-20">
+  <h2 class="text-3xl font-bold tracking-tight text-white">{title}</h2>
+  {intro && <p class="mt-3 text-sm text-zinc-400 leading-relaxed max-w-3xl">{intro}</p>}
   <div class="space-y-6 mt-8">
     <slot />
   </div>

@@ -26,20 +26,20 @@ const OUT_DIR = join(PUBLIC_DIR, 'diagrams');
 const MANIFEST_PATH = join(OUT_DIR, 'manifest.json');
 const CONCURRENCY = 8;
 
-// Palette: the site's light slate surfaces with a teal accent. The SVGs sit on a white card, so they keep a transparent
-// background and every colour below is chosen for contrast against white.
+// Palette: the site's dark zinc surfaces with lime and emerald accents. The SVGs sit on a #18181b card, so they keep a
+// transparent background and every colour below is chosen for contrast against that card.
 const COLORS = {
-  card: '#ffffff', // white: rectangle fill, the same as the card behind the image
-  cluster: '#f8fafc', // slate-50: subgraph fill, a shade darker than the card
-  clusterBorder: '#e2e8f0', // slate-200
-  nodeBorder: '#94a3b8', // slate-400
-  text: '#0f172a', // slate-900
-  edgeText: '#334155', // slate-700
-  edge: '#64748b', // slate-500
-  accent: '#0f766e', // teal-700: decisions, subgraph titles
-  accentFill: '#f0fdfa', // teal-50
-  human: '#b45309', // amber-700: human steps
-  humanFill: '#fffbeb', // amber-50
+  card: '#18181b', // zinc-900: rectangle fill, the same as the card behind the image
+  cluster: '#0c0c0f', // subgraph fill, a shade darker than the card
+  clusterBorder: '#27272a', // zinc-800
+  nodeBorder: '#3f3f46', // zinc-700
+  text: '#f4f4f5', // zinc-100
+  edgeText: '#d4d4d8', // zinc-300
+  edge: '#71717a', // zinc-500
+  lime: '#a3e635', // lime-400: decisions, subgraph titles
+  limeFill: '#1a2e05', // lime-950
+  emerald: '#34d399', // emerald-400: human steps
+  emeraldFill: '#022c22', // emerald-950
 };
 
 const FONT_FAMILY = 'Arial, Helvetica, "Liberation Sans", sans-serif';
@@ -48,12 +48,12 @@ const FONT_FAMILY = 'Arial, Helvetica, "Liberation Sans", sans-serif';
 // decisions a <polygon>. Subgraph titles get a chip in the subgraph's fill (see postProcess), so edges pass under them.
 const THEME_CSS = `
   .node .label-container { fill: ${COLORS.card}; stroke: ${COLORS.nodeBorder}; stroke-width: 1.5px; }
-  .node rect.label-container[rx]:not([rx="0"]) { fill: ${COLORS.humanFill}; stroke: ${COLORS.human}; }
-  .node polygon.label-container { fill: ${COLORS.accentFill}; stroke: ${COLORS.accent}; }
+  .node rect.label-container[rx]:not([rx="0"]) { fill: ${COLORS.emeraldFill}; stroke: ${COLORS.emerald}; }
+  .node polygon.label-container { fill: ${COLORS.limeFill}; stroke: ${COLORS.lime}; }
   .node .label text { fill: ${COLORS.text}; }
   .cluster rect { fill: ${COLORS.cluster}; stroke: ${COLORS.clusterBorder}; stroke-width: 1px; }
   .cluster-label rect.background { fill: ${COLORS.cluster}; }
-  .cluster-label text { fill: ${COLORS.accent}; }
+  .cluster-label text { fill: ${COLORS.lime}; }
   .flowchart-link { stroke: ${COLORS.edge}; stroke-width: 1.5px; }
   .marker { fill: ${COLORS.edge}; stroke: ${COLORS.edge}; }
   .edgeLabel rect.background { fill: ${COLORS.card}; opacity: 1; }
@@ -63,7 +63,7 @@ const THEME_CSS = `
 const MERMAID_CONFIG = {
   theme: 'base',
   look: 'classic',
-  darkMode: false,
+  darkMode: true,
   fontFamily: FONT_FAMILY,
   htmlLabels: false,
   deterministicIds: true,
@@ -71,7 +71,7 @@ const MERMAID_CONFIG = {
   logLevel: 'error',
   flowchart: {htmlLabels: false, useMaxWidth: false, diagramPadding: 8},
   themeVariables: {
-    darkMode: false,
+    darkMode: true,
     fontFamily: FONT_FAMILY,
     fontSize: '16px',
     background: COLORS.card,
@@ -87,7 +87,7 @@ const MERMAID_CONFIG = {
     lineColor: COLORS.edge,
     clusterBkg: COLORS.cluster,
     clusterBorder: COLORS.clusterBorder,
-    titleColor: COLORS.accent,
+    titleColor: COLORS.lime,
     edgeLabelBackground: COLORS.card,
   },
   themeCSS: THEME_CSS,

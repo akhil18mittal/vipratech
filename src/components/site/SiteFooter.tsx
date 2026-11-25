@@ -14,20 +14,20 @@ const PAGE_LINKS: NavLink[] = [
   { name: "Privacy", href: "/privacy/" },
 ];
 
-const labelClass = "text-slate-900 font-semibold block mb-3 text-sm";
-const linkClass = "hover:text-teal-700 transition-colors";
+const labelClass = "text-white font-bold block mb-3 uppercase tracking-wider text-[11px] font-mono";
+const linkClass = "hover:text-lime-400 transition-colors";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-slate-200 bg-slate-50 py-14 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 text-sm text-slate-600">
+    <footer className="border-t border-zinc-800 bg-zinc-950 py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 text-xs text-zinc-400 font-mono">
         <div className="md:col-span-5 space-y-3">
-          <a href="/" className="flex items-center gap-2.5 text-base font-bold text-slate-900">
+          <a href="/" className="flex items-center gap-2.5 text-sm font-bold text-white font-mono tracking-wider">
             <LogoMark />
-            <span>VipraTech</span>
+            <span>VIPRATECH LABS</span>
           </a>
-          <p className="max-w-md leading-relaxed">{COMPANY_INFO.subheading}</p>
-          <p className="text-xs text-slate-500 leading-relaxed">
+          <p className="max-w-md leading-relaxed font-sans">{COMPANY_INFO.subheading}</p>
+          <p className="text-zinc-500 leading-relaxed">
             {COMPANY_INFO.name}
             <br />
             {COMPANY_INFO.address}
@@ -55,11 +55,11 @@ export function SiteFooter() {
         <div className="md:col-span-4 space-y-2">
           <span className={labelClass}>Talk to {COMPANY_INFO.founder}</span>
           <a href={`mailto:${COMPANY_INFO.email}`} className={`flex items-center gap-2 ${linkClass}`}>
-            <Mail className="w-4 h-4 text-teal-700" />
+            <Mail className="w-3.5 h-3.5 text-lime-400" />
             {COMPANY_INFO.email}
           </a>
           <a href={`tel:${COMPANY_INFO.phone.replace(/\s/g, "")}`} className={`flex items-center gap-2 ${linkClass}`}>
-            <Phone className="w-4 h-4 text-teal-700" />
+            <Phone className="w-3.5 h-3.5 text-lime-400" />
             {COMPANY_INFO.phone}
           </a>
           <a
@@ -70,12 +70,12 @@ export function SiteFooter() {
             data-cta-location="footer"
             className={`flex items-center gap-2 ${linkClass}`}
           >
-            <MessageCircle className="w-4 h-4 text-teal-700" />
+            <MessageCircle className="w-3.5 h-3.5 text-lime-400" />
             WhatsApp
           </a>
         </div>
       </div>
-      <p className="max-w-5xl mx-auto mt-10 pt-6 border-t border-slate-200 text-xs text-slate-500">
+      <p className="max-w-7xl mx-auto mt-10 pt-6 border-t border-zinc-800/80 text-[11px] text-zinc-600 font-mono">
         © {new Date().getFullYear()} {COMPANY_INFO.name}
       </p>
     </footer>

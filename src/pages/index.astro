@@ -116,27 +116,27 @@ const engine = [
   jsonLd={[organizationJsonLd()]}
 >
   <section class="pt-14 sm:pt-20 pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
-    <span class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold">
+    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-400/10 border border-lime-400/40 text-lime-400 text-xs font-mono">
       For finance teams at brands, manufacturers and distributors
     </span>
-    <h1 class="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900 max-w-4xl">
+    <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.05] text-white max-w-4xl">
       Stop paying claims and deductions you don't owe.
     </h1>
-    <p class="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl">
+    <p class="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-3xl">
       VipraTech checks every distributor claim, retailer and platform deduction, subsidy and freight claim against your
       schemes, invoices, receipts and contracts, flags what does not hold up, and gives finance a clean settlement sheet to
       approve.
     </p>
     <div class="pt-2 space-y-4">
       <ContactButtons links={contact} location="hero" />
-      <a href="/sample-audit-report/" class="inline-block text-sm font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
+      <a href="/sample-audit-report/" class="inline-block text-sm font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
         See a sample audit report →
       </a>
     </div>
     <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
       {
         proofPoints.map((point) => (
-          <li class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 leading-relaxed">{point}</li>
+          <li class="p-4 bg-zinc-900/70 border border-zinc-800 rounded-xl text-xs text-zinc-300 leading-relaxed font-mono">{point}</li>
         ))
       }
     </ul>
@@ -149,7 +149,7 @@ const engine = [
   <Section id="how-it-works" title="How it works" intro={claims.solution.overview}>
     <WorkflowSteps steps={claims.workflow} />
     <p class="text-base">
-      <a href={claims.url} class="font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
+      <a href={claims.url} class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
         Full details: app screens, architecture, decision rules, exception codes and go-live plan →
       </a>
     </p>
@@ -166,11 +166,11 @@ const engine = [
         href={AUDIT_PATH}
         data-cta="audit"
         data-cta-location="audit-section"
-        class="px-6 py-3.5 bg-teal-700 hover:bg-teal-800 text-white font-semibold rounded-xl text-sm transition-colors"
+        class="px-6 py-3.5 bg-lime-400 hover:bg-lime-300 text-black font-mono font-bold shadow-xl shadow-lime-400/25 rounded-xl text-sm transition-all"
       >
         Get a free claims audit
       </a>
-      <a href="/sample-audit-report/" class="text-sm font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
+      <a href="/sample-audit-report/" class="text-sm font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
         See a sample report →
       </a>
     </div>
@@ -186,7 +186,7 @@ const engine = [
       ]}
     />
     <p class="text-base">
-      <a href="/security/" class="font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">How we handle your data →</a>
+      <a href="/security/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">How we handle your data →</a>
     </p>
   </Section>
 
@@ -197,7 +197,7 @@ const engine = [
   <Section id="under-the-hood" title="Under the hood" intro="Every workflow runs on one claims engine, built for finance teams that settle tens of thousands of lines a month.">
     <DetailCards items={engine} />
     <p class="text-base">
-      <a href="/platform/" class="font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">How the engine works →</a>
+      <a href="/platform/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">How the engine works →</a>
     </p>
   </Section>
 
@@ -205,14 +205,14 @@ const engine = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {
         coverage.map((group) => (
-          <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
-            <h3 class="text-lg font-bold text-slate-900">
-              <a href={`/use-cases/#${group.id}`} class="hover:text-teal-800">{group.label}</a>
+          <div class="p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl shadow-lg">
+            <h3 class="text-lg font-bold text-white">
+              <a href={`/use-cases/#${group.id}`} class="hover:text-lime-300">{group.label}</a>
             </h3>
             <ul class="mt-4 space-y-2">
               {group.useCases.map((useCase) => (
                 <li>
-                  <a href={useCase.url} class="text-sm font-medium text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
+                  <a href={useCase.url} class="text-sm font-medium text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
                     {useCase.title}
                   </a>
                 </li>

@@ -11,7 +11,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 // before changing the practice.
 
 const contact = contactLinks('/security/', 'how VipraTech handles claims data');
-const link = 'font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2';
+const link = 'font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2';
 ---
 
 <BaseLayout
@@ -67,14 +67,14 @@ const link = 'font-semibold text-teal-700 hover:text-teal-900 hover:underline un
   </Section>
 
   <Section title="Who builds it">
-    <p class="text-base text-slate-600 leading-relaxed max-w-3xl">
+    <p class="text-base text-zinc-400 leading-relaxed max-w-3xl">
       {COMPANY_INFO.founder} spent 8 years building and leading engineering on a security-testing platform, and builds
       this system to the same habits: least-privilege access, logging and reviewed changes.
     </p>
   </Section>
 
   <Section title="Security questionnaires">
-    <p class="text-base text-slate-600 leading-relaxed max-w-3xl">
+    <p class="text-base text-zinc-400 leading-relaxed max-w-3xl">
       If your IT or security team has a questionnaire, send it to
       <a href={`mailto:${COMPANY_INFO.email}`} class={link}>{COMPANY_INFO.email}</a> and we will fill it in. How this
       website itself uses data is covered by the <a href="/privacy/" class={link}>privacy policy</a>.

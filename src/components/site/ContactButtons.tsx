@@ -6,47 +6,30 @@ interface ContactButtonsProps {
   /** Where on the page the buttons are, for the cta_click analytics event. */
   location: string;
   centered?: boolean;
-  /** On a dark band the secondary buttons need light borders and text. */
-  onDark?: boolean;
 }
 
-const base = "px-6 py-3.5 rounded-xl text-sm font-semibold transition-colors flex items-center gap-2";
+const secondary =
+  "px-6 py-4 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 font-mono";
+const newTab = (href: string) => (href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {});
 
-export function ContactButtons({ links, location, centered, onDark }: ContactButtonsProps) {
-  const secondary = onDark
-    ? `${base} bg-transparent hover:bg-white/10 text-white border border-white/40`
-    : `${base} bg-white hover:bg-slate-50 text-slate-800 border border-slate-300`;
-  const external = links.primary.href.startsWith("http");
+export function ContactButtons({ links, location, centered }: ContactButtonsProps) {
   return (
-    <div className={`flex flex-wrap items-center gap-3 ${centered ? "justify-center" : ""}`}>
+    <div className={`flex flex-wrap items-center gap-4 ${centered ? "justify-center" : ""}`}>
       <a
         href={links.primary.href}
-        {...(external ? { target: "_blank", rel: "noopener" } : {})}
+        {...newTab(links.primary.href)}
         data-cta={links.primary.cta}
         data-cta-location={location}
-        className={`${base} ${onDark ? "bg-white hover:bg-teal-50 text-slate-900" : "bg-teal-700 hover:bg-teal-800 text-white"}`}
+        className="px-7 py-4 bg-lime-400 hover:bg-lime-300 text-black font-bold rounded-xl text-sm transition-all flex items-center gap-2.5 shadow-xl shadow-lime-400/25 font-mono"
       >
         <span>{links.primary.label}</span>
       </a>
-      <a
-        href={links.demo.href}
-        {...(links.demo.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
-        data-cta={links.demo.cta}
-        data-cta-location={location}
-        className={secondary}
-      >
-        <MonitorPlay className="w-4 h-4" />
+      <a href={links.demo.href} {...newTab(links.demo.href)} data-cta={links.demo.cta} data-cta-location={location} className={secondary}>
+        <MonitorPlay className="w-4 h-4 text-lime-400" />
         <span>Book a demo</span>
       </a>
-      <a
-        href={links.whatsapp}
-        target="_blank"
-        rel="noopener"
-        data-cta="whatsapp"
-        data-cta-location={location}
-        className={secondary}
-      >
-        <MessageCircle className="w-4 h-4" />
+      <a href={links.whatsapp} target="_blank" rel="noopener" data-cta="whatsapp" data-cta-location={location} className={secondary}>
+        <MessageCircle className="w-4 h-4 text-lime-400" />
         <span>WhatsApp us</span>
       </a>
     </div>

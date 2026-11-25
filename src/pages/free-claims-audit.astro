@@ -13,7 +13,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 // never collected through the website, only through a secure link after the NDA.
 
 const contact = auditRequestLinks();
-const link = 'font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2';
+const link = 'font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2';
 
 const steps = [
   {title: 'Ask for the audit', detail: 'Email or WhatsApp us. A 15-minute call follows to understand your claim types and schemes.'},
@@ -66,7 +66,7 @@ const faqs = [
         "Finance's settled outcome for one month, if you have it, so we can compare",
       ]}
     />
-    <p class="text-base text-slate-600">You can start with one region or one claim type.</p>
+    <p class="text-base text-zinc-400">You can start with one region or one claim type.</p>
   </Section>
 
   <Section title="What you get">
@@ -88,7 +88,7 @@ const faqs = [
   </Section>
 
   <Section title="Your data">
-    <p class="text-base text-slate-600 leading-relaxed max-w-3xl">
+    <p class="text-base text-zinc-400 leading-relaxed max-w-3xl">
       Your files are used only to prepare your report, by the people working on it, and are deleted afterwards. They are
       not used to train AI models. <a href="/security/" class={link}>How we handle your data →</a>
     </p>

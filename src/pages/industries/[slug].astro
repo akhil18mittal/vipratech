@@ -25,8 +25,8 @@ const cards = industry.use_cases.map((entry) => {
   const useCase = content.useCase(entry.use_case);
   return {label: categoryLabel(useCase.category), title: useCase.title, text: entry.note, href: useCase.url, featured: isInProduction(useCase)};
 });
-const paragraph = 'text-base text-slate-600 leading-relaxed max-w-3xl';
-const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold';
+const paragraph = 'text-base text-zinc-400 leading-relaxed max-w-3xl';
+const label = 'text-xs text-zinc-500 uppercase tracking-wide mb-3 font-semibold';
 ---
 
 <BaseLayout
@@ -68,9 +68,9 @@ const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold
       <Section title="The numbers behind the problem">
         <ul class="grid grid-cols-1 md:grid-cols-3 gap-4">
           {industry.facts.map((fact) => (
-            <li class="p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
-              <p class="text-sm text-slate-800 leading-relaxed">{fact.text}</p>
-              <a href={fact.url} rel="noopener" target="_blank" class="block text-xs font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
+            <li class="p-5 bg-zinc-950/80 border border-zinc-800 rounded-xl space-y-3">
+              <p class="text-sm text-zinc-100 leading-relaxed">{fact.text}</p>
+              <a href={fact.url} rel="noopener" target="_blank" class="block text-xs font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
                 Source: {fact.source}
               </a>
             </li>
@@ -86,7 +86,7 @@ const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold
       rules and matched to your invoices, and anything uncertain goes to your team with a reason code.
     </p>
     <p class="text-base">
-      <a href="/platform/" class="font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">See the architecture →</a>
+      <a href="/platform/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">See the architecture →</a>
     </p>
   </Section>
 

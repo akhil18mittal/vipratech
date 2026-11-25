@@ -8,23 +8,23 @@ export function ContentCard({ item }: { item: CardItem }) {
       {(item.label || item.featured) && (
         <span className="flex flex-wrap items-center gap-2">
           {item.featured && (
-            <span className="px-2.5 py-0.5 text-xs bg-teal-50 text-teal-800 border border-teal-200 rounded-full font-semibold">
+            <span className="px-2.5 py-0.5 text-[11px] font-mono bg-lime-400/10 text-lime-400 border border-lime-400/40 rounded-full font-bold">
               Featured
             </span>
           )}
-          {item.label && <span className="text-xs text-slate-500 font-semibold uppercase tracking-wide">{item.label}</span>}
+          {item.label && <span className="text-xs font-mono text-zinc-400 font-bold uppercase">{item.label}</span>}
         </span>
       )}
-      <h3 className="text-lg font-bold text-slate-900 flex items-start justify-between gap-3">
+      <h3 className="text-lg font-bold text-white flex items-start justify-between gap-3">
         {item.title}
-        {item.href && <ArrowUpRight className="w-4 h-4 text-teal-700 flex-shrink-0 mt-1" />}
+        {item.href && <ArrowUpRight className="w-4 h-4 text-lime-400 flex-shrink-0 mt-1" />}
       </h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{item.text}</p>
+      <p className="text-xs text-zinc-400 leading-relaxed">{item.text}</p>
     </>
   );
-  const cardClass = "h-full p-6 bg-white border border-slate-200 rounded-2xl space-y-3 shadow-sm block";
+  const cardClass = "h-full p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl space-y-3 shadow-lg block";
   return item.href ? (
-    <a href={item.href} className={`${cardClass} hover:border-teal-600 transition-colors`}>
+    <a href={item.href} className={`${cardClass} hover:border-lime-500/40 transition-colors`}>
       {body}
     </a>
   ) : (
