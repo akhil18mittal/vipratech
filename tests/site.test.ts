@@ -1,10 +1,13 @@
 import {describe, expect, it} from 'vitest';
-import {AUDIT_PATH, auditEmailLink, auditRequestLinks, calendlyLink, contactLinks, earlyAccessLinks, whatsappLink} from '../src/data/site';
+import {AUDIT_PATH, auditEmailLink, auditRequestLinks, calendlyLink, contactLinks, demoEmailLink, whatsappLink} from '../src/data/site';
 
 describe('contact links', () => {
-  it('has no booking link while Calendly is still the placeholder', () => {
+  it('asks for a demo by email while Calendly is still the placeholder', () => {
     expect(calendlyLink('/')).toBeUndefined();
-    expect(contactLinks('/', 'a free claims audit').call).toBeUndefined();
+    expect(contactLinks('/platform/', 'the VipraTech claims engine').demo).toEqual({
+      href: demoEmailLink('the VipraTech claims engine'),
+      cta: 'demo_email',
+    });
   });
 
   it('tags the booking link with the page it came from once Calendly is set up', () => {
@@ -36,9 +39,9 @@ describe('contact links', () => {
     expect(url.searchParams.get('body')).toContain('Number of distributors');
   });
 
-  it('asks about early access by email on early-access pages', () => {
-    const {primary} = earlyAccessLinks('/use-cases/quick-commerce-deductions/', 'Quick-Commerce Deductions');
-    expect(new URL(primary.href).searchParams.get('subject')).toBe('Early access: Quick-Commerce Deductions');
-    expect(primary.cta).toBe('early_access_email');
+  it('prepares the demo request email for the page topic', () => {
+    const url = new URL(demoEmailLink('Freight Bill Audit'));
+    expect(url.searchParams.get('subject')).toBe('Demo request: Freight Bill Audit');
+    expect(url.searchParams.get('body')).toContain('What we want to see');
   });
 });

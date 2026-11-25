@@ -11,6 +11,7 @@ export const GET: APIRoute = async () => {
     '/',
     AUDIT_PATH,
     '/sample-audit-report/',
+    '/platform/',
     '/industries/',
     ...industries.map((industry) => industry.url),
     '/use-cases/',

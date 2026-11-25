@@ -51,6 +51,14 @@
     {
       "use_case": "credit-note-reconciliation",
       "note": "Credit notes for returns and markdown support matched to approvals and retailer ledgers."
+    },
+    {
+      "use_case": "season-end-sales-returns",
+      "note": "End-of-season returns from distributors and store chains, traced by style and size to the original invoices."
+    },
+    {
+      "use_case": "co-marketing-fund-claims",
+      "note": "Store branding, shop-in-shop and promotion support claimed by chains and franchisees, checked against approvals and proof."
     }
   ],
   "documents": [
@@ -61,6 +69,14 @@
     "Website orders, gateway settlements and COD remittances",
     "Retailer ledgers"
   ],
+  "systems": [
+    "ERP or retail ERP",
+    "Marketplace seller reports",
+    "Store chain sales and payment reports",
+    "Shopify or a custom store",
+    "Payment gateways and courier panels"
+  ],
+  "facts": [],
   "faqs": [
     {
       "q": "Can it work at size and colour level?",
@@ -71,8 +87,8 @@
       "a": "Yes. Sale-or-return terms are configured per chain, and payments are checked against their sales reports and returns."
     },
     {
-      "q": "What is live today?",
-      "a": "Distributor claims settlement is live. The marketplace, store chain and COD workflows are in early access with design partners."
+      "q": "Can it handle end-of-season returns?",
+      "a": "Yes. Returns are traced to the original invoices by style and size, checked against the return window and cap, and netted for margin support already paid."
     }
   ],
   "url": "/industries/apparel-footwear-lifestyle/"

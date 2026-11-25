@@ -55,6 +55,18 @@
     {
       "use_case": "credit-note-reconciliation",
       "note": "Rebate and scheme credit notes matched to approvals and dealer ledgers."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Cash discounts dealers take on paint, pipe and cement purchases, checked against payment realisation and slabs."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Cement, tile and pipe freight checked against lane rates, weighbridge weights, detention and duplicate LRs."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Bag breakage, tile damage and short weight claims checked against weighbridge slips and POD remarks."
     }
   ],
   "documents": [
@@ -65,6 +77,14 @@
     "Price revision circulars",
     "Dealer ledgers"
   ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Dealer and contractor loyalty platforms",
+    "Sales force apps with shop photos",
+    "Weighbridge and transport systems",
+    "Bank statements for collections"
+  ],
+  "facts": [],
   "faqs": [
     {
       "q": "Our loyalty programme runs on a vendor platform. Can you work with it?",
@@ -75,8 +95,8 @@
       "a": "Yes. Cash discount windows and collection-linked rebates use the actual payment dates from your bank or ERP."
     },
     {
-      "q": "What is live today?",
-      "a": "Distributor claims settlement is live. Dealer rebates and display claims are pilot-ready on the same engine; loyalty validation is in early access."
+      "q": "Can it audit our freight bills?",
+      "a": "Yes. Every transporter bill is checked against the lane rate, the weighbridge weight, detention rules and earlier LRs before payment."
     }
   ],
   "url": "/industries/building-materials/"

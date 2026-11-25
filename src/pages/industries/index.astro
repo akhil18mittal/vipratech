@@ -9,7 +9,7 @@ import {siteContent} from '../../lib/collections';
 
 const {industries} = await siteContent();
 const description =
-  'The claims, deductions and reconciliations VipraTech checks in each industry that sells through distributors, dealers, retail chains and marketplaces.';
+  'The claims, deductions, subsidies and settlements VipraTech reconciles in each industry that sells through distributors, dealers, retail chains, quick-commerce platforms and marketplaces.';
 const contact = contactLinks('/industries/', 'VipraTech claims reconciliation');
 const cards = industries.map((industry) => ({
   label: `${industry.use_cases.length} use cases`,
@@ -21,7 +21,7 @@ const cards = industries.map((industry) => ({
 
 <BaseLayout
   title="Industries | VipraTech"
-  description="Claims and deductions reconciliation for FMCG, D2C, pharma, durables, building materials, agri inputs, auto parts and apparel brands."
+  description="Claims and deductions reconciliation for FMCG, beauty, D2C, pharma, durables, fertiliser, agri inputs, chemicals, building materials, auto and apparel."
   page={{type: 'industries'}}
   crumbs={[{name: 'Industries', path: '/industries/'}]}
 >

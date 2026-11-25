@@ -1,7 +1,7 @@
 {
   "slug": "dealer-incentive-and-rebate-settlement",
   "title": "Dealer Incentive and Rebate Settlement",
-  "status": "pilot-ready",
+  "category": "distributor-dealer",
   "summary": "Calculate target-based dealer incentives, turnover rebates and cash discounts from your scheme terms and sales data, and check them against what dealers claim before finance pays.",
   "seo": {
     "title": "Dealer Incentive and Rebate Settlement | VipraTech",
@@ -121,6 +121,145 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Scheme terms\"]\n    I2[\"Billing and returns\"]\n    I3[\"Bank collections\"]\n    I4[\"Dealer claims\"]\n  end\n  subgraph S2[\"Rules\"]\n    R1[\"Scheme rule engine\"]\n    R2[\"Slab and target calculator\"]\n  end\n  subgraph S3[\"Reconciliation\"]\n    C1[\"Claim comparison\"]\n    C2[\"Difference explanations\"]\n  end\n  subgraph S4[\"Review and payout\"]\n    V1(\"Finance approval\")\n    V2[\"Dealer statements\"]\n  end\n  I1 --> R1\n  I2 --> R2\n  I3 --> R2\n  R1 --> R2\n  R2 --> C1\n  I4 --> C1\n  C1 --> C2\n  C2 --> V1 --> V2"
   },
+  "app_screens": [
+    {
+      "name": "Scheme builder",
+      "purpose": "Each incentive and rebate scheme as rules: targets, slabs, product mix, growth and collection conditions.",
+      "shows": [
+        "Target and slab table",
+        "Qualifying SKUs and mix rules",
+        "Collection and return conditions"
+      ]
+    },
+    {
+      "name": "Dealer progress",
+      "purpose": "Each dealer's sales, returns and collections against the scheme, as of today.",
+      "shows": [
+        "Achievement against target",
+        "Next slab and the gap to it",
+        "Returns and overdue amounts deducted"
+      ]
+    },
+    {
+      "name": "Entitlement run",
+      "purpose": "The payout each dealer has earned, recalculated from billing and collections.",
+      "shows": [
+        "Earned payout per dealer",
+        "Conditions met and missed",
+        "Comparison with the dealer's claim"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Dealers whose claims differ from the calculated entitlement.",
+      "shows": [
+        "Reason code and difference",
+        "Invoices and receipts behind it",
+        "Approve, adjust or reject"
+      ]
+    },
+    {
+      "name": "Payout and statements",
+      "purpose": "Approved payouts, and a statement each dealer can check.",
+      "shows": [
+        "Credit note or payout sheet",
+        "Dealer statement with every condition",
+        "Scheme cost against budget"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Billing in the scheme period",
+      "logic": "Only invoices dated within the scheme period count, for qualifying SKUs, net of returns and credit notes for that period."
+    },
+    {
+      "rule": "Target and slab met",
+      "logic": "The slab is set by net achievement against target. Growth schemes compare with the same period last year from your own billing."
+    },
+    {
+      "rule": "Product-mix conditions",
+      "logic": "Mix rules, such as a minimum share of a focus range, are checked before any slab is paid."
+    },
+    {
+      "rule": "Collected within terms",
+      "logic": "Where the scheme needs payment within a period, receipts are matched to invoices and late collections are left out."
+    },
+    {
+      "rule": "No overlap with other schemes",
+      "logic": "Sales already rewarded under another scheme are left out where the circulars say schemes do not stack."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "TARGET_NOT_MET",
+      "meaning": "Net achievement is below the slab claimed.",
+      "action": "Pay the slab achieved."
+    },
+    {
+      "code": "MIX_NOT_MET",
+      "meaning": "The product-mix condition is not met.",
+      "action": "Pay the base rate or nothing, as the circular says."
+    },
+    {
+      "code": "LATE_COLLECTION",
+      "meaning": "Some invoices were paid after the scheme's payment window.",
+      "action": "Leave those invoices out of achievement."
+    },
+    {
+      "code": "RETURNS_NOT_NETTED",
+      "meaning": "The claim counts sales that were later returned.",
+      "action": "Recalculate net of returns."
+    },
+    {
+      "code": "SCHEME_OVERLAP",
+      "meaning": "The sales were already rewarded under another scheme.",
+      "action": "Leave out the overlap."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "IncentiveScheme",
+      "fields": [
+        "scheme_id",
+        "period",
+        "targets",
+        "slabs",
+        "mix_rules",
+        "payment_window"
+      ]
+    },
+    {
+      "entity": "DealerAchievement",
+      "fields": [
+        "dealer_code",
+        "scheme_id",
+        "gross_sales",
+        "returns",
+        "net_sales",
+        "slab"
+      ]
+    },
+    {
+      "entity": "Collection",
+      "fields": [
+        "invoice_no",
+        "receipt_date",
+        "amount",
+        "days_to_pay"
+      ]
+    },
+    {
+      "entity": "Entitlement",
+      "fields": [
+        "dealer_code",
+        "scheme_id",
+        "earned",
+        "claimed",
+        "difference"
+      ]
+    }
+  ],
   "inputs": [
     "Scheme circulars with targets, slabs and conditions",
     "Billing and returns from the ERP",
@@ -149,11 +288,11 @@
   "compliance_notes": [
     "Volume rebates and discounts given after supply are usually settled by credit note for GST; the system keeps the link to the underlying invoices."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "One scheme period, about 6 to 8 weeks",
     "scope": "One closed scheme period for one region, recalculated and compared with what finance paid.",
     "deliverables": [
-      "Scheme rules for the pilot period",
+      "Scheme rules for the rollout period",
       "Entitlement for every dealer, with workings",
       "Differences from what was paid, with reasons",
       "Dealer statement format"
@@ -188,7 +327,7 @@
     },
     {
       "q": "Is this the same system as your distributor claims settlement?",
-      "a": "Yes. It runs on the same claims engine as our live distributor claims settlement, configured to your schemes during a pilot."
+      "a": "Yes. Every VipraTech workflow runs on one claims engine: the document reading, matching, review queue and audit trail are shared. For this workflow we set up your schemes as versioned rules, along with your document templates and matching keys."
     }
   ],
   "related": [

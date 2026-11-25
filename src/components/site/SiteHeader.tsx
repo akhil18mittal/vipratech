@@ -6,7 +6,7 @@ import type { NavLink } from "../../types";
 // closes it on outside click and Escape.
 
 const NAV_LINKS: NavLink[] = [
-  { name: "How it works", href: "/#how-it-works" },
+  { name: "Platform", href: "/platform/" },
   { name: "Industries", href: "/industries/" },
   { name: "Use cases", href: "/use-cases/" },
   { name: "Sample report", href: "/sample-audit-report/" },

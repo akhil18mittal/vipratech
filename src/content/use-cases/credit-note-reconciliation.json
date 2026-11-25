@@ -1,7 +1,7 @@
 {
   "slug": "credit-note-reconciliation",
   "title": "Credit Note and Distributor Ledger Reconciliation",
-  "status": "early-access",
+  "category": "ledgers-accruals",
   "summary": "Check that every approved claim became the right credit note, that nothing was credited twice, and that your books and each distributor's ledger agree, with the differences explained.",
   "seo": {
     "title": "Credit Note and Distributor Ledger Reconciliation",
@@ -119,6 +119,145 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Approved claim sheets\"]\n    I2[\"ERP or Tally credit notes\"]\n    I3[\"Distributor ledger statements\"]\n  end\n  subgraph S2[\"Matching\"]\n    M1[\"Claim to credit note matcher\"]\n    M2[\"Ledger statement reader\"]\n    M3[\"Balance comparison\"]\n  end\n  subgraph S3[\"Review\"]\n    R1[\"Differences with reasons\"]\n    R2(\"Finance review\")\n  end\n  subgraph S4[\"Output\"]\n    O1[\"Reconciliation statements\"]\n    O2[\"Audit trail\"]\n  end\n  I1 --> M1\n  I2 --> M1\n  I3 --> M2\n  M1 --> M3\n  M2 --> M3\n  M3 --> R1 --> R2\n  R2 --> O1\n  R2 --> O2"
   },
+  "app_screens": [
+    {
+      "name": "Approved claims",
+      "purpose": "Every claim finance approved, from VipraTech or from your own sheets.",
+      "shows": [
+        "Distributor, claim and approved amount",
+        "Approval date",
+        "Credit note expected by"
+      ]
+    },
+    {
+      "name": "Credit note match",
+      "purpose": "Each approved claim linked to the credit note raised in your ERP.",
+      "shows": [
+        "Credit note number and date",
+        "Amount against approved amount",
+        "GST and original invoice reference"
+      ]
+    },
+    {
+      "name": "Ledger compare",
+      "purpose": "Your ledger for each distributor beside the statement they sent.",
+      "shows": [
+        "Opening and closing balance on both sides",
+        "Entries on one side only",
+        "Timing differences"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Differences held for review, with the documents from both sides.",
+      "shows": [
+        "Reason code and amount",
+        "Entry in our books and in theirs",
+        "Mark as timing, correct or dispute"
+      ]
+    },
+    {
+      "name": "Reconciliation statement",
+      "purpose": "An agreed statement for each distributor.",
+      "shows": [
+        "Balance agreed and open items",
+        "Corrections to post",
+        "Distributors with the oldest open items"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Every approved claim has a credit note",
+      "logic": "Each approved claim must have one credit note for the approved amount, raised within the agreed time."
+    },
+    {
+      "rule": "Credit note matches the approval",
+      "logic": "Credit note amount, distributor and reference must match the approval. Any difference is flagged."
+    },
+    {
+      "rule": "No credit note without approval",
+      "logic": "A credit note with no approved claim behind it is held for review."
+    },
+    {
+      "rule": "Ledgers agree after timing items",
+      "logic": "Your ledger and the distributor's statement must agree once in-transit items and posting-date differences are listed."
+    },
+    {
+      "rule": "Tax references present",
+      "logic": "Tax credit notes must carry the original invoice reference where GST rules need it."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "CN_MISSING",
+      "meaning": "An approved claim has no credit note.",
+      "action": "Raise the credit note."
+    },
+    {
+      "code": "CN_AMOUNT_DIFF",
+      "meaning": "The credit note differs from the approved amount.",
+      "action": "Correct the credit note or the approval."
+    },
+    {
+      "code": "CN_WITHOUT_CLAIM",
+      "meaning": "A credit note has no approved claim behind it.",
+      "action": "Find the approval, or reverse the note."
+    },
+    {
+      "code": "ONE_SIDED_ENTRY",
+      "meaning": "An entry appears in one ledger only.",
+      "action": "Mark as timing, or post the missing entry."
+    },
+    {
+      "code": "INVOICE_REF_MISSING",
+      "meaning": "A tax credit note does not reference the original invoice.",
+      "action": "Fix the reference before filing."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "ApprovedClaim",
+      "fields": [
+        "claim_id",
+        "distributor_code",
+        "approved_amount",
+        "approved_on"
+      ]
+    },
+    {
+      "entity": "CreditNote",
+      "fields": [
+        "cn_no",
+        "cn_date",
+        "distributor_code",
+        "amount",
+        "invoice_ref",
+        "claim_id"
+      ]
+    },
+    {
+      "entity": "LedgerEntry",
+      "fields": [
+        "side",
+        "distributor_code",
+        "doc_no",
+        "date",
+        "debit",
+        "credit"
+      ]
+    },
+    {
+      "entity": "ReconItem",
+      "fields": [
+        "distributor_code",
+        "period",
+        "difference",
+        "reason",
+        "status"
+      ]
+    }
+  ],
   "inputs": [
     "Approved claim sheets and credit note sheets",
     "Credit notes and ledger entries from the ERP or Tally",
@@ -147,12 +286,12 @@
     "Credit notes for GST need to reference the original invoice; the system checks that each credit note carries the reference your tax team expects.",
     "Reconciled balances with an audit trail support distributor balance confirmations at year-end audit."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "About 6 weeks",
     "scope": "One quarter of approved claims and credit notes for the distributors of one region, with their ledger statements for the same period.",
     "deliverables": [
-      "Claim-to-credit-note match for the pilot period",
-      "Ledger comparison for each pilot distributor",
+      "Claim-to-credit-note match for the rollout period",
+      "Ledger comparison for each distributor in scope",
       "Reconciliation statement format agreed with your team",
       "Roll-out plan for all distributors"
     ],
@@ -185,8 +324,8 @@
       "a": "It prepares the corrections for finance to approve. Posting them to your ERP can be added once the matching has proven itself."
     },
     {
-      "q": "Is this available today?",
-      "a": "Distributor claims settlement is live today. Credit note and ledger reconciliation is in early access: we are building it with a small number of brands as design partners."
+      "q": "How long does it take to go live?",
+      "a": "About 6 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
     }
   ],
   "related": [

@@ -59,6 +59,22 @@
     {
       "use_case": "credit-note-reconciliation",
       "note": "Credit notes for protection, incentives and support matched to approvals and dealer ledgers."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Transit damage on large appliances and televisions, checked against POD remarks, with carrier recoveries."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Transporter bills for plant-to-warehouse and warehouse-to-dealer moves, checked against lane rates and PODs."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Early-payment discounts dealers take, checked against invoice dates and bank realisation."
+    },
+    {
+      "use_case": "quick-commerce-deductions",
+      "note": "Accessories, small appliances and electronics on quick-commerce platforms, with deductions checked against POs and GRNs."
     }
   ],
   "documents": [
@@ -68,6 +84,20 @@
     "Co-marketing approvals, invoices and photos",
     "Warranty job cards and serial records",
     "Dealer ledgers and credit notes"
+  ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Dealer management and incentive platforms",
+    "Service and warranty CRM",
+    "Retail chain and marketplace portals",
+    "Transport management system"
+  ],
+  "facts": [
+    {
+      "text": "Quick-commerce players are moving into higher-value categories such as electronics, beauty and gifting.",
+      "source": "Inc42",
+      "url": "https://inc42.com/?p=558124"
+    }
   ],
   "faqs": [
     {
@@ -79,8 +109,8 @@
       "a": "Yes, if sell-out or activation data is available, it can be used in the incentive rules."
     },
     {
-      "q": "What is live today?",
-      "a": "Distributor claims settlement is live, and price protection, incentives and co-marketing claims run on the same engine and are pilot-ready. Warranty claims are in early access."
+      "q": "Can it handle transit damage claims from dealers?",
+      "a": "Yes. Damage claims are checked against LR and POD remarks, and losses the evidence places with the transporter go on a recovery sheet."
     }
   ],
   "url": "/industries/consumer-durables-electronics/"

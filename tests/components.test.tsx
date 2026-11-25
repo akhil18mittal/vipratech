@@ -90,33 +90,54 @@ describe('Breadcrumbs', () => {
 
 describe('ContactButtons', () => {
   const primary = {href: '/free-claims-audit/', label: 'Get a free claims audit', cta: 'audit'};
+  const demo = {href: 'mailto:akhilesh@vipratech.in?subject=Demo', cta: 'demo_email'};
   const cta = (html: string) =>
     tags(html, 'a').map((tag) => [tag.match(/data-cta="([^"]*)"/)?.[1], tag.match(/data-cta-location="([^"]*)"/)?.[1]]);
 
-  it('shows the main action and WhatsApp, tagged for the cta_click event', () => {
-    const html = renderToStaticMarkup(<ContactButtons links={{primary, whatsapp: 'https://wa.me/1'}} location="hero" />);
+  it('shows the main action, the demo and WhatsApp, tagged for the cta_click event', () => {
+    const html = renderToStaticMarkup(<ContactButtons links={{primary, demo, whatsapp: 'https://wa.me/1'}} location="hero" />);
     expect(cta(html)).toEqual([
       ['audit', 'hero'],
+      ['demo_email', 'hero'],
       ['whatsapp', 'hero'],
     ]);
     expect(html).toContain('Get a free claims audit');
-    expect(html).not.toContain('Book a 20-minute call');
+    expect(html).toContain('Book a demo');
   });
 
-  it('adds the booking button once there is a booking link', () => {
+  it('opens the booking page in a new tab once Calendly is set up', () => {
     const html = renderToStaticMarkup(
-      <ContactButtons links={{primary, whatsapp: 'https://wa.me/1', call: 'https://calendly.example/20min'}} location="cta" />,
+      <ContactButtons links={{primary, demo: {href: 'https://calendly.example/20min', cta: 'calendly'}, whatsapp: 'https://wa.me/1'}} location="cta" />,
     );
-    expect(cta(html).map(([name]) => name)).toEqual(['audit', 'whatsapp', 'calendly']);
-    expect(html).toContain('Book a 20-minute call');
+    expect(cta(html).map(([name]) => name)).toEqual(['audit', 'calendly', 'whatsapp']);
+    expect(tags(html, 'a')[1]).toContain('target="_blank"');
   });
 
   it('opens an internal page in the same tab and an external one in a new tab', () => {
-    const internal = renderToStaticMarkup(<ContactButtons links={{primary, whatsapp: 'https://wa.me/1'}} location="hero" />);
+    const internal = renderToStaticMarkup(<ContactButtons links={{primary, demo, whatsapp: 'https://wa.me/1'}} location="hero" />);
     expect(tags(internal, 'a')[0]).not.toContain('target=');
     const external = renderToStaticMarkup(
-      <ContactButtons links={{primary: {...primary, href: 'https://example.com/'}, whatsapp: 'https://wa.me/1'}} location="hero" />,
+      <ContactButtons links={{primary: {...primary, href: 'https://example.com/'}, demo, whatsapp: 'https://wa.me/1'}} location="hero" />,
     );
     expect(tags(external, 'a')[0]).toContain('target="_blank"');
+  });
+});
+
+describe('engine design components', () => {
+  it('draws each app screen as a numbered window with what it shows', async () => {
+    const {AppScreens} = await import('../src/components/content/AppScreens');
+    const html = renderToStaticMarkup(
+      <AppScreens screens={[{name: 'Claims inbox', purpose: 'Every file received.', shows: ['Distributor and month', 'Read status', 'Totals']}]} />,
+    );
+    expect(html).toContain('vipratech / claims inbox');
+    expect(tags(html, 'li')).toHaveLength(4);
+  });
+
+  it('numbers the decision rules and shows each exception code', async () => {
+    const {ExceptionCodes, MatchRules} = await import('../src/components/content/EngineTables');
+    expect(renderToStaticMarkup(<MatchRules rules={[{rule: 'Invoice exists', logic: 'Match on number and date.'}]} />)).toContain('R1');
+    const codes = renderToStaticMarkup(<ExceptionCodes codes={[{code: 'NO_INVOICE', meaning: 'No invoice.', action: 'Ask for it.'}]} />);
+    expect(codes).toContain('<code');
+    expect(codes).toContain('NO_INVOICE');
   });
 });

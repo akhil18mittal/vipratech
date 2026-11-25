@@ -55,6 +55,14 @@
     {
       "use_case": "rate-difference-claims",
       "note": "Price-change claims on channel stock capped at estimated stock on hand."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Early-payment discounts distributors and retailers take, checked against realisation dates and slabs."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Warranty, scheme and loyalty credit notes tied to approvals and to each distributor's ledger."
     }
   ],
   "documents": [
@@ -65,6 +73,14 @@
     "Price revision circulars",
     "Dealer ledgers"
   ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Mechanic and retailer loyalty apps",
+    "Service and warranty systems",
+    "DMS for distributor sales",
+    "Bank statements"
+  ],
+  "facts": [],
   "faqs": [
     {
       "q": "Can it check pro-rata battery warranties?",
@@ -75,8 +91,8 @@
       "a": "Yes. The checks work from the app's exports and return redemptions to release or hold."
     },
     {
-      "q": "What is live today?",
-      "a": "Distributor claims settlement is live and dealer incentives are pilot-ready. Warranty and loyalty validation are in early access."
+      "q": "Do you cover cash discounts to dealers?",
+      "a": "Yes. Discounts dealers take for early payment are checked against invoice dates, bank realisation dates and your slabs, including bounced cheques."
     }
   ],
   "url": "/industries/auto-components-lubricants/"

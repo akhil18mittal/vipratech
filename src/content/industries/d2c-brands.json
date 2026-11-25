@@ -54,7 +54,7 @@
     },
     {
       "use_case": "distributor-scheme-claims",
-      "note": "Distributor scheme claims checked line by line as you build general trade, on the engine that is live today."
+      "note": "Distributor scheme claims checked line by line as you build general trade, on the engine that has run in production since mid-2026."
     },
     {
       "use_case": "credit-note-reconciliation",
@@ -69,18 +69,38 @@
     "Store orders from Shopify or WooCommerce",
     "Distributor claim sheets"
   ],
+  "systems": [
+    "Shopify, WooCommerce or a custom store",
+    "Payment gateways such as Razorpay, Cashfree or PayU",
+    "Courier and aggregator panels such as Shiprocket or Delhivery",
+    "Amazon and Flipkart seller reports",
+    "Blinkit, Zepto and Swiggy Instamart seller portals",
+    "Tally or Zoho Books"
+  ],
+  "facts": [
+    {
+      "text": "Quick commerce is growing about four times faster than traditional e-commerce and takes most everyday online purchases.",
+      "source": "NewKerala, June 2026",
+      "url": "https://www.newkerala.com/news/a/quick-commerce-grows-four-times-faster-than-traditional-131.htm"
+    },
+    {
+      "text": "Blinkit holds over half of India's quick-commerce market, so one platform's deduction rules can decide a brand's channel margin.",
+      "source": "ClickPost, citing BofA Securities, 2026",
+      "url": "https://www.clickpost.ai/blog/quick-commerce-companies"
+    }
+  ],
   "faqs": [
     {
       "q": "We are small. Is this only for large brands?",
-      "a": "No. D2C brands often feel channel leakage most because they have the smallest finance teams. A pilot can start with one channel."
+      "a": "No. D2C brands often feel channel leakage most because they have the smallest finance teams. You can start with one channel."
     },
     {
       "q": "Which channel should we start with?",
       "a": "The one where you suspect the most money is lost. For many D2C brands that is quick-commerce deductions or marketplace returns."
     },
     {
-      "q": "What is live today?",
-      "a": "Distributor scheme claims settlement is live. The marketplace, quick-commerce and COD workflows are in early access with design partners."
+      "q": "How fast can we see results?",
+      "a": "A free claims audit on one channel takes 5 working days. Going live on a channel takes about 6 to 8 weeks, with the first cycle run beside your current process."
     }
   ],
   "url": "/industries/d2c-brands/"

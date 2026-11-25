@@ -2,7 +2,9 @@ import {readdirSync, readFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {z} from 'astro/zod';
 import {industrySchema, proofProjectSchema, useCaseSchema, type Industry, type ProofProject, type UseCase} from '../src/content/schema';
+import {CATEGORY_ORDER} from '../src/data/categories';
 import {INDUSTRY_ORDER} from '../src/data/order';
+import {PLATFORM_DIAGRAMS} from '../src/data/platform';
 import {APPROVED_PROOFS} from '../src/data/proofs';
 
 export interface Content {
@@ -149,7 +151,12 @@ export function findContentErrors({useCases, industries, proofProjects}: Content
     for (const value of duplicates(values)) errors.push(`duplicate ${what}: ${value}`);
   }
 
-  if (!useCases.some((useCase) => useCase.status === 'live')) errors.push('at least one use case must be live');
+  if (!useCases.some((useCase) => useCase.proof_ref !== null && APPROVED_PROOFS.includes(useCase.proof_ref))) {
+    errors.push('at least one use case must have an approved proof');
+  }
+  for (const category of CATEGORY_ORDER) {
+    if (!useCases.some((useCase) => useCase.category === category)) errors.push(`category ${category}: no use case is in it`);
+  }
 
   for (const useCase of useCases) {
     const fail = reporter(`use case ${useCase.slug}`);
@@ -161,7 +168,12 @@ export function findContentErrors({useCases, industries, proofProjects}: Content
     });
     for (const error of diagramErrors(useCase.flow_diagram, 'LR')) fail(`flow_diagram ${error}`);
     for (const error of diagramErrors(useCase.architecture.diagram, 'TB')) fail(`architecture.diagram ${error}`);
+    for (const code of duplicates(useCase.exception_codes.map((item) => item.code))) fail(`exception_codes lists ${code} more than once`);
+    for (const name of duplicates(useCase.app_screens.map((item) => item.name))) fail(`app_screens lists "${name}" more than once`);
   }
+
+  for (const error of diagramErrors(PLATFORM_DIAGRAMS.pipeline, 'LR')) errors.push(`src/data/platform.ts pipeline ${error}`);
+  for (const error of diagramErrors(PLATFORM_DIAGRAMS.architecture, 'TB')) errors.push(`src/data/platform.ts architecture ${error}`);
 
   const industrySlugs = new Set(industries.map((industry) => industry.slug));
   const orderFail = reporter('src/data/order.ts INDUSTRY_ORDER');

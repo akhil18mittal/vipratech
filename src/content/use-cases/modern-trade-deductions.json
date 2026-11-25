@@ -1,7 +1,7 @@
 {
   "slug": "modern-trade-deductions",
   "title": "Modern-Trade Deductions and Margin Reconciliation",
-  "status": "early-access",
+  "category": "channel-deductions",
   "summary": "Reconcile payments from supermarket and large-format chains with your invoices and their GRNs, and check margin, listing, visibility, shortage and damage deductions against agreed terms.",
   "seo": {
     "title": "Modern-Trade Deductions Reconciliation | VipraTech",
@@ -119,6 +119,145 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Payment advice and debit notes\"]\n    I2[\"GRN reports\"]\n    I3[\"ERP invoices\"]\n    I4[\"Annual terms register\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Debit note reader\"]\n    U2[\"Deduction classifier\"]\n  end\n  subgraph S3[\"Matching and rules\"]\n    M1[\"Payment to invoice matcher\"]\n    M2[\"Terms checker\"]\n  end\n  subgraph S4[\"Review and recovery\"]\n    V1(\"Key account review\")\n    V2[\"Dispute list and ageing\"]\n  end\n  I1 --> U1 --> U2\n  I2 --> M1\n  I3 --> M1\n  U2 --> M1\n  M1 --> M2\n  I4 --> M2\n  M2 --> V1 --> V2"
   },
+  "app_screens": [
+    {
+      "name": "Chain documents",
+      "purpose": "Payment advice, debit notes, GRNs and annual terms from each chain.",
+      "shows": [
+        "Chain, store and period",
+        "Documents received, by type",
+        "Terms version in force"
+      ]
+    },
+    {
+      "name": "Payment tie-out",
+      "purpose": "Each payment tied to the invoices it settles.",
+      "shows": [
+        "Invoice, billed and paid",
+        "Deduction per invoice",
+        "Unpaid invoices by age"
+      ]
+    },
+    {
+      "name": "Terms check",
+      "purpose": "Every deduction checked against the annual terms: margins, rebates, fees and penalties.",
+      "shows": [
+        "Deduction type and amount",
+        "The terms clause it relies on",
+        "Recalculated amount"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Deductions that do not match the terms or the GRN.",
+      "shows": [
+        "Reason code and amount",
+        "Clause and GRN beside the debit note",
+        "Accept or dispute"
+      ]
+    },
+    {
+      "name": "Dispute tracker",
+      "purpose": "Disputes with each chain, and what came back.",
+      "shows": [
+        "Dispute pack per chain",
+        "Status and age",
+        "Recovered against disputed"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Payment explained",
+      "logic": "Every invoice must be paid in full or carry a debit note that explains the difference."
+    },
+    {
+      "rule": "Margin and rebate as per terms",
+      "logic": "Back-margin and rebate deductions are recalculated from the annual terms on actual purchases in the period."
+    },
+    {
+      "rule": "Shortage and damage as per GRN",
+      "logic": "Shortage and damage deductions must match the store's GRN and any agreed damage allowance."
+    },
+    {
+      "rule": "Promotional support agreed",
+      "logic": "Promotion and display fees must match an agreed plan for that store and period."
+    },
+    {
+      "rule": "No double deduction",
+      "logic": "The same rebate, fee or shortage cannot be deducted twice across payments."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "MARGIN_ABOVE_TERMS",
+      "meaning": "The margin or rebate deducted is above the terms.",
+      "action": "Dispute, with the recalculation."
+    },
+    {
+      "code": "SHORT_NOT_IN_GRN",
+      "meaning": "The shortage or damage is not in the GRN.",
+      "action": "Dispute, with the GRN."
+    },
+    {
+      "code": "PROMO_NOT_AGREED",
+      "meaning": "No agreed plan supports the promotion fee.",
+      "action": "Check with the category manager, then dispute."
+    },
+    {
+      "code": "DOUBLE_DEDUCTION",
+      "meaning": "The same item was deducted before.",
+      "action": "Dispute, with both debit notes."
+    },
+    {
+      "code": "NO_DEBIT_NOTE",
+      "meaning": "A short payment has no debit note.",
+      "action": "Ask the chain for it."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "TradeTerms",
+      "fields": [
+        "chain",
+        "year",
+        "margin_pct",
+        "rebate_slabs",
+        "fees",
+        "penalties"
+      ]
+    },
+    {
+      "entity": "Invoice",
+      "fields": [
+        "invoice_no",
+        "chain",
+        "store",
+        "amount",
+        "due_date"
+      ]
+    },
+    {
+      "entity": "DebitNote",
+      "fields": [
+        "dn_no",
+        "chain",
+        "type",
+        "amount",
+        "invoice_refs"
+      ]
+    },
+    {
+      "entity": "Dispute",
+      "fields": [
+        "dispute_id",
+        "dn_no",
+        "amount",
+        "raised_on",
+        "status"
+      ]
+    }
+  ],
   "inputs": [
     "Payment advice and remittances from each chain",
     "Debit notes",
@@ -148,11 +287,11 @@
   "compliance_notes": [
     "Debit notes that change the value of a supply may need matching credit notes for GST; the system keeps the link between debit note, invoice and credit note."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "Two monthly cycles, about 8 weeks",
     "scope": "One chain, using two to three months of payments, debit notes and GRNs, with deductions finance has already reviewed as the benchmark.",
     "deliverables": [
-      "Terms register for the pilot chain",
+      "Terms register for the first chain",
       "Payment-to-invoice reconciliation",
       "Deduction checks with reasons",
       "Dispute list format"
@@ -175,7 +314,7 @@
   "faqs": [
     {
       "q": "Which chains does it cover?",
-      "a": "Any chain that sends payment advice and debit notes, such as supermarket, hypermarket and department store chains. A pilot starts with the chain where the largest differences sit."
+      "a": "Any chain that sends payment advice and debit notes, such as supermarket, hypermarket and department store chains. Rollout starts with the chain where the largest differences sit."
     },
     {
       "q": "Do you need access to retailer vendor portals?",
@@ -186,8 +325,8 @@
       "a": "Yes, as rules in the terms register, so sales reports and returns are checked against what the chain pays."
     },
     {
-      "q": "Is this available today?",
-      "a": "Distributor claims settlement is live today. Modern-trade deductions reconciliation is in early access: we are building it with a small number of brands as design partners."
+      "q": "How long does it take to go live?",
+      "a": "Two monthly cycles, about 8 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
     }
   ],
   "related": [

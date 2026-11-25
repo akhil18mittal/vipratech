@@ -1,6 +1,7 @@
 // Renders every built use case's Mermaid diagrams to static SVGs under public/diagrams/, so pages ship plain <img>s
 // and no Mermaid runtime. Run with `bun scripts/render-diagrams.ts` (part of `bun run build`).
 //
+// For /platform/, one file per entry of PLATFORM_DIAGRAMS: platform-<name>.svg, plus platform-pipeline-tb.svg for phones.
 // Per use case, three files in public/diagrams/:
 //   <slug>-flow.svg     flow_diagram as written (flowchart LR)
 //   <slug>-flow-tb.svg  the same flow top-to-bottom, for narrow screens
@@ -16,6 +17,7 @@ import {dirname, join, relative, sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {renderMermaid} from '@mermaid-js/mermaid-cli';
 import {launchChrome} from './chrome';
+import {PLATFORM_DIAGRAMS} from '../src/data/platform';
 import {loadContent} from './content-checks';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
@@ -235,6 +237,10 @@ async function main() {
         {path: `${base}-arch.svg`, label: `${useCase.slug} architecture.diagram`, source: useCase.architecture.diagram},
       ];
     })
+    .concat(
+      Object.entries(PLATFORM_DIAGRAMS).map(([name, source]) => ({path: `diagrams/platform-${name}.svg`, label: `platform ${name}`, source})),
+      [{path: 'diagrams/platform-pipeline-tb.svg', label: 'platform pipeline (top-to-bottom)', source: PLATFORM_DIAGRAMS.pipeline.replace(/^flowchart LR\b/, 'flowchart TB')}],
+    )
     .map((job) => ({...job, hash: hashOf(job.source)}));
 
   const previous = readManifest();

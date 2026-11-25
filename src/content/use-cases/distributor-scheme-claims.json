@@ -1,7 +1,7 @@
 {
   "slug": "distributor-scheme-claims",
   "title": "Distributor Scheme Claims Settlement",
-  "status": "live",
+  "category": "distributor-dealer",
   "summary": "Check every distributor claim line against your scheme circulars, invoices and past claims, recalculate what is due, catch duplicates, and give finance a clean credit note sheet to approve.",
   "seo": {
     "title": "Distributor Claims Settlement Software for FMCG | VipraTech",
@@ -129,6 +129,156 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Distributor portal and email\"]\n    I2[\"DMS invoice feed\"]\n    I3[\"Scheme circular register\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Claim sheet normaliser\"]\n    D2[\"OCR and LLM extraction\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Scheme rule engine\"]\n    R2[\"Proof matcher\"]\n    R3[\"Recalculation and duplicates\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Exception queue\")\n    V2(\"Finance approval\")\n    V3[\"CN sheet and statements\"]\n  end\n  I1 --> D1\n  I1 --> D2\n  D1 --> R2\n  D2 --> R2\n  I2 --> R2\n  I3 --> R1\n  R2 --> R3\n  R1 --> R3\n  R3 --> V1 --> V2\n  R3 --> V2\n  V2 --> V3"
   },
+  "app_screens": [
+    {
+      "name": "Claims inbox",
+      "purpose": "Every claim file that arrives by email or upload, grouped by distributor and month.",
+      "shows": [
+        "Distributor, claim month and file count",
+        "Read status: parsed, partly parsed or unreadable",
+        "Claimed total against last month"
+      ]
+    },
+    {
+      "name": "Scheme register",
+      "purpose": "The circulars in force, turned into rules with their validity, SKUs, slabs and caps.",
+      "shows": [
+        "Scheme code, validity and channel",
+        "Eligible SKUs and slab table",
+        "Rule version history with who changed it"
+      ]
+    },
+    {
+      "name": "Line review",
+      "purpose": "Each claim line beside its invoice, scheme and proof, with the recalculated amount.",
+      "shows": [
+        "Claimed against recalculated amount",
+        "Matched invoice and proof thumbnails",
+        "Rules passed and failed"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Lines held for a person, sorted by amount at risk.",
+      "shows": [
+        "Reason code and evidence",
+        "Approve, reject or approve in part",
+        "Bulk action on lines with the same reason"
+      ]
+    },
+    {
+      "name": "Settlement",
+      "purpose": "The credit note sheet and statements, ready for finance approval.",
+      "shows": [
+        "Credit note sheet in your ERP format",
+        "Statement per distributor",
+        "Leakage summary by scheme and reason"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Scheme in force on the invoice date",
+      "logic": "The invoice date must fall within the scheme validity for the distributor's region and channel, judged by the rule version active on that date."
+    },
+    {
+      "rule": "SKU and slab eligibility",
+      "logic": "Each SKU must be in the scheme. Quantity and value slabs are recalculated from what the distributor was actually billed, not from the quantities claimed."
+    },
+    {
+      "rule": "Invoice exists and matches",
+      "logic": "The claimed invoice number, date, SKU and quantity must match a primary or secondary invoice within tolerance. Quantity above the invoice is capped."
+    },
+    {
+      "rule": "Not claimed before",
+      "logic": "The same invoice, SKU and scheme must not appear in an earlier claim, across months and across distributors."
+    },
+    {
+      "rule": "Proof present and unique",
+      "logic": "Where the scheme needs proof, such as a retailer acknowledgement or a photo, it must be attached, readable and not reused from another claim."
+    },
+    {
+      "rule": "Amount within caps",
+      "logic": "The recalculated amount is held to the scheme budget and to any per-outlet or per-distributor limit."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "NO_INVOICE",
+      "meaning": "No invoice matches the claimed number, SKU and date.",
+      "action": "Ask the distributor for the invoice, or reject the line."
+    },
+    {
+      "code": "SCHEME_EXPIRED",
+      "meaning": "The invoice date falls outside the scheme validity.",
+      "action": "Reject, or approve once with a note."
+    },
+    {
+      "code": "DUPLICATE_CLAIM",
+      "meaning": "The same invoice and SKU were claimed under this scheme before.",
+      "action": "Reject, with the earlier claim linked."
+    },
+    {
+      "code": "QTY_OVER_INVOICE",
+      "meaning": "The claimed quantity is above the invoiced quantity.",
+      "action": "Approve the invoiced quantity only."
+    },
+    {
+      "code": "PROOF_MISSING",
+      "meaning": "Required proof is missing, unreadable or reused.",
+      "action": "Ask for proof. The line stays open."
+    },
+    {
+      "code": "LOW_CONFIDENCE",
+      "meaning": "A field could not be read with confidence, or several invoices match.",
+      "action": "A reviewer confirms the field or picks the match."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "Claim",
+      "fields": [
+        "claim_id",
+        "distributor_code",
+        "claim_month",
+        "source_file",
+        "claimed_total",
+        "status"
+      ]
+    },
+    {
+      "entity": "ClaimLine",
+      "fields": [
+        "line_id",
+        "invoice_no",
+        "sku",
+        "qty",
+        "claimed_amount",
+        "recalculated_amount"
+      ]
+    },
+    {
+      "entity": "Scheme",
+      "fields": [
+        "scheme_code",
+        "valid_from",
+        "valid_to",
+        "eligible_skus",
+        "slab_table",
+        "rule_version"
+      ]
+    },
+    {
+      "entity": "Decision",
+      "fields": [
+        "line_id",
+        "rule_results",
+        "exception_code",
+        "reviewer",
+        "decided_at"
+      ]
+    }
+  ],
   "inputs": [
     "Distributor claim sheets in Excel, CSV or PDF",
     "Secondary sales invoices from the DMS",
@@ -164,11 +314,11 @@
     "The GST treatment of scheme discounts and credit notes depends on how schemes are agreed and documented; the system keeps the links between circular, invoice and credit note that your tax team needs.",
     "A complete audit trail supports statutory audit of trade spends."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "Two monthly claim cycles, about 8 weeks",
     "scope": "One or two claim types, such as quantity-slab schemes and damage claims, for the distributors of one region, using a recent month of finance-settled claims as the benchmark.",
     "deliverables": [
-      "Rule configuration for the pilot schemes",
+      "Rule configuration for the schemes in scope",
       "Working claims pipeline and exception queue",
       "Credit note sheet in your finance format",
       "Line-level comparison with finance-settled outcomes",
@@ -200,7 +350,7 @@
     },
     {
       "q": "Will distributors need to change their claim format?",
-      "a": "Not necessarily. The system reads varied formats, though agreeing a standard template over time reduces exceptions. We freeze the formats used in the pilot before sign-off."
+      "a": "Not necessarily. The system reads varied formats, though agreeing a standard template over time reduces exceptions. We freeze the input formats before sign-off, so the rules are tested on exactly what distributors send."
     },
     {
       "q": "Can it check display claim photos?",

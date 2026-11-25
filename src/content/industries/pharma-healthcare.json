@@ -55,6 +55,14 @@
     {
       "use_case": "trade-spend-accruals",
       "note": "Accruals for schemes and expected returns compared with claims at month-end close."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Cash discounts stockists take for early payment, checked against realisation dates, bounced cheques and your slabs."
+    },
+    {
+      "use_case": "quick-commerce-deductions",
+      "note": "OTC, wellness and nutrition lines on quick-commerce platforms, with shortage, expiry and penalty deductions checked against GRNs."
     }
   ],
   "documents": [
@@ -65,6 +73,14 @@
     "Stockist invoices to hospitals and institutions",
     "Credit notes and stockist ledgers"
   ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Stockist and distributor management systems",
+    "Tender and institutional contract registers",
+    "Warehouse systems with batch tracking",
+    "Quick-commerce and e-pharmacy seller reports"
+  ],
+  "facts": [],
   "faqs": [
     {
       "q": "Can it work at batch level?",
@@ -76,7 +92,7 @@
     },
     {
       "q": "Where should we start?",
-      "a": "With a free claims audit on one quarter of expiry and breakage returns, which run on the same engine as our live claims settlement."
+      "a": "With a free claims audit on one quarter of expiry and breakage returns. You see every finding, with the amount at risk, in 5 working days."
     }
   ],
   "url": "/industries/pharma-healthcare/"

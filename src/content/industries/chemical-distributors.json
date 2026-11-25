@@ -1,0 +1,110 @@
+{
+  "slug": "chemical-distributors",
+  "name": "Chemical Distributors",
+  "seo": {
+    "title": "Rebate Recovery for Chemical Distributors | VipraTech",
+    "description": "For chemical distributors: calculate rebates and price support owed by principals, settle customer quality claims, audit freight and agree every ledger.",
+    "keywords": [
+      "chemical distributor rebates",
+      "principal rebate claims",
+      "price drop compensation chemicals",
+      "chemical distributor ledger reconciliation",
+      "customer quality claims distributor"
+    ]
+  },
+  "hero": {
+    "headline": "Claim every rebate and price support your principals owe you",
+    "subheadline": "Chemical distributors earn rebates, price support and special-price claims from principals, and settle quality claims with customers. VipraTech calculates and tracks all of it."
+  },
+  "intro": "A chemical distributor buys from several principals under agreements that pay volume rebates, compensate for price drops and support special prices for named customers. On the other side, it settles quality and shortage claims from its own customers and passes valid ones back to the principal. Margins are thin, so every unclaimed rebate and unrecovered claim comes straight out of profit.",
+  "challenges": [
+    {
+      "title": "Rebates nobody calculates",
+      "detail": "Volume and growth rebates depend on a year of purchases by product family, and thresholds reached late in the year are missed."
+    },
+    {
+      "title": "Price drops on stock in hand",
+      "detail": "When a principal cuts its price, compensation on stock already held is claimed late or not at all."
+    },
+    {
+      "title": "Customer claims not passed back",
+      "detail": "Quality and shortage claims accepted from customers are not claimed back from the principal or the transporter."
+    },
+    {
+      "title": "Ledgers with principals that never agree",
+      "detail": "Rebates, credit notes and debit notes differ between your books and each principal's ledger."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "supplier-rebate-claims",
+      "note": "Volume rebates, price-drop compensation and special-price claims calculated from your purchases and resales, claimed with proof."
+    },
+    {
+      "use_case": "distributor-claim-recovery",
+      "note": "Every claim raised on every principal, matched to credit notes and ledgers, with follow-up packs for what is still owed."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Customer quality and shortage claims checked against COAs and weighbridge slips, and passed back to the principal or carrier."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Principal credit notes and customer credit notes tied to claims, and ledgers agreed on both sides."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price changes passed on to your customers, checked against contracts and stock."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Transporter bills for deliveries to customers checked against lane rates and PODs."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Early-payment discounts given to customers and earned from principals, checked against payment dates."
+    }
+  ],
+  "documents": [
+    "Supplier agreements and price circulars",
+    "Purchase and resale invoices",
+    "Stock statements",
+    "Principal credit notes and ledgers",
+    "Customer claims with COAs and weighbridge slips",
+    "Transporter bills and PODs"
+  ],
+  "systems": [
+    "ERP or Tally for purchases, stock and sales",
+    "Principal portals and email",
+    "Warehouse and stock systems",
+    "Transport records",
+    "Bank statements"
+  ],
+  "facts": [
+    {
+      "text": "India's chemical distribution market was estimated at about US$13.6 billion in 2024.",
+      "source": "Market Research Future, India chemical distribution market",
+      "url": "https://www.marketresearchfuture.com/reports/india-chemical-distribution-market-47856"
+    },
+    {
+      "text": "Larger chemical distributors are buying regional distributors to gain scale and efficiency, which raises the bar for finance and reporting.",
+      "source": "Indian Chemical News, interview with IMCD India MD, 2025",
+      "url": "https://www.indianchemicalnews.com/interviews/future-of-chemical-distribution-lies-in-scale-innovation-digitalisation-and-sustainability-narendra-varde-managing-director-imcd-india-bangladesh-519"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Our agreements are PDFs and emails. Can it use them?",
+      "a": "Yes. Terms are read from the documents and confirmed by your team once, then kept as versioned rules."
+    },
+    {
+      "q": "Can it track special prices for named customers?",
+      "a": "Yes. Each special price is set up with its customer, products, validity and quantity, and claims are built from your resale invoices."
+    },
+    {
+      "q": "Is this for distributors or for manufacturers?",
+      "a": "This page is for distributors. Manufacturers use the same engine to check rebate, price support and quality claims from their side."
+    }
+  ],
+  "url": "/industries/chemical-distributors/"
+}

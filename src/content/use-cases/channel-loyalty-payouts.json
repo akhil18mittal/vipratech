@@ -1,7 +1,7 @@
 {
   "slug": "channel-loyalty-payouts",
   "title": "Channel Loyalty Points Validation",
-  "status": "early-access",
+  "category": "distributor-dealer",
   "summary": "Check loyalty points earned by retailers, painters, plumbers, mechanics and farmers against real sales and scan data, and catch abnormal scanning before points are paid out.",
   "seo": {
     "title": "Channel Loyalty Points Validation | VipraTech",
@@ -118,6 +118,144 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Scans and redemptions\"]\n    I2[\"Member and device records\"]\n    I3[\"Secondary sales\"]\n  end\n  subgraph S2[\"Pattern checks\"]\n    P1[\"Scan pattern detection\"]\n    P2[\"Linked account detection\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Programme rules\"]\n    R2[\"Sales comparison\"]\n  end\n  subgraph S4[\"Review and release\"]\n    V1(\"Programme team review\")\n    V2[\"Redemption release\"]\n    V3[\"Leakage report\"]\n  end\n  I1 --> P1\n  I2 --> P2\n  I1 --> R1\n  I3 --> R2\n  P1 --> R2\n  R1 --> R2\n  R2 --> V1\n  P2 --> V1\n  V1 --> V2\n  V1 --> V3"
   },
+  "app_screens": [
+    {
+      "name": "Activity feed",
+      "purpose": "Scans, uploads and redemptions from your loyalty platform.",
+      "shows": [
+        "Member, product code and points",
+        "Scan time and location when present",
+        "Redemption requests pending"
+      ]
+    },
+    {
+      "name": "Sales match",
+      "purpose": "Points earned compared with what was actually sold in that area.",
+      "shows": [
+        "Points by area and SKU",
+        "Secondary sales in the same area",
+        "Points against sales"
+      ]
+    },
+    {
+      "name": "Pattern check",
+      "purpose": "Unusual activity across members, products and times.",
+      "shows": [
+        "Bursts of scans from one member",
+        "Codes scanned far from where they were sold",
+        "Devices shared across accounts"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Members and redemptions held for review.",
+      "shows": [
+        "Reason code and points at risk",
+        "The member's activity timeline",
+        "Release, hold or block"
+      ]
+    },
+    {
+      "name": "Payout release",
+      "purpose": "Redemptions cleared for release, and a report of what was held.",
+      "shows": [
+        "Cleared redemptions for the fulfilment partner",
+        "Held points with reasons",
+        "Points cost against sales by area"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Code genuine and unused",
+      "logic": "Each scanned code must exist, belong to the SKU claimed and not have been scanned before."
+    },
+    {
+      "rule": "Code sold into that area",
+      "logic": "The code's batch must have been sold by a distributor that serves the member's area, from secondary sales."
+    },
+    {
+      "rule": "Points in line with sales",
+      "logic": "Points earned in an area must stay in line with what was sold there. The excess is held."
+    },
+    {
+      "rule": "Member activity is plausible",
+      "logic": "Scan rates, times and locations are compared with similar members. Outliers are held for review, not blocked."
+    },
+    {
+      "rule": "Redemption within balance and rules",
+      "logic": "Redemptions must come from cleared points and follow the catalogue rules."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "CODE_REUSED",
+      "meaning": "The code was scanned before.",
+      "action": "Reverse the points."
+    },
+    {
+      "code": "OUT_OF_AREA",
+      "meaning": "The code was sold far from where it was scanned.",
+      "action": "Hold until the area team confirms."
+    },
+    {
+      "code": "POINTS_OVER_SALES",
+      "meaning": "Points in the area are above what sales support.",
+      "action": "Hold the excess for review."
+    },
+    {
+      "code": "UNUSUAL_PATTERN",
+      "meaning": "The member's activity is far outside the normal pattern.",
+      "action": "Review the member before release."
+    },
+    {
+      "code": "REDEMPTION_HELD",
+      "meaning": "The redemption draws on points still under review.",
+      "action": "Release once the points clear."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "Member",
+      "fields": [
+        "member_id",
+        "type",
+        "area",
+        "device_ids",
+        "joined_on"
+      ]
+    },
+    {
+      "entity": "ScanEvent",
+      "fields": [
+        "code",
+        "sku",
+        "member_id",
+        "scanned_at",
+        "location",
+        "points"
+      ]
+    },
+    {
+      "entity": "AreaSales",
+      "fields": [
+        "area",
+        "sku",
+        "period",
+        "units_sold"
+      ]
+    },
+    {
+      "entity": "Redemption",
+      "fields": [
+        "member_id",
+        "points",
+        "item",
+        "status",
+        "exception_code"
+      ]
+    }
+  ],
   "inputs": [
     "Scans, points and redemption requests",
     "Member profiles, devices and bank details",
@@ -146,7 +284,7 @@
   "compliance_notes": [
     "Member phone numbers and bank details are personal data under India's Digital Personal Data Protection Act; the checks use them only to run the programme, with access limited to the programme team."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "About 6 weeks",
     "scope": "Three months of scans and redemptions for one region, compared with secondary sales for the same period.",
     "deliverables": [
@@ -184,8 +322,8 @@
       "a": "It uses location where the scan records it. Without location, it relies on volumes, timing, linked accounts and the sales comparison."
     },
     {
-      "q": "Is this available today?",
-      "a": "Distributor claims settlement is live today. Channel loyalty points validation is in early access: we are building it with a small number of brands as design partners."
+      "q": "How long does it take to go live?",
+      "a": "About 6 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
     }
   ],
   "related": [

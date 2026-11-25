@@ -1,0 +1,128 @@
+{
+  "slug": "crop-protection",
+  "name": "Crop Protection and Agrochemicals",
+  "seo": {
+    "title": "Claims Reconciliation for Agrochemical Companies | VipraTech",
+    "description": "Season-end returns, dealer schemes, cash discounts, price changes and credit notes checked line by line for crop protection companies.",
+    "keywords": [
+      "agrochemical sales returns",
+      "crop protection dealer schemes",
+      "pesticide distributor claims",
+      "agrochemical cash discount",
+      "season end returns reconciliation",
+      "agrochemical credit notes"
+    ]
+  },
+  "hero": {
+    "headline": "Check season-end returns and dealer schemes before they cut into the season's margin",
+    "subheadline": "Crop protection companies sell on credit into a seasonal, weather-driven channel. VipraTech checks every return, scheme payout and discount against what was sold and collected."
+  },
+  "intro": "Insecticides, herbicides and fungicides are sold through thousands of distributors and retailers ahead of each season, usually on credit. When rainfall is uneven or pest pressure is low, stock comes back, and schemes and discounts already paid on it have to be reversed. Companies run several schemes per season, price changes on key molecules and cash discount slabs, all settled by spreadsheet.",
+  "challenges": [
+    {
+      "title": "Returns after a weak season",
+      "detail": "Unsold stock returns in bulk at season end, and returns are credited without tracing the batch to the original sale."
+    },
+    {
+      "title": "Schemes paid on stock that came back",
+      "detail": "Booking, liquidation and slab schemes earned on sales that were later returned stay paid."
+    },
+    {
+      "title": "Long credit and cash discounts",
+      "detail": "Dealers take months to pay, and cash discounts are given on cheque dates or for slabs they did not reach."
+    },
+    {
+      "title": "Expiry and price changes",
+      "detail": "Products near expiry and price changes on molecules lead to claims that depend on stock nobody can see."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "season-end-sales-returns",
+      "note": "Season-end returns traced to batches and invoices, with return windows, caps and scheme reversals applied."
+    },
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Booking, liquidation and slab schemes recalculated from billing, returns and collections."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Cash discounts on long credit terms checked against realisation dates and slabs."
+    },
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Distributor and retailer scheme claims checked against circulars and secondary invoices."
+    },
+    {
+      "use_case": "damage-and-expiry-claims",
+      "note": "Expired and damaged product returns traced to batches, with expiry dates checked."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price changes on key molecules, with claims capped at stock the distributor could have held."
+    },
+    {
+      "use_case": "channel-loyalty-payouts",
+      "note": "Retailer loyalty points validated against secondary sales before redemption."
+    },
+    {
+      "use_case": "trade-spend-accruals",
+      "note": "Season scheme accruals matched to what is really owed before quarter close."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Return and scheme credit notes tied to approvals and distributor ledgers."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Depot and distributor freight bills checked against lane rates and PODs."
+    }
+  ],
+  "documents": [
+    "Season scheme circulars",
+    "Sales invoices with batch numbers",
+    "Return requests and depot receipt notes",
+    "Collections and bank realisation data",
+    "Price revision circulars",
+    "Distributor ledgers and credit notes"
+  ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "DMS for secondary sales and liquidation",
+    "Retailer loyalty apps",
+    "Depot and warehouse systems",
+    "Bank statements"
+  ],
+  "facts": [
+    {
+      "text": "Agrochemical companies typically give dealers around three months of credit, so collection dates drive both cash and discounts.",
+      "source": "Agropages, citing B&K Securities",
+      "url": "https://news.agropages.com/News/print-15899.htm"
+    },
+    {
+      "text": "One crop protection company reports about 5,000 distributors and 25,000 retailers, which shows the number of claim parties a single brand settles with.",
+      "source": "IFC project disclosure, Crystal Crop Protection",
+      "url": "https://disclosures.ifc.org/project-detail/ESRS/44971/crystal-crop"
+    },
+    {
+      "text": "In the July to September 2026 quarter, weak monsoon rainfall and low pest pressure left dealers cautious about restocking.",
+      "source": "Global Agriculture, October 2026",
+      "url": "https://www.global-agriculture.com/crop-protection/weak-monsoon-and-elevated-input-costs-set-to-hit-indias-agrochemical-earnings-in-q2-fy27/"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Our returns spike after a weak season. Can it keep up?",
+      "a": "Yes. The whole return file is checked at once, so a season's returns are traced and settled in days rather than weeks."
+    },
+    {
+      "q": "Can it reverse schemes paid on returned stock?",
+      "a": "Yes. Every scheme and discount paid on the returned quantity is calculated and netted from the credit, for finance to approve."
+    },
+    {
+      "q": "Can it work at batch level?",
+      "a": "Yes. Returns are traced to batches sold to each distributor, with expiry dates and return windows applied."
+    }
+  ],
+  "url": "/industries/crop-protection/"
+}

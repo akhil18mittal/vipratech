@@ -1,0 +1,131 @@
+{
+  "slug": "beauty-personal-care",
+  "name": "Beauty and Personal Care",
+  "seo": {
+    "title": "Beauty and Personal Care Deductions | VipraTech",
+    "description": "Quick-commerce, marketplace and modern-trade deductions, distributor schemes and near-expiry returns, checked line by line for beauty brands.",
+    "keywords": [
+      "beauty brand deductions",
+      "personal care quick commerce deductions",
+      "cosmetics marketplace reconciliation",
+      "BPC distributor claims",
+      "near expiry returns cosmetics"
+    ]
+  },
+  "hero": {
+    "headline": "Recover what quick commerce, marketplaces and chains deduct from beauty brands",
+    "subheadline": "Beauty and personal care brands sell through more channels than almost anyone. VipraTech checks every deduction, claim and return against the PO, the receipt and the terms."
+  },
+  "intro": "Beauty and personal care brands sell through quick-commerce dark stores, marketplaces, beauty retailers, modern trade, distributors and their own websites at once. Each channel deducts in its own way: shortages, damages, fill-rate penalties, visibility fees, near-expiry returns and margin differences. With many SKUs and shades and small finance teams, most deductions are accepted because there is no time to check them.",
+  "challenges": [
+    {
+      "title": "Deductions on every platform",
+      "detail": "Quick-commerce and marketplace payments arrive net of shortages, damages, penalties and fees, often without a clear debit note."
+    },
+    {
+      "title": "Near-expiry and damaged returns",
+      "detail": "Short shelf-life products come back from every channel, and returns are credited without checking batch, date or condition."
+    },
+    {
+      "title": "Visibility and promotion fees",
+      "detail": "Listing, banner and in-store promotion fees are deducted against plans that were never agreed in writing."
+    },
+    {
+      "title": "Distributor schemes in general trade",
+      "detail": "Brands moving into general trade pay distributor schemes and display claims with little checking."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "quick-commerce-deductions",
+      "note": "Shortage, damage, fill-rate and visibility deductions on Blinkit, Zepto and Swiggy Instamart, checked against POs, GRNs and the trade agreement."
+    },
+    {
+      "use_case": "marketplace-settlement-reconciliation",
+      "note": "Commission, shipping and return reimbursements on Amazon, Flipkart, Nykaa and other marketplaces, recalculated order by order."
+    },
+    {
+      "use_case": "modern-trade-deductions",
+      "note": "Margins, rebates and promotion fees deducted by beauty retailers and supermarket chains, checked against annual terms."
+    },
+    {
+      "use_case": "d2c-payment-and-cod-reconciliation",
+      "note": "Website orders tied to gateway settlements and COD remittances, with courier charges checked."
+    },
+    {
+      "use_case": "damage-and-expiry-claims",
+      "note": "Near-expiry and damaged returns from distributors and chains, traced to batches and invoices."
+    },
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Distributor schemes for brands selling into general trade, checked against circulars and invoices."
+    },
+    {
+      "use_case": "display-and-visibility-claims",
+      "note": "Counter, gondola and shelf displays in chemists and beauty stores, checked with photo reuse detection."
+    },
+    {
+      "use_case": "co-marketing-fund-claims",
+      "note": "Promoter, sampling and in-store activation claims from retailers, checked against approvals and proof."
+    },
+    {
+      "use_case": "trade-spend-accruals",
+      "note": "Trade spend across channels accrued against what is really owed each month."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Credit notes to distributors and chains tied to approvals and ledgers."
+    }
+  ],
+  "documents": [
+    "Quick-commerce POs, GRNs, payment advice and debit notes",
+    "Marketplace settlement, fee and return reports",
+    "Retail chain terms and payment advice",
+    "Return notes with batch and expiry details",
+    "Display and promoter photos",
+    "Distributor scheme circulars and claim sheets"
+  ],
+  "systems": [
+    "Blinkit, Zepto and Swiggy Instamart seller portals",
+    "Amazon, Flipkart and Nykaa seller reports",
+    "Shopify or a custom store with payment gateways",
+    "ERP such as SAP, Tally or Zoho Books",
+    "DMS for general trade distributors"
+  ],
+  "facts": [
+    {
+      "text": "Quick commerce carries 61% of online personal care purchases and 54% of online baby care purchases in India.",
+      "source": "Asianet Newsable, quick commerce report, 2026",
+      "url": "https://newsable.asianetnews.com/business/quick-commerce-emerges-as-growth-engine-for-indias-digital-commerce-articleshow-ima07ml"
+    },
+    {
+      "text": "The top 10 brands take 25% of beauty and personal care sales on quick commerce, while more than 1,500 smaller brands share the last 25%.",
+      "source": "Redseer, BPC Brands on Quick Commerce, JFM 2026",
+      "url": "https://redseer.com/digests/bpc-brands-quick-commerce-india/"
+    },
+    {
+      "text": "Quick commerce is expected to carry about 1 in 10 rupees of India's beauty and personal care spending by FY31.",
+      "source": "Redseer Brand Index, JFM 2026",
+      "url": "https://redseer.com/reports/the-redseer-brand-index/"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Which channel should we start with?",
+      "a": "Usually quick commerce, because deductions there are frequent and rarely explained. A free audit on one platform shows the amount at risk in 5 working days."
+    },
+    {
+      "q": "We have hundreds of SKUs and shades. Is that a problem?",
+      "a": "No. Matching works at SKU level, and your SKU master maps each platform's item codes to yours once."
+    },
+    {
+      "q": "Can it handle returns with batch and expiry dates?",
+      "a": "Yes. Returns are traced to the batch and invoice, and shelf life on the return date is checked against the reason given."
+    },
+    {
+      "q": "Do you need our portal logins?",
+      "a": "No. Your team downloads the reports, or shares them by email, and the engine reads them as they arrive."
+    }
+  ],
+  "url": "/industries/beauty-personal-care/"
+}

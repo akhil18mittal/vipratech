@@ -14,7 +14,7 @@ export default defineConfig({
     '/industries/retail-ecommerce/': '/industries/d2c-brands/',
     '/industries/pharma-life-sciences/': '/industries/pharma-healthcare/',
     '/industries/automotive-mobility/': '/industries/auto-components-lubricants/',
-    '/industries/agriculture/': '/industries/agri-inputs/',
+    '/industries/agriculture/': '/industries/',
     '/industries/manufacturing/': '/industries/',
     '/solutions/document-intelligence/': '/',
   },

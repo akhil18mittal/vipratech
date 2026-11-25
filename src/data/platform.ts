@@ -1,0 +1,50 @@
+// Content for /platform/: how the VipraTech claims engine is built. The two diagrams are rendered to
+// public/diagrams/platform-*.svg by scripts/render-diagrams.ts and checked by scripts/validate-content.ts.
+
+export const PLATFORM_DIAGRAMS = {
+  /** The path every line takes, left to right. */
+  pipeline: [
+    'flowchart LR',
+    '  A["Collect documents"] --> B["Extract and classify"]',
+    '  B --> C["Map to masters"]',
+    '  C --> D["Apply versioned rules"]',
+    '  D --> E["Match to invoices and ledgers"]',
+    '  E --> F{"Confident and within policy?"}',
+    '  F -->|"yes"| G["Settlement sheet"]',
+    '  F -->|"no or unsure"| H("Finance review")',
+    '  H --> G',
+    '  G --> I["ERP posting and statements"]',
+  ].join('\n'),
+  /** The services and stores behind the pipeline. */
+  architecture: [
+    'flowchart TB',
+    'subgraph S1["Sources"]',
+    '  I1["Email, portals and uploads"]',
+    '  I2["ERP, DMS and bank exports"]',
+    'end',
+    'subgraph S2["Document AI"]',
+    '  D1["OCR and layout reading"]',
+    '  D2["Field extraction with confidence"]',
+    'end',
+    'subgraph S3["Data layer"]',
+    '  M1["Master data mapping"]',
+    '  M2["Line store by period"]',
+    'end',
+    'subgraph S4["Decision engine"]',
+    '  R1["Versioned rules"]',
+    '  R2["Set-based matching"]',
+    '  R3["Duplicate and anomaly checks"]',
+    'end',
+    'subgraph S5["Review and output"]',
+    '  V1("Finance review queue")',
+    '  V2["Credit notes and journals"]',
+    '  V3["Audit trail"]',
+    'end',
+    'I1 --> D1 --> D2 --> M1',
+    'I2 --> M1',
+    'M1 --> M2 --> R1 --> R2 --> R3',
+    'R3 --> V1 --> V2',
+    'R3 --> V2',
+    'V2 --> V3',
+  ].join('\n'),
+} as const;

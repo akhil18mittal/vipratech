@@ -1,0 +1,342 @@
+{
+  "slug": "supplier-rebate-claims",
+  "title": "Supplier Rebate and Price Support Claims",
+  "category": "ledgers-accruals",
+  "summary": "For distributors: work out every volume rebate, price-drop compensation and special-price claim your principals owe, claim it with proof, and match what comes back.",
+  "seo": {
+    "title": "Supplier Rebate Claims for Distributors | VipraTech",
+    "description": "Calculate volume rebates, price-drop compensation and special-price claims owed by principals from purchases and resales, and reconcile their credit notes.",
+    "keywords": [
+      "supplier rebate claims",
+      "volume rebate reconciliation",
+      "price drop compensation distributor",
+      "special price claim chemicals",
+      "ship and debit claims"
+    ]
+  },
+  "designed_for": [
+    "CFO or Finance Controller at a distributor",
+    "Commercial or Purchasing Manager",
+    "Principal Relationship Manager",
+    "Accounts Head"
+  ],
+  "problem": {
+    "intro": "Chemical, industrial and agri-input distributors buy under agreements that pay rebates for volume, compensate for price drops on stock in hand, and support special prices given to named customers. Each agreement has its own thresholds, periods and proof. The distributor has to work out what it is owed from its own purchases and resales, claim it on time and check what the principal pays.",
+    "pain_points": [
+      {
+        "title": "Rebates nobody calculates",
+        "detail": "Volume and growth rebates depend on purchases across a year by product family, and thresholds crossed late in the year are missed."
+      },
+      {
+        "title": "Price drops on stock in hand",
+        "detail": "When a principal cuts its price, compensation on stock already held is claimed late or not at all."
+      },
+      {
+        "title": "Special-price claims without proof",
+        "detail": "Claims for the gap between the normal price and a special price agreed for a customer need resale invoices that are hard to pull together."
+      },
+      {
+        "title": "Payments that do not match claims",
+        "detail": "Principals pay rebates net, late or in lump sums, and the difference is never chased."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech reads each supplier agreement into rules: rebate slabs by product family and period, price protection terms, and special prices with their customers and validity. It calculates what you have earned from your purchase and resale data, prepares each claim with the invoices that prove it, and matches the principal's credit notes and statements to your claims. Rebates still to be earned show progress against the next threshold, so purchasing can act before the period ends.",
+    "capabilities": [
+      "Supplier agreements set up as rules for rebates, price protection and special prices",
+      "Rebates earned calculated from purchases by product family and period",
+      "Price-drop compensation on stock held on the effective date",
+      "Special-price claims built from resale invoices to the named customer",
+      "Principal credit notes matched to claims, with shortfalls listed",
+      "Progress to the next rebate threshold for purchasing"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Set up agreements",
+      "detail": "Each supplier agreement is set up as rules with its periods, slabs and terms."
+    },
+    {
+      "step": 2,
+      "title": "Load purchases and resales",
+      "detail": "Purchase invoices, stock and resale invoices are loaded each month."
+    },
+    {
+      "step": 3,
+      "title": "Calculate entitlements",
+      "detail": "Rebates, price-drop compensation and special-price claims are calculated with their proof."
+    },
+    {
+      "step": 4,
+      "title": "Claim",
+      "detail": "Claims are prepared in each principal's format with supporting invoices."
+    },
+    {
+      "step": 5,
+      "title": "Match payments",
+      "detail": "Credit notes and statements are matched to claims, and shortfalls are listed."
+    },
+    {
+      "step": 6,
+      "title": "Follow up",
+      "detail": "Your team chases shortfalls and sees which thresholds are within reach."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Supplier agreements\"] --> B[\"Purchases and resales\"]\n  B --> C[\"Calculate entitlements\"]\n  C --> D[\"Claims with proof\"]\n  D --> E[\"Match credit notes\"]\n  E --> F{\"Paid in full?\"}\n  F -->|\"yes\"| G[\"Closed\"]\n  F -->|\"no\"| H(\"Commercial follow-up\")",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Supplier agreements",
+          "Purchase and resale invoices",
+          "Credit notes and statements"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Agreement term extractor",
+          "Invoice and credit note reader"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Rebate slab calculator",
+          "Price protection and special price rules",
+          "Claim to credit note matcher"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Shortfall queue with reasons",
+          "Claim packs and threshold tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Supplier agreements\"]\n    I2[\"Purchases and resales\"]\n    I3[\"Credit notes\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Agreement term extractor\"]\n    D2[\"Invoice reader\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Rebate calculator\"]\n    R2[\"Price support rules\"]\n    R3[\"Credit note matcher\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Commercial review\")\n    V2[\"Claim packs\"]\n  end\n  I1 --> D1 --> R1\n  D1 --> R2\n  I2 --> D2 --> R1\n  D2 --> R2\n  I3 --> R3\n  R1 --> V2\n  R2 --> V2\n  V2 --> R3 --> V1"
+  },
+  "app_screens": [
+    {
+      "name": "Agreement register",
+      "purpose": "Each supplier agreement as rules, with its periods and terms.",
+      "shows": [
+        "Principal, product family and period",
+        "Rebate slabs and thresholds",
+        "Price protection and special price terms"
+      ]
+    },
+    {
+      "name": "Entitlement view",
+      "purpose": "What each principal owes you, calculated from your data.",
+      "shows": [
+        "Rebate earned to date",
+        "Price-drop compensation on stock held",
+        "Special-price claims by customer"
+      ]
+    },
+    {
+      "name": "Threshold tracker",
+      "purpose": "Progress to the next rebate slab before the period ends.",
+      "shows": [
+        "Purchases to date against threshold",
+        "Gap to the next slab",
+        "Days left in the period"
+      ]
+    },
+    {
+      "name": "Claim packs",
+      "purpose": "Claims in each principal's format, with proof attached.",
+      "shows": [
+        "Claim sheet per principal",
+        "Invoices and stock statements",
+        "Submission date and deadline"
+      ]
+    },
+    {
+      "name": "Payment match",
+      "purpose": "Credit notes and statements matched to claims.",
+      "shows": [
+        "Claimed, paid and short",
+        "Reason for any shortfall",
+        "Follow up, accept or escalate"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Purchases in the rebate period",
+      "logic": "Rebates are calculated on purchase invoices dated in the period, by product family, net of returns to the principal."
+    },
+    {
+      "rule": "Slab from the agreement",
+      "logic": "The rebate rate comes from the slab reached, using the agreement version for that period."
+    },
+    {
+      "rule": "Stock held on the price-drop date",
+      "logic": "Price-drop compensation is calculated on stock held on the effective date, from purchases and resales up to that date."
+    },
+    {
+      "rule": "Special price backed by resale",
+      "logic": "Each special-price claim needs a resale invoice to the named customer, for listed products, within the validity and quantity agreed."
+    },
+    {
+      "rule": "Credit note matches the claim",
+      "logic": "Each credit note must match a claim by period and amount. Shortfalls stay open with the principal's reason."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "THRESHOLD_NOT_MET",
+      "meaning": "Purchases are below the slab for the period.",
+      "action": "Show the gap to purchasing while there is time."
+    },
+    {
+      "code": "NO_RESALE_PROOF",
+      "meaning": "A special-price claim has no matching resale invoice.",
+      "action": "Attach the invoice or drop the line."
+    },
+    {
+      "code": "STOCK_UNVERIFIED",
+      "meaning": "Stock on the price-drop date cannot be confirmed from records.",
+      "action": "Attach a stock statement for review."
+    },
+    {
+      "code": "SHORT_PAID",
+      "meaning": "The principal paid less than the claim.",
+      "action": "Ask for the breakdown and follow up."
+    },
+    {
+      "code": "CLAIM_LATE",
+      "meaning": "The claim is past the principal's submission window.",
+      "action": "Escalate, or record as lost."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "SupplierAgreement",
+      "fields": [
+        "agreement_id",
+        "principal",
+        "product_family",
+        "period",
+        "slabs",
+        "terms_version"
+      ]
+    },
+    {
+      "entity": "PurchaseLine",
+      "fields": [
+        "invoice_no",
+        "principal",
+        "sku",
+        "qty",
+        "value",
+        "invoice_date"
+      ]
+    },
+    {
+      "entity": "Entitlement",
+      "fields": [
+        "agreement_id",
+        "type",
+        "earned",
+        "claimed",
+        "paid"
+      ]
+    },
+    {
+      "entity": "ResaleProof",
+      "fields": [
+        "resale_invoice",
+        "customer",
+        "sku",
+        "qty",
+        "special_price"
+      ]
+    }
+  ],
+  "inputs": [
+    "Supplier agreements and price circulars",
+    "Purchase invoices and returns to principals",
+    "Stock statements and resale invoices",
+    "Credit notes and statements from principals",
+    "Special price approvals for named customers"
+  ],
+  "outputs": [
+    "Entitlements by principal and type",
+    "Claim packs with supporting invoices",
+    "Credit notes matched to claims, with shortfalls",
+    "Threshold tracker for purchasing",
+    "Money owed by principal and age"
+  ],
+  "human_in_the_loop": "Your commercial team decides which claims to submit and how to follow up. Agreement terms read from documents are confirmed by a person before they are used.",
+  "integrations": [
+    "ERP or Tally for purchases, stock and sales",
+    "Principal portals and email for credit notes",
+    "Shared drive for agreements and circulars",
+    "CRM for special price approvals"
+  ],
+  "guardrails": [
+    "Agreement terms confirmed by a person before use",
+    "Every entitlement linked to the invoices behind it",
+    "Shortfalls never closed without a reason",
+    "Principal documents kept as received"
+  ],
+  "compliance_notes": [
+    "Rebates received by credit note may carry GST; the register shows the tax treatment of each credit note received."
+  ],
+  "rollout": {
+    "duration": "About 6 weeks",
+    "scope": "Your three largest principals, using the last full year of purchases and resales and the credit notes received.",
+    "deliverables": [
+      "Agreements set up as rules",
+      "Entitlements recalculated for the year",
+      "Credit notes matched to claims",
+      "Shortfall and threshold report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Entitlement found unclaimed",
+        "how": "Rebates and price support earned but never claimed."
+      },
+      {
+        "metric": "Shortfalls found",
+        "how": "Amounts claimed but not paid in full."
+      },
+      {
+        "metric": "Thresholds within reach",
+        "how": "Rebate slabs that more purchases in the period would reach."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our agreements are PDFs and emails. Can it use them?",
+      "a": "Yes. Terms are read from the documents and confirmed by your team once, then kept as versioned rules."
+    },
+    {
+      "q": "Does it handle rebates by product family and growth?",
+      "a": "Yes. Slabs can be set on volume, value or growth over last year, by product family and period."
+    },
+    {
+      "q": "Can it help with price drops on stock we hold?",
+      "a": "Yes. It calculates stock held on the effective date from your purchases and resales, and prepares the compensation claim."
+    },
+    {
+      "q": "How is this different from claim recovery?",
+      "a": "Claim recovery tracks claims you have already raised. This workflow works out what you are owed under each agreement in the first place."
+    }
+  ],
+  "related": [
+    "distributor-claim-recovery",
+    "rate-difference-claims",
+    "credit-note-reconciliation"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/supplier-rebate-claims/"
+}

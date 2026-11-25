@@ -1,0 +1,110 @@
+{
+  "slug": "seeds",
+  "name": "Seeds",
+  "seo": {
+    "title": "Claims Reconciliation for Seed Companies | VipraTech",
+    "description": "Season-end seed returns, booking schemes, cash discounts and distributor claims checked against lots, invoices and policy for seed companies.",
+    "keywords": [
+      "seed sales returns",
+      "seed company distributor claims",
+      "seed booking scheme settlement",
+      "unsold seed returns",
+      "seed lot return reconciliation"
+    ]
+  },
+  "hero": {
+    "headline": "Settle season-end seed returns lot by lot, net of every scheme already paid",
+    "subheadline": "Seed returns can swing with the monsoon. VipraTech traces every returned lot to its sale, applies your policy and reverses the schemes paid on it."
+  },
+  "intro": "Seed companies place stock with distributors and dealers before sowing and take back what does not sell. Returns rise sharply when the monsoon is late or farmers switch crops. Each return has to be checked lot by lot against the original sale, the return window, the lot's test validity and the booking and early-lifting schemes already paid.",
+  "challenges": [
+    {
+      "title": "Returns that swing with the weather",
+      "detail": "A late or weak monsoon can bring back a large share of what was dispatched, all in a few weeks."
+    },
+    {
+      "title": "Lots that were never sold to that dealer",
+      "detail": "Returned lots do not always match what the dealer bought, and checking each lot by hand is impossible at season end."
+    },
+    {
+      "title": "Booking and early-lifting schemes",
+      "detail": "Schemes earned on early orders and lifting stay paid on seed that later comes back."
+    },
+    {
+      "title": "Lot validity and condition",
+      "detail": "Seed past its test validity or in damaged packs is credited at full value when the policy says otherwise."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "season-end-sales-returns",
+      "note": "Season-end returns traced lot by lot to invoices, with return windows, caps, lot validity and scheme reversals applied."
+    },
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Booking, early-lifting and volume schemes recalculated from net sales after returns."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Cash discounts checked against payment realisation dates and slabs."
+    },
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Distributor and dealer scheme claims checked against circulars and invoices."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Germination and quality complaints checked against lot test reports, with transit damage placed with the carrier."
+    },
+    {
+      "use_case": "trade-spend-accruals",
+      "note": "Season scheme accruals compared with what is owed after returns."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Return and scheme credit notes tied to approvals and distributor ledgers."
+    }
+  ],
+  "documents": [
+    "Season scheme and booking circulars",
+    "Sales invoices with lot numbers",
+    "Return requests and depot receipt notes",
+    "Lot test and validity records",
+    "Collections and bank realisation data",
+    "Distributor ledgers and credit notes"
+  ],
+  "systems": [
+    "ERP such as SAP or Tally",
+    "DMS for dealer sales and liquidation",
+    "Depot and warehouse systems",
+    "Quality lab records",
+    "Bank statements"
+  ],
+  "facts": [
+    {
+      "text": "Seed companies typically plan for 15 to 20% of stock coming back as returns, according to the chairman of the Federation of Seed Industry of India.",
+      "source": "Outlook Business, interview with the FSII chairman",
+      "url": "https://www.outlookbusiness.com/industry/seed-firms-hold-20-30-surplus-stock-for-kharif-last-mile-delivery-key-concern-fsii"
+    },
+    {
+      "text": "In a published business case on a cotton seed company, about 2.8 million packets were dispatched for one kharif season and about 950,000 came back.",
+      "source": "Academy of Marketing Studies Journal case report, 2021",
+      "url": "https://www.abacademies.org/articles/superseed-cotton-a-sales-forecasting-dilemma-9897.html"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Our invoices do not always carry lot numbers. Does that work?",
+      "a": "Yes. Returns are matched on variety, pack, quantity and date where lots are missing, and those matches are marked weaker for finance to judge."
+    },
+    {
+      "q": "Can it reverse booking schemes on returned seed?",
+      "a": "Yes. Schemes and discounts earned on the returned quantity are calculated and netted from the credit."
+    },
+    {
+      "q": "Can it show returns risk before the season ends?",
+      "a": "Yes. Liquidation and channel stock by dealer can be loaded during the season, so likely returns show up while there is time to move stock."
+    }
+  ],
+  "url": "/industries/seeds/"
+}

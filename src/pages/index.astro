@@ -11,19 +11,19 @@ import {ContactButtons} from '../components/site/ContactButtons';
 import {AUDIT_PATH, contactLinks} from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {siteContent} from '../lib/collections';
-import {STATUS_NOTES, STATUS_ORDER, statusLabel} from '../lib/content';
+import {CATEGORIES, CATEGORY_ORDER} from '../data/categories';
 import {organizationJsonLd} from '../lib/seo';
 
-// The homepage: one product (distributor claims settlement) for one buyer (finance at FMCG and D2C brands), with the
-// free claims audit as the next step. The problem and workflow come from the live use case's content file.
+// The homepage: one claims engine for finance teams, led by distributor claims settlement (in production), with every
+// workflow and industry one click away and the free claims audit as the next step.
 
 const content = await siteContent();
 const claims = content.useCase('distributor-scheme-claims');
 const contact = contactLinks('/', 'a free claims audit');
 
 const proofPoints = [
-  'Running every month at a packaged-food brand since mid-2026',
-  'Every line checked against the scheme, the invoice and past claims',
+  'In production every month at a packaged-food brand since mid-2026',
+  `${content.useCases.length} claim and deduction workflows across ${content.industries.length} industries, on one engine`,
   'Finance approves every credit note. Nothing is paid automatically.',
 ];
 
@@ -63,8 +63,8 @@ const auditSteps = [
 
 const pricing = [
   {title: 'Free claims audit', detail: "One recent quarter of your claims, checked line by line. You see what the system finds before you pay anything."},
-  {title: 'Paid pilot on live claims', detail: 'About 8 weeks for a fixed fee: two monthly claim cycles for one region or claim type, compared with what finance settled.'},
-  {title: 'Monthly subscription', detail: 'Priced by the number of distributors, once the pilot has shown its value.'},
+  {title: 'Fixed-fee rollout on live claims', detail: 'About 8 weeks: two monthly cycles for one region or claim type, run beside your current process and compared with what finance settled.'},
+  {title: 'Monthly subscription', detail: 'Priced by volume and the number of counterparties, once the rollout has shown its value.'},
 ];
 
 const faqs = [
@@ -95,26 +95,37 @@ const faqs = [
 ];
 
 const industryCards = content.industries.map((industry) => ({title: industry.name, text: industry.hero.headline, href: industry.url}));
-const coverage = STATUS_ORDER.map((status) => ({status, useCases: content.useCases.filter((useCase) => useCase.status === status)}));
+const coverage = CATEGORY_ORDER.map((category) => ({
+  ...CATEGORIES[category],
+  id: category,
+  useCases: content.useCases.filter((useCase) => useCase.category === category),
+}));
+const engine = [
+  {title: 'Document AI', detail: 'Claim sheets, invoices, scans, photos and portal reports read into structured lines, with a confidence score on every field.'},
+  {title: 'Versioned rules', detail: 'Schemes, policies, contracts and terms as rules with effective dates, so every line is judged by the rule that applied on its date.'},
+  {title: 'Set-based matching', detail: 'A month of lines matched in one batch against invoices, receipts, GRNs, ledgers and earlier claims.'},
+  {title: 'Review queue and audit trail', detail: 'Every uncertain line held with a reason code and its evidence, and every decision logged.'},
+];
 ---
 
 <BaseLayout
-  title="Distributor Claims Reconciliation for FMCG and D2C Brands | VipraTech"
-  description="VipraTech checks every distributor claim against your schemes, invoices and past claims, flags duplicates and ineligible lines, and prepares credit notes for finance."
+  title="Claims and Deductions Reconciliation for Finance Teams | VipraTech"
+  description="VipraTech checks distributor claims, retail and quick-commerce deductions, subsidy and freight claims against your invoices and terms before you pay."
   page={{type: 'home'}}
   faqs={faqs}
   jsonLd={[organizationJsonLd()]}
 >
   <section class="pt-14 sm:pt-20 pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
     <span class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold">
-      For finance teams at FMCG and D2C brands
+      For finance teams at brands, manufacturers and distributors
     </span>
     <h1 class="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900 max-w-4xl">
-      Stop paying distributor claims you don't owe.
+      Stop paying claims and deductions you don't owe.
     </h1>
     <p class="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl">
-      VipraTech checks every claim line against your scheme circulars, invoices and past claims, flags duplicates and
-      ineligible lines, and gives finance a clean credit note sheet to approve.
+      VipraTech checks every distributor claim, retailer and platform deduction, subsidy and freight claim against your
+      schemes, invoices, receipts and contracts, flags what does not hold up, and gives finance a clean settlement sheet to
+      approve.
     </p>
     <div class="pt-2 space-y-4">
       <ContactButtons links={contact} location="hero" />
@@ -139,7 +150,7 @@ const coverage = STATUS_ORDER.map((status) => ({status, useCases: content.useCas
     <WorkflowSteps steps={claims.workflow} />
     <p class="text-base">
       <a href={claims.url} class="font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
-        Full details: diagrams, inputs, integrations, guardrails and pilot plan →
+        Full details: app screens, architecture, decision rules, exception codes and go-live plan →
       </a>
     </p>
   </Section>
@@ -183,13 +194,21 @@ const coverage = STATUS_ORDER.map((status) => ({status, useCases: content.useCas
     <WorkflowSteps steps={pricing} />
   </Section>
 
-  <Section id="coverage" title="Every claim and deduction we check" intro="Distributor claims settlement is live today. The rest run on the same engine, or are being built with design partners.">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <Section id="under-the-hood" title="Under the hood" intro="Every workflow runs on one claims engine, built for finance teams that settle tens of thousands of lines a month.">
+    <DetailCards items={engine} />
+    <p class="text-base">
+      <a href="/platform/" class="font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">How the engine works →</a>
+    </p>
+  </Section>
+
+  <Section id="coverage" title="Every claim and deduction we check" intro="Each workflow has its own page with its app screens, architecture, decision rules, exception codes and go-live plan.">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {
         coverage.map((group) => (
           <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
-            <h3 class="text-lg font-bold text-slate-900">{statusLabel(group.status)}</h3>
-            <p class="mt-1 text-sm text-slate-500 leading-relaxed">{STATUS_NOTES[group.status]}</p>
+            <h3 class="text-lg font-bold text-slate-900">
+              <a href={`/use-cases/#${group.id}`} class="hover:text-teal-800">{group.label}</a>
+            </h3>
             <ul class="mt-4 space-y-2">
               {group.useCases.map((useCase) => (
                 <li>
@@ -205,7 +224,7 @@ const coverage = STATUS_ORDER.map((status) => ({status, useCases: content.useCas
     </div>
   </Section>
 
-  <Section id="industries" title="By industry" intro="How these checks work for brands that sell through distributors, dealers, retail chains and marketplaces.">
+  <Section id="industries" title="By industry" intro="How these checks work for companies that sell through distributors, dealers, retail chains, quick-commerce platforms and marketplaces, and for the distributors themselves.">
     <CardGrid items={industryCards} columns={2} />
   </Section>
 

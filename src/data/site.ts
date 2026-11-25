@@ -45,29 +45,31 @@ export const auditEmailLink = () => {
   return `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 };
 
-/** The buttons for a page: the free audit, WhatsApp opening with the page's topic, and booking when it is set up. */
+/** An email asking for a demo of one workflow, with the details we need to prepare it. */
+export const demoEmailLink = (topic: string) => {
+  const subject = `Demo request: ${topic}`;
+  const body = ['Hi Akhilesh,', '', `We would like a demo of ${topic}.`, '', 'Company:', 'My name and role:', 'What we want to see:', 'Phone or WhatsApp:'].join('\n');
+  return `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
+
+/** The demo button: the booking page once Calendly is set up, an email until then. */
+const demoLink = (pagePath: string, topic: string): ContactLinks['demo'] => {
+  const booking = calendlyLink(pagePath);
+  return booking ? {href: booking, cta: 'calendly'} : {href: demoEmailLink(topic), cta: 'demo_email'};
+};
+
+/** The buttons for a page: the free audit, a demo of the page's topic, and WhatsApp opening with the topic. */
 export const contactLinks = (pagePath: string, topic: string): ContactLinks => ({
   primary: {href: AUDIT_PATH, label: 'Get a free claims audit', cta: 'audit'},
+  demo: demoLink(pagePath, topic),
   whatsapp: whatsappLink(`Hi, I'm interested in ${topic}`),
-  call: calendlyLink(pagePath),
-});
-
-/** The buttons on an early-access page, where the main button asks to become a design partner. */
-export const earlyAccessLinks = (pagePath: string, title: string): ContactLinks => ({
-  primary: {
-    href: `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(`Early access: ${title}`)}`,
-    label: 'Ask about early access',
-    cta: 'early_access_email',
-  },
-  whatsapp: whatsappLink(`Hi, I'm interested in early access to ${title}`),
-  call: calendlyLink(pagePath),
 });
 
 /** The buttons on the audit page itself, where the main button sends the request. */
 export const auditRequestLinks = (): ContactLinks => ({
   primary: {href: auditEmailLink(), label: 'Request the audit by email', cta: 'audit_email'},
+  demo: demoLink(AUDIT_PATH, 'the VipraTech claims engine'),
   whatsapp: whatsappLink("Hi, I'd like a free claims audit"),
-  call: calendlyLink(AUDIT_PATH),
 });
 
 /** The GA4 Measurement ID ("G-…"). Until it is set, no analytics script loads and track() does nothing. */

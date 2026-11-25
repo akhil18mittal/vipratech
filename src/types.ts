@@ -19,10 +19,10 @@ export interface Diagram {
   height: number;
 }
 
-/** The buttons a page offers: its main action, WhatsApp, and a booking link once Calendly is set up. */
+/** The buttons a page offers: its main action, a demo, and WhatsApp. `cta` names the button in the cta_click event. */
 export interface ContactLinks {
-  /** `cta` names the button in the cta_click analytics event. */
   primary: {href: string; label: string; cta: string};
+  /** The Calendly booking page once it is set up, a demo request email until then. */
+  demo: {href: string; cta: string};
   whatsapp: string;
-  call?: string;
 }

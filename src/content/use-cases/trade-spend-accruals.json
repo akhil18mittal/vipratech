@@ -1,7 +1,7 @@
 {
   "slug": "trade-spend-accruals",
   "title": "Trade Spend Accrual and Payout Reconciliation",
-  "status": "early-access",
+  "category": "ledgers-accruals",
   "summary": "Compare what finance accrued for each scheme with what was claimed and paid, find over-accruals, unclaimed schemes and late claims, and close the month with a clear trade spend position.",
   "seo": {
     "title": "Trade Spend Accrual Reconciliation | VipraTech",
@@ -120,6 +120,141 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Scheme register\"]\n    I2[\"Sales data\"]\n    I3[\"Accrual entries\"]\n    I4[\"Claims and payouts\"]\n  end\n  subgraph S2[\"Calculation\"]\n    C1[\"Expected liability engine\"]\n    C2[\"Claim window tracker\"]\n  end\n  subgraph S3[\"Reconciliation\"]\n    R1[\"Scheme and month comparison\"]\n    R2[\"Gap explanations\"]\n  end\n  subgraph S4[\"Close and reporting\"]\n    V1(\"Finance review\")\n    V2[\"Month-end reconciliation\"]\n    V3[\"Scheme cost report\"]\n  end\n  I1 --> C1\n  I2 --> C1\n  I1 --> C2\n  C1 --> R1\n  I3 --> R1\n  I4 --> R1\n  C2 --> R2\n  R1 --> R2\n  R2 --> V1\n  V1 --> V2\n  V1 --> V3"
   },
+  "app_screens": [
+    {
+      "name": "Scheme liability",
+      "purpose": "Expected liability for each running scheme, from sales so far.",
+      "shows": [
+        "Scheme, period and sales to date",
+        "Expected payout at the current run rate",
+        "Accrual booked by finance"
+      ]
+    },
+    {
+      "name": "Accrual compare",
+      "purpose": "Expected liability beside the accruals and payments in your books.",
+      "shows": [
+        "Over-accrued and under-accrued schemes",
+        "Payments made against accrual",
+        "Balance still to be claimed"
+      ]
+    },
+    {
+      "name": "Gap explainer",
+      "purpose": "Why each gap exists, line by line.",
+      "shows": [
+        "Claims pending or rejected",
+        "Sales outside scheme conditions",
+        "Closed schemes not yet released"
+      ]
+    },
+    {
+      "name": "Review",
+      "purpose": "Gaps for finance to accept, adjust or look into.",
+      "shows": [
+        "Reason code and amount",
+        "Proposed journal adjustment",
+        "Owner and due date"
+      ]
+    },
+    {
+      "name": "Close pack",
+      "purpose": "The month-end or quarter-end trade spend summary.",
+      "shows": [
+        "Accrual by scheme and region",
+        "Release of unused accruals",
+        "Trade spend against budget"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Liability from actual sales",
+      "logic": "Expected liability is recalculated from billed or secondary sales against each scheme's rules, not from the original budget."
+    },
+    {
+      "rule": "Accrual covers expected liability",
+      "logic": "The booked accrual for each scheme is compared with expected liability less payments already made."
+    },
+    {
+      "rule": "Closed schemes released",
+      "logic": "Once a scheme's claim window closes, accrual left above pending claims is flagged for release."
+    },
+    {
+      "rule": "Payments tied to schemes",
+      "logic": "Each payout or credit note must map to a scheme and period, so spend lands against the right accrual."
+    },
+    {
+      "rule": "Pending claims counted",
+      "logic": "Claims received but not yet settled count as liability, at their recalculated value."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "UNDER_ACCRUED",
+      "meaning": "Expected liability is above the accrual.",
+      "action": "Book the additional accrual."
+    },
+    {
+      "code": "OVER_ACCRUED",
+      "meaning": "The accrual is above expected liability.",
+      "action": "Release the excess, with finance sign-off."
+    },
+    {
+      "code": "STALE_ACCRUAL",
+      "meaning": "A closed scheme still carries accrual.",
+      "action": "Release it, or confirm the claims still to come."
+    },
+    {
+      "code": "PAYMENT_UNMAPPED",
+      "meaning": "A payout or credit note has no scheme.",
+      "action": "Map it to the right scheme."
+    },
+    {
+      "code": "SALES_DATA_GAP",
+      "meaning": "Sales data for the period is incomplete.",
+      "action": "Hold the estimate until the data arrives."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "Scheme",
+      "fields": [
+        "scheme_id",
+        "period",
+        "rules_version",
+        "budget",
+        "claim_window_end"
+      ]
+    },
+    {
+      "entity": "LiabilityEstimate",
+      "fields": [
+        "scheme_id",
+        "as_of",
+        "eligible_sales",
+        "expected_payout"
+      ]
+    },
+    {
+      "entity": "Accrual",
+      "fields": [
+        "scheme_id",
+        "gl_account",
+        "booked_amount",
+        "booked_on"
+      ]
+    },
+    {
+      "entity": "SpendEntry",
+      "fields": [
+        "scheme_id",
+        "doc_no",
+        "amount",
+        "type"
+      ]
+    }
+  ],
   "inputs": [
     "Scheme register with rules and claim windows",
     "Sales by distributor and month",
@@ -147,11 +282,11 @@
   "compliance_notes": [
     "Consistent, documented accrual logic supports statutory audit of trade spend provisions."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "About 8 weeks",
     "scope": "One quarter of schemes for one region, compared with the accruals and payments finance already booked.",
     "deliverables": [
-      "Expected liability for every pilot scheme",
+      "Expected liability for every scheme in scope",
       "Reconciliation of accrued, claimed and paid",
       "List of unclaimed schemes and late claims",
       "Month-end reconciliation format"
@@ -185,8 +320,8 @@
       "a": "Yes. Liability is calculated by month and scheme, so schemes that span periods are split correctly."
     },
     {
-      "q": "Is this available today?",
-      "a": "Distributor claims settlement is live today. Trade spend accrual reconciliation is in early access: we are building it with a small number of brands as design partners."
+      "q": "How long does it take to go live?",
+      "a": "About 8 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
     }
   ],
   "related": [

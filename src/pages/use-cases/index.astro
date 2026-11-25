@@ -7,25 +7,33 @@ import {PageHero} from '../../components/content/PageHero';
 import {contactLinks} from '../../data/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {siteContent} from '../../lib/collections';
-import {STATUS_NOTES, STATUS_ORDER, statusLabel} from '../../lib/content';
+import {CATEGORIES, CATEGORY_ORDER} from '../../data/categories';
+import {isInProduction} from '../../lib/content';
 
-// Every use case, grouped by how ready it is: live, pilot-ready on the same engine, or early access.
+// Every use case, grouped by category.
 
 const {useCases} = await siteContent();
 const description =
-  'Every claim, deduction and reconciliation VipraTech checks for finance teams at consumer brands: what is live today, what is ready to pilot, and what we are building with design partners.';
+  'Every claim, deduction, subsidy and settlement VipraTech reconciles for finance teams, each with its workflow, app screens, architecture, decision rules and exception codes.';
 const contact = contactLinks('/use-cases/', 'VipraTech claims reconciliation');
-const groups = STATUS_ORDER.map((status) => ({
-  status,
+const groups = CATEGORY_ORDER.map((category) => ({
+  ...CATEGORIES[category],
+  id: category,
   cards: useCases
-    .filter((useCase) => useCase.status === status)
-    .map((useCase) => ({label: statusLabel(useCase.status), title: useCase.title, text: useCase.summary, href: useCase.url})),
+    .filter((useCase) => useCase.category === category)
+    .map((useCase) => ({
+      label: isInProduction(useCase) ? 'In production' : undefined,
+      title: useCase.title,
+      text: useCase.summary,
+      href: useCase.url,
+      featured: isInProduction(useCase),
+    })),
 })).filter((group) => group.cards.length > 0);
 ---
 
 <BaseLayout
   title="Claims and Deductions Reconciliation Use Cases | VipraTech"
-  description="Distributor claims, returns, rate differences, dealer incentives, modern-trade, quick-commerce and marketplace deductions, and ledger reconciliation."
+  description="Distributor and dealer claims, quick-commerce and modern-trade deductions, credit notes, ledgers, fertiliser subsidy, freight and quality claims."
   page={{type: 'library'}}
   crumbs={[{name: 'Use cases', path: '/use-cases/'}]}
 >
@@ -33,7 +41,7 @@ const groups = STATUS_ORDER.map((status) => ({
 
   {
     groups.map((group) => (
-      <Section title={statusLabel(group.status)} intro={STATUS_NOTES[group.status]}>
+      <Section id={group.id} title={group.label} intro={group.intro}>
         <CardGrid items={group.cards} />
       </Section>
     ))

@@ -1,7 +1,7 @@
 {
   "slug": "co-marketing-fund-claims",
   "title": "Co-Marketing and Promotion Fund Claims",
-  "status": "pilot-ready",
+  "category": "distributor-dealer",
   "summary": "Check dealer and retailer claims on co-marketing, promotion and advertising funds against the approved plan, budgets and proof of activity before finance releases money.",
   "seo": {
     "title": "Co-Marketing Fund Claims Verification | VipraTech",
@@ -118,6 +118,143 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Approved activity register\"]\n    I2[\"Partner claims\"]\n    I3[\"Invoices and proofs\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Invoice and proof reader\"]\n    D2[\"Duplicate proof detection\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Activity matcher\"]\n    R2[\"Budget and ratio checks\"]\n  end\n  subgraph S4[\"Review and payout\"]\n    V1(\"Channel marketing review\")\n    V2[\"Payout sheet\"]\n    V3[\"Utilisation report\"]\n  end\n  I3 --> D1\n  I3 --> D2\n  I2 --> R1\n  I1 --> R1\n  D1 --> R1\n  R1 --> R2\n  R2 --> V1\n  D2 --> V1\n  V1 --> V2\n  V2 --> V3"
   },
+  "app_screens": [
+    {
+      "name": "Fund register",
+      "purpose": "Each approved activity with its partner, budget, dates and the proof it needs.",
+      "shows": [
+        "Approval reference and approver",
+        "Approved budget and dates",
+        "Proof required per activity"
+      ]
+    },
+    {
+      "name": "Claims inbox",
+      "purpose": "Partner claims with invoices, photos, media plans and reports.",
+      "shows": [
+        "Partner, activity and claimed amount",
+        "Documents attached, by type",
+        "The approval it refers to"
+      ]
+    },
+    {
+      "name": "Claim check",
+      "purpose": "Each claim matched to its approval and checked for proof and spend.",
+      "shows": [
+        "Approved against claimed amount",
+        "Vendor invoices read and totalled",
+        "Activity dates against approval dates"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Claims held for review, with the approval and proof side by side.",
+      "shows": [
+        "Reason code and amount at risk",
+        "Approval email or sheet linked",
+        "Approve, reduce or reject"
+      ]
+    },
+    {
+      "name": "Payout",
+      "purpose": "Approved reimbursements and the fund position.",
+      "shows": [
+        "Payout or credit note sheet",
+        "Fund used and remaining per partner",
+        "Spend by activity type"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Pre-approved activity",
+      "logic": "Every claim must refer to an approval on record for the same partner, activity type and period."
+    },
+    {
+      "rule": "Within the approved amount",
+      "logic": "Reimbursement is held to the approved budget and to the brand's agreed share of actual spend."
+    },
+    {
+      "rule": "Spend proved by vendor invoices",
+      "logic": "Third-party invoices are read and totalled. The claim cannot exceed the spend they prove."
+    },
+    {
+      "rule": "Activity inside the approved dates",
+      "logic": "Photos, reports or media proof must fall within the approved dates."
+    },
+    {
+      "rule": "Not funded twice",
+      "logic": "The same vendor invoice or activity cannot be claimed under two approvals or two funds."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "NO_APPROVAL",
+      "meaning": "No approval matches the claim.",
+      "action": "Reject, or link the approval if it was made outside the register."
+    },
+    {
+      "code": "OVER_APPROVED",
+      "meaning": "The claimed amount is above the approved budget or share.",
+      "action": "Approve up to the limit."
+    },
+    {
+      "code": "SPEND_NOT_PROVEN",
+      "meaning": "Vendor invoices do not add up to the claimed spend.",
+      "action": "Ask for the missing invoices."
+    },
+    {
+      "code": "OUT_OF_WINDOW",
+      "meaning": "Proof shows the activity outside the approved dates.",
+      "action": "Reject, or approve with the approver's sign-off."
+    },
+    {
+      "code": "DUPLICATE_INVOICE",
+      "meaning": "A vendor invoice was claimed before.",
+      "action": "Reject, with the earlier claim linked."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "FundApproval",
+      "fields": [
+        "approval_id",
+        "partner_code",
+        "activity_type",
+        "budget",
+        "brand_share_pct",
+        "valid_to"
+      ]
+    },
+    {
+      "entity": "FundClaim",
+      "fields": [
+        "claim_id",
+        "approval_id",
+        "claimed_amount",
+        "submitted_at"
+      ]
+    },
+    {
+      "entity": "SpendProof",
+      "fields": [
+        "vendor_invoice_no",
+        "vendor",
+        "amount",
+        "activity_date"
+      ]
+    },
+    {
+      "entity": "FundBalance",
+      "fields": [
+        "partner_code",
+        "period",
+        "approved",
+        "paid",
+        "remaining"
+      ]
+    }
+  ],
   "inputs": [
     "Approved marketing plans, budgets and sharing ratios",
     "Partner claims",
@@ -146,11 +283,11 @@
   "compliance_notes": [
     "Claims backed by vendor invoices support the tax treatment your finance team applies; the system keeps every invoice with its payout."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "About 6 weeks",
     "scope": "One quarter of co-marketing claims for one region or one partner group.",
     "deliverables": [
-      "Approved activity register for the pilot",
+      "Approved activity register for the rollout",
       "Checked claims with exceptions",
       "Payout sheet in your finance format",
       "Fund utilisation report"
@@ -185,7 +322,7 @@
     },
     {
       "q": "Is this the same system as your distributor claims settlement?",
-      "a": "Yes. It runs on the same claims engine as our live distributor claims settlement, configured to your fund rules during a pilot."
+      "a": "Yes. Every VipraTech workflow runs on one claims engine: the document reading, matching, review queue and audit trail are shared. For this workflow we set up your fund rules as versioned rules, along with your document templates and matching keys."
     }
   ],
   "related": [

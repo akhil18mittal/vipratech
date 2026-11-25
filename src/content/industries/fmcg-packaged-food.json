@@ -71,6 +71,14 @@
     {
       "use_case": "credit-note-reconciliation",
       "note": "Approved claims matched to credit notes and distributor ledgers before year-end balance confirmations."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Transit damage and shortage claims from distributors, checked against LRs and PODs, with losses recovered from transporters."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Primary freight from plants and depots to distributors, checked against lane rates, weights and PODs before payment."
     }
   ],
   "documents": [
@@ -80,6 +88,26 @@
     "Display photos and outlet lists",
     "Credit notes in SAP or Tally",
     "Payment advice and debit notes from chains and platforms"
+  ],
+  "systems": [
+    "DMS and sales force automation platforms",
+    "ERP such as SAP, Oracle or Tally",
+    "Field sales apps and photo exports",
+    "Retail chain vendor portals",
+    "Quick-commerce seller portals",
+    "Bank statements and payment advice"
+  ],
+  "facts": [
+    {
+      "text": "Quick commerce now carries 94% of online food and beverage purchases and 68% of online home care purchases in India.",
+      "source": "Asianet Newsable, quick commerce report, 2026",
+      "url": "https://newsable.asianetnews.com/business/quick-commerce-emerges-as-growth-engine-for-indias-digital-commerce-articleshow-ima07ml"
+    },
+    {
+      "text": "Dabur's CEO named beverages, foods, personal care and home care as the strongest categories on quick commerce, now FMCG's largest online channel.",
+      "source": "Economic Times via Third Eyesight, May 2026",
+      "url": "https://www.thirdeyesight.in/?p=6996"
+    }
   ],
   "faqs": [
     {
@@ -92,7 +120,7 @@
     },
     {
       "q": "Where should we start?",
-      "a": "With a free claims audit on one recent quarter of distributor scheme claims, the area that is live today."
+      "a": "With a free claims audit on one recent quarter of distributor scheme claims, where the engine has run in production since mid-2026."
     }
   ],
   "url": "/industries/fmcg-packaged-food/"

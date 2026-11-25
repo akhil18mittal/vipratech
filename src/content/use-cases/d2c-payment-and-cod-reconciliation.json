@@ -1,7 +1,7 @@
 {
   "slug": "d2c-payment-and-cod-reconciliation",
   "title": "D2C Payment, COD and Returns Reconciliation",
-  "status": "early-access",
+  "category": "channel-deductions",
   "summary": "Reconcile your own website's orders with payment gateway settlements, courier COD remittances, RTO and refunds, so every order ends as paid, refunded, returned or chased.",
   "seo": {
     "title": "D2C Payment and COD Reconciliation | VipraTech",
@@ -119,6 +119,145 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Store orders\"]\n    I2[\"Gateway settlements\"]\n    I3[\"Courier remittances\"]\n    I4[\"Courier contracts\"]\n  end\n  subgraph S2[\"Matching\"]\n    M1[\"Order to payment matcher\"]\n    M2[\"COD to remittance matcher\"]\n  end\n  subgraph S3[\"Checks\"]\n    C1[\"Courier charge check\"]\n    C2[\"Order status check\"]\n  end\n  subgraph S4[\"Review and recovery\"]\n    V1(\"Finance review\")\n    V2[\"Open amounts to chase\"]\n  end\n  I1 --> M1\n  I2 --> M1\n  I1 --> M2\n  I3 --> M2\n  I3 --> C1\n  I4 --> C1\n  M1 --> C2\n  M2 --> C2\n  C1 --> V1\n  C2 --> V1\n  V1 --> V2"
   },
+  "app_screens": [
+    {
+      "name": "Orders and payments",
+      "purpose": "Store orders beside gateway settlements and courier COD remittances.",
+      "shows": [
+        "Orders by payment type",
+        "Gateway settlements received",
+        "COD remitted and pending"
+      ]
+    },
+    {
+      "name": "Prepaid tie-out",
+      "purpose": "Each prepaid order tied to its gateway transaction and payout.",
+      "shows": [
+        "Order, captured and settled amount",
+        "Gateway fee and tax",
+        "Refunds and chargebacks"
+      ]
+    },
+    {
+      "name": "COD tie-out",
+      "purpose": "Each delivered COD order tied to the courier's remittance.",
+      "shows": [
+        "Delivered on and remitted on",
+        "COD amount and remittance",
+        "Delivered but not remitted"
+      ]
+    },
+    {
+      "name": "Charges check",
+      "purpose": "Courier and gateway charges checked against your rate cards.",
+      "shows": [
+        "Freight at the contracted slab",
+        "COD handling fee",
+        "RTO charges"
+      ]
+    },
+    {
+      "name": "Chase list",
+      "purpose": "Gaps held for review, and the list to send each partner.",
+      "shows": [
+        "Reason code and amount",
+        "Chase list per partner",
+        "Recovered against chased"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Every prepaid order settled",
+      "logic": "Each captured payment must be paid out by the gateway within its settlement cycle, less fees."
+    },
+    {
+      "rule": "Every COD delivery remitted",
+      "logic": "Each delivered COD order must be remitted by the courier within the agreed days."
+    },
+    {
+      "rule": "Refunds tie to returns",
+      "logic": "Refunds must match an approved return or cancellation. Refunds without one are held."
+    },
+    {
+      "rule": "Charges at the rate card",
+      "logic": "Freight, COD and RTO charges are recalculated from weight, zone and contracted rates."
+    },
+    {
+      "rule": "Returned shipments received",
+      "logic": "Shipments marked returned to origin must be received back in the warehouse."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "NOT_SETTLED",
+      "meaning": "A captured payment was not paid out.",
+      "action": "Raise it with the gateway."
+    },
+    {
+      "code": "COD_NOT_REMITTED",
+      "meaning": "A delivered COD order was not remitted.",
+      "action": "Add it to the courier chase list."
+    },
+    {
+      "code": "REFUND_NO_RETURN",
+      "meaning": "A refund has no return or cancellation behind it.",
+      "action": "Review with customer support."
+    },
+    {
+      "code": "FREIGHT_OVERCHARGED",
+      "meaning": "Freight is above the contracted slab.",
+      "action": "Dispute with the courier."
+    },
+    {
+      "code": "RTO_NOT_RECEIVED",
+      "meaning": "A returned shipment never reached the warehouse.",
+      "action": "Raise a lost-shipment claim."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "StoreOrder",
+      "fields": [
+        "order_id",
+        "payment_type",
+        "amount",
+        "status",
+        "delivered_on"
+      ]
+    },
+    {
+      "entity": "GatewayTxn",
+      "fields": [
+        "txn_id",
+        "order_id",
+        "captured",
+        "fee",
+        "settled_on"
+      ]
+    },
+    {
+      "entity": "CodRemittance",
+      "fields": [
+        "awb",
+        "order_id",
+        "cod_amount",
+        "remitted_on",
+        "remittance_ref"
+      ]
+    },
+    {
+      "entity": "CourierCharge",
+      "fields": [
+        "awb",
+        "weight_slab",
+        "zone",
+        "freight",
+        "cod_fee",
+        "rto_fee"
+      ]
+    }
+  ],
   "inputs": [
     "Orders from Shopify, WooCommerce or your store",
     "Payment gateway settlement reports",
@@ -147,7 +286,7 @@
     "Chasing only after finance review"
   ],
   "compliance_notes": [],
-  "pilot": {
+  "rollout": {
     "duration": "About 6 weeks",
     "scope": "Two to three months of orders, one payment gateway and your main courier or aggregator.",
     "deliverables": [
@@ -185,8 +324,8 @@
       "a": "Yes. Each order keeps all its payments, refunds and exchanges, and its final balance is what is reconciled."
     },
     {
-      "q": "Is this available today?",
-      "a": "Distributor claims settlement is live today. D2C payment and COD reconciliation is in early access: we are building it with a small number of brands as design partners."
+      "q": "How long does it take to go live?",
+      "a": "About 6 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
     }
   ],
   "related": [

@@ -1,12 +1,13 @@
 import {getCollection} from 'astro:content';
 import type {Industry, ProofProject, UseCase} from '../content/schema';
 import {INDUSTRY_ORDER} from '../data/order';
-import {STATUS_ORDER} from './content';
+import {CATEGORY_ORDER} from '../data/categories';
+import {isInProduction} from './content';
 
 // Build-time access to the content collections, for pages. Plain scripts use scripts/content-checks.ts instead.
 
 interface SiteContent {
-  /** Live use cases first, then pilot-ready, then early access, each group in title order. */
+  /** In CATEGORY_ORDER; within a category, use cases in production first, then by title. */
   useCases: UseCase[];
   /** In INDUSTRY_ORDER. */
   industries: Industry[];
@@ -39,7 +40,12 @@ async function load(): Promise<SiteContent> {
   ]);
   const useCases = useCaseEntries
     .map((entry) => entry.data)
-    .sort((a, b) => position(STATUS_ORDER, a.status) - position(STATUS_ORDER, b.status) || a.title.localeCompare(b.title));
+    .sort(
+      (a, b) =>
+        position(CATEGORY_ORDER, a.category) - position(CATEGORY_ORDER, b.category) ||
+        Number(isInProduction(b)) - Number(isInProduction(a)) ||
+        a.title.localeCompare(b.title),
+    );
   const industries = industryEntries
     .map((entry) => entry.data)
     .sort((a, b) => position(INDUSTRY_ORDER, a.slug) - position(INDUSTRY_ORDER, b.slug));

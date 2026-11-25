@@ -1,7 +1,7 @@
 import {fileURLToPath} from 'node:url';
 import {describe, expect, it} from 'vitest';
 import {type Content, diagramErrors, findContentErrors, loadContent} from '../scripts/content-checks';
-import {isProofApproved, statusLabel} from '../src/lib/content';
+import {categoryLabel, isProofApproved} from '../src/lib/content';
 
 const {content, errors} = loadContent(fileURLToPath(new URL('../src/content/', import.meta.url)));
 
@@ -14,29 +14,46 @@ const errorsAfter = (change: (copy: Content) => void) => {
 describe('content', () => {
   it('loads every file against its schema', () => {
     expect(errors).toEqual([]);
-    expect([content.useCases.length, content.industries.length, content.proofProjects.length]).toEqual([15, 8, 1]);
+    expect([content.useCases.length, content.industries.length, content.proofProjects.length]).toEqual([22, 14, 1]);
   });
 
   it('passes the cross-file checks', () => {
     expect(findContentErrors(content)).toEqual([]);
   });
 
-  it('has only distributor scheme claims live, the claims-engine workflows pilot-ready and the rest in early access', () => {
-    const byStatus = (status: string) =>
+  it('shows no readiness labels, and only distributor scheme claims as in production', () => {
+    for (const useCase of content.useCases) expect(useCase).not.toHaveProperty('status');
+    expect(content.useCases.filter((useCase) => isProofApproved(useCase.proof_ref)).map((useCase) => useCase.slug)).toEqual([
+      'distributor-scheme-claims',
+    ]);
+  });
+
+  it('puts every use case in a category, with the agri, chemicals and freight workflows covered', () => {
+    const byCategory = (category: string) =>
       content.useCases
-        .filter((useCase) => useCase.status === status)
+        .filter((useCase) => useCase.category === category)
         .map((useCase) => useCase.slug)
         .sort();
-    expect(byStatus('live')).toEqual(['distributor-scheme-claims']);
-    expect(byStatus('pilot-ready')).toEqual([
-      'co-marketing-fund-claims',
-      'damage-and-expiry-claims',
-      'dealer-incentive-and-rebate-settlement',
-      'display-and-visibility-claims',
-      'distributor-expense-claims',
-      'rate-difference-claims',
+    expect(byCategory('subsidy-freight-quality')).toEqual([
+      'fertiliser-subsidy-reconciliation',
+      'freight-bill-audit',
+      'quality-and-transit-loss-claims',
     ]);
-    expect(byStatus('early-access')).toHaveLength(8);
+    expect(byCategory('channel-deductions')).toEqual([
+      'd2c-payment-and-cod-reconciliation',
+      'marketplace-settlement-reconciliation',
+      'modern-trade-deductions',
+      'quick-commerce-deductions',
+    ]);
+    expect(byCategory('ledgers-accruals')).toHaveLength(4);
+    expect(byCategory('distributor-dealer')).toHaveLength(11);
+  });
+
+  it('covers the agri and chemicals industries', () => {
+    const slugs = content.industries.map((industry) => industry.slug);
+    for (const slug of ['fertilisers', 'crop-protection', 'seeds', 'agri-input-distributors', 'specialty-chemicals', 'chemical-distributors']) {
+      expect(slugs).toContain(slug);
+    }
   });
 
   it('reports an industry that lists a missing use case', () => {
@@ -76,12 +93,29 @@ describe('content', () => {
     ).toContain(`use case ${first.slug}: url should be /use-cases/${first.slug}/`);
   });
 
-  it('reports a site with nothing live', () => {
+  it('reports a site with nothing in production', () => {
     expect(
       errorsAfter((copy) => {
-        for (const useCase of copy.useCases) useCase.status = 'early-access';
+        for (const useCase of copy.useCases) useCase.proof_ref = null;
       }),
-    ).toContain('at least one use case must be live');
+    ).toContain('at least one use case must have an approved proof');
+  });
+
+  it('reports a repeated exception code', () => {
+    expect(
+      errorsAfter((copy) => {
+        const [first] = copy.useCases;
+        first.exception_codes[1].code = first.exception_codes[0].code;
+      }),
+    ).toContain(`use case ${content.useCases[0].slug}: exception_codes lists ${content.useCases[0].exception_codes[0].code} more than once`);
+  });
+
+  it('reports an empty category', () => {
+    expect(
+      errorsAfter((copy) => {
+        for (const useCase of copy.useCases) if (useCase.category === 'subsidy-freight-quality') useCase.category = 'ledgers-accruals';
+      }),
+    ).toContain('category subsidy-freight-quality: no use case is in it');
   });
 });
 
@@ -93,9 +127,10 @@ describe('isProofApproved', () => {
   });
 });
 
-describe('statusLabel', () => {
-  it('names each status', () => {
-    expect([statusLabel('live'), statusLabel('pilot-ready'), statusLabel('early-access')]).toEqual(['Live', 'Pilot-ready', 'Early access']);
+describe('categoryLabel', () => {
+  it('names each category', () => {
+    expect(categoryLabel('distributor-dealer')).toBe('Distributor and dealer claims');
+    expect(categoryLabel('subsidy-freight-quality')).toBe('Subsidy, freight and quality claims');
   });
 });
 

@@ -1,4 +1,4 @@
-import { CalendarDays, MessageCircle } from "lucide-react";
+import { MessageCircle, MonitorPlay } from "lucide-react";
 import type { ContactLinks } from "../../types";
 
 interface ContactButtonsProps {
@@ -29,6 +29,16 @@ export function ContactButtons({ links, location, centered, onDark }: ContactBut
         <span>{links.primary.label}</span>
       </a>
       <a
+        href={links.demo.href}
+        {...(links.demo.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+        data-cta={links.demo.cta}
+        data-cta-location={location}
+        className={secondary}
+      >
+        <MonitorPlay className="w-4 h-4" />
+        <span>Book a demo</span>
+      </a>
+      <a
         href={links.whatsapp}
         target="_blank"
         rel="noopener"
@@ -39,12 +49,6 @@ export function ContactButtons({ links, location, centered, onDark }: ContactBut
         <MessageCircle className="w-4 h-4" />
         <span>WhatsApp us</span>
       </a>
-      {links.call && (
-        <a href={links.call} target="_blank" rel="noopener" data-cta="calendly" data-cta-location={location} className={secondary}>
-          <CalendarDays className="w-4 h-4" />
-          <span>Book a 20-minute call</span>
-        </a>
-      )}
     </div>
   );
 }

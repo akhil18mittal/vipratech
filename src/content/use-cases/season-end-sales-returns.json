@@ -1,0 +1,346 @@
+{
+  "slug": "season-end-sales-returns",
+  "title": "Season-End Sales Returns",
+  "category": "distributor-dealer",
+  "summary": "Check every season-end return of seeds, crop protection products or seasonal stock against the original sale, the return policy and the schemes already paid on it.",
+  "seo": {
+    "title": "Season-End Sales Returns Reconciliation | VipraTech",
+    "description": "Check season-end returns from distributors and dealers against invoices, lots, return windows and caps, and reverse schemes paid on returned stock.",
+    "keywords": [
+      "season end sales returns",
+      "seed sales return reconciliation",
+      "agrochemical sales returns",
+      "unsold stock returns distributors",
+      "sale or return reconciliation"
+    ]
+  },
+  "designed_for": [
+    "CFO or Head of Sales Finance",
+    "Commercial Manager for distribution",
+    "Supply Chain or Depot Manager",
+    "Internal Audit"
+  ],
+  "problem": {
+    "intro": "Seed and crop protection companies, and seasonal businesses such as apparel, sell stock into the channel before the season and take back what does not sell. A weak or late monsoon can double the returns. Each return has to be checked against the lot that was sold, the return window, the policy and the schemes and discounts already paid on the original sale.",
+    "pain_points": [
+      {
+        "title": "Returns of stock never sold to that dealer",
+        "detail": "Lots and batches come back from a distributor who did not buy them, or in larger quantities than were sold."
+      },
+      {
+        "title": "Schemes not reversed",
+        "detail": "Booking discounts, cash discounts and scheme payouts earned on the original sale stay paid after the stock comes back."
+      },
+      {
+        "title": "Returns outside the window or the cap",
+        "detail": "Late returns and returns above the policy share of purchases are accepted because nobody checks each line."
+      },
+      {
+        "title": "Lots that cannot be resold",
+        "detail": "Seed past its test validity, expired chemicals or damaged packs are credited at full price when the policy says otherwise."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech traces each returned lot or batch to the invoices that sold it to that distributor, checks the return window, the policy cap as a share of season purchases, the lot's validity and the condition recorded at the depot, and values the return at the billed price. It then finds every scheme, booking discount and cash discount paid on the returned quantity and calculates what should be reversed. Finance gets a credit note sheet net of reversals, and every line keeps its trace.",
+    "capabilities": [
+      "Traces each returned lot or batch to the original invoices to that distributor",
+      "Checks the return window and the policy cap as a share of season purchases",
+      "Checks lot validity, expiry and the condition recorded at the depot",
+      "Finds schemes, booking discounts and cash discounts paid on returned stock and calculates the reversal",
+      "Credit note sheet net of reversals, with an exception queue for the rest",
+      "Season return report by distributor, product, region and reason"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive returns",
+      "detail": "Return requests and depot receipt notes are loaded with lot, quantity and condition."
+    },
+    {
+      "step": 2,
+      "title": "Trace to sales",
+      "detail": "Each lot is traced to the invoices that sold it to the distributor during the season."
+    },
+    {
+      "step": 3,
+      "title": "Apply the policy",
+      "detail": "Return window, cap and resaleability rules are applied, and the eligible quantity is set."
+    },
+    {
+      "step": 4,
+      "title": "Reverse benefits",
+      "detail": "Schemes and discounts paid on the returned quantity are calculated for reversal."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "Lines outside policy or without a trace go to finance and sales with the reason."
+    },
+    {
+      "step": 6,
+      "title": "Credit and report",
+      "detail": "Finance approves the net credit note sheet, and each distributor gets a statement."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Return note and depot receipt\"] --> B[\"Trace lot to invoice\"]\n  B --> C[\"Apply window and cap\"]\n  C --> D[\"Reverse schemes paid\"]\n  D --> E{\"Traceable and within policy?\"}\n  E -->|\"yes\"| F[\"Net credit note sheet\"]\n  E -->|\"no or unsure\"| G(\"Finance and sales review\")\n  G --> F\n  F --> H[\"Distributor statement\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Return requests and depot receipt notes",
+          "Season sales invoices with lots",
+          "Return policy and scheme register"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Return note and receipt reader",
+          "Lot and batch normaliser"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Lot to invoice tracer",
+          "Window, cap and validity rules",
+          "Scheme and discount reversal"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Exception queue with reason codes",
+          "Net credit note sheet and statements"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Return notes and receipts\"]\n    I2[\"Season invoices with lots\"]\n    I3[\"Policy and schemes\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Return note reader\"]\n    D2[\"Lot normaliser\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Lot to invoice tracer\"]\n    R2[\"Window and cap rules\"]\n    R3[\"Benefit reversal\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Finance review\")\n    V2[\"Net credit note sheet\"]\n  end\n  I1 --> D1 --> D2 --> R1\n  I2 --> R1\n  I3 --> R2\n  I3 --> R3\n  R1 --> R2 --> R3\n  R3 --> V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Returns inbox",
+      "purpose": "Return requests and depot receipts for the season.",
+      "shows": [
+        "Distributor, product and lot",
+        "Quantity returned and condition",
+        "Returns as a share of season purchases"
+      ]
+    },
+    {
+      "name": "Lot trace",
+      "purpose": "Each returned lot traced to the invoices that sold it.",
+      "shows": [
+        "Invoice, date and billed price",
+        "Sold, already returned and now returned",
+        "Lot validity or expiry"
+      ]
+    },
+    {
+      "name": "Benefit reversal",
+      "purpose": "Schemes and discounts paid on the returned quantity.",
+      "shows": [
+        "Scheme payouts on the returned stock",
+        "Booking and cash discounts taken",
+        "Amount to reverse"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Returns held for review, with the trace and policy clause.",
+      "shows": [
+        "Reason code and value",
+        "Depot condition note and photos",
+        "Approve, reduce or reject"
+      ]
+    },
+    {
+      "name": "Season close",
+      "purpose": "The net credit note sheet and the season return report.",
+      "shows": [
+        "Credit note sheet net of reversals",
+        "Statement per distributor",
+        "Returns by product, region and reason"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Lot sold to this distributor",
+      "logic": "Every returned lot must trace to an invoice to the same distributor in the season. Quantity is capped at sold less earlier returns."
+    },
+    {
+      "rule": "Inside the return window",
+      "logic": "The return must reach the depot within the window the policy sets for that product and season."
+    },
+    {
+      "rule": "Within the return cap",
+      "logic": "Eligible returns stay within the cap set as a share of the distributor's season purchases."
+    },
+    {
+      "rule": "Resaleable as the policy defines",
+      "logic": "Lot validity, expiry and the depot's condition note decide whether the return is credited in full, in part or not at all."
+    },
+    {
+      "rule": "Benefits reversed on returned stock",
+      "logic": "Schemes, booking discounts and cash discounts earned on the returned quantity are calculated and netted from the credit."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "LOT_NOT_SOLD",
+      "meaning": "The lot was never invoiced to this distributor.",
+      "action": "Reject, or ask where the stock came from."
+    },
+    {
+      "code": "QTY_OVER_SOLD",
+      "meaning": "Returned quantity is above what was sold, less earlier returns.",
+      "action": "Credit the traceable quantity only."
+    },
+    {
+      "code": "OUTSIDE_WINDOW",
+      "meaning": "The return reached the depot after the window.",
+      "action": "Reject, or approve with commercial sign-off."
+    },
+    {
+      "code": "OVER_RETURN_CAP",
+      "meaning": "Returns are above the policy share of season purchases.",
+      "action": "Credit up to the cap. The rest needs sign-off."
+    },
+    {
+      "code": "LOT_NOT_RESALEABLE",
+      "meaning": "The lot is past validity or damaged beyond the policy.",
+      "action": "Credit at the policy rate for unsaleable stock."
+    },
+    {
+      "code": "BENEFIT_NOT_REVERSED",
+      "meaning": "Schemes or discounts paid on this stock have not been netted.",
+      "action": "Net the reversal from the credit."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "SalesReturn",
+      "fields": [
+        "return_id",
+        "distributor_code",
+        "season",
+        "product",
+        "lot_no",
+        "qty"
+      ]
+    },
+    {
+      "entity": "LotTrace",
+      "fields": [
+        "lot_no",
+        "invoice_no",
+        "invoice_date",
+        "sold_qty",
+        "returned_to_date"
+      ]
+    },
+    {
+      "entity": "ReturnPolicy",
+      "fields": [
+        "product_group",
+        "season",
+        "window_end",
+        "cap_pct",
+        "unsaleable_rate"
+      ]
+    },
+    {
+      "entity": "BenefitReversal",
+      "fields": [
+        "return_id",
+        "scheme_id",
+        "discount_type",
+        "amount"
+      ]
+    }
+  ],
+  "inputs": [
+    "Return requests and depot receipt notes with lot numbers",
+    "Season sales invoices with lot or batch numbers",
+    "Return policy by product group and season",
+    "Scheme, booking discount and cash discount records",
+    "Earlier returns for the season"
+  ],
+  "outputs": [
+    "Return lines traced to invoices, with eligible quantities",
+    "Scheme and discount reversals for returned stock",
+    "Net credit note sheet for finance approval",
+    "Exceptions with reason codes",
+    "Season return report by distributor, product and reason"
+  ],
+  "human_in_the_loop": "Finance and the commercial team decide every return outside policy. The system proposes reversals but finance approves each one before credit notes are raised.",
+  "integrations": [
+    "ERP such as SAP or Tally for invoices, returns and credit notes",
+    "Depot or warehouse system for receipt notes",
+    "DMS or scheme register for payouts",
+    "Shared drive for the return policy"
+  ],
+  "guardrails": [
+    "No credit without a traced invoice for the lot",
+    "Caps and windows from the policy version for that season",
+    "Reversals shown line by line beside the credit",
+    "Claimed and eligible quantities shown side by side"
+  ],
+  "compliance_notes": [
+    "Sales return credit notes should reference the original invoice for GST; the trace keeps that link.",
+    "Scheme reversals keep trade spend accruals and revenue net of returns correct for the season close."
+  ],
+  "rollout": {
+    "duration": "About 6 weeks",
+    "scope": "Returns from the last season for one region or product group, with finance-settled returns as the benchmark.",
+    "deliverables": [
+      "Return policy set up as rules",
+      "Returns traced to invoices, with exceptions",
+      "Scheme and discount reversal calculation",
+      "Comparison with finance-settled returns"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Returns traced to sale",
+        "how": "Share of returned quantity matched to an invoice for the same lot."
+      },
+      {
+        "metric": "Benefits found unreversed",
+        "how": "Schemes and discounts still paid on returned stock."
+      },
+      {
+        "metric": "Ineligible returns caught",
+        "how": "Lines outside the window, cap or resaleability rules, confirmed by finance."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our invoices do not always carry lot numbers. Does that work?",
+      "a": "Yes. Where lots are missing, returns are matched on product, pack, quantity and date, and those matches are marked weaker so finance can decide how much evidence it needs."
+    },
+    {
+      "q": "Can it handle different policies for seeds and crop protection?",
+      "a": "Yes. Windows, caps and resaleability rules are set per product group and season, and each return is judged by the rules for its own group."
+    },
+    {
+      "q": "Does it work for apparel sale-or-return?",
+      "a": "Yes. Season, style and size replace lot numbers, and the same trace, cap and reversal checks apply."
+    },
+    {
+      "q": "Can it show returns risk before the season ends?",
+      "a": "Yes. Channel stock and liquidation by distributor can be loaded during the season, so likely returns show up while there is still time to move stock."
+    }
+  ],
+  "related": [
+    "damage-and-expiry-claims",
+    "dealer-incentive-and-rebate-settlement",
+    "cash-discount-claims"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/season-end-sales-returns/"
+}

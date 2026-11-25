@@ -1,7 +1,7 @@
 {
   "slug": "display-and-visibility-claims",
   "title": "Display and Visibility Claims",
-  "status": "pilot-ready",
+  "category": "distributor-dealer",
   "summary": "Check retailer display, shelf and branding claims against the agreed programme, outlet list and photo proof, and catch reused, mismatched or missing photos before finance pays.",
   "seo": {
     "title": "Display and Visibility Claims Verification | VipraTech",
@@ -118,6 +118,144 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Claims and outlet lists\"]\n    I2[\"Display photos\"]\n    I3[\"Programme register\"]\n  end\n  subgraph S2[\"Image checks\"]\n    P1[\"Photo metadata reader\"]\n    P2[\"Near duplicate detection\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Outlet and period matcher\"]\n    R2[\"Programme rate calculator\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Trade marketing review\")\n    V2[\"Credit note sheet\"]\n    V3[\"Spend report\"]\n  end\n  I2 --> P1\n  I2 --> P2\n  I1 --> R1\n  I3 --> R1\n  R1 --> R2\n  P1 --> V1\n  P2 --> V1\n  R2 --> V1\n  V1 --> V2\n  V2 --> V3"
   },
+  "app_screens": [
+    {
+      "name": "Programme setup",
+      "purpose": "Each display programme with its outlets, display types, rates and photo rules.",
+      "shows": [
+        "Enrolled outlets and display type",
+        "Rate per display per month",
+        "Photos needed, and when"
+      ]
+    },
+    {
+      "name": "Photo inbox",
+      "purpose": "Display photos from the field app, WhatsApp exports or the distributor.",
+      "shows": [
+        "Outlet, date and photo count",
+        "Location and timestamp when present",
+        "Duplicate check status"
+      ]
+    },
+    {
+      "name": "Photo check",
+      "purpose": "Each photo checked for the outlet, the period, the brand on display and reuse.",
+      "shows": [
+        "Matched outlet and month",
+        "Near-duplicate photos found",
+        "Brand and display type seen"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Claims held for review, with the photos side by side.",
+      "shows": [
+        "Reason code and amount",
+        "The earlier photo it resembles",
+        "Approve, reject or ask for a new photo"
+      ]
+    },
+    {
+      "name": "Payout sheet",
+      "purpose": "Approved display payments by outlet and distributor.",
+      "shows": [
+        "Months qualified per outlet",
+        "Credit note or payout sheet",
+        "Coverage and rejection rate by region"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Outlet enrolled in the programme",
+      "logic": "The outlet must be on the programme list for the claim month, with the display type it was enrolled for."
+    },
+    {
+      "rule": "Photo from the right period",
+      "logic": "Photos must be taken within the claim period. Timestamps and metadata are used where they exist, and photos without them count as weaker evidence."
+    },
+    {
+      "rule": "Not a reused photo",
+      "logic": "Each photo is compared with every earlier display photo by image fingerprint, so a photo reused across outlets or months is caught even when cropped or resized."
+    },
+    {
+      "rule": "Display visible as agreed",
+      "logic": "The photo is checked for the agreed brand and display type. Doubtful photos go to a person rather than straight to rejection."
+    },
+    {
+      "rule": "Rate and months recalculated",
+      "logic": "Payment is the programme rate times the months that qualified, held to the programme budget."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "NOT_ENROLLED",
+      "meaning": "The outlet is not on the programme for that month.",
+      "action": "Reject, or add the outlet if it was enrolled late."
+    },
+    {
+      "code": "PHOTO_REUSED",
+      "meaning": "The photo matches one already used for another outlet or month.",
+      "action": "Reject the month and flag the outlet."
+    },
+    {
+      "code": "PHOTO_OUT_OF_PERIOD",
+      "meaning": "The photo was taken outside the claim period.",
+      "action": "Ask for a photo from the period."
+    },
+    {
+      "code": "DISPLAY_UNCLEAR",
+      "meaning": "The brand or display type cannot be confirmed from the photo.",
+      "action": "A reviewer looks at the photo and decides."
+    },
+    {
+      "code": "OVER_BUDGET",
+      "meaning": "Approved payments would exceed the programme budget.",
+      "action": "Hold the excess for sign-off."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "DisplayProgramme",
+      "fields": [
+        "programme_id",
+        "display_type",
+        "rate_per_month",
+        "valid_from",
+        "valid_to",
+        "budget"
+      ]
+    },
+    {
+      "entity": "Enrolment",
+      "fields": [
+        "programme_id",
+        "outlet_id",
+        "distributor_code",
+        "enrolled_from"
+      ]
+    },
+    {
+      "entity": "DisplayPhoto",
+      "fields": [
+        "photo_id",
+        "outlet_id",
+        "taken_at",
+        "fingerprint",
+        "source"
+      ]
+    },
+    {
+      "entity": "DisplayClaim",
+      "fields": [
+        "outlet_id",
+        "month",
+        "claimed_amount",
+        "qualified",
+        "exception_code"
+      ]
+    }
+  ],
   "inputs": [
     "Display claims with outlet lists",
     "Photos from the field app, distributors or retailers",
@@ -146,11 +284,11 @@
   "compliance_notes": [
     "Display payments are often settled through distributors by credit note; the system keeps the link from programme to claim to credit note for audit."
   ],
-  "pilot": {
+  "rollout": {
     "duration": "About 6 weeks",
     "scope": "One display programme in one region, with one month of settled display claims as the benchmark.",
     "deliverables": [
-      "Programme register for the pilot",
+      "Programme register for the rollout",
       "Photo checks on one month of claims",
       "Credit note sheet with exceptions",
       "Comparison with settled claims"
@@ -185,7 +323,7 @@
     },
     {
       "q": "Is this the same system as your distributor claims settlement?",
-      "a": "Yes. It runs on the same claims engine as our live distributor claims settlement, configured to your display programme during a pilot."
+      "a": "Yes. Every VipraTech workflow runs on one claims engine: the document reading, matching, review queue and audit trail are shared. For this workflow we set up your display programme as versioned rules, along with your document templates and matching keys."
     }
   ],
   "related": [

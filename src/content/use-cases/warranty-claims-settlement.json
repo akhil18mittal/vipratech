@@ -1,7 +1,7 @@
 {
   "slug": "warranty-claims-settlement",
   "title": "Dealer Warranty Claims Settlement",
-  "status": "early-access",
+  "category": "distributor-dealer",
   "summary": "Check warranty claims from dealers and service centres against warranty terms, serial numbers, sale dates, returned parts and labour rates before finance reimburses them.",
   "seo": {
     "title": "Warranty Claims Verification for Dealers | VipraTech",
@@ -119,6 +119,143 @@
     ],
     "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Claims and job cards\"]\n    I2[\"Serial and sale records\"]\n    I3[\"Warranty terms and rates\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Job card reader\"]\n    U2[\"Photo checks\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Warranty eligibility\"]\n    R2[\"Claim history check\"]\n    R3[\"Rate and parts checks\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Service team review\")\n    V2[\"Reimbursement sheet\"]\n  end\n  I1 --> U1\n  I1 --> U2\n  U1 --> R1\n  I2 --> R1\n  R1 --> R2\n  I3 --> R3\n  R2 --> R3\n  U2 --> V1\n  R3 --> V1\n  V1 --> V2"
   },
+  "app_screens": [
+    {
+      "name": "Claims inbox",
+      "purpose": "Dealer and service-centre warranty claims with job cards and part details.",
+      "shows": [
+        "Dealer, product and claimed amount",
+        "Serial number and fault code",
+        "Job card attached or not"
+      ]
+    },
+    {
+      "name": "Product check",
+      "purpose": "Each serial number checked against its sale, warranty period and terms.",
+      "shows": [
+        "Sale date and warranty end",
+        "Model and terms version",
+        "Earlier claims on this serial"
+      ]
+    },
+    {
+      "name": "Cost check",
+      "purpose": "Labour, parts and travel checked against the rate card.",
+      "shows": [
+        "Labour hours at the rate card",
+        "Parts at the agreed price",
+        "Travel within limits"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Claims held for review, with the serial history and job card.",
+      "shows": [
+        "Reason code and amount",
+        "Serial history timeline",
+        "Approve, adjust or reject"
+      ]
+    },
+    {
+      "name": "Reimbursement",
+      "purpose": "Approved claims ready for finance, with the parts to be returned.",
+      "shows": [
+        "Reimbursement sheet per dealer",
+        "Parts return list",
+        "Claim rate by model and fault"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Serial sold and in warranty",
+      "logic": "The serial number must be on a sale record, and the repair date must fall inside the warranty period from sale or installation."
+    },
+    {
+      "rule": "Fault covered by the terms",
+      "logic": "The fault code and part must be covered by the warranty terms for that model on the sale date."
+    },
+    {
+      "rule": "Costs at the rate card",
+      "logic": "Labour, parts and travel are recalculated at the rate card. Anything above it is reduced."
+    },
+    {
+      "rule": "Repeat repair pattern",
+      "logic": "The same serial or part claimed again within a short period, or an unusual claim rate at one dealer, is held for review."
+    },
+    {
+      "rule": "Part returned where needed",
+      "logic": "Where the policy needs the replaced part back, the claim is paid once its return is recorded."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "SERIAL_NOT_FOUND",
+      "meaning": "The serial number is not on any sale record.",
+      "action": "Ask for proof of purchase, or reject."
+    },
+    {
+      "code": "OUT_OF_WARRANTY",
+      "meaning": "The repair date is past the warranty period.",
+      "action": "Reject, or approve as goodwill with sign-off."
+    },
+    {
+      "code": "NOT_COVERED",
+      "meaning": "The fault or part is not covered by the terms.",
+      "action": "Reject, citing the clause."
+    },
+    {
+      "code": "ABOVE_RATE_CARD",
+      "meaning": "Labour, parts or travel is above the rate card.",
+      "action": "Approve at the rate card."
+    },
+    {
+      "code": "REPEAT_CLAIM",
+      "meaning": "The serial or part was claimed recently.",
+      "action": "Technical review before payment."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "WarrantyClaim",
+      "fields": [
+        "claim_id",
+        "dealer_code",
+        "serial_no",
+        "fault_code",
+        "repair_date",
+        "claimed_amount"
+      ]
+    },
+    {
+      "entity": "SerialRecord",
+      "fields": [
+        "serial_no",
+        "model",
+        "sold_on",
+        "warranty_end",
+        "terms_version"
+      ]
+    },
+    {
+      "entity": "RateCard",
+      "fields": [
+        "model",
+        "labour_rate",
+        "part_prices",
+        "travel_limit"
+      ]
+    },
+    {
+      "entity": "PartReturn",
+      "fields": [
+        "claim_id",
+        "part_no",
+        "returned_on",
+        "condition"
+      ]
+    }
+  ],
   "inputs": [
     "Warranty claims with job cards and invoices",
     "Serial number sale and dispatch records",
@@ -146,7 +283,7 @@
     "Technical decisions left to the service team"
   ],
   "compliance_notes": [],
-  "pilot": {
+  "rollout": {
     "duration": "About 8 weeks",
     "scope": "One product line, with three months of settled warranty claims as the benchmark.",
     "deliverables": [
@@ -184,8 +321,8 @@
       "a": "Yes. Pro-rata and free-replacement terms are configured as rules for each product."
     },
     {
-      "q": "Is this available today?",
-      "a": "Distributor claims settlement is live today. Warranty claims settlement is in early access: we are building it with a small number of brands as design partners."
+      "q": "How long does it take to go live?",
+      "a": "About 8 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
     }
   ],
   "related": [

@@ -10,7 +10,7 @@ import {PageHero} from '../../components/content/PageHero';
 import {contactLinks} from '../../data/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {siteContent} from '../../lib/collections';
-import {STATUS_ORDER, statusLabel} from '../../lib/content';
+import {categoryLabel, isInProduction} from '../../lib/content';
 
 export async function getStaticPaths() {
   const {industries} = await siteContent();
@@ -20,18 +20,13 @@ export async function getStaticPaths() {
 const content = await siteContent();
 const industry = content.industry(Astro.props.slug);
 const contact = contactLinks(industry.url, `claims reconciliation for ${industry.name}`);
-// Live first, then pilot-ready, then early access; within a status, in the order the industry lists them.
-const cards = industry.use_cases
-  .map((entry, index) => ({entry, index, useCase: content.useCase(entry.use_case)}))
-  .sort((a, b) => STATUS_ORDER.indexOf(a.useCase.status) - STATUS_ORDER.indexOf(b.useCase.status) || a.index - b.index)
-  .map(({entry, useCase}) => ({
-    label: statusLabel(useCase.status),
-    title: useCase.title,
-    text: entry.note,
-    href: useCase.url,
-    featured: useCase.status === 'live',
-  }));
+// In the order the industry lists them, which puts the workflows that matter most in that industry first.
+const cards = industry.use_cases.map((entry) => {
+  const useCase = content.useCase(entry.use_case);
+  return {label: categoryLabel(useCase.category), title: useCase.title, text: entry.note, href: useCase.url, featured: isInProduction(useCase)};
+});
 const paragraph = 'text-base text-slate-600 leading-relaxed max-w-3xl';
+const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold';
 ---
 
 <BaseLayout
@@ -56,7 +51,43 @@ const paragraph = 'text-base text-slate-600 leading-relaxed max-w-3xl';
   </Section>
 
   <Section title="Documents and systems we work with">
-    <BulletList items={industry.documents} />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class={label}>Documents</h3>
+        <BulletList items={industry.documents} />
+      </div>
+      <div>
+        <h3 class={label}>Systems and data sources</h3>
+        <BulletList items={industry.systems} />
+      </div>
+    </div>
+  </Section>
+
+  {
+    industry.facts.length > 0 && (
+      <Section title="The numbers behind the problem">
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {industry.facts.map((fact) => (
+            <li class="p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+              <p class="text-sm text-slate-800 leading-relaxed">{fact.text}</p>
+              <a href={fact.url} rel="noopener" target="_blank" class="block text-xs font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">
+                Source: {fact.source}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+
+  <Section title="How the engine fits">
+    <p class={paragraph}>
+      Every workflow above runs on one engine: documents are read and normalised, each line is checked against versioned
+      rules and matched to your invoices, and anything uncertain goes to your team with a reason code.
+    </p>
+    <p class="text-base">
+      <a href="/platform/" class="font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2">See the architecture →</a>
+    </p>
   </Section>
 
   <Section title="FAQs">
