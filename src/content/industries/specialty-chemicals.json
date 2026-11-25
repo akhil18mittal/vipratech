@@ -1,0 +1,111 @@
+{
+  "slug": "specialty-chemicals",
+  "name": "Specialty and Industrial Chemicals",
+  "seo": {
+    "title": "Claims Reconciliation for Chemical Manufacturers | VipraTech",
+    "description": "Quality, short-weight and transit-loss claims, freight bills, distributor rebates, price support and credit notes checked line by line for chemical makers.",
+    "keywords": [
+      "chemical quality claims",
+      "chemical distributor rebates",
+      "chemical freight bill audit",
+      "short weight claims chemicals",
+      "volume rebate accrual Ind AS 115",
+      "COA deviation claims"
+    ]
+  },
+  "hero": {
+    "headline": "Settle quality and short-weight claims on evidence, and every rebate on the numbers",
+    "subheadline": "Chemical manufacturers sell in bulk to industrial customers and through distributors. VipraTech checks each claim against COAs, weighbridge slips, LRs and agreements."
+  },
+  "intro": "Chemical manufacturers sell to industrial customers directly and through distributors, by tanker, drum and bag. Customers claim for off-spec material, short weight and transit damage. Distributors earn volume rebates and price support when prices fall. Freight is a large share of cost. Each of these is a claim that needs evidence and the right terms, and most are settled by email and spreadsheet.",
+  "challenges": [
+    {
+      "title": "Quality and weight claims settled to keep the customer",
+      "detail": "Credit notes for off-spec or short material are raised before anyone checks the COA, the retest or the weighbridge slips."
+    },
+    {
+      "title": "Rebates estimated every quarter",
+      "detail": "Volume rebates to distributors and customers must be estimated and accrued each quarter, and the estimate rarely matches what is finally paid."
+    },
+    {
+      "title": "Price support on falling prices",
+      "detail": "When prices fall, distributors claim compensation on stock they hold, and the quantity is hard to verify."
+    },
+    {
+      "title": "Freight and transit losses",
+      "detail": "Tanker and truck freight is billed with detention and extras, and transit losses are absorbed instead of recovered."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Off-spec, short-weight and transit-loss claims checked against COAs, retests, weighbridge slips, LRs and PODs."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Tanker and truck freight checked against lane rates, weights, detention rules and duplicate LRs."
+    },
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Volume and growth rebates to distributors and customers recalculated from billing and collections."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price support claims from distributors capped at the stock they could have held on the date."
+    },
+    {
+      "use_case": "trade-spend-accruals",
+      "note": "Rebate and discount accruals compared with what customers and distributors have earned, ahead of quarter close."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Early-payment discounts checked against realisation dates and slabs."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Quality, rebate and discount credit notes tied to approvals and customer ledgers."
+    }
+  ],
+  "documents": [
+    "Customer claims with photos and lab reports",
+    "Certificates of analysis and specifications",
+    "Weighbridge slips, LRs and PODs",
+    "Distributor and customer rebate agreements",
+    "Price circulars and stock statements",
+    "Transporter bills and freight contracts"
+  ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Laboratory information systems",
+    "Weighbridge and gate systems",
+    "Transport management system",
+    "Customer and distributor portals"
+  ],
+  "facts": [
+    {
+      "text": "Chemical companies measure revenue net of volume rebates and discount schemes, which are variable consideration and must be estimated each period.",
+      "source": "Sumitomo Chemical India, notes to accounts",
+      "url": "https://www.goodreturns.in/company/sumitomo-chemical-india/notes-to-account.html"
+    },
+    {
+      "text": "India's chemicals industry spans more than 80,000 commercial products, from bulk and specialty chemicals to agrochemicals, polymers and fertilisers.",
+      "source": "US International Trade Administration, India chemicals guide",
+      "url": "https://www.trade.gov/country-commercial-guides/india-chemicals"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can it read our COAs and lab reports?",
+      "a": "Yes. COAs, lab reports and weighbridge slips are read into structured values, and anything read with low confidence goes to a person."
+    },
+    {
+      "q": "Can it help with rebate accruals for Ind AS 115?",
+      "a": "Yes. Rebates earned to date are recalculated from billing, so the accrual reflects what customers have actually earned."
+    },
+    {
+      "q": "Does it work for tanker loads as well as bags and drums?",
+      "a": "Yes. Tolerances and weight rules are set by product, pack and mode, from each customer's terms."
+    }
+  ],
+  "url": "/industries/specialty-chemicals/"
+}

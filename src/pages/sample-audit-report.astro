@@ -1,0 +1,149 @@
+---
+import Section from '../components/content/Section.astro';
+import {CtaBlock} from '../components/content/CtaBlock';
+import {PageHero} from '../components/content/PageHero';
+import {contactLinks} from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// What a claims audit report looks like. Every name and figure here is invented, and the page says so at the top and
+// in the table captions, so nobody reads it as a result or a benchmark.
+
+const contact = contactLinks('/sample-audit-report/', 'a free claims audit');
+
+const inr = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
+
+const summary = [
+  {label: 'Distributors', value: '42'},
+  {label: 'Claim lines checked', value: '1,860'},
+  {label: 'Amount claimed', value: inr(4860000)},
+  {label: 'Amount flagged', value: inr(151400)},
+];
+
+const reasons = [
+  {code: 'DUP', reason: 'Invoice already claimed in an earlier month', lines: 18, amount: 52300, outcome: 'Not payable'},
+  {code: 'EXP', reason: 'Scheme not valid on the invoice date', lines: 14, amount: 27600, outcome: 'Not payable'},
+  {code: 'SKU', reason: 'SKU not covered by the scheme', lines: 21, amount: 19800, outcome: 'Not payable'},
+  {code: 'SLAB', reason: 'Slab or cap applied wrongly; amount recalculated', lines: 33, amount: 31900, outcome: 'Pay the recalculated amount'},
+  {code: 'PRF', reason: 'Proof missing or unreadable', lines: 29, amount: 19800, outcome: 'Needs review'},
+];
+
+const lines = [
+  {distributor: 'D-014, Jaipur', scheme: 'Q2 slab scheme', invoice: 'INV-20871', claimed: 18400, due: 0, code: 'DUP'},
+  {distributor: 'D-007, Kota', scheme: 'Monsoon display', invoice: 'INV-19342', claimed: 6000, due: 0, code: 'EXP'},
+  {distributor: 'D-021, Ajmer', scheme: 'Q2 slab scheme', invoice: 'INV-21105', claimed: 12750, due: 9600, code: 'SLAB'},
+  {distributor: 'D-003, Udaipur', scheme: 'New launch 5+1', invoice: 'INV-20412', claimed: 4320, due: 0, code: 'SKU'},
+  {distributor: 'D-014, Jaipur', scheme: 'Damage and expiry', invoice: 'INV-20990', claimed: 2860, due: null, code: 'PRF'},
+];
+
+const totalLines = reasons.reduce((sum, row) => sum + row.lines, 0);
+const totalAmount = reasons.reduce((sum, row) => sum + row.amount, 0);
+const th = 'px-4 py-3 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wide whitespace-nowrap';
+const td = 'px-4 py-3 text-sm text-zinc-300 align-top';
+const num = 'px-4 py-3 text-sm text-zinc-300 text-right tabular-nums whitespace-nowrap align-top';
+---
+
+<BaseLayout
+  title="Sample Claims Audit Report | VipraTech"
+  description="What a VipraTech claims audit report looks like: every flagged claim line with its reason, the recalculated amount and the total at risk."
+  page={{type: 'sample-report'}}
+  crumbs={[{name: 'Sample audit report', path: '/sample-audit-report/'}]}
+>
+  <PageHero
+    eyebrow="Sample with invented figures"
+    title="Sample claims audit report"
+    subtitle="This is the format of the report you get from a free claims audit. The brand, distributors and every figure below are invented to show the format. They are not results from a real audit and not a benchmark: your audit may find more or less."
+    contact={contact}
+  />
+
+  <Section title="Summary" intro="Example Foods (fictional), distributor claims for July to September, all regions.">
+    <dl class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        summary.map((item) => (
+          <div class="p-5 bg-zinc-900/70 border border-zinc-800 rounded-xl">
+            <dt class="text-xs font-semibold text-zinc-500 uppercase tracking-wide">{item.label}</dt>
+            <dd class="mt-1 text-2xl font-bold text-white tabular-nums">{item.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section title="Findings by reason" intro="Each flagged line has one main reason. Not payable lines are excluded from the credit note sheet; lines needing review go to your team with the evidence.">
+    <div class="overflow-x-auto border border-zinc-800 rounded-xl">
+      <table class="min-w-full divide-y divide-zinc-800 bg-zinc-900/70">
+        <caption class="sr-only">Flagged claim lines by reason, with invented figures</caption>
+        <thead class="bg-zinc-950/80">
+          <tr>
+            <th scope="col" class={th}>Code</th>
+            <th scope="col" class={th}>Reason</th>
+            <th scope="col" class={`${th} text-right`}>Lines</th>
+            <th scope="col" class={`${th} text-right`}>Amount</th>
+            <th scope="col" class={th}>Outcome</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-800">
+          {
+            reasons.map((row) => (
+              <tr>
+                <td class={`${td} font-semibold text-white`}>{row.code}</td>
+                <td class={td}>{row.reason}</td>
+                <td class={num}>{row.lines}</td>
+                <td class={num}>{inr(row.amount)}</td>
+                <td class={td}>{row.outcome}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+        <tfoot class="bg-zinc-950/80">
+          <tr>
+            <th scope="row" colspan="2" class={`${td} text-left font-semibold text-white`}>Total flagged</th>
+            <td class={`${num} font-semibold text-white`}>{totalLines}</td>
+            <td class={`${num} font-semibold text-white`}>{inr(totalAmount)}</td>
+            <td class={td}></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </Section>
+
+  <Section title="Example lines" intro="Every line in the report shows the claimed amount, the amount due under the scheme and the evidence behind the decision.">
+    <div class="overflow-x-auto border border-zinc-800 rounded-xl">
+      <table class="min-w-full divide-y divide-zinc-800 bg-zinc-900/70">
+        <caption class="sr-only">Example flagged claim lines, with invented figures</caption>
+        <thead class="bg-zinc-950/80">
+          <tr>
+            <th scope="col" class={th}>Distributor</th>
+            <th scope="col" class={th}>Scheme</th>
+            <th scope="col" class={th}>Invoice</th>
+            <th scope="col" class={`${th} text-right`}>Claimed</th>
+            <th scope="col" class={`${th} text-right`}>Due</th>
+            <th scope="col" class={th}>Code</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-800">
+          {
+            lines.map((row) => (
+              <tr>
+                <td class={`${td} whitespace-nowrap`}>{row.distributor}</td>
+                <td class={`${td} whitespace-nowrap`}>{row.scheme}</td>
+                <td class={`${td} whitespace-nowrap`}>{row.invoice}</td>
+                <td class={num}>{inr(row.claimed)}</td>
+                <td class={num}>{row.due === null ? 'Review' : inr(row.due)}</td>
+                <td class={`${td} font-semibold text-white`}>{row.code}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section title="After go-live">
+    <p class="text-base text-zinc-400 leading-relaxed max-w-3xl">
+      After go-live, the same checks run every month on live claims. Lines that pass go to a credit note sheet for finance to
+      approve, each distributor gets a line-by-line settlement statement, and every decision is logged.
+    </p>
+  </Section>
+
+  <CtaBlock headline="Get this report for your own claims" text="Free, under NDA, in 5 working days." contact={contact} />
+</BaseLayout>

@@ -11,7 +11,5 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-const {capabilities, industries, useCases, proofProjects} = content;
-console.log(
-  `Content OK: ${capabilities.length} capabilities, ${industries.length} industries, ${useCases.length} use cases, ${proofProjects.length} proof projects.`,
-);
+const {useCases, industries, proofProjects} = content;
+console.log(`Content OK: ${useCases.length} use cases, ${industries.length} industries, ${proofProjects.length} proof project(s).`);

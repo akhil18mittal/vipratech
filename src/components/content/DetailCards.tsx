@@ -1,4 +1,4 @@
-/** A titled card per item: an industry's challenges, a use case's pain points. */
+/** A titled card per item: a use case's pain points, an industry's challenges, the homepage's problems. */
 export function DetailCards({ items }: { items: readonly { title: string; detail: string }[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -1,66 +1,9 @@
-type EvidenceLevel = "Built/Deployed" | "Prototyped" | "Researched/Designed";
-
-export interface DiagnosticTriggerProps {
-  onOpenDiagnostic: (workflow?: string) => void;
-}
-
-export interface ServiceOffer {
-  id: string;
-  title: string;
-  diagnosticLabel: string;
-  description: string;
-  includedFeatures: string[];
-  targetAudience: string;
-  primaryOfferName: string;
-  sprintOutputs: string[];
-  /** The matching /solutions/{slug}/ page, if there is one. */
-  solutionSlug?: string;
-}
-
-export interface ProductSystem {
-  id: string;
-  name: string;
-  evidenceLevel: EvidenceLevel;
-  shortDesc: string;
-  capabilities: string[];
-}
-
-export interface FitDiagnosticInput {
-  workflowType: string;
-  challenges: string[];
-  timeline: string;
-  teamSize: string;
-  currentWorkaround: string;
-}
-
-export interface DiagnosticAnalysis {
-  fitScore: number;
-  fitStatus: "Strong Fit";
-  recommendedSprint: string;
-  estimatedDurationDays: string;
-  keyRisksIdentified: string[];
-  recommendedArchitecture: string;
-  sprintDeliverables: string[];
-  evidenceLevelToDeliver: EvidenceLevel;
-  reasoning: string;
-}
-
 export interface NavLink {
   name: string;
   href: string;
 }
 
-export interface SolutionLink extends NavLink {
-  headline: string;
-}
-
-/** Links to the content pages, passed from src/pages/index.astro to the homepage app. */
-export interface HomeLinks {
-  solutions: SolutionLink[];
-  industries: NavLink[];
-}
-
-/** A card on a content page. Without `href` the card is shown without a link (its page isn't published yet). */
+/** A card on a content page. Without `href` the card is shown without a link. */
 export interface CardItem {
   label?: string;
   title: string;
@@ -76,7 +19,10 @@ export interface Diagram {
   height: number;
 }
 
+/** The buttons a page offers: its main action, a demo, and WhatsApp. `cta` names the button in the cta_click event. */
 export interface ContactLinks {
-  call: string;
+  primary: {href: string; label: string; cta: string};
+  /** The Calendly booking page once it is set up, a demo request email until then. */
+  demo: {href: string; cta: string};
   whatsapp: string;
 }

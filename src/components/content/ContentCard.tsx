@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import type { CardItem } from "../../types";
 
-/** A linked card, or a plain one when its page isn't published yet. */
+/** A linked card, or a plain one when it has no page. */
 export function ContentCard({ item }: { item: CardItem }) {
   const body = (
     <>

@@ -1,0 +1,346 @@
+{
+  "slug": "quick-commerce-deductions",
+  "title": "Quick-Commerce Deductions",
+  "category": "channel-deductions",
+  "summary": "Match every Blinkit, Zepto and Swiggy Instamart payment back to its POs, invoices and dark-store receipts, check each deduction against your agreed terms, and dispute the wrong ones.",
+  "seo": {
+    "title": "Quick-Commerce Deductions Reconciliation | VipraTech",
+    "description": "Reconcile Blinkit, Zepto and Swiggy Instamart payments with POs, invoices and GRNs, check every deduction against agreed terms and dispute wrong ones.",
+    "keywords": [
+      "quick commerce reconciliation",
+      "Blinkit Zepto Instamart reconciliation",
+      "dark store short receipt deduction",
+      "quick commerce payment reconciliation",
+      "quick commerce GRN reconciliation"
+    ]
+  },
+  "designed_for": [
+    "CFO or Head of Finance",
+    "Accounts Receivable Lead",
+    "Quick-Commerce Channel Manager"
+  ],
+  "problem": {
+    "intro": "Brands that sell to quick-commerce platforms ship against hundreds of purchase orders a month to warehouses and dark stores. What comes back is a payment that is less than the invoices, with deductions for short receipts, damage and near-expiry rejections, margin differences, promotion support and other charges, explained across portal reports and remittance files.",
+    "pain_points": [
+      {
+        "title": "Payments that never add up",
+        "detail": "One payment covers many invoices and many deductions, so finance cannot see which invoice was short-paid or why without days of spreadsheet work."
+      },
+      {
+        "title": "Receiving-dock deductions",
+        "detail": "Short receipts, damage and near-expiry rejections are raised at the dark store or warehouse, and the brand rarely has the evidence to check them."
+      },
+      {
+        "title": "Terms applied inconsistently",
+        "detail": "Margins, promotion support and charges are agreed per platform and per SKU, but deductions are not checked against what was actually agreed."
+      },
+      {
+        "title": "Dispute windows close",
+        "detail": "Each platform has its own process and deadline for disputes, and the wrong deductions that nobody had time to raise are written off."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech brings together purchase orders, your invoices, each platform's receipt and return reports, payment advice and the trade terms you agreed with each platform. It reads portal exports and remittance files in each platform's format, ties every payment back to the invoices it covers, classifies each deduction and checks it against the receipt evidence and the agreed terms. Deductions that hold up are accepted. The rest are flagged with the reason and the evidence, and finance decides which to dispute. The system then builds a dispute pack in the platform's format and tracks what is recovered.",
+    "capabilities": [
+      "Reads portal exports, payment advice and remittance files from each platform",
+      "Ties every payment to the invoices and purchase orders it covers",
+      "Classifies deductions: short receipt, damage, expiry, rate difference, promotion and other charges",
+      "Checks each deduction against receipt evidence and the terms agreed with that platform",
+      "Builds dispute packs with the evidence attached and tracks recoveries",
+      "Ageing report of open deductions and disputes by platform"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect documents",
+      "detail": "POs, invoices, receipt and return reports, and payment advice are pulled from portals, email and your ERP for the period."
+    },
+    {
+      "step": 2,
+      "title": "Normalise",
+      "detail": "Each platform's files are read into one structure of PO, invoice, SKU, quantity, amount and deduction."
+    },
+    {
+      "step": 3,
+      "title": "Tie payments to invoices",
+      "detail": "Every payment is matched to the invoices it covers, and every short payment is split into its deductions."
+    },
+    {
+      "step": 4,
+      "title": "Check each deduction",
+      "detail": "Deductions are checked against receipt evidence and the terms agreed with that platform."
+    },
+    {
+      "step": 5,
+      "title": "Finance review",
+      "detail": "Finance reviews flagged deductions with the reason and evidence, and decides which to dispute."
+    },
+    {
+      "step": 6,
+      "title": "Dispute and track",
+      "detail": "Dispute packs are prepared in each platform's format, and recoveries are tracked to closure."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"PO, invoice and GRN data\"] --> B[\"Normalise by PO and SKU\"]\n  C[\"Payment advice and deductions\"] --> D[\"Classify each deduction\"]\n  B --> E[\"Match deduction to evidence\"]\n  D --> E\n  E --> F{\"Valid under agreed terms?\"}\n  F -->|\"yes\"| G[\"Accept and post\"]\n  F -->|\"no or unsure\"| H(\"Finance review\")\n  H --> I[\"Dispute pack to platform\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Platform portal exports",
+          "Payment advice and remittance files",
+          "ERP invoices and trade terms"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Parsers for each platform's formats",
+          "Deduction classifier"
+        ]
+      },
+      {
+        "name": "Matching and rules",
+        "components": [
+          "PO, invoice and receipt matcher",
+          "Terms and margin checker"
+        ]
+      },
+      {
+        "name": "Review and recovery",
+        "components": [
+          "Finance review queue",
+          "Dispute pack builder",
+          "Recovery and ageing tracker"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Platform portal exports\"]\n    I2[\"Payment advice and remittances\"]\n    I3[\"ERP invoices and terms\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    U1[\"Platform file parsers\"]\n    U2[\"Deduction classifier\"]\n  end\n  subgraph S3[\"Matching and rules\"]\n    M1[\"PO, invoice and receipt matcher\"]\n    M2[\"Terms and margin checker\"]\n  end\n  subgraph S4[\"Review and recovery\"]\n    R1(\"Finance review\")\n    R2[\"Dispute pack builder\"]\n    R3[\"Recovery tracker\"]\n  end\n  I1 --> U1\n  I2 --> U1\n  U1 --> U2\n  I3 --> M1\n  U2 --> M1\n  M1 --> M2\n  M2 --> R1\n  R1 --> R2 --> R3"
+  },
+  "app_screens": [
+    {
+      "name": "Platform documents",
+      "purpose": "POs, GRNs, invoices, payment advice and debit notes from each platform.",
+      "shows": [
+        "Platform, city and dark store",
+        "Documents received, by type",
+        "Payment cycles covered"
+      ]
+    },
+    {
+      "name": "Payment tie-out",
+      "purpose": "Each payment tied to the invoices it settles.",
+      "shows": [
+        "Invoice, amount billed and amount paid",
+        "Short payment per invoice",
+        "Unpaid invoices by age"
+      ]
+    },
+    {
+      "name": "Deduction classifier",
+      "purpose": "Every short payment and debit note sorted into a type.",
+      "shows": [
+        "Shortage, damage, rate, fill-rate penalty or fee",
+        "The terms clause that allows it",
+        "Amount and invoice"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Deductions that do not hold up against the PO, GRN or terms.",
+      "shows": [
+        "Reason code and amount",
+        "PO, GRN and invoice side by side",
+        "Accept, or raise a dispute"
+      ]
+    },
+    {
+      "name": "Dispute tracker",
+      "purpose": "Disputes raised with each platform, and what was recovered.",
+      "shows": [
+        "Dispute pack per platform",
+        "Status and age",
+        "Recovered against disputed"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Paid amount matches the invoice",
+      "logic": "Every invoice must be paid in full or carry a deduction that explains the difference."
+    },
+    {
+      "rule": "Shortage backed by the GRN",
+      "logic": "A shortage deduction must match the gap between invoiced and received quantity on the GRN for that PO and dark store."
+    },
+    {
+      "rule": "Rate as per the PO",
+      "logic": "Rate deductions are checked against the PO price and the margin agreed for that date."
+    },
+    {
+      "rule": "Penalties as per the agreement",
+      "logic": "Fill-rate and other penalties must follow the formula and thresholds in your trade agreement for that period."
+    },
+    {
+      "rule": "Fees agreed in writing",
+      "logic": "Listing, visibility and marketing fees must match an agreed plan or a platform invoice."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "SHORT_NOT_IN_GRN",
+      "meaning": "The shortage is not supported by the GRN.",
+      "action": "Dispute, with the GRN and delivery proof."
+    },
+    {
+      "code": "RATE_BELOW_PO",
+      "meaning": "The deduction applies a rate below the PO price.",
+      "action": "Dispute, with the PO."
+    },
+    {
+      "code": "PENALTY_NOT_PER_TERMS",
+      "meaning": "The penalty does not follow the agreement's formula.",
+      "action": "Dispute, with the recalculation."
+    },
+    {
+      "code": "FEE_NOT_AGREED",
+      "meaning": "A fee has no agreed plan behind it.",
+      "action": "Check with the key account manager, then dispute."
+    },
+    {
+      "code": "UNEXPLAINED_SHORT",
+      "meaning": "A short payment has no debit note or reason.",
+      "action": "Ask the platform for the debit note."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "PurchaseOrder",
+      "fields": [
+        "po_no",
+        "platform",
+        "dark_store",
+        "sku",
+        "qty",
+        "po_price"
+      ]
+    },
+    {
+      "entity": "GoodsReceipt",
+      "fields": [
+        "grn_no",
+        "po_no",
+        "received_qty",
+        "damaged_qty",
+        "received_on"
+      ]
+    },
+    {
+      "entity": "Payment",
+      "fields": [
+        "utr",
+        "platform",
+        "paid_on",
+        "amount",
+        "invoices_settled"
+      ]
+    },
+    {
+      "entity": "Deduction",
+      "fields": [
+        "invoice_no",
+        "type",
+        "amount",
+        "clause_ref",
+        "status"
+      ]
+    }
+  ],
+  "inputs": [
+    "Purchase orders from each platform",
+    "Your invoices from the ERP or Tally",
+    "Receipt, short-receipt, damage and return reports",
+    "Payment advice and remittance files",
+    "Trade terms, margins and promotion agreements for each platform"
+  ],
+  "outputs": [
+    "Payment-to-invoice reconciliation for every remittance",
+    "Classified deductions with the evidence for each",
+    "List of deductions to dispute, with reasons",
+    "Dispute packs in each platform's format",
+    "Ageing report of open deductions and recoveries"
+  ],
+  "human_in_the_loop": "Finance decides which deductions to accept and which to dispute. The system never raises a dispute on its own, and any deduction it cannot match to evidence or terms is flagged for a person rather than accepted.",
+  "integrations": [
+    "Quick-commerce seller portal exports",
+    "Bank statements and payment advice by email",
+    "ERP such as SAP or Tally for invoices and receipts",
+    "Shared drive for trade agreements"
+  ],
+  "guardrails": [
+    "No deduction accepted without matching evidence or agreed terms",
+    "Every flagged deduction shows its reason and source documents",
+    "Disputes are raised only after finance approves them",
+    "Terms are versioned by platform and date"
+  ],
+  "compliance_notes": [
+    "Deductions that change the value of a supply, such as rate differences or returns, may need a credit or debit note for GST. The system keeps the link between deduction, invoice and note that your tax team needs.",
+    "TDS deducted on payments can be matched to Form 26AS so that credits are not missed."
+  ],
+  "rollout": {
+    "duration": "Two monthly cycles, about 8 weeks",
+    "scope": "One platform, using the last two to three months of POs, invoices, receipt reports and payments, with deductions finance has already reviewed as the benchmark.",
+    "deliverables": [
+      "Parsers for the platform's reports and payment files",
+      "Payment-to-invoice reconciliation for the rollout period",
+      "Deduction review queue with reasons and evidence",
+      "Dispute pack format agreed with your team",
+      "Roll-out plan for other platforms"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Payments fully reconciled",
+        "how": "Share of payments tied to their invoices with every deduction explained."
+      },
+      {
+        "metric": "Deductions flagged and confirmed",
+        "how": "Deductions the system flagged that finance agreed were wrong."
+      },
+      {
+        "metric": "Value raised in disputes",
+        "how": "Amount disputed in the rollout period, and the amount recovered so far."
+      },
+      {
+        "metric": "Time to reconcile",
+        "how": "Time from payment receipt to a reconciled, explained payment, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which platforms does it cover?",
+      "a": "It is built around the reports each platform gives you, so it can cover Blinkit, Zepto, Swiggy Instamart and newer platforms. Rollout starts with the platform where you lose the most to deductions. Supermarket and department store chains are covered by modern-trade deductions."
+    },
+    {
+      "q": "Do you need access to our platform portals?",
+      "a": "No. Exports from the portals and the payment files you already receive are enough to start. Automating the downloads can come later, with your approval."
+    },
+    {
+      "q": "Can it file disputes for us?",
+      "a": "It prepares the dispute pack with the evidence attached. Your team approves and submits it, and the system tracks the outcome."
+    },
+    {
+      "q": "How long does it take to go live?",
+      "a": "Two monthly cycles, about 8 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
+    }
+  ],
+  "related": [
+    "modern-trade-deductions",
+    "marketplace-settlement-reconciliation",
+    "credit-note-reconciliation"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/quick-commerce-deductions/"
+}

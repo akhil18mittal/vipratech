@@ -1,0 +1,340 @@
+{
+  "slug": "dealer-incentive-and-rebate-settlement",
+  "title": "Dealer Incentive and Rebate Settlement",
+  "category": "distributor-dealer",
+  "summary": "Calculate target-based dealer incentives, turnover rebates and cash discounts from your scheme terms and sales data, and check them against what dealers claim before finance pays.",
+  "seo": {
+    "title": "Dealer Incentive and Rebate Settlement | VipraTech",
+    "description": "Calculate and verify dealer incentives, turnover rebates and cash discounts from scheme terms and sales data, and reconcile them with dealer claims.",
+    "keywords": [
+      "dealer incentive calculation",
+      "dealer rebate settlement",
+      "turnover discount reconciliation",
+      "channel incentive automation",
+      "cash discount verification"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales Finance",
+    "Channel Sales Head",
+    "Commercial Manager",
+    "Accounts Receivable Lead"
+  ],
+  "problem": {
+    "intro": "Durables, building materials, auto parts and agri-input brands pay dealers through target-based incentives, quarterly and annual turnover rebates, and cash discounts for early payment. Terms change every season, and finance calculates payouts in spreadsheets from sales and collection data, then argues with dealers who calculated differently.",
+    "pain_points": [
+      {
+        "title": "Complex scheme terms",
+        "detail": "Slabs, growth targets, product-mix conditions and qualifying periods make every payout a custom calculation."
+      },
+      {
+        "title": "Sales and collections in different systems",
+        "detail": "Payouts depend on billing, returns and payment dates that sit in the ERP, the DMS and bank statements."
+      },
+      {
+        "title": "Disputes with dealers",
+        "detail": "Dealers calculate their own entitlement, and without a line-by-line working, every difference becomes a dispute."
+      },
+      {
+        "title": "Over-payment through returns and late payment",
+        "detail": "Sales later returned, or paid after the window, still count toward targets and discounts."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech turns each scheme's terms into rules: targets, slabs, eligible products, qualifying periods, exclusions and payment conditions. It calculates every dealer's entitlement from billing, returns and collection data, and compares it with what the dealer claims. Differences are explained line by line, such as a return that took a dealer below a slab or a payment that missed the cash-discount window. Finance reviews the differences and approves payouts, and each dealer gets a statement showing how their incentive was worked out.",
+    "capabilities": [
+      "Scheme register with targets, slabs, product mix and qualifying periods",
+      "Calculates each dealer's entitlement from billing, returns and collections",
+      "Applies cash discount windows from actual payment dates",
+      "Compares calculated entitlement with dealer claims and explains differences",
+      "Dealer statements showing how each payout was worked out",
+      "Accrual report of incentives earned but not yet paid"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Configure schemes",
+      "detail": "Each scheme's targets, slabs, eligible products and conditions are entered as rules."
+    },
+    {
+      "step": 2,
+      "title": "Load sales and collections",
+      "detail": "Billing, returns and collection data for the period are taken from the ERP and bank records."
+    },
+    {
+      "step": 3,
+      "title": "Calculate entitlements",
+      "detail": "Each dealer's incentive, rebate and cash discount is calculated with a line-by-line working."
+    },
+    {
+      "step": 4,
+      "title": "Compare with claims",
+      "detail": "Calculated amounts are matched to dealer claims, and every difference gets a reason."
+    },
+    {
+      "step": 5,
+      "title": "Finance review",
+      "detail": "Finance reviews differences and approves payouts."
+    },
+    {
+      "step": 6,
+      "title": "Pay and inform",
+      "detail": "Credit notes or payouts are prepared, and each dealer gets a statement."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scheme terms\"] --> C[\"Calculate entitlement\"]\n  B[\"Billing, returns, collections\"] --> C\n  C --> D[\"Compare with dealer claim\"]\n  D --> E{\"Difference explained?\"}\n  E -->|\"yes\"| F[\"Payout and statement\"]\n  E -->|\"no\"| G(\"Finance review\")\n  G --> F",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Scheme circulars and terms",
+          "ERP billing and returns",
+          "Bank collections",
+          "Dealer claims"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Scheme rule engine",
+          "Target and slab calculator",
+          "Cash discount window checks"
+        ]
+      },
+      {
+        "name": "Reconciliation",
+        "components": [
+          "Claim comparison",
+          "Difference explanations"
+        ]
+      },
+      {
+        "name": "Review and payout",
+        "components": [
+          "Finance approval",
+          "Dealer statements and accrual report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Scheme terms\"]\n    I2[\"Billing and returns\"]\n    I3[\"Bank collections\"]\n    I4[\"Dealer claims\"]\n  end\n  subgraph S2[\"Rules\"]\n    R1[\"Scheme rule engine\"]\n    R2[\"Slab and target calculator\"]\n  end\n  subgraph S3[\"Reconciliation\"]\n    C1[\"Claim comparison\"]\n    C2[\"Difference explanations\"]\n  end\n  subgraph S4[\"Review and payout\"]\n    V1(\"Finance approval\")\n    V2[\"Dealer statements\"]\n  end\n  I1 --> R1\n  I2 --> R2\n  I3 --> R2\n  R1 --> R2\n  R2 --> C1\n  I4 --> C1\n  C1 --> C2\n  C2 --> V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Scheme builder",
+      "purpose": "Each incentive and rebate scheme as rules: targets, slabs, product mix, growth and collection conditions.",
+      "shows": [
+        "Target and slab table",
+        "Qualifying SKUs and mix rules",
+        "Collection and return conditions"
+      ]
+    },
+    {
+      "name": "Dealer progress",
+      "purpose": "Each dealer's sales, returns and collections against the scheme, as of today.",
+      "shows": [
+        "Achievement against target",
+        "Next slab and the gap to it",
+        "Returns and overdue amounts deducted"
+      ]
+    },
+    {
+      "name": "Entitlement run",
+      "purpose": "The payout each dealer has earned, recalculated from billing and collections.",
+      "shows": [
+        "Earned payout per dealer",
+        "Conditions met and missed",
+        "Comparison with the dealer's claim"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Dealers whose claims differ from the calculated entitlement.",
+      "shows": [
+        "Reason code and difference",
+        "Invoices and receipts behind it",
+        "Approve, adjust or reject"
+      ]
+    },
+    {
+      "name": "Payout and statements",
+      "purpose": "Approved payouts, and a statement each dealer can check.",
+      "shows": [
+        "Credit note or payout sheet",
+        "Dealer statement with every condition",
+        "Scheme cost against budget"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Billing in the scheme period",
+      "logic": "Only invoices dated within the scheme period count, for qualifying SKUs, net of returns and credit notes for that period."
+    },
+    {
+      "rule": "Target and slab met",
+      "logic": "The slab is set by net achievement against target. Growth schemes compare with the same period last year from your own billing."
+    },
+    {
+      "rule": "Product-mix conditions",
+      "logic": "Mix rules, such as a minimum share of a focus range, are checked before any slab is paid."
+    },
+    {
+      "rule": "Collected within terms",
+      "logic": "Where the scheme needs payment within a period, receipts are matched to invoices and late collections are left out."
+    },
+    {
+      "rule": "No overlap with other schemes",
+      "logic": "Sales already rewarded under another scheme are left out where the circulars say schemes do not stack."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "TARGET_NOT_MET",
+      "meaning": "Net achievement is below the slab claimed.",
+      "action": "Pay the slab achieved."
+    },
+    {
+      "code": "MIX_NOT_MET",
+      "meaning": "The product-mix condition is not met.",
+      "action": "Pay the base rate or nothing, as the circular says."
+    },
+    {
+      "code": "LATE_COLLECTION",
+      "meaning": "Some invoices were paid after the scheme's payment window.",
+      "action": "Leave those invoices out of achievement."
+    },
+    {
+      "code": "RETURNS_NOT_NETTED",
+      "meaning": "The claim counts sales that were later returned.",
+      "action": "Recalculate net of returns."
+    },
+    {
+      "code": "SCHEME_OVERLAP",
+      "meaning": "The sales were already rewarded under another scheme.",
+      "action": "Leave out the overlap."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "IncentiveScheme",
+      "fields": [
+        "scheme_id",
+        "period",
+        "targets",
+        "slabs",
+        "mix_rules",
+        "payment_window"
+      ]
+    },
+    {
+      "entity": "DealerAchievement",
+      "fields": [
+        "dealer_code",
+        "scheme_id",
+        "gross_sales",
+        "returns",
+        "net_sales",
+        "slab"
+      ]
+    },
+    {
+      "entity": "Collection",
+      "fields": [
+        "invoice_no",
+        "receipt_date",
+        "amount",
+        "days_to_pay"
+      ]
+    },
+    {
+      "entity": "Entitlement",
+      "fields": [
+        "dealer_code",
+        "scheme_id",
+        "earned",
+        "claimed",
+        "difference"
+      ]
+    }
+  ],
+  "inputs": [
+    "Scheme circulars with targets, slabs and conditions",
+    "Billing and returns from the ERP",
+    "Payment dates from bank statements or the ERP",
+    "Dealer claims or statements of entitlement"
+  ],
+  "outputs": [
+    "Entitlement for every dealer, with its working",
+    "Differences from dealer claims, with reasons",
+    "Dealer statements",
+    "Accrual of incentives earned but unpaid"
+  ],
+  "human_in_the_loop": "Finance approves every payout and decides on differences the rules cannot explain. Scheme interpretations are confirmed by the channel sales team before they are used.",
+  "integrations": [
+    "ERP such as SAP, Tally or Oracle for billing, returns and credit notes",
+    "Bank statements or collection data",
+    "DMS or dealer portal",
+    "Shared drive for scheme circulars"
+  ],
+  "guardrails": [
+    "Every payout has a line-by-line working",
+    "Returns and late payments applied before slabs are decided",
+    "Scheme rules versioned with a reference to the circular",
+    "Payouts released only after finance approval"
+  ],
+  "compliance_notes": [
+    "Volume rebates and discounts given after supply are usually settled by credit note for GST; the system keeps the link to the underlying invoices."
+  ],
+  "rollout": {
+    "duration": "One scheme period, about 6 to 8 weeks",
+    "scope": "One closed scheme period for one region, recalculated and compared with what finance paid.",
+    "deliverables": [
+      "Scheme rules for the rollout period",
+      "Entitlement for every dealer, with workings",
+      "Differences from what was paid, with reasons",
+      "Dealer statement format"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Agreement with paid amounts",
+        "how": "Dealers whose calculated payout matches what finance paid."
+      },
+      {
+        "metric": "Over- and under-payments found",
+        "how": "Differences confirmed by finance, by count and value."
+      },
+      {
+        "metric": "Time to settle a scheme",
+        "how": "Time from period close to approved payouts, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our schemes have product-mix and growth conditions. Can those be rules?",
+      "a": "Yes. Growth over a base period, product-mix thresholds, focus-product targets and exclusions are all configurable. Ambiguous terms are flagged for the channel team to clarify."
+    },
+    {
+      "q": "Do dealers need a new portal?",
+      "a": "No. Statements can go by email or WhatsApp. A dealer portal can be added later if you want dealers to see their progress during the scheme."
+    },
+    {
+      "q": "Can dealers see their progress mid-scheme?",
+      "a": "Yes. Entitlements can be recalculated daily or weekly, so dealers and sales teams see where they stand against each slab."
+    },
+    {
+      "q": "Is this the same system as your distributor claims settlement?",
+      "a": "Yes. Every VipraTech workflow runs on one claims engine: the document reading, matching, review queue and audit trail are shared. For this workflow we set up your schemes as versioned rules, along with your document templates and matching keys."
+    }
+  ],
+  "related": [
+    "channel-loyalty-payouts",
+    "rate-difference-claims",
+    "trade-spend-accruals"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/dealer-incentive-and-rebate-settlement/"
+}

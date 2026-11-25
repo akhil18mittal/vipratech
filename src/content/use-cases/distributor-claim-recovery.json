@@ -1,0 +1,340 @@
+{
+  "slug": "distributor-claim-recovery",
+  "title": "Claim Recovery for Distributors",
+  "category": "ledgers-accruals",
+  "summary": "For distributors and stockists: track every claim raised on each principal, tie it to the credit notes received and the principal's ledger, and chase what is still owed.",
+  "seo": {
+    "title": "Claim Recovery for Distributors | VipraTech",
+    "description": "Track scheme, return, rate difference and damage claims raised on each principal, match them to credit notes and ledgers, and recover what is still owed.",
+    "keywords": [
+      "distributor claim recovery",
+      "pending claims from company",
+      "distributor claim tracking",
+      "principal ledger reconciliation",
+      "stockist claims settlement"
+    ]
+  },
+  "designed_for": [
+    "Owner or CFO of a distribution business",
+    "Accounts Head at a distributor or super stockist",
+    "Claims Executive",
+    "Chartered Accountant for distributors"
+  ],
+  "problem": {
+    "intro": "A distributor carrying ten or twenty principals raises claims on each of them every month: schemes, returns, rate differences, damages, display and expenses. Each principal settles in its own format and time, partly, late or not at all. The money owed sits across email threads, portals and spreadsheets, and it is often a large share of the distributor's margin.",
+    "pain_points": [
+      {
+        "title": "No single list of what is owed",
+        "detail": "Claims raised, settled and pending sit in different files for each principal, so nobody knows the total owed at any time."
+      },
+      {
+        "title": "Credit notes that do not say what they settle",
+        "detail": "Principals issue lump-sum credit notes that cover several claims, short-pay some lines and give no breakdown."
+      },
+      {
+        "title": "Claims that expire",
+        "detail": "Principals set claim submission windows. Claims raised late or not followed up are lost for good."
+      },
+      {
+        "title": "Ledgers that never agree",
+        "detail": "The principal's ledger and the distributor's books differ by claims, credit notes and debit notes that nobody has matched."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech gives a distributor one claims register across every principal. It reads the claims you raise, the credit notes and statements principals send back, and the principal's ledger, then matches each credit note to the claims it settles, including lump-sum and part settlements. Each claim shows its status: settled, short-settled, rejected, pending or close to its deadline. Rejected and short-settled claims come with the principal's reason and a resubmission pack where the claim still holds.",
+    "capabilities": [
+      "One claims register across every principal, with status and age",
+      "Matches lump-sum and partial credit notes to the claims they settle",
+      "Tracks submission windows and flags claims close to expiry",
+      "Reconciles your ledger with each principal's statement",
+      "Prepares resubmission packs for short-settled and rejected claims",
+      "Shows money owed by principal, claim type and age"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load claims",
+      "detail": "Claims raised on each principal are loaded from your sheets, DMS or principal portals."
+    },
+    {
+      "step": 2,
+      "title": "Load settlements",
+      "detail": "Credit notes, settlement statements and principal ledgers are read as they arrive."
+    },
+    {
+      "step": 3,
+      "title": "Match",
+      "detail": "Each credit note is matched to the claims it settles, line by line where the statement allows."
+    },
+    {
+      "step": 4,
+      "title": "Track status",
+      "detail": "Each claim is marked settled, short-settled, rejected or pending, with age and deadline."
+    },
+    {
+      "step": 5,
+      "title": "Reconcile ledgers",
+      "detail": "Your books and each principal's ledger are compared and differences listed."
+    },
+    {
+      "step": 6,
+      "title": "Recover",
+      "detail": "Your team follows up with resubmission packs and a pending list per principal."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Claims raised\"] --> B[\"Credit notes and statements\"]\n  B --> C[\"Match settlements to claims\"]\n  C --> D[\"Status and deadline\"]\n  D --> E{\"Fully settled?\"}\n  E -->|\"yes\"| F[\"Closed in register\"]\n  E -->|\"no\"| G(\"Claims team follow-up\")\n  G --> H[\"Resubmission pack\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Claims raised on each principal",
+          "Credit notes and settlement statements",
+          "Principal ledgers and your books"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Credit note and statement reader",
+          "Claim sheet normaliser"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Settlement to claim matcher",
+          "Deadline and ageing rules",
+          "Ledger comparison"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Follow-up queue with reasons",
+          "Pending list and resubmission packs"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Claims raised\"]\n    I2[\"Credit notes and statements\"]\n    I3[\"Principal ledgers\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Statement reader\"]\n    D2[\"Claim sheet normaliser\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Settlement matcher\"]\n    R2[\"Deadline rules\"]\n    R3[\"Ledger comparison\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Claims team follow-up\")\n    V2[\"Resubmission packs\"]\n  end\n  I1 --> D2 --> R1\n  I2 --> D1 --> R1\n  I3 --> R3\n  R1 --> R2\n  R1 --> R3\n  R2 --> V1\n  R3 --> V1\n  V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Claims register",
+      "purpose": "Every claim raised on every principal, in one list.",
+      "shows": [
+        "Principal, claim type and month",
+        "Claimed, settled and pending",
+        "Days to the submission deadline"
+      ]
+    },
+    {
+      "name": "Settlement match",
+      "purpose": "Each credit note matched to the claims it settles.",
+      "shows": [
+        "Credit note and amount",
+        "Claims it covers, in full or in part",
+        "Unexplained amount left over"
+      ]
+    },
+    {
+      "name": "Ledger compare",
+      "purpose": "Your books beside each principal's ledger.",
+      "shows": [
+        "Balance on both sides",
+        "Entries on one side only",
+        "Claims not yet in their ledger"
+      ]
+    },
+    {
+      "name": "Follow-up queue",
+      "purpose": "Claims short-settled, rejected or close to expiry.",
+      "shows": [
+        "Reason code and amount",
+        "Principal's reason, where given",
+        "Resubmit, accept or escalate"
+      ]
+    },
+    {
+      "name": "Owed summary",
+      "purpose": "What each principal owes you, and for how long.",
+      "shows": [
+        "Owed by principal and age",
+        "Recovered this month",
+        "Claims lost to expiry"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Claim raised within the window",
+      "logic": "Each claim is checked against the principal's submission window for that claim type, and claims close to expiry are flagged first."
+    },
+    {
+      "rule": "Settlement matched to claims",
+      "logic": "Credit notes are matched to claims by reference, amount and period. Lump sums are split using the principal's statement or your rule."
+    },
+    {
+      "rule": "Short settlement explained",
+      "logic": "Any line settled below the claim needs a reason from the principal's statement. Without one it stays open."
+    },
+    {
+      "rule": "Ledgers agree",
+      "logic": "Your books and the principal's ledger must agree once open claims and timing items are listed."
+    },
+    {
+      "rule": "No claim settled twice",
+      "logic": "A credit note cannot be counted against two claims, and a claim cannot be closed twice."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "NOT_SETTLED",
+      "meaning": "The claim has no credit note past the principal's usual time.",
+      "action": "Follow up with the principal."
+    },
+    {
+      "code": "SHORT_SETTLED",
+      "meaning": "The credit note is below the claim with no reason given.",
+      "action": "Ask for the breakdown, then resubmit."
+    },
+    {
+      "code": "REJECTED",
+      "meaning": "The principal rejected the claim.",
+      "action": "Check the reason; resubmit with proof if it holds."
+    },
+    {
+      "code": "NEAR_DEADLINE",
+      "meaning": "The claim is close to its submission deadline and still incomplete.",
+      "action": "Complete and submit it first."
+    },
+    {
+      "code": "LEDGER_DIFF",
+      "meaning": "The principal's ledger and your books differ.",
+      "action": "Send the difference list to the principal."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "RaisedClaim",
+      "fields": [
+        "claim_id",
+        "principal",
+        "claim_type",
+        "period",
+        "amount",
+        "deadline"
+      ]
+    },
+    {
+      "entity": "Settlement",
+      "fields": [
+        "cn_no",
+        "principal",
+        "amount",
+        "cn_date",
+        "statement_ref"
+      ]
+    },
+    {
+      "entity": "ClaimSettlement",
+      "fields": [
+        "claim_id",
+        "cn_no",
+        "settled_amount",
+        "reason"
+      ]
+    },
+    {
+      "entity": "PrincipalLedger",
+      "fields": [
+        "principal",
+        "doc_no",
+        "date",
+        "debit",
+        "credit"
+      ]
+    }
+  ],
+  "inputs": [
+    "Claims raised on each principal, with supporting documents",
+    "Credit notes and settlement statements from principals",
+    "Principal ledger statements",
+    "Your own ledger for each principal",
+    "Claim submission rules and windows per principal"
+  ],
+  "outputs": [
+    "One claims register with status, age and deadline",
+    "Credit notes matched to claims, including part settlements",
+    "Ledger reconciliation per principal",
+    "Follow-up queue with resubmission packs",
+    "Money owed by principal and age"
+  ],
+  "human_in_the_loop": "Your claims team decides what to resubmit, accept or escalate. The system prepares the evidence but never contacts a principal on your behalf.",
+  "integrations": [
+    "Tally, Busy or Marg for your books",
+    "Principal portals and DMS exports",
+    "Email for credit notes and statements",
+    "Shared drive for claim proofs"
+  ],
+  "guardrails": [
+    "No claim closed without a matched credit note",
+    "Lump-sum splits shown with the rule used",
+    "Deadlines from each principal's rules, kept up to date by your team",
+    "Principal documents kept as received"
+  ],
+  "compliance_notes": [
+    "Credit notes received from principals affect input tax credit; the register shows which credit notes carry GST."
+  ],
+  "rollout": {
+    "duration": "About 4 to 6 weeks",
+    "scope": "Your five largest principals, using the last two quarters of claims, credit notes and ledgers.",
+    "deliverables": [
+      "Claims register for the scope",
+      "Credit notes matched to claims",
+      "Ledger reconciliation per principal",
+      "Owed list with follow-up packs"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Claims matched",
+        "how": "Share of claims matched to a credit note or marked open with a reason."
+      },
+      {
+        "metric": "Money found owed",
+        "how": "Open, short-settled and unexplained amounts across principals."
+      },
+      {
+        "metric": "Claims saved from expiry",
+        "how": "Claims completed and submitted before their deadline."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "We use Tally. Does that work?",
+      "a": "Yes. The system reads Tally exports for your books, and claim sheets and credit notes in whatever format principals send."
+    },
+    {
+      "q": "Each principal sends a different statement format. Is that a problem?",
+      "a": "No. Each format is set up once, and new formats are added as they appear."
+    },
+    {
+      "q": "Can it raise claims for us?",
+      "a": "It prepares the claim sheet and proofs in each principal's format. Your team submits them."
+    },
+    {
+      "q": "Is this for distributors or for brands?",
+      "a": "This workflow is for distributors and stockists. Brands use distributor claims settlement to check the same claims from their side."
+    }
+  ],
+  "related": [
+    "credit-note-reconciliation",
+    "supplier-rebate-claims",
+    "distributor-scheme-claims"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/distributor-claim-recovery/"
+}

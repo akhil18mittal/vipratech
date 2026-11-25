@@ -1,5 +1,5 @@
 ---
-import {GA4_ID} from '../../data/site';
+import {CLARITY_ID, GA4_ID} from '../../data/site';
 
 // The cookie banner. ConsentScripts.astro decides who sees it and handles the buttons; it starts hidden, so visitors
 // outside Europe never see it. Accept and Reject look the same, as EU regulators expect.
@@ -9,7 +9,7 @@ const button =
 ---
 
 {
-  GA4_ID && (
+  (GA4_ID || CLARITY_ID) && (
     <div
       id="cookie-banner"
       role="region"
@@ -18,7 +18,7 @@ const button =
       class="fixed z-50 bottom-4 inset-x-4 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl p-5 shadow-2xl"
     >
       <p class="text-sm text-zinc-300 leading-relaxed">
-        We use cookies to measure site traffic and ad performance.{' '}
+        We use cookies to measure site traffic, see how pages are used, and measure ad performance.{' '}
         <a href="/privacy/" class="text-lime-400 hover:text-lime-300 transition-colors">Privacy policy</a>
       </p>
       <div class="mt-4 flex gap-3">

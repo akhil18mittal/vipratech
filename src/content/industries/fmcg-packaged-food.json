@@ -1,0 +1,127 @@
+{
+  "slug": "fmcg-packaged-food",
+  "name": "FMCG and Packaged Food",
+  "seo": {
+    "title": "Claims Reconciliation for FMCG and Packaged Food | VipraTech",
+    "description": "Distributor scheme, damage, display, expense and rate difference claims, and modern-trade and quick-commerce deductions, checked for FMCG finance teams.",
+    "keywords": [
+      "FMCG claims settlement",
+      "FMCG distributor claims",
+      "packaged food trade schemes",
+      "FMCG deductions reconciliation",
+      "trade spend FMCG India"
+    ]
+  },
+  "hero": {
+    "headline": "Check every distributor claim and retailer deduction before you pay it",
+    "subheadline": "Schemes, damage and expiry, display, rate differences and distributor expenses, checked line by line, with finance approving every credit note."
+  },
+  "intro": "FMCG and packaged-food brands run dozens of schemes through hundreds of distributors at once, and sell more each year through modern trade and quick commerce. Every one of those channels sends money back as claims, debit notes or deductions. VipraTech's claims engine is live at a packaged-food brand, where it checks distributor claims every month against scheme circulars, invoices and earlier claims before finance issues credit notes.",
+  "challenges": [
+    {
+      "title": "Many schemes at once",
+      "detail": "Quantity slabs, free goods, retailer schemes and display programmes overlap, each with its own dates, SKUs and caps."
+    },
+    {
+      "title": "Every distributor's own format",
+      "detail": "Claims arrive in each distributor's spreadsheet layout, with proofs as PDFs and photos."
+    },
+    {
+      "title": "Returns and expiry",
+      "detail": "Damage and near-expiry returns follow caps and batch rules that are hard to check by hand."
+    },
+    {
+      "title": "New channels, new deductions",
+      "detail": "Modern-trade and quick-commerce payments arrive net of margins, fees and shortages."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Quantity-slab, free-goods and retailer schemes checked against circulars, secondary invoices and earlier claims. Live at a packaged-food brand."
+    },
+    {
+      "use_case": "damage-and-expiry-claims",
+      "note": "Market returns and near-expiry stock traced to batches sold to each distributor, within your return caps."
+    },
+    {
+      "use_case": "display-and-visibility-claims",
+      "note": "Retailer display and visibility payments checked against enrolled outlets and photos."
+    },
+    {
+      "use_case": "distributor-expense-claims",
+      "note": "Distributor salesman salaries, delivery vehicles and promoters reimbursed against your policy and field app activity."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price-drop claims on distributor stock capped at what the distributor could have held on the effective date."
+    },
+    {
+      "use_case": "trade-spend-accruals",
+      "note": "Scheme accruals compared with claims and payouts for month-end close."
+    },
+    {
+      "use_case": "modern-trade-deductions",
+      "note": "Supermarket chain debit notes checked against annual terms and GRNs."
+    },
+    {
+      "use_case": "quick-commerce-deductions",
+      "note": "Dark-store short receipts and margin deductions checked against POs, invoices and agreed terms."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Approved claims matched to credit notes and distributor ledgers before year-end balance confirmations."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Transit damage and shortage claims from distributors, checked against LRs and PODs, with losses recovered from transporters."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Primary freight from plants and depots to distributors, checked against lane rates, weights and PODs before payment."
+    }
+  ],
+  "documents": [
+    "Scheme circulars and claim sheets",
+    "Secondary invoices from the DMS",
+    "Return notes, batch lists and destruction certificates",
+    "Display photos and outlet lists",
+    "Credit notes in SAP or Tally",
+    "Payment advice and debit notes from chains and platforms"
+  ],
+  "systems": [
+    "DMS and sales force automation platforms",
+    "ERP such as SAP, Oracle or Tally",
+    "Field sales apps and photo exports",
+    "Retail chain vendor portals",
+    "Quick-commerce seller portals",
+    "Bank statements and payment advice"
+  ],
+  "facts": [
+    {
+      "text": "Quick commerce now carries 94% of online food and beverage purchases and 68% of online home care purchases in India.",
+      "source": "Asianet Newsable, quick commerce report, 2026",
+      "url": "https://newsable.asianetnews.com/business/quick-commerce-emerges-as-growth-engine-for-indias-digital-commerce-articleshow-ima07ml"
+    },
+    {
+      "text": "Dabur's CEO named beverages, foods, personal care and home care as the strongest categories on quick commerce, now FMCG's largest online channel.",
+      "source": "Economic Times via Third Eyesight, May 2026",
+      "url": "https://www.thirdeyesight.in/?p=6996"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "We use a DMS with a claims module. Why add this?",
+      "a": "A DMS claims module records and routes claims. VipraTech checks each line against your circulars, invoices and earlier claims, reads distributors' own formats and keeps the evidence. It reads your DMS exports; it does not replace the DMS."
+    },
+    {
+      "q": "Can it handle regional and channel-specific schemes?",
+      "a": "Yes. Schemes are configured with their regions, channels, distributor groups and validity, and each claim is checked against the version that applied."
+    },
+    {
+      "q": "Where should we start?",
+      "a": "With a free claims audit on one recent quarter of distributor scheme claims, where the engine has run in production since mid-2026."
+    }
+  ],
+  "url": "/industries/fmcg-packaged-food/"
+}

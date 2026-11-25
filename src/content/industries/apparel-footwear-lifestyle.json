@@ -1,0 +1,95 @@
+{
+  "slug": "apparel-footwear-lifestyle",
+  "name": "Apparel, Footwear and Lifestyle",
+  "seo": {
+    "title": "Reconciliation for Apparel and Footwear Brands | VipraTech",
+    "description": "Marketplace settlements, large-format store margins and markdown support, COD and returns, reconciled for apparel, footwear and lifestyle brands.",
+    "keywords": [
+      "apparel brand reconciliation",
+      "fashion marketplace returns reconciliation",
+      "large format retail margin reconciliation",
+      "markdown support claims",
+      "sale or return reconciliation"
+    ]
+  },
+  "hero": {
+    "headline": "Reconcile marketplaces, store chains and returns in one place",
+    "subheadline": "Marketplace settlements and returns, department store margins and markdown support, website COD and refunds, and credit notes to retailers."
+  },
+  "intro": "Apparel, footwear and lifestyle brands sell through marketplaces, department and large-format stores, multi-brand outlets and their own websites, with high return rates and end-of-season markdowns. Store chains settle on agreed margins, often on sale-or-return terms, and ask for markdown support. Marketplaces settle net of commissions and returns. Every channel needs reconciling at size and colour level.",
+  "challenges": [
+    {
+      "title": "High return rates",
+      "detail": "Customer and store returns are frequent, and some never come back to the warehouse."
+    },
+    {
+      "title": "Sale-or-return terms",
+      "detail": "Store chains pay on sales rather than dispatches, and return unsold stock at season end."
+    },
+    {
+      "title": "Markdown support",
+      "detail": "Retailers deduct markdown and promotion support agreed for end-of-season sales."
+    },
+    {
+      "title": "Many SKUs",
+      "detail": "Size and colour variants multiply every reconciliation."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "marketplace-settlement-reconciliation",
+      "note": "Marketplace settlements tied to orders, with commission overcharges and missing returns found."
+    },
+    {
+      "use_case": "modern-trade-deductions",
+      "note": "Department and large-format store payments checked against agreed margins, sale-or-return terms and markdown support."
+    },
+    {
+      "use_case": "d2c-payment-and-cod-reconciliation",
+      "note": "Website orders matched to gateway settlements, COD remittances and returns."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Credit notes for returns and markdown support matched to approvals and retailer ledgers."
+    },
+    {
+      "use_case": "season-end-sales-returns",
+      "note": "End-of-season returns from distributors and store chains, traced by style and size to the original invoices."
+    },
+    {
+      "use_case": "co-marketing-fund-claims",
+      "note": "Store branding, shop-in-shop and promotion support claimed by chains and franchisees, checked against approvals and proof."
+    }
+  ],
+  "documents": [
+    "Marketplace settlement and return reports",
+    "Store chain sales reports and payment advice",
+    "Sale-or-return and margin agreements",
+    "Markdown support approvals",
+    "Website orders, gateway settlements and COD remittances",
+    "Retailer ledgers"
+  ],
+  "systems": [
+    "ERP or retail ERP",
+    "Marketplace seller reports",
+    "Store chain sales and payment reports",
+    "Shopify or a custom store",
+    "Payment gateways and courier panels"
+  ],
+  "facts": [],
+  "faqs": [
+    {
+      "q": "Can it work at size and colour level?",
+      "a": "Yes. Orders, returns and store sales are matched at SKU level, including size and colour variants."
+    },
+    {
+      "q": "Our store chains pay on sell-through. Does that work?",
+      "a": "Yes. Sale-or-return terms are configured per chain, and payments are checked against their sales reports and returns."
+    },
+    {
+      "q": "Can it handle end-of-season returns?",
+      "a": "Yes. Returns are traced to the original invoices by style and size, checked against the return window and cap, and netted for margin support already paid."
+    }
+  ],
+  "url": "/industries/apparel-footwear-lifestyle/"
+}

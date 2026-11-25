@@ -1,0 +1,339 @@
+{
+  "slug": "marketplace-settlement-reconciliation",
+  "title": "Marketplace Settlement Reconciliation",
+  "category": "channel-deductions",
+  "summary": "Reconcile Amazon, Flipkart and other marketplace settlements order by order, including commissions, fees, returns, reimbursements, TCS and TDS, and find what the marketplace still owes you.",
+  "seo": {
+    "title": "Marketplace Settlement Reconciliation | VipraTech",
+    "description": "Reconcile Amazon, Flipkart and other marketplace settlements order by order, check fees and returns against rate cards, and find money still owed.",
+    "keywords": [
+      "marketplace reconciliation",
+      "Amazon settlement reconciliation",
+      "Flipkart payment reconciliation",
+      "marketplace fee audit",
+      "returns reimbursement claims"
+    ]
+  },
+  "designed_for": [
+    "CFO or Head of Finance",
+    "E-commerce Finance Manager",
+    "Marketplace Channel Manager"
+  ],
+  "problem": {
+    "intro": "Brands that sell on marketplaces receive settlements that net off commissions, shipping and storage fees, returns, cancellations, reimbursements and taxes. Each marketplace reports this in its own files, and the totals rarely match the orders in your books. Fees charged above the rate card and returns that never came back quietly reduce margin.",
+    "pain_points": [
+      {
+        "title": "Settlements that do not tie to orders",
+        "detail": "One payout covers thousands of orders, returns and fees, and tying it back to your sales register takes days."
+      },
+      {
+        "title": "Fees above the rate card",
+        "detail": "Commission, shipping weight slabs and storage fees are charged at the wrong rate or on the wrong category."
+      },
+      {
+        "title": "Returns that never came back",
+        "detail": "Customer returns are refunded but the product never reaches your warehouse, or comes back damaged, and the claim window passes."
+      },
+      {
+        "title": "TCS and TDS to match",
+        "detail": "Tax collected and deducted by the marketplace has to match your books and tax statements, settlement by settlement."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech reads each marketplace's settlement, order, return and fee reports and ties every settlement line to an order in your sales register. Fees are recalculated from the rate card for the category, weight and fulfilment type, and charges above the rate card are flagged. Returns are matched to what your warehouse actually received, so missing or damaged returns are listed with the evidence a reimbursement claim needs, before the window closes. TCS and TDS are reconciled with your books.",
+    "capabilities": [
+      "Ties every settlement line to an order, return or fee",
+      "Recalculates fees from each marketplace's rate card",
+      "Matches refunded returns to warehouse receipts",
+      "Lists reimbursement claims with evidence and deadlines",
+      "Reconciles TCS and TDS with your books",
+      "Order-level margin after all marketplace charges"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect reports",
+      "detail": "Settlement, order, return and fee reports are downloaded from each marketplace."
+    },
+    {
+      "step": 2,
+      "title": "Tie to orders",
+      "detail": "Every settlement line is matched to an order or return in your sales register."
+    },
+    {
+      "step": 3,
+      "title": "Check fees",
+      "detail": "Fees are recalculated from the rate card and compared with what was charged."
+    },
+    {
+      "step": 4,
+      "title": "Check returns",
+      "detail": "Refunded returns are matched to warehouse receipts and their condition."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "Finance reviews overcharges and missing returns."
+    },
+    {
+      "step": 6,
+      "title": "Claim and track",
+      "detail": "Reimbursement claims are prepared with evidence and tracked to closure."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Settlement and fee reports\"] --> B[\"Tie lines to orders\"]\n  B --> C[\"Recalculate fees\"]\n  B --> D[\"Match returns to receipts\"]\n  C --> E{\"Charges and returns correct?\"}\n  D --> E\n  E -->|\"yes\"| F[\"Reconciled settlement\"]\n  E -->|\"no\"| G(\"Finance review\")\n  G --> H[\"Reimbursement claim\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Marketplace settlement reports",
+          "Order and return reports",
+          "Rate cards",
+          "Warehouse receipts"
+        ]
+      },
+      {
+        "name": "Matching",
+        "components": [
+          "Settlement to order matcher",
+          "Return to receipt matcher"
+        ]
+      },
+      {
+        "name": "Checks",
+        "components": [
+          "Fee recalculation",
+          "TCS and TDS reconciliation"
+        ]
+      },
+      {
+        "name": "Review and recovery",
+        "components": [
+          "Review queue",
+          "Reimbursement claim packs"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Settlement reports\"]\n    I2[\"Order and return reports\"]\n    I3[\"Rate cards\"]\n    I4[\"Warehouse receipts\"]\n  end\n  subgraph S2[\"Matching\"]\n    M1[\"Settlement to order matcher\"]\n    M2[\"Return to receipt matcher\"]\n  end\n  subgraph S3[\"Checks\"]\n    C1[\"Fee recalculation\"]\n    C2[\"TCS and TDS reconciliation\"]\n  end\n  subgraph S4[\"Review and recovery\"]\n    V1(\"Finance review\")\n    V2[\"Reimbursement claims\"]\n  end\n  I1 --> M1\n  I2 --> M1\n  I2 --> M2\n  I4 --> M2\n  M1 --> C1\n  I3 --> C1\n  M1 --> C2\n  C1 --> V1\n  C2 --> V1\n  M2 --> V1\n  V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Settlement reports",
+      "purpose": "Settlement, order, return and fee reports from each marketplace.",
+      "shows": [
+        "Marketplace and settlement period",
+        "Orders and returns covered",
+        "Report coverage check"
+      ]
+    },
+    {
+      "name": "Order tie-out",
+      "purpose": "Every order tied from sale to settlement.",
+      "shows": [
+        "Order, item price and amount settled",
+        "Commission, shipping and other fees",
+        "Orders not yet settled"
+      ]
+    },
+    {
+      "name": "Fee check",
+      "purpose": "Each fee recalculated from the rate card, weight and category.",
+      "shows": [
+        "Commission at the category rate",
+        "Shipping at the declared weight slab",
+        "Fee difference per order"
+      ]
+    },
+    {
+      "name": "Returns check",
+      "purpose": "Returns matched to warehouse receipts and refunds.",
+      "shows": [
+        "Return received or missing",
+        "Condition on receipt",
+        "Refund against item value"
+      ]
+    },
+    {
+      "name": "Claims tracker",
+      "purpose": "Reimbursement claims raised and recovered.",
+      "shows": [
+        "Claims raised per marketplace",
+        "Status and age",
+        "Recovered against claimed"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Every order settled",
+      "logic": "Each delivered order must appear in a settlement within the marketplace's payment cycle."
+    },
+    {
+      "rule": "Fees at the rate card",
+      "logic": "Commission, fixed and shipping fees are recalculated from the rate card, category and weight slab on the order date."
+    },
+    {
+      "rule": "Returns received",
+      "logic": "Each customer return must show as received in your warehouse, in the condition the marketplace reports."
+    },
+    {
+      "rule": "Lost and damaged returns reimbursed",
+      "logic": "Returns not received, or received damaged, must carry a reimbursement, or a claim is prepared."
+    },
+    {
+      "rule": "Settlement matches the bank",
+      "logic": "Each settlement total must match the bank credit for that cycle."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "ORDER_NOT_SETTLED",
+      "meaning": "A delivered order has no settlement after the cycle.",
+      "action": "Raise a ticket with the order list."
+    },
+    {
+      "code": "FEE_OVERCHARGED",
+      "meaning": "A fee is above the rate card.",
+      "action": "Raise a claim with the recalculation."
+    },
+    {
+      "code": "RETURN_NOT_RECEIVED",
+      "meaning": "A refunded return never reached the warehouse.",
+      "action": "Raise a reimbursement claim."
+    },
+    {
+      "code": "WEIGHT_DISPUTE",
+      "meaning": "Shipping was charged on a higher weight slab.",
+      "action": "Dispute, with the declared weight."
+    },
+    {
+      "code": "BANK_MISMATCH",
+      "meaning": "The settlement total and the bank credit differ.",
+      "action": "Check the cycle with finance."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "Order",
+      "fields": [
+        "order_id",
+        "marketplace",
+        "sku",
+        "item_price",
+        "ordered_on",
+        "status"
+      ]
+    },
+    {
+      "entity": "SettlementLine",
+      "fields": [
+        "order_id",
+        "cycle",
+        "gross",
+        "commission",
+        "shipping_fee",
+        "net"
+      ]
+    },
+    {
+      "entity": "ReturnRecord",
+      "fields": [
+        "order_id",
+        "return_type",
+        "received_on",
+        "condition"
+      ]
+    },
+    {
+      "entity": "ReimbursementClaim",
+      "fields": [
+        "claim_id",
+        "order_ids",
+        "amount",
+        "status"
+      ]
+    }
+  ],
+  "inputs": [
+    "Settlement, order, return and fee reports from each marketplace",
+    "Your sales register",
+    "Marketplace rate cards",
+    "Warehouse return receipts",
+    "TCS and TDS statements"
+  ],
+  "outputs": [
+    "Settlements tied to orders, returns and fees",
+    "Fee overcharges with workings",
+    "Missing or damaged returns with claim evidence and deadlines",
+    "TCS and TDS reconciliation",
+    "Order-level margin"
+  ],
+  "human_in_the_loop": "Finance reviews overcharges and missing returns and decides which reimbursement claims to file. The system prepares the evidence; your team submits the claims.",
+  "integrations": [
+    "Marketplace seller reports",
+    "ERP or Tally sales register",
+    "Warehouse or inventory system",
+    "Order management system"
+  ],
+  "guardrails": [
+    "Every flagged fee shows the rate card line used",
+    "Claim deadlines tracked for each marketplace",
+    "Claims filed only after finance approves them",
+    "No settlement marked reconciled with unexplained lines"
+  ],
+  "compliance_notes": [
+    "TCS collected by e-commerce operators and TDS deducted on payouts must match your returns and tax statements; the system reconciles both settlement by settlement."
+  ],
+  "rollout": {
+    "duration": "About 8 weeks",
+    "scope": "One marketplace, using the last two to three months of settlements, with your sales register and warehouse receipts.",
+    "deliverables": [
+      "Settlement-to-order reconciliation",
+      "Fee checks against the rate card",
+      "Missing-return list with evidence",
+      "Reimbursement claim format"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Settlement lines tied",
+        "how": "Share of settlement lines tied to an order, return or fee."
+      },
+      {
+        "metric": "Overcharges found",
+        "how": "Fee differences confirmed by finance."
+      },
+      {
+        "metric": "Returns recoverable",
+        "how": "Value of missing or damaged returns found within the claim window."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Which marketplaces?",
+      "a": "Amazon and Flipkart first, then others such as Myntra, Nykaa, Meesho and Ajio, depending on where you sell most."
+    },
+    {
+      "q": "Do you need our seller account login?",
+      "a": "No. Report exports are enough to start. Automating downloads can come later, with your approval."
+    },
+    {
+      "q": "Can it file reimbursement claims for us?",
+      "a": "It prepares each claim with the order, return and evidence. Your team files it and the system tracks the outcome."
+    },
+    {
+      "q": "How long does it take to go live?",
+      "a": "About 8 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
+    }
+  ],
+  "related": [
+    "d2c-payment-and-cod-reconciliation",
+    "quick-commerce-deductions",
+    "modern-trade-deductions"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/marketplace-settlement-reconciliation/"
+}

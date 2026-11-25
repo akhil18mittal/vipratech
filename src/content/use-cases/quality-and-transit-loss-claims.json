@@ -1,0 +1,343 @@
+{
+  "slug": "quality-and-transit-loss-claims",
+  "title": "Quality, Shortage and Transit-Loss Claims",
+  "category": "subsidy-freight-quality",
+  "summary": "Settle customer claims for off-spec material, short weight and transit damage on evidence: COAs, weighbridge slips, LRs and PODs, and recover from transporters or insurers.",
+  "seo": {
+    "title": "Quality and Transit-Loss Claims Settlement | VipraTech",
+    "description": "Validate customer quality, short-weight and transit-loss claims against COAs, lab reports, weighbridge slips, LRs and PODs, and recover from carriers.",
+    "keywords": [
+      "quality claim settlement",
+      "transit loss claims",
+      "short weight claim",
+      "COA quality deviation claim",
+      "transporter damage recovery"
+    ]
+  },
+  "designed_for": [
+    "CFO or Finance Controller",
+    "Quality Assurance Head",
+    "Logistics or Dispatch Manager",
+    "Key Account Manager"
+  ],
+  "problem": {
+    "intro": "Chemicals, fertilisers, cement, building materials and packaged goods move in bulk by road and rail. Customers raise claims for material that is off-spec, for weight short on arrival, and for bags, drums or cartons damaged in transit. Each claim needs the certificate of analysis, the lab report, the weighbridge slips at both ends, the lorry receipt and the delivery remarks, and the loss has to be placed with the right party.",
+    "pain_points": [
+      {
+        "title": "Claims settled without evidence",
+        "detail": "Credit notes are raised to keep the customer happy before anyone compares the claim with the COA or the weighbridge slips."
+      },
+      {
+        "title": "Tolerance ignored",
+        "detail": "Normal weight variation and moisture loss within the agreed tolerance are credited as shortage."
+      },
+      {
+        "title": "Loss not recovered from the carrier",
+        "detail": "Damage noted on the POD should be recovered from the transporter or the insurer, but the claim is absorbed instead."
+      },
+      {
+        "title": "The same loss credited twice",
+        "detail": "A shortage credited to the customer is also deducted from the transporter or claimed on insurance without anyone linking the two."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech reads each claim with its evidence and checks it against what was dispatched and received: the COA and any retest for quality claims, the dispatch and receipt weighbridge slips for shortage, and the LR and POD remarks for transit damage. Agreed tolerances are applied, the loss is placed with the customer, the transporter, the insurer or your plant, and the amount is recalculated. Finance gets a credit note sheet for customers and a recovery sheet for transporters and insurers, so each loss is settled once.",
+    "capabilities": [
+      "Checks quality claims against the COA, specification and any retest",
+      "Checks shortage against dispatch and receipt weighbridge slips, with agreed tolerances",
+      "Checks transit damage against LR and POD remarks",
+      "Places each loss with the customer, transporter, insurer or plant",
+      "Credit note sheet for customers and recovery sheet for carriers and insurers",
+      "Claim rates by product, plant, lane and transporter"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive claims",
+      "detail": "Customer claims are loaded with the evidence they attach."
+    },
+    {
+      "step": 2,
+      "title": "Gather dispatch evidence",
+      "detail": "COA, dispatch weight, LR and seal details are pulled for the consignment."
+    },
+    {
+      "step": 3,
+      "title": "Compare",
+      "detail": "Quality, weight and condition are compared at both ends against specification and tolerance."
+    },
+    {
+      "step": 4,
+      "title": "Place the loss",
+      "detail": "The loss is placed with the customer, transporter, insurer or plant from the evidence and terms."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "Claims without enough evidence or above a limit go to quality and finance."
+    },
+    {
+      "step": 6,
+      "title": "Settle and recover",
+      "detail": "Credit notes go to customers and recovery claims to transporters and insurers."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Customer claim and proof\"] --> B[\"Dispatch evidence\"]\n  B --> C[\"Compare weight and quality\"]\n  C --> D[\"Apply tolerance\"]\n  D --> E{\"Loss proven and placed?\"}\n  E -->|\"yes\"| F[\"Credit or recovery sheet\"]\n  E -->|\"no or unsure\"| G(\"Quality and finance review\")\n  G --> F",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Customer claims and photos",
+          "COAs, lab reports and weighbridge slips",
+          "LRs, PODs and transport contracts"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "COA and lab report reader",
+          "Weighbridge slip and LR reader"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Specification and tolerance checks",
+          "Loss placement rules",
+          "Duplicate settlement check"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Review queue with reason codes",
+          "Credit note and recovery sheets"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Customer claims\"]\n    I2[\"COAs and weighbridge slips\"]\n    I3[\"LRs and PODs\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"COA and lab reader\"]\n    D2[\"Slip and LR reader\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Spec and tolerance checks\"]\n    R2[\"Loss placement\"]\n    R3[\"Duplicate check\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Quality and finance review\")\n    V2[\"Credit and recovery sheets\"]\n  end\n  I1 --> R1\n  I2 --> D1 --> R1\n  I2 --> D2\n  I3 --> D2 --> R2\n  R1 --> R2 --> R3\n  R3 --> V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Claims inbox",
+      "purpose": "Customer claims with the evidence they sent.",
+      "shows": [
+        "Customer, consignment and claim type",
+        "Claimed quantity and value",
+        "Photos, lab reports and remarks"
+      ]
+    },
+    {
+      "name": "Consignment file",
+      "purpose": "Everything about the shipment in one place.",
+      "shows": [
+        "COA and specification",
+        "Dispatch and receipt weights",
+        "LR, seal numbers and POD remarks"
+      ]
+    },
+    {
+      "name": "Assessment",
+      "purpose": "The comparison, the tolerance and where the loss sits.",
+      "shows": [
+        "Difference beyond tolerance",
+        "Spec parameters out of range",
+        "Loss placed with customer, carrier or plant"
+      ]
+    },
+    {
+      "name": "Review queue",
+      "purpose": "Claims that need quality or finance to decide.",
+      "shows": [
+        "Reason code and value",
+        "Evidence on both sides",
+        "Accept, reduce, reject or ask for a retest"
+      ]
+    },
+    {
+      "name": "Settlement",
+      "purpose": "Customer credit notes and carrier or insurer recoveries.",
+      "shows": [
+        "Credit note sheet",
+        "Transporter and insurer recovery sheet",
+        "Claim rates by lane and plant"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Quality against COA and spec",
+      "logic": "A quality claim must show a parameter outside the agreed specification, compared with the COA at dispatch and any joint retest."
+    },
+    {
+      "rule": "Shortage beyond tolerance",
+      "logic": "Shortage is the gap between dispatch and receipt weighbridge weights, less the tolerance agreed for the product and mode."
+    },
+    {
+      "rule": "Damage noted at delivery",
+      "logic": "Transit damage must be noted on the POD or reported within the agreed time, with photos."
+    },
+    {
+      "rule": "Loss placed by the evidence",
+      "logic": "Damage noted on the POD with intact seals is a carrier loss. Off-spec material against a passing COA needs a retest before it is placed."
+    },
+    {
+      "rule": "Settled once",
+      "logic": "A loss credited to a customer is linked to any recovery from a carrier or insurer, so it is never counted twice."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "WITHIN_TOLERANCE",
+      "meaning": "The shortage is within the agreed tolerance.",
+      "action": "Reject the claim, citing the tolerance."
+    },
+    {
+      "code": "COA_PASSES_SPEC",
+      "meaning": "The COA shows the material within specification.",
+      "action": "Ask for a joint retest before deciding."
+    },
+    {
+      "code": "NO_POD_REMARK",
+      "meaning": "The damage was not noted at delivery.",
+      "action": "Reject, or accept with sales sign-off."
+    },
+    {
+      "code": "CARRIER_LIABLE",
+      "meaning": "The evidence places the loss with the transporter.",
+      "action": "Credit the customer and raise a recovery."
+    },
+    {
+      "code": "ALREADY_SETTLED",
+      "meaning": "The loss was settled or recovered before.",
+      "action": "Link the earlier settlement and close."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "QualityClaim",
+      "fields": [
+        "claim_id",
+        "customer",
+        "consignment_no",
+        "claim_type",
+        "claimed_qty",
+        "claimed_value"
+      ]
+    },
+    {
+      "entity": "Consignment",
+      "fields": [
+        "consignment_no",
+        "lr_no",
+        "dispatch_wt",
+        "receipt_wt",
+        "seal_no",
+        "pod_remark"
+      ]
+    },
+    {
+      "entity": "QualityRecord",
+      "fields": [
+        "consignment_no",
+        "coa_ref",
+        "parameter",
+        "spec_range",
+        "coa_value",
+        "retest_value"
+      ]
+    },
+    {
+      "entity": "LossAllocation",
+      "fields": [
+        "claim_id",
+        "party",
+        "amount",
+        "recovery_status"
+      ]
+    }
+  ],
+  "inputs": [
+    "Customer claims with photos and lab reports",
+    "Certificates of analysis and specifications",
+    "Dispatch and receipt weighbridge slips",
+    "Lorry receipts, seal numbers and PODs",
+    "Customer, transport and insurance terms with tolerances"
+  ],
+  "outputs": [
+    "Assessment for every claim with evidence",
+    "Credit note sheet for customers",
+    "Recovery sheet for transporters and insurers",
+    "Review queue with reason codes",
+    "Claim rates by product, plant, lane and transporter"
+  ],
+  "human_in_the_loop": "Quality decides every disputed specification and retest, and finance approves every credit note and recovery. The system never rejects a key customer's claim without a person seeing it.",
+  "integrations": [
+    "ERP such as SAP for dispatches, invoices and credit notes",
+    "Weighbridge and laboratory systems",
+    "Transport management system or LR records",
+    "Email and shared drive for claims and photos"
+  ],
+  "guardrails": [
+    "Tolerances and specifications from the contract version in force",
+    "Each loss placed with exactly one party",
+    "Retest results never overwritten",
+    "Every decision shown with the documents behind it"
+  ],
+  "compliance_notes": [
+    "Credit notes for quality and shortage claims should reference the original invoice for GST.",
+    "Recoveries from transporters and insurers support audit of write-offs."
+  ],
+  "rollout": {
+    "duration": "About 6 weeks",
+    "scope": "One plant or product line, using the last quarter of customer claims, with finance-settled claims as the benchmark.",
+    "deliverables": [
+      "Specifications and tolerances set up as rules",
+      "Claims assessed with evidence",
+      "Credit note and recovery sheets",
+      "Comparison with claims already settled"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Claims with full evidence",
+        "how": "Share of claims where every needed document was found."
+      },
+      {
+        "metric": "Credit avoided",
+        "how": "Claims within tolerance or against a passing COA, confirmed by quality."
+      },
+      {
+        "metric": "Recovery found",
+        "how": "Losses that should be recovered from carriers or insurers."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Can it read our COAs and lab reports?",
+      "a": "Yes. COAs, lab reports and weighbridge slips are read into structured values, and any value read with low confidence is shown to a person."
+    },
+    {
+      "q": "Different products have different tolerances. Is that a problem?",
+      "a": "No. Tolerances are set by product, pack and mode of transport, from the terms in force for each customer."
+    },
+    {
+      "q": "Does it file insurance claims?",
+      "a": "It prepares the recovery sheet and evidence pack. Your team files the claim with the insurer."
+    },
+    {
+      "q": "Can it spot transporters with high losses?",
+      "a": "Yes. Loss rates by lane and transporter show where losses cluster, which supports freight contract decisions."
+    }
+  ],
+  "related": [
+    "freight-bill-audit",
+    "damage-and-expiry-claims",
+    "credit-note-reconciliation"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/quality-and-transit-loss-claims/"
+}

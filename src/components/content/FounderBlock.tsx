@@ -11,10 +11,14 @@ export function FounderBlock() {
           decoding="async"
           className="w-20 h-20 rounded-xl object-cover border border-zinc-800 flex-shrink-0"
         />
-        <p className="text-sm text-zinc-300 leading-relaxed">
-          Founded by Akhilesh Mittal. 8 years building a security platform for a New Zealand company. IIT ISM Dhanbad
-          and IMT Ghaziabad. Builds production agentic AI.
-        </p>
+        <div className="space-y-1">
+          <p className="text-sm font-bold text-white font-mono">Akhilesh Mittal, founder</p>
+          <p className="text-sm text-zinc-300 leading-relaxed">
+            IIT ISM Dhanbad and IMT Ghaziabad. Spent 8 years building and leading engineering on a security-testing
+            platform for a New Zealand company. Built the claims system that a packaged-food brand's finance team runs
+            every month. You work with him directly.
+          </p>
+        </div>
       </div>
     </section>
   );

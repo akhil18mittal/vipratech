@@ -1,0 +1,104 @@
+---
+import Section from '../../components/content/Section.astro';
+import {BulletList} from '../../components/content/BulletList';
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {DetailCards} from '../../components/content/DetailCards';
+import {FaqList} from '../../components/content/FaqList';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+import {categoryLabel, isInProduction} from '../../lib/content';
+
+export async function getStaticPaths() {
+  const {industries} = await siteContent();
+  return industries.map((industry) => ({params: {slug: industry.slug}, props: {slug: industry.slug}}));
+}
+
+const content = await siteContent();
+const industry = content.industry(Astro.props.slug);
+const contact = contactLinks(industry.url, `claims reconciliation for ${industry.name}`);
+// In the order the industry lists them, which puts the workflows that matter most in that industry first.
+const cards = industry.use_cases.map((entry) => {
+  const useCase = content.useCase(entry.use_case);
+  return {label: categoryLabel(useCase.category), title: useCase.title, text: entry.note, href: useCase.url, featured: isInProduction(useCase)};
+});
+const paragraph = 'text-base text-zinc-400 leading-relaxed max-w-3xl';
+const label = 'text-xs text-zinc-500 uppercase tracking-wide mb-3 font-semibold';
+---
+
+<BaseLayout
+  title={industry.seo.title}
+  description={industry.seo.description}
+  page={{type: 'industry', slug: industry.slug}}
+  crumbs={[
+    {name: 'Industries', path: '/industries/'},
+    {name: industry.name, path: industry.url},
+  ]}
+  faqs={industry.faqs}
+>
+  <PageHero eyebrow={industry.name} title={industry.hero.headline} subtitle={industry.hero.subheadline} contact={contact} />
+
+  <Section title="Where the money leaks">
+    <p class={paragraph}>{industry.intro}</p>
+    <DetailCards items={industry.challenges} />
+  </Section>
+
+  <Section title={`Use cases for ${industry.name}`}>
+    <CardGrid items={cards} />
+  </Section>
+
+  <Section title="Documents and systems we work with">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class={label}>Documents</h3>
+        <BulletList items={industry.documents} />
+      </div>
+      <div>
+        <h3 class={label}>Systems and data sources</h3>
+        <BulletList items={industry.systems} />
+      </div>
+    </div>
+  </Section>
+
+  {
+    industry.facts.length > 0 && (
+      <Section title="The numbers behind the problem">
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {industry.facts.map((fact) => (
+            <li class="p-5 bg-zinc-950/80 border border-zinc-800 rounded-xl space-y-3">
+              <p class="text-sm text-zinc-100 leading-relaxed">{fact.text}</p>
+              <a href={fact.url} rel="noopener" target="_blank" class="block text-xs font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
+                Source: {fact.source}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+
+  <Section title="How the engine fits">
+    <p class={paragraph}>
+      Every workflow above runs on one engine: documents are read and normalised, each line is checked against versioned
+      rules and matched to your invoices, and anything uncertain goes to your team with a reason code.
+    </p>
+    <p class="text-base">
+      <a href="/platform/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">See the architecture →</a>
+    </p>
+  </Section>
+
+  <Section title="FAQs">
+    <FaqList faqs={industry.faqs} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock
+    headline="Start with a free claims audit"
+    text="Send one recent quarter of claims. Get every finding, with the amount at risk, in 5 working days."
+    contact={contact}
+  />
+</BaseLayout>

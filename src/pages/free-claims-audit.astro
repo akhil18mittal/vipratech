@@ -1,0 +1,104 @@
+---
+import Section from '../components/content/Section.astro';
+import {BulletList} from '../components/content/BulletList';
+import {CtaBlock} from '../components/content/CtaBlock';
+import {FaqList} from '../components/content/FaqList';
+import {FounderBlock} from '../components/content/FounderBlock';
+import {PageHero} from '../components/content/PageHero';
+import {WorkflowSteps} from '../components/content/WorkflowSteps';
+import {AUDIT_PATH, auditRequestLinks} from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// The free claims audit: what to send, what comes back, and how to ask. Requests go by email or WhatsApp; files are
+// never collected through the website, only through a secure link after the NDA.
+
+const contact = auditRequestLinks();
+const link = 'font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2';
+
+const steps = [
+  {title: 'Ask for the audit', detail: 'Email or WhatsApp us. A 15-minute call follows to understand your claim types and schemes.'},
+  {title: 'Sign an NDA', detail: 'Yours or ours, before you share anything.'},
+  {title: 'Share the files', detail: 'Through a secure upload link we send you. Never through a form on this website.'},
+  {title: 'Get the report in 5 working days', detail: 'Every finding with its reason and evidence, and the amount at risk.'},
+  {title: 'Walk through the findings', detail: 'A 30-minute call with you and the person who owns claims settlement.'},
+];
+
+const faqs = [
+  {
+    q: 'Is it really free?',
+    a: 'Yes. The audit shows you what the system finds on your own claims. We take on a few audits each month, so we ask that the person who owns claims settlement joins the results call.',
+  },
+  {
+    q: 'What happens after the audit?',
+    a: 'If the findings are useful, we propose a fixed-fee rollout on your live monthly claims, about 8 weeks, run beside your current process. There is no obligation.',
+  },
+  {
+    q: 'Do you need access to our systems?',
+    a: 'No. Files and exports are enough. System access only comes up at rollout, and only with your approval.',
+  },
+  {
+    q: 'How much work is it for our team?',
+    a: 'Gathering the files, usually from the claims team and the DMS, plus the 15-minute call before and the 30-minute walkthrough after.',
+  },
+];
+---
+
+<BaseLayout
+  title="Free Distributor Claims Audit | VipraTech"
+  description="Send last quarter's distributor claims. In 5 working days get every duplicate, ineligible line and over-claim, with the amount at risk. Free, under NDA."
+  page={{type: 'audit'}}
+  crumbs={[{name: 'Free claims audit', path: AUDIT_PATH}]}
+  faqs={faqs}
+>
+  <PageHero
+    eyebrow="Free, under NDA"
+    title="Free claims audit"
+    subtitle="Send us one recent quarter of distributor claims. In 5 working days you get every duplicate, ineligible line and over-claim we find, with the amount at risk."
+    contact={contact}
+  />
+
+  <Section title="What you send">
+    <BulletList
+      items={[
+        'Distributor claim sheets for one recent quarter, in Excel, CSV, PDF or scans',
+        'The scheme circulars that applied in that quarter',
+        'Secondary invoices or a DMS export for the same distributors',
+        "Finance's settled outcome for one month, if you have it, so we can compare",
+      ]}
+    />
+    <p class="text-base text-zinc-400">You can start with one region or one claim type.</p>
+  </Section>
+
+  <Section title="What you get">
+    <BulletList
+      items={[
+        'Every claim line checked against the scheme, the invoice and past claims',
+        'Duplicate claims across months and distributors',
+        'Lines under expired schemes or for SKUs outside the scheme',
+        'The recalculated amount beside the claimed amount for every line',
+        'The amount at risk by distributor, scheme and reason',
+        'A 30-minute walkthrough of the findings',
+      ]}
+    />
+    <p class="text-base"><a href="/sample-audit-report/" class={link}>See a sample report →</a></p>
+  </Section>
+
+  <Section title="How it works">
+    <WorkflowSteps steps={steps} />
+  </Section>
+
+  <Section title="Your data">
+    <p class="text-base text-zinc-400 leading-relaxed max-w-3xl">
+      Your files are used only to prepare your report, by the people working on it, and are deleted afterwards. They are
+      not used to train AI models. <a href="/security/" class={link}>How we handle your data →</a>
+    </p>
+  </Section>
+
+  <Section title="Questions">
+    <FaqList faqs={faqs} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock headline="Ask for your free claims audit" text="Email or WhatsApp us. We reply within one working day." contact={contact} />
+</BaseLayout>

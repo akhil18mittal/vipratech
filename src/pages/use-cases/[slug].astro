@@ -1,0 +1,210 @@
+---
+import Section from '../../components/content/Section.astro';
+import {AppScreens} from '../../components/content/AppScreens';
+import {ArchitectureLayers} from '../../components/content/ArchitectureLayers';
+import {BulletList} from '../../components/content/BulletList';
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {DetailCards} from '../../components/content/DetailCards';
+import {DiagramFigure} from '../../components/content/DiagramFigure';
+import {DataModel, ExceptionCodes, MatchRules} from '../../components/content/EngineTables';
+import {FaqList} from '../../components/content/FaqList';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {ProofBox} from '../../components/content/ProofBox';
+import {RolloutBox} from '../../components/content/RolloutBox';
+import {WorkflowSteps} from '../../components/content/WorkflowSteps';
+import {contactLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+import {categoryLabel, isProofApproved} from '../../lib/content';
+import {diagramFor} from '../../lib/diagrams';
+
+export async function getStaticPaths() {
+  const {useCases} = await siteContent();
+  return useCases.map((useCase) => ({params: {slug: useCase.slug}, props: {slug: useCase.slug}}));
+}
+
+const content = await siteContent();
+const useCase = content.useCase(Astro.props.slug);
+const contact = contactLinks(useCase.url, useCase.title);
+const industryCards = content.industriesFor(useCase.slug).map(({industry, note}) => ({title: industry.name, text: note, href: industry.url}));
+const proof = isProofApproved(useCase.proof_ref) ? content.proofProject(useCase.proof_ref!) : undefined;
+const relatedCards = useCase.related.map(content.useCase).map((related) => ({
+  label: categoryLabel(related.category),
+  title: related.title,
+  text: related.summary,
+  href: related.url,
+}));
+const onThisPage = [
+  ['How it works', 'how-it-works'],
+  ['Inside the app', 'inside-the-app'],
+  ['Architecture', 'architecture'],
+  ['Decision rules', 'decision-rules'],
+  ['Exception codes', 'exception-codes'],
+  ['Data model', 'data-model'],
+  ['Go-live plan', 'go-live'],
+] as const;
+const paragraph = 'text-base text-zinc-400 leading-relaxed max-w-3xl';
+const label = 'text-xs text-zinc-500 uppercase tracking-wide mb-3 font-semibold';
+---
+
+<BaseLayout
+  title={useCase.seo.title}
+  description={useCase.seo.description}
+  page={{type: 'use-case', slug: useCase.slug}}
+  crumbs={[
+    {name: 'Use cases', path: '/use-cases/'},
+    {name: useCase.title, path: useCase.url},
+  ]}
+  faqs={useCase.faqs}
+>
+  <PageHero eyebrow={categoryLabel(useCase.category)} title={useCase.title} subtitle={useCase.summary} contact={contact} />
+
+  <nav aria-label="On this page" class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pb-10">
+    <ul class="flex flex-wrap gap-2">
+      {
+        onThisPage.map(([name, id]) => (
+          <li>
+            <a
+              href={`#${id}`}
+              class="inline-block px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900/70 text-sm text-zinc-300 hover:border-lime-500/40 hover:text-lime-300"
+            >
+              {name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <Section title="Who it is for">
+    <BulletList items={useCase.designed_for} />
+  </Section>
+
+  <Section title="The problem">
+    <p class={paragraph}>{useCase.problem.intro}</p>
+    <DetailCards items={useCase.problem.pain_points} />
+  </Section>
+
+  <Section title="What it does">
+    <p class={paragraph}>{useCase.solution.overview}</p>
+    <BulletList items={useCase.solution.capabilities} />
+  </Section>
+
+  {
+    proof && (
+      <Section title="In production">
+        <ProofBox proof={proof} />
+      </Section>
+    )
+  }
+
+  <Section id="how-it-works" title="How it works">
+    <WorkflowSteps id="workflow-steps" steps={useCase.workflow} />
+    <DiagramFigure
+      title={useCase.title}
+      kind="workflow"
+      diagram={diagramFor(useCase, 'flow')}
+      narrow={diagramFor(useCase, 'flow-tb')}
+      describedBy="workflow-steps"
+    />
+  </Section>
+
+  <Section
+    id="inside-the-app"
+    title="Inside the app"
+    intro="The screens your team works in, in the order a claim moves through them."
+  >
+    <AppScreens screens={useCase.app_screens} />
+  </Section>
+
+  <Section
+    id="architecture"
+    title="Architecture"
+    intro="Each layer is a separate service on the VipraTech claims engine, so documents, rules and decisions can be checked and changed independently."
+  >
+    <ArchitectureLayers id="architecture-layers" layers={useCase.architecture.layers} />
+    <DiagramFigure title={useCase.title} kind="architecture" diagram={diagramFor(useCase, 'arch')} describedBy="architecture-layers" />
+    <p class="text-base">
+      <a href="/platform/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">How the engine works →</a>
+    </p>
+  </Section>
+
+  <Section
+    id="decision-rules"
+    title="Decision rules"
+    intro="The checks run on every line, in this order. Each rule is versioned, so a line is always judged by the rule that applied on its date."
+  >
+    <MatchRules rules={useCase.match_rules} />
+  </Section>
+
+  <Section
+    id="exception-codes"
+    title="Exception codes"
+    intro="A line that fails a rule, or that the engine cannot decide with confidence, is held with one of these codes and the evidence behind it."
+  >
+    <ExceptionCodes codes={useCase.exception_codes} />
+  </Section>
+
+  <Section id="data-model" title="Data model" intro="The main records the engine keeps for this workflow, with their key fields.">
+    <DataModel entities={useCase.data_model} />
+  </Section>
+
+  <Section title="Inputs and outputs">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class={label}>Inputs</h3>
+        <BulletList items={useCase.inputs} />
+      </div>
+      <div>
+        <h3 class={label}>Outputs</h3>
+        <BulletList items={useCase.outputs} />
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Where people stay in control">
+    <p class={paragraph}>{useCase.human_in_the_loop}</p>
+  </Section>
+
+  <Section title="Guardrails">
+    <BulletList items={useCase.guardrails} />
+  </Section>
+
+  <Section title="Works with">
+    <BulletList items={useCase.integrations} />
+  </Section>
+
+  {
+    useCase.compliance_notes.length > 0 && (
+      <Section title="Tax and audit notes">
+        <BulletList items={useCase.compliance_notes} />
+      </Section>
+    )
+  }
+
+  <Section title="By industry">
+    <CardGrid items={industryCards} />
+  </Section>
+
+  <Section id="go-live" title="Go-live plan">
+    <RolloutBox rollout={useCase.rollout} />
+  </Section>
+
+  <Section title="FAQs">
+    <FaqList faqs={useCase.faqs} />
+  </Section>
+
+  <Section title="Related">
+    <CardGrid items={relatedCards} columns={2} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock
+    headline="See it on your own data"
+    text="Book a demo of this workflow, or send last quarter's claims for a free audit with every finding and the amount at risk in 5 working days."
+    contact={contact}
+  />
+</BaseLayout>

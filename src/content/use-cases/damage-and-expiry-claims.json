@@ -1,0 +1,340 @@
+{
+  "slug": "damage-and-expiry-claims",
+  "title": "Damage, Expiry and Market Return Claims",
+  "category": "distributor-dealer",
+  "summary": "Check every damage, expiry and market-return claim against batches, invoices, return notes and destruction proof, so finance credits only stock that really qualifies.",
+  "seo": {
+    "title": "Damage and Expiry Claims Reconciliation | VipraTech",
+    "description": "Validate distributor damage, expiry and market-return claims against batches, invoices, return notes and destruction proof before finance issues credit.",
+    "keywords": [
+      "damage and expiry claims",
+      "market return claims FMCG",
+      "expiry return settlement",
+      "breakage and expiry claims pharma",
+      "salvage claim verification"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales Finance",
+    "Claims Settlement Team Lead",
+    "Supply Chain or Returns Manager"
+  ],
+  "problem": {
+    "intro": "Brands take back damaged, near-expiry and expired stock from distributors and retailers, usually under a policy that caps returns as a share of sales and sets which batches and reasons qualify. Claims arrive with return notes, batch lists, photos and destruction certificates, and checking them against the original invoices takes days.",
+    "pain_points": [
+      {
+        "title": "Batches never sold to that distributor",
+        "detail": "Returned batch and invoice numbers often do not match what the distributor actually bought, and nobody cross-checks every line."
+      },
+      {
+        "title": "Return caps applied by hand",
+        "detail": "Return allowances as a share of purchases, by period and category, are calculated in spreadsheets and applied inconsistently."
+      },
+      {
+        "title": "Weak destruction and salvage proof",
+        "detail": "Destruction certificates and photos are missing, reused from earlier claims or do not match the quantities claimed."
+      },
+      {
+        "title": "Saleable stock returned as damaged",
+        "detail": "Without checking expiry dates and reasons, saleable stock comes back as damaged and is credited at full value."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech reads each return claim with its return notes, batch lists, photos and destruction certificates, and checks every line against the original sales invoices: was this batch sold to this distributor, at what price, and is it within or past its shelf life as claimed. Your returns policy is configured as rules, including caps as a share of purchases and the reasons that qualify. Duplicates are checked across months, and lines that fail or lack proof go to an exception queue with the reason. Finance approves the credit note sheet, and every decision keeps its evidence.",
+    "capabilities": [
+      "Matches returned batches and quantities to the original invoices to that distributor",
+      "Checks expiry dates and shelf life against the reason claimed",
+      "Applies return caps by period, category and distributor from your policy",
+      "Checks that destruction certificates and photos exist, match the claim and are not reused",
+      "Values each line at the right price, net of salvage where it applies",
+      "Exception queue with reason codes, and a credit note sheet for finance"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive return claims",
+      "detail": "Distributors send return claims with return notes, batch lists, photos and destruction certificates."
+    },
+    {
+      "step": 2,
+      "title": "Normalise lines",
+      "detail": "Each line is read into distributor, SKU, batch, quantity, reason and claimed value."
+    },
+    {
+      "step": 3,
+      "title": "Trace to invoices",
+      "detail": "Every batch is traced to the sales invoices to that distributor, with price and date."
+    },
+    {
+      "step": 4,
+      "title": "Apply the returns policy",
+      "detail": "Shelf life, qualifying reasons and return caps are checked, and the eligible value is recalculated."
+    },
+    {
+      "step": 5,
+      "title": "Exception review",
+      "detail": "Lines without proof, outside the cap or with a mismatched batch go to finance with the reason."
+    },
+    {
+      "step": 6,
+      "title": "Approve and credit",
+      "detail": "Finance approves the credit note sheet, and each distributor gets a line-by-line statement."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Return claim and proofs\"] --> B[\"Normalise return lines\"]\n  B --> C[\"Trace batch to invoice\"]\n  C --> D[\"Apply shelf life and caps\"]\n  D --> E{\"Proof valid, within policy?\"}\n  E -->|\"yes\"| F[\"Credit note sheet\"]\n  E -->|\"no or unsure\"| G(\"Finance review\")\n  G --> F\n  F --> H[\"Distributor statement\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Distributor return claims and notes",
+          "Sales invoice and batch history",
+          "Returns policy register"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Batch list and claim normaliser",
+          "OCR for notes and certificates"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Batch to invoice tracer",
+          "Shelf life and cap rules",
+          "Proof and duplicate checks"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Exception queue with reason codes",
+          "Credit note sheet and statements"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Return claims and notes\"]\n    I2[\"Invoice and batch history\"]\n    I3[\"Returns policy register\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Claim normaliser\"]\n    D2[\"OCR for certificates\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Batch to invoice tracer\"]\n    R2[\"Shelf life and cap rules\"]\n    R3[\"Proof and duplicate checks\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Finance review\")\n    V2[\"Credit note sheet\"]\n  end\n  I1 --> D1\n  I1 --> D2\n  I2 --> R1\n  I3 --> R2\n  D1 --> R1\n  D2 --> R3\n  R1 --> R2 --> R3\n  R3 --> V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Returns inbox",
+      "purpose": "Return claims with their notes, batch lists, photos and destruction certificates.",
+      "shows": [
+        "Distributor, month and claimed value",
+        "Proofs attached, by type",
+        "Returns as a share of purchases"
+      ]
+    },
+    {
+      "name": "Batch trace",
+      "purpose": "Each returned batch traced to the invoices that sold it to this distributor.",
+      "shows": [
+        "Batch, SKU and invoice found",
+        "Price and date of sale",
+        "Shelf life left on the claim date"
+      ]
+    },
+    {
+      "name": "Policy setup",
+      "purpose": "Return caps, qualifying reasons and pricing rules by category and channel.",
+      "shows": [
+        "Cap as a share of purchases",
+        "Qualifying reasons per category",
+        "Return price and salvage rules"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Returns held for review, with the batch trace and proof side by side.",
+      "shows": [
+        "Reason code and amount at risk",
+        "Photos and certificates beside the claim",
+        "Approve, reject or approve in part"
+      ]
+    },
+    {
+      "name": "Credit and statement",
+      "purpose": "The approved credit note sheet and a line-by-line return statement.",
+      "shows": [
+        "Credit notes linked to the original invoices",
+        "Statement per distributor",
+        "Return trends by SKU and reason"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Batch sold to this distributor",
+      "logic": "Every returned batch must trace to a sales invoice to the same distributor. The quantity is capped at what that invoice sold, less earlier returns."
+    },
+    {
+      "rule": "Reason fits the shelf life",
+      "logic": "Expiry returns must be past expiry or inside the near-expiry window on the claim date. Damage returns need a damage reason and proof."
+    },
+    {
+      "rule": "Within the return cap",
+      "logic": "Eligible returns for the period stay within the cap set as a share of the distributor's purchases, by category."
+    },
+    {
+      "rule": "Proof present and unique",
+      "logic": "Destruction certificates and photos must exist where required, match the quantities and not repeat an image or certificate from an earlier claim."
+    },
+    {
+      "rule": "Valued at the right price",
+      "logic": "Each line is valued at the invoiced price or the policy return price, net of salvage where it applies."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "BATCH_NOT_SOLD",
+      "meaning": "The batch was never invoiced to this distributor.",
+      "action": "Reject, or ask where the stock was bought."
+    },
+    {
+      "code": "QTY_OVER_SOLD",
+      "meaning": "The claimed quantity is above what was sold, less earlier returns.",
+      "action": "Approve the traceable quantity only."
+    },
+    {
+      "code": "NOT_NEAR_EXPIRY",
+      "meaning": "The batch still had shelf life beyond the return window.",
+      "action": "Reject as saleable stock, or approve as an exception."
+    },
+    {
+      "code": "OVER_RETURN_CAP",
+      "meaning": "The claim takes returns past the policy cap for the period.",
+      "action": "Approve up to the cap. The rest needs sign-off."
+    },
+    {
+      "code": "PROOF_REUSED",
+      "meaning": "A photo or certificate matches one used in an earlier claim.",
+      "action": "Hold and ask for fresh proof."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "ReturnClaim",
+      "fields": [
+        "claim_id",
+        "distributor_code",
+        "period",
+        "claimed_value",
+        "proof_count"
+      ]
+    },
+    {
+      "entity": "ReturnLine",
+      "fields": [
+        "sku",
+        "batch_no",
+        "qty",
+        "reason",
+        "claimed_value",
+        "eligible_value"
+      ]
+    },
+    {
+      "entity": "BatchTrace",
+      "fields": [
+        "batch_no",
+        "invoice_no",
+        "invoice_date",
+        "sold_qty",
+        "returned_to_date"
+      ]
+    },
+    {
+      "entity": "ReturnPolicy",
+      "fields": [
+        "category",
+        "channel",
+        "cap_pct",
+        "near_expiry_days",
+        "version"
+      ]
+    }
+  ],
+  "inputs": [
+    "Return claims with return notes and batch lists",
+    "Photos and destruction certificates",
+    "Sales invoices with batch numbers",
+    "Returns policy with caps and qualifying reasons",
+    "Previous return claims for duplicate checks"
+  ],
+  "outputs": [
+    "Return lines traced to invoices, with eligible values",
+    "Exceptions with reason codes and evidence",
+    "Credit note sheet for finance approval",
+    "Return trends by distributor, SKU and reason"
+  ],
+  "human_in_the_loop": "Finance approves every credit note sheet, and supply chain decides on any return the policy does not cover. Lines with missing or doubtful proof are always flagged for a person.",
+  "integrations": [
+    "DMS or ERP sales invoices with batch numbers",
+    "ERP such as SAP or Tally for credit notes",
+    "Warehouse or returns system for received stock",
+    "Claims mailbox or distributor portal"
+  ],
+  "guardrails": [
+    "No credit without a traced invoice for the batch",
+    "Caps applied from the policy version valid for the period",
+    "Reused photos and certificates held until reviewed",
+    "Claimed and eligible values shown side by side"
+  ],
+  "compliance_notes": [
+    "Credit notes for returns should reference the original invoice for GST; the system keeps that link.",
+    "Destruction records support audit of stock write-offs."
+  ],
+  "rollout": {
+    "duration": "Two monthly claim cycles, about 8 weeks",
+    "scope": "Damage and expiry claims for the distributors of one region, with one month of finance-settled returns as the benchmark.",
+    "deliverables": [
+      "Returns policy configured as rules",
+      "Return claims traced to invoices, with exceptions",
+      "Credit note sheet in your finance format",
+      "Comparison with finance-settled returns"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Lines traced to invoices",
+        "how": "Share of return lines matched to a sales invoice for the same batch."
+      },
+      {
+        "metric": "Ineligible returns caught",
+        "how": "Lines flagged outside policy or without proof, confirmed by finance."
+      },
+      {
+        "metric": "Settlement time",
+        "how": "Time from claim receipt to approved credit, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our returns policy differs by category and channel. Can it handle that?",
+      "a": "Yes. Caps, qualifying reasons and price rules are configured per category, channel and period, and the version valid for each claim is applied."
+    },
+    {
+      "q": "What if our invoices do not carry batch numbers?",
+      "a": "The system matches on SKU, quantity and date instead and marks those matches as weaker, so finance can decide how much evidence it needs."
+    },
+    {
+      "q": "Can it check physical stock?",
+      "a": "No. It checks documents and data. Where you run physical verification, its results can be added as evidence on each claim."
+    },
+    {
+      "q": "Is this the same system as your distributor claims settlement?",
+      "a": "Yes. Every VipraTech workflow runs on one claims engine: the document reading, matching, review queue and audit trail are shared. For this workflow we set up your returns policy as versioned rules, along with your document templates and matching keys."
+    }
+  ],
+  "related": [
+    "distributor-scheme-claims",
+    "rate-difference-claims",
+    "credit-note-reconciliation"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/damage-and-expiry-claims/"
+}

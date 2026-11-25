@@ -1,0 +1,124 @@
+{
+  "slug": "fertilisers",
+  "name": "Fertilisers: Urea, DAP, NPK and SSP",
+  "seo": {
+    "title": "Fertiliser Subsidy and Claims Reconciliation | VipraTech",
+    "description": "Subsidy, freight, dealer scheme and cash discount reconciliation for urea, DAP, NPK and SSP manufacturers, importers and marketers.",
+    "keywords": [
+      "fertiliser subsidy reconciliation",
+      "urea subsidy claim",
+      "DAP NPK subsidy accounting",
+      "fertiliser freight subsidy",
+      "fertiliser dealer schemes",
+      "iFMS reconciliation"
+    ]
+  },
+  "hero": {
+    "headline": "Get every tonne you sell into the subsidy claim, and every freight claim paid",
+    "subheadline": "VipraTech ties dispatches, receipt acknowledgements, retail stock and PoS sales together, so finance sees exactly where subsidy is waiting and why."
+  },
+  "intro": "For a fertiliser company, the subsidy is often a larger receivable than anything customers owe. It is paid only on product sold to farmers through retailers' PoS devices, so every dispatch has to be received, acknowledged and sold before it earns subsidy. Freight reimbursement, dealer schemes on decontrolled grades, cash discounts and transit losses add more claims to reconcile, across thousands of dealers and many states.",
+  "challenges": [
+    {
+      "title": "Subsidy waiting on stuck stock",
+      "detail": "Product that is dispatched but not acknowledged, or sitting at retail without PoS sales, holds back subsidy the company has already financed."
+    },
+    {
+      "title": "Two sets of records",
+      "detail": "The company's ERP and the government monitoring system both record every movement, and differences in quantity, grade or dealer code go unresolved."
+    },
+    {
+      "title": "Freight claims and transit losses",
+      "detail": "Rail and road freight claims need movement records and the right rates, and bag shortages at rake points are absorbed instead of recovered."
+    },
+    {
+      "title": "Dealer schemes and discounts",
+      "detail": "Schemes on P&K grades, specialty fertilisers and cash discounts for early payment are paid across thousands of dealers with little checking."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "fertiliser-subsidy-reconciliation",
+      "note": "Dispatches traced through acknowledgement and retail stock to PoS sales, with weekly claims and payments tied back by grade."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Transporter and rail freight bills from plants, ports and rake points checked against contracts and movement records."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Bag shortages and damage at rake points and warehouses, checked against weighbridge slips and placed with the carrier or handling agent."
+    },
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Season schemes on DAP, NPK, SSP, water-soluble and specialty fertilisers recalculated from billing, returns and collections."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Cash discounts dealers take for early payment, checked against bank realisation dates and slabs."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price changes on decontrolled grades, with dealer claims capped at the stock they could have held."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Scheme and discount credit notes tied to approvals and to each dealer's ledger."
+    },
+    {
+      "use_case": "trade-spend-accruals",
+      "note": "Season scheme accruals compared with what dealers have earned, ahead of quarter close."
+    }
+  ],
+  "documents": [
+    "ERP dispatch, stock transfer and sales records",
+    "Monitoring system reports: dispatch, receipt, retail stock and PoS sales",
+    "Weekly subsidy claim and payment statements",
+    "Railway receipts, challans and road movement records",
+    "Weighbridge slips and rake point handling reports",
+    "Dealer scheme circulars and ledgers"
+  ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Report downloads from the fertiliser monitoring system",
+    "Logistics and rake handling records",
+    "Dealer and retailer master with system codes",
+    "Bank statements"
+  ],
+  "facts": [
+    {
+      "text": "Fertiliser companies raise subsidy claims every week, based on actual sales recorded on retailers' PoS devices.",
+      "source": "Lok Sabha unstarred question 2229, August 2025",
+      "url": "https://eparlib.sansad.in/bitstream/123456789/2993975/1/AU2229_0I7e7Q.pdf"
+    },
+    {
+      "text": "The government system tracks more than 640 lakh tonnes of fertiliser across over 18 crore PoS transactions, with subsidy claims processed weekly.",
+      "source": "NIC Informatics, e-Urvarak, October 2024",
+      "url": "https://informatics.nic.in/files/websites/october-2024/e-urvarak.php"
+    },
+    {
+      "text": "A parliamentary committee noted in 2017 that claims are generated in sequence, so a month with pending claims can hold up the claims after it.",
+      "source": "PRS Legislative Research, Freight Subsidy Policy summary",
+      "url": "https://prsindia.org/policy/report-summaries/freight-subsidy-policy"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Do you need access to the government system?",
+      "a": "No. Your team downloads the reports it already uses. We never log in to government portals or file claims on your behalf."
+    },
+    {
+      "q": "Does it work for urea as well as P&K fertilisers?",
+      "a": "Yes. The dispatch-to-sale chain is the same. Grades, freight legs and rates are set up separately because the policies differ."
+    },
+    {
+      "q": "Our dealer codes differ from the system codes. Is that a problem?",
+      "a": "No. A mapping table links them, and any new mismatch is flagged for your team to map once."
+    },
+    {
+      "q": "Where should we start?",
+      "a": "With one product group in two or three states, using last quarter's dispatches, reports, claims and payments."
+    }
+  ],
+  "url": "/industries/fertilisers/"
+}

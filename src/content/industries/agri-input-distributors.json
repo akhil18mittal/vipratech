@@ -1,0 +1,100 @@
+{
+  "slug": "agri-input-distributors",
+  "name": "Agri-Input Distributors and Dealers",
+  "seo": {
+    "title": "Claim Recovery for Agri-Input Distributors | VipraTech",
+    "description": "For distributors of seeds, fertilisers and crop protection: track every claim on every company, match credit notes and ledgers, and recover what is owed.",
+    "keywords": [
+      "agri input distributor claims",
+      "pending claims from companies",
+      "fertiliser dealer ledger reconciliation",
+      "pesticide distributor credit notes",
+      "agri dealer scheme claims"
+    ]
+  },
+  "hero": {
+    "headline": "Know what every company owes you, and get it paid before the claim window closes",
+    "subheadline": "Agri-input distributors carry many companies at once. VipraTech gives you one register of every claim, credit note and ledger difference across all of them."
+  },
+  "intro": "A distributor of seeds, fertilisers and crop protection products may carry ten or more companies, each with its own schemes, return rules, cash discounts and claim formats. Season-end returns, scheme payouts, rate differences and discounts owed by companies are a large part of the distributor's margin, and much of it is settled late, short or not at all.",
+  "challenges": [
+    {
+      "title": "Claims spread across companies",
+      "detail": "Each company has its own format, portal and timeline, so nobody knows the total owed at any time."
+    },
+    {
+      "title": "Credit notes without a breakdown",
+      "detail": "Companies issue lump-sum credit notes that cover several claims and short-pay some lines without saying which."
+    },
+    {
+      "title": "Returns and schemes netted against you",
+      "detail": "When stock goes back at season end, companies reverse schemes and discounts, sometimes more than they should."
+    },
+    {
+      "title": "Retailer credit on your side",
+      "detail": "You give retailers credit and discounts too, and the gap between what you pay and what you recover grows every season."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "distributor-claim-recovery",
+      "note": "One register of claims on every company, matched to credit notes and ledgers, with follow-up packs for what is short or pending."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Company credit notes and debit notes matched to your claims and returns, and your books agreed with each company's ledger."
+    },
+    {
+      "use_case": "season-end-sales-returns",
+      "note": "Your season-end returns to each company, with the schemes and discounts they reverse checked against their own policy."
+    },
+    {
+      "use_case": "supplier-rebate-claims",
+      "note": "Volume and growth schemes from companies calculated from your purchases, so no slab you reached goes unpaid."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Cash discounts you earn from companies and give to retailers, both checked against payment dates and slabs."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price-drop compensation on stock you held on the date, calculated from your own purchases and sales."
+    }
+  ],
+  "documents": [
+    "Claims raised on each company",
+    "Company credit notes, debit notes and statements",
+    "Company ledgers and your own books",
+    "Scheme circulars from each company",
+    "Purchase, sales and return invoices",
+    "Bank statements"
+  ],
+  "systems": [
+    "Tally, Busy or Marg for your books",
+    "Company portals and DMS apps",
+    "Email and WhatsApp for statements",
+    "Bank statements"
+  ],
+  "facts": [
+    {
+      "text": "Agrochemical companies typically give dealers around three months of credit, so claims and collections often run months behind sales.",
+      "source": "Agropages, citing B&K Securities",
+      "url": "https://news.agropages.com/News/print-15899.htm"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "We use Tally. Does that work?",
+      "a": "Yes. Tally exports are read for your books, and claim sheets and credit notes in whatever format each company sends."
+    },
+    {
+      "q": "Can it handle ten or more companies?",
+      "a": "Yes. Each company's formats and rules are set up once, and every claim sits in one register."
+    },
+    {
+      "q": "Is this for distributors or for companies?",
+      "a": "This page is for distributors and dealers. Companies use the same engine to check the claims distributors raise."
+    }
+  ],
+  "url": "/industries/agri-input-distributors/"
+}

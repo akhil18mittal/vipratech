@@ -1,0 +1,362 @@
+{
+  "slug": "fertiliser-subsidy-reconciliation",
+  "title": "Fertiliser Subsidy and Freight Claim Reconciliation",
+  "category": "subsidy-freight-quality",
+  "summary": "Tie every dispatch to its receipt acknowledgement, retail stock and PoS sale, so each week's subsidy claim covers everything sold and stuck stock is found early.",
+  "seo": {
+    "title": "Fertiliser Subsidy Claim Reconciliation | VipraTech",
+    "description": "Reconcile fertiliser dispatches, receipt acknowledgements, retailer PoS sales, weekly subsidy claims and freight reimbursement for urea and P&K companies.",
+    "keywords": [
+      "fertiliser subsidy reconciliation",
+      "iFMS subsidy claim",
+      "PoS sales fertiliser subsidy",
+      "fertiliser freight subsidy claim",
+      "urea DAP subsidy accounting"
+    ]
+  },
+  "designed_for": [
+    "CFO or Head of Finance at a fertiliser company",
+    "Subsidy and Government Claims Manager",
+    "Marketing Accounts or Logistics Finance Lead",
+    "Internal Audit"
+  ],
+  "problem": {
+    "intro": "Subsidy on urea and P&K fertilisers is paid to the manufacturer or importer only after the product is sold to a farmer through a retailer's Aadhaar-enabled PoS device, and claims are generated weekly from those sales. Between the plant and the farmer sit dispatches, rake points, wholesalers, retailers and receipt acknowledgements, each recorded in the company's ERP and in the government's fertiliser monitoring system. When the two do not agree, subsidy waits.",
+    "pain_points": [
+      {
+        "title": "Dispatches not acknowledged",
+        "detail": "Stock reaches the wholesaler or retailer but the receipt is not acknowledged in the system, so it never becomes eligible for sale and subsidy."
+      },
+      {
+        "title": "Stock stuck at retail",
+        "detail": "Product shows as retail stock for weeks with no PoS sales, tying up subsidy that the company has already financed."
+      },
+      {
+        "title": "ERP and system figures drift",
+        "detail": "Quantities, product grades and dealer codes differ between the company's books and the monitoring system, and nobody tracks the gap line by line."
+      },
+      {
+        "title": "Freight claims under-recovered",
+        "detail": "Rail and road movement eligible for freight reimbursement is claimed late, at the wrong rate or with missing receipts."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech builds a single chain for every tonne: plant or port dispatch, rake point, wholesaler and retailer receipt, acknowledgement, retail stock and PoS sale. It reads your ERP dispatch data and the reports your team downloads from the fertiliser monitoring system, matches them by dispatch, product grade, dealer and date, and shows where each tonne is stuck and how much subsidy is waiting on it. Weekly subsidy claims and payments are tied back to PoS sales by product, and freight claims are checked against movement records and the rates in force. Gaps go to your subsidy team with the reason, and every figure keeps its source.",
+    "capabilities": [
+      "Links each dispatch to its receipt acknowledgement and retail sale, by product grade and dealer",
+      "Shows unacknowledged dispatches and slow-moving retail stock, with the subsidy waiting on each",
+      "Ties weekly subsidy claims and payments to PoS sales by product and week",
+      "Checks freight claims against rail receipts, road movement records and the rates in force",
+      "Flags differences in quantity, grade and dealer code between your ERP and the system reports",
+      "Gives finance a weekly subsidy position: earned, claimed, received and pending"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect records",
+      "detail": "ERP dispatches and sales, the system reports for dispatch, receipt, stock and PoS sales, and claim and payment statements are loaded each week."
+    },
+    {
+      "step": 2,
+      "title": "Link the chain",
+      "detail": "Each dispatch is linked to its receipts and acknowledgements down to the retailer, by dispatch reference, grade, dealer and date."
+    },
+    {
+      "step": 3,
+      "title": "Find stuck stock",
+      "detail": "Unacknowledged receipts and retail stock without sales are listed by age, district and dealer, with the subsidy waiting on them."
+    },
+    {
+      "step": 4,
+      "title": "Tie claims to sales",
+      "detail": "Each weekly claim and payment is compared with PoS sales by product, and differences are explained."
+    },
+    {
+      "step": 5,
+      "title": "Check freight",
+      "detail": "Freight claims are checked against movement records and the applicable rates."
+    },
+    {
+      "step": 6,
+      "title": "Review and act",
+      "detail": "The subsidy team works the exception list: chase acknowledgements, correct records or follow up payments."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"ERP dispatches\"] --> B[\"Link to receipts\"]\n  B --> C[\"Acknowledgement and stock\"]\n  C --> D[\"PoS sales by week\"]\n  D --> E[\"Tie to subsidy claims\"]\n  E --> F{\"Chain complete and agreed?\"}\n  F -->|\"yes\"| G[\"Subsidy position\"]\n  F -->|\"no or unsure\"| H(\"Subsidy team review\")\n  H --> G",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "ERP dispatch and sales data",
+          "Monitoring system report downloads",
+          "Claim, payment and freight records"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Report normaliser by grade and dealer",
+          "Railway receipt and challan reader"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Dispatch to sale chain builder",
+          "Claim to sales tie-out",
+          "Freight rate and distance checks"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Exception list with reason codes",
+          "Weekly subsidy position report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"ERP dispatches and sales\"]\n    I2[\"System report downloads\"]\n    I3[\"Claims and payments\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Report normaliser\"]\n    D2[\"Receipt and challan reader\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Dispatch to sale chain\"]\n    R2[\"Claim to sales tie-out\"]\n    R3[\"Freight checks\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Subsidy team review\")\n    V2[\"Subsidy position report\"]\n  end\n  I1 --> R1\n  I2 --> D1 --> R1\n  I3 --> R2\n  D2 --> R3\n  R1 --> R2\n  R2 --> V1\n  R3 --> V1\n  V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Movement chain",
+      "purpose": "Every dispatch traced down to retail, with where it stopped.",
+      "shows": [
+        "Dispatch, rake point and wholesaler",
+        "Retailer receipt and acknowledgement",
+        "Tonnes sold through PoS"
+      ]
+    },
+    {
+      "name": "Stuck stock",
+      "purpose": "Unacknowledged receipts and retail stock with no sales, by age.",
+      "shows": [
+        "District, dealer and grade",
+        "Days since receipt",
+        "Subsidy waiting on the stock"
+      ]
+    },
+    {
+      "name": "Claim tie-out",
+      "purpose": "Weekly claims and payments beside PoS sales by product.",
+      "shows": [
+        "Sold, claimed and paid by week",
+        "Claims held or short-paid",
+        "Weeks waiting on earlier claims"
+      ]
+    },
+    {
+      "name": "Freight check",
+      "purpose": "Freight claims beside movement records and rates.",
+      "shows": [
+        "Mode, distance and rate applied",
+        "Receipts attached or missing",
+        "Claimed against recalculated"
+      ]
+    },
+    {
+      "name": "Exception list",
+      "purpose": "Gaps for the subsidy team, with the records on both sides.",
+      "shows": [
+        "Reason code and tonnes",
+        "Owner: logistics, sales or finance",
+        "Mark as chased, corrected or closed"
+      ]
+    },
+    {
+      "name": "Subsidy position",
+      "purpose": "Earned, claimed, received and pending, every week.",
+      "shows": [
+        "Position by product and state",
+        "Ageing of pending subsidy",
+        "Trend against last season"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Dispatch received and acknowledged",
+      "logic": "Each dispatch to a wholesaler or retailer must have a matching receipt acknowledgement for the same grade and quantity within the expected days."
+    },
+    {
+      "rule": "Books and system agree",
+      "logic": "Quantity, grade and dealer code for each dispatch must agree between your ERP and the system report, within a set tolerance."
+    },
+    {
+      "rule": "Retail stock is moving",
+      "logic": "Retail stock older than the threshold you set, with no PoS sales, is listed with the subsidy it holds back."
+    },
+    {
+      "rule": "Claim covers PoS sales",
+      "logic": "Each weekly claim must cover the PoS sales of that week by product. Payments must match the claims they settle."
+    },
+    {
+      "rule": "Freight at the policy rate",
+      "logic": "Freight claims must match movement records, eligible legs and the rates and distance limits in force for the period."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "NOT_ACKNOWLEDGED",
+      "meaning": "A dispatch has no receipt acknowledgement after the expected days.",
+      "action": "Ask the dealer or field team to acknowledge it."
+    },
+    {
+      "code": "QTY_GRADE_MISMATCH",
+      "meaning": "Quantity or grade differs between your books and the system report.",
+      "action": "Correct the record on the wrong side."
+    },
+    {
+      "code": "STOCK_NOT_SELLING",
+      "meaning": "Retail stock has had no PoS sales past the threshold.",
+      "action": "Review with sales: liquidate or move the stock."
+    },
+    {
+      "code": "CLAIM_SHORT",
+      "meaning": "A weekly claim or payment is below the PoS sales it should cover.",
+      "action": "Follow up the difference with the subsidy cell."
+    },
+    {
+      "code": "FREIGHT_UNSUPPORTED",
+      "meaning": "A freight claim has no movement record or uses the wrong rate.",
+      "action": "Attach the receipt or recalculate."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "Dispatch",
+      "fields": [
+        "dispatch_ref",
+        "grade",
+        "qty_mt",
+        "from_point",
+        "to_dealer",
+        "dispatched_on"
+      ]
+    },
+    {
+      "entity": "Acknowledgement",
+      "fields": [
+        "dispatch_ref",
+        "dealer_code",
+        "ack_qty_mt",
+        "ack_on"
+      ]
+    },
+    {
+      "entity": "RetailStock",
+      "fields": [
+        "retailer_code",
+        "grade",
+        "qty_mt",
+        "as_of",
+        "last_sale_on"
+      ]
+    },
+    {
+      "entity": "SubsidyClaim",
+      "fields": [
+        "claim_week",
+        "grade",
+        "pos_sales_mt",
+        "claimed",
+        "paid",
+        "status"
+      ]
+    },
+    {
+      "entity": "FreightClaim",
+      "fields": [
+        "movement_ref",
+        "mode",
+        "distance_km",
+        "qty_mt",
+        "rate",
+        "claimed"
+      ]
+    }
+  ],
+  "inputs": [
+    "ERP dispatch, stock transfer and sales data",
+    "Reports downloaded from the fertiliser monitoring system: dispatch, receipt, stock and PoS sales",
+    "Weekly subsidy claim and payment statements",
+    "Railway receipts, challans and road movement records",
+    "Dealer and retailer master with system codes"
+  ],
+  "outputs": [
+    "Dispatch-to-sale chain for every tonne",
+    "Stuck stock list by district, dealer and age, with subsidy waiting",
+    "Weekly tie-out of claims and payments to PoS sales",
+    "Freight claim check with recalculated amounts",
+    "Weekly subsidy position for finance"
+  ],
+  "human_in_the_loop": "The subsidy team decides every correction and follow-up. VipraTech never logs in to government systems or files claims; it works only on reports your team downloads and records you share.",
+  "integrations": [
+    "ERP such as SAP or Oracle for dispatches and sales",
+    "Report downloads from the fertiliser monitoring system",
+    "Logistics or transport management system",
+    "Shared drive or email for receipts and challans"
+  ],
+  "guardrails": [
+    "No access to government portals: only downloaded reports",
+    "Every figure shown with the report and row it came from",
+    "Tolerances and thresholds set by your team",
+    "Records on both sides kept unchanged; differences are listed, not overwritten"
+  ],
+  "compliance_notes": [
+    "Subsidy receivable and freight claims are material balances for auditors; the chain gives line-level support for both.",
+    "Rates, freight policies and claim rules change by notification; each check uses the version in force for the period."
+  ],
+  "rollout": {
+    "duration": "About 6 weeks",
+    "scope": "One product group and two or three states, using the last full quarter of dispatches, system reports, claims and payments.",
+    "deliverables": [
+      "Dispatch-to-sale chain for the scope",
+      "Stuck stock list with subsidy waiting",
+      "Claim and payment tie-out",
+      "Freight claim check"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Dispatches traced to sale",
+        "how": "Share of dispatched tonnes linked through to PoS sales or current stock."
+      },
+      {
+        "metric": "Subsidy found waiting",
+        "how": "Subsidy held back by unacknowledged or slow-moving stock."
+      },
+      {
+        "metric": "Freight under-recovered",
+        "how": "Eligible freight not claimed or claimed short."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do you need access to the government system?",
+      "a": "No. Your team downloads the reports it already uses and shares them with us. We never log in to government portals or file anything on your behalf."
+    },
+    {
+      "q": "Does it cover urea as well as P&K fertilisers?",
+      "a": "Yes. The chain works the same way for both. Product grades, freight legs and rates are set up separately because the policies differ."
+    },
+    {
+      "q": "Can it help with dealers who do not acknowledge receipts?",
+      "a": "Yes. The stuck stock list shows each unacknowledged dispatch by dealer and age, so field teams know whom to call first."
+    },
+    {
+      "q": "Can it handle our dealer codes being different from the system codes?",
+      "a": "Yes. A mapping table links your dealer codes to the system codes, and new mismatches are flagged for your team to map once."
+    }
+  ],
+  "related": [
+    "freight-bill-audit",
+    "dealer-incentive-and-rebate-settlement",
+    "credit-note-reconciliation"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/fertiliser-subsidy-reconciliation/"
+}

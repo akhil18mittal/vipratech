@@ -1,0 +1,341 @@
+{
+  "slug": "cash-discount-claims",
+  "title": "Cash Discount and Payment-Term Claims",
+  "category": "distributor-dealer",
+  "summary": "Check every cash discount a dealer takes or claims against the invoice date, the payment date and your discount slabs, before the credit note goes out.",
+  "seo": {
+    "title": "Cash Discount Claims Reconciliation | VipraTech",
+    "description": "Validate cash discounts and prompt-payment claims against invoice dates, receipts, bounced cheques and your discount slabs before credit notes are raised.",
+    "keywords": [
+      "cash discount reconciliation",
+      "prompt payment discount dealers",
+      "cash discount credit note",
+      "dealer CD claims",
+      "payment term discount validation"
+    ]
+  },
+  "designed_for": [
+    "CFO or Head of Credit and Collections",
+    "Accounts Receivable Manager",
+    "Sales Finance Lead",
+    "Internal Audit"
+  ],
+  "problem": {
+    "intro": "Agri-input, building materials, chemicals, pharma and auto parts companies give dealers a cash discount for paying early, in slabs by the days taken to pay. Dealers either deduct it when they pay or claim it afterwards. With thousands of invoices, part payments, cheques that bounce and payments that cover several invoices, most companies check cash discounts in bulk and pay more than they owe.",
+    "pain_points": [
+      {
+        "title": "Discount taken on late payments",
+        "detail": "Payments made after the slab ends still get the higher discount, because receipts are not matched to invoices one by one."
+      },
+      {
+        "title": "Bounced cheques keep the discount",
+        "detail": "The discount is given on the cheque date, and stays even when the cheque bounces and is paid late."
+      },
+      {
+        "title": "Part payments and on-account receipts",
+        "detail": "Receipts that cover several invoices, or that arrive without references, are split by hand and often in the dealer's favour."
+      },
+      {
+        "title": "Discount on the wrong value",
+        "detail": "Cash discount is calculated on the gross value instead of the value net of schemes, returns or taxes, as the policy says."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech matches each receipt to the invoices it settles, using references where they exist and your allocation rule, such as oldest invoice first, where they do not. It works out the days taken to pay each invoice from the date the money was actually realised, applies your slabs to the value the policy sets, and compares the result with the discount the dealer took or claimed. Bounced and re-presented cheques are followed through to the final realisation. Differences go to an exception queue, and finance approves the credit note or debit note sheet.",
+    "capabilities": [
+      "Matches receipts to invoices, with your allocation rule for unreferenced payments",
+      "Counts days to pay from the realisation date, following bounced and re-presented cheques",
+      "Applies discount slabs by product group, region and dealer type",
+      "Calculates the discount on the value the policy sets, net of schemes and returns",
+      "Compares with the discount taken or claimed, and prepares credit or debit notes for the difference",
+      "Shows days to pay and discount cost by dealer and region"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load receivables",
+      "detail": "Invoices, receipts, bank realisation dates and cheque returns are loaded for the period."
+    },
+    {
+      "step": 2,
+      "title": "Allocate receipts",
+      "detail": "Each receipt is allocated to invoices by reference or by your allocation rule."
+    },
+    {
+      "step": 3,
+      "title": "Count days to pay",
+      "detail": "Days to pay are counted from invoice or due date to realisation, per invoice."
+    },
+    {
+      "step": 4,
+      "title": "Apply slabs",
+      "detail": "Your discount slabs are applied to the eligible value of each invoice."
+    },
+    {
+      "step": 5,
+      "title": "Compare and review",
+      "detail": "Calculated discount is compared with what was taken or claimed, and differences go to review."
+    },
+    {
+      "step": 6,
+      "title": "Settle",
+      "detail": "Finance approves credit notes for discount due and debit notes for discount taken wrongly."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Invoices and receipts\"] --> B[\"Allocate receipts\"]\n  B --> C[\"Days to pay at realisation\"]\n  C --> D[\"Apply discount slabs\"]\n  D --> E{\"Matches discount taken?\"}\n  E -->|\"yes\"| F[\"Credit note sheet\"]\n  E -->|\"no or unsure\"| G(\"Credit team review\")\n  G --> H[\"Credit or debit notes\"]\n  F --> H",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Invoices and receipts from the ERP",
+          "Bank realisation and cheque returns",
+          "Discount policy and slabs"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Bank statement and advice reader",
+          "Receipt reference parser"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Receipt to invoice allocator",
+          "Days to pay and slab rules",
+          "Taken against due comparison"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Exception queue with reason codes",
+          "Credit and debit note sheet"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Invoices and receipts\"]\n    I2[\"Bank and cheque returns\"]\n    I3[\"Discount slabs\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Bank advice reader\"]\n    D2[\"Reference parser\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Receipt allocator\"]\n    R2[\"Days and slab rules\"]\n    R3[\"Taken against due\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Credit team review\")\n    V2[\"Credit and debit notes\"]\n  end\n  I1 --> R1\n  I2 --> D1 --> D2 --> R1\n  I3 --> R2\n  R1 --> R2 --> R3\n  R3 --> V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Receivables",
+      "purpose": "Invoices, receipts and realisations for the period.",
+      "shows": [
+        "Dealer, invoice and due date",
+        "Receipts with mode and reference",
+        "Cheques returned and re-presented"
+      ]
+    },
+    {
+      "name": "Allocation",
+      "purpose": "Each receipt allocated to the invoices it settles.",
+      "shows": [
+        "Allocated by reference or by rule",
+        "Unallocated and on-account amounts",
+        "Part-paid invoices"
+      ]
+    },
+    {
+      "name": "Discount calculator",
+      "purpose": "Days to pay and the discount each invoice earned.",
+      "shows": [
+        "Days to pay from realisation",
+        "Slab and eligible value",
+        "Discount due against taken"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Differences held for the credit team.",
+      "shows": [
+        "Reason code and amount",
+        "Receipt and bank evidence",
+        "Approve, recover or adjust"
+      ]
+    },
+    {
+      "name": "Settlement",
+      "purpose": "Credit notes for discount due, debit notes for discount taken wrongly.",
+      "shows": [
+        "Credit and debit note sheet",
+        "Dealer statement",
+        "Discount cost and days to pay by region"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Receipt allocated to invoices",
+      "logic": "Each receipt is allocated by invoice reference. Without one, your rule applies, such as oldest invoice first."
+    },
+    {
+      "rule": "Days counted to realisation",
+      "logic": "Days to pay run from the invoice or due date to the date the money was realised in your bank, not the cheque date."
+    },
+    {
+      "rule": "Bounced cheques followed through",
+      "logic": "A returned cheque cancels the discount until the amount is realised again, and the new date sets the slab."
+    },
+    {
+      "rule": "Slab for the dealer and product",
+      "logic": "Slabs are chosen by product group, region and dealer type from the policy version in force on the invoice date."
+    },
+    {
+      "rule": "Discount on the eligible value",
+      "logic": "The discount is calculated on the value the policy sets, such as net of schemes, returns or taxes."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "LATE_FOR_SLAB",
+      "meaning": "The discount taken is for a faster slab than the days to pay allow.",
+      "action": "Raise a debit note for the difference."
+    },
+    {
+      "code": "CHEQUE_RETURNED",
+      "meaning": "The cheque bounced, so the discount was not earned on its date.",
+      "action": "Recalculate from the final realisation date."
+    },
+    {
+      "code": "UNALLOCATED_RECEIPT",
+      "meaning": "A receipt could not be allocated with confidence.",
+      "action": "The credit team allocates it."
+    },
+    {
+      "code": "WRONG_BASE_VALUE",
+      "meaning": "The discount was calculated on the wrong value.",
+      "action": "Recalculate on the eligible value."
+    },
+    {
+      "code": "DISCOUNT_NOT_GIVEN",
+      "meaning": "The dealer earned a discount that was not given.",
+      "action": "Raise the credit note."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "Invoice",
+      "fields": [
+        "invoice_no",
+        "dealer_code",
+        "invoice_date",
+        "due_date",
+        "eligible_value"
+      ]
+    },
+    {
+      "entity": "Receipt",
+      "fields": [
+        "receipt_id",
+        "dealer_code",
+        "mode",
+        "amount",
+        "cheque_no",
+        "realised_on"
+      ]
+    },
+    {
+      "entity": "Allocation",
+      "fields": [
+        "receipt_id",
+        "invoice_no",
+        "amount",
+        "method"
+      ]
+    },
+    {
+      "entity": "DiscountLine",
+      "fields": [
+        "invoice_no",
+        "days_to_pay",
+        "slab",
+        "due",
+        "taken",
+        "exception_code"
+      ]
+    }
+  ],
+  "inputs": [
+    "Sales invoices with dates, due dates and values",
+    "Receipts with mode, reference and amount",
+    "Bank statements with realisation dates and cheque returns",
+    "Cash discount policy and slabs",
+    "Scheme and return credit notes for the eligible value"
+  ],
+  "outputs": [
+    "Receipts allocated to invoices",
+    "Discount due per invoice beside discount taken",
+    "Credit and debit note sheet for finance approval",
+    "Exceptions with reason codes and bank evidence",
+    "Days to pay and discount cost by dealer and region"
+  ],
+  "human_in_the_loop": "The credit team decides every unallocated receipt and every recovery from a dealer. Finance approves all credit and debit notes.",
+  "integrations": [
+    "ERP such as SAP or Tally for invoices, receipts and notes",
+    "Bank statements by download or feed",
+    "Collections or DMS records",
+    "Shared drive for the discount policy"
+  ],
+  "guardrails": [
+    "Days counted from realisation, never from cheque date alone",
+    "Policy version applied by invoice date",
+    "Unallocated receipts never guessed: they go to a person",
+    "Every difference shown with the receipt and bank line"
+  ],
+  "compliance_notes": [
+    "Cash discount passed through credit notes may need the original invoice reference for GST; the system keeps it."
+  ],
+  "rollout": {
+    "duration": "About 4 to 6 weeks",
+    "scope": "One quarter of invoices and receipts for one region, compared with the discounts finance allowed.",
+    "deliverables": [
+      "Discount policy set up as rules",
+      "Receipt allocation and discount calculation",
+      "Exception list with recoverable amounts",
+      "Comparison with discounts allowed"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Receipts allocated",
+        "how": "Share of receipts allocated to invoices without manual work."
+      },
+      {
+        "metric": "Excess discount found",
+        "how": "Discount taken above what the days to pay allow."
+      },
+      {
+        "metric": "Discount owed found",
+        "how": "Discount dealers earned but were not given."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our dealers pay against several invoices at once. Can it allocate?",
+      "a": "Yes. It uses invoice references where they exist and your rule, such as oldest invoice first, where they do not. Receipts it cannot allocate with confidence go to your team."
+    },
+    {
+      "q": "Can it handle different slabs for different products?",
+      "a": "Yes. Slabs are set by product group, region and dealer type, and each invoice uses the slab in force on its date."
+    },
+    {
+      "q": "What about post-dated cheques?",
+      "a": "Days to pay count to the date the money is realised, so a post-dated cheque earns the slab for its realisation date."
+    },
+    {
+      "q": "Will dealers see why a discount was reduced?",
+      "a": "Yes. Each dealer statement shows the invoice, the receipt, the days to pay and the slab applied."
+    }
+  ],
+  "related": [
+    "dealer-incentive-and-rebate-settlement",
+    "credit-note-reconciliation",
+    "season-end-sales-returns"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/cash-discount-claims/"
+}

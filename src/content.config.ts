@@ -1,11 +1,11 @@
 import {defineCollection} from 'astro:content';
 import {file, glob} from 'astro/loaders';
-import {capabilitySchema, industrySchema, proofProjectSchema, useCaseSchema} from './content/schema';
+import {industrySchema, proofProjectSchema, useCaseSchema} from './content/schema';
 
-// Each JSON file's `slug` becomes its entry id. scripts/validate-content.ts checks the cross-file rules before every build.
-const capabilities = defineCollection({
-  loader: glob({base: './src/content/capabilities', pattern: '*.json'}),
-  schema: capabilitySchema,
+// Each use case's and industry's `slug` becomes its entry id. scripts/validate-content.ts checks the cross-file rules before every build.
+const useCases = defineCollection({
+  loader: glob({base: './src/content/use-cases', pattern: '*.json'}),
+  schema: useCaseSchema,
 });
 
 const industries = defineCollection({
@@ -13,14 +13,9 @@ const industries = defineCollection({
   schema: industrySchema,
 });
 
-const useCases = defineCollection({
-  loader: glob({base: './src/content/use-cases', pattern: '*/*.json'}),
-  schema: useCaseSchema,
-});
-
 const proofProjects = defineCollection({
   loader: file('src/content/proof-projects.json'),
   schema: proofProjectSchema,
 });
 
-export const collections = {capabilities, industries, useCases, proofProjects};
+export const collections = {useCases, industries, proofProjects};

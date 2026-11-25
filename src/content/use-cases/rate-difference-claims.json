@@ -1,0 +1,344 @@
+{
+  "slug": "rate-difference-claims",
+  "title": "Rate Difference and Price Protection Claims",
+  "category": "distributor-dealer",
+  "summary": "Check price-drop, price protection and contract-rate claims against price lists, contracts, stock and sales data, and cap each claim at what the distributor or dealer could really have held.",
+  "seo": {
+    "title": "Rate Difference and Price Protection Claims | VipraTech",
+    "description": "Validate rate difference, price protection and contract-rate claims against price lists, contracts, stock and invoices before credit is issued.",
+    "keywords": [
+      "rate difference claims",
+      "price protection claims",
+      "price drop claim settlement",
+      "contract rate chargeback",
+      "institutional rate difference pharma"
+    ]
+  },
+  "designed_for": [
+    "Head of Sales Finance",
+    "Commercial or Pricing Manager",
+    "Claims Settlement Team Lead",
+    "Institutional Sales Head"
+  ],
+  "problem": {
+    "intro": "When a brand cuts a price, distributors and dealers claim the difference on stock they already hold. When they sell to hospitals, institutions or key accounts at an agreed rate below list price, they claim the difference back. Both kinds of claim depend on stock and sales data the brand does not fully see.",
+    "pain_points": [
+      {
+        "title": "Stock in hand that is hard to verify",
+        "detail": "Price drop and price protection claims rely on the claimant's own stock statement on the effective date, which rarely matches what they bought and sold."
+      },
+      {
+        "title": "Contract rates scattered across agreements",
+        "detail": "Institutional and key-account rates, validity and eligible customers sit in contracts and emails, not in one register."
+      },
+      {
+        "title": "Claims on ineligible sales",
+        "detail": "Sales to customers outside the contract, after it ends or above the agreed quantity are claimed at the contract rate."
+      },
+      {
+        "title": "Price lists with many versions",
+        "detail": "Effective dates, regional prices and pack changes make it hard to know which price applied to which invoice."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech checks each claim against the price list or contract that applied on the date. For price drops and price protection, it estimates the stock the distributor or dealer could have held on the effective date from purchases, sales and earlier stock reports, and caps the claim at that quantity. For contract-rate claims, it checks each sale against the contract's customers, SKUs, rates, validity and quantities, using invoices to those customers. The difference is recalculated line by line, uncertain lines go to an exception queue, and finance approves the credit note sheet.",
+    "capabilities": [
+      "Versioned price lists and contract register, by region, pack and effective date",
+      "Stock-on-hand estimate from purchases, sales and earlier stock reports",
+      "Checks contract-rate sales against eligible customers, SKUs, validity and quantity",
+      "Recalculates the eligible difference for every line",
+      "Flags claims above estimated stock or outside the contract",
+      "Credit note sheet and audit trail linking claim, price list or contract, and invoice"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive claims",
+      "detail": "Distributors and dealers send price-drop or contract-rate claims with stock statements or invoices to the end customer."
+    },
+    {
+      "step": 2,
+      "title": "Load prices and contracts",
+      "detail": "The price list or contract valid on each date is taken from the register."
+    },
+    {
+      "step": 3,
+      "title": "Check quantities",
+      "detail": "Stock on hand is estimated for price drops; contract sales are checked against eligible customers and quantities."
+    },
+    {
+      "step": 4,
+      "title": "Recalculate",
+      "detail": "The eligible difference is recalculated for every line and compared with the amount claimed."
+    },
+    {
+      "step": 5,
+      "title": "Exception review",
+      "detail": "Lines above estimated stock, outside the contract or without invoices go to finance with the reason."
+    },
+    {
+      "step": 6,
+      "title": "Approve and credit",
+      "detail": "Finance approves the credit note sheet, with the price list or contract linked to every line."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Rate difference claim\"] --> B[\"Normalise claim lines\"]\n  C[\"Price lists and contracts\"] --> D[\"Find rate valid on date\"]\n  B --> D\n  D --> E[\"Check stock or eligible sale\"]\n  E --> F{\"Within stock and contract?\"}\n  F -->|\"yes\"| G[\"Credit note sheet\"]\n  F -->|\"no or unsure\"| H(\"Finance review\")\n  H --> G",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Claims and stock statements",
+          "Invoices to end customers",
+          "Price list and contract register"
+        ]
+      },
+      {
+        "name": "Sales data",
+        "components": [
+          "Primary and secondary sales history",
+          "Earlier stock statements"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Rate lookup by date and region",
+          "Stock-on-hand estimator",
+          "Contract eligibility checks"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Exception queue with reasons",
+          "Credit note sheet for finance"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Claims and stock statements\"]\n    I2[\"Invoices to end customers\"]\n    I3[\"Price and contract register\"]\n  end\n  subgraph S2[\"Sales data\"]\n    H1[\"Sales history\"]\n    H2[\"Earlier stock statements\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Rate lookup by date\"]\n    R2[\"Stock on hand estimator\"]\n    R3[\"Contract eligibility checks\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Finance review\")\n    V2[\"Credit note sheet\"]\n  end\n  I3 --> R1\n  I1 --> R2\n  H1 --> R2\n  H2 --> R2\n  I2 --> R3\n  R1 --> R3\n  R2 --> V1\n  R3 --> V1\n  V1 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Price change register",
+      "purpose": "Every price drop and contract rate, with its effective dates, region and SKUs.",
+      "shows": [
+        "Old and new price per SKU",
+        "Effective date and region",
+        "Contracts with customers, rates and validity"
+      ]
+    },
+    {
+      "name": "Claims inbox",
+      "purpose": "Rate difference and price protection claims as they arrive.",
+      "shows": [
+        "Claim type: price drop, protection or contract",
+        "Claimed quantity and amount",
+        "Stock statement attached or not"
+      ]
+    },
+    {
+      "name": "Stock check",
+      "purpose": "The stock each claimant could have held on the effective date, from their purchase and sales trail.",
+      "shows": [
+        "Opening stock, purchases and sales",
+        "Estimated stock on the date",
+        "Claimed against estimated quantity"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Claims held for review, with the stock trail and contract terms.",
+      "shows": [
+        "Reason code and amount at risk",
+        "Contract clause or price notice",
+        "Approve the eligible quantity"
+      ]
+    },
+    {
+      "name": "Credit note sheet",
+      "purpose": "Recalculated differences, ready for finance.",
+      "shows": [
+        "Difference per SKU at the right rate",
+        "Credit note sheet in your ERP format",
+        "Statement per distributor or dealer"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Price list version on the date",
+      "logic": "The difference is the old price less the new price in force on the effective date for that region and pack, not the latest list."
+    },
+    {
+      "rule": "Quantity capped at possible stock",
+      "logic": "Price-drop and protection claims are capped at the stock the claimant could have held: last verified stock plus purchases less sales up to the effective date."
+    },
+    {
+      "rule": "Contract customer and validity",
+      "logic": "Contract-rate claims count only sales to customers named in the contract, for listed SKUs, within its validity and agreed quantity."
+    },
+    {
+      "rule": "Sale proved by invoice",
+      "logic": "Each contract-rate sale must match the claimant's invoice to that customer, with date, SKU, quantity and billed rate."
+    },
+    {
+      "rule": "No double claim",
+      "logic": "The same stock or sale cannot be claimed both as a price drop and at a contract rate, or in two periods."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "QTY_OVER_STOCK",
+      "meaning": "The claimed quantity is above the stock the claimant could have held.",
+      "action": "Approve the estimated quantity and ask for stock records for the rest."
+    },
+    {
+      "code": "WRONG_PRICE_VERSION",
+      "meaning": "The claim uses a price that was not in force on the date.",
+      "action": "Recalculate at the correct price."
+    },
+    {
+      "code": "NOT_IN_CONTRACT",
+      "meaning": "The sale is to a customer or SKU the contract does not cover.",
+      "action": "Reject, or approve with the contract owner's sign-off."
+    },
+    {
+      "code": "CONTRACT_EXPIRED",
+      "meaning": "The sale falls after the contract ended or past its quantity.",
+      "action": "Reject the excess."
+    },
+    {
+      "code": "NO_SALE_INVOICE",
+      "meaning": "No invoice supports the contract-rate sale.",
+      "action": "Ask for the invoice to the customer."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "PriceChange",
+      "fields": [
+        "sku",
+        "region",
+        "old_price",
+        "new_price",
+        "effective_from",
+        "notice_ref"
+      ]
+    },
+    {
+      "entity": "RateContract",
+      "fields": [
+        "contract_id",
+        "customer",
+        "skus",
+        "contract_rate",
+        "valid_to",
+        "max_qty"
+      ]
+    },
+    {
+      "entity": "StockPosition",
+      "fields": [
+        "claimant_code",
+        "sku",
+        "as_of_date",
+        "opening",
+        "purchases",
+        "sales"
+      ]
+    },
+    {
+      "entity": "RateClaimLine",
+      "fields": [
+        "claim_type",
+        "sku",
+        "qty",
+        "claimed_diff",
+        "eligible_diff",
+        "exception_code"
+      ]
+    }
+  ],
+  "inputs": [
+    "Price drop, price protection and contract-rate claims",
+    "Distributor and dealer stock statements",
+    "Invoices to institutions or key accounts",
+    "Price lists with effective dates and regions",
+    "Institutional and key-account contracts",
+    "Purchase and sales history"
+  ],
+  "outputs": [
+    "Eligible difference recalculated for every line",
+    "Claims above estimated stock flagged, with workings",
+    "Contract-rate sales outside terms flagged",
+    "Credit note sheet for finance approval"
+  ],
+  "human_in_the_loop": "Finance approves every credit, and commercial or institutional sales confirm contract terms the register cannot settle. The stock-on-hand estimate is shown with its workings so a person can accept or override it.",
+  "integrations": [
+    "DMS for secondary sales and stock statements",
+    "ERP such as SAP or Tally for price lists and credit notes",
+    "Contract register on a shared drive or CRM",
+    "Claims mailbox or distributor portal"
+  ],
+  "guardrails": [
+    "No credit above the estimated stock on hand without approval",
+    "Every line linked to the price list or contract version used",
+    "Contract validity and customer eligibility checked on every sale",
+    "Overrides logged with the reviewer and reason"
+  ],
+  "compliance_notes": [
+    "Price reductions after supply are usually settled by credit note referencing the original invoice for GST; the system keeps that link."
+  ],
+  "rollout": {
+    "duration": "About 8 weeks",
+    "scope": "One recent price change, or the contract-rate claims of one region, with finance-settled claims as the benchmark.",
+    "deliverables": [
+      "Price list and contract register for the rollout",
+      "Stock-on-hand estimates with workings",
+      "Recalculated claims with exceptions",
+      "Comparison with finance-settled outcomes"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Claims capped by stock",
+        "how": "Claims reduced to estimated stock on hand, confirmed by finance."
+      },
+      {
+        "metric": "Ineligible contract sales",
+        "how": "Sales outside contract terms flagged and confirmed."
+      },
+      {
+        "metric": "Settlement time",
+        "how": "Time from claim to approved credit, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How accurate is the stock-on-hand estimate?",
+      "a": "It is only as good as the purchase, sales and stock data available, so it is shown as an estimate with its workings. Finance can accept it, override it or ask for evidence."
+    },
+    {
+      "q": "Does it cover price protection for electronics and durables dealers?",
+      "a": "Yes. Price protection on a price drop is the same check: the dealer's eligible stock on the effective date, multiplied by the drop for each model."
+    },
+    {
+      "q": "Do you handle government and hospital rate contracts?",
+      "a": "Yes. Contracts are entered with their customers, SKUs, rates, quantities and validity, and each claimed sale is checked against them."
+    },
+    {
+      "q": "Is this the same system as your distributor claims settlement?",
+      "a": "Yes. Every VipraTech workflow runs on one claims engine: the document reading, matching, review queue and audit trail are shared. For this workflow we set up your price lists and contracts as versioned rules, along with your document templates and matching keys."
+    }
+  ],
+  "related": [
+    "distributor-scheme-claims",
+    "damage-and-expiry-claims",
+    "dealer-incentive-and-rebate-settlement"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/rate-difference-claims/"
+}

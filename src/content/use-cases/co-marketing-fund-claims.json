@@ -1,0 +1,335 @@
+{
+  "slug": "co-marketing-fund-claims",
+  "title": "Co-Marketing and Promotion Fund Claims",
+  "category": "distributor-dealer",
+  "summary": "Check dealer and retailer claims on co-marketing, promotion and advertising funds against the approved plan, budgets and proof of activity before finance releases money.",
+  "seo": {
+    "title": "Co-Marketing Fund Claims Verification | VipraTech",
+    "description": "Verify co-marketing, MDF and promotion fund claims against approved plans, budgets, invoices and proof of activity before finance releases payments.",
+    "keywords": [
+      "co-marketing fund claims",
+      "MDF claim verification",
+      "co-op advertising claims",
+      "promotion fund reconciliation",
+      "dealer marketing claims"
+    ]
+  },
+  "designed_for": [
+    "Trade Marketing Manager",
+    "Head of Sales Finance",
+    "Channel Marketing Manager"
+  ],
+  "problem": {
+    "intro": "Brands share the cost of local marketing with dealers and large retailers: newspaper ads, in-store events, hoardings, festive promotions and digital campaigns. Partners claim their share with vendor invoices and proof of activity. Checking each claim against the approved plan and budget is slow, so claims either wait for months or are paid without much checking.",
+    "pain_points": [
+      {
+        "title": "Activity that was never approved",
+        "detail": "Claims arrive for activities, amounts or periods outside the plan that was signed off."
+      },
+      {
+        "title": "Invoices that do not prove the activity",
+        "detail": "Vendor invoices, photos and media proofs are missing, generic or reused from earlier claims."
+      },
+      {
+        "title": "Budgets overrun",
+        "detail": "Without a running balance per partner, claims exceed the fund allocated for the period."
+      },
+      {
+        "title": "Slow settlement sours partners",
+        "detail": "Partners wait months for reimbursement and lose interest in running the next activity."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech keeps a register of approved activities, budgets and sharing ratios for each partner and period. Each claim is read with its vendor invoices and proofs, matched to an approved activity, and checked for amount, period, sharing ratio and remaining budget. Invoices and photos are checked for completeness and for reuse across claims. Lines that pass go to the payout sheet, and the rest go to channel marketing or finance with the reason.",
+    "capabilities": [
+      "Register of approved activities, budgets and sharing ratios by partner",
+      "Reads vendor invoices and proofs in PDF, image or spreadsheet form",
+      "Matches each claim to an approved activity and checks amount and period",
+      "Tracks the remaining budget for each partner and period",
+      "Flags invoices and photos reused across claims",
+      "Payout sheet and fund utilisation report"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Register approvals",
+      "detail": "Approved activities, budgets and sharing ratios are recorded for each partner and period."
+    },
+    {
+      "step": 2,
+      "title": "Receive claims",
+      "detail": "Partners submit claims with vendor invoices and proof of activity."
+    },
+    {
+      "step": 3,
+      "title": "Match and check",
+      "detail": "Each claim is matched to an approved activity and checked for amount, period, ratio and budget."
+    },
+    {
+      "step": 4,
+      "title": "Check proofs",
+      "detail": "Invoices and photos are checked for completeness and reuse."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "Channel marketing or finance reviews flagged claims with the reason."
+    },
+    {
+      "step": 6,
+      "title": "Approve and pay",
+      "detail": "Finance approves the payout sheet, and fund use is reported by partner."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Claim with invoices and proof\"] --> B[\"Match to approved activity\"]\n  B --> C[\"Check amount, ratio, budget\"]\n  C --> D[\"Check proofs for reuse\"]\n  D --> E{\"Approved and within budget?\"}\n  E -->|\"yes\"| F[\"Payout sheet\"]\n  E -->|\"no or unsure\"| G(\"Channel marketing review\")\n  G --> F",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Approved activity register",
+          "Partner claims",
+          "Vendor invoices and proofs"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Invoice and proof reader",
+          "Duplicate proof detection"
+        ]
+      },
+      {
+        "name": "Rules",
+        "components": [
+          "Activity matcher",
+          "Budget and ratio checks"
+        ]
+      },
+      {
+        "name": "Review and payout",
+        "components": [
+          "Review queue",
+          "Payout sheet and utilisation report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Approved activity register\"]\n    I2[\"Partner claims\"]\n    I3[\"Invoices and proofs\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Invoice and proof reader\"]\n    D2[\"Duplicate proof detection\"]\n  end\n  subgraph S3[\"Rules\"]\n    R1[\"Activity matcher\"]\n    R2[\"Budget and ratio checks\"]\n  end\n  subgraph S4[\"Review and payout\"]\n    V1(\"Channel marketing review\")\n    V2[\"Payout sheet\"]\n    V3[\"Utilisation report\"]\n  end\n  I3 --> D1\n  I3 --> D2\n  I2 --> R1\n  I1 --> R1\n  D1 --> R1\n  R1 --> R2\n  R2 --> V1\n  D2 --> V1\n  V1 --> V2\n  V2 --> V3"
+  },
+  "app_screens": [
+    {
+      "name": "Fund register",
+      "purpose": "Each approved activity with its partner, budget, dates and the proof it needs.",
+      "shows": [
+        "Approval reference and approver",
+        "Approved budget and dates",
+        "Proof required per activity"
+      ]
+    },
+    {
+      "name": "Claims inbox",
+      "purpose": "Partner claims with invoices, photos, media plans and reports.",
+      "shows": [
+        "Partner, activity and claimed amount",
+        "Documents attached, by type",
+        "The approval it refers to"
+      ]
+    },
+    {
+      "name": "Claim check",
+      "purpose": "Each claim matched to its approval and checked for proof and spend.",
+      "shows": [
+        "Approved against claimed amount",
+        "Vendor invoices read and totalled",
+        "Activity dates against approval dates"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Claims held for review, with the approval and proof side by side.",
+      "shows": [
+        "Reason code and amount at risk",
+        "Approval email or sheet linked",
+        "Approve, reduce or reject"
+      ]
+    },
+    {
+      "name": "Payout",
+      "purpose": "Approved reimbursements and the fund position.",
+      "shows": [
+        "Payout or credit note sheet",
+        "Fund used and remaining per partner",
+        "Spend by activity type"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Pre-approved activity",
+      "logic": "Every claim must refer to an approval on record for the same partner, activity type and period."
+    },
+    {
+      "rule": "Within the approved amount",
+      "logic": "Reimbursement is held to the approved budget and to the brand's agreed share of actual spend."
+    },
+    {
+      "rule": "Spend proved by vendor invoices",
+      "logic": "Third-party invoices are read and totalled. The claim cannot exceed the spend they prove."
+    },
+    {
+      "rule": "Activity inside the approved dates",
+      "logic": "Photos, reports or media proof must fall within the approved dates."
+    },
+    {
+      "rule": "Not funded twice",
+      "logic": "The same vendor invoice or activity cannot be claimed under two approvals or two funds."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "NO_APPROVAL",
+      "meaning": "No approval matches the claim.",
+      "action": "Reject, or link the approval if it was made outside the register."
+    },
+    {
+      "code": "OVER_APPROVED",
+      "meaning": "The claimed amount is above the approved budget or share.",
+      "action": "Approve up to the limit."
+    },
+    {
+      "code": "SPEND_NOT_PROVEN",
+      "meaning": "Vendor invoices do not add up to the claimed spend.",
+      "action": "Ask for the missing invoices."
+    },
+    {
+      "code": "OUT_OF_WINDOW",
+      "meaning": "Proof shows the activity outside the approved dates.",
+      "action": "Reject, or approve with the approver's sign-off."
+    },
+    {
+      "code": "DUPLICATE_INVOICE",
+      "meaning": "A vendor invoice was claimed before.",
+      "action": "Reject, with the earlier claim linked."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "FundApproval",
+      "fields": [
+        "approval_id",
+        "partner_code",
+        "activity_type",
+        "budget",
+        "brand_share_pct",
+        "valid_to"
+      ]
+    },
+    {
+      "entity": "FundClaim",
+      "fields": [
+        "claim_id",
+        "approval_id",
+        "claimed_amount",
+        "submitted_at"
+      ]
+    },
+    {
+      "entity": "SpendProof",
+      "fields": [
+        "vendor_invoice_no",
+        "vendor",
+        "amount",
+        "activity_date"
+      ]
+    },
+    {
+      "entity": "FundBalance",
+      "fields": [
+        "partner_code",
+        "period",
+        "approved",
+        "paid",
+        "remaining"
+      ]
+    }
+  ],
+  "inputs": [
+    "Approved marketing plans, budgets and sharing ratios",
+    "Partner claims",
+    "Vendor invoices",
+    "Photos, media proofs and event reports"
+  ],
+  "outputs": [
+    "Claims matched to approved activities",
+    "Flags for unapproved, over-budget or poorly proven claims",
+    "Payout sheet for finance approval",
+    "Fund utilisation by partner and period"
+  ],
+  "human_in_the_loop": "Channel marketing decides on claims outside the approved plan, and finance approves every payout. Doubtful proofs are flagged for a person, never rejected automatically.",
+  "integrations": [
+    "ERP such as SAP or Tally for payouts or credit notes",
+    "Marketing approval sheets or workflow tool",
+    "Claims mailbox or partner portal",
+    "Shared drive for proofs"
+  ],
+  "guardrails": [
+    "No payout without a matched approved activity",
+    "Budget balance checked before every approval",
+    "Reused invoices and photos held for review",
+    "Every payout linked to its proofs"
+  ],
+  "compliance_notes": [
+    "Claims backed by vendor invoices support the tax treatment your finance team applies; the system keeps every invoice with its payout."
+  ],
+  "rollout": {
+    "duration": "About 6 weeks",
+    "scope": "One quarter of co-marketing claims for one region or one partner group.",
+    "deliverables": [
+      "Approved activity register for the rollout",
+      "Checked claims with exceptions",
+      "Payout sheet in your finance format",
+      "Fund utilisation report"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Claims matched to approvals",
+        "how": "Share of claims matched to an approved activity."
+      },
+      {
+        "metric": "Ineligible claims caught",
+        "how": "Unapproved, over-budget or unproven claims confirmed by finance."
+      },
+      {
+        "metric": "Settlement time",
+        "how": "Time from claim to payout, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our approvals happen over email. Can that work?",
+      "a": "Yes. Approvals can be captured from a sheet or forwarded emails into the register. A simple approval form can come later."
+    },
+    {
+      "q": "Can it check digital campaign proof?",
+      "a": "It checks that screenshots, reports or links are attached and not reused. Checking campaign delivery against ad platform data can be added if partners share access."
+    },
+    {
+      "q": "Do partners need to change how they claim?",
+      "a": "Not to start. Agreeing a standard claim format over time reduces exceptions."
+    },
+    {
+      "q": "Is this the same system as your distributor claims settlement?",
+      "a": "Yes. Every VipraTech workflow runs on one claims engine: the document reading, matching, review queue and audit trail are shared. For this workflow we set up your fund rules as versioned rules, along with your document templates and matching keys."
+    }
+  ],
+  "related": [
+    "display-and-visibility-claims",
+    "dealer-incentive-and-rebate-settlement",
+    "trade-spend-accruals"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/co-marketing-fund-claims/"
+}

@@ -1,0 +1,170 @@
+---
+import Section from '../components/content/Section.astro';
+import {AppScreens} from '../components/content/AppScreens';
+import {ArchitectureLayers} from '../components/content/ArchitectureLayers';
+import {BulletList} from '../components/content/BulletList';
+import {CtaBlock} from '../components/content/CtaBlock';
+import {DetailCards} from '../components/content/DetailCards';
+import {DiagramFigure} from '../components/content/DiagramFigure';
+import {DataModel} from '../components/content/EngineTables';
+import {FaqList} from '../components/content/FaqList';
+import {FounderBlock} from '../components/content/FounderBlock';
+import {PageHero} from '../components/content/PageHero';
+import {WorkflowSteps} from '../components/content/WorkflowSteps';
+import {CATEGORIES, CATEGORY_ORDER} from '../data/categories';
+import {contactLinks} from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {siteContent} from '../lib/collections';
+import {diagramAt} from '../lib/diagrams';
+
+// How the claims engine is built: the pipeline every line takes, the services behind it, the screens, the data model
+// and the design choices for volume. Every use case page links here from its architecture section.
+
+const content = await siteContent();
+const contact = contactLinks('/platform/', 'the VipraTech claims engine');
+const title = 'VipraTech claims engine';
+
+const pipeline = [
+  {title: 'Collect', detail: 'Claim sheets, invoices, payment advice, debit notes, portal reports and proofs arrive by email, upload, shared drive or export, in whatever format each counterparty uses.'},
+  {title: 'Extract and classify', detail: 'Each document is classified, then read into a fixed schema: header fields, line tables and totals, with a confidence score on every field.'},
+  {title: 'Map to masters', detail: 'Distributor, outlet, SKU, customer and platform codes are mapped to your masters. New codes are mapped once by your team and reused.'},
+  {title: 'Apply versioned rules', detail: 'Schemes, policies, contracts and terms are rules with effective dates. Each line is judged by the version that applied on its date.'},
+  {title: 'Match', detail: 'Lines are matched to invoices, receipts, GRNs, ledgers and earlier claims on exact keys first, then within tolerances, including one-to-many and many-to-one matches.'},
+  {title: 'Review', detail: 'Lines that fail a rule or cannot be decided with confidence go to a review queue with a reason code and the evidence on both sides.'},
+  {title: 'Settle', detail: 'Approved lines become a credit note, debit note, payment or journal sheet in your ERP format, with a statement for each counterparty.'},
+];
+
+const layers = [
+  {name: 'Sources', components: ['Email inbox and uploads', 'ERP, DMS and bank exports', 'Platform and portal reports', 'Photos and scans']},
+  {name: 'Document AI', components: ['Classification', 'OCR and layout reading', 'Field and table extraction', 'Confidence scoring']},
+  {name: 'Data layer', components: ['Master data mapping', 'Line store by period', 'Document and evidence store']},
+  {name: 'Decision engine', components: ['Versioned rules', 'Set-based matching', 'Duplicate and anomaly checks']},
+  {name: 'Review and output', components: ['Review queue with reason codes', 'Maker-checker approval', 'ERP export and statements', 'Audit trail']},
+];
+
+const screens = [
+  {name: 'Inbox', purpose: 'Every file received, by counterparty and period, with its read status.', shows: ['Counterparty, period and file type', 'Parsed, partly parsed or unreadable', 'Totals against the last period']},
+  {name: 'Extraction review', purpose: 'Fields read with low confidence, beside the source image.', shows: ['Field, value and confidence', 'Highlighted area on the page', 'Confirm or correct in one click']},
+  {name: 'Rule builder', purpose: 'Schemes, policies and terms as rules, with their versions.', shows: ['Conditions, slabs and caps', 'Effective dates and scope', 'Test against last month before publishing']},
+  {name: 'Match results', purpose: 'Each line with what it matched and the rules it passed or failed.', shows: ['Claimed against recalculated', 'Matched documents', 'Rule results line by line']},
+  {name: 'Exception queue', purpose: 'Lines held for a person, sorted by amount at risk.', shows: ['Reason code and evidence', 'Approve, reject, adjust or ask', 'Bulk action on one reason']},
+  {name: 'Settlement and audit', purpose: 'Approved output for your ERP, and the trail behind every decision.', shows: ['Credit note, debit note or payment sheet', 'Statement per counterparty', 'Who decided what, when and why']},
+];
+
+const principles = [
+  {title: 'Rules decide amounts. AI reads documents.', detail: 'Language models read claim sheets, invoices and proofs into structured fields. Every amount is calculated by rules you can read and change, never by a model.'},
+  {title: 'Nothing uncertain passes silently', detail: 'A line goes to review when evidence is missing, a field is read with low confidence, several matches are possible, or a duplicate, amount or eligibility check fails.'},
+  {title: 'Finance keeps the final say', detail: 'The engine prepares the settlement. Finance approves every credit note, debit note and payment, with maker-checker approval where you need it.'},
+  {title: 'Your settled sheet is the benchmark', detail: 'Before go-live, the engine runs on months you have already settled. Differences are explained line by line until the results agree.'},
+  {title: 'Every rule is versioned', detail: 'Schemes and terms change every month. Rules carry effective dates, so a claim from March is judged by March\'s rules even after April\'s are published.'},
+  {title: 'Input formats are frozen before sign-off', detail: 'Each counterparty\'s format is set up and tested before go-live. A new or changed format is flagged instead of being guessed.'},
+];
+
+const volume = [
+  'Matching runs as set-based queries in the database over indexed keys such as invoice, SKU, counterparty and date, so a month of lines is matched in one batch rather than one line at a time',
+  'Lines are stored by period and counterparty, so a re-run or an audit question touches only the data it needs',
+  'Runs are incremental: only new files, changed rules and affected lines are processed again',
+  'Runs are repeatable: the same inputs and rule versions always give the same decisions, which is what auditors need',
+  'Documents are read in parallel, and the review queue fills while the rest of the batch is still running',
+  'Duplicate checks look across every earlier period and counterparty, not only the current file',
+];
+
+const dataModel = [
+  {entity: 'Counterparty', fields: ['code', 'type', 'region', 'channel', 'master_ids']},
+  {entity: 'Document', fields: ['doc_id', 'type', 'source', 'received_at', 'hash']},
+  {entity: 'Line', fields: ['line_id', 'doc_id', 'keys', 'claimed', 'recalculated']},
+  {entity: 'RuleVersion', fields: ['rule_id', 'version', 'valid_from', 'valid_to', 'scope']},
+  {entity: 'Decision', fields: ['line_id', 'rule_results', 'exception_code', 'reviewer', 'decided_at']},
+];
+
+const groups = CATEGORY_ORDER.map((category) => ({
+  title: CATEGORIES[category].label,
+  detail: content.useCases
+    .filter((useCase) => useCase.category === category)
+    .map((useCase) => useCase.title)
+    .join(' · '),
+}));
+
+const faqs = [
+  {q: 'Does it replace our ERP or DMS?', a: 'No. It reads exports from your ERP, DMS, portals and bank, and produces sheets your team posts in SAP, Oracle, Tally or whichever system you use.'},
+  {q: 'Where does it run?', a: 'In your own cloud account, or in ours in an India region of a major cloud provider. Access is role-based, and every login and decision is logged.'},
+  {q: 'Is our data used to train AI models?', a: 'No. Your documents are used only for your work. Counterparty formats are saved as configuration, not as training data.'},
+  {q: 'How is a new workflow set up?', a: 'Your policy, scheme or terms are set up as rules, your document formats and matching keys are configured, and the engine is run on a month you have already settled until the results agree.'},
+];
+---
+
+<BaseLayout
+  title="How the Claims Engine Works | VipraTech"
+  description="The architecture behind VipraTech: document AI, master data mapping, versioned rules, set-based matching, a review queue with reason codes and a full audit trail."
+  page={{type: 'platform'}}
+  crumbs={[{name: 'Platform', path: '/platform/'}]}
+  faqs={faqs}
+>
+  <PageHero
+    eyebrow="Platform"
+    title="One engine for every claim, deduction and settlement"
+    subtitle="Every VipraTech workflow runs on the same claims engine: documents are read into structured lines, each line is checked against versioned rules and matched to your records, and anything uncertain goes to your team with a reason."
+    contact={contact}
+  />
+
+  <Section id="pipeline" title="The path every line takes">
+    <WorkflowSteps id="pipeline-steps" steps={pipeline} />
+    <DiagramFigure title={title} kind="workflow" diagram={diagramAt('platform-pipeline')} narrow={diagramAt('platform-pipeline-tb')} describedBy="pipeline-steps" />
+  </Section>
+
+  <Section id="architecture" title="Architecture" intro="Five layers, each a separate service, so documents, rules and decisions can be tested and changed on their own.">
+    <ArchitectureLayers id="platform-layers" layers={layers} />
+    <DiagramFigure title={title} kind="architecture" diagram={diagramAt('platform-architecture')} describedBy="platform-layers" />
+  </Section>
+
+  <Section id="inside-the-app" title="Inside the app" intro="The screens your finance team works in. Each workflow adds its own views on top of these.">
+    <AppScreens screens={screens} />
+  </Section>
+
+  <Section title="How decisions are made">
+    <DetailCards items={principles} />
+  </Section>
+
+  <Section id="volume" title="Built for volume" intro="Claims and deductions arrive in tens of thousands of lines a month across hundreds of counterparties. The engine is designed for that from the start.">
+    <BulletList items={volume} />
+  </Section>
+
+  <Section title="Core data model" intro="Every workflow stores its lines, rules and decisions in the same shape, so a line can always be traced back to the document and rule behind it.">
+    <DataModel entities={dataModel} />
+  </Section>
+
+  <Section title="Workflows on the engine">
+    <DetailCards items={groups} />
+    <p class="text-base">
+      <a href="/use-cases/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
+        Every workflow with its app screens, decision rules and exception codes →
+      </a>
+    </p>
+  </Section>
+
+  <Section title="Security">
+    <BulletList
+      items={[
+        'NDA before any file is shared',
+        'Runs in your cloud account or ours, in an India region',
+        'Role-based access, with every login and decision logged',
+        'Your data is never used to train AI models',
+      ]}
+    />
+    <p class="text-base">
+      <a href="/security/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">How we handle your data →</a>
+    </p>
+  </Section>
+
+  <Section title="FAQs">
+    <FaqList faqs={faqs} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock
+    headline="See the engine on your own data"
+    text="Book a demo, or send last quarter's claims for a free audit with every finding and the amount at risk in 5 working days."
+    contact={contact}
+  />
+</BaseLayout>

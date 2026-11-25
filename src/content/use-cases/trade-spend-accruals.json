@@ -1,0 +1,334 @@
+{
+  "slug": "trade-spend-accruals",
+  "title": "Trade Spend Accrual and Payout Reconciliation",
+  "category": "ledgers-accruals",
+  "summary": "Compare what finance accrued for each scheme with what was claimed and paid, find over-accruals, unclaimed schemes and late claims, and close the month with a clear trade spend position.",
+  "seo": {
+    "title": "Trade Spend Accrual Reconciliation | VipraTech",
+    "description": "Reconcile trade scheme accruals with claims and payouts by scheme, distributor and month, and find over-accruals, unclaimed schemes and late claims.",
+    "keywords": [
+      "trade spend accrual",
+      "scheme accrual reconciliation",
+      "trade promotion accounting",
+      "month end trade spend",
+      "scheme liability reconciliation"
+    ]
+  },
+  "designed_for": [
+    "CFO or Head of Finance",
+    "Financial Controller",
+    "Head of Sales Finance"
+  ],
+  "problem": {
+    "intro": "Every month finance accrues a liability for schemes running in the market, based on sales and scheme terms. Claims arrive weeks or months later, at different amounts. The gap between accrued and paid sits on the balance sheet, and at quarter or year end someone has to explain it.",
+    "pain_points": [
+      {
+        "title": "Accruals estimated in spreadsheets",
+        "detail": "Monthly accruals are worked out from sales and scheme terms by hand, and the logic changes with whoever prepares them."
+      },
+      {
+        "title": "Claims that never come",
+        "detail": "Some schemes are never fully claimed, and the unused accrual sits on the books until someone writes it back."
+      },
+      {
+        "title": "Late claims for closed periods",
+        "detail": "Distributors claim against schemes from earlier quarters, after the accrual was reversed or the books were closed."
+      },
+      {
+        "title": "Trade spend that cannot be explained",
+        "detail": "Management asks what a scheme actually cost, and the answer needs days of reconciliation."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech calculates the expected liability for each scheme from sales and the scheme's rules, and compares it with what finance accrued and with what was claimed and paid, by scheme, distributor and month. It shows over- and under-accruals, schemes with no claims after their claim window, and claims that arrive after a period was closed. Finance gets a reconciliation for month-end close and a report of what each scheme actually cost.",
+    "capabilities": [
+      "Expected liability per scheme from sales and scheme rules",
+      "Comparison of expected, accrued, claimed and paid amounts by scheme and month",
+      "Unclaimed schemes past their claim window",
+      "Late claims against closed periods",
+      "Month-end reconciliation with suggested adjustments for finance",
+      "Actual cost of each scheme for management reporting"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Load schemes and sales",
+      "detail": "Scheme rules and sales for the period are taken from the scheme register and the DMS or ERP."
+    },
+    {
+      "step": 2,
+      "title": "Calculate expected liability",
+      "detail": "Each scheme's expected liability is calculated by distributor and month."
+    },
+    {
+      "step": 3,
+      "title": "Compare",
+      "detail": "Expected liability is compared with accruals booked and with claims received and paid."
+    },
+    {
+      "step": 4,
+      "title": "Explain gaps",
+      "detail": "Over- and under-accruals, unclaimed schemes and late claims are listed with reasons."
+    },
+    {
+      "step": 5,
+      "title": "Finance review",
+      "detail": "Finance reviews the gaps and decides on write-backs and adjustments."
+    },
+    {
+      "step": 6,
+      "title": "Close and report",
+      "detail": "A month-end reconciliation and a scheme cost report are produced."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Scheme rules and sales\"] --> B[\"Expected liability\"]\n  C[\"Accruals in ledger\"] --> D[\"Compare by scheme and month\"]\n  E[\"Claims and payouts\"] --> D\n  B --> D\n  D --> F{\"Gap explained?\"}\n  F -->|\"yes\"| G[\"Month-end reconciliation\"]\n  F -->|\"no\"| H(\"Finance review\")\n  H --> G",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Scheme register",
+          "Sales from the DMS or ERP",
+          "Accrual entries from the ledger",
+          "Claims and payouts"
+        ]
+      },
+      {
+        "name": "Calculation",
+        "components": [
+          "Expected liability engine",
+          "Claim window tracker"
+        ]
+      },
+      {
+        "name": "Reconciliation",
+        "components": [
+          "Scheme and month comparison",
+          "Gap explanations"
+        ]
+      },
+      {
+        "name": "Close and reporting",
+        "components": [
+          "Finance review",
+          "Month-end reconciliation",
+          "Scheme cost report"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Scheme register\"]\n    I2[\"Sales data\"]\n    I3[\"Accrual entries\"]\n    I4[\"Claims and payouts\"]\n  end\n  subgraph S2[\"Calculation\"]\n    C1[\"Expected liability engine\"]\n    C2[\"Claim window tracker\"]\n  end\n  subgraph S3[\"Reconciliation\"]\n    R1[\"Scheme and month comparison\"]\n    R2[\"Gap explanations\"]\n  end\n  subgraph S4[\"Close and reporting\"]\n    V1(\"Finance review\")\n    V2[\"Month-end reconciliation\"]\n    V3[\"Scheme cost report\"]\n  end\n  I1 --> C1\n  I2 --> C1\n  I1 --> C2\n  C1 --> R1\n  I3 --> R1\n  I4 --> R1\n  C2 --> R2\n  R1 --> R2\n  R2 --> V1\n  V1 --> V2\n  V1 --> V3"
+  },
+  "app_screens": [
+    {
+      "name": "Scheme liability",
+      "purpose": "Expected liability for each running scheme, from sales so far.",
+      "shows": [
+        "Scheme, period and sales to date",
+        "Expected payout at the current run rate",
+        "Accrual booked by finance"
+      ]
+    },
+    {
+      "name": "Accrual compare",
+      "purpose": "Expected liability beside the accruals and payments in your books.",
+      "shows": [
+        "Over-accrued and under-accrued schemes",
+        "Payments made against accrual",
+        "Balance still to be claimed"
+      ]
+    },
+    {
+      "name": "Gap explainer",
+      "purpose": "Why each gap exists, line by line.",
+      "shows": [
+        "Claims pending or rejected",
+        "Sales outside scheme conditions",
+        "Closed schemes not yet released"
+      ]
+    },
+    {
+      "name": "Review",
+      "purpose": "Gaps for finance to accept, adjust or look into.",
+      "shows": [
+        "Reason code and amount",
+        "Proposed journal adjustment",
+        "Owner and due date"
+      ]
+    },
+    {
+      "name": "Close pack",
+      "purpose": "The month-end or quarter-end trade spend summary.",
+      "shows": [
+        "Accrual by scheme and region",
+        "Release of unused accruals",
+        "Trade spend against budget"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Liability from actual sales",
+      "logic": "Expected liability is recalculated from billed or secondary sales against each scheme's rules, not from the original budget."
+    },
+    {
+      "rule": "Accrual covers expected liability",
+      "logic": "The booked accrual for each scheme is compared with expected liability less payments already made."
+    },
+    {
+      "rule": "Closed schemes released",
+      "logic": "Once a scheme's claim window closes, accrual left above pending claims is flagged for release."
+    },
+    {
+      "rule": "Payments tied to schemes",
+      "logic": "Each payout or credit note must map to a scheme and period, so spend lands against the right accrual."
+    },
+    {
+      "rule": "Pending claims counted",
+      "logic": "Claims received but not yet settled count as liability, at their recalculated value."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "UNDER_ACCRUED",
+      "meaning": "Expected liability is above the accrual.",
+      "action": "Book the additional accrual."
+    },
+    {
+      "code": "OVER_ACCRUED",
+      "meaning": "The accrual is above expected liability.",
+      "action": "Release the excess, with finance sign-off."
+    },
+    {
+      "code": "STALE_ACCRUAL",
+      "meaning": "A closed scheme still carries accrual.",
+      "action": "Release it, or confirm the claims still to come."
+    },
+    {
+      "code": "PAYMENT_UNMAPPED",
+      "meaning": "A payout or credit note has no scheme.",
+      "action": "Map it to the right scheme."
+    },
+    {
+      "code": "SALES_DATA_GAP",
+      "meaning": "Sales data for the period is incomplete.",
+      "action": "Hold the estimate until the data arrives."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "Scheme",
+      "fields": [
+        "scheme_id",
+        "period",
+        "rules_version",
+        "budget",
+        "claim_window_end"
+      ]
+    },
+    {
+      "entity": "LiabilityEstimate",
+      "fields": [
+        "scheme_id",
+        "as_of",
+        "eligible_sales",
+        "expected_payout"
+      ]
+    },
+    {
+      "entity": "Accrual",
+      "fields": [
+        "scheme_id",
+        "gl_account",
+        "booked_amount",
+        "booked_on"
+      ]
+    },
+    {
+      "entity": "SpendEntry",
+      "fields": [
+        "scheme_id",
+        "doc_no",
+        "amount",
+        "type"
+      ]
+    }
+  ],
+  "inputs": [
+    "Scheme register with rules and claim windows",
+    "Sales by distributor and month",
+    "Accrual journal entries",
+    "Claims received and amounts paid"
+  ],
+  "outputs": [
+    "Expected, accrued, claimed and paid amounts by scheme and month",
+    "Over- and under-accruals with reasons",
+    "Unclaimed schemes and late claims",
+    "Month-end reconciliation and scheme cost report"
+  ],
+  "human_in_the_loop": "Finance decides every write-back and adjustment. The system suggests entries with their workings; it does not post them.",
+  "integrations": [
+    "ERP such as SAP, Oracle or Tally for accruals and payouts",
+    "DMS for secondary sales",
+    "Claims settlement output, from our claims system or your sheets"
+  ],
+  "guardrails": [
+    "Expected liability always shown with its calculation",
+    "No entry posted without finance approval",
+    "Claim windows taken from the scheme terms",
+    "Every gap keeps its supporting lines"
+  ],
+  "compliance_notes": [
+    "Consistent, documented accrual logic supports statutory audit of trade spend provisions."
+  ],
+  "rollout": {
+    "duration": "About 8 weeks",
+    "scope": "One quarter of schemes for one region, compared with the accruals and payments finance already booked.",
+    "deliverables": [
+      "Expected liability for every scheme in scope",
+      "Reconciliation of accrued, claimed and paid",
+      "List of unclaimed schemes and late claims",
+      "Month-end reconciliation format"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Gaps explained",
+        "how": "Share of accrual differences the system explained, checked by finance."
+      },
+      {
+        "metric": "Unclaimed accruals found",
+        "how": "Value of accruals past their claim window, confirmed by finance."
+      },
+      {
+        "metric": "Close time",
+        "how": "Time to reconcile trade spend at month end, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need to use your claims system first?",
+      "a": "It helps, because claims then arrive structured. But it can work from your claim and payment sheets."
+    },
+    {
+      "q": "Will it post entries to our ERP?",
+      "a": "No. It suggests entries with their workings for finance to post. Posting can be added later with your approval."
+    },
+    {
+      "q": "Can it handle schemes that span quarters?",
+      "a": "Yes. Liability is calculated by month and scheme, so schemes that span periods are split correctly."
+    },
+    {
+      "q": "How long does it take to go live?",
+      "a": "About 8 weeks from the first files to go-live. The first cycle runs beside your current process on your own data, and your team switches over once the results agree with what it would have settled."
+    }
+  ],
+  "related": [
+    "distributor-scheme-claims",
+    "credit-note-reconciliation",
+    "dealer-incentive-and-rebate-settlement"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/trade-spend-accruals/"
+}

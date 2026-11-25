@@ -1,14 +1,11 @@
-import type {Capability, Industry, UseCase} from '../content/schema';
+import type {UseCase} from '../content/schema';
+import {CATEGORIES} from '../data/categories';
 import {APPROVED_PROOFS} from '../data/proofs';
-import {USE_CASE_BATCHES} from '../data/release';
-
-/** `CONTENT_PREVIEW=all` builds every use case, for local review only. */
-export const PREVIEW_ALL = process.env.CONTENT_PREVIEW === 'all';
-
-const releasedIndustries = new Set(USE_CASE_BATCHES.flatMap((batch) => batch.industries));
-
-/** The page address for a capability, industry or use case, or undefined when that page isn't built. */
-export const linkFor = (item: Capability | Industry | UseCase) =>
-  'content_type' in item && !PREVIEW_ALL && !releasedIndustries.has(item.industry) ? undefined : item.url;
 
 export const isProofApproved = (id: string | null) => id !== null && APPROVED_PROOFS.includes(id);
+
+/** The label shown on a use case's cards and hero: its category. */
+export const categoryLabel = (category: UseCase['category']) => CATEGORIES[category].label;
+
+/** Whether a use case has an approved, published customer deployment behind it. */
+export const isInProduction = (useCase: Pick<UseCase, 'proof_ref'>) => isProofApproved(useCase.proof_ref);

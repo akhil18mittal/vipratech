@@ -1,18 +1,242 @@
 ---
-import App from '../App';
+import Section from '../components/content/Section.astro';
+import {BulletList} from '../components/content/BulletList';
+import {CardGrid} from '../components/content/CardGrid';
+import {CtaBlock} from '../components/content/CtaBlock';
+import {DetailCards} from '../components/content/DetailCards';
+import {FaqList} from '../components/content/FaqList';
+import {FounderBlock} from '../components/content/FounderBlock';
+import {WorkflowSteps} from '../components/content/WorkflowSteps';
+import {ContactButtons} from '../components/site/ContactButtons';
+import {AUDIT_PATH, contactLinks} from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {siteLinks} from '../lib/collections';
+import {siteContent} from '../lib/collections';
+import {CATEGORIES, CATEGORY_ORDER} from '../data/categories';
 import {organizationJsonLd} from '../lib/seo';
 
-const links = await siteLinks();
+// The homepage: one claims engine for finance teams, led by distributor claims settlement (in production), with every
+// workflow and industry one click away and the free claims audit as the next step.
+
+const content = await siteContent();
+const claims = content.useCase('distributor-scheme-claims');
+const contact = contactLinks('/', 'a free claims audit');
+
+const proofPoints = [
+  'In production every month at a packaged-food brand since mid-2026',
+  `${content.useCases.length} claim and deduction workflows across ${content.industries.length} industries, on one engine`,
+  'Finance approves every credit note. Nothing is paid automatically.',
+];
+
+const deliverables = [
+  {
+    title: 'A credit note sheet ready to approve',
+    detail: 'Lines that pass every check, with the recalculated amount beside the claimed amount, in your finance format.',
+  },
+  {
+    title: 'An exception queue with reasons',
+    detail: 'Every line that failed a check or is uncertain, with its reason and evidence, so your team decides quickly.',
+  },
+  {
+    title: 'Duplicates and ineligible lines caught',
+    detail: 'The same invoice claimed twice, claims under expired schemes and claims for SKUs outside the scheme, across months and distributors.',
+  },
+  {
+    title: 'A leakage report',
+    detail: 'What was claimed, what was due and the difference, by distributor, scheme and reason.',
+  },
+  {
+    title: 'A statement for each distributor',
+    detail: 'A line-by-line settlement statement distributors can check for themselves, so fewer disputes come back.',
+  },
+  {
+    title: 'An audit trail',
+    detail: 'Who approved what and when, with the circular, invoice and proof behind every decision.',
+  },
+];
+
+const auditSteps = [
+  {title: 'Sign an NDA', detail: 'Yours or ours, before you share anything.'},
+  {title: "Send last quarter's claims", detail: 'Claim sheets, scheme circulars and the related invoices, in whatever format you have them.'},
+  {title: 'Get the report in 5 working days', detail: 'Duplicates, ineligible lines and over-claims, with the amount at risk by distributor, scheme and reason.'},
+  {title: 'Walk through it together', detail: 'A 30-minute call with the person who owns claims settlement.'},
+];
+
+const pricing = [
+  {title: 'Free claims audit', detail: "One recent quarter of your claims, checked line by line. You see what the system finds before you pay anything."},
+  {title: 'Fixed-fee rollout on live claims', detail: 'About 8 weeks: two monthly cycles for one region or claim type, run beside your current process and compared with what finance settled.'},
+  {title: 'Monthly subscription', detail: 'Priced by volume and the number of counterparties, once the rollout has shown its value.'},
+];
+
+const faqs = [
+  {
+    q: 'What does the free audit need from us?',
+    a: "One recent quarter of distributor claim sheets, the scheme circulars for that period and the related invoices or a DMS export. Excel, PDF and scans are all fine. You can start with one region or one claim type.",
+  },
+  {
+    q: 'What happens when the AI is unsure?',
+    a: 'Every amount is decided by rules built from your circulars; AI reads the documents and spreadsheets. Any line where a document cannot be read with confidence, a proof is missing or several matches are possible goes to your team with the reason. Nothing uncertain is passed silently.',
+  },
+  {
+    q: 'Do our distributors need to change how they send claims?',
+    a: "No. The system reads each distributor's own format. Agreeing a standard template over time reduces exceptions, but it is not needed to start.",
+  },
+  {
+    q: 'Does it replace our DMS or ERP?',
+    a: 'No. It reads exports from your DMS and ERP and produces a credit note sheet for finance to post in Tally, SAP or whichever system you use.',
+  },
+  {
+    q: 'Is our data safe with you?',
+    a: 'We sign an NDA before you share anything, use your files only for your audit, and delete them after. Your data is not used to train AI models. The security page has the details.',
+  },
+  {
+    q: 'Who will we work with?',
+    a: 'Akhilesh Mittal, who built the system that runs at a packaged-food brand today. You work with him directly from the audit to go-live.',
+  },
+];
+
+const industryCards = content.industries.map((industry) => ({title: industry.name, text: industry.hero.headline, href: industry.url}));
+const coverage = CATEGORY_ORDER.map((category) => ({
+  ...CATEGORIES[category],
+  id: category,
+  useCases: content.useCases.filter((useCase) => useCase.category === category),
+}));
+const engine = [
+  {title: 'Document AI', detail: 'Claim sheets, invoices, scans, photos and portal reports read into structured lines, with a confidence score on every field.'},
+  {title: 'Versioned rules', detail: 'Schemes, policies, contracts and terms as rules with effective dates, so every line is judged by the rule that applied on its date.'},
+  {title: 'Set-based matching', detail: 'A month of lines matched in one batch against invoices, receipts, GRNs, ledgers and earlier claims.'},
+  {title: 'Review queue and audit trail', detail: 'Every uncertain line held with a reason code and its evidence, and every decision logged.'},
+];
 ---
 
 <BaseLayout
-  title="VipraTech Labs | Evidence-First Applied-AI Engineering"
-  description="VipraTech Labs builds evidence-first applied-AI software for business-critical workflows where accuracy, human review, and operational reliability matter."
+  title="Claims and Deductions Reconciliation for Finance Teams | VipraTech"
+  description="VipraTech checks distributor claims, retail and quick-commerce deductions, subsidy and freight claims against your invoices and terms before you pay."
   page={{type: 'home'}}
+  faqs={faqs}
   jsonLd={[organizationJsonLd()]}
-  homepage
 >
-  <App client:only="react" solutions={links.solutions} industries={links.industries} />
+  <section class="pt-14 sm:pt-20 pb-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
+    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-400/10 border border-lime-400/40 text-lime-400 text-xs font-mono">
+      For finance teams at brands, manufacturers and distributors
+    </span>
+    <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.05] text-white max-w-4xl">
+      Stop paying claims and deductions you don't owe.
+    </h1>
+    <p class="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-3xl">
+      VipraTech checks every distributor claim, retailer and platform deduction, subsidy and freight claim against your
+      schemes, invoices, receipts and contracts, flags what does not hold up, and gives finance a clean settlement sheet to
+      approve.
+    </p>
+    <div class="pt-2 space-y-4">
+      <ContactButtons links={contact} location="hero" />
+      <a href="/sample-audit-report/" class="inline-block text-sm font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
+        See a sample audit report →
+      </a>
+    </div>
+    <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
+      {
+        proofPoints.map((point) => (
+          <li class="p-4 bg-zinc-900/70 border border-zinc-800 rounded-xl text-xs text-zinc-300 leading-relaxed font-mono">{point}</li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <Section title="Claims settlement is a monthly leak" intro={claims.problem.intro}>
+    <DetailCards items={claims.problem.pain_points} />
+  </Section>
+
+  <Section id="how-it-works" title="How it works" intro={claims.solution.overview}>
+    <WorkflowSteps steps={claims.workflow} />
+    <p class="text-base">
+      <a href={claims.url} class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
+        Full details: app screens, architecture, decision rules, exception codes and go-live plan →
+      </a>
+    </p>
+  </Section>
+
+  <Section title="What finance gets every month">
+    <DetailCards items={deliverables} />
+  </Section>
+
+  <Section id="free-audit" title="Start with a free claims audit" intro="See what the system finds on your own claims before you commit to anything.">
+    <WorkflowSteps steps={auditSteps} />
+    <div class="flex flex-wrap items-center gap-4 pt-2">
+      <a
+        href={AUDIT_PATH}
+        data-cta="audit"
+        data-cta-location="audit-section"
+        class="px-6 py-3.5 bg-lime-400 hover:bg-lime-300 text-black font-mono font-bold shadow-xl shadow-lime-400/25 rounded-xl text-sm transition-all"
+      >
+        Get a free claims audit
+      </a>
+      <a href="/sample-audit-report/" class="text-sm font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
+        See a sample report →
+      </a>
+    </div>
+  </Section>
+
+  <Section title="Your data stays under your control">
+    <BulletList
+      items={[
+        'NDA signed before you share any file',
+        'Files used only for your audit, and deleted afterwards',
+        'Your data is not used to train AI models',
+        'For live use, the system can run in your own cloud account',
+      ]}
+    />
+    <p class="text-base">
+      <a href="/security/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">How we handle your data →</a>
+    </p>
+  </Section>
+
+  <Section title="How pricing works">
+    <WorkflowSteps steps={pricing} />
+  </Section>
+
+  <Section id="under-the-hood" title="Under the hood" intro="Every workflow runs on one claims engine, built for finance teams that settle tens of thousands of lines a month.">
+    <DetailCards items={engine} />
+    <p class="text-base">
+      <a href="/platform/" class="font-semibold text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">How the engine works →</a>
+    </p>
+  </Section>
+
+  <Section id="coverage" title="Every claim and deduction we check" intro="Each workflow has its own page with its app screens, architecture, decision rules, exception codes and go-live plan.">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        coverage.map((group) => (
+          <div class="p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl shadow-lg">
+            <h3 class="text-lg font-bold text-white">
+              <a href={`/use-cases/#${group.id}`} class="hover:text-lime-300">{group.label}</a>
+            </h3>
+            <ul class="mt-4 space-y-2">
+              {group.useCases.map((useCase) => (
+                <li>
+                  <a href={useCase.url} class="text-sm font-medium text-lime-400 hover:text-lime-300 hover:underline underline-offset-2">
+                    {useCase.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section id="industries" title="By industry" intro="How these checks work for companies that sell through distributors, dealers, retail chains, quick-commerce platforms and marketplaces, and for the distributors themselves.">
+    <CardGrid items={industryCards} columns={2} />
+  </Section>
+
+  <FounderBlock />
+
+  <Section title="Questions finance teams ask">
+    <FaqList faqs={faqs} />
+  </Section>
+
+  <CtaBlock
+    headline="Send last quarter's claims. Get the audit in 5 working days."
+    text="Free, under NDA, with a walkthrough of every finding."
+    contact={contact}
+  />
 </BaseLayout>

@@ -12,7 +12,6 @@
     "diagrams": "bun scripts/render-diagrams.ts",
     "knip": "knip",
     "preview": "astro preview",
-    "preview:all": "CONTENT_PREVIEW=all bun run build && astro preview",
     "test": "vitest run",
     "typecheck": "astro check && tsc --noEmit",
     "validate": "bun scripts/validate-content.ts"
@@ -20,9 +19,7 @@
   "dependencies": {
     "@astrojs/react": "^7.1.1",
     "astro": "^7.4.2",
-    "canvas-confetti": "^1.9.4",
     "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
     "tailwindcss": "^4.1.14"
@@ -31,7 +28,6 @@
     "@astrojs/check": "^0.9.12",
     "@mermaid-js/mermaid-cli": "^12.0.0",
     "@tailwindcss/vite": "^4.1.14",
-    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^24",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",

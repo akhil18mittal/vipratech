@@ -13,12 +13,18 @@ import {DIST, fileFor, listPages} from './dist';
 const WIDTH = 400;
 const TEMPLATES: [string, RegExp][] = [
   ['homepage', /^\/$/],
-  ['solution', /^\/solutions\/[^/]+\/$/],
+  ['free claims audit', /^\/free-claims-audit\/$/],
+  ['sample audit report', /^\/sample-audit-report\/$/],
   ['industries hub', /^\/industries\/$/],
-  ['industry', /^\/industries\/[^/]+\/$/],
+  ['industry', /^\/industries\/fmcg-packaged-food\/$/],
   ['use case library', /^\/use-cases\/$/],
-  ['use case', /^\/use-cases\/[^/]+\/[^/]+\/$/],
-  ['careers', /^\/careers\/$/],
+  ['use case', /^\/use-cases\/distributor-scheme-claims\/$/],
+  ['use case with six exception codes', /^\/use-cases\/season-end-sales-returns\/$/],
+  ['use case (quick commerce)', /^\/use-cases\/quick-commerce-deductions\/$/],
+  ['use case (fertiliser subsidy)', /^\/use-cases\/fertiliser-subsidy-reconciliation\/$/],
+  ['industry with facts (fertilisers)', /^\/industries\/fertilisers\/$/],
+  ['platform', /^\/platform\/$/],
+  ['security', /^\/security\/$/],
   ['privacy', /^\/privacy\/$/],
   ['not found', /^\/404\.html$/],
 ];
@@ -41,9 +47,9 @@ const TYPES: Record<string, string> = {
 const findOverflow = (page: Page) =>
   page.evaluate(() => {
     const width = document.documentElement.clientWidth;
-    // The page shells (<main>, and the homepage's full-height wrapper) clip sideways overflow, so a too-wide element
-    // is cut off rather than scrolling the page. Smaller boxes that clip (the homepage ticker) or scroll (diagrams)
-    // do it on purpose, and so does the homepage's moving background, which ignores the pointer.
+    // <main> clips sideways overflow, so a too-wide element is cut off rather than scrolling the page. Boxes that
+    // scroll on their own (diagrams, the sample report's tables) do it on purpose, and so does anything decorative
+    // that ignores the pointer.
     const clippedOnPurpose = (element: Element) => {
       for (let parent = element.parentElement; parent && parent !== document.body; parent = parent.parentElement) {
         const {overflowX} = getComputedStyle(parent);
@@ -100,10 +106,8 @@ async function main() {
         for (const image of images) image.loading = 'eager';
         await Promise.all(images.map((image) => image.decode().catch(() => undefined)));
       });
-      // Gives the homepage's React app time to draw.
-      await sleep(1_000);
-      // Its entrance animations slide content in from the side, so an overflow counts only if it is still there once
-      // they have had time to finish.
+      // Gives fonts and images a moment to settle; an overflow counts only if it is still there after a few retries.
+      await sleep(500);
       let overflow = await findOverflow(page);
       for (let retry = 0; overflow && retry < 5; retry++) {
         await sleep(1_000);

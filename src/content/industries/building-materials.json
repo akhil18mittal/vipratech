@@ -1,0 +1,103 @@
+{
+  "slug": "building-materials",
+  "name": "Paints, Pipes and Building Materials",
+  "seo": {
+    "title": "Building Materials Dealer Claims | VipraTech",
+    "description": "Dealer rebates, cash discounts, painter and plumber loyalty points and display claims, checked for paints, pipes, tiles and building materials brands.",
+    "keywords": [
+      "dealer rebate reconciliation",
+      "painter loyalty program audit",
+      "building materials dealer schemes",
+      "cash discount reconciliation",
+      "plumber loyalty points"
+    ]
+  },
+  "hero": {
+    "headline": "Pay dealer rebates and loyalty points only on sales that really happened",
+    "subheadline": "Turnover rebates, cash discounts, painter and plumber loyalty, and shop display claims, checked against your schemes and sales data."
+  },
+  "intro": "Paints, pipes, tiles, plywood, adhesives and cement brands sell through dealers and reward the painters, plumbers, carpenters and contractors who choose their products. Dealer rebates depend on targets and collections, loyalty points on codes scanned from packs, and shop branding on photos. All of it is paid out at scale, often on trust.",
+  "challenges": [
+    {
+      "title": "Target and collection-based rebates",
+      "detail": "Quarterly and annual rebates depend on billing, returns and when dealers paid."
+    },
+    {
+      "title": "Loyalty at scale",
+      "detail": "Painters and plumbers scan codes for points, and bulk scanning inflates payouts."
+    },
+    {
+      "title": "Shop branding and displays",
+      "detail": "Dealers claim branding and display support with photos."
+    },
+    {
+      "title": "Price changes",
+      "detail": "Price revisions on stock with dealers create rate difference claims."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Turnover rebates, target incentives and cash discounts calculated from billing, returns and payment dates."
+    },
+    {
+      "use_case": "channel-loyalty-payouts",
+      "note": "Painter, plumber and carpenter loyalty points compared with sales by town, with bulk scanning flagged."
+    },
+    {
+      "use_case": "display-and-visibility-claims",
+      "note": "Shop branding and display claims checked against enrolled dealers and photos."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price-revision claims on dealer stock capped at estimated stock on hand."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Rebate and scheme credit notes matched to approvals and dealer ledgers."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Cash discounts dealers take on paint, pipe and cement purchases, checked against payment realisation and slabs."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Cement, tile and pipe freight checked against lane rates, weighbridge weights, detention and duplicate LRs."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Bag breakage, tile damage and short weight claims checked against weighbridge slips and POD remarks."
+    }
+  ],
+  "documents": [
+    "Dealer scheme and rebate circulars",
+    "Billing, returns and collection data",
+    "Loyalty scans and redemptions",
+    "Shop branding photos and dealer lists",
+    "Price revision circulars",
+    "Dealer ledgers"
+  ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Dealer and contractor loyalty platforms",
+    "Sales force apps with shop photos",
+    "Weighbridge and transport systems",
+    "Bank statements for collections"
+  ],
+  "facts": [],
+  "faqs": [
+    {
+      "q": "Our loyalty programme runs on a vendor platform. Can you work with it?",
+      "a": "Yes. The checks work from the platform's exports and return a list of redemptions to release or hold."
+    },
+    {
+      "q": "Can rebates depend on payment dates?",
+      "a": "Yes. Cash discount windows and collection-linked rebates use the actual payment dates from your bank or ERP."
+    },
+    {
+      "q": "Can it audit our freight bills?",
+      "a": "Yes. Every transporter bill is checked against the lane rate, the weighbridge weight, detention rules and earlier LRs before payment."
+    }
+  ],
+  "url": "/industries/building-materials/"
+}

@@ -1,12 +1,13 @@
 // Renders every built use case's Mermaid diagrams to static SVGs under public/diagrams/, so pages ship plain <img>s
 // and no Mermaid runtime. Run with `bun scripts/render-diagrams.ts` (part of `bun run build`).
 //
-// Per built use case, three files in public/diagrams/<industry>/:
+// For /platform/, one file per entry of PLATFORM_DIAGRAMS: platform-<name>.svg, plus platform-pipeline-tb.svg for phones.
+// Per use case, three files in public/diagrams/:
 //   <slug>-flow.svg     flow_diagram as written (flowchart LR)
 //   <slug>-flow-tb.svg  the same flow top-to-bottom, for narrow screens
 //   <slug>-arch.svg     architecture.diagram (flowchart TB)
 // public/diagrams/manifest.json maps each path (relative to public/) to {hash, width, height}. A diagram is re-rendered
-// only when its hash (source + render config + renderer versions) changes. Files for use cases that aren't built are
+// only when its hash (source + render config + renderer versions) changes. Files for use cases that no longer exist are
 // deleted, because everything in public/ is published.
 
 import {createHash} from 'node:crypto';
@@ -15,8 +16,8 @@ import {createRequire} from 'node:module';
 import {dirname, join, relative, sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {renderMermaid} from '@mermaid-js/mermaid-cli';
-import {linkFor} from '../src/lib/content';
 import {launchChrome} from './chrome';
+import {PLATFORM_DIAGRAMS} from '../src/data/platform';
 import {loadContent} from './content-checks';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
@@ -99,7 +100,7 @@ interface ManifestEntry {
 }
 
 interface Job {
-  /** Path relative to public/, e.g. diagrams/banking/x-flow.svg; also the manifest key. */
+  /** Path relative to public/, e.g. diagrams/distributor-scheme-claims-flow.svg; also the manifest key. */
   path: string;
   /** What to call the diagram in error messages. */
   label: string;
@@ -228,16 +229,18 @@ async function main() {
   }
 
   const jobs: Job[] = content.useCases
-    .filter((useCase) => linkFor(useCase) !== undefined)
     .flatMap((useCase) => {
-      const base = `diagrams/${useCase.industry}/${useCase.slug}`;
-      const name = `${useCase.industry}/${useCase.slug}`;
+      const base = `diagrams/${useCase.slug}`;
       return [
-        {path: `${base}-flow.svg`, label: `${name} flow_diagram`, source: useCase.flow_diagram},
-        {path: `${base}-flow-tb.svg`, label: `${name} flow_diagram (top-to-bottom)`, source: useCase.flow_diagram.replace(/^flowchart LR\b/, 'flowchart TB')},
-        {path: `${base}-arch.svg`, label: `${name} architecture.diagram`, source: useCase.architecture.diagram},
+        {path: `${base}-flow.svg`, label: `${useCase.slug} flow_diagram`, source: useCase.flow_diagram},
+        {path: `${base}-flow-tb.svg`, label: `${useCase.slug} flow_diagram (top-to-bottom)`, source: useCase.flow_diagram.replace(/^flowchart LR\b/, 'flowchart TB')},
+        {path: `${base}-arch.svg`, label: `${useCase.slug} architecture.diagram`, source: useCase.architecture.diagram},
       ];
     })
+    .concat(
+      Object.entries(PLATFORM_DIAGRAMS).map(([name, source]) => ({path: `diagrams/platform-${name}.svg`, label: `platform ${name}`, source})),
+      [{path: 'diagrams/platform-pipeline-tb.svg', label: 'platform pipeline (top-to-bottom)', source: PLATFORM_DIAGRAMS.pipeline.replace(/^flowchart LR\b/, 'flowchart TB')}],
+    )
     .map((job) => ({...job, hash: hashOf(job.source)}));
 
   const previous = readManifest();
@@ -249,7 +252,7 @@ async function main() {
     else pending.push(job);
   }
 
-  // Delete whatever isn't a current output: diagrams of use cases that are no longer built, and stray files.
+  // Delete whatever isn't a current output: diagrams of use cases that no longer exist, and stray files.
   const wanted = new Set([...jobs.map((job) => job.path), relative(PUBLIC_DIR, MANIFEST_PATH).split(sep).join('/')]);
   const stale = listFiles(OUT_DIR).filter((path) => !wanted.has(path));
   for (const path of stale) rmSync(join(PUBLIC_DIR, path));

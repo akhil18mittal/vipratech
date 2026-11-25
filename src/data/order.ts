@@ -1,33 +1,19 @@
-// Display order for capabilities and industries, as listed in the content pack (docs/content/SCHEMA.md).
-// scripts/validate-content.ts checks that these lists name every content file exactly once.
-
-export const CAPABILITY_ORDER = [
-  'document-intelligence',
-  'computer-vision',
-  'voice-ai',
-  'ai-security',
-  'sales-marketing-automation',
-] as const;
+// Display order of the industry pages. scripts/validate-content.ts checks that this list names every industry file
+// exactly once.
 
 export const INDUSTRY_ORDER = [
-  'banking',
-  'nbfc-lending',
-  'insurance',
-  'capital-markets-wealth',
-  'fintech-payments',
-  'healthcare',
-  'pharma-life-sciences',
-  'logistics-supply-chain',
-  'manufacturing',
-  'retail-ecommerce',
-  'real-estate-construction',
-  'hospitality-travel',
-  'education',
-  'legal',
-  'accounting-audit-consulting',
-  'telecom-contact-centers',
-  'energy-mining-utilities',
-  'automotive-mobility',
-  'agriculture',
-  'saas-ai-companies',
+  'fmcg-packaged-food',
+  'beauty-personal-care',
+  'd2c-brands',
+  'pharma-healthcare',
+  'consumer-durables-electronics',
+  'fertilisers',
+  'crop-protection',
+  'seeds',
+  'agri-input-distributors',
+  'specialty-chemicals',
+  'chemical-distributors',
+  'building-materials',
+  'auto-components-lubricants',
+  'apparel-footwear-lifestyle',
 ] as const;

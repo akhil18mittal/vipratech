@@ -1,0 +1,117 @@
+{
+  "slug": "consumer-durables-electronics",
+  "name": "Consumer Durables and Electronics",
+  "seo": {
+    "title": "Dealer Claims Reconciliation for Durables Brands | VipraTech",
+    "description": "Price protection, dealer incentives, co-marketing funds and warranty claims, checked against your terms and sales data for durables and electronics brands.",
+    "keywords": [
+      "price protection claims",
+      "dealer incentive reconciliation",
+      "consumer durables dealer claims",
+      "electronics warranty claims",
+      "co-marketing fund claims"
+    ]
+  },
+  "hero": {
+    "headline": "Settle price protection, incentives and warranty claims with every working shown",
+    "subheadline": "Price drops on dealer stock, sell-in and sell-out incentives, co-marketing funds and warranty repairs, checked before finance pays."
+  },
+  "intro": "Durables and electronics brands sell through distributors, large-format retailers and thousands of dealers, with frequent price changes and season-long incentive schemes. Each price drop creates price protection claims on dealer stock, each scheme ends with incentive calculations dealers dispute, and every repair under warranty is a claim from a service centre.",
+  "challenges": [
+    {
+      "title": "Frequent price drops",
+      "detail": "Each price change triggers protection claims that depend on dealer stock on the day."
+    },
+    {
+      "title": "Complex incentives",
+      "detail": "Sell-in and sell-out targets, model-mix conditions and festive schemes make payouts hard to check."
+    },
+    {
+      "title": "Shared marketing costs",
+      "detail": "Dealers and retailers claim co-marketing funds with invoices and photos."
+    },
+    {
+      "title": "Warranty leakage",
+      "detail": "Out-of-warranty, repeat and overcharged repairs are claimed by service centres."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price protection claims capped at the dealer stock that could have been held on the price-change date."
+    },
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Sell-in, sell-out and festive incentives calculated from billing, returns and collections, with dealer statements."
+    },
+    {
+      "use_case": "co-marketing-fund-claims",
+      "note": "Dealer and retailer co-marketing claims matched to approved activities and budgets."
+    },
+    {
+      "use_case": "warranty-claims-settlement",
+      "note": "Service-centre warranty claims checked against serial numbers, sale dates and rate cards."
+    },
+    {
+      "use_case": "modern-trade-deductions",
+      "note": "Large-format retailer payments and debit notes checked against agreed margins and support."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Credit notes for protection, incentives and support matched to approvals and dealer ledgers."
+    },
+    {
+      "use_case": "quality-and-transit-loss-claims",
+      "note": "Transit damage on large appliances and televisions, checked against POD remarks, with carrier recoveries."
+    },
+    {
+      "use_case": "freight-bill-audit",
+      "note": "Transporter bills for plant-to-warehouse and warehouse-to-dealer moves, checked against lane rates and PODs."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Early-payment discounts dealers take, checked against invoice dates and bank realisation."
+    },
+    {
+      "use_case": "quick-commerce-deductions",
+      "note": "Accessories, small appliances and electronics on quick-commerce platforms, with deductions checked against POs and GRNs."
+    }
+  ],
+  "documents": [
+    "Price change circulars and dealer stock statements",
+    "Incentive scheme circulars",
+    "Billing, returns and collection data",
+    "Co-marketing approvals, invoices and photos",
+    "Warranty job cards and serial records",
+    "Dealer ledgers and credit notes"
+  ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Dealer management and incentive platforms",
+    "Service and warranty CRM",
+    "Retail chain and marketplace portals",
+    "Transport management system"
+  ],
+  "facts": [
+    {
+      "text": "Quick-commerce players are moving into higher-value categories such as electronics, beauty and gifting.",
+      "source": "Inc42",
+      "url": "https://inc42.com/?p=558124"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Dealers report their own stock for price protection. How do you check it?",
+      "a": "Stock on the price-change date is estimated from what each dealer bought and sold, and from earlier stock reports. Claims above the estimate are flagged with the workings."
+    },
+    {
+      "q": "Can it handle sell-out incentives?",
+      "a": "Yes, if sell-out or activation data is available, it can be used in the incentive rules."
+    },
+    {
+      "q": "Can it handle transit damage claims from dealers?",
+      "a": "Yes. Damage claims are checked against LR and POD remarks, and losses the evidence places with the transporter go on a recovery sheet."
+    }
+  ],
+  "url": "/industries/consumer-durables-electronics/"
+}

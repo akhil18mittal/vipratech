@@ -15,15 +15,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      # CONTENT_PREVIEW=all builds every use case with noindex, for local review only.
-      - name: Refuse preview builds
-        if: github.ref == 'refs/heads/main'
-        run: |
-          if [ -n "${CONTENT_PREVIEW:-}" ]; then
-            echo "::error::CONTENT_PREVIEW is set; preview builds must not be deployed"
-            exit 1
-          fi
-
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -55,7 +46,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: public/diagrams
-          key: diagrams-${{ runner.os }}-${{ hashFiles('src/content/use-cases/**', 'scripts/render-diagrams.ts', 'src/data/release.ts', 'bun.lock') }}
+          key: diagrams-${{ runner.os }}-${{ hashFiles('src/content/use-cases/**', 'scripts/render-diagrams.ts', 'bun.lock') }}
           restore-keys: |
             diagrams-${{ runner.os }}-
 

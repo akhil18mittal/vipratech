@@ -1,0 +1,346 @@
+{
+  "slug": "freight-bill-audit",
+  "title": "Freight Bill Audit",
+  "category": "subsidy-freight-quality",
+  "summary": "Check every transporter bill against the contracted lane rate, the LR, the POD and the weight moved before you pay, and catch duplicates, detention and surcharge errors.",
+  "seo": {
+    "title": "Freight Bill Audit for Manufacturers | VipraTech",
+    "description": "Audit transporter bills against contracted lane rates, LRs, PODs and weights, and catch duplicate bills, wrong detention and surcharges before payment.",
+    "keywords": [
+      "freight bill audit",
+      "transporter bill verification",
+      "freight invoice reconciliation",
+      "lane rate contract audit",
+      "detention charges audit"
+    ]
+  },
+  "designed_for": [
+    "CFO or Head of Finance",
+    "Logistics Head",
+    "Accounts Payable Manager",
+    "Internal Audit"
+  ],
+  "problem": {
+    "intro": "Manufacturers of fertilisers, cement, chemicals, steel and packaged goods pay thousands of transporter bills a month, each with a lane rate, a vehicle type, a weight or trip basis and extras for detention, loading, unloading, tolls and fuel. Contracts change every quarter or with diesel prices. Most bills are checked by sampling, and overcharges are paid in full.",
+    "pain_points": [
+      {
+        "title": "Rates from an old contract",
+        "detail": "Bills use a lane rate or diesel adjustment that no longer applies, and nobody checks every bill against the current contract."
+      },
+      {
+        "title": "Billed weight above moved weight",
+        "detail": "Bills charge the vehicle capacity or a rounded weight instead of the weight on the weighbridge slip."
+      },
+      {
+        "title": "Detention and extras without proof",
+        "detail": "Detention, multi-point delivery and loading charges are added without the gate times or approvals that justify them."
+      },
+      {
+        "title": "Duplicate and split bills",
+        "detail": "The same LR is billed twice, or one trip is split across two bills."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech reads each transporter bill and its LRs, PODs and weighbridge slips, and recalculates the charge from the contract in force on the dispatch date: lane, vehicle type, basis, minimum load and fuel adjustment. Detention is recalculated from gate-in and gate-out times against free time, and every extra needs its approval or proof. Duplicate LRs are caught across bills and months. Lines that pass go to a payment sheet; the rest go to logistics with the recalculation.",
+    "capabilities": [
+      "Recalculates each bill from the contract in force on the dispatch date",
+      "Checks billed weight against weighbridge slips and minimum load terms",
+      "Recalculates detention from gate times and free time",
+      "Checks extras such as loading, tolls and multi-point delivery against approvals",
+      "Catches duplicate and split bills across transporters and months",
+      "Shows overcharges and cost per tonne by lane and transporter"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Receive bills",
+      "detail": "Transporter bills arrive with LRs and PODs, by upload, email or portal."
+    },
+    {
+      "step": 2,
+      "title": "Read and link",
+      "detail": "Each bill line is linked to its LR, POD, weighbridge slip and dispatch."
+    },
+    {
+      "step": 3,
+      "title": "Recalculate",
+      "detail": "Freight is recalculated from the contract, weight and fuel adjustment in force."
+    },
+    {
+      "step": 4,
+      "title": "Check extras",
+      "detail": "Detention and extras are checked against gate times and approvals."
+    },
+    {
+      "step": 5,
+      "title": "Review",
+      "detail": "Overcharged and doubtful lines go to logistics with the recalculation."
+    },
+    {
+      "step": 6,
+      "title": "Pay",
+      "detail": "Accounts payable pays the approved amount and sends the transporter a statement."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Transporter bill\"] --> B[\"Link LR, POD and weight\"]\n  B --> C[\"Contract rate on date\"]\n  C --> D[\"Detention and extras\"]\n  D --> E{\"Bill equals recalculated?\"}\n  E -->|\"yes\"| F[\"Payment sheet\"]\n  E -->|\"no or unsure\"| G(\"Logistics review\")\n  G --> F\n  F --> H[\"Transporter statement\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": [
+          "Transporter bills",
+          "LRs, PODs and weighbridge slips",
+          "Freight contracts and fuel index"
+        ]
+      },
+      {
+        "name": "Document understanding",
+        "components": [
+          "Bill and LR reader",
+          "POD and gate time extractor"
+        ]
+      },
+      {
+        "name": "Rules and matching",
+        "components": [
+          "Lane rate calculator",
+          "Detention and extras rules",
+          "Duplicate LR check"
+        ]
+      },
+      {
+        "name": "Review and settlement",
+        "components": [
+          "Review queue with reason codes",
+          "Payment sheet and statements"
+        ]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Transporter bills\"]\n    I2[\"LRs, PODs and slips\"]\n    I3[\"Contracts and fuel index\"]\n  end\n  subgraph S2[\"Document understanding\"]\n    D1[\"Bill and LR reader\"]\n    D2[\"Gate time extractor\"]\n  end\n  subgraph S3[\"Rules and matching\"]\n    R1[\"Lane rate calculator\"]\n    R2[\"Detention rules\"]\n    R3[\"Duplicate LR check\"]\n  end\n  subgraph S4[\"Review and settlement\"]\n    V1(\"Logistics review\")\n    V2[\"Payment sheet\"]\n  end\n  I1 --> D1 --> R1\n  I2 --> D1\n  I2 --> D2 --> R2\n  I3 --> R1\n  R1 --> R2 --> R3\n  R3 --> V1 --> V2\n  R3 --> V2"
+  },
+  "app_screens": [
+    {
+      "name": "Bills inbox",
+      "purpose": "Transporter bills for the period, with their documents.",
+      "shows": [
+        "Transporter, bill and LR count",
+        "Documents attached or missing",
+        "Billed total against last month"
+      ]
+    },
+    {
+      "name": "Trip view",
+      "purpose": "Each LR with its dispatch, weight and delivery.",
+      "shows": [
+        "Lane, vehicle type and dispatch date",
+        "Weighbridge and billed weight",
+        "Gate-in and gate-out times"
+      ]
+    },
+    {
+      "name": "Rate check",
+      "purpose": "The bill recalculated from the contract in force.",
+      "shows": [
+        "Contract rate and basis",
+        "Fuel adjustment applied",
+        "Billed against recalculated"
+      ]
+    },
+    {
+      "name": "Exception queue",
+      "purpose": "Lines overcharged or without proof.",
+      "shows": [
+        "Reason code and amount",
+        "Contract clause and documents",
+        "Approve, reduce or reject"
+      ]
+    },
+    {
+      "name": "Payment sheet",
+      "purpose": "Approved amounts for accounts payable.",
+      "shows": [
+        "Payment sheet by transporter",
+        "Statement with every reduction",
+        "Cost per tonne by lane"
+      ]
+    }
+  ],
+  "match_rules": [
+    {
+      "rule": "Contract rate on the dispatch date",
+      "logic": "The rate is taken from the contract version in force on the dispatch date for that lane, vehicle type and basis."
+    },
+    {
+      "rule": "Weight from the weighbridge",
+      "logic": "Per-tonne bills use the weighbridge weight, or the contract minimum load where it is higher. Rounded or capacity weights are corrected."
+    },
+    {
+      "rule": "Fuel adjustment by the formula",
+      "logic": "Diesel adjustments follow the contract formula and the index value for the period."
+    },
+    {
+      "rule": "Detention beyond free time",
+      "logic": "Detention is paid only for time beyond free time, from gate-in and gate-out records, at the contract rate."
+    },
+    {
+      "rule": "One bill per trip",
+      "logic": "An LR can be billed once. Split bills for one trip and repeated LRs across months are held."
+    }
+  ],
+  "exception_codes": [
+    {
+      "code": "RATE_NOT_CONTRACT",
+      "meaning": "The billed rate differs from the contract for that lane and date.",
+      "action": "Pay at the contract rate."
+    },
+    {
+      "code": "WEIGHT_ABOVE_SLIP",
+      "meaning": "Billed weight is above the weighbridge weight.",
+      "action": "Pay on the weighbridge weight."
+    },
+    {
+      "code": "DETENTION_UNPROVEN",
+      "meaning": "Detention has no gate times or is within free time.",
+      "action": "Remove it unless proof is added."
+    },
+    {
+      "code": "EXTRA_NOT_APPROVED",
+      "meaning": "An extra charge has no approval.",
+      "action": "Ask logistics to approve or remove it."
+    },
+    {
+      "code": "DUPLICATE_LR",
+      "meaning": "The LR was billed before.",
+      "action": "Reject, with the earlier bill linked."
+    },
+    {
+      "code": "POD_MISSING",
+      "meaning": "No proof of delivery for the trip.",
+      "action": "Hold payment until the POD arrives."
+    }
+  ],
+  "data_model": [
+    {
+      "entity": "FreightBill",
+      "fields": [
+        "bill_no",
+        "transporter",
+        "bill_date",
+        "billed_total"
+      ]
+    },
+    {
+      "entity": "Trip",
+      "fields": [
+        "lr_no",
+        "lane",
+        "vehicle_type",
+        "dispatched_on",
+        "weighbridge_wt",
+        "pod_ref"
+      ]
+    },
+    {
+      "entity": "FreightContract",
+      "fields": [
+        "transporter",
+        "lane",
+        "vehicle_type",
+        "basis",
+        "rate",
+        "valid_from"
+      ]
+    },
+    {
+      "entity": "BillLineCheck",
+      "fields": [
+        "bill_no",
+        "lr_no",
+        "billed",
+        "recalculated",
+        "exception_code"
+      ]
+    }
+  ],
+  "inputs": [
+    "Transporter bills",
+    "Lorry receipts and proofs of delivery",
+    "Weighbridge slips and gate-in and gate-out records",
+    "Freight contracts, lane rates and fuel adjustment formula",
+    "Approvals for extras and detention"
+  ],
+  "outputs": [
+    "Every bill line recalculated with the difference",
+    "Payment sheet for accounts payable",
+    "Exceptions with reason codes and evidence",
+    "Statement per transporter",
+    "Cost per tonne and overcharge rate by lane and transporter"
+  ],
+  "human_in_the_loop": "Logistics decides every disputed line and every extra without approval. Accounts payable releases payment only for approved amounts.",
+  "integrations": [
+    "ERP such as SAP or Oracle for dispatches and payables",
+    "Transport management system or LR register",
+    "Weighbridge and gate systems",
+    "Transporter portal or email for bills"
+  ],
+  "guardrails": [
+    "Contract version applied by dispatch date",
+    "No payment without a POD unless logistics approves",
+    "Duplicate LRs held across all transporters",
+    "Every reduction shown with the clause behind it"
+  ],
+  "compliance_notes": [
+    "Transporter bills may involve GST under reverse charge or forward charge; the system keeps the tax fields from each bill for accounts payable."
+  ],
+  "rollout": {
+    "duration": "About 4 to 6 weeks",
+    "scope": "One plant or region, using the last two months of transporter bills, with paid amounts as the benchmark.",
+    "deliverables": [
+      "Contracts set up as rules",
+      "Bills recalculated with exceptions",
+      "Payment sheet in your format",
+      "Comparison with what was paid"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Bills checked in full",
+        "how": "Share of bill lines recalculated, not sampled."
+      },
+      {
+        "metric": "Overcharge found",
+        "how": "Amount billed above the contract, confirmed by logistics."
+      },
+      {
+        "metric": "Duplicates caught",
+        "how": "LRs billed more than once."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Our contracts change with diesel prices. Can it keep up?",
+      "a": "Yes. The fuel adjustment formula is set up once, and each bill uses the index value for its period."
+    },
+    {
+      "q": "Transporters send bills as PDFs and scans. Is that a problem?",
+      "a": "No. Bills, LRs and PODs are read into structured lines, and anything read with low confidence is shown to a person."
+    },
+    {
+      "q": "Does it cover rail freight?",
+      "a": "Yes. Railway receipts and freight charges are checked the same way, with the rail rate basis set up as rules."
+    },
+    {
+      "q": "Can it show which transporters overcharge most?",
+      "a": "Yes. Overcharge rates by transporter and lane come with every cycle."
+    }
+  ],
+  "related": [
+    "quality-and-transit-loss-claims",
+    "fertiliser-subsidy-reconciliation",
+    "cash-discount-claims"
+  ],
+  "proof_ref": null,
+  "url": "/use-cases/freight-bill-audit/"
+}

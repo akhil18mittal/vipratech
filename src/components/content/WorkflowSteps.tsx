@@ -1,4 +1,4 @@
-/** Numbered rows in the homepage's sprint-deliverable style. */
+/** Numbered rows: a workflow's steps, a go-live plan's deliverables. */
 export function WorkflowSteps({ id, steps }: { id?: string; steps: readonly { title?: string; detail: string }[] }) {
   return (
     <ol id={id} className="space-y-3 max-w-3xl">

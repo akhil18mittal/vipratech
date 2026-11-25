@@ -1,0 +1,99 @@
+{
+  "slug": "auto-components-lubricants",
+  "name": "Auto Components, Batteries and Lubricants",
+  "seo": {
+    "title": "Auto Parts and Lubricants Claims | VipraTech",
+    "description": "Warranty claims, mechanic loyalty points, distributor schemes and dealer incentives, checked for auto component, battery, tyre and lubricant brands.",
+    "keywords": [
+      "auto parts warranty claims",
+      "mechanic loyalty program",
+      "battery warranty claims",
+      "lubricant distributor schemes",
+      "aftermarket dealer incentives"
+    ]
+  },
+  "hero": {
+    "headline": "Check warranty claims and mechanic loyalty payouts before they are paid",
+    "subheadline": "Battery, tyre and parts warranty claims, mechanic loyalty points, distributor schemes and retailer incentives, checked against your terms and sales."
+  },
+  "intro": "Aftermarket auto components, batteries, tyres and lubricants reach vehicle owners through distributors, retailers and mechanics. Brands pay for warranty replacements, reward mechanics for choosing their products and run schemes for distributors and retailers. Serial numbers, scan data and sales records make each of these checkable.",
+  "challenges": [
+    {
+      "title": "Warranty replacements",
+      "detail": "Pro-rata and replacement warranties on batteries and tyres are claimed through dealers."
+    },
+    {
+      "title": "Mechanic loyalty",
+      "detail": "Mechanics earn points by scanning codes, and bulk scanning inflates payouts."
+    },
+    {
+      "title": "Distributor and retailer schemes",
+      "detail": "Volume schemes and retailer incentives run across many SKUs."
+    },
+    {
+      "title": "Frequent price changes",
+      "detail": "Price revisions on channel stock create rate difference claims."
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "warranty-claims-settlement",
+      "note": "Battery, tyre and component warranty claims checked against serial numbers, sale dates and pro-rata terms."
+    },
+    {
+      "use_case": "channel-loyalty-payouts",
+      "note": "Mechanic and retailer loyalty points compared with sales by town, with bulk scanning flagged."
+    },
+    {
+      "use_case": "distributor-scheme-claims",
+      "note": "Distributor volume schemes checked against circulars and invoices."
+    },
+    {
+      "use_case": "dealer-incentive-and-rebate-settlement",
+      "note": "Retailer and distributor incentives calculated from billing, returns and collections."
+    },
+    {
+      "use_case": "rate-difference-claims",
+      "note": "Price-change claims on channel stock capped at estimated stock on hand."
+    },
+    {
+      "use_case": "cash-discount-claims",
+      "note": "Early-payment discounts distributors and retailers take, checked against realisation dates and slabs."
+    },
+    {
+      "use_case": "credit-note-reconciliation",
+      "note": "Warranty, scheme and loyalty credit notes tied to approvals and to each distributor's ledger."
+    }
+  ],
+  "documents": [
+    "Warranty claims with serial numbers and job cards",
+    "Mechanic loyalty scans and redemptions",
+    "Distributor scheme circulars",
+    "Billing and collection data",
+    "Price revision circulars",
+    "Dealer ledgers"
+  ],
+  "systems": [
+    "ERP such as SAP or Oracle",
+    "Mechanic and retailer loyalty apps",
+    "Service and warranty systems",
+    "DMS for distributor sales",
+    "Bank statements"
+  ],
+  "facts": [],
+  "faqs": [
+    {
+      "q": "Can it check pro-rata battery warranties?",
+      "a": "Yes. Pro-rata and free-replacement periods are configured per product, and each claim is checked against the sale date."
+    },
+    {
+      "q": "Our mechanics scan through an app run by a vendor. Does that work?",
+      "a": "Yes. The checks work from the app's exports and return redemptions to release or hold."
+    },
+    {
+      "q": "Do you cover cash discounts to dealers?",
+      "a": "Yes. Discounts dealers take for early payment are checked against invoice dates, bank realisation dates and your slabs, including bounced cheques."
+    }
+  ],
+  "url": "/industries/auto-components-lubricants/"
+}
