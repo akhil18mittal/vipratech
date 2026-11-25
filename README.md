@@ -1,6 +1,6 @@
 # VipraTech: distributor claims reconciliation
 
-The public VipraTech website: a claims engine that checks claims, deductions, subsidies and settlements for finance teams at brands, manufacturers and distributors, with two next steps (the free claims audit and a demo). It is a static site built with Astro. Pages are plain HTML with no client-side framework; React components render at build time. Audit requests go by email or WhatsApp, so the site has no backend, API keys, form or lead database. Google Analytics 4 (with Google Consent Mode and a cookie banner for EEA, UK and Swiss visitors) is switched on by setting `GA4_ID` in `src/data/site.ts`; the banner is part of the site, so no consent service is needed.
+The public VipraTech website: a claims engine that checks claims, deductions, subsidies and settlements for finance teams at brands, manufacturers and distributors, with two next steps (the free claims audit and a demo). It is a static site built with Astro. Pages are plain HTML with no client-side framework; React components render at build time. Audit requests go by email or WhatsApp, so the site has no backend, API keys, form or lead database. Google Analytics 4 (`GA4_ID`) and Microsoft Clarity (`CLARITY_ID`, heatmaps and session recordings) are set in `src/data/site.ts`. Both follow one cookie banner for EEA, UK and Swiss visitors: Google through Consent Mode, Clarity through its consentv2 API. The banner is part of the site, so no consent service is needed.
 
 ## Local development
 
@@ -47,7 +47,7 @@ Use-case pages (one per workflow, in one of four categories, each with its app s
 
 - `src/pages/index.astro`: the homepage. Its problem and workflow sections come from the live claims use case.
 - `src/pages/free-claims-audit.astro`, `sample-audit-report.astro`, `security.astro`: the audit offer, a sample report with invented figures, and data-handling commitments.
-- `src/data/site.ts`: contact links (audit, email, WhatsApp, Calendly), the GA4 ID and the privacy policy approval date.
+- `src/data/site.ts`: contact links (audit, email, WhatsApp, Calendly), the GA4 and Clarity IDs, and the privacy policy approval date.
 - `src/data/order.ts`: display order of the industry pages.
 - `src/data/proofs.ts`: which proof projects the site may show.
 - `astro.config.mjs`: redirects from retired pages of the old multi-industry site. Every other retired address gets the 404 page.

@@ -1,14 +1,17 @@
-// GA4 events. Nothing is sent until GA4_ID is set in src/data/site.ts (ConsentScripts.astro only defines gtag then),
-// and Consent Mode decides what GA4 may store for each visitor.
+// GA4 events, also sent to Microsoft Clarity as custom events so recordings can be filtered by them. Nothing is sent
+// until GA4_ID or CLARITY_ID is set in src/data/site.ts (ConsentScripts.astro only defines gtag and clarity then), and
+// the visitor's consent decides what either tool may store.
 
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    clarity?: (...args: unknown[]) => void;
   }
 }
 
 function track(event: string, params: Record<string, string | boolean>) {
   window.gtag?.('event', event, params);
+  window.clarity?.('event', event);
 }
 
 /**

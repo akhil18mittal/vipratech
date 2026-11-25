@@ -76,11 +76,14 @@ export const auditRequestLinks = (): ContactLinks => ({
 /** The GA4 Measurement ID of the "vipratech.in" property in the VipraTech Labs Analytics account. Set to null to turn analytics off. */
 export const GA4_ID: string | null = 'G-X6SC4FX6JN';
 
+/** The Microsoft Clarity project ID ("VipraTech" project) for heatmaps and session recordings. Set to null to turn it off. */
+export const CLARITY_ID: string | null = 'zjacov77if';
+
 /**
  * The day you approved the privacy policy at /privacy/ (e.g. '2026-11-02'). check:dist fails while it is null, so the
  * site can't go live with the draft policy.
  */
-export const PRIVACY_POLICY_APPROVED_ON: string | null = '2026-10-23';
+export const PRIVACY_POLICY_APPROVED_ON: string | null = '2026-11-25';
 
 /** The default share image for social cards, 1200×630. */
 export const SHARE_IMAGE = '/og/default.png';
