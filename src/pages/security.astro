@@ -1,0 +1,85 @@
+---
+import Section from '../components/content/Section.astro';
+import {BulletList} from '../components/content/BulletList';
+import {CtaBlock} from '../components/content/CtaBlock';
+import {PageHero} from '../components/content/PageHero';
+import {COMPANY_INFO} from '../data/companyData';
+import {contactLinks} from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// How client claims data is handled, from the audit to live use. Every statement here is a commitment: change the page
+// before changing the practice.
+
+const contact = contactLinks('/security/', 'how VipraTech handles claims data');
+const link = 'font-semibold text-teal-700 hover:text-teal-900 hover:underline underline-offset-2';
+---
+
+<BaseLayout
+  title="Security and Data Handling | VipraTech"
+  description="How VipraTech handles your distributor claims, scheme and pricing data: NDA first, used only for your work, deleted after an audit, never used to train AI models."
+  page={{type: 'security'}}
+  crumbs={[{name: 'Security', path: '/security/'}]}
+>
+  <PageHero
+    title="Security and data handling"
+    subtitle="Claims data shows your schemes, prices and distributor terms. This is how we handle it, from the free audit to live use."
+  />
+
+  <Section title="Before you share anything">
+    <BulletList
+      items={[
+        'We sign an NDA, yours or ours, before you share any file',
+        'We ask only for the files the work needs',
+        'Files are shared through a secure upload link, never through a form on this website',
+      ]}
+    />
+  </Section>
+
+  <Section title="During an audit">
+    <BulletList
+      items={[
+        'Only the people working on your audit can open your files',
+        'Your files are used only to prepare your report',
+        'Your data is not used to train AI models',
+        'AI reads the documents; every amount is decided by rules built from your circulars, which you can see',
+      ]}
+    />
+  </Section>
+
+  <Section title="After an audit">
+    <BulletList
+      items={[
+        'Your files are deleted within 30 days of delivering the report, or sooner if you ask',
+        'We confirm the deletion in writing',
+      ]}
+    />
+  </Section>
+
+  <Section title="In a pilot and in live use">
+    <BulletList
+      items={[
+        'The system runs in your own cloud account, or in ours in an India region of a major cloud provider',
+        'Access is role-based, and every login and decision is logged',
+        'Finance approves every credit note. Nothing is paid or posted automatically',
+        'Every decision keeps its evidence: the circular, the invoice and the proof behind it',
+      ]}
+    />
+  </Section>
+
+  <Section title="Who builds it">
+    <p class="text-base text-slate-600 leading-relaxed max-w-3xl">
+      {COMPANY_INFO.founder} spent 8 years building and leading engineering on a security-testing platform, and builds
+      this system to the same habits: least-privilege access, logging and reviewed changes.
+    </p>
+  </Section>
+
+  <Section title="Security questionnaires">
+    <p class="text-base text-slate-600 leading-relaxed max-w-3xl">
+      If your IT or security team has a questionnaire, send it to
+      <a href={`mailto:${COMPANY_INFO.email}`} class={link}>{COMPANY_INFO.email}</a> and we will fill it in. How this
+      website itself uses data is covered by the <a href="/privacy/" class={link}>privacy policy</a>.
+    </p>
+  </Section>
+
+  <CtaBlock headline="Start with a free claims audit" text="Under NDA, with your files deleted afterwards." contact={contact} />
+</BaseLayout>

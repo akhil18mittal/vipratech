@@ -12,7 +12,7 @@ let manifest: Manifest | undefined;
 
 export function diagramFor(useCase: UseCase, kind: 'flow' | 'flow-tb' | 'arch'): Diagram {
   manifest ??= JSON.parse(readFileSync(join(process.cwd(), 'public/diagrams/manifest.json'), 'utf8')) as Manifest;
-  const path = `diagrams/${useCase.industry}/${useCase.slug}-${kind}.svg`;
+  const path = `diagrams/${useCase.slug}-${kind}.svg`;
   const entry = manifest[path];
   if (!entry) throw new Error(`No diagram ${path}: run \`bun run diagrams\``);
   return {src: `/${path}`, width: entry.width, height: entry.height};

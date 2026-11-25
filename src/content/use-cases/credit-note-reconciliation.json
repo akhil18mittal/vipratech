@@ -1,0 +1,177 @@
+{
+  "slug": "credit-note-reconciliation",
+  "title": "Credit Note and Distributor Ledger Reconciliation",
+  "status": "early-access",
+  "summary": "Check that every approved claim became the right credit note, that nothing was credited twice, and that your books and each distributor's ledger agree, with the differences explained.",
+  "seo": {
+    "title": "Credit Note and Distributor Ledger Reconciliation",
+    "description": "Match approved claims to credit notes, catch credits issued twice or never issued, and reconcile your books with each distributor's ledger statement.",
+    "keywords": [
+      "credit note reconciliation",
+      "distributor ledger reconciliation",
+      "distributor balance confirmation",
+      "claims to credit note matching",
+      "FMCG distributor accounts"
+    ]
+  },
+  "designed_for": ["CFO or Head of Finance", "Accounts Receivable Lead", "Claims Settlement Team Lead"],
+  "problem": {
+    "intro": "Once claims are approved, finance raises credit notes, distributors adjust them against invoices, and at the end of a quarter or year both sides confirm balances. Credit notes are raised in the ERP or Tally from spreadsheets, and distributors keep their own books, so the two drift apart and nobody sees why until the balance confirmation does not match.",
+    "pain_points": [
+      {
+        "title": "Credits issued twice or never",
+        "detail": "An approved claim is credited twice after a resubmission, or never credited at all, and the gap only shows up months later."
+      },
+      {
+        "title": "Amounts that differ from the approval",
+        "detail": "The credit note amount or invoice reference differs from what finance approved, because it was keyed by hand from a sheet."
+      },
+      {
+        "title": "Balance confirmations that do not agree",
+        "detail": "Distributor ledger statements and your books disagree, and finding the difference means going through months of entries line by line."
+      },
+      {
+        "title": "Disputes without evidence",
+        "detail": "When a distributor says a claim is still pending, the approval, the credit note and the adjustment sit in different files and inboxes."
+      }
+    ]
+  },
+  "solution": {
+    "overview": "VipraTech links each approved claim line to the credit note raised for it, and each credit note to the invoice and ledger entry it was adjusted against. It reads distributor ledger statements in whatever format they arrive, compares them with your books entry by entry, and explains each difference: a credit not yet issued, a credit issued twice, a timing difference or an entry missing on one side. Finance reviews the differences, and the system produces a reconciliation statement that can be shared with the distributor.",
+    "capabilities": [
+      "Links every approved claim line to its credit note, and flags approvals with no credit note",
+      "Catches credit notes issued twice, for the wrong amount or against the wrong invoice",
+      "Reads distributor ledger statements in Excel, PDF or scanned form",
+      "Compares each distributor's ledger with your books and explains every difference",
+      "Reconciliation statement for each distributor, ready to share",
+      "Audit trail from claim approval to credit note to ledger entry"
+    ]
+  },
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Collect records",
+      "detail": "Approved claim sheets, credit notes from the ERP or Tally, and distributor ledger statements are gathered for the period."
+    },
+    {
+      "step": 2,
+      "title": "Link claims to credit notes",
+      "detail": "Each approved claim line is matched to its credit note by distributor, scheme, invoice and amount."
+    },
+    {
+      "step": 3,
+      "title": "Flag mismatches",
+      "detail": "Missing, duplicate and mismatched credit notes are flagged with the approval and the note side by side."
+    },
+    {
+      "step": 4,
+      "title": "Compare ledgers",
+      "detail": "Each distributor's ledger statement is compared with your books, and every difference is given a reason."
+    },
+    {
+      "step": 5,
+      "title": "Finance review",
+      "detail": "Finance confirms corrections and decides what to raise or reverse."
+    },
+    {
+      "step": 6,
+      "title": "Share the statement",
+      "detail": "A reconciliation statement goes to each distributor, and open items are tracked to closure."
+    }
+  ],
+  "flow_diagram": "flowchart LR\n  A[\"Approved claim sheets\"] --> D[\"Match claim to credit note\"]\n  B[\"Credit notes in ERP\"] --> D\n  D --> E{\"Amount and invoice agree?\"}\n  E -->|\"yes\"| F[\"Compare distributor ledger\"]\n  E -->|\"no or unsure\"| G(\"Finance review\")\n  G --> F\n  C[\"Distributor ledger statements\"] --> F\n  F --> H[\"Reconciliation statement\"]",
+  "architecture": {
+    "layers": [
+      {
+        "name": "Intake",
+        "components": ["Approved claim sheets", "ERP or Tally credit notes", "Distributor ledger statements"]
+      },
+      {
+        "name": "Matching",
+        "components": ["Claim to credit note matcher", "Ledger statement reader", "Balance comparison"]
+      },
+      {
+        "name": "Review",
+        "components": ["Differences with reasons", "Finance review"]
+      },
+      {
+        "name": "Output",
+        "components": ["Distributor reconciliation statements", "Audit trail"]
+      }
+    ],
+    "diagram": "flowchart TB\n  subgraph S1[\"Intake\"]\n    I1[\"Approved claim sheets\"]\n    I2[\"ERP or Tally credit notes\"]\n    I3[\"Distributor ledger statements\"]\n  end\n  subgraph S2[\"Matching\"]\n    M1[\"Claim to credit note matcher\"]\n    M2[\"Ledger statement reader\"]\n    M3[\"Balance comparison\"]\n  end\n  subgraph S3[\"Review\"]\n    R1[\"Differences with reasons\"]\n    R2(\"Finance review\")\n  end\n  subgraph S4[\"Output\"]\n    O1[\"Reconciliation statements\"]\n    O2[\"Audit trail\"]\n  end\n  I1 --> M1\n  I2 --> M1\n  I3 --> M2\n  M1 --> M3\n  M2 --> M3\n  M3 --> R1 --> R2\n  R2 --> O1\n  R2 --> O2"
+  },
+  "inputs": [
+    "Approved claim sheets and credit note sheets",
+    "Credit notes and ledger entries from the ERP or Tally",
+    "Distributor ledger statements in Excel, PDF or scans",
+    "Invoice register for the period"
+  ],
+  "outputs": [
+    "Claim-to-credit-note match with missing and duplicate credits flagged",
+    "Ledger differences for each distributor, with a reason for each",
+    "Reconciliation statement for each distributor",
+    "Audit trail from approval to ledger entry"
+  ],
+  "human_in_the_loop": "Finance decides every correction. The system never raises or reverses a credit note on its own, and any difference it cannot explain is shown to a person as unexplained rather than forced into a category.",
+  "integrations": [
+    "ERP such as SAP or Tally for credit notes and ledgers",
+    "Claims settlement output, from our claims system or your sheets",
+    "Distributor statements by email or upload"
+  ],
+  "guardrails": [
+    "No difference marked as explained without matching entries on both sides",
+    "Credit note amount always shown beside the approved amount",
+    "Corrections posted only after finance approves them",
+    "Unexplained differences stay open until a person closes them"
+  ],
+  "compliance_notes": [
+    "Credit notes for GST need to reference the original invoice; the system checks that each credit note carries the reference your tax team expects.",
+    "Reconciled balances with an audit trail support distributor balance confirmations at year-end audit."
+  ],
+  "pilot": {
+    "duration": "About 6 weeks",
+    "scope": "One quarter of approved claims and credit notes for the distributors of one region, with their ledger statements for the same period.",
+    "deliverables": [
+      "Claim-to-credit-note match for the pilot period",
+      "Ledger comparison for each pilot distributor",
+      "Reconciliation statement format agreed with your team",
+      "Roll-out plan for all distributors"
+    ],
+    "what_we_measure": [
+      {
+        "metric": "Credits missing or issued twice",
+        "how": "Count and value of credit note errors found and confirmed by finance."
+      },
+      {
+        "metric": "Differences explained",
+        "how": "Share of ledger differences the system explained, checked by finance."
+      },
+      {
+        "metric": "Time to reconcile a distributor",
+        "how": "Time to produce a reconciliation statement, compared with today."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Do we need to use your claims system for this?",
+      "a": "No. It works from your approved claim sheets and credit notes as they are today. If you use our claims settlement, the link from claim to credit note is already there."
+    },
+    {
+      "q": "Our distributors send statements in different formats. Is that a problem?",
+      "a": "No. The statements are read as they arrive, in Excel, PDF or scanned form. Anything that cannot be read with confidence is shown to a person."
+    },
+    {
+      "q": "Can it post corrections to Tally or SAP?",
+      "a": "It prepares the corrections for finance to approve. Posting them to your ERP can be added once the matching has proven itself."
+    },
+    {
+      "q": "Is this available today?",
+      "a": "Distributor claims settlement is live today. Credit note and ledger reconciliation is in early access: we are building it with a small number of brands as design partners."
+    }
+  ],
+  "related": ["distributor-scheme-claims", "quick-commerce-deductions"],
+  "proof_ref": null,
+  "url": "/use-cases/credit-note-reconciliation/"
+}

@@ -24,12 +24,12 @@ const sizeVars = (diagram: Diagram, suffix: string) => ({
 export function DiagramFigure({ title, kind, diagram, narrow = diagram, describedBy }: DiagramFigureProps) {
   const alt = `${title}: ${kind} diagram`;
   return (
-    <figure className="p-4 sm:p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl">
+    <figure className="p-4 sm:p-6 bg-white border border-slate-200 rounded-2xl">
       <div
         role="region"
         aria-label={alt}
         tabIndex={0}
-        className="overflow-x-auto rounded-lg focus-visible:outline focus-visible:outline-lime-400"
+        className="overflow-x-auto rounded-lg focus-visible:outline focus-visible:outline-teal-700"
       >
         <picture>
           <source media="(max-width: 639px)" srcSet={narrow.src} width={narrow.width} height={narrow.height} />
@@ -46,8 +46,8 @@ export function DiagramFigure({ title, kind, diagram, narrow = diagram, describe
           />
         </picture>
       </div>
-      <figcaption className="mt-4 text-xs font-mono">
-        <a href={diagram.src} target="_blank" rel="noopener" className="text-lime-400 hover:text-lime-300 transition-colors">
+      <figcaption className="mt-4 text-sm">
+        <a href={diagram.src} target="_blank" rel="noopener" className="text-teal-700 hover:text-teal-900 underline-offset-2 hover:underline">
           Open full size
         </a>
       </figcaption>

@@ -1,0 +1,156 @@
+---
+import Section from '../../components/content/Section.astro';
+import {ArchitectureLayers} from '../../components/content/ArchitectureLayers';
+import {BulletList} from '../../components/content/BulletList';
+import {CardGrid} from '../../components/content/CardGrid';
+import {CtaBlock} from '../../components/content/CtaBlock';
+import {DetailCards} from '../../components/content/DetailCards';
+import {DiagramFigure} from '../../components/content/DiagramFigure';
+import {FaqList} from '../../components/content/FaqList';
+import {FounderBlock} from '../../components/content/FounderBlock';
+import {PageHero} from '../../components/content/PageHero';
+import {PilotBox} from '../../components/content/PilotBox';
+import {ProofBox} from '../../components/content/ProofBox';
+import {WorkflowSteps} from '../../components/content/WorkflowSteps';
+import {contactLinks, earlyAccessLinks} from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {siteContent} from '../../lib/collections';
+import {isProofApproved, statusLabel} from '../../lib/content';
+import {diagramFor} from '../../lib/diagrams';
+
+export async function getStaticPaths() {
+  const {useCases} = await siteContent();
+  return useCases.map((useCase) => ({params: {slug: useCase.slug}, props: {slug: useCase.slug}}));
+}
+
+const content = await siteContent();
+const useCase = content.useCase(Astro.props.slug);
+const live = useCase.status === 'live';
+const contact = live ? contactLinks(useCase.url, useCase.title) : earlyAccessLinks(useCase.url, useCase.title);
+const proof = isProofApproved(useCase.proof_ref) ? content.proofProject(useCase.proof_ref!) : undefined;
+const relatedCards = useCase.related.map(content.useCase).map((related) => ({
+  label: statusLabel(related.status),
+  title: related.title,
+  text: related.summary,
+  href: related.url,
+}));
+const paragraph = 'text-base text-slate-600 leading-relaxed max-w-3xl';
+const label = 'text-xs text-slate-500 uppercase tracking-wide mb-3 font-semibold';
+---
+
+<BaseLayout
+  title={useCase.seo.title}
+  description={useCase.seo.description}
+  page={{type: 'use-case', slug: useCase.slug}}
+  crumbs={[
+    {name: 'Use cases', path: '/use-cases/'},
+    {name: useCase.title, path: useCase.url},
+  ]}
+  faqs={useCase.faqs}
+>
+  <PageHero eyebrow={statusLabel(useCase.status)} title={useCase.title} subtitle={useCase.summary} contact={contact} />
+
+  {
+    !live && (
+      <div class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pb-10">
+        <p class="p-5 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-900 leading-relaxed max-w-3xl">
+          <strong>Early access.</strong> We are building this with a small number of brands as design partners.
+          Distributor claims settlement is live today, and design partners can start with a free claims audit.
+        </p>
+      </div>
+    )
+  }
+
+  <Section title="Who it is for">
+    <BulletList items={useCase.designed_for} />
+  </Section>
+
+  <Section title="The problem">
+    <p class={paragraph}>{useCase.problem.intro}</p>
+    <DetailCards items={useCase.problem.pain_points} />
+  </Section>
+
+  <Section title="What it does">
+    <p class={paragraph}>{useCase.solution.overview}</p>
+    <BulletList items={useCase.solution.capabilities} />
+  </Section>
+
+  <Section title="How it works">
+    <WorkflowSteps id="workflow-steps" steps={useCase.workflow} />
+    <DiagramFigure
+      title={useCase.title}
+      kind="workflow"
+      diagram={diagramFor(useCase, 'flow')}
+      narrow={diagramFor(useCase, 'flow-tb')}
+      describedBy="workflow-steps"
+    />
+  </Section>
+
+  <Section title="Inputs and outputs">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class={label}>Inputs</h3>
+        <BulletList items={useCase.inputs} />
+      </div>
+      <div>
+        <h3 class={label}>Outputs</h3>
+        <BulletList items={useCase.outputs} />
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Where people stay in control">
+    <p class={paragraph}>{useCase.human_in_the_loop}</p>
+  </Section>
+
+  <Section title="Guardrails">
+    <BulletList items={useCase.guardrails} />
+  </Section>
+
+  <Section title="Works with">
+    <BulletList items={useCase.integrations} />
+  </Section>
+
+  {
+    useCase.compliance_notes.length > 0 && (
+      <Section title="Tax and audit notes">
+        <BulletList items={useCase.compliance_notes} />
+      </Section>
+    )
+  }
+
+  <Section title="A typical pilot">
+    <PilotBox pilot={useCase.pilot} />
+  </Section>
+
+  {
+    proof && (
+      <Section title="Running today">
+        <ProofBox proof={proof} />
+      </Section>
+    )
+  }
+
+  <Section title="Architecture">
+    <ArchitectureLayers id="architecture-layers" layers={useCase.architecture.layers} />
+    <DiagramFigure title={useCase.title} kind="architecture" diagram={diagramFor(useCase, 'arch')} describedBy="architecture-layers" />
+  </Section>
+
+  <Section title="FAQs">
+    <FaqList faqs={useCase.faqs} />
+  </Section>
+
+  <Section title="Related">
+    <CardGrid items={relatedCards} columns={2} />
+  </Section>
+
+  <FounderBlock />
+
+  <CtaBlock
+    headline={live ? 'Start with a free claims audit' : 'Become a design partner'}
+    text={live
+      ? "Send last quarter's claims. Get every finding, with the amount at risk, in 5 working days."
+      : 'Tell us how you handle this today. Design partners shape the product and start with a free claims audit.'}
+    contact={contact}
+  />
+</BaseLayout>

@@ -1,22 +1,22 @@
 ---
+import {AUDIT_PATH} from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const button = 'px-6 py-3.5 rounded-xl text-sm font-semibold transition-colors';
 ---
 
 <BaseLayout title="Page not found | VipraTech" description="Page not found." page={{type: '404'}} noindex>
   <section class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-    <span class="text-xs font-mono text-lime-400 uppercase tracking-widest font-bold">404</span>
-    <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.08] text-white mt-2">Page not found</h1>
-    <div class="flex flex-wrap gap-4 mt-10">
-      <a
-        href="/"
-        class="px-6 py-4 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 rounded-xl text-sm font-semibold transition-all font-mono"
-        >Home</a
-      >
-      <a
-        href="/use-cases/"
-        class="px-6 py-4 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 rounded-xl text-sm font-semibold transition-all font-mono"
-        >Use case library</a
-      >
+    <span class="text-sm font-semibold text-teal-700">404</span>
+    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1] text-slate-900 mt-2">Page not found</h1>
+    <p class="mt-4 text-lg text-slate-600 max-w-2xl">
+      VipraTech now focuses on one thing: checking distributor claims and deductions for finance teams at FMCG and D2C
+      brands. The page you were looking for has moved or no longer exists.
+    </p>
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="/" class={`${button} bg-teal-700 hover:bg-teal-800 text-white`}>Home</a>
+      <a href={AUDIT_PATH} class={`${button} bg-white hover:bg-slate-50 text-slate-800 border border-slate-300`}>Free claims audit</a>
+      <a href="/use-cases/" class={`${button} bg-white hover:bg-slate-50 text-slate-800 border border-slate-300`}>Use cases</a>
     </div>
   </section>
 </BaseLayout>

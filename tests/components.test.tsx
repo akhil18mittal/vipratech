@@ -11,14 +11,14 @@ const tags = (html: string, tag: string) => html.match(new RegExp(`<${tag}\\b[^>
 
 describe('ContentCard', () => {
   it('links to a published page', () => {
-    const html = renderToStaticMarkup(<ContentCard item={{title: 'Claims triage', text: 'Summary', href: '/use-cases/insurance/claims-triage/'}} />);
-    expect(html).toMatch(/^<a href="\/use-cases\/insurance\/claims-triage\/"/);
+    const html = renderToStaticMarkup(<ContentCard item={{title: 'Scheme claims', text: 'Summary', href: '/use-cases/distributor-scheme-claims/'}} />);
+    expect(html).toMatch(/^<a href="\/use-cases\/distributor-scheme-claims\/"/);
   });
 
-  it('is plain text for a page that is not published yet', () => {
-    const html = renderToStaticMarkup(<ContentCard item={{title: 'Claims triage', text: 'Summary'}} />);
+  it('is plain text without a page to link to', () => {
+    const html = renderToStaticMarkup(<ContentCard item={{title: 'Scheme claims', text: 'Summary'}} />);
     expect(tags(html, 'a')).toEqual([]);
-    expect(html).toContain('Claims triage</h3>');
+    expect(html).toContain('Scheme claims</h3>');
   });
 
   it('shows the Featured pill only on featured cards', () => {
@@ -28,9 +28,9 @@ describe('ContentCard', () => {
 });
 
 describe('DiagramFigure', () => {
-  const wide = {src: '/diagrams/banking/kyc-flow.svg', width: 1800, height: 400};
-  const narrow = {src: '/diagrams/banking/kyc-flow-tb.svg', width: 320, height: 1100};
-  const html = renderToStaticMarkup(<DiagramFigure title="KYC review" kind="workflow" diagram={wide} narrow={narrow} describedBy="workflow-steps" />);
+  const wide = {src: '/diagrams/distributor-scheme-claims-flow.svg', width: 1800, height: 400};
+  const narrow = {src: '/diagrams/distributor-scheme-claims-flow-tb.svg', width: 320, height: 1100};
+  const html = renderToStaticMarkup(<DiagramFigure title="Claims settlement" kind="workflow" diagram={wide} narrow={narrow} describedBy="workflow-steps" />);
   const [image] = tags(html, 'img');
 
   it('serves the top-to-bottom diagram on phones', () => {
@@ -39,9 +39,9 @@ describe('DiagramFigure', () => {
   });
 
   it('describes the diagram and points to its text version', () => {
-    expect(image).toContain('alt="KYC review: workflow diagram"');
+    expect(image).toContain('alt="Claims settlement: workflow diagram"');
     expect(image).toContain('aria-describedby="workflow-steps"');
-    expect(tags(html, 'div')[0]).toContain('aria-label="KYC review: workflow diagram"');
+    expect(tags(html, 'div')[0]).toContain('aria-label="Claims settlement: workflow diagram"');
   });
 
   it('shrinks each version to 3/4 of its size at most, then scrolls', () => {
@@ -76,27 +76,47 @@ describe('Breadcrumbs', () => {
     <Breadcrumbs
       crumbs={[
         {name: 'Home', path: '/'},
-        {name: 'Industries', path: '/industries/'},
-        {name: 'Banking', path: '/industries/banking/'},
+        {name: 'Use cases', path: '/use-cases/'},
+        {name: 'Scheme claims', path: '/use-cases/distributor-scheme-claims/'},
       ]}
     />,
   );
 
   it('links every crumb but the current page', () => {
-    expect(tags(html, 'a').map((tag) => tag.match(/href="([^"]*)"/)?.[1])).toEqual(['/', '/industries/']);
-    expect(html).toMatch(/<span aria-current="page"[^>]*>Banking<\/span>/);
+    expect(tags(html, 'a').map((tag) => tag.match(/href="([^"]*)"/)?.[1])).toEqual(['/', '/use-cases/']);
+    expect(html).toMatch(/<span aria-current="page"[^>]*>Scheme claims<\/span>/);
   });
 });
 
 describe('ContactButtons', () => {
-  const html = renderToStaticMarkup(<ContactButtons links={{call: 'https://calendly.example/20min', whatsapp: 'https://wa.me/1'}} location="hero" />);
+  const primary = {href: '/free-claims-audit/', label: 'Get a free claims audit', cta: 'audit'};
+  const cta = (html: string) =>
+    tags(html, 'a').map((tag) => [tag.match(/data-cta="([^"]*)"/)?.[1], tag.match(/data-cta-location="([^"]*)"/)?.[1]]);
 
-  it('tags both buttons for the cta_click event', () => {
-    expect(tags(html, 'a').map((tag) => [tag.match(/data-cta="([^"]*)"/)?.[1], tag.match(/data-cta-location="([^"]*)"/)?.[1]])).toEqual([
-      ['calendly', 'hero'],
+  it('shows the main action and WhatsApp, tagged for the cta_click event', () => {
+    const html = renderToStaticMarkup(<ContactButtons links={{primary, whatsapp: 'https://wa.me/1'}} location="hero" />);
+    expect(cta(html)).toEqual([
+      ['audit', 'hero'],
       ['whatsapp', 'hero'],
     ]);
+    expect(html).toContain('Get a free claims audit');
+    expect(html).not.toContain('Book a 20-minute call');
+  });
+
+  it('adds the booking button once there is a booking link', () => {
+    const html = renderToStaticMarkup(
+      <ContactButtons links={{primary, whatsapp: 'https://wa.me/1', call: 'https://calendly.example/20min'}} location="cta" />,
+    );
+    expect(cta(html).map(([name]) => name)).toEqual(['audit', 'whatsapp', 'calendly']);
     expect(html).toContain('Book a 20-minute call');
-    expect(html).toContain('WhatsApp us');
+  });
+
+  it('opens an internal page in the same tab and an external one in a new tab', () => {
+    const internal = renderToStaticMarkup(<ContactButtons links={{primary, whatsapp: 'https://wa.me/1'}} location="hero" />);
+    expect(tags(internal, 'a')[0]).not.toContain('target=');
+    const external = renderToStaticMarkup(
+      <ContactButtons links={{primary: {...primary, href: 'https://example.com/'}, whatsapp: 'https://wa.me/1'}} location="hero" />,
+    );
+    expect(tags(external, 'a')[0]).toContain('target="_blank"');
   });
 });

@@ -6,21 +6,27 @@ interface ContactButtonsProps {
   /** Where on the page the buttons are, for the cta_click analytics event. */
   location: string;
   centered?: boolean;
+  /** On a dark band the secondary buttons need light borders and text. */
+  onDark?: boolean;
 }
 
-export function ContactButtons({ links, location, centered }: ContactButtonsProps) {
+const base = "px-6 py-3.5 rounded-xl text-sm font-semibold transition-colors flex items-center gap-2";
+
+export function ContactButtons({ links, location, centered, onDark }: ContactButtonsProps) {
+  const secondary = onDark
+    ? `${base} bg-transparent hover:bg-white/10 text-white border border-white/40`
+    : `${base} bg-white hover:bg-slate-50 text-slate-800 border border-slate-300`;
+  const external = links.primary.href.startsWith("http");
   return (
-    <div className={`flex flex-wrap items-center gap-4 ${centered ? "justify-center" : ""}`}>
+    <div className={`flex flex-wrap items-center gap-3 ${centered ? "justify-center" : ""}`}>
       <a
-        href={links.call}
-        target="_blank"
-        rel="noopener"
-        data-cta="calendly"
+        href={links.primary.href}
+        {...(external ? { target: "_blank", rel: "noopener" } : {})}
+        data-cta={links.primary.cta}
         data-cta-location={location}
-        className="px-7 py-4 bg-lime-400 hover:bg-lime-300 text-black font-bold rounded-xl text-sm transition-all flex items-center gap-2.5 shadow-xl shadow-lime-400/25 font-mono"
+        className={`${base} ${onDark ? "bg-white hover:bg-teal-50 text-slate-900" : "bg-teal-700 hover:bg-teal-800 text-white"}`}
       >
-        <CalendarDays className="w-4 h-4" />
-        <span>Book a 20-minute call</span>
+        <span>{links.primary.label}</span>
       </a>
       <a
         href={links.whatsapp}
@@ -28,11 +34,17 @@ export function ContactButtons({ links, location, centered }: ContactButtonsProp
         rel="noopener"
         data-cta="whatsapp"
         data-cta-location={location}
-        className="px-6 py-4 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 font-mono"
+        className={secondary}
       >
-        <MessageCircle className="w-4 h-4 text-lime-400" />
+        <MessageCircle className="w-4 h-4" />
         <span>WhatsApp us</span>
       </a>
+      {links.call && (
+        <a href={links.call} target="_blank" rel="noopener" data-cta="calendly" data-cta-location={location} className={secondary}>
+          <CalendarDays className="w-4 h-4" />
+          <span>Book a 20-minute call</span>
+        </a>
+      )}
     </div>
   );
 }

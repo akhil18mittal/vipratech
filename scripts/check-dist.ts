@@ -8,15 +8,14 @@ import {loadContent} from './content-checks';
 import {DIST, fileFor, listPages, pathOf} from './dist';
 
 // Checks the built site in dist/ before it goes live: head tags, structured data, links and images, the sitemap, and
-// that nothing unready (the draft privacy policy, unapproved proofs) is published. Pages still linking to the Calendly
-// placeholder are reported as a warning. Pages are read as served, without running their JavaScript, which is what
-// search engines see first.
+// that nothing unready (the draft privacy policy, unapproved proofs, the Calendly placeholder) is published. Pages are
+// read as served, without running their JavaScript, which is what search engines see first. The small pages Astro
+// writes for the redirects in astro.config.mjs only need to point at a page that exists.
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const SITE = 'https://vipratech.in';
-// The homepage is drawn in the browser by the React app, so its HTML has no H1.
-const CLIENT_RENDERED = new Set(['/']);
 const NOINDEX = new Set(['/404.html']);
+const REDIRECT = /^\d+;url=(.+)$/;
 
 interface PageData {
   h1s: number;
@@ -28,6 +27,8 @@ interface PageData {
   refs: string[];
   text: string;
   html: string;
+  /** The target of a <meta http-equiv="refresh"> redirect, if the page is one. */
+  redirect: string | null;
 }
 
 async function readPages(): Promise<Map<string, PageData>> {
@@ -52,6 +53,7 @@ async function readPages(): Promise<Map<string, PageData>> {
           title: document.title,
           meta,
           canonical: document.querySelector('link[rel=canonical]')?.getAttribute('href') ?? null,
+          refresh: document.querySelector('meta[http-equiv="refresh"]')?.getAttribute('content') ?? null,
           jsonLd: all('script[type="application/ld+json"]').map((script) => script.textContent ?? ''),
           ids: all('[id]').map((element) => element.id),
           refs: [
@@ -63,7 +65,8 @@ async function readPages(): Promise<Map<string, PageData>> {
           text: document.body.textContent ?? '',
         };
       });
-      pages.set(path, {...data, html});
+      const {refresh, ...rest} = data;
+      pages.set(path, {...rest, html, redirect: refresh === null ? null : (REDIRECT.exec(refresh)?.[1] ?? refresh)});
     }
     return pages;
   } finally {
@@ -91,14 +94,18 @@ async function main() {
     ]);
 
   const indexable: string[] = [];
-  let placeholderPages = 0;
   for (const [path, page] of pages) {
     const fail = (message: string) => errors.push(`${path}: ${message}`);
     const noindex = page.meta.robots?.includes('noindex') ?? false;
+    if (page.redirect !== null) {
+      if (!noindex) fail('is a redirect but is not marked noindex');
+      if (!page.redirect.startsWith('/') || !fileFor(new URL(page.redirect, SITE).pathname)) fail(`redirects to ${page.redirect}, which isn't in dist/`);
+      continue;
+    }
     if (!noindex) indexable.push(`${SITE}${path}`);
-    if (noindex && !NOINDEX.has(path)) fail('is marked noindex (is this a CONTENT_PREVIEW build?)');
+    if (noindex && !NOINDEX.has(path)) fail('is marked noindex');
 
-    if (page.h1s !== 1 && !CLIENT_RENDERED.has(path)) fail(`has ${page.h1s} H1 headings, expected 1`);
+    if (page.h1s !== 1) fail(`has ${page.h1s} H1 headings, expected 1`);
     if (!page.title.trim()) fail('has no <title>');
     for (const name of ['description', 'og:title', 'og:description', 'og:image', 'twitter:card']) {
       if (!page.meta[name]?.trim()) fail(`has no ${name} meta tag`);
@@ -133,7 +140,7 @@ async function main() {
       }
     }
 
-    if (page.html.includes(CALENDLY_PLACEHOLDER)) placeholderPages++;
+    if (page.html.includes(CALENDLY_PLACEHOLDER)) fail('links to the Calendly placeholder');
     for (const text of hidden) if (page.text.includes(text)) fail(`shows an unapproved proof project: "${text}"`);
   }
 
@@ -150,15 +157,13 @@ async function main() {
   const robots = existsSync(join(DIST, 'robots.txt')) ? readFileSync(join(DIST, 'robots.txt'), 'utf8') : '';
   if (!robots.includes(`Sitemap: ${SITE}/sitemap.xml`)) errors.push('robots.txt is missing or doesn\'t point to the sitemap');
 
-  if (placeholderPages > 0) {
-    console.warn(`Warning: ${placeholderPages} page(s) link to the Calendly placeholder; set CALENDLY_URL in src/data/site.ts`);
-  }
   if (errors.length > 0) {
     console.error(`dist/ check failed with ${errors.length} error(s):`);
     for (const error of errors) console.error(`  - ${error}`);
     process.exit(1);
   }
-  console.log(`dist/ OK: ${pages.size} pages, ${indexable.length} in the sitemap.`);
+  const redirects = [...pages.values()].filter((page) => page.redirect !== null).length;
+  console.log(`dist/ OK: ${pages.size - redirects} pages (${indexable.length} in the sitemap) and ${redirects} redirects.`);
 }
 
 await main();
