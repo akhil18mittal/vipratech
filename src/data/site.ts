@@ -73,8 +73,8 @@ export const auditRequestLinks = (): ContactLinks => ({
   whatsapp: whatsappLink("Hi, I'd like a free claims audit"),
 });
 
-/** The GA4 Measurement ID ("G-…"). Until it is set, no analytics script loads and track() does nothing. */
-export const GA4_ID: string | null = null;
+/** The GA4 Measurement ID of the "vipratech.in" property in the VipraTech Labs Analytics account. Set to null to turn analytics off. */
+export const GA4_ID: string | null = 'G-X6SC4FX6JN';
 
 /**
  * The day you approved the privacy policy at /privacy/ (e.g. '2026-11-02'). check:dist fails while it is null, so the
