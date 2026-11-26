@@ -2,6 +2,7 @@
 import Section from '../components/content/Section.astro';
 import {BulletList} from '../components/content/BulletList';
 import {CtaBlock} from '../components/content/CtaBlock';
+import {DetailCards} from '../components/content/DetailCards';
 import {FaqList} from '../components/content/FaqList';
 import {FounderBlock} from '../components/content/FounderBlock';
 import {PageHero} from '../components/content/PageHero';
@@ -21,6 +22,31 @@ const steps = [
   {title: 'Share the files', detail: 'Through a secure upload link we send you. Never through a form on this website.'},
   {title: 'Get the report in 5 working days', detail: 'Every finding with its reason and evidence, and the amount at risk.'},
   {title: 'Walk through the findings', detail: 'A 30-minute call with you and the person who owns claims settlement.'},
+];
+
+// The same audit for teams whose biggest leak is not distributor claims. Each starting point names the files its use
+// case lists as inputs, so a prospect from an outreach email sees their own documents.
+const otherStarts = [
+  {
+    title: 'Quick-commerce and modern trade deductions',
+    detail:
+      'One quarter of platform debit notes and payment advice, with the matching purchase orders, your invoices and the receipt, short-receipt and return reports.',
+  },
+  {
+    title: 'Fertiliser subsidy and freight claims',
+    detail:
+      'Dispatch and receipt reports from the fertiliser monitoring system, your weekly subsidy claim and payment statements, and the railway receipts and challans for the same period.',
+  },
+  {
+    title: 'Dealer rebates and cash discounts',
+    detail:
+      'The scheme circulars with their slabs and conditions, billing and returns from the ERP, and payment dates from the bank or ERP for the dealers in question.',
+  },
+  {
+    title: 'Transporter freight bills',
+    detail:
+      'Transporter bills with their lorry receipts and proofs of delivery, weighbridge slips, and the freight contract with lane rates and the fuel adjustment formula.',
+  },
 ];
 
 const faqs = [
@@ -44,8 +70,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Free Distributor Claims Audit | VipraTech"
-  description="Send last quarter's distributor claims. In 5 working days get every duplicate, ineligible line and over-claim, with the amount at risk. Free, under NDA."
+  title="Free Claims and Deductions Audit | VipraTech"
+  description="Send a quarter of claims, deductions or freight bills. In 5 working days get every duplicate, ineligible line and over-claim, with the amount at risk. Free."
   page={{type: 'audit'}}
   crumbs={[{name: 'Free claims audit', path: AUDIT_PATH}]}
   faqs={faqs}
@@ -53,7 +79,7 @@ const faqs = [
   <PageHero
     eyebrow="Free, under NDA"
     title="Free claims audit"
-    subtitle="Send us one recent quarter of distributor claims. In 5 working days you get every duplicate, ineligible line and over-claim we find, with the amount at risk."
+    subtitle="Send us one recent quarter of distributor claims, platform deductions or freight bills. In 5 working days you get every duplicate, ineligible line and over-claim we find, with the amount at risk."
     contact={contact}
   />
 
@@ -67,6 +93,13 @@ const faqs = [
       ]}
     />
     <p class="text-base text-zinc-400">You can start with one region or one claim type.</p>
+  </Section>
+
+  <Section title="Not distributor claims? Start where your money leaks">
+    <p class="text-base text-zinc-400 leading-relaxed max-w-3xl">
+      The audit works the same way for deductions, subsidy and freight. Send one quarter of any of these instead.
+    </p>
+    <DetailCards items={otherStarts} />
   </Section>
 
   <Section title="What you get">
